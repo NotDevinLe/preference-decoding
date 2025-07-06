@@ -12,9 +12,13 @@ import pickle
 from dotenv import load_dotenv
 from huggingface_hub import login
 import random
-from transformers.generation.logits_process import LogitsProcessor, LogitsProcessorList
 from typing import Optional
-from drift import DriftLogitsProcessor, approximate
+import argparse
+
+parser = argparse.ArgumentParser(description="My parameterized script")
+parser.add_argument("--name", type=str, required=True, help="User id")
+
+args = parser.parse_args()
 
 load_dotenv()
 hf_token = os.getenv("HF_TOKEN")
@@ -26,13 +30,6 @@ small_model_id = "meta-llama/Llama-3.2-1B-Instruct"
 bnb_config = BitsAndBytesConfig(
     load_in_8bit=True,
     llm_int8_enable_fp32_cpu_offload=True
-)
-
-model_ds = AutoModelForCausalLM.from_pretrained(
-    small_model_id,
-    quantization_config=bnb_config,
-    device_map="auto",
-    trust_remote_code=True,
 )
 
 model_bs = AutoModelForCausalLM.from_pretrained(
@@ -52,120 +49,75 @@ We want to sample the random attributes and use models to output responses from 
 
 base_prompt = "You are an AI assistant that keeps answers concise."
 
-attribute_prompts = [
-    "You are an AI assistant.",
-    "You are an AI assistant with a formal tone.",
-    "You are an AI assistant with a concise response rather than verbosity.",
-    "You are an AI assistant using rhetorical devices.",
-    "You are a modest and polite AI assistant.",
-    "You are an emotional AI assistant.",
-    "You are a humorous AI assistant.",
-    "You are an energetic AI assistant.",
-    "You are an AI assistant with expertise in computer science.",
-    "You are an AI assistant using easy-to-understand words.",
-    "You are an AI assistant with a firm and directive tone.",
-    "You are an AI assistant with expertise in sociology.",
-    "You are an AI assistant with western cultures.",
-    "You are an AI assistant with eastern cultures.",
-    "You are a respectful AI assistant.",
-    "You are an AI assistant that communicates using internet slang.",
-    "You are an AI assistant that communicates using proverbs.",
-    "You are an AI assistant that enjoys being critical and argumentative.",
-    "You are an AI assistant that enjoys speaking indirectly and ambiguously.",
-    "You are a creative AI assistant.",
-    "You are an analytic AI assistant.",
-    "You are an empathetic AI assistant.",
-    "You are a sycophant AI assistant.",
-    "You are an AI assistant using old-fashioned English.",
-    "You are a meritocratic AI assistant.",
-    "You are a myopic AI assistant.",
-    "You are an AI assistant that upholds principles and rules above all else.",
-    "You are an AI assistant that prioritizes maximizing pleasure and joy while minimizing pain and discomfort.",
-    "You are an AI assistant that prioritizes the greatest good for the greatest number of people.",
-    "You are an AI assistant that focuses on practical, realistic, and actionable advice.",
-    "You are an AI assistant that views situations through a skeptical or cautious perspective.",
-    "You are an AI assistant that loves explaining things through stories and anecdotes.",
-    "You are an AI assistant that values flexibility over strict adherence to principles.",
-    "You are an AI assistant that enjoys handling tasks spontaneously without making plans.",
-    "You are an AI assistant that prioritizes the group over the individual.",
-    "You are an AI assistant that prioritizes the individual over the group.",
-    "You are an AI assistant that enjoys using exclamations frequently.",
-    "You are an AI assistant that enjoys discussing conspiracy theories.",
-    "You are an AI assistant that prioritizes technological and industrial advancement above all else.",
-    "You are an AI assistant that loves and protects the environment."
-]
-
-question_prompts = [
-    "Ask a philosophical question that sparks deep thought.",
-    "Generate a morally challenging question.",
-    "Pose a strange but meaningful question.",
-    "Write a question about human behavior or society.",
-    "Invent a hypothetical question involving the future.",
-    "Ask a question that starts with 'What if...'",
-    "Write a surprising question that would start a great debate.",
-    "Create a question that blends humor and curiosity.",
-    "Ask a question about something we take for granted.",
-    "Generate a question that a child might ask but an adult would struggle to answer."
-]
-
 data = []
-user_attribute_prompts = random.sample(attribute_prompts, 7)
-p = np.random.rand(7)
-p /= np.linalg.norm(p, ord=2)
 samples = 100
 
-model_ds.eval()
 model_bs.eval()
 device = torch.device("cuda")
 df = pd.read_csv("hf://datasets/domenicrosati/TruthfulQA/train.csv")
 df = df.sample(n=samples)
 
+# Grab a random persona
+from datasets import load_dataset
+users_ds = load_dataset("kaist-ai/Multifaceted-Collection")
+
+train_split = users_ds["train"]
+attribute_prompt = train_split[random.randint(0, len(train_split) - 1)]["system"]
+
 for _, row in df.iterrows():
     data.append([row['Question']])
 
-processor = DriftLogitsProcessor(
-    b=0.5,
-    small_model=model_ds,
-    tokenizer=tokenizer,
-    base_prompt=base_prompt,
-    attribute_prompts=user_attribute_prompts,
-    weights=p
-)
-
 for j in range(samples):
-    print(f"Drift Model Datapoint: {j}")
+    print(f"Datapoint: {j}")
     question = data[j][0]
-    messages = [
-        {"role": "system", "content": base_prompt},
-        {"role": "user", "content": question}
-    ]
-    prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    inputs = tokenizer(prompt, return_tensors="pt").to(model_bs.device)
-    with torch.no_grad():
-        attribute_response = model_bs.generate(**inputs, max_new_tokens=256, logits_processor=LogitsProcessorList([processor]))
-    response_text = tokenizer.decode(attribute_response[0][inputs['input_ids'].shape[1]:], skip_special_tokens=True)
-    data[j].append(response_text) 
 
-
-for j in range(samples):
-    print(f"Base Model Datapoint: {j}")
-    question = data[j][0]
-    messages = [
+    base_message = [
         {"role": "system", "content": base_prompt},
         {"role": "user", "content": question}
     ]
 
-    prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    inputs = tokenizer(prompt, return_tensors="pt").to(model_bs.device)
+    attribute_message = [
+        {"role": "system", "content": attribute_prompt},
+        {"role": "user", "content": question}
+    ]
+
+    base_model_prompt = tokenizer.apply_chat_template(base_message, tokenize=False, add_generation_prompt=True)
+    attribute_model_prompt = tokenizer.apply_chat_template(attribute_message, tokenize=False, add_generation_prompt=True)
+
+    base_inputs = tokenizer(base_model_prompt, return_tensors="pt").to(model_bs.device)
+    attribute_inputs = tokenizer(attribute_model_prompt, return_tensors="pt").to(model_bs.device)
 
     with torch.no_grad():
-        output = model_bs.generate(**inputs, max_new_tokens=256, temperature=0.8, top_p=0.9, do_sample=True, eos_token_id=tokenizer.eos_token_id)
+        base_output = model_bs.generate(
+            **base_inputs,
+            max_new_tokens=256,
+            temperature=0.8,
+            top_p=0.9,
+            do_sample=True,
+            eos_token_id=tokenizer.eos_token_id
+        )
 
-    base_answer = tokenizer.decode(output[0][inputs['input_ids'].shape[1]:], skip_special_tokens=True)
+        attribute_output = model_bs.generate(
+            **attribute_inputs,
+            max_new_tokens=256,
+            temperature=0.8,
+            top_p=0.9,
+            do_sample=True,
+            eos_token_id=tokenizer.eos_token_id
+        )
+
+    base_answer = tokenizer.decode(
+        base_output[0][base_inputs['input_ids'].shape[1]:],
+        skip_special_tokens=True
+    )
+
+    attribute_answer = tokenizer.decode(
+        attribute_output[0][attribute_inputs['input_ids'].shape[1]:],
+        skip_special_tokens=True
+    )
+
+    data[j].append(attribute_answer)
     data[j].append(base_answer)
 
-print(user_attribute_prompts)
-print(p)
-
-with open("user1data.pkl", 'wb') as f:
+with open(f"data/{args.name}.pkl", 'wb') as f:
     pickle.dump(data, f)
