@@ -1,3 +1,4 @@
+from sklearn.model_selection import KFold
 import torch
 import torch.nn.functional as F
 import os
@@ -14,7 +15,7 @@ from huggingface_hub import login
 import random
 from transformers.generation.logits_process import LogitsProcessor, LogitsProcessorList
 from typing import Optional
-from drift import DriftLogitsProcessor, approximate
+from drift import DriftLogitsProcessor, approximate, get_approximation_accuracy
 
 load_dotenv()
 hf_token = os.getenv("HF_TOKEN")
@@ -44,20 +45,16 @@ model_bs = AutoModelForCausalLM.from_pretrained(
 
 tokenizer = AutoTokenizer.from_pretrained(big_model_id)
 
-"""
+base_prompt = "You are an AI assistant."
 
-We want to sample the random attributes and use models to output responses from them and then also use the base model to output the normal response and form a dataset.
-
-"""
-
-base_prompt = "You are an AI assistant that keeps answers concise."
-
-attribute_prompts = [
+s = [
     "You are an AI assistant.",
     "You are an AI assistant with a formal tone.",
     "You are an AI assistant with a concise response rather than verbosity.",
     "You are an AI assistant using rhetorical devices.",
     "You are a modest and polite AI assistant.",
+    "You are an AI assistant with expertise in engineering.",
+    "You are a persuasive AI assistant.",
     "You are an emotional AI assistant.",
     "You are a humorous AI assistant.",
     "You are an energetic AI assistant.",
@@ -95,77 +92,27 @@ attribute_prompts = [
     "You are an AI assistant that loves and protects the environment."
 ]
 
-question_prompts = [
-    "Ask a philosophical question that sparks deep thought.",
-    "Generate a morally challenging question.",
-    "Pose a strange but meaningful question.",
-    "Write a question about human behavior or society.",
-    "Invent a hypothetical question involving the future.",
-    "Ask a question that starts with 'What if...'",
-    "Write a surprising question that would start a great debate.",
-    "Create a question that blends humor and curiosity.",
-    "Ask a question about something we take for granted.",
-    "Generate a question that a child might ask but an adult would struggle to answer."
-]
+with open("user1data.pkl", 'rb') as f:
+    data = pickle.load(f)
 
-data = []
-user_attribute_prompts = random.sample(attribute_prompts, 7)
-p = np.random.rand(7)
-p /= np.linalg.norm(p, ord=2)
-samples = 100
+device = torch.device('cuda')
 
-model_ds.eval()
-model_bs.eval()
-device = torch.device("cuda")
-df = pd.read_csv("hf://datasets/domenicrosati/TruthfulQA/train.csv")
-df = df.sample(n=samples)
+folds = KFold(n_splits=5, shuffle=True)
+acc = 0
+for train_ind, test_ind in folds.split(data):
+    print("Starting new Fold")
+    train = [data[i] for i in train_ind]
+    test = [data[i] for i in test_ind]
 
-for _, row in df.iterrows():
-    data.append([row['Question']])
+    p = approximate(train, model_ds, tokenizer, base_prompt, s, device)
+    temp = p.tolist()
+    temp = [(abs(x), i) for i, x in enumerate(temp)]
+    temp.sort()
+    temp = [ind for (x, ind) in temp[-7:]]
 
-processor = DriftLogitsProcessor(
-    b=0.5,
-    small_model=model_ds,
-    tokenizer=tokenizer,
-    base_prompt=base_prompt,
-    attribute_prompts=user_attribute_prompts,
-    weights=p
-)
-
-for j in range(samples):
-    print(f"Drift Model Datapoint: {j}")
-    question = data[j][0]
-    messages = [
-        {"role": "system", "content": base_prompt},
-        {"role": "user", "content": question}
-    ]
-    prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    inputs = tokenizer(prompt, return_tensors="pt").to(model_bs.device)
-    with torch.no_grad():
-        attribute_response = model_bs.generate(**inputs, max_new_tokens=256, logits_processor=LogitsProcessorList([processor]))
-    response_text = tokenizer.decode(attribute_response[0][inputs['input_ids'].shape[1]:], skip_special_tokens=True)
-    data[j].append(response_text) 
-
-
-for j in range(samples):
-    print(f"Base Model Datapoint: {j}")
-    question = data[j][0]
-    messages = [
-        {"role": "system", "content": base_prompt},
-        {"role": "user", "content": question}
-    ]
-
-    prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    inputs = tokenizer(prompt, return_tensors="pt").to(model_bs.device)
-
-    with torch.no_grad():
-        output = model_bs.generate(**inputs, max_new_tokens=256, temperature=0.8, top_p=0.9, do_sample=True, eos_token_id=tokenizer.eos_token_id)
-
-    base_answer = tokenizer.decode(output[0][inputs['input_ids'].shape[1]:], skip_special_tokens=True)
-    data[j].append(base_answer)
-
-print(user_attribute_prompts)
-print(p)
-
-with open("user1data.pkl", 'wb') as f:
-    pickle.dump(data, f)
+    attribute_prompts = [s[i] for i in temp]
+    p = [p[i] for i in temp]
+    fold_acc = get_approximation_accuracy(test, p, attribute_prompts)
+    print(f"Fold Accuracy: {fold_acc}")
+    acc += fold_acc
+print(f"{user_id} Accuracy: {acc / 5}%")

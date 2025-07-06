@@ -1,0 +1,13 @@
+{
+    "terminal.integrated.profiles.linux": {
+        "apptainer": {
+            "path": "ssh",
+            "icon": "terminal-bash",
+            "args": [
+                "-o StrictHostKeyChecking=no",
+                "localhost",
+            ]
+        },
+    },
+    "terminal.integrated.defaultProfile.linux": "apptainer"
+}
