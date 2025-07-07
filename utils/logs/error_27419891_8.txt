@@ -1,0 +1,4 @@
+/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:12<00:36, 12.20s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:24<00:24, 12.41s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:36<00:12, 12.28s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:39<00:00,  8.44s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:39<00:00,  9.86s/it]

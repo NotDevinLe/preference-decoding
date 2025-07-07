@@ -1,19 +1,0 @@
-
-CondaError: Run 'conda init' before 'conda activate'
-
-/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
-  warnings.warn(
-Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
-The installed version of bitsandbytes was compiled without GPU support. 8-bit optimizers and GPU quantization are unavailable.
-Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:19<00:58, 19.57s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:41<00:41, 20.82s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:02<00:20, 20.88s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:04<00:00, 13.58s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:04<00:00, 16.15s/it]
-Setting `pad_token_id` to `eos_token_id`:128009 for open-end generation.
-Traceback (most recent call last):
-  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/generate.py", line 101, in <module>
-    base_output = model_bs.generate(
-  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/generation/utils.py", line 2625, in generate
-    result = self._sample(
-  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/generation/utils.py", line 3651, in _sample
-    next_tokens = torch.multinomial(probs, num_samples=1).squeeze(1)
-RuntimeError: probability tensor contains either `inf`, `nan` or element < 0

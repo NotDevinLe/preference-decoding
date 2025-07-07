@@ -1,123 +1,79 @@
-import torch
-import torch.nn.functional as F
 import os
-import pandas as pd
-
-os.environ["TRANSFORMERS_CACHE"] = "/gscratch/ark/devinl6/hf_cache"
 os.environ["HF_HOME"] = "/gscratch/ark/devinl6/hf_cache"
-
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, AutoModelForSequenceClassification
-import numpy as np
+import torch
 import pickle
-from dotenv import load_dotenv
-from huggingface_hub import login
-import random
-from typing import Optional
 import argparse
-
-parser = argparse.ArgumentParser(description="My parameterized script")
-parser.add_argument("--name", type=str, required=True, help="User id")
-
-args = parser.parse_args()
-
-load_dotenv()
-hf_token = os.getenv("HF_TOKEN")
-login(hf_token)
-
-big_model_id   = "meta-llama/Meta-Llama-3.1-8B-Instruct"
-small_model_id = "meta-llama/Llama-3.2-1B-Instruct"
-
-bnb_config = BitsAndBytesConfig(
-    load_in_8bit=True,
-    llm_int8_enable_fp32_cpu_offload=True
-)
-
-model_bs = AutoModelForCausalLM.from_pretrained(
-    big_model_id,
-    quantization_config=bnb_config,
-    device_map="auto",
-    trust_remote_code=True,
-)
-
-tokenizer = AutoTokenizer.from_pretrained(big_model_id)
-
-"""
-
-We want to sample the random attributes and use models to output responses from them and then also use the base model to output the normal response and form a dataset.
-
-"""
-
-base_prompt = "You are an AI assistant that keeps answers concise."
-
-data = []
-samples = 100
-
-model_bs.eval()
-device = torch.device("cuda")
-df = pd.read_csv("hf://datasets/domenicrosati/TruthfulQA/train.csv")
-df = df.sample(n=samples)
-
-# Grab a random persona
 from datasets import load_dataset
-users_ds = load_dataset("kaist-ai/Multifaceted-Collection")
+from vllm import LLM, SamplingParams
+from transformers import AutoTokenizer
 
-train_split = users_ds["train"]
-attribute_prompt = train_split[random.randint(0, len(train_split) - 1)]["system"]
+# Args
+parser = argparse.ArgumentParser()
+parser.add_argument("--name", type=str, required=True)
+parser.add_argument("--sample_size", type=int, required=True)
+args = parser.parse_args()
+sample_size = args.sample_size
 
-for _, row in df.iterrows():
-    data.append([row['Question']])
+# Model setup
+model_id = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
 
-for j in range(samples):
-    print(f"Datapoint: {j}")
-    question = data[j][0]
+llm = LLM(
+    model=model_id,
+    dtype="float16",
+    tensor_parallel_size=1,
+    trust_remote_code=True
+)
 
-    base_message = [
-        {"role": "system", "content": base_prompt},
-        {"role": "user", "content": question}
-    ]
+# Sampling configuration
+sampling_params = SamplingParams(
+    temperature=0.8,
+    top_p=0.9,
+    max_tokens=256,
+    stop=[]
+)
 
-    attribute_message = [
-        {"role": "system", "content": attribute_prompt},
-        {"role": "user", "content": question}
-    ]
+# Load Dolly dataset
+dolly_ds = load_dataset("databricks/databricks-dolly-15k", split="train")
+persona_ds = load_dataset("kaist-ai/Multifaceted-Collection", split="train")
 
-    base_model_prompt = tokenizer.apply_chat_template(base_message, tokenize=False, add_generation_prompt=True)
-    attribute_model_prompt = tokenizer.apply_chat_template(attribute_message, tokenize=False, add_generation_prompt=True)
+# Prepare prompts
+instructions = [row["instruction"] for row in dolly_ds.shuffle().select(range(sample_size))]
+data = []
 
-    base_inputs = tokenizer(base_model_prompt, return_tensors="pt").to(model_bs.device)
-    attribute_inputs = tokenizer(attribute_model_prompt, return_tensors="pt").to(model_bs.device)
+# Batch generation
+batch_size = 32
+for i in range(0, len(instructions), batch_size):
+    print(f"Finished batch {i}")
+    batch = instructions[i:i + batch_size]
+    persona_prompt = persona_ds.shuffle()[0]["system"]
+    base_prompt = "You are an AI assistant that keeps answers concise."
 
-    with torch.no_grad():
-        base_output = model_bs.generate(
-            **base_inputs,
-            max_new_tokens=256,
-            temperature=0.8,
-            top_p=0.9,
-            do_sample=True,
-            eos_token_id=tokenizer.eos_token_id
-        )
+    base_inputs = []
+    attr_inputs = []
 
-        attribute_output = model_bs.generate(
-            **attribute_inputs,
-            max_new_tokens=256,
-            temperature=0.8,
-            top_p=0.9,
-            do_sample=True,
-            eos_token_id=tokenizer.eos_token_id
-        )
+    for instr in batch:
+        base_inputs.append(tokenizer.apply_chat_template([
+            {"role": "system", "content": base_prompt},
+            {"role": "user", "content": instr}
+        ], tokenize=False, add_generation_prompt=True))
 
-    base_answer = tokenizer.decode(
-        base_output[0][base_inputs['input_ids'].shape[1]:],
-        skip_special_tokens=True
-    )
+        attr_inputs.append(tokenizer.apply_chat_template([
+            {"role": "system", "content": persona_prompt},
+            {"role": "user", "content": instr}
+        ], tokenize=False, add_generation_prompt=True))
 
-    attribute_answer = tokenizer.decode(
-        attribute_output[0][attribute_inputs['input_ids'].shape[1]:],
-        skip_special_tokens=True
-    )
+    base_outputs = llm.generate(base_inputs, sampling_params)
+    attr_outputs = llm.generate(attr_inputs, sampling_params)
 
-    data[j].append(attribute_answer)
-    data[j].append(base_answer)
+    for q, base, attr in zip(batch, base_outputs, attr_outputs):
+        base_answer = base.outputs[0].text.strip()
+        attr_answer = attr.outputs[0].text.strip()
+        data.append([q, attr_answer, base_answer])
 
-with open(f"data/{args.name}.pkl", 'wb') as f:
-    pickle.dump(data, f)
+# Save dataset
+total = {'user': persona_prompt, 'data': data}
+os.makedirs("data", exist_ok=True)
+with open(f"data/{args.name}.pkl", "wb") as f:
+    pickle.dump(total, f)
+
