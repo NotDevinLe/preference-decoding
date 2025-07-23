@@ -1,0 +1,61 @@
+[INFO|integration_utils.py:880] 2025-07-15 03:51:52,467 >> Could not log the number of model parameters in Weights & Biases due to an AttributeError.
+  0%|          | 0/1875 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/gscratch/ark/devinl6/envs/align/bin/llamafactory-cli", line 8, in <module>
+    sys.exit(main())
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/cli.py", line 151, in main
+    COMMAND_MAP[command]()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 110, in run_exp
+    _training_function(config={"args": args, "callbacks": callbacks})
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 74, in _training_function
+    run_rm(model_args, data_args, training_args, finetuning_args, callbacks)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/rm/workflow.py", line 65, in run_rm
+    train_result = trainer.train(resume_from_checkpoint=training_args.resume_from_checkpoint)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2606, in _inner_training_loop
+    self.optimizer.step()
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/accelerate/optimizer.py", line 179, in step
+    self.optimizer.step(closure)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/optim/lr_scheduler.py", line 124, in wrapper
+    return func.__get__(opt, opt.__class__)(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/optim/optimizer.py", line 485, in wrapper
+    out = func(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/optim/optimizer.py", line 79, in _use_grad
+    ret = func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/optim/adam.py", line 236, in step
+    has_complex = self._init_group(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 838, in _fn
+    return fn(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/optim/adam.py", line 176, in _init_group
+    state["exp_avg"] = torch.zeros_like(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 224.00 MiB. GPU 0 has a total capacity of 79.25 GiB of which 96.75 MiB is free. Including non-PyTorch memory, this process has 79.15 GiB memory in use. Of the allocated memory 73.93 GiB is allocated by PyTorch, and 4.72 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/gscratch/ark/devinl6/envs/align/bin/llamafactory-cli", line 8, in <module>
+    sys.exit(main())
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/cli.py", line 151, in main
+    COMMAND_MAP[command]()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 110, in run_exp
+    _training_function(config={"args": args, "callbacks": callbacks})
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 74, in _training_function
+    run_rm(model_args, data_args, training_args, finetuning_args, callbacks)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/rm/workflow.py", line 65, in run_rm
+    train_result = trainer.train(resume_from_checkpoint=training_args.resume_from_checkpoint)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2606, in _inner_training_loop
+    self.optimizer.step()
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/accelerate/optimizer.py", line 179, in step
+    self.optimizer.step(closure)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/optim/lr_scheduler.py", line 124, in wrapper
+    return func.__get__(opt, opt.__class__)(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/optim/optimizer.py", line 485, in wrapper
+    out = func(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/optim/optimizer.py", line 79, in _use_grad
+    ret = func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/optim/adam.py", line 236, in step
+    has_complex = self._init_group(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 838, in _fn
+    return fn(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/optim/adam.py", line 176, in _init_group
+    state["exp_avg"] = torch.zeros_like(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 224.00 MiB. GPU 0 has a total capacity of 79.25 GiB of which 96.75 MiB is free. Including non-PyTorch memory, this process has 79.15 GiB memory in use. Of the allocated memory 73.93 GiB is allocated by PyTorch, and 4.72 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

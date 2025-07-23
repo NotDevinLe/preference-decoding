@@ -1,0 +1,6 @@
+Loading data from: ../data/preference/user6_train.json
+Loaded 10000 preference pairs
+Converted 160 samples to drift format
+Using device: cuda
+Loading model...
+Computing drift approximation vector p...

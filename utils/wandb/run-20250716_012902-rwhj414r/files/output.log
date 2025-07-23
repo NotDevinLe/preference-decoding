@@ -1,0 +1,59 @@
+[INFO|integration_utils.py:880] 2025-07-16 01:29:03,159 >> Could not log the number of model parameters in Weights & Biases due to an AttributeError.
+ 13%|█████████▊                                                                | 10/75 [00:43<04:40,  4.32s/it][INFO|trainer.py:4327] 2025-07-16 01:29:46,563 >>
+{'loss': 0.6792, 'grad_norm': 16.202367782592773, 'learning_rate': 9.994504457428557e-06, 'epoch': 0.4}
+***** Running Evaluation *****
+[INFO|trainer.py:4329] 2025-07-16 01:29:46,563 >>   Num examples = 200
+[INFO|trainer.py:4332] 2025-07-16 01:29:46,563 >>   Batch size = 1
+ 20%|██████████████▊                                                           | 15/75 [01:33<06:50,  6.85s/it]Traceback (most recent call last):
+  File "/gscratch/ark/devinl6/envs/align/bin/llamafactory-cli", line 8, in <module>                            
+{'eval_loss': 0.7306349277496338, 'eval_accuracy': 0.465, 'eval_runtime': 25.7834, 'eval_samples_per_second': 7.757, 'eval_steps_per_second': 7.757, 'epoch': 0.4}
+    sys.exit(main())
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/cli.py", line 151, in main
+    COMMAND_MAP[command]()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 110, in run_exp
+    _training_function(config={"args": args, "callbacks": callbacks})
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 74, in _training_function
+    run_rm(model_args, data_args, training_args, finetuning_args, callbacks)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/rm/workflow.py", line 65, in run_rm
+    train_result = trainer.train(resume_from_checkpoint=training_args.resume_from_checkpoint)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 3791, in training_step
+    self.accelerator.backward(loss, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/accelerate/accelerator.py", line 2473, in backward
+    loss.backward(**kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_tensor.py", line 648, in backward
+    torch.autograd.backward(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/autograd/__init__.py", line 353, in backward
+    _engine_run_backward(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/autograd/graph.py", line 824, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/gscratch/ark/devinl6/envs/align/bin/llamafactory-cli", line 8, in <module>
+    sys.exit(main())
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/cli.py", line 151, in main
+    COMMAND_MAP[command]()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 110, in run_exp
+    _training_function(config={"args": args, "callbacks": callbacks})
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 74, in _training_function
+    run_rm(model_args, data_args, training_args, finetuning_args, callbacks)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/rm/workflow.py", line 65, in run_rm
+    train_result = trainer.train(resume_from_checkpoint=training_args.resume_from_checkpoint)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 3791, in training_step
+    self.accelerator.backward(loss, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/accelerate/accelerator.py", line 2473, in backward
+    loss.backward(**kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_tensor.py", line 648, in backward
+    torch.autograd.backward(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/autograd/__init__.py", line 353, in backward
+    _engine_run_backward(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/autograd/graph.py", line 824, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

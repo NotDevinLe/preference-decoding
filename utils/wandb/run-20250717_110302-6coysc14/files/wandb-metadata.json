@@ -1,0 +1,44 @@
+{
+  "os":  "Linux-4.18.0-513.18.1.el8_9.x86_64-x86_64-with-glibc2.28",
+  "python":  "CPython 3.10.18",
+  "startedAt":  "2025-07-17T18:03:02.089398Z",
+  "args":  [
+    "reward_train/eval_rm/user1.yaml"
+  ],
+  "program":  "/gscratch/ark/devinl6/envs/align/bin/llamafactory-cli",
+  "git":  {
+    "remote":  "https://github.com/NotDevinLe/preference-decoding.git",
+    "commit":  "d96485e8d1f26531d4151437e3068281bd920d3e"
+  },
+  "email":  "devin.t.le@outlook.com",
+  "root":  "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils",
+  "host":  "g3080",
+  "executable":  "/gscratch/ark/devinl6/envs/align/bin/python3.10",
+  "cpu_count":  52,
+  "cpu_count_logical":  52,
+  "gpu":  "NVIDIA A100 80GB PCIe",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "540678008832",
+      "used":  "8214118400"
+    }
+  },
+  "memory":  {
+    "total":  "1081356021760"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA A100 80GB PCIe",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-75f222e1-f37b-b384-001e-dbe35ffbada2"
+    }
+  ],
+  "cudaVersion":  "12.7",
+  "slurm":  {
+    "job_id":  "27658489"
+  },
+  "writerId":  "m6ded2r7wa82m8m1kdxv890eu4oh4p5q"
+}

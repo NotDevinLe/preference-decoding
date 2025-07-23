@@ -1,0 +1,13 @@
+{"time":"2025-07-15T09:32:58.476499495-07:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-07-15T09:32:58.725112067-07:00","level":"INFO","msg":"stream: created new stream","id":"0fh75b5w"}
+{"time":"2025-07-15T09:32:58.725204821-07:00","level":"INFO","msg":"stream: started","id":"0fh75b5w"}
+{"time":"2025-07-15T09:32:58.725233194-07:00","level":"INFO","msg":"handler: started","stream_id":"0fh75b5w"}
+{"time":"2025-07-15T09:32:58.725359253-07:00","level":"INFO","msg":"sender: started","stream_id":"0fh75b5w"}
+{"time":"2025-07-15T09:32:58.725427429-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"0fh75b5w"}
+{"time":"2025-07-15T10:15:09.729854389-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/devinl6-university-of-washington/Alignment/0fh75b5w/file_stream\": unexpected EOF"}
+{"time":"2025-07-15T14:26:05.468378304-07:00","level":"INFO","msg":"stream: closing","id":"0fh75b5w"}
+{"time":"2025-07-15T14:26:05.963005714-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-07-15T14:26:06.210672442-07:00","level":"INFO","msg":"handler: closed","stream_id":"0fh75b5w"}
+{"time":"2025-07-15T14:26:06.210724626-07:00","level":"INFO","msg":"sender: closed","stream_id":"0fh75b5w"}
+{"time":"2025-07-15T14:26:06.210717566-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"0fh75b5w"}
+{"time":"2025-07-15T14:26:06.249177577-07:00","level":"INFO","msg":"stream: closed","id":"0fh75b5w"}

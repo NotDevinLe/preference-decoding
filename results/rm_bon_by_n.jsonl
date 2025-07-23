@@ -1,0 +1,10 @@
+{"user": "user1", "k": 2, "avg_selected_gold": -6.41927490234375, "avg_all_gold": -7.063031005859375, "uplift": 0.6437561035156252, "avg_selected_minus_max": 0.5825048828125}
+{"user": "user1", "k": 4, "avg_selected_gold": -6.08466064453125, "avg_all_gold": -7.156152954101563, "uplift": 1.0714923095703126, "avg_selected_minus_max": 1.253994140625}
+{"user": "user1", "k": 6, "avg_selected_gold": -6.00632080078125, "avg_all_gold": -7.17652811686198, "uplift": 1.17020731608073, "avg_selected_minus_max": 1.631728515625}
+{"user": "user1", "k": 8, "avg_selected_gold": -5.94526611328125, "avg_all_gold": -7.201072616577148, "uplift": 1.255806503295898, "avg_selected_minus_max": 1.91236328125}
+{"user": "user1", "k": 10, "avg_selected_gold": -5.94962890625, "avg_all_gold": -7.251236267089844, "uplift": 1.301607360839844, "avg_selected_minus_max": 2.07926513671875}
+{"user": "user1", "k": 12, "avg_selected_gold": -5.8229052734375, "avg_all_gold": -7.260330912272136, "uplift": 1.437425638834636, "avg_selected_minus_max": 2.16006103515625}
+{"user": "user1", "k": 14, "avg_selected_gold": -5.6696337890625, "avg_all_gold": -7.256497715541294, "uplift": 1.5868639264787943, "avg_selected_minus_max": 2.24453857421875}
+{"user": "user1", "k": 16, "avg_selected_gold": -5.854752197265625, "avg_all_gold": -7.267618918567896, "uplift": 1.4128667213022714, "avg_selected_minus_max": 2.535692138671875}
+{"user": "user1", "k": 18, "avg_selected_gold": -5.847020263671875, "avg_all_gold": -7.269388186269336, "uplift": 1.422367922597461, "avg_selected_minus_max": 2.680899658203125}
+{"user": "user1", "k": 20, "avg_selected_gold": -5.677469482421875, "avg_all_gold": -7.247968746304512, "uplift": 1.5704992638826365, "avg_selected_minus_max": 2.6397821044921876}

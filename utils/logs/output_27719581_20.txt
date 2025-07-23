@@ -1,0 +1,5 @@
+Finished loading data
+Getting base log probs
+Getting attribute log probs
+Final accuracy: 0.2850 (285/1000)
+Results saved to ../results/approximation_results.jsonl

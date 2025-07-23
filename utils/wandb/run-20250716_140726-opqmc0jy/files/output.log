@@ -1,0 +1,162 @@
+[INFO|integration_utils.py:880] 2025-07-16 14:07:27,465 >> Could not log the number of model parameters in Weights & Biases due to an AttributeError.
+ 17%|████████████▎                                                             | 10/60 [00:04<00:21,  2.31it/s][INFO|trainer.py:4327] 2025-07-16 14:07:32,361 >>
+{'loss': 0.6986, 'grad_norm': 66.44805145263672, 'learning_rate': 9.924038765061042e-06, 'epoch': 0.5}
+***** Running Evaluation *****
+[INFO|trainer.py:4329] 2025-07-16 14:07:32,361 >>   Num examples = 20
+[INFO|trainer.py:4332] 2025-07-16 14:07:32,361 >>   Batch size = 1
+ 33%|████████████████████████▋                                                 | 20/60 [00:12<00:21,  1.84it/s][INFO|trainer.py:4327] 2025-07-16 14:07:39,912 >>
+***** Running Evaluation *****                                                                                 
+{'eval_loss': 0.7920349836349487, 'eval_accuracy': 0.45, 'eval_runtime': 2.72, 'eval_samples_per_second': 7.353, 'eval_steps_per_second': 7.353, 'epoch': 0.5}
+{'loss': 0.8081, 'grad_norm': 51.27985763549805, 'learning_rate': 8.636868207865244e-06, 'epoch': 1.0}
+[INFO|trainer.py:4329] 2025-07-16 14:07:39,913 >>   Num examples = 20
+[INFO|trainer.py:4332] 2025-07-16 14:07:39,913 >>   Batch size = 1
+ 50%|█████████████████████████████████████                                     | 30/60 [00:19<00:13,  2.29it/s][INFO|trainer.py:4327] 2025-07-16 14:07:47,206 >>
+***** Running Evaluation *****                                                                                 
+{'eval_loss': 0.7800484299659729, 'eval_accuracy': 0.45, 'eval_runtime': 2.777, 'eval_samples_per_second': 7.202, 'eval_steps_per_second': 7.202, 'epoch': 1.0}
+{'loss': 0.6397, 'grad_norm': 52.478240966796875, 'learning_rate': 6.153079353712201e-06, 'epoch': 1.5}
+[INFO|trainer.py:4329] 2025-07-16 14:07:47,207 >>   Num examples = 20
+[INFO|trainer.py:4332] 2025-07-16 14:07:47,207 >>   Batch size = 1
+ 67%|█████████████████████████████████████████████████▎                        | 40/60 [00:27<00:10,  1.87it/s][INFO|trainer.py:4327] 2025-07-16 14:07:54,769 >>
+***** Running Evaluation *****                                                                                 
+{'eval_loss': 0.7584657669067383, 'eval_accuracy': 0.45, 'eval_runtime': 2.8296, 'eval_samples_per_second': 7.068, 'eval_steps_per_second': 7.068, 'epoch': 1.5}
+{'loss': 0.812, 'grad_norm': 16.663925170898438, 'learning_rate': 3.289899283371657e-06, 'epoch': 2.0}
+[INFO|trainer.py:4329] 2025-07-16 14:07:54,769 >>   Num examples = 20
+[INFO|trainer.py:4332] 2025-07-16 14:07:54,769 >>   Batch size = 1
+ 83%|█████████████████████████████████████████████████████████████▋            | 50/60 [00:34<00:05,  1.85it/s][INFO|trainer.py:4327] 2025-07-16 14:08:02,398 >>
+***** Running Evaluation *****                                                                                 
+{'eval_loss': 0.7510117292404175, 'eval_accuracy': 0.55, 'eval_runtime': 2.7583, 'eval_samples_per_second': 7.251, 'eval_steps_per_second': 7.251, 'epoch': 2.0}
+{'loss': 0.796, 'grad_norm': 95.43781280517578, 'learning_rate': 9.893840362247809e-07, 'epoch': 2.5}
+[INFO|trainer.py:4329] 2025-07-16 14:08:02,398 >>   Num examples = 20
+[INFO|trainer.py:4332] 2025-07-16 14:08:02,398 >>   Batch size = 1
+100%|██████████████████████████████████████████████████████████████████████████| 60/60 [00:42<00:00,  2.25it/s][INFO|trainer.py:4327] 2025-07-16 14:08:09,609 >>
+***** Running Evaluation *****                                                                                 
+{'eval_loss': 0.7440999746322632, 'eval_accuracy': 0.55, 'eval_runtime': 2.7731, 'eval_samples_per_second': 7.212, 'eval_steps_per_second': 7.212, 'epoch': 2.5}
+{'loss': 0.6904, 'grad_norm': 48.563011169433594, 'learning_rate': 8.459208643659122e-09, 'epoch': 3.0}
+[INFO|trainer.py:4329] 2025-07-16 14:08:09,609 >>   Num examples = 20
+[INFO|trainer.py:4332] 2025-07-16 14:08:09,609 >>   Batch size = 1
+100%|██████████████████████████████████████████████████████████████████████████| 60/60 [00:44<00:00,  2.25it/s][INFO|trainer.py:3993] 2025-07-16 14:08:12,360 >> Saving model checkpoint to saves/normal/user1/toy_reward/checkpoint-60
+[INFO|trainer.py:4007] 2025-07-16 14:08:12,365 >> Trainer.model is not a `PreTrainedModel`, only saving its state dict.
+{'eval_loss': 0.7397372126579285, 'eval_accuracy': 0.5, 'eval_runtime': 2.753, 'eval_samples_per_second': 7.265, 'eval_steps_per_second': 7.265, 'epoch': 3.0}
+[INFO|tokenization_utils_base.py:2356] 2025-07-16 14:08:12,370 >> chat template saved in saves/normal/user1/toy_reward/checkpoint-60/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2025-07-16 14:08:12,373 >> tokenizer config file saved in saves/normal/user1/toy_reward/checkpoint-60/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2025-07-16 14:08:12,374 >> Special tokens file saved in saves/normal/user1/toy_reward/checkpoint-60/special_tokens_map.json
+[INFO|configuration_utils.py:698] 2025-07-16 14:08:13,324 >> loading configuration file config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Meta-Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/config.json
+[INFO|configuration_utils.py:770] 2025-07-16 14:08:13,325 >> Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 128,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 8.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+[INFO|2025-07-16 14:08:13] llamafactory.train.callbacks:143 >> Value head model saved at: saves/normal/user1/toy_reward/checkpoint-60
+
+[INFO|trainer.py:2676] 2025-07-16 14:08:13,459 >>
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+100%|██████████████████████████████████████████████████████████████████████████| 60/60 [00:45<00:00,  1.30it/s]
+{'train_runtime': 47.0491, 'train_samples_per_second': 1.275, 'train_steps_per_second': 1.275, 'train_loss': 0.7408087730407715, 'epoch': 3.0}
+[INFO|trainer.py:3993] 2025-07-16 14:08:13,462 >> Saving model checkpoint to saves/normal/user1/toy_reward
+[INFO|trainer.py:4007] 2025-07-16 14:08:13,466 >> Trainer.model is not a `PreTrainedModel`, only saving its state dict.
+[INFO|tokenization_utils_base.py:2356] 2025-07-16 14:08:13,471 >> chat template saved in saves/normal/user1/toy_reward/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2025-07-16 14:08:13,474 >> tokenizer config file saved in saves/normal/user1/toy_reward/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2025-07-16 14:08:13,475 >> Special tokens file saved in saves/normal/user1/toy_reward/special_tokens_map.json
+[INFO|configuration_utils.py:698] 2025-07-16 14:08:14,105 >> loading configuration file config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Meta-Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/config.json
+[INFO|configuration_utils.py:770] 2025-07-16 14:08:14,106 >> Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 128,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 8.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+[INFO|2025-07-16 14:08:14] llamafactory.train.callbacks:143 >> Value head model saved at: saves/normal/user1/toy_reward
+***** train metrics *****
+  epoch                    =        3.0
+  total_flos               =        0GF
+  train_loss               =     0.7408
+  train_runtime            = 0:00:47.04
+  train_samples_per_second =      1.275
+  train_steps_per_second   =      1.275
+Figure saved at: saves/normal/user1/toy_reward/training_loss.png
+Figure saved at: saves/normal/user1/toy_reward/training_eval_loss.png
+Figure saved at: saves/normal/user1/toy_reward/training_eval_accuracy.png
+
+[INFO|trainer.py:4327] 2025-07-16 14:08:14,592 >>
+***** Running Evaluation *****
+[INFO|trainer.py:4329] 2025-07-16 14:08:14,593 >>   Num examples = 20
+[INFO|trainer.py:4332] 2025-07-16 14:08:14,593 >>   Batch size = 1
+100%|██████████████████████████████████████████████████████████████████████████| 20/20 [00:02<00:00,  8.15it/s]
+***** eval metrics *****
+  epoch                   =        3.0
+  eval_accuracy           =        0.5
+  eval_loss               =     0.7397
+  eval_runtime            = 0:00:02.78
+  eval_samples_per_second =      7.186
+  eval_steps_per_second   =      7.186
+[INFO|modelcard.py:450] 2025-07-16 14:08:17,376 >> Dropping the following result as it does not have all the necessary fields:
+{'task': {'name': 'Causal Language Modeling', 'type': 'text-generation'}, 'metrics': [{'name': 'Accuracy', 'type': 'accuracy', 'value': 0.5}]}

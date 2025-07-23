@@ -1,0 +1,83 @@
+[INFO|integration_utils.py:880] 2025-07-16 01:33:43,491 >> Could not log the number of model parameters in Weights & Biases due to an AttributeError.
+  2%|█▏                                                                       | 10/600 [00:04<03:20,  2.95it/s][INFO|trainer.py:4327] 2025-07-16 01:33:47,689 >>
+{'loss': 0.8825, 'grad_norm': 52.97801971435547, 'learning_rate': 1.5e-06, 'epoch': 0.05}
+***** Running Evaluation *****
+[INFO|trainer.py:4329] 2025-07-16 01:33:47,689 >>   Num examples = 200
+[INFO|trainer.py:4332] 2025-07-16 01:33:47,689 >>   Batch size = 1
+  3%|██▍                                                                      | 20/600 [00:33<07:39,  1.26it/s][INFO|trainer.py:4327] 2025-07-16 01:34:17,455 >>
+***** Running Evaluation *****                                                                                 
+{'eval_loss': 0.7401215434074402, 'eval_accuracy': 0.445, 'eval_runtime': 25.1926, 'eval_samples_per_second': 7.939, 'eval_steps_per_second': 7.939, 'epoch': 0.05}
+{'loss': 0.7352, 'grad_norm': 51.16127014160156, 'learning_rate': 3.1666666666666667e-06, 'epoch': 0.1}
+[INFO|trainer.py:4329] 2025-07-16 01:34:17,455 >>   Num examples = 200
+[INFO|trainer.py:4332] 2025-07-16 01:34:17,455 >>   Batch size = 1
+  5%|███▋                                                                     | 30/600 [01:02<06:02,  1.57it/s][INFO|trainer.py:4327] 2025-07-16 01:34:46,403 >>
+***** Running Evaluation *****                                                                                 
+{'eval_loss': 0.7390853762626648, 'eval_accuracy': 0.44, 'eval_runtime': 25.6267, 'eval_samples_per_second': 7.804, 'eval_steps_per_second': 7.804, 'epoch': 0.1}
+{'loss': 0.5571, 'grad_norm': 40.683040618896484, 'learning_rate': 4.833333333333333e-06, 'epoch': 0.15}
+[INFO|trainer.py:4329] 2025-07-16 01:34:46,404 >>   Num examples = 200
+[INFO|trainer.py:4332] 2025-07-16 01:34:46,404 >>   Batch size = 1
+  7%|████▊                                                                    | 40/600 [01:31<06:31,  1.43it/s][INFO|trainer.py:4327] 2025-07-16 01:35:15,465 >>
+***** Running Evaluation *****                                                                                 
+{'eval_loss': 0.7372548580169678, 'eval_accuracy': 0.45, 'eval_runtime': 25.6502, 'eval_samples_per_second': 7.797, 'eval_steps_per_second': 7.797, 'epoch': 0.15}
+{'loss': 0.6579, 'grad_norm': 57.88688659667969, 'learning_rate': 6.5000000000000004e-06, 'epoch': 0.2}
+[INFO|trainer.py:4329] 2025-07-16 01:35:15,465 >>   Num examples = 200
+[INFO|trainer.py:4332] 2025-07-16 01:35:15,466 >>   Batch size = 1
+  8%|██████                                                                   | 50/600 [02:01<06:21,  1.44it/s][INFO|trainer.py:4327] 2025-07-16 01:35:45,280 >>
+***** Running Evaluation *****                                                                                 
+{'eval_loss': 0.7321343421936035, 'eval_accuracy': 0.465, 'eval_runtime': 25.5007, 'eval_samples_per_second': 7.843, 'eval_steps_per_second': 7.843, 'epoch': 0.2}
+{'loss': 0.6188, 'grad_norm': 50.528804779052734, 'learning_rate': 8.166666666666668e-06, 'epoch': 0.25}
+[INFO|trainer.py:4329] 2025-07-16 01:35:45,280 >>   Num examples = 200
+[INFO|trainer.py:4332] 2025-07-16 01:35:45,280 >>   Batch size = 1
+  9%|██████▋                                                                  | 55/600 [02:29<21:04,  2.32s/it]Traceback (most recent call last):
+  File "/gscratch/ark/devinl6/envs/align/bin/llamafactory-cli", line 8, in <module>                            
+{'eval_loss': 0.7187699675559998, 'eval_accuracy': 0.485, 'eval_runtime': 25.5229, 'eval_samples_per_second': 7.836, 'eval_steps_per_second': 7.836, 'epoch': 0.25}
+    sys.exit(main())
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/cli.py", line 151, in main
+    COMMAND_MAP[command]()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 110, in run_exp
+    _training_function(config={"args": args, "callbacks": callbacks})
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 74, in _training_function
+    run_rm(model_args, data_args, training_args, finetuning_args, callbacks)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/rm/workflow.py", line 65, in run_rm
+    train_result = trainer.train(resume_from_checkpoint=training_args.resume_from_checkpoint)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 3791, in training_step
+    self.accelerator.backward(loss, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/accelerate/accelerator.py", line 2473, in backward
+    loss.backward(**kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_tensor.py", line 648, in backward
+    torch.autograd.backward(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/autograd/__init__.py", line 353, in backward
+    _engine_run_backward(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/autograd/graph.py", line 824, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/gscratch/ark/devinl6/envs/align/bin/llamafactory-cli", line 8, in <module>
+    sys.exit(main())
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/cli.py", line 151, in main
+    COMMAND_MAP[command]()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 110, in run_exp
+    _training_function(config={"args": args, "callbacks": callbacks})
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 74, in _training_function
+    run_rm(model_args, data_args, training_args, finetuning_args, callbacks)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/rm/workflow.py", line 65, in run_rm
+    train_result = trainer.train(resume_from_checkpoint=training_args.resume_from_checkpoint)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 3791, in training_step
+    self.accelerator.backward(loss, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/accelerate/accelerator.py", line 2473, in backward
+    loss.backward(**kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_tensor.py", line 648, in backward
+    torch.autograd.backward(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/autograd/__init__.py", line 353, in backward
+    _engine_run_backward(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/autograd/graph.py", line 824, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

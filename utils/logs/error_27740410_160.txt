@@ -1,0 +1,2 @@
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+[2025-07-20T20:59:54.458] error: *** JOB 27740410 ON g3086 CANCELLED AT 2025-07-20T20:59:54 DUE to SIGNAL Terminated ***

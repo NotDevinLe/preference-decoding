@@ -1,0 +1,65 @@
+Traceback (most recent call last):
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x14ea36801660>: Failed to resolve 'huggingface.co' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /api/whoami-v2 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x14ea36801660>: Failed to resolve 'huggingface.co' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/find_user_p.py", line 16, in <module>
+    login(hf_token)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 101, in inner_f
+    return f(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 31, in inner_f
+    return f(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/_login.py", line 126, in login
+    _login(token, add_to_git_credential=add_to_git_credential)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/_login.py", line 404, in _login
+    token_info = whoami(token)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 1770, in whoami
+    r = get_session().get(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/requests/sessions.py", line 602, in get
+    return self.request("GET", url, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 96, in send
+    return super().send(request, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: (MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /api/whoami-v2 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x14ea36801660>: Failed to resolve \'huggingface.co\' ([Errno -2] Name or service not known)"))'), '(Request ID: 0372c3a3-9242-4e50-9b7e-4ad2245b4b2e)')

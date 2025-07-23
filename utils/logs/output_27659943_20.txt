@@ -1,0 +1,5 @@
+Loaded 500 prompts from ../data/bon.json
+Loaded gold reward cache for 1000 prompts from ../results/gold_scores.jsonl
+Loading reward model from: saves/user1_samples/user1_20/reward
+[INFO|2025-07-17 11:09:58] llamafactory.model.model_utils.kv_cache:143 >> KV cache is enabled for faster generation.
+[INFO|2025-07-17 11:10:11] llamafactory.model.model_utils.attention:143 >> Using torch SDPA for faster training and inference.

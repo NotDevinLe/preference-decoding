@@ -1,0 +1,26 @@
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:04,  1.53s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.70s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:05<00:01,  1.94s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.27s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.45s/it]
+Traceback (most recent call last):
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/peft/config.py", line 260, in _get_peft_type
+    config_file = hf_hub_download(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 106, in _inner_fn
+    validate_repo_id(arg_value)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 154, in validate_repo_id
+    raise HFValidationError(
+huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': 'saves/user1_samples/user1_20/reward'. Use `repo_type` argument if needed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/approx_bon.py", line 58, in <module>
+    model = load_model(
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/model/loader.py", line 184, in load_model
+    model = init_adapter(config, model, model_args, finetuning_args, is_trainable)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/model/adapter.py", line 300, in init_adapter
+    model = _setup_lora_tuning(
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/model/adapter.py", line 183, in _setup_lora_tuning
+    model: LoraModel = PeftModel.from_pretrained(model, adapter, **init_kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/peft/peft_model.py", line 439, in from_pretrained
+    PeftConfig._get_peft_type(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/peft/config.py", line 266, in _get_peft_type
+    raise ValueError(f"Can't find '{CONFIG_NAME}' at '{model_id}'")
+ValueError: Can't find 'adapter_config.json' at 'saves/user1_samples/user1_20/reward'

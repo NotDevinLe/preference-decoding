@@ -1,0 +1,5 @@
+Loaded 500 prompts from ../data/bon.json
+Loaded gold reward cache for 1000 prompts from ../results/gold_scores.jsonl
+Loading reward model from: saves/normal/user1/toy_reward_20
+Sparsified p: kept top 7 elements (by abs value), set rest to zero.
+Scoring outputs with reward model...

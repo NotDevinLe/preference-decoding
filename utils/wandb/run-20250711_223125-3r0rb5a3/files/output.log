@@ -1,0 +1,176 @@
+[INFO|integration_utils.py:880] 2025-07-11 22:31:31,415 >> Could not log the number of model parameters in Weights & Biases due to an AttributeError.
+  0%|                                                                      | 0/3750 [00:00<?, ?it/s]/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+  4%|██                                                        | 134/3750 [07:01<3:12:56,  3.20s/it]Traceback (most recent call last):
+{'loss': 0.6963, 'grad_norm': 14.408439636230469, 'learning_rate': 2.4000000000000003e-06, 'epoch': 0.01}
+{'loss': 0.8572, 'grad_norm': 12.802858352661133, 'learning_rate': 5.066666666666667e-06, 'epoch': 0.02}
+{'loss': 0.8023, 'grad_norm': 11.409096717834473, 'learning_rate': 7.733333333333334e-06, 'epoch': 0.02}
+{'loss': 0.7343, 'grad_norm': 16.48583221435547, 'learning_rate': 1.04e-05, 'epoch': 0.03}
+{'loss': 0.8227, 'grad_norm': 17.126869201660156, 'learning_rate': 1.3066666666666666e-05, 'epoch': 0.04}
+{'loss': 0.725, 'grad_norm': 16.93755340576172, 'learning_rate': 1.5733333333333334e-05, 'epoch': 0.05}
+{'loss': 0.7925, 'grad_norm': 14.499736785888672, 'learning_rate': 1.84e-05, 'epoch': 0.06}
+{'loss': 0.6995, 'grad_norm': 14.182804107666016, 'learning_rate': 2.106666666666667e-05, 'epoch': 0.06}
+{'loss': 0.7079, 'grad_norm': 11.693585395812988, 'learning_rate': 2.3733333333333335e-05, 'epoch': 0.07}
+{'loss': 0.6828, 'grad_norm': 11.581332206726074, 'learning_rate': 2.64e-05, 'epoch': 0.08}
+{'loss': 0.7008, 'grad_norm': 14.192788124084473, 'learning_rate': 2.906666666666667e-05, 'epoch': 0.09}
+{'loss': 0.7095, 'grad_norm': 14.404791831970215, 'learning_rate': 3.173333333333334e-05, 'epoch': 0.1}
+{'loss': 0.7021, 'grad_norm': 13.062822341918945, 'learning_rate': 3.4399999999999996e-05, 'epoch': 0.1}
+  File "/gscratch/ark/devinl6/envs/align/bin/llamafactory-cli", line 8, in <module>
+    sys.exit(main())
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/cli.py", line 151, in main
+    COMMAND_MAP[command]()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 110, in run_exp
+    _training_function(config={"args": args, "callbacks": callbacks})
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 74, in _training_function
+    run_rm(model_args, data_args, training_args, finetuning_args, callbacks)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/rm/workflow.py", line 65, in run_rm
+    train_result = trainer.train(resume_from_checkpoint=training_args.resume_from_checkpoint)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 3745, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/rm/trainer.py", line 98, in compute_loss
+    _, _, values = model(**inputs, output_hidden_states=True, return_dict=True, use_cache=False)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1857, in _call_impl
+    return inner()
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1805, in inner
+    result = forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/accelerate/utils/operations.py", line 818, in forward
+    return model_forward(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/accelerate/utils/operations.py", line 806, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/trl/models/modeling_value_head.py", line 173, in forward
+    base_model_output = self.pretrained_model(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/peft/peft_model.py", line 1757, in forward
+    return self.base_model(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/peft/tuners/tuners_utils.py", line 193, in forward
+    return self.model.forward(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/utils/generic.py", line 969, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 688, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/utils/generic.py", line 969, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 453, in forward
+    layer_outputs = decoder_layer(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/modeling_layers.py", line 47, in __call__
+    return self._gradient_checkpointing_func(partial(super().__call__, **kwargs), *args)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/model/model_utils/checkpointing.py", line 97, in custom_gradient_checkpointing_func
+    return gradient_checkpointing_func(func, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_compile.py", line 51, in inner
+    return disable_fn(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 838, in _fn
+    return fn(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/checkpoint.py", line 488, in checkpoint
+    return CheckpointFunction.apply(function, preserve, *args)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/autograd/function.py", line 575, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/checkpoint.py", line 245, in forward
+    ctx.fwd_devices, ctx.fwd_device_states = get_device_states(*args)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/checkpoint.py", line 174, in get_device_states
+    tree_map(add_device_ids, args)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/_pytree.py", line 1145, in tree_map
+    return treespec.unflatten(map(func, *flat_args))
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/_pytree.py", line 1000, in unflatten
+    child_pytrees.append(child_spec.unflatten(leaves[start:end]))
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/_pytree.py", line 980, in unflatten
+    def unflatten(self, leaves: Iterable[Any]) -> PyTree:
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/gscratch/ark/devinl6/envs/align/bin/llamafactory-cli", line 8, in <module>
+    sys.exit(main())
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/cli.py", line 151, in main
+    COMMAND_MAP[command]()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 110, in run_exp
+    _training_function(config={"args": args, "callbacks": callbacks})
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/tuner.py", line 74, in _training_function
+    run_rm(model_args, data_args, training_args, finetuning_args, callbacks)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/rm/workflow.py", line 65, in run_rm
+    train_result = trainer.train(resume_from_checkpoint=training_args.resume_from_checkpoint)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/trainer.py", line 3745, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/train/rm/trainer.py", line 98, in compute_loss
+    _, _, values = model(**inputs, output_hidden_states=True, return_dict=True, use_cache=False)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1857, in _call_impl
+    return inner()
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1805, in inner
+    result = forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/accelerate/utils/operations.py", line 818, in forward
+    return model_forward(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/accelerate/utils/operations.py", line 806, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/trl/models/modeling_value_head.py", line 173, in forward
+    base_model_output = self.pretrained_model(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/peft/peft_model.py", line 1757, in forward
+    return self.base_model(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/peft/tuners/tuners_utils.py", line 193, in forward
+    return self.model.forward(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/utils/generic.py", line 969, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 688, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/utils/generic.py", line 969, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 453, in forward
+    layer_outputs = decoder_layer(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/modeling_layers.py", line 47, in __call__
+    return self._gradient_checkpointing_func(partial(super().__call__, **kwargs), *args)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/LLaMA-Factory/src/llamafactory/model/model_utils/checkpointing.py", line 97, in custom_gradient_checkpointing_func
+    return gradient_checkpointing_func(func, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_compile.py", line 51, in inner
+    return disable_fn(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 838, in _fn
+    return fn(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/checkpoint.py", line 488, in checkpoint
+    return CheckpointFunction.apply(function, preserve, *args)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/autograd/function.py", line 575, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/checkpoint.py", line 245, in forward
+    ctx.fwd_devices, ctx.fwd_device_states = get_device_states(*args)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/checkpoint.py", line 174, in get_device_states
+    tree_map(add_device_ids, args)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/_pytree.py", line 1145, in tree_map
+    return treespec.unflatten(map(func, *flat_args))
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/_pytree.py", line 1000, in unflatten
+    child_pytrees.append(child_spec.unflatten(leaves[start:end]))
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/_pytree.py", line 980, in unflatten
+    def unflatten(self, leaves: Iterable[Any]) -> PyTree:
+KeyboardInterrupt

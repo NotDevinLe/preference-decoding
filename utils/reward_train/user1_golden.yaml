@@ -1,0 +1,45 @@
+### model
+model_name_or_path: meta-llama/Meta-Llama-3.1-8B-Instruct
+trust_remote_code: true
+
+### method
+stage: rm
+do_train: true
+finetuning_type: lora
+lora_rank: 8
+lora_target: all
+
+### dataset
+dataset: user1_train
+dataset_dir: /mmfs1/gscratch/ark/devinl6/preference/preference-decoding/data/preference
+template: llama3
+cutoff_len: 2048
+overwrite_cache: true
+preprocessing_num_workers: 8
+dataloader_num_workers: 4
+
+### output
+output_dir: saves/golden/user1/toy_reward
+logging_steps: 10
+save_steps: 500
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: false
+report_to: wandb  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+
+### train
+per_device_train_batch_size: 8
+gradient_accumulation_steps: 4
+learning_rate: 1.0e-5
+num_train_epochs: 3.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 180000000
+resume_from_checkpoint: null
+
+### eval
+eval_dataset: user1_test
+per_device_eval_batch_size: 1
+eval_strategy: steps
+eval_steps: 100

@@ -1,0 +1,12 @@
+{"time":"2025-07-15T17:55:19.53058214-07:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-07-15T17:55:19.782283526-07:00","level":"INFO","msg":"stream: created new stream","id":"etcpswfy"}
+{"time":"2025-07-15T17:55:19.782335184-07:00","level":"INFO","msg":"stream: started","id":"etcpswfy"}
+{"time":"2025-07-15T17:55:19.782345647-07:00","level":"INFO","msg":"handler: started","stream_id":"etcpswfy"}
+{"time":"2025-07-15T17:55:19.782396444-07:00","level":"INFO","msg":"sender: started","stream_id":"etcpswfy"}
+{"time":"2025-07-15T17:55:19.78241665-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"etcpswfy"}
+{"time":"2025-07-15T22:42:04.150156322-07:00","level":"INFO","msg":"stream: closing","id":"etcpswfy"}
+{"time":"2025-07-15T22:42:05.12757792-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-07-15T22:42:05.257764561-07:00","level":"INFO","msg":"handler: closed","stream_id":"etcpswfy"}
+{"time":"2025-07-15T22:42:05.257795082-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"etcpswfy"}
+{"time":"2025-07-15T22:42:05.257808248-07:00","level":"INFO","msg":"sender: closed","stream_id":"etcpswfy"}
+{"time":"2025-07-15T22:42:05.305200335-07:00","level":"INFO","msg":"stream: closed","id":"etcpswfy"}

@@ -1,0 +1,64 @@
+INFO 07-15 15:04:34 [__init__.py:244] Automatically detected platform cuda.
+INFO 07-15 15:05:07 [config.py:841] This model supports multiple tasks: {'generate', 'embed', 'reward', 'classify'}. Defaulting to 'generate'.
+WARNING 07-15 15:05:07 [config.py:3371] Casting torch.bfloat16 to torch.float16.
+INFO 07-15 15:05:07 [config.py:1472] Using max model len 131072
+INFO 07-15 15:05:12 [config.py:2285] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 07-15 15:05:15 [core.py:526] Waiting for init message from front-end.
+INFO 07-15 15:05:15 [core.py:69] Initializing a V1 LLM engine (v0.9.2) with config: model='meta-llama/Meta-Llama-3.1-8B-Instruct', speculative_config=None, tokenizer='meta-llama/Meta-Llama-3.1-8B-Instruct', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config={}, tokenizer_revision=None, trust_remote_code=True, dtype=torch.float16, max_seq_len=131072, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto,  device_config=cuda, decoding_config=DecodingConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_backend=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=meta-llama/Meta-Llama-3.1-8B-Instruct, num_scheduler_steps=1, multi_step_stream_outputs=True, enable_prefix_caching=True, chunked_prefill_enabled=True, use_async_output_proc=True, pooler_config=None, compilation_config={"level":3,"debug_dump_path":"","cache_dir":"","backend":"","custom_ops":[],"splitting_ops":["vllm.unified_attention","vllm.unified_attention_with_output"],"use_inductor":true,"compile_sizes":[],"inductor_compile_config":{"enable_auto_functionalized_v2":false},"inductor_passes":{},"use_cudagraph":true,"cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[512,504,496,488,480,472,464,456,448,440,432,424,416,408,400,392,384,376,368,360,352,344,336,328,320,312,304,296,288,280,272,264,256,248,240,232,224,216,208,200,192,184,176,168,160,152,144,136,128,120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,4,2,1],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"max_capture_size":512,"local_cache_dir":null}
+INFO 07-15 15:05:23 [parallel_state.py:1076] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+WARNING 07-15 15:05:24 [topk_topp_sampler.py:59] FlashInfer is not available. Falling back to the PyTorch-native implementation of top-p & top-k sampling. For the best performance, please install FlashInfer.
+INFO 07-15 15:05:24 [gpu_model_runner.py:1770] Starting to load model meta-llama/Meta-Llama-3.1-8B-Instruct...
+INFO 07-15 15:05:24 [gpu_model_runner.py:1775] Loading model from scratch...
+INFO 07-15 15:05:25 [cuda.py:284] Using Flash Attention backend on V1 engine.
+INFO 07-15 15:05:30 [weight_utils.py:292] Using model weights format ['*.safetensors']
+INFO 07-15 15:06:40 [default_loader.py:272] Loading weights took 68.79 seconds
+INFO 07-15 15:06:41 [gpu_model_runner.py:1801] Model loading took 14.9889 GiB and 75.702962 seconds
+INFO 07-15 15:06:46 [gpu_worker.py:232] Available KV cache memory: 23.66 GiB
+INFO 07-15 15:06:47 [kv_cache_utils.py:716] GPU KV cache size: 193,856 tokens
+INFO 07-15 15:06:47 [kv_cache_utils.py:720] Maximum concurrency for 131,072 tokens per request: 1.48x
+INFO 07-15 15:06:53 [gpu_model_runner.py:2326] Graph capturing finished in 7 secs, took 0.15 GiB
+INFO 07-15 15:06:53 [core.py:172] init engine (profile, create kv cache, warmup model) took 12.73 seconds
+Processing batch starting at item 0 (10000 items remaining)
+Processing batch starting at item 256 (9744 items remaining)
+Processing batch starting at item 512 (9488 items remaining)
+Processing batch starting at item 768 (9232 items remaining)
+Processing batch starting at item 1024 (8976 items remaining)
+Processing batch starting at item 1280 (8720 items remaining)
+Processing batch starting at item 1536 (8464 items remaining)
+Processing batch starting at item 1792 (8208 items remaining)
+Processing batch starting at item 2048 (7952 items remaining)
+Processing batch starting at item 2304 (7696 items remaining)
+Processing batch starting at item 2560 (7440 items remaining)
+Processing batch starting at item 2816 (7184 items remaining)
+Processing batch starting at item 3072 (6928 items remaining)
+Processing batch starting at item 3328 (6672 items remaining)
+Processing batch starting at item 3584 (6416 items remaining)
+Processing batch starting at item 3840 (6160 items remaining)
+Processing batch starting at item 4096 (5904 items remaining)
+Processing batch starting at item 4352 (5648 items remaining)
+Processing batch starting at item 4608 (5392 items remaining)
+Processing batch starting at item 4864 (5136 items remaining)
+Processing batch starting at item 5120 (4880 items remaining)
+Processing batch starting at item 5376 (4624 items remaining)
+Processing batch starting at item 5632 (4368 items remaining)
+Processing batch starting at item 5888 (4112 items remaining)
+Processing batch starting at item 6144 (3856 items remaining)
+Processing batch starting at item 6400 (3600 items remaining)
+Processing batch starting at item 6656 (3344 items remaining)
+Processing batch starting at item 6912 (3088 items remaining)
+Processing batch starting at item 7168 (2832 items remaining)
+Processing batch starting at item 7424 (2576 items remaining)
+Processing batch starting at item 7680 (2320 items remaining)
+Processing batch starting at item 7936 (2064 items remaining)
+Processing batch starting at item 8192 (1808 items remaining)
+Processing batch starting at item 8448 (1552 items remaining)
+Processing batch starting at item 8704 (1296 items remaining)
+Processing batch starting at item 8960 (1040 items remaining)
+Processing batch starting at item 9216 (784 items remaining)
+Processing batch starting at item 9472 (528 items remaining)
+Processing batch starting at item 9728 (272 items remaining)
+Processing batch starting at item 9984 (16 items remaining)
+
+Generation complete!
+Generated 10000 preference pairs for user: user4 (train split)
+Dataset saved to: ../../data/preference/user4_train.json

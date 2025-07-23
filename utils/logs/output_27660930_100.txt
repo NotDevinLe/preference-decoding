@@ -1,0 +1,3 @@
+Loaded 100 prompts from ../data/bon.json
+Loaded gold reward cache for 1000 prompts from ../results/gold_scores.jsonl
+Loading reward model from: saves/normal/user1/toy_reward_100

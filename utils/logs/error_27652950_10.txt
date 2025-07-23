@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/eval_approx.py", line 37, in <module>
+    raise ValueError(f"No p vector found for user {args.name} in {p_path}")
+ValueError: No p vector found for user user6 in ../results/user_p.jsonl

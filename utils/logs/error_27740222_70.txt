@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/find_user_p.py", line 16, in <module>
+    login(hf_token)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 101, in inner_f
+    return f(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 31, in inner_f
+    return f(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/_login.py", line 126, in login
+    _login(token, add_to_git_credential=add_to_git_credential)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/_login.py", line 412, in _login
+    _set_active_token(token_name=token_name, add_to_git_credential=add_to_git_credential)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/huggingface_hub/_login.py", line 457, in _set_active_token
+    raise ValueError(f"Token {token_name} not found in {constants.HF_STORED_TOKENS_PATH}")
+ValueError: Token thing not found in /gscratch/ark/devinl6/hf_cache/stored_tokens

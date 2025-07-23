@@ -1,0 +1,15 @@
+{"user": "user1", "n": 200, "uplift": 1.1157739889962333, "selected_minus_max": 1.73777294921875}
+{"user": "user1", "n": 10, "uplift": 0.1253862936837331, "selected_minus_max": 2.72816064453125}
+{"user": "user1", "n": 20, "uplift": 0.3404126608712339, "selected_minus_max": 2.51313427734375}
+{"user": "user1", "n": 30, "uplift": 0.41045172337123326, "selected_minus_max": 2.44309521484375}
+{"user": "user1", "n": 40, "uplift": 0.5127359030587337, "selected_minus_max": 2.34081103515625}
+{"user": "user1", "n": 50, "uplift": 0.7040313132149834, "selected_minus_max": 2.149515625}
+{"user": "user1", "n": 60, "uplift": 0.8658340475899831, "selected_minus_max": 1.987712890625}
+{"user": "user1", "n": 70, "uplift": 0.9567735464913509, "selected_minus_max": 1.896773391723633}
+{"user": "user1", "n": 80, "uplift": 1.0157657339913504, "selected_minus_max": 1.8377812042236328}
+{"user": "user1", "n": 90, "uplift": 1.1687657339913509, "selected_minus_max": 1.6847812042236328}
+{"user": "user1", "n": 100, "uplift": 1.147442980085101, "selected_minus_max": 1.706103958129883}
+{"user": "user1", "n": 120, "uplift": 1.1491212027413509, "selected_minus_max": 1.7044257354736327}
+{"user": "user1", "n": 140, "uplift": 1.1695328238351008, "selected_minus_max": 1.6840141143798828}
+{"user": "user1", "n": 160, "uplift": 1.1397886832101003, "selected_minus_max": 1.7137582550048829}
+{"user": "user1", "n": 180, "uplift": 1.2179463522774832, "selected_minus_max": 1.6356005859375}
