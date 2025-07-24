@@ -3,8 +3,8 @@ import json
 import torch
 import os
 os.environ["HF_HOME"] = "/gscratch/ark/devinl6/hf_cache"
-from drift import approximate_l1
-from transformers import AutoTokenizer
+from drift import approximate
+from transformers import AutoTokenizer, AutoModelForCausalLM
 from attribute_prompts import attribute_prompts
 from dotenv import load_dotenv
 from huggingface_hub import login
@@ -39,7 +39,10 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f"Using device: {device}")
 
 print("Loading model...")
-model = vllm.LLM(model=small_model_id, tensor_parallel_size=1, gpu_memory_utilization=0.95, max_model_len=4096)
+# model = vllm.LLM(model=small_model_id, tensor_parallel_size=1, gpu_memory_utilization=0.95, max_model_len=4096)
+
+model = AutoModelForCausalLM.from_pretrained(small_model_id, device_map="auto", torch_dtype=torch.bfloat16)
+
 tokenizer = AutoTokenizer.from_pretrained(small_model_id)
 tokenizer.pad_token = tokenizer.eos_token
 
@@ -58,17 +61,13 @@ for j in range(args.max_samples):
 
 print(f"Converted {len(data)} samples to drift format")
 
-results = []
-
-p = approximate_l1(data, model, tokenizer, base_prompt, attribute_prompts, device, batch_size=1)
-print(p)
-results.append(p.tolist())
+p = approximate(data, model, tokenizer, base_prompt, attribute_prompts, device, batch_size=32)
 
 # Save p to jsonl
 result_entry = {
     "user": args.name,
     "n": args.max_samples,
-    "p": results,
+    "p": p.tolist(),
 }
 
 with open(args.save_path, "a") as f:

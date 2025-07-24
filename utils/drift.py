@@ -11,6 +11,7 @@ from typing import Optional
 from tqdm import tqdm
 import cvxpy as cp
 from vllm import LLM, SamplingParams
+import gc
 
 def log_prob(pi, ys, systems, questions, device, tokenizer, batch_size=8, show_progress=True):
     log_probs = []
@@ -114,71 +115,83 @@ def find_sublist(sub, full):
 def get_log_probs_vllm(systems, questions, completions, llm, tokenizer, batch_size=8):
     assert len(systems) == len(questions) == len(completions)
 
-    full_texts = []
-    prompt_texts = []
-    for sys, q, c in zip(systems, questions, completions):
-        full_messages = [
-            {"role": "system", "content": sys.strip()},
-            {"role": "user", "content": q.strip()},
-            {"role": "assistant", "content": c.lstrip()}
-        ]
-        prompt_messages = [
-            {"role": "system", "content": sys.strip()},
-            {"role": "user", "content": q.strip()}
-        ]
-        full_text = tokenizer.apply_chat_template(full_messages, tokenize=False, add_generation_prompt=False)
-        prompt_text = tokenizer.apply_chat_template(prompt_messages, tokenize=False, add_generation_prompt=True)
-        full_texts.append(full_text)
-        prompt_texts.append(prompt_text)
-
-    prompt_ids_list = tokenizer(prompt_texts, return_tensors="pt", padding=True).input_ids.tolist()
-    full_ids_list = tokenizer(full_texts, return_tensors="pt", padding=True).input_ids.tolist()
-
-    sampling_params = SamplingParams(
-        temperature=0.0,
-        prompt_logprobs=1,
-        max_tokens=1
-    )
-
     log_probs = []
     token_counts = []
-    n = len(full_texts)
-    outputs = []
-    # Explicitly batch the generation step
+    n = len(systems)
     for batch_start in range(0, n, batch_size):
         batch_end = min(batch_start + batch_size, n)
-        batch_full_texts = full_texts[batch_start:batch_end]
+        batch_systems = systems[batch_start:batch_end]
+        batch_questions = questions[batch_start:batch_end]
+        batch_completions = completions[batch_start:batch_end]
+
+        batch_full_texts = []
+        batch_prompt_texts = []
+        for sys, q, c in zip(batch_systems, batch_questions, batch_completions):
+            full_messages = [
+                {"role": "system", "content": sys.strip()},
+                {"role": "user", "content": q.strip()},
+                {"role": "assistant", "content": c.lstrip()}
+            ]
+            prompt_messages = [
+                {"role": "system", "content": sys.strip()},
+                {"role": "user", "content": q.strip()}
+            ]
+            full_text = tokenizer.apply_chat_template(full_messages, tokenize=False, add_generation_prompt=False)
+            prompt_text = tokenizer.apply_chat_template(prompt_messages, tokenize=False, add_generation_prompt=True)
+            batch_full_texts.append(full_text)
+            batch_prompt_texts.append(prompt_text)
+
+        batch_prompt_ids_list = tokenizer(batch_prompt_texts, return_tensors="pt", padding=True).input_ids.tolist()
+        batch_full_ids_list = tokenizer(batch_full_texts, return_tensors="pt", padding=True).input_ids.tolist()
+
+        sampling_params = SamplingParams(
+            temperature=0.0,
+            prompt_logprobs=1,
+            max_tokens=1
+        )
         batch_outputs = llm.generate(batch_full_texts, sampling_params)
-        outputs.extend(batch_outputs)
 
-    for idx, (out, prompt_ids, full_ids) in enumerate(zip(outputs, prompt_ids_list, full_ids_list)):
-        log_prob_dict = out.prompt_logprobs
-
-        # Robustly find where the prompt ends in the full input
-        start = find_sublist(prompt_ids, full_ids)
-        if start == -1:
-            print(f"Warning: Prompt tokens not found as prefix in full tokens for example {idx}. Using fallback split.")
-            start = len(prompt_ids)
-        else:
-            start += len(prompt_ids)
-
-        target_ids = full_ids[start:]
-        completion_log_probs = []
-        tokens_found = 0
-
-        for i, token_id in enumerate(target_ids, start=start):
-            if i >= len(log_prob_dict):
-                break
-            logprob_entry = log_prob_dict[i].get(token_id)
-            if logprob_entry is not None:
-                completion_log_probs.append(logprob_entry.logprob)
-                tokens_found += 1
+        for idx, (out, prompt_ids, full_ids) in enumerate(zip(batch_outputs, batch_prompt_ids_list, batch_full_ids_list)):
+            
+            prompt_len = len(out.prompt_token_ids)
+            if full_ids[:prompt_len] != out.prompt_token_ids:
+                print(full_ids[:prompt_len])
+                print(out.prompt_token_ids)
+                assert False
+            log_prob_dict = out.prompt_logprobs
+            # Robustly find where the prompt ends in the full input
+            start = find_sublist(prompt_ids, full_ids)
+            if start == -1:
+                print(f"Warning: Prompt tokens not found as prefix in full tokens for example {batch_start + idx}. Using fallback split.")
+                start = prompt_ids.index(tokenizer.eos_token_id)
             else:
-                print(f"Token ID {token_id} not found in prompt_logprobs at position {i} (example {idx})")
-
-        log_probs.append(sum(completion_log_probs))
-        token_counts.append(tokens_found)
-
+                start += len(prompt_ids)
+            target_ids = full_ids[start:]
+            completion_log_probs = []
+            tokens_found = 0
+            for i, token_id in enumerate(target_ids, start=start):
+                if i >= len(log_prob_dict):
+                    break
+                logprob_entry = log_prob_dict[i].get(token_id)
+                if logprob_entry is not None:
+                    completion_log_probs.append(logprob_entry.logprob)
+                    tokens_found += 1
+                else:
+                    print(f"Token ID {token_id} not found in prompt_logprobs at position {i} (example {batch_start + idx})")
+                    assert False
+            if len(completion_log_probs) == 0:
+                print(f"No log probs found for example {batch_start + idx}")
+                print(f"Full ids: {full_ids}")
+                print(f"Prompt ids: {prompt_ids}")
+                print(f"Target ids: {target_ids}")
+                print(f"Full text: {out.prompt_token_ids}")
+                assert False
+            
+            log_probs.append(sum(completion_log_probs))
+            token_counts.append(tokens_found)
+        # Explicitly delete and collect garbage
+        del batch_outputs
+        gc.collect()
     return log_probs, token_counts
 
 def approximate_l1(data, llm, tokenizer, s0: str, s_list: list[str], device, lambda_reg=0.1, batch_size=8):
@@ -213,11 +226,6 @@ def approximate_l1(data, llm, tokenizer, s0: str, s_list: list[str], device, lam
     # === Step 3: Batch inference ===
     pi_yw_attr_all, pi_yw_attr_all_counts = get_log_probs_vllm(all_systems_yw, all_questions_yw, all_completions_yw, llm, tokenizer, batch_size=batch_size)
     pi_yl_attr_all, pi_yl_attr_all_counts = get_log_probs_vllm(all_systems_yl, all_questions_yl, all_completions_yl, llm, tokenizer, batch_size=batch_size)
-
-    pi_yw_base = [log_prob / token_count for log_prob, token_count in zip(pi_yw_base, pi_yw_base_counts)]
-    pi_yl_base = [log_prob / token_count for log_prob, token_count in zip(pi_yl_base, pi_yl_base_counts)]
-    pi_yw_attr_all = [log_prob / token_count for log_prob, token_count in zip(pi_yw_attr_all, pi_yw_attr_all_counts)]
-    pi_yl_attr_all = [log_prob / token_count for log_prob, token_count in zip(pi_yl_attr_all, pi_yl_attr_all_counts)]
 
     # === Step 4: Reconstruct W and L ===
     for i in range(k):
@@ -339,63 +347,108 @@ def get_approximation_accuracy(data, model_ds, p, base_prompt, attribute_prompts
     """
 
     questions, yw_list, yl_list = zip(*data)
-    k, n = len(attribute_prompts), len(data)
+    n = len(data)
 
-    yw_base_probs, yw_base_counts = get_log_probs_vllm([base_prompt] * n, list(questions), list(yw_list), model_ds, tokenizer, batch_size=batch_size)
-    yl_base_probs, yl_base_counts = get_log_probs_vllm([base_prompt] * n, list(questions), list(yl_list), model_ds, tokenizer, batch_size=batch_size)
+    # Get base log probabilities
+    print("Computing base log probabilities...")
+    yw_base_probs, _ = log_prob(model_ds, yw_list, [base_prompt] * n, questions, device, tokenizer, batch_size=batch_size)
+    yl_base_probs, _ = log_prob(model_ds, yl_list, [base_prompt] * n, questions, device, tokenizer, batch_size=batch_size)
 
-    yw_base_probs = [log_prob / token_count for log_prob, token_count in zip(yw_base_probs, yw_base_counts)]
-    yl_base_probs = [log_prob / token_count for log_prob, token_count in zip(yl_base_probs, yl_base_counts)]
+    # Initialize drift scores for each example
+    drift_scores = torch.zeros(n, device=device)
 
-    all_systems_yw = []
-    all_questions_yw = []
-    all_completions_yw = []
-
-    all_systems_yl = []
-    all_questions_yl = []
-    all_completions_yl = []
-
-    p_sparse = []
-
-    for pi, system in zip(p, attribute_prompts):
-        if pi == 0:
+    # Process each attribute prompt individually
+    for i, attribute_prompt in enumerate(attribute_prompts):
+        if p[i] == 0:
+            print(f"Skipping attribute {i} (p={p[i]})")
             continue
-        p_sparse.append(pi)
-        all_systems_yw.extend([system] * n)
-        all_questions_yw.extend(questions)
-        all_completions_yw.extend(yw_list)
+            
+        print(f"Processing attribute {i+1}/{len(attribute_prompts)}: p={p[i]:.4f}")
+        
+        # Get log probabilities for this attribute prompt
+        yw_attr_probs, _ = log_prob(model_ds, yw_list, [attribute_prompt] * n, questions, device, tokenizer, batch_size=batch_size, show_progress=False)
+        yl_attr_probs, _ = log_prob(model_ds, yl_list, [attribute_prompt] * n, questions, device, tokenizer, batch_size=batch_size, show_progress=False)
+        
+        # Convert to tensors
+        yw_attr_tensor = torch.tensor(yw_attr_probs, device=device)
+        yl_attr_tensor = torch.tensor(yl_attr_probs, device=device)
+        yw_base_tensor = torch.tensor(yw_base_probs, device=device)
+        yl_base_tensor = torch.tensor(yl_base_probs, device=device)
+        
+        # Compute drift contribution for this attribute
+        # drift = p[i] * ((yw_attr - yw_base) - (yl_attr - yl_base))
+        attribute_drift = p[i] * ((yw_attr_tensor - yw_base_tensor) - (yl_attr_tensor - yl_base_tensor))
+        
+        # Add to total drift scores
+        drift_scores += attribute_drift
 
-        all_systems_yl.extend([system] * n)
-        all_questions_yl.extend(questions)
-        all_completions_yl.extend(yl_list)
-
-    p_sparse = torch.tensor(p_sparse, device=device, dtype=torch.float32)
+    # Count how many examples have positive drift scores (chosen > rejected)
+    correct = (drift_scores > 0).sum().item()
+    accuracy = correct / n
     
-    pi_yw_attr_all, yw_attr_counts = get_log_probs_vllm(all_systems_yw, all_questions_yw, all_completions_yw, model_ds, tokenizer, batch_size=batch_size)
-    pi_yl_attr_all, yl_attr_counts = get_log_probs_vllm(all_systems_yl, all_questions_yl, all_completions_yl, model_ds, tokenizer, batch_size=batch_size)
+    print(f"Accuracy: {accuracy:.4f} ({correct}/{n})")
+    return accuracy
 
-    pi_yw_attr_all = [log_prob / token_count for log_prob, token_count in zip(pi_yw_attr_all, yw_attr_counts)]
-    pi_yl_attr_all = [log_prob / token_count for log_prob, token_count in zip(pi_yl_attr_all, yl_attr_counts)]
+# def get_approximation_accuracy(data, model_ds, p, base_prompt, attribute_prompts, device, tokenizer, batch_size=8):
+#     """
+#     Evaluate approximation accuracy using the learned p-vector.
+    
+#     Args:
+#         data: list of (question, chosen, rejected) tuples
+#         model_ds: model for scoring
+#         p: learned drift vector
+#         base_prompt: base system prompt
+#         attribute_prompts: list of attribute prompts
+#         device: torch device
+#         tokenizer: tokenizer
+#     """
 
-    yw_attr_probs = torch.tensor(pi_yw_attr_all, device=device, dtype=torch.float32)
-    yl_attr_probs = torch.tensor(pi_yl_attr_all, device=device, dtype=torch.float32)
+#     questions, yw_list, yl_list = zip(*data)
+#     k, n = len(attribute_prompts), len(data)
 
-    yw_base_probs = torch.tensor(yw_base_probs, device=device, dtype=torch.float32).view(n, 1)
-    yl_base_probs = torch.tensor(yl_base_probs, device=device, dtype=torch.float32).view(n, 1)
+#     yw_base_probs, yw_base_counts = log_prob(model_ds, yw_list, [base_prompt] * n, questions, device, tokenizer, batch_size=batch_size)
+#     yl_base_probs, yl_base_counts = log_prob(model_ds, yl_list, [base_prompt] * n, questions, device, tokenizer, batch_size=batch_size)
 
-    # Reshape to (len(p_sparse), n) then transpose to (n, len(p_sparse))
-    yw_attr_probs = yw_attr_probs.view(n, len(p_sparse))
-    yl_attr_probs = yl_attr_probs.view(n, len(p_sparse))
+#     all_systems_yw = []
+#     all_questions_yw = []
+#     all_completions_yw = []
 
-    print(yw_attr_probs)
-    print(yl_attr_probs)
-    print(yw_base_probs)
-    print(yl_base_probs)
-    print(p_sparse)
-    attr_scores = (yw_attr_probs - yw_base_probs - yl_attr_probs + yl_base_probs) @ p_sparse.view(len(p_sparse), 1)
-    print(attr_scores)
-    attr_scores = (attr_scores > 0).sum() / n
-    return attr_scores.item()
+#     all_systems_yl = []
+#     all_questions_yl = []
+#     all_completions_yl = []
+
+#     p_sparse = []
+
+#     for pi, system in zip(p, attribute_prompts):
+#         if pi == 0:
+#             continue
+#         p_sparse.append(pi)
+#         all_systems_yw.extend([system] * n)
+#         all_questions_yw.extend(questions)
+#         all_completions_yw.extend(yw_list)
+
+#         all_systems_yl.extend([system] * n)
+#         all_questions_yl.extend(questions)
+#         all_completions_yl.extend(yl_list)
+
+#     p_sparse = torch.tensor(p_sparse, device=device, dtype=torch.float32)
+    
+#     pi_yw_attr_all, yw_attr_counts = log_prob(model_ds, all_completions_yw, all_systems_yw, all_questions_yw, device, tokenizer, batch_size=batch_size)
+#     pi_yl_attr_all, yl_attr_counts = log_prob(model_ds, all_completions_yl, all_systems_yl, all_questions_yl, device, tokenizer, batch_size=batch_size)
+
+#     yw_attr_probs = torch.tensor(pi_yw_attr_all, device=device, dtype=torch.float32)
+#     yl_attr_probs = torch.tensor(pi_yl_attr_all, device=device, dtype=torch.float32)
+
+#     yw_base_probs = torch.tensor(yw_base_probs, device=device, dtype=torch.float32).view(n, 1)
+#     yl_base_probs = torch.tensor(yl_base_probs, device=device, dtype=torch.float32).view(n, 1)
+
+#     # Reshape to (len(p_sparse), n) then transpose to (n, len(p_sparse))
+#     yw_attr_probs = yw_attr_probs.view(n, len(p_sparse))
+#     yl_attr_probs = yl_attr_probs.view(n, len(p_sparse))
+
+#     attr_scores = (yw_attr_probs - yw_base_probs - yl_attr_probs + yl_base_probs) @ p_sparse.view(len(p_sparse), 1)
+#     attr_scores = (attr_scores > 0).sum() / n
+#     return attr_scores.item()
 
 def best_of_n_decode(n, question, model_bs, model_ds, base_prompt, attribute_prompts, device, tokenizer, logits_processor, b=1.0):
     """
