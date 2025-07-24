@@ -19,7 +19,7 @@ login(hf_token)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--name', type=str, required=True, help='User name (e.g., user1)')
-parser.add_argument('--max_samples', type=int, default=200, help='Maximum number of samples to use')
+parser.add_argument('--samples', type=int, default=200, help='Maximum number of samples to use')
 parser.add_argument('--save_path', type=str, default="../results/user_p.jsonl", help='Path to save results')
 args = parser.parse_args()
 
@@ -53,7 +53,7 @@ print("Computing drift approximation vector p...")
 # Compute drift approximation vector p
 
 data = []
-for j in range(args.max_samples):
+for j in range(200):
     question = preference_data[j]['prompt']
     yw = preference_data[j]['chosen']  # winning/chosen response
     yl = preference_data[j]['rejected']  # losing/rejected response
@@ -61,14 +61,14 @@ for j in range(args.max_samples):
 
 print(f"Converted {len(data)} samples to drift format")
 
-p = approximate(data, model, tokenizer, base_prompt, attribute_prompts, device, batch_size=32)
+p = approximate(data, model, tokenizer, base_prompt, attribute_prompts, device, batch_size=16)
 
-# Save p to jsonl
-result_entry = {
-    "user": args.name,
-    "n": args.max_samples,
-    "p": p.tolist(),
-}
+# # Save p to jsonl
+# result_entry = {
+#     "user": args.name,
+#     "n": args.samples,
+#     "p": p.tolist(),
+# }
 
-with open(args.save_path, "a") as f:
-    f.write(json.dumps(result_entry) + "\n")
+# with open(args.save_path, "a") as f:
+#     f.write(json.dumps(result_entry) + "\n")

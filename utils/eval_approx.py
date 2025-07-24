@@ -13,6 +13,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, required=True)
 parser.add_argument("--sample_size", type=int, required=True)
 # parser.add_argument("--p_path", type=str, required=True)
+parser.add_argument("--k", type=int, default=7)
+parser.add_argument("--save_path", type=str, required=True)
 args = parser.parse_args()
 
 # Settings
@@ -42,42 +44,41 @@ eval_data = [
 
 print("Finished loading data")
 
-# Load p vector
-# with open(p_path, "r") as f:
-#     p_list = []
-#     for line in f:
-#         entry = json.loads(line)
-#         if entry["user"] == args.name and entry["n"] == args.sample_size:
-#             p_list = np.array(entry["p"])
-#             break
-# if len(p_list) == 0:
-#     raise ValueError(f"No p vector found for user {args.name} in {p_path}")
-
-p_list = np.array([0.23717154562473297, -0.46195921301841736, -0.11329557746648788, -0.06549912691116333, 0.04673735052347183, 0.1067386120557785, -0.18598854541778564, -0.15604130923748016, -0.0021691410802304745, -0.3412631154060364, -0.009832870215177536, -0.23358413577079773, 0.06611279398202896, 0.30385392904281616, -0.1227310374379158, 0.003548177657648921, 0.07944106310606003, -0.09030941873788834, -0.23023240268230438, -0.17242513597011566, 0.2155042439699173, 0.2601220905780792, -0.11842811107635498, -0.3504617214202881, 0.09189332276582718, -0.03463320806622505])
-abs_p = np.abs(p_list)
-topk_idx = np.argsort(abs_p)[-14:]
-p_sparse = np.zeros_like(p_list)
-p_sparse[topk_idx] = p_list[topk_idx]
+def sparsify_p(p_list, k=14):
+    p_list = np.array(p_list)
+    abs_p = np.abs(p_list)
+    topk_idx = np.argsort(abs_p)[-k:]
+    p_sparse = np.zeros_like(p_list)
+    p_sparse[topk_idx] = p_list[topk_idx]
+    return p_sparse
 
 eval_data = eval_data[:args.sample_size]
 
-accuracy = get_approximation_accuracy(
-    eval_data,
-    model,
-    p_sparse,
-    base_prompt,
-    attribute_prompts,
-    device,
-    tokenizer
-)
 
-print(f"Best accuracy: {accuracy:.4f} ({int(accuracy * len(eval_data))}/{len(eval_data)})")
+with open("../results/user_p.jsonl", "r") as f:
+    for line in f:
+        entry = json.loads(line)
+        if entry["user"] != args.name:
+            continue
+        accuracy = get_approximation_accuracy(
+            eval_data,
+            model,
+            sparsify_p(entry["p"], args.k),
+            base_prompt,
+            attribute_prompts,
+            device,
+            tokenizer,
+            batch_size=8
+        )
 
-# Save results
-with open("../results/approximation_results.jsonl", "a") as f:
-    f.write(json.dumps({
-        "user": args.name,
-        "n": args.sample_size,
-        "acc": accuracy,
-    }) + "\n")
-print("Results saved to ../results/approximation_results.jsonl")
+        print(f"Accuracy: {accuracy:.4f} ({int(accuracy * len(eval_data))}/{len(eval_data)})")
+
+        # Save results
+        with open(args.save_path, "a") as f:
+            f.write(json.dumps({
+                "user": entry["user"],
+                "n": entry["n"],
+                "acc": accuracy,
+                "k": args.k
+            }) + "\n")
+        print(f"Results saved to {args.save_path}")

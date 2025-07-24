@@ -235,10 +235,6 @@ def approximate_l1(data, llm, tokenizer, s0: str, s_list: list[str], device, lam
         L[:, i] = torch.tensor(pi_yl_attr_all[start:end], device=device) - torch.tensor(pi_yl_base, device=device)
 
     # === Step 5: Solve the optimization ===
-    temp = (W - L).tolist()
-    with open('a.pkl', 'wb') as f:
-        pickle.dump(temp, f)
-
     a = torch.sum(W - L, dim=0).cpu().numpy()
 
     p_var = cp.Variable(len(a))

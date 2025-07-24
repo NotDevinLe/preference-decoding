@@ -1,0 +1,26 @@
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+log_prob batches:   0%|          | 0/4 [00:00<?, ?it/s]log_prob batches:  25%|██▌       | 1/4 [00:03<00:09,  3.10s/it]log_prob batches:  50%|█████     | 2/4 [00:04<00:03,  1.84s/it]log_prob batches:  75%|███████▌  | 3/4 [00:05<00:01,  1.74s/it]log_prob batches: 100%|██████████| 4/4 [00:05<00:00,  1.43s/it]
+log_prob batches:   0%|          | 0/4 [00:00<?, ?it/s]log_prob batches:  25%|██▌       | 1/4 [00:00<00:01,  1.65it/s]log_prob batches:  50%|█████     | 2/4 [00:01<00:01,  1.31it/s]log_prob batches:  75%|███████▌  | 3/4 [00:02<00:00,  1.14it/s]log_prob batches: 100%|██████████| 4/4 [00:02<00:00,  1.58it/s]
+log_prob batches:   0%|          | 0/4 [00:00<?, ?it/s]log_prob batches:  25%|██▌       | 1/4 [00:00<00:01,  1.65it/s]log_prob batches:  50%|█████     | 2/4 [00:01<00:01,  1.23it/s]log_prob batches:  50%|█████     | 2/4 [00:02<00:02,  1.11s/it]
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/find_user_p.py", line 64, in <module>
+    p = approximate(data, model, tokenizer, base_prompt, attribute_prompts, device, batch_size=32)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/drift.py", line 98, in approximate
+    pi_yw_base, _ = log_prob(pi, yw_list, [s0]*m, questions, device, tokenizer, batch_size)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/drift.py", line 60, in log_prob
+    outputs = pi(input_ids, attention_mask=attention_mask).logits
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/utils/generic.py", line 969, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 704, in forward
+    logits = self.lm_head(hidden_states[:, slice_indices, :])
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.60 GiB. GPU 0 has a total capacity of 44.42 GiB of which 9.96 GiB is free. Including non-PyTorch memory, this process has 34.45 GiB memory in use. Of the allocated memory 23.57 GiB is allocated by PyTorch, and 10.38 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

@@ -1,0 +1,8 @@
+INFO 07-23 18:22:39 [__init__.py:244] Automatically detected platform cuda.
+Loading data from: ../data/preference/user1_train.json
+Loaded 10000 preference pairs
+Using device: cuda
+Loading model...
+Computing drift approximation vector p...
+Converted 100 samples to drift format
+0

@@ -3,14 +3,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load results
-with open('../results/reg_p.jsonl', 'r') as f:
+with open('../results/l1_reg/user1.jsonl', 'r') as f:
     entries = [json.loads(line) for line in f if line.strip()]
 
 # Extract lambda_reg and p vectors
 lambdas = []
 p_list = []
 for entry in entries:
-    lambdas.append(entry['lambda_reg'])
+    lambdas.append(entry['lambda'])
     p = np.array(entry['p'])
     p_list.append(p)
 

@@ -1,0 +1,11 @@
+log_prob batches:   0%|          | 0/32 [00:00<?, ?it/s]log_prob batches:   3%|▎         | 1/32 [00:03<01:52,  3.63s/it]log_prob batches:   3%|▎         | 1/32 [00:06<03:15,  6.31s/it]
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/eval_approx.py", line 63, in <module>
+    accuracy = get_approximation_accuracy(
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/drift.py", line 354, in get_approximation_accuracy
+    yw_base_probs, _ = log_prob(model_ds, yw_list, [base_prompt] * n, questions, device, tokenizer, batch_size=batch_size)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/drift.py", line 61, in log_prob
+    probs = torch.nn.functional.log_softmax(outputs, dim=-1)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/functional.py", line 2248, in log_softmax
+    ret = input.log_softmax(dim)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 18.34 GiB. GPU 0 has a total capacity of 44.42 GiB of which 16.66 GiB is free. Including non-PyTorch memory, this process has 27.75 GiB memory in use. Of the allocated memory 26.77 GiB is allocated by PyTorch, and 495.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
