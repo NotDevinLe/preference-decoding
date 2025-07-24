@@ -7,8 +7,9 @@ import cvxpy as cp
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--name', type=str, required=True, help='User name (e.g., user1)')
-parser.add_argument('--save_path', type=str, default="../results/l1_reg/user1.jsonl", help='Path to save results')
 args = parser.parse_args()
+
+save_path = f"../results/l1_reg/{args.name}_l1_reg.jsonl"
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f"Using device: {device}")
@@ -89,7 +90,7 @@ for i, lambda_ in enumerate(lambdas):
         "p": p.tolist(),
     }
 
-    with open(args.save_path, "a") as f:
+    with open(save_path, "a") as f:
         f.write(json.dumps(result_entry) + "\n")
 
 # Compare solutions across different lambdas

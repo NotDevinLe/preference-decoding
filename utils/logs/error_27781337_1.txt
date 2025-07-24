@@ -1,0 +1,3 @@
+usage: eval_approx.py [-h] --name NAME --sample_size SAMPLE_SIZE --p_path
+                      P_PATH [--k K] --save_path SAVE_PATH
+eval_approx.py: error: the following arguments are required: --p_path

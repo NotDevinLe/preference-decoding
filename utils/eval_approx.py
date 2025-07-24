@@ -3,7 +3,7 @@ import torch
 import numpy as np
 import sys
 from drift import drift_score_bon, get_approximation_accuracy
-from attribute_prompts import attribute_prompts
+from attribute_prompts import attribute_prompts, persona_prompts
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 import argparse
 from tqdm import tqdm
@@ -12,7 +12,7 @@ import vllm
 parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, required=True)
 parser.add_argument("--sample_size", type=int, required=True)
-# parser.add_argument("--p_path", type=str, required=True)
+parser.add_argument("--p_path", type=str, required=True)
 parser.add_argument("--k", type=int, default=7)
 parser.add_argument("--save_path", type=str, required=True)
 args = parser.parse_args()
@@ -55,7 +55,7 @@ def sparsify_p(p_list, k=14):
 eval_data = eval_data[:args.sample_size]
 
 
-with open("../results/user_p.jsonl", "r") as f:
+with open(args.p_path, "r") as f:
     for line in f:
         entry = json.loads(line)
         if entry["user"] != args.name:
@@ -65,7 +65,7 @@ with open("../results/user_p.jsonl", "r") as f:
             model,
             sparsify_p(entry["p"], args.k),
             base_prompt,
-            attribute_prompts,
+            persona_prompts,
             device,
             tokenizer,
             batch_size=8

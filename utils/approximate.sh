@@ -19,4 +19,4 @@ export PATH=/gscratch/ark/devinl6/envs/align/bin:$PATH
 export HF_HOME=/mmfs1/gscratch/ark/devinl6/hf_cache
 
 # Run Python script with unbuffered output
-python find_user_p.py --name user${SLURM_ARRAY_TASK_ID} --samples 200
+python find_user_p.py --name user${SLURM_ARRAY_TASK_ID} --save_path "../results/l1_reg/p/${SLURM_ARRAY_TASK_ID}.jsonl"

@@ -5,7 +5,7 @@ import os
 os.environ["HF_HOME"] = "/gscratch/ark/devinl6/hf_cache"
 from drift import approximate
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from attribute_prompts import attribute_prompts
+from attribute_prompts import attribute_prompts, persona_prompts, user1_reg_prompts, user2_reg_prompts, user4_reg_prompts
 from dotenv import load_dotenv
 from huggingface_hub import login
 import random
@@ -19,7 +19,7 @@ login(hf_token)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--name', type=str, required=True, help='User name (e.g., user1)')
-parser.add_argument('--samples', type=int, default=200, help='Maximum number of samples to use')
+# parser.add_argument('--samples', type=int, default=200, help='Maximum number of samples to use')
 parser.add_argument('--save_path', type=str, default="../results/user_p.jsonl", help='Path to save results')
 args = parser.parse_args()
 
@@ -61,14 +61,17 @@ for j in range(200):
 
 print(f"Converted {len(data)} samples to drift format")
 
-p = approximate(data, model, tokenizer, base_prompt, attribute_prompts, device, batch_size=16)
+ns = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200]
+for n in ns:
+    current_data = data[:n]
+    p = approximate(current_data, model, tokenizer, base_prompt, user4_reg_prompts, device, batch_size=8)
 
-# # Save p to jsonl
-# result_entry = {
-#     "user": args.name,
-#     "n": args.samples,
-#     "p": p.tolist(),
-# }
+    # Save p to jsonl
+    result_entry = {
+        "user": args.name,
+        "n": n,
+        "p": p.tolist(),
+    }
 
-# with open(args.save_path, "a") as f:
-#     f.write(json.dumps(result_entry) + "\n")
+    with open(args.save_path, "a") as f:
+        f.write(json.dumps(result_entry) + "\n")

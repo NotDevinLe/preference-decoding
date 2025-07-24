@@ -93,13 +93,13 @@ def approximate(data, pi, tokenizer, s0: str, s_list: list[str], device, batch_s
         yw_list = [yw for _, yw, _ in data]
         yl_list = [yl for _, _, yl in data]
 
-        pi_yw_attr, _ = log_prob(pi, yw_list, [system]*m, questions, device, tokenizer, batch_size)
-        pi_yl_attr, _ = log_prob(pi, yl_list, [system]*m, questions, device, tokenizer, batch_size)
-        pi_yw_base, _ = log_prob(pi, yw_list, [s0]*m, questions, device, tokenizer, batch_size)
-        pi_yl_base, _ = log_prob(pi, yl_list, [s0]*m, questions, device, tokenizer, batch_size)
+        pi_yw_attr, pi_yw_attr_counts = log_prob(pi, yw_list, [system]*m, questions, device, tokenizer, batch_size)
+        pi_yl_attr, pi_yl_attr_counts = log_prob(pi, yl_list, [system]*m, questions, device, tokenizer, batch_size)
+        pi_yw_base, pi_yw_base_counts = log_prob(pi, yw_list, [s0]*m, questions, device, tokenizer, batch_size)
+        pi_yl_base, pi_yl_base_counts = log_prob(pi, yl_list, [s0]*m, questions, device, tokenizer, batch_size)
 
-        W[:, i] = torch.tensor(pi_yw_attr, device=device) - torch.tensor(pi_yw_base, device=device)
-        L[:, i] = torch.tensor(pi_yl_attr, device=device) - torch.tensor(pi_yl_base, device=device)
+        W[:, i] = torch.tensor(pi_yw_attr, device=device) / torch.tensor(pi_yw_attr_counts, device=device) - torch.tensor(pi_yw_base, device=device) / torch.tensor(pi_yw_base_counts, device=device)
+        L[:, i] = torch.tensor(pi_yl_attr, device=device) / torch.tensor(pi_yl_attr_counts, device=device) - torch.tensor(pi_yl_base, device=device) / torch.tensor(pi_yl_base_counts, device=device)
 
     d = torch.sum(W - L, dim=0)
     p = d / torch.norm(d, p=2)
@@ -347,8 +347,8 @@ def get_approximation_accuracy(data, model_ds, p, base_prompt, attribute_prompts
 
     # Get base log probabilities
     print("Computing base log probabilities...")
-    yw_base_probs, _ = log_prob(model_ds, yw_list, [base_prompt] * n, questions, device, tokenizer, batch_size=batch_size)
-    yl_base_probs, _ = log_prob(model_ds, yl_list, [base_prompt] * n, questions, device, tokenizer, batch_size=batch_size)
+    yw_base_probs, yw_base_counts = log_prob(model_ds, yw_list, [base_prompt] * n, questions, device, tokenizer, batch_size=batch_size)
+    yl_base_probs, yl_base_counts = log_prob(model_ds, yl_list, [base_prompt] * n, questions, device, tokenizer, batch_size=batch_size)
 
     # Initialize drift scores for each example
     drift_scores = torch.zeros(n, device=device)
@@ -362,14 +362,14 @@ def get_approximation_accuracy(data, model_ds, p, base_prompt, attribute_prompts
         print(f"Processing attribute {i+1}/{len(attribute_prompts)}: p={p[i]:.4f}")
         
         # Get log probabilities for this attribute prompt
-        yw_attr_probs, _ = log_prob(model_ds, yw_list, [attribute_prompt] * n, questions, device, tokenizer, batch_size=batch_size, show_progress=False)
-        yl_attr_probs, _ = log_prob(model_ds, yl_list, [attribute_prompt] * n, questions, device, tokenizer, batch_size=batch_size, show_progress=False)
+        yw_attr_probs, yw_attr_counts = log_prob(model_ds, yw_list, [attribute_prompt] * n, questions, device, tokenizer, batch_size=batch_size, show_progress=False)
+        yl_attr_probs, yl_attr_counts = log_prob(model_ds, yl_list, [attribute_prompt] * n, questions, device, tokenizer, batch_size=batch_size, show_progress=False)
         
         # Convert to tensors
-        yw_attr_tensor = torch.tensor(yw_attr_probs, device=device)
-        yl_attr_tensor = torch.tensor(yl_attr_probs, device=device)
-        yw_base_tensor = torch.tensor(yw_base_probs, device=device)
-        yl_base_tensor = torch.tensor(yl_base_probs, device=device)
+        yw_attr_tensor = torch.tensor(yw_attr_probs, device=device) / torch.tensor(yw_attr_counts, device=device)
+        yl_attr_tensor = torch.tensor(yl_attr_probs, device=device) / torch.tensor(yl_attr_counts, device=device)
+        yw_base_tensor = torch.tensor(yw_base_probs, device=device) / torch.tensor(yw_base_counts, device=device)
+        yl_base_tensor = torch.tensor(yl_base_probs, device=device) / torch.tensor(yl_base_counts, device=device)
         
         # Compute drift contribution for this attribute
         # drift = p[i] * ((yw_attr - yw_base) - (yl_attr - yl_base))
