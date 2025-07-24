@@ -271,3 +271,33 @@ Accuracy: 0.7850 (785/1000)
 Accuracy: 0.7850 (785/1000)
 Results saved to ../results/attributes/user4.jsonl
 Computing base log probabilities...
+Skipping attribute 0 (p=0.0)
+Processing attribute 2/26: p=0.0787
+Processing attribute 3/26: p=0.1889
+Skipping attribute 3 (p=0.0)
+Processing attribute 5/26: p=0.1059
+Processing attribute 6/26: p=0.1623
+Processing attribute 7/26: p=0.2347
+Processing attribute 8/26: p=0.0865
+Skipping attribute 8 (p=0.0)
+Skipping attribute 9 (p=0.0)
+Processing attribute 11/26: p=0.0741
+Processing attribute 12/26: p=0.0819
+Processing attribute 13/26: p=0.2826
+Processing attribute 14/26: p=0.2883
+Processing attribute 15/26: p=0.0850
+Skipping attribute 15 (p=0.0)
+Processing attribute 17/26: p=0.1499
+Processing attribute 18/26: p=0.1696
+Processing attribute 19/26: p=0.1517
+Skipping attribute 19 (p=0.0)
+Processing attribute 21/26: p=0.3075
+Processing attribute 22/26: p=0.5446
+Processing attribute 23/26: p=0.1750
+Processing attribute 24/26: p=0.2632
+Processing attribute 25/26: p=0.1626
+Processing attribute 26/26: p=0.2750
+Accuracy: 0.7860 (786/1000)
+Accuracy: 0.7860 (786/1000)
+Results saved to ../results/attributes/user4.jsonl
+Computing base log probabilities...
