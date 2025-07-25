@@ -7,12 +7,13 @@ from pathlib import Path
 from transformers import AutoModelForCausalLM, BitsAndBytesConfig, AutoTokenizer
 sys.path.append("LLaMA-Factory/src")
 from drift import drift_score_bon_batched
-from attribute_prompts import attribute_prompts
+from attribute_prompts import persona_prompts
 
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, required=True)
 parser.add_argument("--gold_cache", type=str, default="../results/gold_scores.jsonl")
+parser.add_argument("--p_path", type=str, default="../results/user_p.jsonl")
 args = parser.parse_args()
 
 # Load bon outputs
@@ -45,7 +46,7 @@ tokenizer = AutoTokenizer.from_pretrained(base_model_path)
 tokenizer.pad_token = tokenizer.eos_token
 
 # Load p vector
-with open("../results/user_p.jsonl", "r") as f:
+with open(args.p_path, "r") as f:
     p = None
     for line in f:
         entry = json.loads(line)
@@ -53,7 +54,7 @@ with open("../results/user_p.jsonl", "r") as f:
             p = np.array(entry["p"])
             break
 if p is None:
-    raise ValueError(f"No p vector found for user {args.name} in ../results/user_p.jsonl")
+    raise ValueError(f"No p vector found for user {args.name} in {args.p_path}")
 
 # Sparsify p
 abs_p = np.abs(p)
@@ -70,7 +71,7 @@ max_k = 20
 all_prompt_outputs = [(item["prompt"], item["outputs"]) for item in bon_data]
 all_scores_full = drift_score_bon_batched(
     all_prompt_outputs,
-    model_ds, tokenizer, base_prompt, attribute_prompts, p_sparse, device, batch_size=8
+    model_ds, tokenizer, base_prompt, persona_prompts, p_sparse, device, batch_size=32
 )
 
 results_by_k = []
@@ -104,7 +105,7 @@ for k in range(2, max_k + 1, 2):
     print(f"k={k}: avg_selected_gold={avg_selected:.4f}, avg_all_gold={avg_all:.4f}, uplift={uplift:.4f}, avg_selected_minus_max={avg_selected_minus_max:.4f}")
 
 # Save results
-with open("../results/approx_bon_by_n.jsonl", "a") as f:
+with open("../results/approx_bon_persona_by_n.jsonl", "a") as f:
     for res in results_by_k:
         f.write(json.dumps(res) + "\n")
-print("✅ Results saved to ../results/approx_bon_by_n.jsonl")
+print("✅ Results saved to ../results/approx_bon_persona_by_n.jsonl")

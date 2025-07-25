@@ -39,9 +39,9 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f"Using device: {device}")
 
 print("Loading model...")
-# model = vllm.LLM(model=small_model_id, tensor_parallel_size=1, gpu_memory_utilization=0.95, max_model_len=4096)
+model = vllm.LLM(model=small_model_id, tensor_parallel_size=1, gpu_memory_utilization=0.7, max_model_len=4096)
 
-model = AutoModelForCausalLM.from_pretrained(small_model_id, device_map="auto", torch_dtype=torch.bfloat16)
+# model = AutoModelForCausalLM.from_pretrained(small_model_id, device_map="auto", torch_dtype=torch.bfloat16)
 
 tokenizer = AutoTokenizer.from_pretrained(small_model_id)
 tokenizer.pad_token = tokenizer.eos_token
@@ -61,7 +61,7 @@ for j in range(200):
 
 print(f"Converted {len(data)} samples to drift format")
 
-ns = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200]
+ns = [200]
 for n in ns:
     current_data = data[:n]
     p = approximate(current_data, model, tokenizer, base_prompt, user4_reg_prompts, device, batch_size=8)

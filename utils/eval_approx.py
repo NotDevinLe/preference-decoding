@@ -3,7 +3,7 @@ import torch
 import numpy as np
 import sys
 from drift import drift_score_bon, get_approximation_accuracy
-from attribute_prompts import attribute_prompts, persona_prompts
+from attribute_prompts import attribute_prompts, persona_prompts, user1_reg_prompts, user2_reg_prompts, user4_reg_prompts
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 import argparse
 from tqdm import tqdm
@@ -54,6 +54,13 @@ def sparsify_p(p_list, k=14):
 
 eval_data = eval_data[:args.sample_size]
 
+reg_prompts = None
+if args.name == "user1":
+    reg_prompts = user1_reg_prompts
+elif args.name == "user2":
+    reg_prompts = user2_reg_prompts
+elif args.name == "user4":
+    reg_prompts = user4_reg_prompts
 
 with open(args.p_path, "r") as f:
     for line in f:
@@ -65,7 +72,7 @@ with open(args.p_path, "r") as f:
             model,
             sparsify_p(entry["p"], args.k),
             base_prompt,
-            persona_prompts,
+            reg_prompts,
             device,
             tokenizer,
             batch_size=8

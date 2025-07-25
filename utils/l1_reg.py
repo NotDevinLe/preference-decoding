@@ -16,12 +16,11 @@ print(f"Using device: {device}")
 
 with open(f'../results/l1_reg/{args.name}_p.pkl', 'rb') as f:
     d = pickle.load(f)
-d = torch.sum(torch.tensor(d, device=device), dim=0).cpu().numpy()
 
-# Start with a smaller, more focused range
-d_norm = np.linalg.norm(d)
+d = np.array(d)
+d = d / len(d)
+
 # Lambda should be on the same scale as ||d|| to have meaningful effect
-lambdas = d_norm * np.exp(np.linspace(-20, 3, 100))
 
 print(f"d vector shape: {d.shape}")
 print(f"d vector norm: {np.linalg.norm(d):.6f}")
@@ -31,14 +30,16 @@ print(f"Non-zero elements in d: {np.count_nonzero(np.abs(d) > 1e-8)}/{len(d)}")
 # Store solutions for comparison
 solutions = []
 
+lambdas = [0.1, 0.5, 1, 2, 5, 10]
+
 for i, lambda_ in enumerate(lambdas):
     print(f"\n--- Lambda = {lambda_} ---")
-    
+
     p_var = cp.Variable(len(d))
-    constraints = [cp.norm2(p_var) <= 1.0]
-    objective = cp.Maximize(p_var @ d - lambda_ * cp.norm1(p_var))
+    constraints = [cp.norm1(p_var) <= lambda_]
+    objective = cp.Maximize(p_var @ d)
     problem = cp.Problem(objective, constraints)
-    problem.solve(verbose=True)
+    problem.solve()
     
     print(f"Solver status: {problem.status}")
     print(f"Objective value: {problem.value}")
@@ -66,23 +67,9 @@ for i, lambda_ in enumerate(lambdas):
     
     p = torch.tensor(p_raw, device=device, dtype=torch.float32)
     
-    # CRITICAL: Normalize the solution
-    if p.norm() > 0:
-        p = p / p.norm(p=2)
-    
-    sparsity = (torch.abs(p) < 1e-6).sum().item()
-    max_weight = torch.abs(p).max().item()
-    print(f"After normalization - sparsity: {sparsity}/{len(p)}, max_weight: {max_weight:.6f}")
-    
-    # Show top 5 largest weights
-    top_indices = torch.topk(torch.abs(p), min(5, len(p))).indices
-    print(f"Top 5 weights: {[(idx.item(), p[idx].item()) for idx in top_indices]}")
-    
     solutions.append({
         'lambda': lambda_,
         'p': p.clone(),
-        'sparsity': sparsity,
-        'max_weight': max_weight
     })
 
     result_entry = {

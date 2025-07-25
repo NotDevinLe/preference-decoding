@@ -14,6 +14,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, required=True)
 parser.add_argument("--sample_size", type=int, required=True)
 parser.add_argument("--gold_cache", type=str, default="../results/gold_scores.jsonl")
+parser.add_argument("--p_path", type=str, default="../results/user_p.jsonl")
 args = parser.parse_args()
 
 # Load bon outputs
@@ -56,7 +57,7 @@ tokenizer = AutoTokenizer.from_pretrained(base_model_path)
 tokenizer.pad_token = tokenizer.eos_token
 
 # For reward model, p is loaded from user_p.jsonl
-with open("../results/user_p.jsonl", "r") as f:
+with open(args.p_path, "r") as f:
     p = None
     for line in f:
         entry = json.loads(line)
@@ -64,7 +65,7 @@ with open("../results/user_p.jsonl", "r") as f:
             p = np.array(entry["p"])
             break
 if p is None:
-    raise ValueError(f"No p vector found for user {args.name} in ../results/user_p.jsonl")
+    raise ValueError(f"No p vector found for user {args.name} in {args.p_path}")
 
 # Sparsify p
 abs_p = np.abs(p)

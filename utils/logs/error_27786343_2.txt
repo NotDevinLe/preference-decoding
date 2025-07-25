@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/eval_approx.py", line 65, in <module>
+    with open(args.p_path, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: '../results/l1_reg/p/user2.jsonl'

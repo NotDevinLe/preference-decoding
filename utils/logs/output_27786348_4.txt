@@ -1,0 +1,182 @@
+INFO 07-24 12:49:37 [__init__.py:244] Automatically detected platform cuda.
+Finished loading data
+Computing base log probabilities...
+Processing attribute 1/8: p=0.6671
+Skipping attribute 1 (p=0.0)
+Processing attribute 3/8: p=0.3479
+Processing attribute 4/8: p=0.1582
+Processing attribute 5/8: p=0.1880
+Processing attribute 6/8: p=0.1642
+Processing attribute 7/8: p=0.2217
+Processing attribute 8/8: p=0.5452
+Accuracy: 0.8500 (85/100)
+Accuracy: 0.8500 (85/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.6928
+Processing attribute 2/8: p=0.3151
+Processing attribute 3/8: p=0.3236
+Processing attribute 4/8: p=0.2495
+Processing attribute 5/8: p=0.1965
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2252
+Processing attribute 8/8: p=0.3746
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.6864
+Processing attribute 2/8: p=0.3752
+Processing attribute 3/8: p=0.3170
+Processing attribute 4/8: p=0.2864
+Processing attribute 5/8: p=0.2012
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2283
+Processing attribute 8/8: p=0.3134
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.6956
+Processing attribute 2/8: p=0.3660
+Processing attribute 3/8: p=0.3161
+Processing attribute 4/8: p=0.2669
+Processing attribute 5/8: p=0.1866
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2406
+Processing attribute 8/8: p=0.3144
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.7060
+Processing attribute 2/8: p=0.3471
+Processing attribute 3/8: p=0.3447
+Processing attribute 4/8: p=0.2749
+Processing attribute 5/8: p=0.1779
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2340
+Processing attribute 8/8: p=0.2960
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.7269
+Processing attribute 2/8: p=0.3122
+Processing attribute 3/8: p=0.3631
+Processing attribute 4/8: p=0.2652
+Processing attribute 5/8: p=0.1582
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2234
+Processing attribute 8/8: p=0.2938
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.7374
+Processing attribute 2/8: p=0.3032
+Processing attribute 3/8: p=0.3549
+Processing attribute 4/8: p=0.2676
+Processing attribute 5/8: p=0.1553
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2157
+Processing attribute 8/8: p=0.2936
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.7085
+Processing attribute 2/8: p=0.3246
+Processing attribute 3/8: p=0.3513
+Processing attribute 4/8: p=0.2932
+Processing attribute 5/8: p=0.1567
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2334
+Processing attribute 8/8: p=0.3020
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.7130
+Processing attribute 2/8: p=0.3181
+Processing attribute 3/8: p=0.3639
+Processing attribute 4/8: p=0.2844
+Processing attribute 5/8: p=0.1536
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2262
+Processing attribute 8/8: p=0.2995
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.7189
+Processing attribute 2/8: p=0.3141
+Processing attribute 3/8: p=0.3535
+Processing attribute 4/8: p=0.2676
+Processing attribute 5/8: p=0.1576
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2481
+Processing attribute 8/8: p=0.2949
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.7335
+Processing attribute 2/8: p=0.3121
+Processing attribute 3/8: p=0.3440
+Processing attribute 4/8: p=0.2568
+Processing attribute 5/8: p=0.1514
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2427
+Processing attribute 8/8: p=0.2913
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.7458
+Processing attribute 2/8: p=0.3023
+Processing attribute 3/8: p=0.3414
+Processing attribute 4/8: p=0.2393
+Processing attribute 5/8: p=0.1385
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2390
+Processing attribute 8/8: p=0.3020
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.7420
+Processing attribute 2/8: p=0.3030
+Processing attribute 3/8: p=0.3499
+Processing attribute 4/8: p=0.2438
+Processing attribute 5/8: p=0.1321
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2378
+Processing attribute 8/8: p=0.3043
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.7566
+Processing attribute 2/8: p=0.2998
+Processing attribute 3/8: p=0.3384
+Processing attribute 4/8: p=0.2303
+Processing attribute 5/8: p=0.1311
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2335
+Processing attribute 8/8: p=0.2970
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
+Computing base log probabilities...
+Processing attribute 1/8: p=0.7625
+Processing attribute 2/8: p=0.2952
+Processing attribute 3/8: p=0.3452
+Processing attribute 4/8: p=0.2256
+Processing attribute 5/8: p=0.1174
+Skipping attribute 5 (p=0.0)
+Processing attribute 7/8: p=0.2302
+Processing attribute 8/8: p=0.2969
+Accuracy: 0.8400 (84/100)
+Accuracy: 0.8400 (84/100)
+Results saved to ../results/l1_reg/small_results.jsonl
