@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os
 
 # File path
-path = '../results/l1_reg/user4_l1_reg.jsonl'
+path = '../results/l1_reg/user2_l1_reg.jsonl'
 
 # Load results
 entries = []
@@ -41,5 +41,5 @@ plt.title('Each element of p vs log(lambda)')
 plt.grid(True)
 plt.tight_layout()
 plt.legend(loc='center left', bbox_to_anchor=(1, 0.5), title='p index', fontsize=9)
-plt.savefig('../results/l1_reg/user4_l1_reg_lambda_vs_p_elements.png', bbox_inches='tight')
+plt.savefig('../results/l1_reg/user2_l1_reg_lambda_vs_p_elements.png', bbox_inches='tight')
 plt.show()

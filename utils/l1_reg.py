@@ -14,11 +14,11 @@ save_path = f"../results/l1_reg/{args.name}_l1_reg.jsonl"
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f"Using device: {device}")
 
-with open(f'../results/l1_reg/{args.name}_p.pkl', 'rb') as f:
+with open(f'd_user2.pkl', 'rb') as f:
     d = pickle.load(f)
 
-d = np.array(d)
-d = d / len(d)
+d = np.array(d.cpu().numpy())
+d = d.mean(axis=0)
 
 # Lambda should be on the same scale as ||d|| to have meaningful effect
 
@@ -29,16 +29,26 @@ print(f"Non-zero elements in d: {np.count_nonzero(np.abs(d) > 1e-8)}/{len(d)}")
 
 # Store solutions for comparison
 solutions = []
-
-lambdas = [0.1, 0.5, 1, 2, 5, 10]
+d = d / np.linalg.norm(d, ord=2)
+print(d)
+lambdas = np.exp(np.linspace(np.log(0.01), np.log(1.0), 100))
 
 for i, lambda_ in enumerate(lambdas):
     print(f"\n--- Lambda = {lambda_} ---")
 
     p_var = cp.Variable(len(d))
-    constraints = [cp.norm1(p_var) <= lambda_]
-    objective = cp.Maximize(p_var @ d)
+
+    # Constraint to keep solutions bounded
+    constraints = [cp.norm1(p_var) <= 1.0]
+
+    # Elastic net objective: linear term + L1 penalty + L2 penalty
+    linear_term = d @ -p_var
+    l1_penalty = lambda_ * cp.norm1(p_var)
+    l2_penalty = 1 * cp.sum_squares(p_var)  # This is λ2 * ||p||_2^2
+
+    objective = cp.Minimize(linear_term + l1_penalty + l2_penalty)
     problem = cp.Problem(objective, constraints)
+
     problem.solve()
     
     print(f"Solver status: {problem.status}")

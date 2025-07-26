@@ -19,12 +19,12 @@ login(hf_token)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--name', type=str, required=True, help='User name (e.g., user1)')
-# parser.add_argument('--samples', type=int, default=200, help='Maximum number of samples to use')
+parser.add_argument('--samples', type=int, default=200, help='Maximum number of samples to use')
 parser.add_argument('--save_path', type=str, default="../results/user_p.jsonl", help='Path to save results')
 args = parser.parse_args()
 
 # Load user data from JSON format
-data_path = f"../data/preference/{args.name}_train.json"
+data_path = f"../data/preference/toy/{args.name}_train.json"
 print(f"Loading data from: {data_path}")
 
 with open(data_path, "r") as f:
@@ -53,7 +53,7 @@ print("Computing drift approximation vector p...")
 # Compute drift approximation vector p
 
 data = []
-for j in range(200):
+for j in range(args.samples):
     question = preference_data[j]['prompt']
     yw = preference_data[j]['chosen']  # winning/chosen response
     yl = preference_data[j]['rejected']  # losing/rejected response
@@ -61,10 +61,10 @@ for j in range(200):
 
 print(f"Converted {len(data)} samples to drift format")
 
-ns = [200]
+ns = [args.samples]
 for n in ns:
     current_data = data[:n]
-    p = approximate(current_data, model, tokenizer, base_prompt, user4_reg_prompts, device, batch_size=8)
+    p = approximate(current_data, model, tokenizer, base_prompt, attribute_prompts, device, batch_size=8)
 
     # Save p to jsonl
     result_entry = {

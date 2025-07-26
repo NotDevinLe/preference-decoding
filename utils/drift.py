@@ -7,6 +7,7 @@ import pickle
 from dotenv import load_dotenv
 from transformers.generation.logits_process import LogitsProcessor, LogitsProcessorList
 from vllm import LLM, SamplingParams
+import gc
 
 def approximate(data, pi, tokenizer, s0: str, s_list: list[str], device, batch_size=8):
     m, k = len(data), len(s_list)
@@ -170,57 +171,6 @@ def get_approximation_accuracy(data, model_ds, p, base_prompt, attribute_prompts
     print(f"Accuracy: {accuracy:.4f} ({correct}/{n})")
     return accuracy
 
-def best_of_n_decode(n, question, model_bs, model_ds, base_prompt, attribute_prompts, device, tokenizer, logits_processor, b=1.0):
-    """
-    n: number of generations per prompt
-    question: question to generate for
-    model_bs: the model to generate with
-    model_ds: the model to score with
-    base_prompt: base system prompt
-    attribute_prompts: list of attribute prompts
-    device: torch device
-    tokenizer: tokenizer for the model
-    logits_processor: function/class for drift
-    b: drift parameter
-    """
-    model_ds.eval()
-    model_bs.eval()
-
-    prompt_text = tokenizer.apply_chat_template([
-        {"role": "system", "content": base_prompt},
-        {"role": "user", "content": question}
-    ], tokenize=False, add_generation_prompt=True)
-
-    # Generate n completions
-    inputs = tokenizer(prompt_text, return_tensors="pt", padding=True).to(device)
-    generations = []
-    lengths = []
-    for i in range(n):
-        output = model_bs.generate(
-            **inputs, 
-            logits_processor=LogitsProcessorList([logits_processor]),
-            max_new_tokens=256,
-            do_sample=True,
-            temperature=0.8,
-            )
-        generated = output[0][inputs['input_ids'].shape[1]:]
-        lengths.append(generated.shape[0])
-        decoded_output = tokenizer.decode(generated, skip_special_tokens=True)
-        generations.append(decoded_output)
-        print(decoded_output)
-    
-    # Find the best completion
-    best_prompt = None
-    best_score = -float("inf")
-    for i in range(n):
-        curr_log_prob, curr_length = log_prob(model_ds, [generations[i]], [base_prompt], [question], device, tokenizer)
-        curr_score = curr_log_prob[0] / curr_length[0]
-        if curr_score > best_score:
-            best_score = curr_score
-            best_prompt = generations[i]
-    
-    return best_prompt
-
 def drift_score_bon_batched(data, pi, tokenizer, s0: str, s_list: list[str], p, device, batch_size=8, batch_size_outer=8):
     """
     Batched version of drift_score_bon. Processes multiple (question, outputs) pairs at once for efficiency.
@@ -284,8 +234,8 @@ def get_log_probs(model, tokenizer, system_prompts, user_prompts, completion_tex
         ], tokenize=False, add_generation_prompt=True)
         prompt_ids = tokenizer([prompt_text], return_tensors=None, add_special_tokens=False)["input_ids"][0]
         ns.append(len(prompt_ids))
-        # Tokenize completion (skip BOS)
-        completion_ids_i = tokenizer([completion], return_tensors=None, add_special_tokens=False)["input_ids"][0][1:]
+        # Tokenize completion without skipping tokens
+        completion_ids_i = tokenizer([completion], return_tensors=None, add_special_tokens=False)["input_ids"][0]
         input_ids_i = prompt_ids + completion_ids_i + [tokenizer.eos_token_id]
         input_ids.append(input_ids_i)
         completion_ids.append(completion_ids_i)
@@ -309,7 +259,7 @@ def get_log_probs(model, tokenizer, system_prompts, user_prompts, completion_tex
                 compl[1:],
                 out.prompt_logprobs[1:],
             )
-        ][n - 1 :]
+        ][n:]
         log_probs.append(sum(logprobs))
 
     token_counts = [len(compl) for compl in completion_ids]

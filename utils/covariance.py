@@ -2,13 +2,10 @@ import numpy as np
 import pickle
 import matplotlib.pyplot as plt
 
-with open('../results/l1_reg/user1_p.pkl', 'rb') as f:
+with open('d_user1.pkl', 'rb') as f:
     d = pickle.load(f)
 
-d = np.array(d)
-d = d / d.shape[0]
-
-d = (d - d.mean(axis=0)) / (d.std(axis=0) + 1e-8)
+d = np.array(d.cpu().numpy())
 
 # Covariance between samples (default)
 cov_samples = np.cov(d)
