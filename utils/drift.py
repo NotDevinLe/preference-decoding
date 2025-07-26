@@ -9,7 +9,7 @@ from transformers.generation.logits_process import LogitsProcessor, LogitsProces
 from vllm import LLM, SamplingParams
 import gc
 
-def approximate(data, pi, tokenizer, s0: str, s_list: list[str], device, batch_size=8):
+def approximate(data, pi, tokenizer, s0: str, s_list: list[str], device):
     m, k = len(data), len(s_list)
     W = torch.zeros(m, k, device=device)
     L = torch.zeros(m, k, device=device)
@@ -37,6 +37,27 @@ def approximate(data, pi, tokenizer, s0: str, s_list: list[str], device, batch_s
     else:
         p = d
     return p
+
+def get_training_matrix(data, pi, tokenizer, s0: str, s_list: list[str], device):
+    m, k = len(data), len(s_list)
+    W = torch.zeros(m, k, device=device)
+    L = torch.zeros(m, k, device=device)
+
+    for i, system in enumerate(s_list):
+        print(i)
+        questions = [q for q, _, _ in data]
+        yw_list = [yw for _, yw, _ in data]
+        yl_list = [yl for _, _, yl in data]
+
+        pi_yw_attr, pi_yw_attr_counts = get_log_probs(pi, tokenizer, [system]*m, questions, yw_list, device=device)
+        pi_yl_attr, pi_yl_attr_counts = get_log_probs(pi, tokenizer, [system]*m, questions, yl_list, device=device)
+        pi_yw_base, pi_yw_base_counts = get_log_probs(pi, tokenizer, [s0]*m, questions, yw_list, device=device)
+        pi_yl_base, pi_yl_base_counts = get_log_probs(pi, tokenizer, [s0]*m, questions, yl_list, device=device)
+
+        W[:, i] = torch.tensor(pi_yw_attr, device=device) / torch.tensor(pi_yw_attr_counts, device=device) - torch.tensor(pi_yw_base, device=device) / torch.tensor(pi_yw_base_counts, device=device)
+        L[:, i] = torch.tensor(pi_yl_attr, device=device) / torch.tensor(pi_yl_attr_counts, device=device) - torch.tensor(pi_yl_base, device=device) / torch.tensor(pi_yl_base_counts, device=device)
+
+    return W-L
 
 class DriftLogitsProcessor(LogitsProcessor):
     def __init__(

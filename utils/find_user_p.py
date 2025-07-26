@@ -5,7 +5,7 @@ import os
 os.environ["HF_HOME"] = "/gscratch/ark/devinl6/hf_cache"
 from drift import approximate
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from attribute_prompts import attribute_prompts, persona_prompts, user1_reg_prompts, user2_reg_prompts, user4_reg_prompts
+from attribute_prompts import attribute_prompts, persona_prompts, user1_reg_prompts, user2_reg_prompts, user4_reg_prompts, base_prompt
 from dotenv import load_dotenv
 from huggingface_hub import login
 import random
@@ -45,12 +45,6 @@ model = vllm.LLM(model=small_model_id, tensor_parallel_size=1, gpu_memory_utiliz
 
 tokenizer = AutoTokenizer.from_pretrained(small_model_id)
 tokenizer.pad_token = tokenizer.eos_token
-
-# Get base prompt (system prompt used for base)
-base_prompt = "You are an AI assistant."
-
-print("Computing drift approximation vector p...")
-# Compute drift approximation vector p
 
 data = []
 for j in range(args.samples):
