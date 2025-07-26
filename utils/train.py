@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, default="user2")
 args = parser.parse_args()
 
-with open(f"d_{args.name}.pkl", "rb") as f:
+with open(f"d.pkl", "rb") as f:
     d = pickle.load(f)
 
 d = np.array(d.cpu().numpy())

@@ -7,12 +7,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, default="user1")
 args = parser.parse_args()
 
-with open(f"../results/user_test/{args.name}_toy.json", "r") as f:
+with open(f"../results/user_test/{args.name}_test.json", "r") as f:
     data = json.load(f)
 
 data = np.array(data)
 
-with open("../results/user_p_toy.jsonl", "r") as f:
+with open("../results/user_p.jsonl", "r") as f:
     for line in f:
         entry = json.loads(line)
         if entry['user'] == args.name:
@@ -21,4 +21,4 @@ with open("../results/user_p_toy.jsonl", "r") as f:
             print(f"{args.name} accuracy: {acc}")
             
             with open("../results/approximation_accuracy.jsonl", "a") as f:
-                f.write(json.dumps({'user': args.name, 'n': entry['n'], 'accuracy': acc}) + "\n")
+                f.write(json.dumps({'user': args.name, 'n': entry['sample_size'], 'accuracy': acc}) + "\n")

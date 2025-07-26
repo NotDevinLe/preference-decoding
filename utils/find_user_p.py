@@ -24,7 +24,7 @@ parser.add_argument('--save_path', type=str, default="../results/user_p.jsonl", 
 args = parser.parse_args()
 
 # Load user data from JSON format
-data_path = f"../data/preference/toy/{args.name}_train.json"
+data_path = f"../data/preference/{args.name}_train.json"
 print(f"Loading data from: {data_path}")
 
 with open(data_path, "r") as f:

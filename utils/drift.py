@@ -28,6 +28,8 @@ def approximate(data, pi, tokenizer, s0: str, s_list: list[str], device, batch_s
         W[:, i] = torch.tensor(pi_yw_attr, device=device) / torch.tensor(pi_yw_attr_counts, device=device) - torch.tensor(pi_yw_base, device=device) / torch.tensor(pi_yw_base_counts, device=device)
         L[:, i] = torch.tensor(pi_yl_attr, device=device) / torch.tensor(pi_yl_attr_counts, device=device) - torch.tensor(pi_yl_base, device=device) / torch.tensor(pi_yl_base_counts, device=device)
 
+    with open("d.pkl", "wb") as f:
+        pickle.dump(W-L, f)
     d = torch.mean(W - L, dim=0)
     current_norm = torch.norm(d, p=1)
     if current_norm > 1:

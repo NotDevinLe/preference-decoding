@@ -13,7 +13,7 @@ parser.add_argument("--name", type=str, default="user1")
 parser.add_argument("--attributes", type=int, default=26)
 args = parser.parse_args()
 
-with open(f"../data/toy/{args.name}_test.json", "r") as f:
+with open(f"../data/preference/{args.name}_test.json", "r") as f:
     data = json.load(f)
 
 model_id = "meta-llama/Llama-3.2-1B-Instruct"
