@@ -49,7 +49,7 @@ d = get_training_matrix(data, model, tokenizer, base_prompt, attribute_prompts, 
 sample_sizes = [10,20,30,40,50,60,70,80,90,100,120,140,160,180,200]
 
 for sample_size in sample_sizes:
-    curr = d[:sample_size]
+    curr = d[:sample_size].cpu().numpy()
     curr = np.mean(curr, axis=0)
     if np.linalg.norm(curr, ord=1) > 1:
         curr = curr * (1 / np.linalg.norm(curr, ord=1))
