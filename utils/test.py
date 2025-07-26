@@ -7,7 +7,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, default="user1")
 args = parser.parse_args()
 
-with open(f"../results/user_test/{args.name}_test.json", "r") as f:
+with open(f"../results/user_test/{args.name}_toy.json", "r") as f:
     data = json.load(f)
 
 data = np.array(data)
