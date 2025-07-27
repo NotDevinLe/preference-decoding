@@ -81,7 +81,7 @@ attr1_prompt_outputs = [output.outputs[0].text.strip() for output in attr1_promp
 attr2_prompt_inputs = []
 attr2_prompt_outputs = []
 
-attr2_prompt = "You are a persuasive AI assistant."
+attr2_prompt = "You are an AI assistant that communicates using internet slang."
 for instruction in instructions[int(len(instructions) * 0.8):]:
     attr2_prompt_input = tokenizer.apply_chat_template([
         {"role": "system", "content": attr2_prompt},

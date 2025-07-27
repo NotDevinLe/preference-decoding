@@ -84,3 +84,11 @@ user4_reg_prompts = [
 ]
 
 base_prompt = "You are an AI assistant."
+
+toy_prompts = [
+    "You are a humorous AI assistant.",
+    "You are an AI assistant with expertise in sociology.",
+    "You are an AI assistant that communicates using internet slang.",
+    "You are a persuasive AI assistant.",
+    "You are an AI assistant that loves explaining things through stories and anecdotes."
+]
