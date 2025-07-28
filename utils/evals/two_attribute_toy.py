@@ -1,10 +1,21 @@
 import numpy as np
 import random
+import itertools
 from vllm import LLM, SamplingParams
 from transformers import AutoTokenizer
 from datasets import load_dataset
-from utils.drift import get_training_matrix
-from utils.attribute_prompts import attribute_prompts, base_prompt
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+try:
+    from utils.drift import get_training_matrix
+    from utils.attribute_prompts import attribute_prompts, base_prompt
+except ImportError:
+    # If running from evals folder directly
+    sys.path.append('..')
+    from drift import get_training_matrix
+    from attribute_prompts import attribute_prompts, base_prompt
 import torch
 import json
 
@@ -66,17 +77,13 @@ def generate_data(system_prompt1, system_prompt2, base_prompt, prob1, prob2, siz
     return all_data
     
 
-def reduce_attributes_to_uncorrelated(all_prompts, n_components=5, random_state=42):
-    """
-    Reduce 26 attributes to 5 uncorrelated ones using PCA on embeddings
-    For now, we'll randomly select 5 from the available prompts as a toy implementation
-    """
-    np.random.seed(random_state)
-    selected_indices = np.random.choice(len(all_prompts), size=min(n_components, len(all_prompts)), replace=False)
-    return [all_prompts[i] for i in selected_indices]
-
-# Reduce from 26 attributes to 5 uncorrelated ones
-selected_prompts = reduce_attributes_to_uncorrelated(attribute_prompts, n_components=5)
+selected_prompts = [
+    "You are an AI assistant that speaks in Japanese.",
+    "You are an AI assistant that speaks in French.",
+    "You are an AI assistant that speaks in Spanish.",
+    "You are an AI assistant that speaks in German.",
+    "You are an AI assistant that speaks in Italian.",
+]
 
 # Model setup
 model_id = "meta-llama/Llama-3.2-1B-Instruct"
@@ -86,14 +93,14 @@ llm = LLM(
     model=model_id,
     tensor_parallel_size=1,
     gpu_memory_utilization=0.7,
-    max_model_len=8192
+    max_model_len=16384
 )
 
 # Sampling configuration
 sampling_params = SamplingParams(
-    temperature=0.8,
-    top_p=0.9,
-    max_tokens=512,
+    temperature=0.0,
+    top_p=1.0,
+    max_tokens=4096,
     stop=[]
 )
 
@@ -110,11 +117,13 @@ def build_prompt(instruction, context):
 results = []
 train_size, test_size = 200, 1000
 
-for experiment_idx in range(10):
-    print(f"\n=== EXPERIMENT {experiment_idx + 1}/10 ===")
+pairs = list(itertools.combinations(range(5), 2))
+
+for experiment_idx, pair in enumerate(pairs):
+    print(f"\n=== EXPERIMENT {pair} ===")
     
     # Randomly sample 2 attributes from the 5
-    attr1, attr2 = random.sample(selected_prompts, 2)
+    attr1, attr2 = selected_prompts[pair[0]], selected_prompts[pair[1]]
     
     # Assign random probabilities
     prob1 = random.random()
@@ -137,7 +146,18 @@ for experiment_idx in range(10):
         [(item['prompt'], item['chosen'], item['rejected']) for item in train_data], 
         llm, tokenizer, base_prompt, selected_prompts, device
     )
-    
+
+    print(f"\n=== DEBUG INFO ===")
+    print(f"Training matrix shape: {training_matrix.shape}")
+    print(f"Training matrix range: [{training_matrix.min():.6f}, {training_matrix.max():.6f}]")
+    print(f"Training matrix mean per attribute: {torch.mean(training_matrix, dim=0)}")
+    print(f"Training matrix std per attribute: {torch.std(training_matrix, dim=0)}")
+
+    # Check which attributes should be active
+    print(f"Expected active attributes: {pair[0]} (prob={prob1:.3f}), {pair[1]} (prob={prob2:.3f})")
+    means = torch.mean(training_matrix, dim=0).cpu().numpy()
+    print(f"Highest signal attribute: {np.argmax(np.abs(means))} (value={means[np.argmax(np.abs(means))]:.6f})")
+        
     # Compute average preference vector
     p_recovered = torch.mean(training_matrix, dim=0).cpu().numpy()
     
@@ -207,6 +227,6 @@ print(f"Average Cosine Similarity: {avg_cosine:.4f} ± {np.std([r['cosine_simila
 print(f"Average Top-2 Accuracy: {avg_top2_acc:.2f} ± {np.std([r['top_2_accuracy'] for r in results]):.2f}")
 
 # Save detailed results
-with open('two_attribute_toy_results.json', 'w') as f:
+with open('two_attribute_toy_results_temperature_0.json', 'w') as f:
     json.dump(results, f, indent=2)
-print(f"\nDetailed results saved to 'two_attribute_toy_results.json'")
+print(f"\nDetailed results saved to 'two_attribute_toy_results_temperature_0.json'")

@@ -22,11 +22,4 @@ with open("../results/user_p.jsonl", "r") as f:
             print(f"{args.name} accuracy: {acc}")
             
             with open("../results/approximation_accuracy.jsonl", "a") as f:
-                f.write(json.dumps({'user': args.name, 'n': entry['sample_size'], 'accuracy': acc}) + "\n")
-
-for i in range(len(attribute_prompts)):
-    print(f"Attribute {i}: {attribute_prompts[i]}")
-    p = np.zeros(len(attribute_prompts))
-    p[i] = 1
-    acc = np.sum((data @ p.reshape(-1, 1) > 0).astype(int)) / len(data)
-    print(f"Attribute {i} accuracy: {acc}")
+                f.write(json.dumps({'user': args.name, 'n': entry['sample_size'], 'accuracy': acc, 'lambda': entry['lambda']}) + "\n")

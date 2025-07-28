@@ -8,8 +8,33 @@ from dotenv import load_dotenv
 from transformers.generation.logits_process import LogitsProcessor, LogitsProcessorList
 from vllm import LLM, SamplingParams
 import gc
+import cvxpy as cp
 
-def approximate(data, pi, tokenizer, s0: str, s_list: list[str], device):
+def elastic_net_solve(d_mean, l1_lambda, l2_lambda):
+    """Solve elastic net optimization problem"""
+    p_var = cp.Variable(len(d_mean))
+    
+    linear_term = d_mean @ -p_var
+    l1_penalty = l1_lambda * cp.norm1(p_var)
+    l2_penalty = l2_lambda * cp.sum_squares(p_var)
+    objective = cp.Minimize(linear_term + l1_penalty + l2_penalty)
+    
+    problem = cp.Problem(objective)
+    problem.solve()
+    
+    if p_var.value is None:
+        print(f"Optimization failed for L1={l1_lambda}, L2={l2_lambda}, using normalization fallback")
+        # Use simple normalization as fallback
+        current_norm = np.linalg.norm(d_mean, ord=1)
+        if current_norm > 1:
+            p = d_mean * (1 / current_norm)
+        else:
+            p = d_mean.copy()
+        return p
+    else:
+        return p_var.value
+
+def approximate(data, pi, tokenizer, s0: str, s_list: list[str], l1_lambda, l2_lambda=1, device=None):
     m, k = len(data), len(s_list)
     W = torch.zeros(m, k, device=device)
     L = torch.zeros(m, k, device=device)
@@ -28,17 +53,10 @@ def approximate(data, pi, tokenizer, s0: str, s_list: list[str], device):
         W[:, i] = torch.tensor(pi_yw_attr, device=device) / torch.tensor(pi_yw_attr_counts, device=device) - torch.tensor(pi_yw_base, device=device) / torch.tensor(pi_yw_base_counts, device=device)
         L[:, i] = torch.tensor(pi_yl_attr, device=device) / torch.tensor(pi_yl_attr_counts, device=device) - torch.tensor(pi_yl_base, device=device) / torch.tensor(pi_yl_base_counts, device=device)
 
-    with open("d.pkl", "wb") as f:
-        pickle.dump(W-L, f)
-    d = torch.mean(W - L, dim=0)
-    current_norm = torch.norm(d, p=1)
-    if current_norm > 1:
-        p = d * (1 / current_norm)
-    else:
-        p = d
-    return p
+    d = torch.mean(W - L, dim=0).cpu().numpy()
+    return elastic_net_solve(d, l1_lambda, l2_lambda)
 
-def get_training_matrix(data, pi, tokenizer, s0: str, s_list: list[str], device):
+def get_training_matrix(data, pi, tokenizer, s0: str, s_list: list[str], device=None):
     m, k = len(data), len(s_list)
     W = torch.zeros(m, k, device=device)
     L = torch.zeros(m, k, device=device)

@@ -1,0 +1,60 @@
+{
+  "experiment_config": {
+    "attributes": [
+      "You are an AI assistant that only responds in English.",
+      "Eres un asistente de IA que responde \u00fanicamente en espa\u00f1ol. Todas tus respuestas deben estar en espa\u00f1ol."
+    ],
+    "train_size": 5,
+    "batch_size": 25,
+    "model": "meta-llama/Llama-3.2-1B-Instruct",
+    "temperature": 0.0,
+    "max_tokens": 256,
+    "max_model_len": 2048
+  },
+  "results": [
+    {
+      "experiment": 1,
+      "attribute": "You are an AI assistant that only responds in English.",
+      "expected_attribute_idx": 0,
+      "recovered_attribute_idx": 1,
+      "true_distribution": [
+        1.0,
+        0.0
+      ],
+      "recovered_distribution": [
+        0.00476966192945838,
+        0.03967215493321419
+      ],
+      "mse": 0.49602865284652475,
+      "mae": 0.5174512465018779,
+      "cosine_similarity": 0.11936730931782204,
+      "top_1_accuracy": 0.0,
+      "l1_norm_before_normalization": 0.044441815465688705
+    },
+    {
+      "experiment": 2,
+      "attribute": "Eres un asistente de IA que responde \u00fanicamente en espa\u00f1ol. Todas tus respuestas deben estar en espa\u00f1ol.",
+      "expected_attribute_idx": 1,
+      "recovered_attribute_idx": 1,
+      "true_distribution": [
+        0.0,
+        1.0
+      ],
+      "recovered_distribution": [
+        0.0051840911619365215,
+        0.9948159456253052
+      ],
+      "mse": 2.687461046753045e-05,
+      "mae": 0.005184072768315673,
+      "cosine_similarity": 0.99998638937169,
+      "top_1_accuracy": 1.0,
+      "l1_norm_before_normalization": 1.100763201713562
+    }
+  ],
+  "summary": {
+    "avg_mse": 0.24802776372849614,
+    "avg_mae": 0.2613176596350968,
+    "avg_cosine_similarity": 0.559676849344756,
+    "avg_top1_accuracy": 0.5
+  }
+}

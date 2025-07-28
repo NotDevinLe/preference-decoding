@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, default="user1")
 args = parser.parse_args()
 
-with open(f"../data/toy/{args.name}_test.json", "r") as f:
+with open(f"../data/preference/{args.name}_test.json", "r") as f:
     data = json.load(f)
 data = data[:500]
 

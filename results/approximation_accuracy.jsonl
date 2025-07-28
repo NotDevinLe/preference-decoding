@@ -1,61 +1,120 @@
-{"user": "user1", "n": 10, "accuracy": 0.848}
-{"user": "user1", "n": 20, "accuracy": 0.783}
-{"user": "user1", "n": 30, "accuracy": 0.78}
-{"user": "user1", "n": 40, "accuracy": 0.824}
-{"user": "user1", "n": 50, "accuracy": 0.832}
-{"user": "user1", "n": 60, "accuracy": 0.83}
-{"user": "user1", "n": 70, "accuracy": 0.807}
-{"user": "user1", "n": 80, "accuracy": 0.809}
-{"user": "user1", "n": 90, "accuracy": 0.82}
-{"user": "user1", "n": 100, "accuracy": 0.8}
-{"user": "user1", "n": 120, "accuracy": 0.8}
-{"user": "user1", "n": 140, "accuracy": 0.798}
-{"user": "user1", "n": 160, "accuracy": 0.803}
-{"user": "user1", "n": 180, "accuracy": 0.805}
-{"user": "user1", "n": 200, "accuracy": 0.805}
-{"user": "user1", "n": 10, "accuracy": 0.905}
-{"user": "user1", "n": 20, "accuracy": 0.855}
-{"user": "user1", "n": 30, "accuracy": 0.846}
-{"user": "user1", "n": 40, "accuracy": 0.892}
-{"user": "user1", "n": 50, "accuracy": 0.906}
-{"user": "user1", "n": 60, "accuracy": 0.902}
-{"user": "user1", "n": 70, "accuracy": 0.883}
-{"user": "user1", "n": 80, "accuracy": 0.887}
-{"user": "user1", "n": 90, "accuracy": 0.892}
-{"user": "user1", "n": 100, "accuracy": 0.884}
-{"user": "user1", "n": 120, "accuracy": 0.878}
-{"user": "user1", "n": 140, "accuracy": 0.877}
-{"user": "user1", "n": 160, "accuracy": 0.881}
-{"user": "user1", "n": 180, "accuracy": 0.884}
-{"user": "user1", "n": 200, "accuracy": 0.885}
-{"user": "user3", "n": 10, "accuracy": 0.87}
-{"user": "user3", "n": 20, "accuracy": 0.874}
-{"user": "user3", "n": 30, "accuracy": 0.886}
-{"user": "user3", "n": 40, "accuracy": 0.882}
-{"user": "user3", "n": 50, "accuracy": 0.882}
-{"user": "user3", "n": 60, "accuracy": 0.882}
-{"user": "user3", "n": 70, "accuracy": 0.88}
-{"user": "user3", "n": 80, "accuracy": 0.882}
-{"user": "user3", "n": 90, "accuracy": 0.882}
-{"user": "user3", "n": 100, "accuracy": 0.88}
-{"user": "user3", "n": 120, "accuracy": 0.884}
-{"user": "user3", "n": 140, "accuracy": 0.884}
-{"user": "user3", "n": 160, "accuracy": 0.884}
-{"user": "user3", "n": 180, "accuracy": 0.884}
-{"user": "user3", "n": 200, "accuracy": 0.882}
-{"user": "user3", "n": 200, "accuracy": 0.0}
-{"user": "user4", "n": 10, "accuracy": 0.968}
-{"user": "user4", "n": 20, "accuracy": 0.966}
-{"user": "user4", "n": 30, "accuracy": 0.966}
-{"user": "user4", "n": 40, "accuracy": 0.968}
-{"user": "user4", "n": 50, "accuracy": 0.966}
-{"user": "user4", "n": 60, "accuracy": 0.968}
-{"user": "user4", "n": 70, "accuracy": 0.968}
-{"user": "user4", "n": 80, "accuracy": 0.968}
-{"user": "user4", "n": 90, "accuracy": 0.968}
-{"user": "user4", "n": 100, "accuracy": 0.968}
-{"user": "user4", "n": 120, "accuracy": 0.968}
-{"user": "user4", "n": 140, "accuracy": 0.968}
-{"user": "user4", "n": 160, "accuracy": 0.968}
-{"user": "user4", "n": 180, "accuracy": 0.968}
-{"user": "user4", "n": 200, "accuracy": 0.968}
+{"user": "user1", "n": 10, "accuracy": 0.89, "lambda": 0.01}
+{"user": "user1", "n": 20, "accuracy": 0.858, "lambda": 0.01}
+{"user": "user1", "n": 30, "accuracy": 0.85, "lambda": 0.01}
+{"user": "user1", "n": 40, "accuracy": 0.916, "lambda": 0.01}
+{"user": "user1", "n": 50, "accuracy": 0.916, "lambda": 0.01}
+{"user": "user1", "n": 60, "accuracy": 0.914, "lambda": 0.01}
+{"user": "user1", "n": 70, "accuracy": 0.892, "lambda": 0.01}
+{"user": "user1", "n": 80, "accuracy": 0.894, "lambda": 0.01}
+{"user": "user1", "n": 90, "accuracy": 0.902, "lambda": 0.01}
+{"user": "user1", "n": 100, "accuracy": 0.884, "lambda": 0.01}
+{"user": "user1", "n": 120, "accuracy": 0.886, "lambda": 0.01}
+{"user": "user1", "n": 140, "accuracy": 0.874, "lambda": 0.01}
+{"user": "user1", "n": 160, "accuracy": 0.882, "lambda": 0.01}
+{"user": "user1", "n": 180, "accuracy": 0.892, "lambda": 0.01}
+{"user": "user1", "n": 200, "accuracy": 0.892, "lambda": 0.01}
+{"user": "user1", "n": 10, "accuracy": 0.09, "lambda": 0.1}
+{"user": "user1", "n": 20, "accuracy": 0.79, "lambda": 0.1}
+{"user": "user1", "n": 30, "accuracy": 0.142, "lambda": 0.1}
+{"user": "user1", "n": 40, "accuracy": 0.79, "lambda": 0.1}
+{"user": "user1", "n": 50, "accuracy": 0.082, "lambda": 0.1}
+{"user": "user1", "n": 60, "accuracy": 0.68, "lambda": 0.1}
+{"user": "user1", "n": 70, "accuracy": 0.206, "lambda": 0.1}
+{"user": "user1", "n": 80, "accuracy": 0.208, "lambda": 0.1}
+{"user": "user1", "n": 90, "accuracy": 0.088, "lambda": 0.1}
+{"user": "user1", "n": 100, "accuracy": 0.79, "lambda": 0.1}
+{"user": "user1", "n": 120, "accuracy": 0.79, "lambda": 0.1}
+{"user": "user1", "n": 140, "accuracy": 0.206, "lambda": 0.1}
+{"user": "user1", "n": 160, "accuracy": 0.206, "lambda": 0.1}
+{"user": "user1", "n": 180, "accuracy": 0.092, "lambda": 0.1}
+{"user": "user1", "n": 200, "accuracy": 0.79, "lambda": 0.1}
+{"user": "user1", "n": 10, "accuracy": 0.09, "lambda": 0.2}
+{"user": "user1", "n": 20, "accuracy": 0.12, "lambda": 0.2}
+{"user": "user1", "n": 30, "accuracy": 0.126, "lambda": 0.2}
+{"user": "user1", "n": 40, "accuracy": 0.086, "lambda": 0.2}
+{"user": "user1", "n": 50, "accuracy": 0.082, "lambda": 0.2}
+{"user": "user1", "n": 60, "accuracy": 0.084, "lambda": 0.2}
+{"user": "user1", "n": 70, "accuracy": 0.09, "lambda": 0.2}
+{"user": "user1", "n": 80, "accuracy": 0.092, "lambda": 0.2}
+{"user": "user1", "n": 90, "accuracy": 0.088, "lambda": 0.2}
+{"user": "user1", "n": 100, "accuracy": 0.094, "lambda": 0.2}
+{"user": "user1", "n": 120, "accuracy": 0.104, "lambda": 0.2}
+{"user": "user1", "n": 140, "accuracy": 0.106, "lambda": 0.2}
+{"user": "user1", "n": 160, "accuracy": 0.1, "lambda": 0.2}
+{"user": "user1", "n": 180, "accuracy": 0.092, "lambda": 0.2}
+{"user": "user1", "n": 200, "accuracy": 0.094, "lambda": 0.2}
+{"user": "user1", "n": 10, "accuracy": 0.09, "lambda": 0.5}
+{"user": "user1", "n": 20, "accuracy": 0.12, "lambda": 0.5}
+{"user": "user1", "n": 30, "accuracy": 0.126, "lambda": 0.5}
+{"user": "user1", "n": 40, "accuracy": 0.086, "lambda": 0.5}
+{"user": "user1", "n": 50, "accuracy": 0.082, "lambda": 0.5}
+{"user": "user1", "n": 60, "accuracy": 0.084, "lambda": 0.5}
+{"user": "user1", "n": 70, "accuracy": 0.09, "lambda": 0.5}
+{"user": "user1", "n": 80, "accuracy": 0.092, "lambda": 0.5}
+{"user": "user1", "n": 90, "accuracy": 0.088, "lambda": 0.5}
+{"user": "user1", "n": 100, "accuracy": 0.094, "lambda": 0.5}
+{"user": "user1", "n": 120, "accuracy": 0.102, "lambda": 0.5}
+{"user": "user1", "n": 140, "accuracy": 0.106, "lambda": 0.5}
+{"user": "user1", "n": 160, "accuracy": 0.1, "lambda": 0.5}
+{"user": "user1", "n": 180, "accuracy": 0.092, "lambda": 0.5}
+{"user": "user1", "n": 200, "accuracy": 0.094, "lambda": 0.5}
+{"user": "user1", "n": 10, "accuracy": 0.088, "lambda": 1}
+{"user": "user1", "n": 20, "accuracy": 0.12, "lambda": 1}
+{"user": "user1", "n": 30, "accuracy": 0.126, "lambda": 1}
+{"user": "user1", "n": 40, "accuracy": 0.086, "lambda": 1}
+{"user": "user1", "n": 50, "accuracy": 0.082, "lambda": 1}
+{"user": "user1", "n": 60, "accuracy": 0.084, "lambda": 1}
+{"user": "user1", "n": 70, "accuracy": 0.09, "lambda": 1}
+{"user": "user1", "n": 80, "accuracy": 0.09, "lambda": 1}
+{"user": "user1", "n": 90, "accuracy": 0.088, "lambda": 1}
+{"user": "user1", "n": 100, "accuracy": 0.094, "lambda": 1}
+{"user": "user1", "n": 120, "accuracy": 0.102, "lambda": 1}
+{"user": "user1", "n": 140, "accuracy": 0.106, "lambda": 1}
+{"user": "user1", "n": 160, "accuracy": 0.1, "lambda": 1}
+{"user": "user1", "n": 180, "accuracy": 0.092, "lambda": 1}
+{"user": "user1", "n": 200, "accuracy": 0.094, "lambda": 1}
+{"user": "user1", "n": 10, "accuracy": 0.086, "lambda": 2}
+{"user": "user1", "n": 20, "accuracy": 0.12, "lambda": 2}
+{"user": "user1", "n": 30, "accuracy": 0.126, "lambda": 2}
+{"user": "user1", "n": 40, "accuracy": 0.086, "lambda": 2}
+{"user": "user1", "n": 50, "accuracy": 0.082, "lambda": 2}
+{"user": "user1", "n": 60, "accuracy": 0.084, "lambda": 2}
+{"user": "user1", "n": 70, "accuracy": 0.092, "lambda": 2}
+{"user": "user1", "n": 80, "accuracy": 0.092, "lambda": 2}
+{"user": "user1", "n": 90, "accuracy": 0.088, "lambda": 2}
+{"user": "user1", "n": 100, "accuracy": 0.094, "lambda": 2}
+{"user": "user1", "n": 120, "accuracy": 0.104, "lambda": 2}
+{"user": "user1", "n": 140, "accuracy": 0.104, "lambda": 2}
+{"user": "user1", "n": 160, "accuracy": 0.1, "lambda": 2}
+{"user": "user1", "n": 180, "accuracy": 0.094, "lambda": 2}
+{"user": "user1", "n": 200, "accuracy": 0.092, "lambda": 2}
+{"user": "user1", "n": 10, "accuracy": 0.128, "lambda": 5}
+{"user": "user1", "n": 20, "accuracy": 0.108, "lambda": 5}
+{"user": "user1", "n": 30, "accuracy": 0.084, "lambda": 5}
+{"user": "user1", "n": 40, "accuracy": 0.164, "lambda": 5}
+{"user": "user1", "n": 50, "accuracy": 0.092, "lambda": 5}
+{"user": "user1", "n": 60, "accuracy": 0.082, "lambda": 5}
+{"user": "user1", "n": 70, "accuracy": 0.144, "lambda": 5}
+{"user": "user1", "n": 80, "accuracy": 0.146, "lambda": 5}
+{"user": "user1", "n": 90, "accuracy": 0.146, "lambda": 5}
+{"user": "user1", "n": 100, "accuracy": 0.172, "lambda": 5}
+{"user": "user1", "n": 120, "accuracy": 0.158, "lambda": 5}
+{"user": "user1", "n": 140, "accuracy": 0.156, "lambda": 5}
+{"user": "user1", "n": 160, "accuracy": 0.16, "lambda": 5}
+{"user": "user1", "n": 180, "accuracy": 0.16, "lambda": 5}
+{"user": "user1", "n": 200, "accuracy": 0.14, "lambda": 5}
+{"user": "user1", "n": 10, "accuracy": 0.206, "lambda": 10}
+{"user": "user1", "n": 20, "accuracy": 0.138, "lambda": 10}
+{"user": "user1", "n": 30, "accuracy": 0.12, "lambda": 10}
+{"user": "user1", "n": 40, "accuracy": 0.086, "lambda": 10}
+{"user": "user1", "n": 50, "accuracy": 0.152, "lambda": 10}
+{"user": "user1", "n": 60, "accuracy": 0.178, "lambda": 10}
+{"user": "user1", "n": 70, "accuracy": 0.162, "lambda": 10}
+{"user": "user1", "n": 80, "accuracy": 0.172, "lambda": 10}
+{"user": "user1", "n": 90, "accuracy": 0.184, "lambda": 10}
+{"user": "user1", "n": 100, "accuracy": 0.138, "lambda": 10}
+{"user": "user1", "n": 120, "accuracy": 0.16, "lambda": 10}
+{"user": "user1", "n": 140, "accuracy": 0.172, "lambda": 10}
+{"user": "user1", "n": 160, "accuracy": 0.166, "lambda": 10}
+{"user": "user1", "n": 180, "accuracy": 0.18, "lambda": 10}
+{"user": "user1", "n": 200, "accuracy": 0.12, "lambda": 10}
