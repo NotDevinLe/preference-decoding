@@ -10,20 +10,18 @@ from vllm import LLM, SamplingParams
 import gc
 import cvxpy as cp
 
-def elastic_net_solve(d_mean, l1_lambda, l2_lambda):
+def l1_solve(d_mean, l1_lambda):
     """Solve elastic net optimization problem"""
     p_var = cp.Variable(len(d_mean))
+    constraints = [cp.norm2(p_var) <= 1]
     
-    linear_term = d_mean @ -p_var
-    l1_penalty = l1_lambda * cp.norm1(p_var)
-    l2_penalty = l2_lambda * cp.sum_squares(p_var)
-    objective = cp.Minimize(linear_term + l1_penalty + l2_penalty)
+    objective = cp.Maximize(d_mean @ p_var - l1_lambda * cp.norm1(p_var))
+    problem = cp.Problem(objective, constraints)
     
-    problem = cp.Problem(objective)
     problem.solve()
     
     if p_var.value is None:
-        print(f"Optimization failed for L1={l1_lambda}, L2={l2_lambda}, using normalization fallback")
+        print(f"Optimization failed for L1={l1_lambda}, using normalization fallback")
         # Use simple normalization as fallback
         current_norm = np.linalg.norm(d_mean, ord=1)
         if current_norm > 1:
@@ -54,7 +52,7 @@ def approximate(data, pi, tokenizer, s0: str, s_list: list[str], l1_lambda, l2_l
         L[:, i] = torch.tensor(pi_yl_attr, device=device) / torch.tensor(pi_yl_attr_counts, device=device) - torch.tensor(pi_yl_base, device=device) / torch.tensor(pi_yl_base_counts, device=device)
 
     d = torch.mean(W - L, dim=0).cpu().numpy()
-    return elastic_net_solve(d, l1_lambda, l2_lambda)
+    return l1_solve(d, l1_lambda)
 
 def get_training_matrix(data, pi, tokenizer, s0: str, s_list: list[str], device=None):
     m, k = len(data), len(s_list)

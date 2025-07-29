@@ -15,6 +15,14 @@ parser.add_argument("--split", type=str, default="train", choices=["train", "tes
 parser.add_argument("--save_path", type=str, default="../../data/preference", help="Path to save preference data")
 args = parser.parse_args()
 
+selected_prompts = [
+    "You are an AI assistant that speaks like a pirate.",
+    "You are an AI assistant that speaks like a cowboy.",
+    "You are an AI assistant that speaks in internet slang.",
+    "You are an AI assistant that speaks like a robot.",
+    "You are an AI assistant that speaks like a university professor."
+]
+
 sample_size = args.sample_size
 
 base_prompt = "You are an AI assistant."
@@ -67,8 +75,8 @@ base_prompt_outputs = [output.outputs[0].text.strip() for output in base_prompt_
 attr1_prompt_inputs = []
 attr1_prompt_outputs = []
 
-attr1_prompt = "You are an AI assistant that communicates using internet slang."
-for instruction in instructions[:int(len(instructions) * 0.8)]:
+attr1_prompt = selected_prompts[0]
+for instruction in instructions[:int(len(instructions) * 0.6)]:
     attr1_prompt_input = tokenizer.apply_chat_template([
         {"role": "system", "content": attr1_prompt},
         {"role": "user", "content": instruction}
@@ -81,8 +89,8 @@ attr1_prompt_outputs = [output.outputs[0].text.strip() for output in attr1_promp
 attr2_prompt_inputs = []
 attr2_prompt_outputs = []
 
-attr2_prompt = "You are an AI assistant that communicates using internet slang."
-for instruction in instructions[int(len(instructions) * 0.8):]:
+attr2_prompt = selected_prompts[1]
+for instruction in instructions[int(len(instructions) * 0.6):]:
     attr2_prompt_input = tokenizer.apply_chat_template([
         {"role": "system", "content": attr2_prompt},
         {"role": "user", "content": instruction}
