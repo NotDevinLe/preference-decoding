@@ -1,11 +1,11 @@
 import os
 os.environ["HF_HOME"] = "/gscratch/ark/devinl6/hf_cache"
 import argparse
-from datasets import load_dataset
 from vllm import LLM, SamplingParams
 from transformers import AutoTokenizer
 import json
 import random
+from datasets import load_dataset
 
 # Args
 parser = argparse.ArgumentParser()
@@ -13,6 +13,7 @@ parser.add_argument("--name", type=str, required=True)
 parser.add_argument("--sample_size", type=int, required=True)
 parser.add_argument("--split", type=str, default="train", choices=["train", "test"], help="Generate train or test split")
 parser.add_argument("--save_path", type=str, default="../../data/preference", help="Path to save preference data")
+parser.add_argument("--temperature", type=float, default=0.8)
 args = parser.parse_args()
 
 selected_prompts = [
@@ -30,6 +31,7 @@ base_prompt = "You are an AI assistant."
 # Model setup
 model_id = "meta-llama/Llama-3.2-1B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_id)
+tokenizer.pad_token = tokenizer.eos_token
 
 llm = LLM(
     model=model_id,
@@ -40,7 +42,7 @@ llm = LLM(
 
 # Sampling configuration
 sampling_params = SamplingParams(
-    temperature=0.8,
+    temperature=args.temperature,
     top_p=0.9,
     max_tokens=512,
     stop=[]
@@ -110,5 +112,5 @@ for i in range(len(instructions)):
     })
 
 random.shuffle(all_data)
-with open(f"{args.save_path}/{args.name}_{args.split}.json", "w") as f:
+with open(f"{args.save_path}/{args.name}_{args.split}_{args.temperature}.json", "w") as f:
     json.dump(all_data, f, indent=2)
