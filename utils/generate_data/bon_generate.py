@@ -39,12 +39,20 @@ sampling_params = SamplingParams(
     stop=[]
 )
 
+def build_prompt(instruction, context):
+    """Combine instruction and context like in generate.py"""
+    if context.strip():
+        return f"{instruction}\n\n{context}"
+    else:
+        return instruction
+
 # Load Dolly dataset
 print("Loading Dolly dataset...")
 dolly_ds = load_dataset("databricks/databricks-dolly-15k", split="train")
 
-# Prepare prompts (no system prompt)
-instructions = [row["instruction"] for row in dolly_ds.shuffle().select(range(sample_size))]
+# Prepare prompts including context (same logic as generate.py)
+selected_rows = dolly_ds.shuffle().select(range(sample_size))
+instructions = [build_prompt(row["instruction"], row["context"]) for row in selected_rows]
 
 results = []
 
