@@ -87,7 +87,6 @@ def generate_batch(prompts_batch, big_model, drift_processor, tokenizer, max_new
             temperature=0.7,
             logits_processor=[drift_processor],
             pad_token_id=tokenizer.eos_token_id,
-            attention_mask=inputs['attention_mask'],
             use_cache=True  # Enable KV caching for speed
         )
     
@@ -111,51 +110,81 @@ drift_processor = DriftLogitsProcessor(
     weights=p
 )
 
-# Process in batches
+# Setup output file
+output_file = f'../results/drift_decoding_responses_b{args.b}_batch{args.batch_size}.json'
+
+# Initialize or load existing results
 results = []
+start_idx = 0
+
+# Check if output file exists and load existing results
+if os.path.exists(output_file):
+    try:
+        with open(output_file, 'r') as f:
+            results = json.load(f)
+        start_idx = len(results)
+        print(f"📁 Resuming from {start_idx} existing results")
+    except:
+        print("⚠️ Could not load existing results, starting fresh")
+        results = []
+
+def save_results_incrementally(results, output_file):
+    """Save results to file immediately"""
+    with open(output_file, 'w') as f:
+        json.dump(results, f, indent=2)
+
+# Process in batches
 batch_size = args.batch_size
+total_batches = (len(prompts) - start_idx - 1) // batch_size + 1
 
-print(f"Processing {len(prompts)} prompts in batches of {batch_size}")
+print(f"Processing {len(prompts) - start_idx} remaining prompts in batches of {batch_size}")
 
-for i in range(0, len(prompts), batch_size):
+for i in range(start_idx, len(prompts), batch_size):
     batch_prompts = prompts[i:i+batch_size]
-    print(f"Processing batch {i//batch_size + 1}/{(len(prompts)-1)//batch_size + 1}")
+    batch_num = (i - start_idx) // batch_size + 1
+    print(f"Processing batch {batch_num}/{total_batches} (prompts {i+1}-{min(i+batch_size, len(prompts))}/{len(prompts)})")
+    
+    batch_results = []
     
     try:
         batch_responses = generate_batch(batch_prompts, big_model, drift_processor, tokenizer)
         
         for prompt, response in zip(batch_prompts, batch_responses):
-            results.append({
+            batch_results.append({
                 "prompt": prompt,
                 "response": response
             })
-            print(f"Generated response for: {prompt[:50]}...")
+            print(f"✅ Generated response for: {prompt[:50]}...")
             
     except torch.cuda.OutOfMemoryError:
-        print("CUDA OOM! Reducing batch size and trying again...")
+        print("💥 CUDA OOM! Reducing batch size and trying again...")
         # Fallback to individual generation for this batch
         for prompt in batch_prompts:
             try:
                 batch_responses = generate_batch([prompt], big_model, drift_processor, tokenizer)
-                results.append({
+                batch_results.append({
                     "prompt": prompt,
                     "response": batch_responses[0]
                 })
+                print(f"✅ Generated response (single): {prompt[:50]}...")
             except Exception as e:
-                print(f"Failed to generate for prompt: {e}")
-                results.append({
+                print(f"❌ Failed to generate for prompt: {e}")
+                batch_results.append({
                     "prompt": prompt,
                     "response": "[GENERATION_FAILED]"
                 })
     
+    # Add batch results to main results and save immediately
+    results.extend(batch_results)
+    save_results_incrementally(results, output_file)
+    print(f"💾 Saved batch {batch_num} - Total: {len(results)} responses")
+    
     # Clear cache periodically
     if i % (batch_size * 4) == 0:
         torch.cuda.empty_cache()
+        print("🧹 Cleared CUDA cache")
 
-# Save results
-output_file = f'../results/drift_decoding_responses_b{args.b}_batch{batch_size}.json'
-with open(output_file, 'w') as f:
-    json.dump(results, f, indent=2)
-
-print(f"✅ Saved {len(results)} responses to {output_file}")
-print(f"Average response length: {np.mean([len(r['response']) for r in results]):.1f} chars")
+print(f"🎉 Completed! Saved {len(results)} total responses to {output_file}")
+if results:
+    avg_length = np.mean([len(r['response']) for r in results if r['response'] != '[GENERATION_FAILED]'])
+    print(f"📊 Average response length: {avg_length:.1f} chars")
