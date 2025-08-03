@@ -329,3 +329,81 @@ def get_log_probs(model, tokenizer, system_prompts, user_prompts, completion_tex
 
     token_counts = [len(compl) for compl in completion_ids]
     return log_probs, token_counts
+
+class DriftLogitsProcessor(LogitsProcessor):
+    def __init__(
+        self,
+        b: float,
+        small_model,
+        tokenizer,
+        base_prompt: str,
+        attribute_prompts: list[str],
+        weights: list[float],
+        use_cache: bool = True,
+    ):
+        self.b = b
+        self.small_model = small_model
+        self.tokenizer = tokenizer
+        self.base_prompt = base_prompt
+        self.attribute_prompts = attribute_prompts
+        self.weights = weights
+        self.use_cache = use_cache
+
+        self.refs = {prompt: {
+            "input_ids": None,
+            "attention_mask": None,
+            "past_key_values": None,
+            "first_pass": True
+        } for prompt in [base_prompt] + attribute_prompts}
+
+    def get_small_logits(self, input_ids, prompt):
+        ref = self.refs[prompt]
+
+        if ref["first_pass"]:
+            if ref["input_ids"] is None:
+                prompt_text = self.tokenizer.apply_chat_template([
+                    {"role": "system", "content": prompt},
+                    {"role": "user", "content": "__Q__"},
+                    {"role": "assistant", "content": ""}
+                ], tokenize=False, add_generation_prompt=True)
+
+                prompt_text = prompt_text.replace("__Q__", "")
+                prompt_ids = self.tokenizer(prompt_text, return_tensors="pt").input_ids.to(input_ids.device)
+
+                ref["input_ids"] = prompt_ids
+                ref["attention_mask"] = torch.ones_like(prompt_ids)
+                ref["past_key_values"] = None
+                ref["first_pass"] = False
+
+        prompt_ids = ref["input_ids"]
+        attention_mask = ref["attention_mask"]
+
+        if self.use_cache:
+            input_step = input_ids[:, -1:]
+        else:
+            input_step = torch.cat([prompt_ids, input_ids[:, -1:]], dim=1)
+            attention_mask = torch.cat([attention_mask, torch.ones_like(input_ids[:, -1:])], dim=1)
+
+        out = self.small_model(
+            input_step,
+            attention_mask=attention_mask,
+            use_cache=self.use_cache,
+            past_key_values=ref["past_key_values"]
+        )
+
+        ref["past_key_values"] = out.get("past_key_values", None)
+        ref["attention_mask"] = attention_mask
+
+        return out.logits[:, -1]
+
+    def __call__(self, input_ids, aligned_logits):
+        h0_small = self.get_small_logits(input_ids, self.base_prompt)
+
+        drift = torch.zeros_like(h0_small)
+        for w, attr_prompt in zip(self.weights, self.attribute_prompts):
+            if w == 0:
+                continue
+            hi_small = self.get_small_logits(input_ids, attr_prompt)
+            drift += w * (hi_small - h0_small)
+
+        return aligned_logits + drift / self.b
