@@ -27,6 +27,7 @@ small_model_id = "meta-llama/Llama-3.2-1B-Instruct"
 
 tokenizer = AutoTokenizer.from_pretrained(small_model_id)
 tokenizer.pad_token = tokenizer.eos_token
+tokenizer.padding_side = 'left'  # Required for decoder-only models in batch generation
 
 # Load models WITHOUT quantization for speed
 print("Loading models (no quantization for speed)...")
