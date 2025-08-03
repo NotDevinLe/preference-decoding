@@ -11,9 +11,8 @@ from datasets import load_dataset
 parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, required=True)
 parser.add_argument("--sample_size", type=int, required=True)
-parser.add_argument("--split", type=str, default="train", choices=["train", "test"], help="Generate train or test split")
+parser.add_argument("--split", type=str, default="train", choices=["train", "test", "val"], help="Generate train or test split")
 parser.add_argument("--save_path", type=str, default="../../data/preference", help="Path to save preference data")
-parser.add_argument("--temperature", type=float, default=0.8)
 args = parser.parse_args()
 
 selected_prompts = [
@@ -42,7 +41,7 @@ llm = LLM(
 
 # Sampling configuration
 sampling_params = SamplingParams(
-    temperature=args.temperature,
+    temperature=0.8,
     top_p=0.9,
     max_tokens=512,
     stop=[]
@@ -112,5 +111,5 @@ for i in range(len(instructions)):
     })
 
 random.shuffle(all_data)
-with open(f"{args.save_path}/{args.name}_{args.split}_{args.temperature}.json", "w") as f:
+with open(f"{args.save_path}/{args.name}_{args.split}.json", "w") as f:
     json.dump(all_data, f, indent=2)

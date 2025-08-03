@@ -1,0 +1,247 @@
+[INFO|tokenization_utils_base.py:2023] 2025-07-31 10:48:21,574 >> loading file tokenizer.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/tokenizer.json
+[INFO|tokenization_utils_base.py:2023] 2025-07-31 10:48:21,576 >> loading file tokenizer.model from cache at None
+[INFO|tokenization_utils_base.py:2023] 2025-07-31 10:48:21,576 >> loading file added_tokens.json from cache at None
+[INFO|tokenization_utils_base.py:2023] 2025-07-31 10:48:21,579 >> loading file special_tokens_map.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/special_tokens_map.json
+[INFO|tokenization_utils_base.py:2023] 2025-07-31 10:48:21,579 >> loading file tokenizer_config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2023] 2025-07-31 10:48:21,579 >> loading file chat_template.jinja from cache at None
+[INFO|tokenization_utils_base.py:2299] 2025-07-31 10:48:22,015 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|configuration_utils.py:698] 2025-07-31 10:48:22,606 >> loading configuration file config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/config.json
+[INFO|configuration_utils.py:770] 2025-07-31 10:48:22,634 >> Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 64,
+  "hidden_act": "silu",
+  "hidden_size": 2048,
+  "initializer_range": 0.02,
+  "intermediate_size": 8192,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 16,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+
+[INFO|tokenization_utils_base.py:2023] 2025-07-31 10:48:22,803 >> loading file tokenizer.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/tokenizer.json
+[INFO|tokenization_utils_base.py:2023] 2025-07-31 10:48:22,803 >> loading file tokenizer.model from cache at None
+[INFO|tokenization_utils_base.py:2023] 2025-07-31 10:48:22,803 >> loading file added_tokens.json from cache at None
+[INFO|tokenization_utils_base.py:2023] 2025-07-31 10:48:22,803 >> loading file special_tokens_map.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/special_tokens_map.json
+[INFO|tokenization_utils_base.py:2023] 2025-07-31 10:48:22,803 >> loading file tokenizer_config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2023] 2025-07-31 10:48:22,803 >> loading file chat_template.jinja from cache at None
+[INFO|tokenization_utils_base.py:2299] 2025-07-31 10:48:23,185 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Converting format of dataset (num_proc=8):   0%|          | 0/40 [00:00<?, ? examples/s]Converting format of dataset (num_proc=8):  12%|█▎        | 5/40 [00:00<00:00, 36.61 examples/s]Converting format of dataset (num_proc=8): 100%|██████████| 40/40 [00:00<00:00, 102.02 examples/s]
+Running tokenizer on dataset (num_proc=8):   0%|          | 0/40 [00:00<?, ? examples/s]Running tokenizer on dataset (num_proc=8):  12%|█▎        | 5/40 [00:01<00:08,  4.17 examples/s]Running tokenizer on dataset (num_proc=8):  38%|███▊      | 15/40 [00:01<00:02, 12.47 examples/s]Running tokenizer on dataset (num_proc=8):  50%|█████     | 20/40 [00:01<00:01, 12.07 examples/s]Running tokenizer on dataset (num_proc=8):  75%|███████▌  | 30/40 [00:02<00:00, 18.14 examples/s]Running tokenizer on dataset (num_proc=8):  88%|████████▊ | 35/40 [00:02<00:00, 17.01 examples/s]Running tokenizer on dataset (num_proc=8): 100%|██████████| 40/40 [00:02<00:00, 19.91 examples/s]Running tokenizer on dataset (num_proc=8): 100%|██████████| 40/40 [00:02<00:00, 14.55 examples/s]
+[INFO|configuration_utils.py:698] 2025-07-31 10:48:28,512 >> loading configuration file config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/config.json
+[INFO|configuration_utils.py:770] 2025-07-31 10:48:28,513 >> Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 64,
+  "hidden_act": "silu",
+  "hidden_size": 2048,
+  "initializer_range": 0.02,
+  "intermediate_size": 8192,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 16,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+
+[INFO|modeling_utils.py:1151] 2025-07-31 10:48:32,973 >> loading weights file model.safetensors from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/model.safetensors
+[INFO|modeling_utils.py:2241] 2025-07-31 10:48:33,027 >> Instantiating LlamaForCausalLM model under default dtype torch.bfloat16.
+[INFO|configuration_utils.py:1135] 2025-07-31 10:48:33,031 >> Generate config GenerationConfig {
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "use_cache": false
+}
+
+[INFO|modeling_utils.py:5131] 2025-07-31 10:48:36,841 >> All model checkpoint weights were used when initializing LlamaForCausalLM.
+
+[INFO|modeling_utils.py:5139] 2025-07-31 10:48:36,841 >> All the weights of LlamaForCausalLM were initialized from the model checkpoint at meta-llama/Llama-3.2-1B-Instruct.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use LlamaForCausalLM for predictions without further training.
+[INFO|configuration_utils.py:1090] 2025-07-31 10:48:36,933 >> loading configuration file generation_config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/generation_config.json
+[INFO|configuration_utils.py:1135] 2025-07-31 10:48:36,934 >> Generate config GenerationConfig {
+  "bos_token_id": 128000,
+  "do_sample": true,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "temperature": 0.6,
+  "top_p": 0.9
+}
+
+Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+[INFO|trainer.py:756] 2025-07-31 10:48:39,295 >> Using auto half precision backend
+[INFO|trainer.py:2409] 2025-07-31 10:48:39,934 >> ***** Running training *****
+[INFO|trainer.py:2410] 2025-07-31 10:48:39,934 >>   Num examples = 40
+[INFO|trainer.py:2411] 2025-07-31 10:48:39,934 >>   Num Epochs = 3
+[INFO|trainer.py:2412] 2025-07-31 10:48:39,934 >>   Instantaneous batch size per device = 1
+[INFO|trainer.py:2415] 2025-07-31 10:48:39,934 >>   Total train batch size (w. parallel, distributed & accumulation) = 1
+[INFO|trainer.py:2416] 2025-07-31 10:48:39,934 >>   Gradient Accumulation steps = 1
+[INFO|trainer.py:2417] 2025-07-31 10:48:39,934 >>   Total optimization steps = 120
+[INFO|trainer.py:2418] 2025-07-31 10:48:39,936 >>   Number of trainable parameters = 5,638,145
+[INFO|integration_utils.py:832] 2025-07-31 10:48:39,939 >> Automatic Weights & Biases logging enabled, to disable set os.environ["WANDB_DISABLED"] = "true"
+wandb: WARNING The `run_name` is currently set to the same value as `TrainingArguments.output_dir`. If this was not intended, please specify a different run name by setting the `TrainingArguments.run_name` parameter.
+wandb: Currently logged in as: devinl6 (devinl6-university-of-washington) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.21.0
+wandb: Run data is saved locally in /mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/wandb/run-20250731_104840-mh87mwd6
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run saves/normal/user1_1b/toy_reward_40
+wandb: ⭐️ View project at https://wandb.ai/devinl6-university-of-washington/Alignment
+wandb: 🚀 View run at https://wandb.ai/devinl6-university-of-washington/Alignment/runs/mh87mwd6
+[INFO|integration_utils.py:880] 2025-07-31 10:48:45,827 >> Could not log the number of model parameters in Weights & Biases due to an AttributeError.
+  0%|          | 0/120 [00:00<?, ?it/s]  1%|          | 1/120 [00:06<13:07,  6.62s/it]  2%|▏         | 2/120 [00:06<05:31,  2.81s/it]  2%|▎         | 3/120 [00:06<03:05,  1.59s/it]  3%|▎         | 4/120 [00:07<01:57,  1.02s/it]  4%|▍         | 5/120 [00:07<01:20,  1.43it/s]  5%|▌         | 6/120 [00:07<00:58,  1.97it/s]  6%|▌         | 7/120 [00:07<00:43,  2.58it/s]  7%|▋         | 8/120 [00:07<00:34,  3.23it/s]  8%|▊         | 9/120 [00:07<00:28,  3.90it/s]  8%|▊         | 10/120 [00:07<00:24,  4.55it/s]                                                  8%|▊         | 10/120 [00:07<00:24,  4.55it/s]  9%|▉         | 11/120 [00:08<00:21,  5.12it/s] 10%|█         | 12/120 [00:08<00:19,  5.57it/s] 11%|█         | 13/120 [00:08<00:17,  5.98it/s] 12%|█▏        | 14/120 [00:08<00:16,  6.31it/s] 12%|█▎        | 15/120 [00:08<00:15,  6.59it/s] 13%|█▎        | 16/120 [00:08<00:18,  5.77it/s] 14%|█▍        | 17/120 [00:08<00:16,  6.15it/s] 15%|█▌        | 18/120 [00:09<00:15,  6.39it/s] 16%|█▌        | 19/120 [00:09<00:15,  6.63it/s] 17%|█▋        | 20/120 [00:09<00:14,  6.76it/s]                                                 17%|█▋        | 20/120 [00:09<00:14,  6.76it/s] 18%|█▊        | 21/120 [00:09<00:14,  6.90it/s] 18%|█▊        | 22/120 [00:09<00:14,  7.00it/s] 19%|█▉        | 23/120 [00:09<00:13,  7.10it/s] 20%|██        | 24/120 [00:09<00:13,  7.16it/s] 21%|██        | 25/120 [00:10<00:13,  7.08it/s] 22%|██▏       | 26/120 [00:10<00:13,  7.06it/s] 22%|██▎       | 27/120 [00:10<00:13,  7.08it/s] 23%|██▎       | 28/120 [00:10<00:12,  7.11it/s] 24%|██▍       | 29/120 [00:10<00:12,  7.04it/s] 25%|██▌       | 30/120 [00:10<00:12,  6.94it/s]                                                 25%|██▌       | 30/120 [00:10<00:12,  6.94it/s] 26%|██▌       | 31/120 [00:10<00:12,  6.88it/s] 27%|██▋       | 32/120 [00:11<00:15,  5.79it/s] 28%|██▊       | 33/120 [00:11<00:14,  6.12it/s] 28%|██▊       | 34/120 [00:11<00:13,  6.34it/s] 29%|██▉       | 35/120 [00:11<00:13,  6.53it/s] 30%|███       | 36/120 [00:11<00:12,  6.71it/s] 31%|███       | 37/120 [00:11<00:12,  6.83it/s] 32%|███▏      | 38/120 [00:11<00:11,  6.98it/s] 32%|███▎      | 39/120 [00:12<00:11,  7.11it/s] 33%|███▎      | 40/120 [00:12<00:12,  6.17it/s]                                                 33%|███▎      | 40/120 [00:12<00:12,  6.17it/s] 34%|███▍      | 41/120 [00:12<00:18,  4.39it/s] 35%|███▌      | 42/120 [00:12<00:18,  4.33it/s] 36%|███▌      | 43/120 [00:13<00:15,  4.89it/s] 37%|███▋      | 44/120 [00:13<00:14,  5.40it/s] 38%|███▊      | 45/120 [00:13<00:13,  5.76it/s] 38%|███▊      | 46/120 [00:13<00:12,  6.05it/s] 39%|███▉      | 47/120 [00:13<00:11,  6.31it/s] 40%|████      | 48/120 [00:13<00:11,  6.43it/s] 41%|████      | 49/120 [00:13<00:10,  6.55it/s] 42%|████▏     | 50/120 [00:14<00:10,  6.62it/s]                                                 42%|████▏     | 50/120 [00:14<00:10,  6.62it/s] 42%|████▎     | 51/120 [00:14<00:10,  6.59it/s] 43%|████▎     | 52/120 [00:14<00:10,  6.60it/s] 44%|████▍     | 53/120 [00:14<00:10,  6.68it/s] 45%|████▌     | 54/120 [00:14<00:09,  6.73it/s] 46%|████▌     | 55/120 [00:14<00:09,  6.71it/s] 47%|████▋     | 56/120 [00:15<00:09,  6.74it/s] 48%|████▊     | 57/120 [00:15<00:09,  6.67it/s] 48%|████▊     | 58/120 [00:15<00:09,  6.67it/s] 49%|████▉     | 59/120 [00:15<00:09,  6.76it/s] 50%|█████     | 60/120 [00:15<00:08,  6.75it/s]                                                 50%|█████     | 60/120 [00:15<00:08,  6.75it/s] 51%|█████     | 61/120 [00:15<00:08,  6.78it/s] 52%|█████▏    | 62/120 [00:15<00:08,  6.68it/s] 52%|█████▎    | 63/120 [00:16<00:08,  6.78it/s] 53%|█████▎    | 64/120 [00:16<00:08,  6.86it/s] 54%|█████▍    | 65/120 [00:16<00:07,  6.93it/s] 55%|█████▌    | 66/120 [00:16<00:07,  6.95it/s] 56%|█████▌    | 67/120 [00:16<00:07,  6.87it/s] 57%|█████▋    | 68/120 [00:16<00:07,  6.89it/s] 57%|█████▊    | 69/120 [00:16<00:07,  6.87it/s] 58%|█████▊    | 70/120 [00:17<00:07,  6.87it/s]                                                 58%|█████▊    | 70/120 [00:17<00:07,  6.87it/s] 59%|█████▉    | 71/120 [00:17<00:07,  6.89it/s] 60%|██████    | 72/120 [00:17<00:06,  6.95it/s] 61%|██████    | 73/120 [00:17<00:06,  6.95it/s] 62%|██████▏   | 74/120 [00:17<00:06,  6.96it/s] 62%|██████▎   | 75/120 [00:17<00:06,  7.01it/s] 63%|██████▎   | 76/120 [00:17<00:06,  6.99it/s] 64%|██████▍   | 77/120 [00:18<00:06,  7.02it/s] 65%|██████▌   | 78/120 [00:18<00:05,  7.03it/s] 66%|██████▌   | 79/120 [00:18<00:05,  7.00it/s] 67%|██████▋   | 80/120 [00:18<00:06,  6.26it/s]                                                 67%|██████▋   | 80/120 [00:18<00:06,  6.26it/s] 68%|██████▊   | 81/120 [00:18<00:08,  4.56it/s] 68%|██████▊   | 82/120 [00:19<00:07,  5.12it/s] 69%|██████▉   | 83/120 [00:19<00:06,  5.57it/s] 70%|███████   | 84/120 [00:19<00:06,  5.97it/s] 71%|███████   | 85/120 [00:19<00:05,  6.28it/s] 72%|███████▏  | 86/120 [00:19<00:05,  6.55it/s] 72%|███████▎  | 87/120 [00:19<00:04,  6.76it/s] 73%|███████▎  | 88/120 [00:19<00:04,  6.90it/s] 74%|███████▍  | 89/120 [00:20<00:04,  6.95it/s] 75%|███████▌  | 90/120 [00:20<00:04,  6.99it/s]                                                 75%|███████▌  | 90/120 [00:20<00:04,  6.99it/s] 76%|███████▌  | 91/120 [00:20<00:04,  7.05it/s] 77%|███████▋  | 92/120 [00:20<00:04,  5.89it/s] 78%|███████▊  | 93/120 [00:20<00:04,  6.26it/s] 78%|███████▊  | 94/120 [00:20<00:03,  6.54it/s] 79%|███████▉  | 95/120 [00:20<00:03,  6.67it/s] 80%|████████  | 96/120 [00:21<00:03,  6.84it/s] 81%|████████  | 97/120 [00:21<00:03,  6.89it/s] 82%|████████▏ | 98/120 [00:21<00:03,  6.90it/s] 82%|████████▎ | 99/120 [00:21<00:03,  6.92it/s] 83%|████████▎ | 100/120 [00:21<00:02,  7.01it/s]                                                  83%|████████▎ | 100/120 [00:21<00:02,  7.01it/s] 84%|████████▍ | 101/120 [00:21<00:02,  7.09it/s] 85%|████████▌ | 102/120 [00:21<00:02,  7.15it/s] 86%|████████▌ | 103/120 [00:22<00:02,  7.21it/s] 87%|████████▋ | 104/120 [00:22<00:02,  7.24it/s] 88%|████████▊ | 105/120 [00:22<00:02,  7.31it/s] 88%|████████▊ | 106/120 [00:22<00:01,  7.35it/s] 89%|████████▉ | 107/120 [00:22<00:01,  7.37it/s] 90%|█████████ | 108/120 [00:22<00:01,  7.34it/s] 91%|█████████ | 109/120 [00:22<00:01,  7.16it/s] 92%|█████████▏| 110/120 [00:23<00:01,  7.17it/s]                                                  92%|█████████▏| 110/120 [00:23<00:01,  7.17it/s] 92%|█████████▎| 111/120 [00:23<00:01,  7.23it/s] 93%|█████████▎| 112/120 [00:23<00:01,  7.32it/s] 94%|█████████▍| 113/120 [00:23<00:00,  7.35it/s] 95%|█████████▌| 114/120 [00:23<00:00,  7.40it/s] 96%|█████████▌| 115/120 [00:23<00:00,  7.30it/s] 97%|█████████▋| 116/120 [00:23<00:00,  7.34it/s] 98%|█████████▊| 117/120 [00:23<00:00,  7.40it/s] 98%|█████████▊| 118/120 [00:24<00:00,  7.15it/s] 99%|█████████▉| 119/120 [00:24<00:00,  7.22it/s]100%|██████████| 120/120 [00:24<00:00,  6.01it/s]                                                 100%|██████████| 120/120 [00:24<00:00,  6.01it/s][INFO|trainer.py:3993] 2025-07-31 10:49:10,324 >> Saving model checkpoint to saves/normal/user1_1b/toy_reward_40/checkpoint-120
+[INFO|trainer.py:4007] 2025-07-31 10:49:10,326 >> Trainer.model is not a `PreTrainedModel`, only saving its state dict.
+[INFO|tokenization_utils_base.py:2356] 2025-07-31 10:49:10,336 >> chat template saved in saves/normal/user1_1b/toy_reward_40/checkpoint-120/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2025-07-31 10:49:10,345 >> tokenizer config file saved in saves/normal/user1_1b/toy_reward_40/checkpoint-120/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2025-07-31 10:49:10,352 >> Special tokens file saved in saves/normal/user1_1b/toy_reward_40/checkpoint-120/special_tokens_map.json
+[INFO|configuration_utils.py:698] 2025-07-31 10:49:11,055 >> loading configuration file config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/config.json
+[INFO|configuration_utils.py:770] 2025-07-31 10:49:11,056 >> Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 64,
+  "hidden_act": "silu",
+  "hidden_size": 2048,
+  "initializer_range": 0.02,
+  "intermediate_size": 8192,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 16,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+
+[INFO|trainer.py:2676] 2025-07-31 10:49:11,122 >> 
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+                                                 100%|██████████| 120/120 [00:25<00:00,  6.01it/s]100%|██████████| 120/120 [00:25<00:00,  4.74it/s]
+[INFO|trainer.py:3993] 2025-07-31 10:49:11,125 >> Saving model checkpoint to saves/normal/user1_1b/toy_reward_40
+[INFO|trainer.py:4007] 2025-07-31 10:49:11,127 >> Trainer.model is not a `PreTrainedModel`, only saving its state dict.
+[INFO|tokenization_utils_base.py:2356] 2025-07-31 10:49:11,139 >> chat template saved in saves/normal/user1_1b/toy_reward_40/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2025-07-31 10:49:11,145 >> tokenizer config file saved in saves/normal/user1_1b/toy_reward_40/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2025-07-31 10:49:11,151 >> Special tokens file saved in saves/normal/user1_1b/toy_reward_40/special_tokens_map.json
+[INFO|configuration_utils.py:698] 2025-07-31 10:49:11,524 >> loading configuration file config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/config.json
+[INFO|configuration_utils.py:770] 2025-07-31 10:49:11,525 >> Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 64,
+  "hidden_act": "silu",
+  "hidden_size": 2048,
+  "initializer_range": 0.02,
+  "intermediate_size": 8192,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 16,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+
+[INFO|modelcard.py:450] 2025-07-31 10:49:12,373 >> Dropping the following result as it does not have all the necessary fields:
+{'task': {'name': 'Causal Language Modeling', 'type': 'text-generation'}}

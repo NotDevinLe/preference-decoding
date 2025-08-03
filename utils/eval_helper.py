@@ -6,23 +6,11 @@ import json
 from drift import get_training_matrix, get_log_probs
 from vllm import LLM
 from transformers import AutoTokenizer
-from attribute_prompts import attribute_prompts, persona_prompts, user1_reg_prompts, user2_reg_prompts, user4_reg_prompts, base_prompt
+from attribute_prompts import attribute_prompts, base_prompt
 import cvxpy as cp
 import tqdm
 
-def get_p_vector(preference_data):
-    # Model and tokenizer setup
-    small_model_id = "meta-llama/Llama-3.2-1B-Instruct"
-
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(f"Using device: {device}")
-
-    print("Loading model...")
-    model = vllm.LLM(model=small_model_id, tensor_parallel_size=1, gpu_memory_utilization=0.7, max_model_len=8192)
-
-    tokenizer = AutoTokenizer.from_pretrained(small_model_id)
-    tokenizer.pad_token = tokenizer.eos_token
-
+def get_p_vector(preference_data, model, tokenizer, device):
     data = []
     for j in range(len(preference_data)):
         question = preference_data[j]['prompt']
@@ -33,7 +21,7 @@ def get_p_vector(preference_data):
     print(f"Converted {len(data)} samples to drift format")
     res = []
 
-    lambdas = [0.01, 0.1, 0.2, 0.5, 1, 2, 5, 10]
+    lambdas = [0.001, 0.005, 0.01, 0.05]
 
     d = get_training_matrix(data[:200], model, tokenizer, base_prompt, attribute_prompts, device)
 
@@ -42,17 +30,12 @@ def get_p_vector(preference_data):
 
         for sample_size in sample_sizes:
             curr = d[:sample_size]
-            # Take mean over samples and convert to numpy
             d_mean = torch.mean(curr, dim=0).cpu().numpy()
             
-            p_var = cp.Variable(len(d_mean))  # Use number of attributes, not samples
-            # Remove redundant constraint since you're using L1 penalty
-            
-            linear_term = d_mean @ -p_var  # Use numpy array
-            l1_penalty = lambda_ * cp.norm1(p_var)
-            l2_penalty = 0.01 * cp.sum_squares(p_var)  # Use smaller L2 penalty
-            objective = cp.Minimize(linear_term + l1_penalty + l2_penalty)
-            problem = cp.Problem(objective)  # No constraints
+            p_var = cp.Variable(len(d_mean))
+            constraints = [cp.norm2(p_var) <= 1]
+            objective = cp.Maximize(d_mean @ p_var - lambda_ * cp.norm1(p_var))
+            problem = cp.Problem(objective, constraints)
             problem.solve()
 
             if p_var.value is None:
@@ -73,13 +56,7 @@ def get_p_vector(preference_data):
     return res
 
 
-def get_test_matrix(preference_data):
-    model_id = "meta-llama/Llama-3.2-1B-Instruct"
-    model = LLM(model=model_id, tensor_parallel_size=1, gpu_memory_utilization=0.5, max_model_len=8192)
-    tokenizer = AutoTokenizer.from_pretrained(model_id)
-    tokenizer.pad_token = tokenizer.eos_token
-
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+def get_test_matrix(preference_data, model, tokenizer, device):
 
     prompt_list = [d['prompt'] for d in preference_data]
     chosen_list = [d['chosen'] for d in preference_data]
@@ -119,17 +96,35 @@ def test_p_vector(p_vector_list, testing_matrix):
     return results
 
 if __name__ == "__main__":
+
+    # Model and tokenizer setup
+    small_model_id = "meta-llama/Llama-3.2-1B-Instruct"
+
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(f"Using device: {device}")
+
+    print("Loading model...")
+    model = LLM(model=small_model_id, tensor_parallel_size=1, gpu_memory_utilization=0.5, max_model_len=8192)
+
+    tokenizer = AutoTokenizer.from_pretrained(small_model_id)
+    tokenizer.pad_token = tokenizer.eos_token
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--name", type=str, default="user1")
     args = parser.parse_args()
 
-    with open(f"../data/toy/attribute/{args.name}_train.json", "r") as f:
+    with open(f"../data/preference/{args.name}_train.json", "r") as f:
         train_data = json.load(f)
 
-    with open(f"../data/toy/attribute/{args.name}_test.json", "r") as f:
-        test_data = json.load(f)
+    with open(f"../data/preference/{args.name}_val.json", "r") as f:
+        val_data = json.load(f)
 
-    p_vector_list = get_p_vector(train_data)
-    test_matrix = get_test_matrix(test_data)
-    test_results = test_p_vector(p_vector_list, test_matrix)
-    print(test_results)
+    p_vector_list = get_p_vector(train_data, model, tokenizer, device)
+    val_matrix = get_test_matrix(val_data, model, tokenizer, device)
+    val_results = test_p_vector(p_vector_list, val_matrix)
+
+    with open(f"../results/preference/{args.name}_val_results.json", "w") as f:
+        json.dump(val_results, f)
+    
+    with open(f"../results/preference/{args.name}_p.json", "w") as f:
+        json.dump(p_vector_list, f)

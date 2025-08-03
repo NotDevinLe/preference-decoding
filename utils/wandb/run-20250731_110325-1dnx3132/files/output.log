@@ -1,0 +1,120 @@
+[INFO|integration_utils.py:880] 2025-07-31 11:03:26,966 >> Could not log the number of model parameters in Weights & Biases due to an AttributeError.
+100%|██████████████████████████████████████████████████████████████████████████| 60/60 [00:06<00:00, 10.86it/s][INFO|trainer.py:3993] 2025-07-31 11:03:33,449 >> Saving model checkpoint to saves/normal/user1_1b/toy_reward_20/checkpoint-60
+{'loss': 1.1351, 'grad_norm': 41.599979400634766, 'learning_rate': 9.924038765061042e-06, 'epoch': 0.5}
+{'loss': 0.8525, 'grad_norm': 99.40748596191406, 'learning_rate': 8.636868207865244e-06, 'epoch': 1.0}
+{'loss': 0.6876, 'grad_norm': 34.05670166015625, 'learning_rate': 6.153079353712201e-06, 'epoch': 1.5}
+{'loss': 0.8065, 'grad_norm': 43.58721160888672, 'learning_rate': 3.289899283371657e-06, 'epoch': 2.0}
+{'loss': 0.8965, 'grad_norm': 23.131328582763672, 'learning_rate': 9.893840362247809e-07, 'epoch': 2.5}
+{'loss': 0.6766, 'grad_norm': 16.842973709106445, 'learning_rate': 8.459208643659122e-09, 'epoch': 3.0}
+[INFO|trainer.py:4007] 2025-07-31 11:03:33,451 >> Trainer.model is not a `PreTrainedModel`, only saving its state dict.
+[INFO|tokenization_utils_base.py:2356] 2025-07-31 11:03:33,454 >> chat template saved in saves/normal/user1_1b/toy_reward_20/checkpoint-60/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2025-07-31 11:03:33,456 >> tokenizer config file saved in saves/normal/user1_1b/toy_reward_20/checkpoint-60/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2025-07-31 11:03:33,457 >> Special tokens file saved in saves/normal/user1_1b/toy_reward_20/checkpoint-60/special_tokens_map.json
+[INFO|configuration_utils.py:698] 2025-07-31 11:03:34,054 >> loading configuration file config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/config.json
+[INFO|configuration_utils.py:770] 2025-07-31 11:03:34,055 >> Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 64,
+  "hidden_act": "silu",
+  "hidden_size": 2048,
+  "initializer_range": 0.02,
+  "intermediate_size": 8192,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 16,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+[INFO|2025-07-31 11:03:34] llamafactory.train.callbacks:143 >> Value head model saved at: saves/normal/user1_1b/toy_reward_20/checkpoint-60
+
+[INFO|trainer.py:2676] 2025-07-31 11:03:34,088 >>
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+100%|██████████████████████████████████████████████████████████████████████████| 60/60 [00:07<00:00,  8.42it/s]
+{'train_runtime': 8.3565, 'train_samples_per_second': 7.18, 'train_steps_per_second': 7.18, 'train_loss': 0.8424896081288655, 'epoch': 3.0}
+[INFO|trainer.py:3993] 2025-07-31 11:03:34,091 >> Saving model checkpoint to saves/normal/user1_1b/toy_reward_20
+[INFO|trainer.py:4007] 2025-07-31 11:03:34,092 >> Trainer.model is not a `PreTrainedModel`, only saving its state dict.
+[INFO|tokenization_utils_base.py:2356] 2025-07-31 11:03:34,094 >> chat template saved in saves/normal/user1_1b/toy_reward_20/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2025-07-31 11:03:34,096 >> tokenizer config file saved in saves/normal/user1_1b/toy_reward_20/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2025-07-31 11:03:34,097 >> Special tokens file saved in saves/normal/user1_1b/toy_reward_20/special_tokens_map.json
+[INFO|configuration_utils.py:698] 2025-07-31 11:03:34,377 >> loading configuration file config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/config.json
+[INFO|configuration_utils.py:770] 2025-07-31 11:03:34,378 >> Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 64,
+  "hidden_act": "silu",
+  "hidden_size": 2048,
+  "initializer_range": 0.02,
+  "intermediate_size": 8192,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 16,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+[INFO|2025-07-31 11:03:34] llamafactory.train.callbacks:143 >> Value head model saved at: saves/normal/user1_1b/toy_reward_20
+***** train metrics *****
+  epoch                    =        3.0
+  total_flos               =        0GF
+  train_loss               =     0.8425
+  train_runtime            = 0:00:08.35
+  train_samples_per_second =       7.18
+  train_steps_per_second   =       7.18
+Figure saved at: saves/normal/user1_1b/toy_reward_20/training_loss.png
+[WARNING|2025-07-31 11:03:34] llamafactory.extras.ploting:148 >> No metric eval_loss to plot.
+[WARNING|2025-07-31 11:03:34] llamafactory.extras.ploting:148 >> No metric eval_accuracy to plot.
+
+[INFO|modelcard.py:450] 2025-07-31 11:03:34,501 >> Dropping the following result as it does not have all the necessary fields:
+{'task': {'name': 'Causal Language Modeling', 'type': 'text-generation'}}

@@ -1,5 +1,5 @@
 ### model
-model_name_or_path: meta-llama/Meta-Llama-3.1-8B-Instruct
+model_name_or_path: meta-llama/Llama-3.2-1B-Instruct
 trust_remote_code: true
 
 ### method
@@ -14,13 +14,13 @@ dataset: user1_train
 dataset_dir: /mmfs1/gscratch/ark/devinl6/preference/preference-decoding/data/preference
 template: llama3
 cutoff_len: 2048
-max_samples: 200
+max_samples: 30
 overwrite_cache: true
 preprocessing_num_workers: 8
 dataloader_num_workers: 4
 
 ### output
-output_dir: saves/normal/user1/toy_reward_200
+output_dir: saves/normal/user1_1b/toy_reward_30
 logging_steps: 10
 save_steps: 500
 plot_loss: true

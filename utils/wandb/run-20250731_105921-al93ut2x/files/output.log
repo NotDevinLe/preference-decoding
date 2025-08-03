@@ -1,0 +1,215 @@
+[INFO|integration_utils.py:880] 2025-07-31 10:59:22,268 >> Could not log the number of model parameters in Weights & Biases due to an AttributeError.
+                                                                                                               
+{'loss': 0.5368, 'grad_norm': 1.4031391143798828, 'learning_rate': 1.6666666666666667e-06, 'epoch': 0.06}
+{'loss': 1.1932, 'grad_norm': 26.960248947143555, 'learning_rate': 3.5185185185185187e-06, 'epoch': 0.11}
+{'loss': 0.8332, 'grad_norm': 18.13713264465332, 'learning_rate': 5.370370370370371e-06, 'epoch': 0.17}
+{'loss': 0.5981, 'grad_norm': 28.730777740478516, 'learning_rate': 7.222222222222223e-06, 'epoch': 0.22}
+{'loss': 0.7822, 'grad_norm': 55.48063659667969, 'learning_rate': 9.074074074074075e-06, 'epoch': 0.28}
+{'loss': 0.499, 'grad_norm': 13.102686882019043, 'learning_rate': 9.997388623947927e-06, 'epoch': 0.33}
+{'loss': 0.5962, 'grad_norm': 17.821191787719727, 'learning_rate': 9.976513978965829e-06, 'epoch': 0.39}
+{'loss': 0.473, 'grad_norm': 11.784960746765137, 'learning_rate': 9.934851884702415e-06, 'epoch': 0.44}
+{'loss': 0.951, 'grad_norm': 7.4461774826049805, 'learning_rate': 9.872576368333152e-06, 'epoch': 0.5}
+{'loss': 0.8658, 'grad_norm': 32.916282653808594, 'learning_rate': 9.789947561577445e-06, 'epoch': 0.56}
+{'loss': 1.0379, 'grad_norm': 22.93341064453125, 'learning_rate': 9.687310614099676e-06, 'epoch': 0.61}
+{'loss': 0.5173, 'grad_norm': 18.891965866088867, 'learning_rate': 9.565094251780872e-06, 'epoch': 0.67}
+{'loss': 0.4928, 'grad_norm': 8.881963729858398, 'learning_rate': 9.423808985883289e-06, 'epoch': 0.72}
+{'loss': 0.9939, 'grad_norm': 61.37514114379883, 'learning_rate': 9.264044980588415e-06, 'epoch': 0.78}
+{'loss': 0.358, 'grad_norm': 47.046382904052734, 'learning_rate': 9.086469587815904e-06, 'epoch': 0.83}
+{'loss': 0.3921, 'grad_norm': 2.5896356105804443, 'learning_rate': 8.891824559620801e-06, 'epoch': 0.89}
+{'loss': 1.0467, 'grad_norm': 18.788850784301758, 'learning_rate': 8.680922949813177e-06, 'epoch': 0.94}
+{'loss': 0.7024, 'grad_norm': 69.82130432128906, 'learning_rate': 8.45464571774244e-06, 'epoch': 1.0}
+{'loss': 0.4144, 'grad_norm': 3.800461769104004, 'learning_rate': 8.213938048432697e-06, 'epoch': 1.06}
+{'loss': 1.4865, 'grad_norm': 0.6322857737541199, 'learning_rate': 7.95980540444038e-06, 'epoch': 1.11}
+{'loss': 0.2979, 'grad_norm': 56.669219970703125, 'learning_rate': 7.69330932592594e-06, 'epoch': 1.17}
+{'loss': 0.4292, 'grad_norm': 8.276494979858398, 'learning_rate': 7.415562996483193e-06, 'epoch': 1.22}
+{'loss': 0.5562, 'grad_norm': 64.21955871582031, 'learning_rate': 7.127726593248337e-06, 'epoch': 1.28}
+{'loss': 1.239, 'grad_norm': 2.7523603439331055, 'learning_rate': 6.8310024407117405e-06, 'epoch': 1.33}
+{'loss': 0.4214, 'grad_norm': 25.69803237915039, 'learning_rate': 6.526629988475567e-06, 'epoch': 1.39}
+{'loss': 0.2841, 'grad_norm': 33.619468688964844, 'learning_rate': 6.215880633935709e-06, 'epoch': 1.44}
+{'loss': 1.0891, 'grad_norm': 0.2655027210712433, 'learning_rate': 5.900052411514257e-06, 'epoch': 1.5}
+{'loss': 0.1791, 'grad_norm': 4.2816162109375, 'learning_rate': 5.5804645706261515e-06, 'epoch': 1.56}
+{'loss': 0.5818, 'grad_norm': 0.22138291597366333, 'learning_rate': 5.258452065028473e-06, 'epoch': 1.61}
+{'loss': 0.2814, 'grad_norm': 3.444222927093506, 'learning_rate': 4.9353599765709585e-06, 'epoch': 1.67}
+{'loss': 0.2115, 'grad_norm': 1.6511991024017334, 'learning_rate': 4.6125378966403465e-06, 'epoch': 1.72}
+{'loss': 0.0669, 'grad_norm': 0.10037057846784592, 'learning_rate': 4.291334288767899e-06, 'epoch': 1.78}
+{'loss': 0.8008, 'grad_norm': 10.564441680908203, 'learning_rate': 3.9730908559480904e-06, 'epoch': 1.83}
+{'loss': 0.2859, 'grad_norm': 15.173440933227539, 'learning_rate': 3.6591369361968127e-06, 'epoch': 1.89}
+{'loss': 0.4853, 'grad_norm': 4.838510990142822, 'learning_rate': 3.350783949759462e-06, 'epoch': 1.94}
+{'loss': 0.0569, 'grad_norm': 0.22321422398090363, 'learning_rate': 3.049319921163526e-06, 'epoch': 2.0}
+{'loss': 0.1596, 'grad_norm': 5.714343933505006e-05, 'learning_rate': 2.7560040989976894e-06, 'epoch': 2.06}
+{'loss': 0.246, 'grad_norm': 24.61700439453125, 'learning_rate': 2.4720616958912054e-06, 'epoch': 2.11}
+{'loss': 0.4906, 'grad_norm': 0.012864927761256695, 'learning_rate': 2.1986787706652377e-06, 'epoch': 2.17}
+{'loss': 0.7496, 'grad_norm': 55.65989685058594, 'learning_rate': 1.936997274033986e-06, 'epoch': 2.22}
+{'loss': 0.7304, 'grad_norm': 0.028743693605065346, 'learning_rate': 1.6881102785502618e-06, 'epoch': 2.28}
+{'loss': 1.0386, 'grad_norm': 8.617578506469727, 'learning_rate': 1.453057412720536e-06, 'epoch': 2.33}
+{'loss': 1.7985, 'grad_norm': 0.009890882298350334, 'learning_rate': 1.2328205183616964e-06, 'epoch': 2.39}
+{'loss': 0.2504, 'grad_norm': 0.22145190834999084, 'learning_rate': 1.0283195493391823e-06, 'epoch': 2.44}
+{'loss': 0.0728, 'grad_norm': 1.3440988063812256, 'learning_rate': 8.404087288179425e-07, 'epoch': 2.5}
+{'loss': 0.8002, 'grad_norm': 1.0650595426559448, 'learning_rate': 6.698729810778065e-07, 'epoch': 2.56}
+{'loss': 0.0764, 'grad_norm': 0.6220138669013977, 'learning_rate': 5.174246527979532e-07, 'epoch': 2.61}
+{'loss': 0.6714, 'grad_norm': 29.855297088623047, 'learning_rate': 3.837005375060482e-07, 'epoch': 2.67}
+{'loss': 0.6493, 'grad_norm': 0.02460605278611183, 'learning_rate': 2.6925921562124867e-07, 'epoch': 2.72}
+{'loss': 0.2325, 'grad_norm': 0.01474967785179615, 'learning_rate': 1.745787212020178e-07, 'epoch': 2.78}
+[INFO|trainer.py:4007] 2025-07-31 11:00:09,481 >> Trainer.model is not a `PreTrainedModel`, only saving its state dict.
+[INFO|tokenization_utils_base.py:2356] 2025-07-31 11:00:09,483 >> chat template saved in saves/normal/user1_1b/toy_reward_180/checkpoint-500/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2025-07-31 11:00:09,486 >> tokenizer config file saved in saves/normal/user1_1b/toy_reward_180/checkpoint-500/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2025-07-31 11:00:09,487 >> Special tokens file saved in saves/normal/user1_1b/toy_reward_180/checkpoint-500/special_tokens_map.json
+[INFO|configuration_utils.py:698] 2025-07-31 11:00:10,015 >> loading configuration file config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/config.json
+[INFO|configuration_utils.py:770] 2025-07-31 11:00:10,016 >> Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 64,
+  "hidden_act": "silu",
+  "hidden_size": 2048,
+  "initializer_range": 0.02,
+  "intermediate_size": 8192,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 16,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+[INFO|2025-07-31 11:00:10] llamafactory.train.callbacks:143 >> Value head model saved at: saves/normal/user1_1b/toy_reward_180/checkpoint-500
+
+100%|████████████████████████████████████████████████████████████████████████| 540/540 [00:51<00:00, 10.39it/s][INFO|trainer.py:3993] 2025-07-31 11:00:14,003 >> Saving model checkpoint to saves/normal/user1_1b/toy_reward_180/checkpoint-540
+{'loss': 0.2516, 'grad_norm': 0.17101477086544037, 'learning_rate': 1.0005454514499413e-07, 'epoch': 2.83}
+{'loss': 0.299, 'grad_norm': 0.009751521050930023, 'learning_rate': 4.599798317577342e-08, 'epoch': 2.89}
+{'loss': 0.1091, 'grad_norm': 0.0063079893589019775, 'learning_rate': 1.2634835532233658e-08, 'epoch': 2.94}
+{'loss': 0.1776, 'grad_norm': 74.96524047851562, 'learning_rate': 1.0446377197104174e-10, 'epoch': 3.0}
+[INFO|trainer.py:4007] 2025-07-31 11:00:14,005 >> Trainer.model is not a `PreTrainedModel`, only saving its state dict.
+[INFO|tokenization_utils_base.py:2356] 2025-07-31 11:00:14,007 >> chat template saved in saves/normal/user1_1b/toy_reward_180/checkpoint-540/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2025-07-31 11:00:14,009 >> tokenizer config file saved in saves/normal/user1_1b/toy_reward_180/checkpoint-540/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2025-07-31 11:00:14,010 >> Special tokens file saved in saves/normal/user1_1b/toy_reward_180/checkpoint-540/special_tokens_map.json
+[INFO|configuration_utils.py:698] 2025-07-31 11:00:14,359 >> loading configuration file config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/config.json
+[INFO|configuration_utils.py:770] 2025-07-31 11:00:14,359 >> Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 64,
+  "hidden_act": "silu",
+  "hidden_size": 2048,
+  "initializer_range": 0.02,
+  "intermediate_size": 8192,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 16,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+[INFO|2025-07-31 11:00:14] llamafactory.train.callbacks:143 >> Value head model saved at: saves/normal/user1_1b/toy_reward_180/checkpoint-540
+
+[INFO|trainer.py:2676] 2025-07-31 11:00:14,395 >>
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+100%|████████████████████████████████████████████████████████████████████████| 540/540 [00:52<00:00, 10.36it/s]
+{'train_runtime': 53.245, 'train_samples_per_second': 10.142, 'train_steps_per_second': 10.142, 'train_loss': 0.5711164036282786, 'epoch': 3.0}
+[INFO|trainer.py:3993] 2025-07-31 11:00:14,397 >> Saving model checkpoint to saves/normal/user1_1b/toy_reward_180
+[INFO|trainer.py:4007] 2025-07-31 11:00:14,399 >> Trainer.model is not a `PreTrainedModel`, only saving its state dict.
+[INFO|tokenization_utils_base.py:2356] 2025-07-31 11:00:14,400 >> chat template saved in saves/normal/user1_1b/toy_reward_180/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2025-07-31 11:00:14,402 >> tokenizer config file saved in saves/normal/user1_1b/toy_reward_180/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2025-07-31 11:00:14,403 >> Special tokens file saved in saves/normal/user1_1b/toy_reward_180/special_tokens_map.json
+[INFO|configuration_utils.py:698] 2025-07-31 11:00:14,737 >> loading configuration file config.json from cache at /mmfs1/gscratch/ark/devinl6/hf_cache/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6/config.json
+[INFO|configuration_utils.py:770] 2025-07-31 11:00:14,738 >> Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 64,
+  "hidden_act": "silu",
+  "hidden_size": 2048,
+  "initializer_range": 0.02,
+  "intermediate_size": 8192,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 16,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+[INFO|2025-07-31 11:00:14] llamafactory.train.callbacks:143 >> Value head model saved at: saves/normal/user1_1b/toy_reward_180
+***** train metrics *****
+  epoch                    =        3.0
+  total_flos               =        0GF
+  train_loss               =     0.5711
+  train_runtime            = 0:00:53.24
+  train_samples_per_second =     10.142
+  train_steps_per_second   =     10.142
+Figure saved at: saves/normal/user1_1b/toy_reward_180/training_loss.png
+[WARNING|2025-07-31 11:00:14] llamafactory.extras.ploting:148 >> No metric eval_loss to plot.
+[WARNING|2025-07-31 11:00:14] llamafactory.extras.ploting:148 >> No metric eval_accuracy to plot.
+
+[INFO|modelcard.py:450] 2025-07-31 11:00:14,904 >> Dropping the following result as it does not have all the necessary fields:
+{'task': {'name': 'Causal Language Modeling', 'type': 'text-generation'}}

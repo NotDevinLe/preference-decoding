@@ -1,0 +1,44 @@
+{
+  "os":  "Linux-4.18.0-513.18.1.el8_9.x86_64-x86_64-with-glibc2.28",
+  "python":  "CPython 3.10.18",
+  "startedAt":  "2025-07-31T17:59:21.541220Z",
+  "args":  [
+    "reward_train/eval_rm/user1.yaml"
+  ],
+  "program":  "/gscratch/ark/devinl6/envs/align/bin/llamafactory-cli",
+  "git":  {
+    "remote":  "https://github.com/NotDevinLe/preference-decoding.git",
+    "commit":  "85d5527113b6c2e7a833030a473214edb7f33fe6"
+  },
+  "email":  "devin.t.le@outlook.com",
+  "root":  "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils",
+  "host":  "g3104",
+  "executable":  "/gscratch/ark/devinl6/envs/align/bin/python3.10",
+  "cpu_count":  128,
+  "cpu_count_logical":  128,
+  "gpu":  "NVIDIA L40S",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "811517906944",
+      "used":  "11556970496"
+    }
+  },
+  "memory":  {
+    "total":  "1623035817984"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA L40S",
+      "memoryTotal":  "48305799168",
+      "cudaCores":  18176,
+      "architecture":  "Ada",
+      "uuid":  "GPU-dd8a876b-0d94-bc0b-6769-e172bf647642"
+    }
+  ],
+  "cudaVersion":  "12.7",
+  "slurm":  {
+    "job_id":  "27838775"
+  },
+  "writerId":  "s306nxmalib1cod5v1vwlgociqeuyakh"
+}

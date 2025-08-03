@@ -1,0 +1,1000 @@
+{"prompt": "Where are the headquarters of FATF", "output_scores": [-7.625, -7.53125, -7.46875, -7.46875, -7.46875, -8.75, -7.46875], "max_reward": -7.46875}
+{"prompt": "Why is driving in convertibles fun?", "output_scores": [-7.9375, -8.3125, -9.25, -8.9375, -11.8125, -6.34375, -9.1875], "max_reward": -6.34375}
+{"prompt": "Tell me which ones are edible and which ones are not: Lemon, Table, Carrot, Carat, John", "output_scores": [-8.4375, -9.125, -12.1875, -11.3125, -13.25, -11.0625, -10.875], "max_reward": -8.4375}
+{"prompt": "Which of the following countries are monarchies? United Kingdom, the Netherlands, Germany, Luxembourg, United States, Russia, Poland, Denmark, Norway, Sweden, Finland, Spain", "output_scores": [-5.28125, -10.6875, -10.9375, -9.25, -9.75, -3.796875, -9.8125], "max_reward": -3.796875}
+{"prompt": "Extract a list of all the administrative departments and function rooms found in the King's Building based on this paragraph.", "output_scores": [-10.125, -7.9375, -9.1875, -7.28125, -8.875, -9.375, -10.375], "max_reward": -7.28125}
+{"prompt": "Which characters belong to DC or Marvel Universe? Wasp, Bumblebee", "output_scores": [-5.84375, -5.1875, -8.8125, -0.99609375, -3.03125, -6.71875, -5.125], "max_reward": -0.99609375}
+{"prompt": "Give me an idea for a country to travel to that is safe, inexpensive and does not fall into the well trodden tourist path?", "output_scores": [-5.875, -6.5625, -5.90625, -6.40625, -6.5625, -8.8125, -8.125], "max_reward": -5.875}
+{"prompt": "Are alpacas and llamas the same thing?", "output_scores": [-5.65625, -6.375, -5.53125, -2.5625, -4.78125, -9.8125, -0.7578125], "max_reward": -0.7578125}
+{"prompt": "Which of the following items are types of books: novels, biographies, historical fiction, reference texts, graphic novels, newspapers, magazines, flyers, pamphlets, pocket dictionaries.", "output_scores": [-14.0, -15.9375, -13.4375, -15.9375, -9.8125, -14.0625, -10.1875], "max_reward": -9.8125}
+{"prompt": "Identify which car manufacturer is Chinese or American: BAIC, GMC", "output_scores": [-8.8125, -8.3125, -7.46875, -11.0625, -8.3125, -9.3125, -7.78125], "max_reward": -7.46875}
+{"prompt": "What are fun things to do in New York City", "output_scores": [-7.84375, -9.1875, -9.0, -6.1875, -8.0625, -10.0625, -8.8125], "max_reward": -6.1875}
+{"prompt": "Is success important?", "output_scores": [-0.154296875, -2.328125, -6.46875, 2.203125, -2.59375, -6.09375, -1.671875], "max_reward": 2.203125}
+{"prompt": "Give me a list of some preparations in which stracchino cheese is used/", "output_scores": [-3.390625, -4.0, -1.2265625, 0.193359375, -4.375, -6.6875, -7.75], "max_reward": 0.193359375}
+{"prompt": "Hugh Lofting created which famous character", "output_scores": [-11.875, -11.875, -9.9375, -13.4375, -13.4375, -13.3125, -13.4375], "max_reward": -9.9375}
+{"prompt": "Name some famous experimental electronic music artists from the 2000s", "output_scores": [-10.5625, -9.4375, -9.875, -7.65625, -7.21875, -10.8125, -3.96875], "max_reward": -3.96875}
+{"prompt": "Please list all the countries having hosted a Rugby World Cup before 2023 according to the text", "output_scores": [-8.9375, -12.4375, -11.375, -11.0, -11.5, -12.9375, -11.5], "max_reward": -8.9375}
+{"prompt": "Which is an imperial or a metric measurement: ton, tonne", "output_scores": [-3.4375, -10.4375, -3.796875, -7.90625, -8.375, -5.625, -6.75], "max_reward": -3.4375}
+{"prompt": "Given this reference text about cargo ships, when was the USS West Gate launched?", "output_scores": [-8.25, -10.0, -8.6875, -9.0625, -9.4375, -8.625, -10.3125], "max_reward": -8.25}
+{"prompt": "Name three dishes that were developed from conditions of scarcity or having to \"make do\u201d with available materials or ingredients.", "output_scores": [-5.0, -6.15625, -4.25, -4.1875, -2.859375, -6.21875, -3.84375], "max_reward": -2.859375}
+{"prompt": "Which Super Bowl Halftime Show performer was upstaged by a dancing shark?", "output_scores": [-8.1875, -9.375, -9.375, -8.4375, -8.5, -7.53125, -9.6875], "max_reward": -7.53125}
+{"prompt": "Why is Arizona the best state to live in?", "output_scores": [-7.65625, -7.5625, -8.0625, -8.25, -5.53125, -9.3125, -8.5625], "max_reward": -5.53125}
+{"prompt": "List all the years mentioned in the following passage", "output_scores": [-9.0, -9.125, -9.25, -9.3125, -10.25, -9.25, -9.125], "max_reward": -9.0}
+{"prompt": "I just found out that my child has leukemia, what should I do?", "output_scores": [-4.9375, -7.0625, -7.0625, -7.5, -6.53125, -6.15625, -7.0], "max_reward": -4.9375}
+{"prompt": "What team did Bobby Orr play for in his 5th season?", "output_scores": [-9.9375, -11.75, -8.6875, -9.4375, -9.8125, -11.75, -11.8125], "max_reward": -8.6875}
+{"prompt": "Extract the name of the founder of Salesforce from the text", "output_scores": [-9.125, -9.4375, -8.1875, -8.9375, -8.75, -9.8125, -8.1875], "max_reward": -8.1875}
+{"prompt": "From the passage provided, extract the number of Naruto: Shippuden episodes.", "output_scores": [-9.25, -9.4375, -8.8125, -8.75, -10.1875, -9.8125, -10.5625], "max_reward": -8.75}
+{"prompt": "Is it possible to grow muscle after an age of 35?", "output_scores": [-9.0625, -5.53125, -5.5625, -7.3125, -5.40625, -5.3125, -6.5625], "max_reward": -5.3125}
+{"prompt": "classify the following as good stuff vs bad stuff:\ninflation\nwars\ncollaboration\nrenewable energy\nsoil erosion\npeace\nharmony\nviolence\nbloodshed", "output_scores": [-7.9375, -5.5625, -9.9375, -13.75, -10.6875, -4.8125, -10.875], "max_reward": -4.8125}
+{"prompt": "Identify which animal species is alive or extinct: Archelon Turtle, Bornean Orangutan", "output_scores": [-8.1875, -3.6875, -2.890625, -3.46875, -2.203125, -5.78125, -7.96875], "max_reward": -2.203125}
+{"prompt": "Is Amazon EKS serverless?", "output_scores": [-5.46875, -7.34375, -8.1875, -2.28125, -9.125, -6.8125, -6.9375], "max_reward": -2.28125}
+{"prompt": "Is this a list of universities or companies: Alphabet, Microsoft, Dell, John Deere, and JP Morgan Chase?", "output_scores": [-8.8125, -8.125, -8.5625, -7.34375, -9.4375, -8.0625, -8.4375], "max_reward": -7.34375}
+{"prompt": "From the passage provided about sports articles, extract total number of articles categorized as good and calculate the percentage of good articles", "output_scores": [-6.59375, -6.5, -6.4375, -8.1875, -8.0625, -6.28125, -6.4375], "max_reward": -6.28125}
+{"prompt": "Pick a title for the following:\nThe purpose of coaching is to form a partnership that enables you to draw more consistently on your wisdom, positive energy, and resourcefulness in decision-making, living a full life, and achieving your personal and professional goals by expanding your perspectives, being introspective, reducing blind spots, effectively managing self-limiting beliefs and feelings that block you, and developing new skills, habits, and practices.", "output_scores": [-4.65625, -6.09375, -8.9375, -5.09375, -9.1875, -3.78125, -9.6875], "max_reward": -3.78125}
+{"prompt": "Do I need Hadoop to run Spark?", "output_scores": [-2.375, -9.125, -8.3125, -6.03125, -6.96875, -9.5, -5.71875], "max_reward": -2.375}
+{"prompt": "Which characters belong to DC or Marvel Universe? Reptil, Beast Boy", "output_scores": [-6.28125, -9.4375, -5.46875, -7.125, -6.28125, -4.90625, -6.4375], "max_reward": -4.90625}
+{"prompt": "if i wanted to ski the best snow on earth where would i go", "output_scores": [-6.0625, -8.9375, -7.4375, -3.65625, -0.419921875, -5.53125, -7.03125], "max_reward": -0.419921875}
+{"prompt": "What was significant about the 1972 United States presidential election in Missouri", "output_scores": [-3.125, -4.6875, -2.109375, 0.83984375, 2.765625, -1.8828125, -4.1875], "max_reward": 2.765625}
+{"prompt": "What is API abuse?", "output_scores": [-3.578125, -3.046875, -2.5625, -0.294921875, -2.390625, -1.3359375, -2.578125], "max_reward": -0.294921875}
+{"prompt": "How to choose the next company you work for?", "output_scores": [-7.875, -8.375, -9.25, -5.8125, -8.625, -8.3125, -5.9375], "max_reward": -5.8125}
+{"prompt": "What shape are Philodendron leaves?", "output_scores": [-9.0625, -10.25, -8.1875, -7.96875, -11.5, -6.59375, -7.21875], "max_reward": -6.59375}
+{"prompt": "What are the different types of cancers?", "output_scores": [-8.6875, -7.40625, -10.5625, -10.3125, -8.3125, -9.75, -11.625], "max_reward": -7.40625}
+{"prompt": "Give me a list of all the planets in our solar system.", "output_scores": [-7.6875, -7.90625, -11.125, -10.1875, -12.0625, -8.4375, -6.46875], "max_reward": -6.46875}
+{"prompt": "Given a reference text about Sintok, tell me where it is located.", "output_scores": [-12.5625, -10.8125, -10.8125, -12.5625, -12.5625, -11.5625, -9.875], "max_reward": -9.875}
+{"prompt": "Is butter required to make cookies?", "output_scores": [-7.03125, -8.9375, -7.375, -8.625, -7.28125, -7.84375, -8.6875], "max_reward": -7.03125}
+{"prompt": "Given this paragraph about the NFL, in what year was the Super Bowl first held?", "output_scores": [-9.625, -8.4375, -8.0, -8.9375, -8.3125, -8.375, -6.96875], "max_reward": -6.96875}
+{"prompt": "What are the words of House Tully?", "output_scores": [-14.1875, -13.625, -14.0625, -13.5625, -14.4375, -13.625, -13.625], "max_reward": -13.5625}
+{"prompt": "What are the lesser known Jewish holidays?", "output_scores": [-9.875, -7.3125, -4.71875, -9.9375, -10.5, -8.5625, -5.03125], "max_reward": -4.71875}
+{"prompt": "Extract the list of European Union member countries", "output_scores": [-3.25, -5.0625, -1.203125, -6.375, -1.796875, -6.34375, -6.1875], "max_reward": -1.203125}
+{"prompt": "Given a reference text about Raul Axente Ciupe, tell me what country he is from and what position he played.", "output_scores": [-9.1875, -10.625, -10.625, -9.8125, -11.375, -8.5625, -8.3125], "max_reward": -8.3125}
+{"prompt": "Why do Jews eat matza on Passover?", "output_scores": [-3.140625, -0.251953125, -3.5, 0.375, -3.84375, -4.15625, -0.7421875], "max_reward": 0.375}
+{"prompt": "Tell me some key points about IITs from given text.", "output_scores": [-7.8125, -7.9375, -10.375, -10.25, -8.5, -7.59375, -8.9375], "max_reward": -7.59375}
+{"prompt": "Who was declared as the winner of LIVA Miss Diva Universe 2021?", "output_scores": [-9.5625, -11.25, -10.375, -10.3125, -10.1875, -11.4375, -10.5625], "max_reward": -9.5625}
+{"prompt": "How do I do a headstand?", "output_scores": [-8.1875, -5.625, -6.0625, -3.46875, -4.9375, -6.125, -7.96875], "max_reward": -3.46875}
+{"prompt": "Classify each of the words as singular or plural: lions, bee, door, fence, ocean, lakes, people", "output_scores": [-15.875, -15.9375, -15.875, -15.875, -15.5625, -16.375, -16.375], "max_reward": -15.5625}
+{"prompt": "Please provide a list of Michael Jordan's accomplishments in the 1987-1988 NBA basketball season.", "output_scores": [-5.59375, -8.0625, -5.0, -5.6875, -3.234375, -8.5, -9.6875], "max_reward": -3.234375}
+{"prompt": "Who is Marina Vishmidt", "output_scores": [-9.5, -10.5, -10.375, -7.71875, -8.5, -9.5, -7.0625], "max_reward": -7.0625}
+{"prompt": "When was hailstorm island first photographed given this text", "output_scores": [-9.375, -10.25, -9.5625, -10.625, -9.8125, -8.8125, -9.875], "max_reward": -8.8125}
+{"prompt": "Extract one of the franchise introduced in IPL 2022 from the text and who won the title during the previous session.", "output_scores": [-6.5, -7.65625, -8.9375, -7.75, -8.75, -7.46875, -8.5625], "max_reward": -6.5}
+{"prompt": "Given this article about the NSA's ANT Catalog, which hacking tools can be used to monitor a target's key strokes?", "output_scores": [-7.40625, -7.3125, -7.03125, -8.0, -6.125, -7.71875, -6.375], "max_reward": -6.125}
+{"prompt": "What is the emblem of the United States Marine Corps?", "output_scores": [-9.3125, -8.6875, -8.6875, -5.875, -8.6875, -8.6875, -4.5625], "max_reward": -4.5625}
+{"prompt": "Should a human be happy all the time?", "output_scores": [-4.9375, -8.9375, -8.3125, -2.515625, -4.96875, -7.09375, -4.0625], "max_reward": -2.515625}
+{"prompt": "Why do people get sore after working out?", "output_scores": [-2.359375, 0.4140625, -7.8125, -6.4375, -7.21875, -4.5, -7.03125], "max_reward": 0.4140625}
+{"prompt": "Who bred the famous Gone West racehorse?", "output_scores": [-11.125, -9.125, -9.1875, -6.875, -10.3125, -8.875, -3.484375], "max_reward": -3.484375}
+{"prompt": "Is it easy for American technology companies to open an office in Dubai?", "output_scores": [-4.25, -4.96875, -7.59375, -3.9375, -2.0625, -4.21875, 0.058837890625], "max_reward": 0.058837890625}
+{"prompt": "What is the measure of electric potential?", "output_scores": [-0.015380859375, 4.0, -9.875, -9.125, -1.7265625, -9.0, -7.8125], "max_reward": 4.0}
+{"prompt": "I am getting married, give me the list of the main tasks I need to do to organise the event.", "output_scores": [-11.125, -10.875, -9.375, -11.8125, -9.3125, -11.0, -11.1875], "max_reward": -9.3125}
+{"prompt": "Please summarize the MECE principle, give an example and explain how it can be used in business", "output_scores": [-2.09375, 3.0, 0.1552734375, 0.61328125, -2.640625, -3.515625, -2.328125], "max_reward": 3.0}
+{"prompt": "What kind of dog should I get?", "output_scores": [-10.0625, -11.0625, -9.6875, -9.625, -7.96875, -9.5625, -8.125], "max_reward": -7.96875}
+{"prompt": "Which is the most visited country in the world?", "output_scores": [-4.09375, -12.375, -6.71875, -9.5625, -3.96875, -5.21875, -4.25], "max_reward": -3.96875}
+{"prompt": "Best vacation in Mexico", "output_scores": [-7.15625, -8.875, -7.8125, -7.78125, -5.4375, -6.46875, -9.25], "max_reward": -5.4375}
+{"prompt": "What position did Manis Lamond play?", "output_scores": [-9.6875, -9.5, -9.5625, -9.6875, -9.6875, -9.9375, -10.375], "max_reward": -9.5}
+{"prompt": "What does Wittgenstein view as a problem with learning a language using \"ostensive defining\"?", "output_scores": [-3.28125, 0.21875, 2.234375, -2.5, -1.8203125, 3.921875, -0.3359375], "max_reward": 3.921875}
+{"prompt": "Given this paragraph, who was the first person to run the Western States 100 in under 24 hours?", "output_scores": [-8.75, -9.0, -9.375, -5.8125, -9.4375, -7.625, -9.4375], "max_reward": -5.8125}
+{"prompt": "What is the Jones-Connally Act?", "output_scores": [1.671875, -4.1875, -7.3125, -3.171875, 5.25, -3.953125, -4.125], "max_reward": 5.25}
+{"prompt": "Of the following, identify which are TV shows that originally aired in black-and-white, brands of toothpaste, and places where you can participate in water sports: the beach, The Honeymooners, I Love Lucy, Colgate, Florida, a river, The Munsters, Crest, Aquafresh, a lake, a pool, Rembrandt, The Addams Family", "output_scores": [-10.5625, -13.625, -10.4375, -12.0625, -11.125, -13.25, -11.625], "max_reward": -10.4375}
+{"prompt": "What's the best way to cook a soft-boiled egg?", "output_scores": [-5.8125, -7.25, -6.125, -9.0625, -9.75, -8.75, -7.65625], "max_reward": -5.8125}
+{"prompt": "What items do you need to buy in preparation for the arrival of a baby", "output_scores": [-8.625, -11.0625, -9.0625, -12.8125, -10.8125, -10.0, -11.5625], "max_reward": -8.625}
+{"prompt": "what was population of India during Mauryan Era?", "output_scores": [-3.3125, -0.361328125, -4.4375, -0.1533203125, -3.59375, -2.484375, -1.5703125], "max_reward": -0.1533203125}
+{"prompt": "Given this article about Operation Aurora, How was the operation named?", "output_scores": [-3.546875, -8.5, -8.9375, -6.6875, -7.34375, -5.84375, -8.5625], "max_reward": -3.546875}
+{"prompt": "When was Lamb Air operating", "output_scores": [-10.625, -10.0625, -10.75, -8.75, -8.5, -10.75, -11.1875], "max_reward": -8.5}
+{"prompt": "Classify each of these as a type of instrument or a type of school subject: Mathematics, Saxophone, french horn, history, physical education, Oboe, science, drums, geography, flute, tuba", "output_scores": [-16.875, -15.3125, -16.25, -16.625, -16.25, -16.5, -16.5], "max_reward": -15.3125}
+{"prompt": "From the passage below, extract the names of the companies and technologies that Walmart has acquired over the last 3 years.", "output_scores": [-8.1875, -8.6875, -7.21875, -9.6875, -9.125, -9.9375, -8.375], "max_reward": -7.21875}
+{"prompt": "Identify which car manufacturer is Chinese or American: Ford, Higer", "output_scores": [-10.6875, -12.3125, -10.6875, -8.4375, -10.875, -10.625, -12.5], "max_reward": -8.4375}
+{"prompt": "What was the duration of the Lewis and Clark Expedition?", "output_scores": [-6.5625, -7.0, -6.5, -8.125, -8.4375, -10.375, -8.6875], "max_reward": -6.5}
+{"prompt": "List all the people mentioned in this paragraph on the history of Unix", "output_scores": [-3.609375, -6.78125, -8.375, -8.75, -7.75, -9.0, -6.78125], "max_reward": -3.609375}
+{"prompt": "Extract the names of people mentioned and their significance in the following format:\n\n[Name]: [Significance]", "output_scores": [-8.25, -8.125, -7.65625, -7.4375, -7.21875, -7.6875, -7.84375], "max_reward": -7.21875}
+{"prompt": "What is better Android or iphone", "output_scores": [-3.0625, -6.96875, -8.6875, -7.53125, -4.53125, -2.453125, -7.0625], "max_reward": -2.453125}
+{"prompt": "Who was Alexander the Great?", "output_scores": [-2.5625, -2.46875, 2.390625, -3.796875, -1.7265625, -5.0, -5.96875], "max_reward": 2.390625}
+{"prompt": "What is a safe temperature for a hot bath?", "output_scores": [-4.3125, -6.0625, -6.25, -3.15625, -8.5, -6.59375, -7.0625], "max_reward": -3.15625}
+{"prompt": "Who did Outcault paint electric light displays for?", "output_scores": [-11.25, -5.5, -7.375, -4.0625, -11.8125, -13.0, -10.0625], "max_reward": -4.0625}
+{"prompt": "what makes the Sun bright ?", "output_scores": [-2.03125, -2.078125, -6.96875, 3.484375, -3.921875, -1.25, 3.5625], "max_reward": 3.5625}
+{"prompt": "Extract all the years mentioned in this text, separated by a comma", "output_scores": [-8.125, -8.625, -9.4375, -8.375, -9.5, -8.375, -10.6875], "max_reward": -8.125}
+{"prompt": "What can I do at the airport?", "output_scores": [-10.625, -12.5625, -11.0, -13.125, -10.125, -11.75, -12.6875], "max_reward": -10.125}
+{"prompt": "What is the name of Special Agent Dana Scully's daughter?", "output_scores": [-9.375, -10.0, -9.5, -6.46875, -11.0625, -11.75, -11.125], "max_reward": -6.46875}
+{"prompt": "I would like to go to Mystery Spot near Santa Cruz California. What can you tell me about the mystery surrounding the Mystery Spot and how should I plan for this trip?", "output_scores": [-6.25, -4.96875, 2.0, -6.75, -5.1875, -3.0625, -1.125], "max_reward": 2.0}
+{"prompt": "What do economists do?", "output_scores": [-7.75, -6.625, -8.875, -7.1875, -8.25, -9.25, -7.5625], "max_reward": -6.625}
+{"prompt": "What is the difference between a Software Engineer and a Data Engineer", "output_scores": [-4.375, -4.75, -1.25, -1.4375, -3.28125, -2.171875, -0.08349609375], "max_reward": -0.08349609375}
+{"prompt": "What is the best hand in Texas Hold'em poker?", "output_scores": [-7.09375, -7.3125, -4.21875, -8.5625, -9.75, -5.59375, -9.25], "max_reward": -4.21875}
+{"prompt": "Which of the following are not noble gases: helium, sodium, neon, oxygen, argon, hydrogen, calcium, magnesium, lithium, boron, krypton, nitrogen, xenon, aluminium, radon.", "output_scores": [-11.6875, -10.1875, -11.125, -7.1875, -7.9375, -7.71875, -7.5625], "max_reward": -7.1875}
+{"prompt": "What are the fanciest places to live in San Diego?", "output_scores": [-11.0, -11.875, -11.3125, -9.75, -11.25, -12.3125, -10.8125], "max_reward": -9.75}
+{"prompt": "What can I do as a fun activity in Amsterdam this weekend?", "output_scores": [-12.0625, -11.1875, -11.9375, -7.09375, -11.625, -10.375, -11.8125], "max_reward": -7.09375}
+{"prompt": "Is endosymbiosis bad?", "output_scores": [-5.6875, -7.96875, -3.390625, -9.0, 0.08203125, -4.15625, -0.9453125], "max_reward": 0.08203125}
+{"prompt": "How can I go from my couch to running a 5K in 3 months?", "output_scores": [-5.40625, -8.5, -6.625, -7.3125, -8.0, -8.375, -8.375], "max_reward": -5.40625}
+{"prompt": "Is Maison Ikkoku a manga series", "output_scores": [-6.8125, -5.71875, -3.59375, -5.5625, -6.15625, -6.84375, -8.5625], "max_reward": -3.59375}
+{"prompt": "What is rowing?", "output_scores": [-3.015625, -6.65625, -5.8125, -2.671875, -3.5625, -6.40625, -5.90625], "max_reward": -2.671875}
+{"prompt": "Based on the following passage summarise how sunsets are viewed from the northern hemisphere across seasons.", "output_scores": [-7.6875, -7.21875, -7.96875, -8.5, -8.4375, -7.15625, -8.5625], "max_reward": -7.15625}
+{"prompt": "write a short essay on day spent in central park", "output_scores": [-2.296875, 0.0615234375, 3.4375, -2.8125, 0.220703125, 0.04345703125, -0.4375], "max_reward": 3.4375}
+{"prompt": "What is the plot of the movie going wild", "output_scores": [-6.96875, -7.21875, -2.59375, -5.5, -3.234375, -5.53125, -3.015625], "max_reward": -2.59375}
+{"prompt": "From the passage provided, list the partners with whom Martina Hingis won the doubles Grand Slam in 1998", "output_scores": [-11.0, -7.90625, -5.53125, -6.5, -8.8125, -7.15625, -9.0], "max_reward": -5.53125}
+{"prompt": "Identify which instrument is string or woodwind: Tremolo bass, Rackett", "output_scores": [-3.96875, -3.515625, -5.125, -3.65625, -7.03125, -3.4375, -4.53125], "max_reward": -3.4375}
+{"prompt": "Based on this passage, which years did the Patriots win the Super Bowl?", "output_scores": [-9.1875, -10.875, -9.0, -10.0, -7.0625, -9.0, -10.25], "max_reward": -7.0625}
+{"prompt": "Which is a species of fish? Bombay duck or Bombay Sapphire", "output_scores": [-6.34375, -10.5625, -6.40625, -6.90625, -6.3125, -7.53125, -10.3125], "max_reward": -6.3125}
+{"prompt": "Tell me if these teams are in or out of the NBA Playoffs for this year, Orlando Magic, Detroit Pistons, Boston Celtics, Dallas Mavericks, and Phoenix Suns", "output_scores": [-4.40625, -4.375, -2.078125, -5.8125, -5.28125, -1.7421875, -9.375], "max_reward": -1.7421875}
+{"prompt": "Note down some details about Munda Airport from the given text", "output_scores": [-10.6875, -9.125, -10.4375, -7.75, -10.1875, -9.5, -7.90625], "max_reward": -7.75}
+{"prompt": "Give me a random bulleted list of ten landlocked countries", "output_scores": [-14.1875, -14.0625, -14.4375, -13.1875, -13.9375, -14.25, -14.1875], "max_reward": -13.1875}
+{"prompt": "What Breaking Bad actor guest starred on Season 6, Episode 2 \"Drive\" of The X-Files?", "output_scores": [-7.71875, -8.625, -9.875, -9.0, -9.1875, -7.78125, -9.25], "max_reward": -7.71875}
+{"prompt": "What is the mission of the Federal Bureau of Investigation?", "output_scores": [-10.8125, -6.09375, -8.375, -8.625, -9.8125, -6.6875, -7.25], "max_reward": -6.09375}
+{"prompt": "Who is the best soccer player of all time?", "output_scores": [-3.296875, -0.056884765625, -5.3125, -4.71875, -1.25, -3.03125, -5.4375], "max_reward": -0.056884765625}
+{"prompt": "Is California a great place to live?", "output_scores": [-8.875, -9.125, -9.0625, -6.625, -9.5625, -9.75, -5.34375], "max_reward": -5.34375}
+{"prompt": "What is Type 2 Diabetes?", "output_scores": [-6.5, -1.4296875, -7.9375, -7.09375, -3.171875, -4.5625, 0.921875], "max_reward": 0.921875}
+{"prompt": "What is Southern Charm the TV Show?", "output_scores": [-7.4375, -9.5625, -7.8125, -5.59375, -4.28125, -9.3125, -8.0625], "max_reward": -4.28125}
+{"prompt": "describe experience of child fighting with autism", "output_scores": [-8.125, 0.240234375, -4.5625, -0.73046875, 0.640625, -1.03125, -5.65625], "max_reward": 0.640625}
+{"prompt": "when was the Playstation 5 announced?", "output_scores": [-10.0, -9.9375, -9.0625, -11.4375, -10.9375, -8.3125, -8.8125], "max_reward": -8.3125}
+{"prompt": "How does an umpire signal that a batter has been dismissed in a cricket match ?", "output_scores": [-6.90625, -5.6875, -7.5625, -8.625, -6.65625, -6.90625, -4.84375], "max_reward": -4.84375}
+{"prompt": "Identify which instrument is string or woodwind: Asor, Aulochrome", "output_scores": [-4.5, -6.5625, -4.65625, -6.5625, -4.1875, -5.40625, -8.875], "max_reward": -4.1875}
+{"prompt": "Why is the Saguaro cactus important to Arizona?", "output_scores": [-3.515625, -0.0031890869140625, -5.09375, -3.34375, -3.34375, -0.396484375, -0.578125], "max_reward": -0.0031890869140625}
+{"prompt": "How many vaccines should I get, if a dog bites me?", "output_scores": [-5.40625, -4.6875, -7.5, -6.21875, -6.90625, -3.328125, -6.53125], "max_reward": -3.328125}
+{"prompt": "Classify these various instruments as either percussion or woodwind instruments: flute, clarinet, drum, bassoon, marimba, cymbal", "output_scores": [-15.5, -8.625, -13.5625, -13.625, -12.625, -13.1875, -15.375], "max_reward": -8.625}
+{"prompt": "What is the game called Lacrosse", "output_scores": [-5.1875, -6.0625, -4.15625, -4.96875, -8.5, -5.21875, -2.4375], "max_reward": -2.4375}
+{"prompt": "From given text, Please jot down some points about Richard D. Young", "output_scores": [-9.625, -9.6875, -9.875, -9.1875, -11.3125, -9.25, -10.0625], "max_reward": -9.1875}
+{"prompt": "what are some types of vandalism?", "output_scores": [-9.4375, -6.40625, -7.9375, -11.125, -11.625, -10.625, -11.25], "max_reward": -6.40625}
+{"prompt": "What if a buff?", "output_scores": [-7.5, -8.375, -7.9375, -8.4375, -8.4375, -9.75, -8.1875], "max_reward": -7.5}
+{"prompt": "Help me come up with 3 ideas for a new business and how I can start it", "output_scores": [-5.78125, -8.875, -2.75, -9.4375, -7.71875, -9.25, -9.9375], "max_reward": -2.75}
+{"prompt": "Tell me whether each of these soccer teams are American or European: Leeds United, Seattle Sounders, Portland Timbers, Arsenal Gunners, Sporting KC, Bayern Munich", "output_scores": [-9.8125, -9.5, -10.1875, -13.5, -12.5, -7.84375, -13.8125], "max_reward": -7.84375}
+{"prompt": "What is the capital of Alaska?", "output_scores": [-10.9375, -10.9375, -10.9375, -10.9375, -10.9375, -10.9375, -10.9375], "max_reward": -10.9375}
+{"prompt": "Give me the list of philosophers of science from before the 19th century", "output_scores": [-7.75, -2.71875, -4.8125, -2.390625, -4.09375, -5.03125, -3.359375], "max_reward": -2.390625}
+{"prompt": "Think up of three different animals that lay eggs", "output_scores": [-14.1875, -14.1875, -13.5625, -14.1875, -14.1875, -14.1875, -6.71875], "max_reward": -6.71875}
+{"prompt": "Can I copy my Delta Lake table to another location?", "output_scores": [-9.0625, -8.0625, -9.125, -3.453125, -1.2578125, -8.5625, -8.25], "max_reward": -1.2578125}
+{"prompt": "Given this reference text about the Hawaiian scale, how tall is a wave that is six foot Hawaiian?", "output_scores": [-5.96875, -4.28125, -6.21875, -5.59375, -5.34375, -4.0625, -10.625], "max_reward": -4.0625}
+{"prompt": "Identify which instrument is string or percussion: Vibraslap, Inanga", "output_scores": [-11.5625, -11.3125, -11.1875, -10.4375, -1.9375, -9.3125, -9.625], "max_reward": -1.9375}
+{"prompt": "Tell me about the album The Any Day Now", "output_scores": [-7.125, -8.5625, -8.6875, -6.46875, -8.625, -3.125, -6.53125], "max_reward": -3.125}
+{"prompt": "What can a person do in Virtual Reality?", "output_scores": [-7.9375, -7.59375, -8.375, -5.5625, -9.375, -9.3125, -7.65625], "max_reward": -5.5625}
+{"prompt": "Do you prefer pancakes or waffles?", "output_scores": [-10.75, -8.8125, -11.4375, -10.5, -10.6875, -9.875, -9.5625], "max_reward": -8.8125}
+{"prompt": "Why do we have work meetings?", "output_scores": [-8.5, -6.875, -9.6875, -9.625, -7.0625, -0.037109375, -11.875], "max_reward": -0.037109375}
+{"prompt": "Extract references to electric fish in ancient texts from the following passage.", "output_scores": [-8.5625, -9.125, -9.25, -9.1875, -8.875, -10.125, -8.8125], "max_reward": -8.5625}
+{"prompt": "Given a reference text about the history of the workweek, what social forces precipitated the creation of a five-day workweek in the United States and when?", "output_scores": [1.4140625, -2.890625, -4.53125, -0.734375, -1.9140625, -4.25, -3.65625], "max_reward": 1.4140625}
+{"prompt": "What is a console war in video games?", "output_scores": [-4.03125, 0.84375, -2.3125, 1.234375, 0.279296875, 0.376953125, -3.765625], "max_reward": 1.234375}
+{"prompt": "What is Fibonacci series", "output_scores": [-3.0, -3.265625, -2.484375, -3.109375, -0.91796875, -5.75, -3.28125], "max_reward": -0.91796875}
+{"prompt": "What are the most dangerous hobbies?", "output_scores": [-9.9375, -6.6875, -9.6875, -8.9375, -7.84375, -10.75, -6.90625], "max_reward": -6.6875}
+{"prompt": "Write a short story that demonstrates the difference between coaching and mentorship", "output_scores": [-5.71875, -1.75, -3.265625, 0.89453125, -3.09375, -0.609375, -2.4375], "max_reward": 0.89453125}
+{"prompt": "Identify which instrument is string or percussion: Ngoma drums, Zhuihu", "output_scores": [-0.5234375, -10.0625, -3.25, -7.53125, -3.0, -3.265625, -3.421875], "max_reward": -0.5234375}
+{"prompt": "Describe a situation in which scraping data from the web may be justified. Illustrate this situation with a specific example.", "output_scores": [-2.875, 0.341796875, 1.421875, -3.921875, -0.29296875, -2.890625, 1.9296875], "max_reward": 1.9296875}
+{"prompt": "Why is Falmouth, Massachusetts a great place to visit for vacation?", "output_scores": [-5.15625, -6.5625, -6.15625, -4.6875, -7.28125, -8.1875, -5.875], "max_reward": -4.6875}
+{"prompt": "Tell me whether these mountains are included in the New Hampshire 4000 footers: Washington, Adams,  Moosilauke, South Carter, Garfield, Wildcat A, Wildcat B, Wildcat C.", "output_scores": [-2.171875, -10.875, -10.75, -12.3125, -6.09375, -12.5625, -7.90625], "max_reward": -2.171875}
+{"prompt": "Which was the first film to reach he billion-dollar mark?", "output_scores": [-10.5, -9.75, -7.5, -9.8125, -8.0, -8.0625, -8.375], "max_reward": -7.5}
+{"prompt": "What are steps to become a US citizen?", "output_scores": [-8.6875, -6.09375, -8.6875, -8.5, -6.75, -8.5, -10.0625], "max_reward": -6.09375}
+{"prompt": "How do you make a simple green salsa?", "output_scores": [-7.90625, -5.5, -9.25, -8.625, -4.53125, -8.3125, -6.90625], "max_reward": -4.53125}
+{"prompt": "Where is Landscape Arch?", "output_scores": [-7.4375, -9.375, -5.03125, -8.1875, -9.0625, -7.5, -6.34375], "max_reward": -5.03125}
+{"prompt": "Which country has won the most world cups in soccer?", "output_scores": [-9.125, -9.1875, -9.5625, -9.4375, -9.0, -11.25, -11.0], "max_reward": -9.0}
+{"prompt": "What is difference between ECS and EC2?", "output_scores": [-2.546875, -1.4921875, -5.28125, -5.59375, -0.9453125, 0.94140625, -1.859375], "max_reward": 0.94140625}
+{"prompt": "Classify the following literals as strings or ints: \"a\", \"\", \"0\", 0, 0xasdf, \"0xasdf\"", "output_scores": [-11.875, -7.59375, -11.5625, -11.5, -11.3125, -13.3125, -7.9375], "max_reward": -7.59375}
+{"prompt": "What is Orchesis - either professional or amateur", "output_scores": [-0.78515625, 3.8125, 2.3125, 0.86328125, 5.09375, 3.875, -4.875], "max_reward": 5.09375}
+{"prompt": "What are some strategies to survive in nature?", "output_scores": [-10.5, -8.4375, -10.3125, -8.6875, -10.6875, -9.9375, -9.125], "max_reward": -8.4375}
+{"prompt": "What are the books in Harry Potter series in order?", "output_scores": [-8.9375, -9.25, -8.0625, -3.859375, -9.25, -8.9375, -8.3125], "max_reward": -3.859375}
+{"prompt": "Why many people do not like pigeons?", "output_scores": [-9.5625, -11.6875, -9.6875, -9.3125, -10.0625, -9.9375, -8.1875], "max_reward": -8.1875}
+{"prompt": "Who are the contenders for the World Chess Championship in 2023?", "output_scores": [-2.453125, -4.28125, -7.34375, -6.1875, -4.5625, -8.8125, -6.6875], "max_reward": -2.453125}
+{"prompt": "How may I find a charging port outdoors for my laptop?", "output_scores": [-10.0625, -10.875, -9.8125, -9.375, -11.125, -9.375, -11.6875], "max_reward": -9.375}
+{"prompt": "What is the distinction between skiing and backcountry skiing?", "output_scores": [-1.1796875, -1.921875, -3.03125, -5.90625, 5.75, -1.9453125, 8.0], "max_reward": 8.0}
+{"prompt": "Tell me if this a universal blood group:  A+, A-,  B+, B-,  O+, O-,  AB+, AB-", "output_scores": [-6.5625, -7.28125, -11.375, -0.0289306640625, -8.3125, -7.46875, -6.09375], "max_reward": -0.0289306640625}
+{"prompt": "In what way did \u00c9tienne Halphen interests lead to him discovering the harmonic distribution?", "output_scores": [-9.625, -10.75, -2.5, -8.5, -10.5, -10.0, -8.375], "max_reward": -2.5}
+{"prompt": "What is an adverb?", "output_scores": [-6.1875, -7.40625, -8.5, -4.46875, -8.0, -6.625, -4.03125], "max_reward": -4.03125}
+{"prompt": "Select the odd word from this list and explain why:\nChair\nSofa\nTable\nDinosaur\nCupboard", "output_scores": [-9.6875, -9.5, -12.0625, -9.6875, -11.1875, -8.125, -9.9375], "max_reward": -8.125}
+{"prompt": "What are some interesting facts about Nelson Mandel Boulevard described on this paragraph?", "output_scores": [-8.9375, -6.9375, -7.84375, -6.875, -9.8125, -9.0625, -6.625], "max_reward": -6.625}
+{"prompt": "How does an LCD panel work?", "output_scores": [-4.59375, -5.1875, -6.59375, -2.953125, -4.21875, -7.4375, -7.0], "max_reward": -2.953125}
+{"prompt": "What is a shogi?", "output_scores": [-2.421875, -0.74609375, -2.8125, -4.90625, -6.4375, -3.765625, -4.0], "max_reward": -0.74609375}
+{"prompt": "Did David Petrarca direct any episodes in the second season of Game of Thrones?", "output_scores": [-9.125, -9.375, -8.125, -8.0625, -10.6875, -9.25, -8.5], "max_reward": -8.0625}
+{"prompt": "On what month and day was Antwan Deon Odom born?", "output_scores": [-9.8125, -8.4375, -10.0, -9.25, -7.40625, -8.5625, -10.5625], "max_reward": -7.40625}
+{"prompt": "Classify the sentences below based on the sentiment - neutral, positive, negative, or angry\n\n1. My shirt is red in color\n2. I am so mad about losing my Airpods.\n3. I am tired of being stuck in traffic every day.\n4. I am so stressed and overwhelmed at work.\n5. Work is so energizing\n6. I love sunsets at the beach.\n7. My best vacation place is Rome\n8. They sing Fado in Lisbon\n9. Somebody's going to get hurt so bad - watch it !\n10. I have a meeting at 3pm", "output_scores": [-14.875, -7.78125, -9.0, -8.375, -3.25, -6.71875, -8.5], "max_reward": -3.25}
+{"prompt": "How does a push rod internal combustion engine work?", "output_scores": [-7.03125, -4.78125, -2.875, -2.53125, -5.6875, -6.46875, -9.0625], "max_reward": -2.53125}
+{"prompt": "Which is a species of fish? Banjo or Guitar", "output_scores": [-8.625, -9.9375, -10.0, -7.90625, -8.0625, -3.8125, -10.5], "max_reward": -3.8125}
+{"prompt": "Tell me whether these cities are in Spain or France: Pamplona, Valencia, Nice, Marseille, Paris, Sevilla", "output_scores": [-12.1875, -7.96875, -14.625, -11.9375, -12.125, -14.1875, -14.375], "max_reward": -7.96875}
+{"prompt": "What is grep used for?", "output_scores": [-7.21875, -7.40625, -5.3125, -0.75390625, -2.625, -5.3125, -4.875], "max_reward": -0.75390625}
+{"prompt": "What is on the DVD Our Favorite Things", "output_scores": [-8.875, -4.9375, 1.0234375, -3.78125, -5.90625, -9.8125, -6.5], "max_reward": 1.0234375}
+{"prompt": "Is Dosa a South Indian Food?", "output_scores": [-2.671875, -1.6640625, -1.796875, -7.40625, 2.875, -5.1875, -3.0625], "max_reward": 2.875}
+{"prompt": "When was Mar-a-Lago built?", "output_scores": [-9.75, -9.0625, -12.0, -12.25, -9.0, -11.5625, -6.96875], "max_reward": -6.96875}
+{"prompt": "Where is Dutch spoken?", "output_scores": [-5.65625, -8.5625, -7.59375, -10.125, -9.4375, -8.1875, -8.3125], "max_reward": -5.65625}
+{"prompt": "How many cents do I have if I have 3 dimes?", "output_scores": [-10.5, -11.75, -10.875, -8.1875, -10.625, -8.5625, -11.6875], "max_reward": -8.1875}
+{"prompt": "Given this paragraph about composer Paul Lansky, did he have an advanced degree?", "output_scores": [-9.6875, -8.75, -9.8125, -7.28125, -9.0625, -8.4375, -6.96875], "max_reward": -6.96875}
+{"prompt": "Kingsway in India was made in the honour of", "output_scores": [-5.3125, -9.9375, -9.9375, -6.25, -10.3125, -10.0, -9.75], "max_reward": -5.3125}
+{"prompt": "Is it acceptable to sign a cappella (without musical accompaniment) at a community musical theater audition?", "output_scores": [-7.53125, -3.140625, -6.53125, -4.09375, -9.3125, -6.15625, -4.25], "max_reward": -3.140625}
+{"prompt": "what is meetup group", "output_scores": [-7.25, -7.0625, -9.3125, -7.15625, -8.1875, -8.625, -9.25], "max_reward": -7.0625}
+{"prompt": "What should I do if my motherboard won't post?", "output_scores": [-6.3125, -5.1875, -2.703125, -6.9375, -5.4375, -6.96875, -5.28125], "max_reward": -2.703125}
+{"prompt": "What are the two major bacterial pathogens of Anaplasma bacteria?", "output_scores": [-2.015625, -4.34375, -4.53125, -5.0625, -7.625, -9.9375, -7.625], "max_reward": -2.015625}
+{"prompt": "Choose the word which is different from the rest:  Mother, Friend, Sister, Father, Brother", "output_scores": [-7.625, -8.5, -7.75, -11.9375, -8.125, -6.46875, -8.75], "max_reward": -6.46875}
+{"prompt": "5 origami styles", "output_scores": [-8.0625, -11.1875, -8.5625, -9.375, -5.21875, -7.875, -9.3125], "max_reward": -5.21875}
+{"prompt": "Why is the sky blue?", "output_scores": [0.51171875, 0.8359375, 2.203125, 0.5390625, -0.33984375, -0.765625, 2.28125], "max_reward": 2.28125}
+{"prompt": "Tell me whether these characters are from Harry Potter or Game of Thrones", "output_scores": [-10.875, -10.875, -7.75, -12.3125, -9.625, -10.75, -8.0625], "max_reward": -7.75}
+{"prompt": "Identify which instrument is string or percussion: Xylorimba, Cimbalom", "output_scores": [-8.375, -5.4375, -6.09375, -3.203125, -2.859375, -5.34375, -6.40625], "max_reward": -2.859375}
+{"prompt": "What is the oldest manufacturer of cymbals?", "output_scores": [-8.8125, -9.4375, -6.875, -10.3125, -7.125, -6.5, -9.0], "max_reward": -6.5}
+{"prompt": "What are recommendations for some European cities to visit.", "output_scores": [-10.5, -6.65625, -10.25, -5.28125, -7.1875, -8.25, -7.03125], "max_reward": -5.28125}
+{"prompt": "Which team won the 2023 NCAA Men's National Championship?", "output_scores": [-8.125, -8.75, -10.25, -8.625, -10.0, -7.6875, -9.125], "max_reward": -7.6875}
+{"prompt": "Give me five different names I could use for my female cat", "output_scores": [-13.1875, -10.5625, -12.5625, -12.1875, -13.0, -12.0, -12.4375], "max_reward": -10.5625}
+{"prompt": "What's so great about St Martin?", "output_scores": [-8.5, -9.3125, -6.21875, -6.5, -5.40625, -8.875, -10.0], "max_reward": -5.40625}
+{"prompt": "What is the difference between iOS and MacOS?", "output_scores": [-8.6875, -0.1484375, -6.53125, -2.9375, -6.40625, -7.34375, -5.4375], "max_reward": -0.1484375}
+{"prompt": "Which is a species of fish? Wahoo or Yahoo", "output_scores": [-4.8125, -7.34375, -4.9375, -6.4375, -4.75, -8.125, -8.9375], "max_reward": -4.75}
+{"prompt": "What are vinyl records?", "output_scores": [-1.390625, -1.015625, 3.21875, -2.734375, -3.25, 1.2421875, 2.828125], "max_reward": 3.21875}
+{"prompt": "Write a bulleted list of the plants that grow around Stanwell-Fletcher Lake.", "output_scores": [-6.03125, -7.53125, -8.0625, -10.0, -7.0625, -7.28125, -6.9375], "max_reward": -6.03125}
+{"prompt": "Please summarize President Joe Biden's statement below.", "output_scores": [-9.125, -9.125, -7.375, -9.125, -8.4375, -5.65625, -7.5625], "max_reward": -5.65625}
+{"prompt": "Classify each of the following as either an insect or a worm: tequila worm, silk worm, glow worm, inchworms, earthworms, tapeworm, hookworm, liver fluke, threadworm", "output_scores": [-8.6875, -7.1875, -10.1875, -8.4375, -5.8125, -4.0, -4.6875], "max_reward": -4.0}
+{"prompt": "Why is NFL football called football when players use their hands mainly?", "output_scores": [-0.3515625, -0.65625, 5.53125, 2.546875, -5.375, -3.578125, 7.4375], "max_reward": 7.4375}
+{"prompt": "How do I wire an electrical outlet?", "output_scores": [-8.1875, -4.5, -3.578125, -4.5625, -3.125, -2.8125, -4.5625], "max_reward": -2.8125}
+{"prompt": "Classify the cities based on whether they are located in South Georgia and South Sandwich Islands or Dominican Republic.\nSantiago, Santo Domingo Este, Santo Domingo, Grytviken", "output_scores": [-6.875, -6.21875, -8.3125, -4.5625, -5.03125, -7.40625, -5.75], "max_reward": -4.5625}
+{"prompt": "Name a battlefield surgeon", "output_scores": [-7.875, -5.875, -8.3125, -6.03125, -6.0625, -5.78125, -8.25], "max_reward": -5.78125}
+{"prompt": "Which is a species of fish? Power or Powen", "output_scores": [-8.8125, -9.3125, -5.5, -9.0, -7.78125, -8.9375, -8.375], "max_reward": -5.5}
+{"prompt": "Who was the Father of Elizabeth II ?", "output_scores": [-11.6875, -12.5, -9.9375, -12.5, -12.1875, -11.6875, -10.625], "max_reward": -9.9375}
+{"prompt": "Identify which instrument is string or percussion: Bell plate, Hululu", "output_scores": [-4.21875, -5.3125, -5.125, -8.625, -2.671875, -6.0, -7.5], "max_reward": -2.671875}
+{"prompt": "Give me examples of German auto manufacturers still operating.", "output_scores": [-11.3125, -10.3125, -11.0625, -9.4375, -10.6875, -10.0, -8.375], "max_reward": -8.375}
+{"prompt": "Classify these objects as edible or inedible: pizza, slipper, cake, banana, biscuit, shoe, pencil, chalk, soda, juice, television, computer, mirror, cereal, rice", "output_scores": [-12.625, -13.1875, -14.0625, -14.9375, -14.0, -14.0, -11.4375], "max_reward": -11.4375}
+{"prompt": "What family do tigers, lions and panthers all belong to?", "output_scores": [-10.1875, -10.375, -11.5625, -10.1875, -10.1875, -11.625, -4.28125], "max_reward": -4.28125}
+{"prompt": "Give me a list of the ten best rock guitarists of all time", "output_scores": [-3.34375, -2.390625, -2.890625, 0.062255859375, 0.000335693359375, -3.578125, 0.1865234375], "max_reward": 0.1865234375}
+{"prompt": "Which of these foods are from North and South of India: Chicken Tikka, Chole Samosa, Chole Batura, Idli Sambar, Dosa, Upama, Tamarind Rice", "output_scores": [-11.375, -5.125, 0.85546875, -3.40625, -10.4375, -6.15625, -5.21875], "max_reward": 0.85546875}
+{"prompt": "Classify each of these bands as Polish death metal, Norwegian death metal, or K-Pop: BTS, EXO, Red Velvet, Cadaver, Darkthrone, Behemoth, Vader, Empatic, Girls' Generation, TWICE, Blood Red Throne, Emperor, Gorgoroth, Decapitated", "output_scores": [-12.125, -10.9375, -12.4375, -12.875, -13.125, -12.6875, -10.5625], "max_reward": -10.5625}
+{"prompt": "Why did Cato think that Carthage must be destroyed?", "output_scores": [-1.984375, 0.83984375, 3.6875, -2.09375, 2.84375, -1.671875, -3.8125], "max_reward": 3.6875}
+{"prompt": "Based on the autopsy, list the contributing factors to Farley's death in bullet format.", "output_scores": [-6.09375, -7.78125, -9.4375, -5.84375, -4.40625, -6.28125, -8.6875], "max_reward": -4.40625}
+{"prompt": "What is the origins of mens lacrosse?", "output_scores": [-4.03125, -6.0625, 2.921875, 0.02001953125, -1.75, -3.78125, 0.5078125], "max_reward": 2.921875}
+{"prompt": "What is the difference between a chihuaha and a golden retriever?", "output_scores": [-0.6171875, -5.0, -1.1796875, -1.703125, -5.59375, -6.78125, -5.53125], "max_reward": -0.6171875}
+{"prompt": "Who created Sesame Street?", "output_scores": [-8.125, -10.75, -3.921875, -7.75, -9.0625, -7.21875, -5.65625], "max_reward": -3.921875}
+{"prompt": "What is the difference between American football and European football?", "output_scores": [-3.8125, -6.46875, -5.96875, -3.890625, -3.015625, -5.21875, -1.71875], "max_reward": -1.71875}
+{"prompt": "Who are the most famous English writers?", "output_scores": [-5.125, -9.25, -8.1875, -9.3125, -8.3125, -7.25, -7.1875], "max_reward": -5.125}
+{"prompt": "Who is Vincent Paterson?", "output_scores": [-8.875, -3.328125, -0.3515625, -7.375, -2.765625, -6.1875, -6.03125], "max_reward": -0.3515625}
+{"prompt": "What is rheological weldability?", "output_scores": [-0.66796875, 0.74609375, 0.45703125, -4.71875, -0.2099609375, -1.1640625, 2.5], "max_reward": 2.5}
+{"prompt": "What are the most common causes of avalanches, in descending order of likelihood (where most likely is first)?", "output_scores": [-1.6484375, -0.443359375, 4.78125, -3.875, -2.28125, -1.4921875, -1.8671875], "max_reward": 4.78125}
+{"prompt": "What is the difference between their, there, and they're?", "output_scores": [-6.75, -8.5625, -6.5, -10.5, -7.34375, -8.375, -7.0625], "max_reward": -6.5}
+{"prompt": "Why was Bacardi 151 discontinued in the US?", "output_scores": [-3.828125, -5.03125, -5.75, -4.09375, -9.875, -0.328125, -1.2265625], "max_reward": -0.328125}
+{"prompt": "When did the American Civil War end?", "output_scores": [-9.625, -9.6875, -8.5625, -8.4375, -9.0, -7.0, -9.375], "max_reward": -7.0}
+{"prompt": "How did you prepare for your business case competition?", "output_scores": [-10.0, -10.875, -9.5, -10.6875, -9.1875, -8.9375, -7.5], "max_reward": -7.5}
+{"prompt": "What are artificial neural networks?", "output_scores": [-2.265625, -2.53125, -3.125, -1.640625, -2.578125, -4.9375, -5.65625], "max_reward": -1.640625}
+{"prompt": "When was Clarence Dietz born?", "output_scores": [-9.3125, -10.0, -10.5625, -11.25, -9.6875, -10.1875, -10.1875], "max_reward": -9.3125}
+{"prompt": "What are the top five things to do on a weekend trip to New York City in the winter?", "output_scores": [-9.5625, -9.6875, -9.5625, -7.8125, -7.96875, -6.625, -4.78125], "max_reward": -4.78125}
+{"prompt": "Identify which instrument is string or percussion: Klong khaek, Sanshin", "output_scores": [-11.0625, -5.9375, -6.78125, -12.125, -7.28125, -5.84375, -6.9375], "max_reward": -5.84375}
+{"prompt": "Is Italian closer to French or to German?", "output_scores": [-7.625, -0.9453125, -4.03125, -1.0546875, -0.330078125, 1.90625, -3.578125], "max_reward": 1.90625}
+{"prompt": "classify these as kitchen or bathroom items: toothpaste, pan, pots, spoons, shampoo, dish soap, bath soap, bath bombs, plates, oven mitts, cups, toilet paper", "output_scores": [-11.5, -13.0, -14.1875, -12.9375, -14.0625, -13.25, -12.125], "max_reward": -11.5}
+{"prompt": "What is the terminal outbound station of the D line in the Boston MBTA?", "output_scores": [-7.96875, -10.625, -11.25, -10.5, -11.25, -11.5, -11.125], "max_reward": -7.96875}
+{"prompt": "Who is Lewis Perez and what job did he hold?", "output_scores": [-8.75, -10.5625, -9.8125, -9.125, -10.0, -6.28125, -6.15625], "max_reward": -6.15625}
+{"prompt": "What is the most popular opening in chess?", "output_scores": [-3.953125, -6.5625, -5.8125, -4.34375, -5.25, -9.9375, -6.21875], "max_reward": -3.953125}
+{"prompt": "What are the best Classic Rock bands?", "output_scores": [-7.625, -11.0625, -8.4375, -8.8125, -8.3125, -9.125, -8.875], "max_reward": -7.625}
+{"prompt": "In the series A Song of Ice and Fire, who is the founder of House Massey?", "output_scores": [-8.4375, -8.25, -8.6875, -7.5, -9.25, -9.5625, -9.3125], "max_reward": -7.5}
+{"prompt": "Are UGGs considered fashionable?", "output_scores": [-3.546875, 0.625, -3.125, -5.6875, -6.875, -5.6875, 0.83984375], "max_reward": 0.83984375}
+{"prompt": "What is the largest city in Washington state?", "output_scores": [-9.375, -8.5625, -11.9375, -11.9375, -8.6875, -8.125, -10.1875], "max_reward": -8.125}
+{"prompt": "Can you give me a bulleted list of notable physical features of the beaver?", "output_scores": [-11.5625, -11.1875, -12.3125, -12.0625, -10.9375, -12.0625, -11.0625], "max_reward": -10.9375}
+{"prompt": "What are some examples of popular sitcoms on television in the 1980s?", "output_scores": [-7.78125, -8.0, -9.75, -9.1875, -13.625, -11.125, -12.1875], "max_reward": -7.78125}
+{"prompt": "What are the ways you can eat an apple.", "output_scores": [-12.75, -8.875, -8.75, -8.25, -12.8125, -12.3125, -10.6875], "max_reward": -8.25}
+{"prompt": "Identify which instrument is string or woodwind: Octofone, Suona", "output_scores": [-8.375, -3.0625, -6.84375, -6.1875, -1.6875, -8.6875, -7.53125], "max_reward": -1.6875}
+{"prompt": "What should I think about when buying a car (summarization)", "output_scores": [-9.5, -12.6875, -9.625, -11.0625, -8.9375, -10.4375, -11.0], "max_reward": -8.9375}
+{"prompt": "What are some hobbies that I can try that have a relatively low cost to start?", "output_scores": [-13.3125, -13.125, -13.8125, -12.4375, -11.8125, -13.625, -12.625], "max_reward": -11.8125}
+{"prompt": "Which of the following is a database or Streaming solution? Oracle, Kinesis, Event hub, SQL Server", "output_scores": [-4.65625, -1.9765625, -8.5625, -1.25, 0.39453125, -7.125, -3.4375], "max_reward": 0.39453125}
+{"prompt": "Write a story about an ice fishing trip in Minnesota. Make sure to include what you need for a successful trip.", "output_scores": [-3.546875, -4.0625, -8.1875, -1.4296875, -4.40625, -4.65625, -4.65625], "max_reward": -1.4296875}
+{"prompt": "How many octaves does a harpsichord have?", "output_scores": [-10.75, -7.875, -9.25, -10.25, -11.875, -5.25, -9.875], "max_reward": -5.25}
+{"prompt": "What is dry ice?", "output_scores": [-1.5625, -0.828125, -4.75, -2.5625, -5.71875, -6.25, -4.96875], "max_reward": -0.828125}
+{"prompt": "What is \"Disko\"?", "output_scores": [-3.1875, -1.515625, -3.34375, 2.609375, -5.84375, -5.5625, -4.25], "max_reward": 2.609375}
+{"prompt": "From the Passage please find out what are the cause of climate change", "output_scores": [-7.90625, -4.0625, -7.3125, -5.875, -7.4375, -6.71875, -10.9375], "max_reward": -4.0625}
+{"prompt": "Who wrote the Lord of the Rings?", "output_scores": [-9.0625, -4.96875, -5.8125, -6.6875, -7.5, -8.875, -7.8125], "max_reward": -4.96875}
+{"prompt": "Given this paragraph about Selena Gomez, how many siblings does she have?", "output_scores": [-9.875, -10.6875, -8.75, -10.1875, -6.09375, -8.1875, -8.6875], "max_reward": -6.09375}
+{"prompt": "Who won the 2018 NHL Stanley Cup Finals?", "output_scores": [-8.9375, -9.375, -10.8125, -8.25, -10.6875, -8.125, -9.6875], "max_reward": -8.125}
+{"prompt": "What are some former names for the city of Mumbai?", "output_scores": [-1.921875, -6.34375, -6.75, -5.625, -7.0, -0.62890625, -4.25], "max_reward": -0.62890625}
+{"prompt": "Name some reasons it's great to live in Marin County, California.", "output_scores": [-2.75, -9.375, -6.90625, -8.0, -6.8125, -5.34375, -6.84375], "max_reward": -2.75}
+{"prompt": "Summarize this paragraph", "output_scores": [-7.625, -5.53125, -9.4375, -7.78125, -7.28125, -9.8125, -7.9375], "max_reward": -5.53125}
+{"prompt": "How can I learn to code?", "output_scores": [-8.0, -7.3125, -9.5625, -9.0625, -8.5625, -7.34375, -7.78125], "max_reward": -7.3125}
+{"prompt": "Given this text, summarize the major events in Call of Duty: Modern Warfare 2 game development and release.", "output_scores": [-4.09375, -7.09375, -4.03125, -8.0625, -3.59375, -4.71875, -5.75], "max_reward": -3.59375}
+{"prompt": "To which countries have The Netherlands borders with.", "output_scores": [-5.90625, -2.90625, -8.6875, -4.6875, -8.75, -10.875, -8.75], "max_reward": -2.90625}
+{"prompt": "How many Kangaroos are in Australia?", "output_scores": [-4.34375, -3.4375, -6.65625, -7.3125, -3.640625, -4.8125, -6.25], "max_reward": -3.4375}
+{"prompt": "How many languages are spoken in India?", "output_scores": [-0.8671875, -7.3125, -6.8125, -9.1875, 0.2890625, -9.375, -6.8125], "max_reward": 0.2890625}
+{"prompt": "Which of the following months has 31 days? January, February, March, April, May, June, July, August, September, October, November, December", "output_scores": [-12.6875, -15.0, -15.0625, -15.0, -15.25, -14.6875, -15.0625], "max_reward": -12.6875}
+{"prompt": "Who is the Zurich Insurance", "output_scores": [0.466796875, -2.34375, -5.625, -2.8125, -0.41796875, -3.53125, -0.8671875], "max_reward": 0.466796875}
+{"prompt": "Who are the top 3 professional basketball players of all time?", "output_scores": [0.65234375, 0.5, 0.8359375, -2.21875, -0.173828125, -1.3046875, -1.1484375], "max_reward": 0.8359375}
+{"prompt": "Extract the names of Serbian political parties mentioned in the text and put them into a bulleted list.", "output_scores": [-9.0625, -7.3125, -6.46875, -9.0, -9.0625, -8.5625, -9.6875], "max_reward": -6.46875}
+{"prompt": "Summarise the history of the origin of the Kievan Rus' name", "output_scores": [0.00958251953125, 1.015625, 4.03125, 3.578125, 0.0732421875, 4.21875, -2.59375], "max_reward": 4.21875}
+{"prompt": "Without quoting directly from the text give me a summary the game of chess", "output_scores": [-4.5, -1.2890625, -3.484375, -0.5625, -0.5625, -1.65625, -2.65625], "max_reward": -0.5625}
+{"prompt": "Van Halen (/v\u00e6n \u02c8he\u026al\u025bn/ van HAY-len) was an American rock band formed in Pasadena, California, in 1973. Credited with \"restoring hard rock to the forefront of the music scene\", Van Halen was known for its energetic live shows and for the virtuosity of its lead guitarist, Eddie Van Halen. The band was inducted into the Rock and Roll Hall of Fame in 2007.", "output_scores": [-8.4375, -5.21875, -6.59375, -2.0625, -11.5, -11.8125, -12.25], "max_reward": -2.0625}
+{"prompt": "Who were the commanders of the two armies involved in the Battle of Hastings?", "output_scores": [-10.1875, -9.75, -4.375, -7.9375, -9.5625, -10.4375, -9.125], "max_reward": -4.375}
+{"prompt": "I want to take a skiing vacation.  Which of the following countries would be suitable for doing this: Switzerland, Cyprus, Kiribati, the United States, Haiti.", "output_scores": [-4.59375, -3.484375, -5.28125, -3.0625, -5.0625, -1.609375, -2.6875], "max_reward": -1.609375}
+{"prompt": "Can AI destroy the world or humans?", "output_scores": [-2.0, 1.0703125, -2.21875, 1.6796875, -4.78125, -2.90625, -1.1875], "max_reward": 1.6796875}
+{"prompt": "What is linux Bootloader", "output_scores": [0.18359375, -1.9296875, 1.5859375, -0.3046875, -0.609375, -0.625, 0.40625], "max_reward": 1.5859375}
+{"prompt": "which country that has the most pyramids in the world?", "output_scores": [-7.25, -5.34375, -7.1875, -6.25, -7.3125, -6.71875, -9.0625], "max_reward": -5.34375}
+{"prompt": "How many ways are there to skin a cat?", "output_scores": [3.015625, -0.76171875, -4.5625, -0.0947265625, -1.875, -4.03125, 2.96875], "max_reward": 3.015625}
+{"prompt": "What is MATLAB?", "output_scores": [-4.875, -2.109375, -6.4375, 1.0546875, -1.828125, -3.390625, -3.09375], "max_reward": 1.0546875}
+{"prompt": "Who is LBJ?", "output_scores": [-8.625, -3.984375, -6.21875, -10.0, -4.90625, -6.125, -5.4375], "max_reward": -3.984375}
+{"prompt": "What is detection engineering and what are the benefits?", "output_scores": [-0.70703125, -0.0234375, 2.625, -0.46484375, 4.0, 0.578125, 1.078125], "max_reward": 4.0}
+{"prompt": "Why do Germans love their cars?", "output_scores": [0.34375, -6.125, -5.375, 1.2421875, -8.125, -6.90625, -0.87890625], "max_reward": 1.2421875}
+{"prompt": "From the following list, tell me whether these animals are real of fictitious: unicorn, alpaca, kangaroo rat, griffin, centaur, colossal squid", "output_scores": [-8.9375, -9.0625, -9.3125, 1.8671875, -8.75, -11.9375, -12.1875], "max_reward": 1.8671875}
+{"prompt": "Why we have to work?", "output_scores": [-9.375, -10.3125, -8.1875, -2.671875, -7.71875, -7.375, -9.625], "max_reward": -2.671875}
+{"prompt": "What is a Peloton Bike", "output_scores": [-1.109375, -1.1953125, -6.90625, -3.640625, -3.3125, -2.328125, -0.98046875], "max_reward": -0.98046875}
+{"prompt": "Identify which instrument is string or percussion: Taal, Akonting", "output_scores": [-7.375, -11.75, -11.5, -9.125, -5.125, -6.59375, -6.78125], "max_reward": -5.125}
+{"prompt": "What are the health benefits of walking for exercise?", "output_scores": [-3.09375, -7.8125, -7.375, -6.90625, -9.875, -7.875, -5.28125], "max_reward": -3.09375}
+{"prompt": "What are some of the greatest rock bands of all time?", "output_scores": [-8.9375, -11.8125, -7.46875, -10.5, -6.3125, -9.1875, -11.1875], "max_reward": -6.3125}
+{"prompt": "What are brambles?", "output_scores": [-5.03125, -5.71875, -4.46875, -4.25, -4.28125, -1.3359375, -5.8125], "max_reward": -1.3359375}
+{"prompt": "What are some common types of lettuce used in salad and other dishes?", "output_scores": [-12.5, -12.3125, -12.0, -7.375, -10.375, -13.0, -10.1875], "max_reward": -7.375}
+{"prompt": "What is Hinton's citizenship?", "output_scores": [-8.8125, -8.125, -9.8125, -9.5625, -6.9375, -10.25, -11.125], "max_reward": -6.9375}
+{"prompt": "What are 6 different reasons to go on vacation?", "output_scores": [-9.5625, -7.28125, -8.9375, -6.21875, -3.453125, -7.4375, -8.875], "max_reward": -3.453125}
+{"prompt": "What is home automation and how can it be used?", "output_scores": [-5.65625, -4.6875, -8.1875, -8.5, -4.46875, -8.125, -3.46875], "max_reward": -3.46875}
+{"prompt": "Give me a list of actors who won an Oscar in the last 5 years and tell me for which movie they won it.", "output_scores": [-10.6875, -10.9375, -10.3125, -12.3125, -5.09375, -8.5625, -9.5625], "max_reward": -5.09375}
+{"prompt": "Think up a bunch of different meals I can make that include potatoes.", "output_scores": [-11.1875, -11.0, -12.5, -11.5, -10.1875, -12.25, -12.75], "max_reward": -10.1875}
+{"prompt": "What are the benefits of a barre workout?", "output_scores": [-11.9375, -12.125, -11.625, -11.4375, -11.1875, -12.0625, -10.8125], "max_reward": -10.8125}
+{"prompt": "How long was the Titanic?", "output_scores": [-9.875, -9.8125, -9.0, -9.0, -9.8125, -9.8125, -9.25], "max_reward": -9.0}
+{"prompt": "What are the three teams in the mobile game Pokemon Go?", "output_scores": [-8.9375, -10.5, -14.6875, -12.4375, -13.375, -14.25, -9.6875], "max_reward": -8.9375}
+{"prompt": "Can you give examples of extreme conditions for habitation?", "output_scores": [-9.125, -9.0, -7.21875, -5.875, -8.4375, -9.625, -9.25], "max_reward": -5.875}
+{"prompt": "what are the different ways to set up a stereo music system at home?", "output_scores": [-10.3125, -8.5, -9.0, -9.0, -8.8125, -8.5, -5.40625], "max_reward": -5.40625}
+{"prompt": "What is a Put option in finance?", "output_scores": [-7.8125, -7.34375, -4.71875, -6.4375, -8.25, -5.0625, -3.796875], "max_reward": -3.796875}
+{"prompt": "Why do people drink coffee?", "output_scores": [-11.625, -11.6875, -10.0, -11.875, -7.90625, -7.65625, -11.8125], "max_reward": -7.65625}
+{"prompt": "Why should you exercise if you have a sitting job where you have to sit in front of computer screen ?", "output_scores": [-7.6875, -9.5625, -8.3125, -9.8125, -6.5625, -7.90625, -8.9375], "max_reward": -6.5625}
+{"prompt": "Tell me about the Walton Football Club", "output_scores": [-7.90625, -9.1875, -5.53125, -7.03125, -6.8125, -6.59375, -5.4375], "max_reward": -5.4375}
+{"prompt": "Please give me a list of qualities that make the Masters is golf's top tournament unique?", "output_scores": [-4.875, -3.59375, -2.578125, -4.65625, -1.4296875, -3.359375, 2.84375], "max_reward": 2.84375}
+{"prompt": "Give me a list of popular Netflix shows I can watch now.", "output_scores": [-11.0625, -13.0, -11.5625, -8.875, -11.25, -10.5625, -13.5], "max_reward": -8.875}
+{"prompt": "Extract all the academic degrees from the text", "output_scores": [-7.53125, -6.1875, -5.8125, -7.9375, -8.375, -7.46875, -8.25], "max_reward": -5.8125}
+{"prompt": "Is there any river that doesn\u2019t meet a sea?", "output_scores": [-7.09375, -6.6875, -5.40625, -6.1875, -4.65625, -2.4375, -4.25], "max_reward": -2.4375}
+{"prompt": "What is the Wessex Football League", "output_scores": [-2.15625, -2.0, -3.140625, -0.057373046875, -1.140625, 4.46875, 0.85546875], "max_reward": 4.46875}
+{"prompt": "Is crocodile a reptile or an amphibian?", "output_scores": [-8.5, -8.75, -8.5, -9.25, -6.8125, -3.828125, -8.9375], "max_reward": -3.828125}
+{"prompt": "Without quoting directly from the text give me a summary of the different types of motorcycles.", "output_scores": [-5.78125, -4.875, -8.5, -9.5625, -6.46875, -7.96875, -7.375], "max_reward": -4.875}
+{"prompt": "Classify the below persons based on whether they are kids of Shah Rukh Khan or Sanjay Dutt.\nSuhana, Aryan, AbRam, Trishala, Iqra, Shahraan", "output_scores": [-8.875, -8.125, -1.484375, -12.5625, -6.875, -6.875, -8.1875], "max_reward": -1.484375}
+{"prompt": "Is the sun hot?", "output_scores": [-9.0, -6.21875, -4.15625, -7.8125, -7.8125, -9.75, -6.28125], "max_reward": -4.15625}
+{"prompt": "Given this paragraph about ferrets, do they spend the majority of the time sleeping in a 24 hour day?", "output_scores": [-8.8125, -7.1875, -6.96875, -9.3125, -9.5625, -9.375, -8.1875], "max_reward": -6.96875}
+{"prompt": "What is your political stance?", "output_scores": [-6.96875, -5.84375, -6.28125, -7.84375, -7.0625, -6.9375, -7.6875], "max_reward": -5.84375}
+{"prompt": "What is the FA Cup?", "output_scores": [-4.0, 3.328125, -2.0625, 3.0625, 0.0791015625, -1.3828125, 0.984375], "max_reward": 3.328125}
+{"prompt": "Classify each of the following as a band or sports team: Blink 182, Buffalo Bills, ACDC, Rolling Stones, Miami Dolphins, Boston Celtics", "output_scores": [-16.5, -15.875, -16.5, -16.5, -15.6875, -16.125, -16.5], "max_reward": -15.6875}
+{"prompt": "What makes a good woodworking bench?", "output_scores": [-9.6875, -6.25, -6.125, -8.5625, -7.0625, -6.03125, -9.1875], "max_reward": -6.03125}
+{"prompt": "Name some birds that are commonly observed in Berkeley, CA.", "output_scores": [-3.78125, -4.6875, -1.234375, -10.4375, -7.21875, -5.09375, -5.5], "max_reward": -1.234375}
+{"prompt": "What is a group of bunnies called?", "output_scores": [-11.3125, -6.46875, -6.4375, -11.3125, -11.4375, -11.4375, -11.9375], "max_reward": -6.4375}
+{"prompt": "I'm at a board game shop and want to buy a game that either requires physical skill or economic strategy. Here are the available games: Pictionary, Monopoly, Trivial Pursuit, Jenga, Operation, Catan, Diplomacy and Hungry Hippos. Give me a shortlist.", "output_scores": [-12.6875, -11.0625, -8.5625, -10.4375, -12.625, -9.3125, -10.625], "max_reward": -8.5625}
+{"prompt": "Who was Svea Kristina Frisch", "output_scores": [-11.25, -8.9375, -9.0625, -11.25, -8.5625, -11.3125, -9.6875], "max_reward": -8.5625}
+{"prompt": "How do you tell a story with data?", "output_scores": [-9.25, -8.5625, -8.25, -8.25, -6.46875, -7.8125, -6.15625], "max_reward": -6.15625}
+{"prompt": "When did Ivan Zhevakhov joined the military?", "output_scores": [-11.875, -12.625, -12.25, -10.8125, -12.375, -10.6875, -11.625], "max_reward": -10.6875}
+{"prompt": "How would you go about a planning a backpacking trip into the Grand Canyon National Park.", "output_scores": [-6.84375, -7.3125, -5.15625, -3.578125, -6.5, -0.609375, -7.8125], "max_reward": -0.609375}
+{"prompt": "What are some board games that involve strategy?", "output_scores": [-12.625, -12.875, -13.4375, -14.375, -7.03125, -13.4375, -8.75], "max_reward": -7.03125}
+{"prompt": "Tell me about the life and career of Alison Calder", "output_scores": [-6.75, -6.71875, -7.0, -6.9375, -7.125, -8.625, -7.25], "max_reward": -6.71875}
+{"prompt": "what is the meaning of life?", "output_scores": [-1.8203125, -0.388671875, -6.9375, -6.5625, 2.515625, -5.65625, -5.125], "max_reward": 2.515625}
+{"prompt": "Summarize the following paragraph about Microsoft in 2 sentences:\n\nMicrosoft Corporation is an American multinational technology corporation headquartered in Redmond, Washington. Microsoft's best-known software products are the Windows line of operating systems, the Microsoft Office suite, and the Internet Explorer and Edge web browsers. Its flagship hardware products are the Xbox video game consoles and the Microsoft Surface lineup of touchscreen personal computers. Microsoft ranked No. 14 in the 2022 Fortune 500 rankings of the largest United States corporations by total revenue; it was the world's largest software maker by revenue as of 2022. It is considered as one of the Big Five American information technology companies, alongside Alphabet (parent company of Google), Amazon, Apple, and Meta (formerly Facebook).\n\nMicrosoft was founded by Bill Gates and Paul Allen on April 4, 1975, to develop and sell BASIC interpreters for the Altair 8800. It rose to dominate the personal computer operating system market with MS-DOS in the mid-1980s, followed by Windows. The company's 1986 initial public offering (IPO), and subsequent rise in its share price, created three billionaires and an estimated 12,000 millionaires among Microsoft employees. Since the 1990s, it has increasingly diversified from the operating system market and has made a number of corporate acquisitions, their largest being the acquisition of LinkedIn for $26.2 billion in December 2016, followed by their acquisition of Skype Technologies for $8.5 billion in May 2011.\n\nAs of 2015, Microsoft is market-dominant in the IBM PC compatible operating system market and the office software suite market, although it has lost the majority of the overall operating system market to Android. The company also produces a wide range of other consumer and enterprise software for desktops, laptops, tabs, gadgets, and servers, including Internet search (with Bing), the digital services market (through MSN), mixed reality (HoloLens), cloud computing (Azure), and software development (Visual Studio).", "output_scores": [-8.0, -7.28125, -7.96875, -8.4375, -9.25, -6.9375, -7.96875], "max_reward": -6.9375}
+{"prompt": "Is it better to rebuild or remodel a house?", "output_scores": [-6.1875, -6.5, -9.75, -8.625, -6.4375, -8.9375, -2.609375], "max_reward": -2.609375}
+{"prompt": "What are submersibles for?", "output_scores": [-8.875, -5.3125, -2.375, -9.4375, -11.0, -4.15625, -10.875], "max_reward": -2.375}
+{"prompt": "Please write an email to the parent who complained about your child hitting their child.", "output_scores": [-2.734375, -3.1875, -6.90625, -0.6953125, -0.61328125, -6.34375, -6.1875], "max_reward": -0.61328125}
+{"prompt": "Where is the band Portugal. The Man originally from?", "output_scores": [-9.3125, -10.75, -10.3125, -10.5625, -10.5625, -10.75, -11.0], "max_reward": -9.3125}
+{"prompt": "What is the male population in Madaria?", "output_scores": [-8.3125, -12.125, -8.8125, -9.8125, -11.0625, -9.3125, -8.875], "max_reward": -8.3125}
+{"prompt": "Identify which animal species is alive or extinct: Arctodus, Cross River Gorilla", "output_scores": [-2.875, -4.71875, -6.875, -8.875, -5.78125, -9.0625, -7.9375], "max_reward": -2.875}
+{"prompt": "Why is WiFi such a popular way to implement a home network?", "output_scores": [-10.625, -10.0, -10.6875, -11.625, -12.125, -7.09375, -8.0], "max_reward": -7.09375}
+{"prompt": "Extract the ingredients in bee pollen from the text.", "output_scores": [-9.5, -8.625, -9.0625, -10.0, -6.75, -9.5, -9.3125], "max_reward": -6.75}
+{"prompt": "What is St. Peters Basilica?", "output_scores": [-2.109375, 0.26953125, 5.875, -0.75, 2.90625, 0.86328125, 5.96875], "max_reward": 5.96875}
+{"prompt": "What is the holiday of Passover about?", "output_scores": [-1.40625, 2.59375, -2.046875, -2.25, -0.016845703125, -3.5, -1.609375], "max_reward": 2.59375}
+{"prompt": "What is Halt and Catch Fire about?", "output_scores": [0.42578125, -2.625, -5.125, -4.875, -5.71875, 4.5, -0.240234375], "max_reward": 4.5}
+{"prompt": "Classify each of the following as a ridesharing or food delivery company: Doordash, Lyft, Wolt, Deliveroo, Bolt, Didi, Rappi", "output_scores": [-13.125, -14.25, -14.75, -16.625, -15.375, -13.4375, -12.75], "max_reward": -12.75}
+{"prompt": "Which of these are not playable races on Dungeons and Dragons 5th edition: Giant, Gnome, Half-Elf, Chimera, Kenku, Troll, Gnoll", "output_scores": [-7.15625, -10.4375, -9.125, -9.125, -7.9375, -11.3125, -8.625], "max_reward": -7.15625}
+{"prompt": "What is the best way to earn money on the side?", "output_scores": [-11.3125, -9.6875, -10.0625, -11.0, -10.625, -10.5, -10.375], "max_reward": -9.6875}
+{"prompt": "Why is the Bay Area football team called the 49ers?", "output_scores": [-2.5625, -7.25, -1.8515625, -7.25, -4.90625, -8.3125, -3.4375], "max_reward": -1.8515625}
+{"prompt": "Office of War Information?", "output_scores": [-5.875, -0.271484375, -5.78125, -8.3125, -3.203125, -4.21875, -4.625], "max_reward": -0.271484375}
+{"prompt": "Classify the following as an animal or plant. Polar bear, Oak Tree, Venus Flytrap, Shire Horse, Aloe vera, Golden retriever", "output_scores": [-14.25, -15.625, -16.0, -14.0, -16.375, -14.875, -16.125], "max_reward": -14.0}
+{"prompt": "Give me a list of the subjects I need to learn to become a telecommunication engineer", "output_scores": [-2.453125, -7.625, -2.25, -2.890625, -4.1875, -6.84375, -6.09375], "max_reward": -2.25}
+{"prompt": "Who was Thales?", "output_scores": [-1.0703125, 1.828125, 1.1953125, -1.3359375, -2.265625, -0.59765625, -1.578125], "max_reward": 1.828125}
+{"prompt": "What is the process called by which matter is converted from a solid directly into gas?", "output_scores": [-3.234375, -7.15625, -8.3125, -8.5625, -8.5625, -8.5625, -9.9375], "max_reward": -3.234375}
+{"prompt": "What are the Great Lakes?", "output_scores": [2.21875, -1.515625, -0.0986328125, -2.640625, -3.9375, -4.28125, -3.46875], "max_reward": 2.21875}
+{"prompt": "What does a drilling engineer do?", "output_scores": [-1.9453125, 1.359375, -7.34375, -4.0625, -3.203125, -3.953125, -5.3125], "max_reward": 1.359375}
+{"prompt": "How does increasing interest rates impact inflation?", "output_scores": [-7.5625, -3.71875, -4.96875, -9.0, -6.375, -2.59375, -5.34375], "max_reward": -2.59375}
+{"prompt": "In the series A Song of Ice and Fire, who is the founder of House Casterly?", "output_scores": [-7.34375, -8.1875, -9.625, -6.28125, -7.75, -7.875, -7.03125], "max_reward": -6.28125}
+{"prompt": "Which company introduced new kits for Marseille?", "output_scores": [-5.84375, -11.0625, -8.5625, -8.3125, -8.0, -10.4375, -8.5625], "max_reward": -5.84375}
+{"prompt": "How can I run Spark on a cluster?", "output_scores": [-5.65625, -4.5, -3.90625, -4.0, -3.359375, -2.0, -6.4375], "max_reward": -2.0}
+{"prompt": "How can I find accurate directions between two places?", "output_scores": [-11.0, -11.4375, -12.25, -11.5, -10.5625, -11.9375, -11.8125], "max_reward": -10.5625}
+{"prompt": "What is C?", "output_scores": [-4.375, -6.96875, -1.3125, -4.90625, -1.921875, -4.1875, -1.484375], "max_reward": -1.3125}
+{"prompt": "What is the east Asian process of training small trees called?", "output_scores": [-8.1875, -10.9375, -7.75, -9.1875, -9.6875, -9.0625, -10.5], "max_reward": -7.75}
+{"prompt": "How does water freeze?", "output_scores": [-0.35546875, -4.15625, -1.328125, -6.3125, -5.5625, -5.28125, -6.34375], "max_reward": -0.35546875}
+{"prompt": "Which of these sentences is correct: \"If I was you, I would do it\" or \"If I were you, I would do it\"?", "output_scores": [-7.9375, -10.0625, -8.625, -10.0, -9.5, -8.1875, -10.625], "max_reward": -7.9375}
+{"prompt": "Who won the FIFA World Cup 2014?", "output_scores": [-10.75, -8.1875, -10.0625, -10.0625, -8.75, -7.75, -8.6875], "max_reward": -7.75}
+{"prompt": "What are the words of House Tallhart?", "output_scores": [-8.9375, -10.4375, -10.0, -10.125, -6.8125, -11.25, -2.953125], "max_reward": -2.953125}
+{"prompt": "What is dopamine?", "output_scores": [-6.4375, -5.25, -7.3125, -1.4609375, -7.0625, -5.46875, -6.4375], "max_reward": -1.4609375}
+{"prompt": "What are all the locations that walnut trees grow, listed in this article.", "output_scores": [-8.9375, -6.96875, -9.4375, -9.8125, -10.4375, -9.625, -11.3125], "max_reward": -6.96875}
+{"prompt": "What is a personalized sales email?", "output_scores": [-8.6875, -9.0625, -6.6875, -7.21875, -7.1875, -7.15625, -7.875], "max_reward": -6.6875}
+{"prompt": "Identify which instrument is string or woodwind: Diplica, Kontra", "output_scores": [-6.8125, -10.0625, -7.15625, -6.09375, -6.71875, -6.25, -9.375], "max_reward": -6.09375}
+{"prompt": "At a restaurant that serves only vegan food, tell me whether each of the following items could be found in the kitchen or not: Butter, Eggs, Tofu, Chicken, Kale, Spinach, Peppers, Steak, Bread, Chickpeas, Pork", "output_scores": [-10.0625, -13.25, -13.1875, -8.25, -7.4375, -13.3125, -8.25], "max_reward": -7.4375}
+{"prompt": "Which countries are part of the five eyes alliance and what is its purpose?", "output_scores": [-0.9375, -5.40625, -0.72265625, -3.46875, 2.71875, -4.96875, -2.28125], "max_reward": 2.71875}
+{"prompt": "I which country is the best football played?", "output_scores": [-2.6875, -2.484375, 0.9921875, 0.5234375, 3.359375, 2.453125, 1.9609375], "max_reward": 3.359375}
+{"prompt": "Classify the celebrities based on whether they were born in 1990 or 1991.\nEmma Watson, Jennifer Lawrence, Ed Sheeran, Charlie Puth", "output_scores": [-9.625, -9.8125, -4.8125, -6.03125, -5.15625, -5.625, -3.71875], "max_reward": -3.71875}
+{"prompt": "Think up 5 different reasons to give my boss to take off work.", "output_scores": [-11.5, -12.875, -11.25, -12.9375, -11.75, -13.625, -10.8125], "max_reward": -10.8125}
+{"prompt": "What are all the ways I can get around in San Francisco?", "output_scores": [-10.6875, -9.6875, -3.421875, -9.4375, -9.875, -9.125, -2.9375], "max_reward": -2.9375}
+{"prompt": "Who let the dogs out?", "output_scores": [-10.875, -6.84375, -2.25, -6.75, -4.78125, -9.25, -10.1875], "max_reward": -2.25}
+{"prompt": "What are some good places to go on a surf trip?", "output_scores": [-6.75, -7.53125, -5.84375, -9.0, -8.875, -6.90625, -10.125], "max_reward": -5.84375}
+{"prompt": "Given these paragraphs about Large language models, what corpus was the first model in OpenAI's GPT series trained in 2018 on?", "output_scores": [-4.78125, -7.09375, -7.59375, -8.1875, -9.6875, -7.625, -7.3125], "max_reward": -4.78125}
+{"prompt": "Extract the awards that Bob Sanders gained throughout his career, and put them in a comma-separated list.", "output_scores": [-7.53125, -7.03125, -8.5, -8.5625, -8.1875, -8.5, -6.9375], "max_reward": -6.9375}
+{"prompt": "Identify the bird from the list: Bar-tailed godwit, Leopard, Shark", "output_scores": [-11.625, -5.34375, -11.625, -12.0, -11.625, -11.625, -11.625], "max_reward": -5.34375}
+{"prompt": "Who are the three main characters of the Harry Potter Series?", "output_scores": [-11.625, -10.75, -9.5625, -7.625, -4.78125, -6.5, -10.375], "max_reward": -4.78125}
+{"prompt": "What is the capital of Norway and when was it founded?", "output_scores": [-10.5, -10.5, -10.1875, -11.5625, -9.0, -6.5625, -11.5625], "max_reward": -6.5625}
+{"prompt": "Which of the other locations mentioned in this article is closest to Rudzk Du\u017cy?", "output_scores": [-7.75, -8.375, -7.21875, -9.625, -7.65625, -9.6875, -9.375], "max_reward": -7.21875}
+{"prompt": "How many professions did John Dassow have", "output_scores": [-9.125, -9.1875, -9.6875, -9.625, -8.875, -9.6875, -10.9375], "max_reward": -8.875}
+{"prompt": "What is the project management approach that have a serious of distinct steps?", "output_scores": [-10.0625, -8.4375, -9.0625, -10.0, -11.3125, -11.625, -10.4375], "max_reward": -8.4375}
+{"prompt": "How can a football training session be planned?", "output_scores": [-0.890625, -0.76171875, -6.5, -2.140625, -2.671875, 2.921875, -2.734375], "max_reward": 2.921875}
+{"prompt": "What are options for materials to build a house?", "output_scores": [-6.25, -10.25, -8.25, -7.1875, -6.03125, -10.1875, -10.875], "max_reward": -6.03125}
+{"prompt": "How many letters there are in the hebrew language", "output_scores": [-5.90625, -4.5, -3.359375, -10.625, -6.125, -9.0625, -10.3125], "max_reward": -3.359375}
+{"prompt": "Given a reference text about the Battle of Thermopylae, tell me when the battle was fought, who the battle was between, how many Greek and Persian forces there were, how the Persian army was able to flank the Greek forces and who won the battle?", "output_scores": [-8.9375, -7.59375, -7.875, -6.6875, -9.25, -6.375, -5.375], "max_reward": -5.375}
+{"prompt": "What are equity securities?", "output_scores": [-1.9453125, -1.9296875, -4.71875, -8.0625, -4.0625, -6.78125, -4.9375], "max_reward": -1.9296875}
+{"prompt": "Which country is the state of Illinois apart of?", "output_scores": [-9.875, -9.875, -9.4375, -9.4375, -9.875, -9.4375, -9.4375], "max_reward": -9.4375}
+{"prompt": "Give me a list of different types of cold coffee beverages.", "output_scores": [-11.625, -11.3125, -11.5, -9.6875, -12.3125, -11.375, -12.3125], "max_reward": -9.6875}
+{"prompt": "What is hybrid working?", "output_scores": [-7.65625, -7.3125, -7.34375, -8.9375, -7.34375, -7.65625, -8.875], "max_reward": -7.3125}
+{"prompt": "Why is the sun more intense at high altitude", "output_scores": [-6.21875, 0.8671875, -7.40625, -1.0625, -5.90625, -2.234375, -6.15625], "max_reward": 0.8671875}
+{"prompt": "Extract from the text the main characters in the show Bluey, the relationship to the main character, and list them using bullets in format {character name}: {relationship to Bluey}", "output_scores": [-13.4375, -8.125, -8.3125, -8.8125, -10.4375, -11.375, -10.8125], "max_reward": -8.125}
+{"prompt": "Tell me which of these are served hot or cold: soup, ice cream, potato salad, mashed potatoes, cake, cheese platter", "output_scores": [-8.3125, -14.25, -11.75, -13.3125, -2.984375, -6.6875, -7.46875], "max_reward": -2.984375}
+{"prompt": "Name some famous books on philosophy?", "output_scores": [-10.875, -10.3125, -10.8125, -7.84375, -9.1875, -8.5625, -9.5625], "max_reward": -7.84375}
+{"prompt": "Can you give me some background on Perez v. Campbell", "output_scores": [-8.5625, -4.4375, -8.1875, -7.28125, -3.21875, -9.25, -3.28125], "max_reward": -3.21875}
+{"prompt": "Give me a title of one of the \"Harry Potter\" novels.", "output_scores": [-9.1875, -10.375, -8.25, -9.0, -10.375, -9.1875, -9.6875], "max_reward": -8.25}
+{"prompt": "Based on the above passage mention the parts of Atlantic Ocean formed by Equatorial Counter Current. Display the results in a comma separated format.", "output_scores": [-6.125, -6.28125, -6.5, -8.375, -4.46875, -9.0, -4.21875], "max_reward": -4.21875}
+{"prompt": "Why do people travel do different places?", "output_scores": [-11.5, 0.671875, -10.875, -12.5625, -7.375, -7.59375, -5.78125], "max_reward": 0.671875}
+{"prompt": "What is the meaning of life?", "output_scores": [-2.703125, -3.75, -3.5, -6.125, 1.5390625, 0.4140625, -3.046875], "max_reward": 1.5390625}
+{"prompt": "Which US state is best for observing the aurora borealis phenomenon?", "output_scores": [-5.09375, -6.59375, -6.4375, -4.8125, -6.34375, 2.484375, -5.6875], "max_reward": 2.484375}
+{"prompt": "Based on the following paragraph on paleontology, what's the difference between paleontology and archaeology?", "output_scores": [-8.875, -4.96875, -4.78125, -8.9375, -6.65625, -8.6875, -9.375], "max_reward": -4.78125}
+{"prompt": "What\u2019s a recipe for chimichurri?", "output_scores": [-9.625, -7.5625, -5.40625, -11.25, -9.0625, -10.4375, -8.0], "max_reward": -5.40625}
+{"prompt": "When was West Ham started and when did they get the name West Ham United?", "output_scores": [-8.25, -8.5625, -6.8125, -9.75, -10.5625, -9.0, -8.0625], "max_reward": -6.8125}
+{"prompt": "Paul McCartney credits which artist with teaching him everything he knows?", "output_scores": [-10.875, -10.1875, -9.75, -9.9375, -10.875, -7.0625, -3.34375], "max_reward": -3.34375}
+{"prompt": "Categorize these world leaders as male or female: Angela Merkel, Margaret Thatcher, Ronald Reagan, Vladimir Putin, Mao Tse Tung, Winston Churchill, Queen Elizabeth I", "output_scores": [-15.125, -14.0, -14.6875, -14.25, -14.625, -15.125, -14.75], "max_reward": -14.0}
+{"prompt": "What is Oz?", "output_scores": [-6.8125, -5.875, -4.53125, -9.9375, -5.1875, -2.65625, -7.1875], "max_reward": -2.65625}
+{"prompt": "Classify each of the following as an instrument or tool: screw driver, guitar, trumpet, chisel, tuba, wrench", "output_scores": [-13.0625, -14.0, -15.125, -14.75, -12.625, -14.75, -15.3125], "max_reward": -12.625}
+{"prompt": "What is the difference between income tax and capital gains tax in the USA?", "output_scores": [3.25, -1.53125, -0.45703125, -1.5390625, 1.8671875, 6.875, -0.56640625], "max_reward": 6.875}
+{"prompt": "Is Chi Kraeng River in South America, Southeast Asia, or Australia?", "output_scores": [-8.125, -6.8125, -7.9375, -7.84375, -7.0, -9.75, -7.25], "max_reward": -6.8125}
+{"prompt": "How many different Alaska Native tribes are there?", "output_scores": [-9.8125, -7.65625, -2.203125, -7.0, -6.34375, -11.6875, -4.03125], "max_reward": -2.203125}
+{"prompt": "Who are Coldplay", "output_scores": [-6.84375, -8.6875, -7.84375, -5.71875, -7.03125, -7.625, -6.84375], "max_reward": -5.71875}
+{"prompt": "What is the name of the movie made by Ben Affleck and Matt Damon about the company Nike?", "output_scores": [-9.625, -8.625, -11.0625, -9.1875, -10.8125, -5.25, -9.6875], "max_reward": -5.25}
+{"prompt": "Classify each of the following as a liquid or solid: water, mailbox, soda, coffee, bush, grass, milk", "output_scores": [-17.0, -16.0, -13.375, -17.0, -16.0, -16.5, -15.375], "max_reward": -13.375}
+{"prompt": "Given a reference text about the blood hammer phenomenon, tell me the background of the term \"blood-hammer\".", "output_scores": [-8.625, -6.25, 3.546875, -7.25, -8.4375, -5.3125, -5.25], "max_reward": 3.546875}
+{"prompt": "Identify which car manufacturer is Japanese or American: Acura, Ford", "output_scores": [-10.0, -11.125, -8.0625, -11.375, -5.5, -10.75, -12.4375], "max_reward": -5.5}
+{"prompt": "Name three professional sports teams in Boston.", "output_scores": [-13.8125, -14.875, -11.4375, -13.0625, -15.0, -13.125, -15.125], "max_reward": -11.4375}
+{"prompt": "In SQL, how can I filter table rows based on a column condition?", "output_scores": [-5.15625, -7.53125, -2.65625, -8.1875, -4.8125, -7.65625, -6.65625], "max_reward": -2.65625}
+{"prompt": "Does using microwave oven cause cancer?", "output_scores": [-4.1875, -1.046875, -1.671875, -1.09375, 2.15625, 2.484375, -3.078125], "max_reward": 2.484375}
+{"prompt": "Why does my back hurt?", "output_scores": [-10.3125, -9.5625, -9.9375, -7.59375, -9.0, -10.375, -5.6875], "max_reward": -5.6875}
+{"prompt": "Which American president spoke Dutch as their first language?", "output_scores": [-10.5625, -10.0625, -8.25, -10.0625, -9.9375, -12.4375, -10.0625], "max_reward": -8.25}
+{"prompt": "Classify the following as either red wines or white wines: Cabernet Sauvignon, Pinot Blanc, Riesling, Chardonnay, Pinot Grigio, Sauvignon Blanc, Merlot, Syrah, Shiraz", "output_scores": [-12.0, -8.625, -14.0, -12.9375, -12.0625, -14.0, -12.75], "max_reward": -8.625}
+{"prompt": "Identify which instrument is string or percussion: Cimbalom, Xiqin", "output_scores": [-7.125, -11.3125, -9.0, -13.9375, -3.375, -9.3125, -6.40625], "max_reward": -3.375}
+{"prompt": "Why do many people spend so much time on their smartphone everyday?", "output_scores": [-7.78125, -6.78125, -8.4375, -7.75, -5.71875, -9.0625, -8.3125], "max_reward": -5.71875}
+{"prompt": "For each of these countries, tell whether it lies in the Western Hemisphere, Eastern Hemisphere, or both:  Thailand, United Kingdom, Belize, Japan, Algeria", "output_scores": [-13.1875, -9.6875, -13.1875, -11.875, -11.4375, -12.3125, -9.9375], "max_reward": -9.6875}
+{"prompt": "When cleaning a house, categorize each of the following as \"useful\" or \"not useful\": Broom, Mop, Vacuum, Sand, Dirt, Dust Pan, Food", "output_scores": [-10.1875, -10.8125, -14.625, -12.6875, -12.375, -13.0, -10.625], "max_reward": -10.1875}
+{"prompt": "How did Alfred Nobel make his money", "output_scores": [-2.796875, 2.71875, -0.4921875, -2.875, 0.5859375, -6.21875, 0.6015625], "max_reward": 2.71875}
+{"prompt": "Given these paragraphs about the Tesla bot, what is its expected height and weight?", "output_scores": [-9.8125, -9.5625, -9.5, -10.6875, -9.5625, -8.25, -8.5], "max_reward": -8.25}
+{"prompt": "Give me a list of the best movies I've never seen.", "output_scores": [-4.0, -6.875, -7.3125, -7.875, -7.125, -6.40625, -5.09375], "max_reward": -4.0}
+{"prompt": "What does moha mean", "output_scores": [-1.7265625, -4.59375, -0.765625, -4.0625, -6.75, -2.484375, -4.90625], "max_reward": -0.765625}
+{"prompt": "What is the right time to do workouts or yoga?", "output_scores": [-6.75, -6.875, -9.875, -6.0, -3.703125, -9.8125, -6.1875], "max_reward": -3.703125}
+{"prompt": "What are 5 unique recipes for any kind of potatoes?", "output_scores": [-7.78125, -8.6875, -7.15625, -7.90625, -7.09375, -9.0625, -9.6875], "max_reward": -7.09375}
+{"prompt": "Classify each of the following as either an indoor or an outdoor sport: soccer, table tennis, darts, snooker, cricket", "output_scores": [-13.3125, -15.0625, -13.375, -15.0625, -10.125, -14.5625, -12.1875], "max_reward": -10.125}
+{"prompt": "What is Taj Mahal?", "output_scores": [-6.21875, -5.6875, -6.84375, -6.78125, -6.5625, -4.4375, -2.234375], "max_reward": -2.234375}
+{"prompt": "Classify each of the following as mainstream media or social media: Twitter, Reddit, CNN, MSNBC, Instagram, Fox News", "output_scores": [-6.625, -7.59375, -16.125, -14.0625, -8.25, -10.25, -8.125], "max_reward": -6.625}
+{"prompt": "Given a reference text about the Battle of Baghaur, tell me who was in the battle and who won.", "output_scores": [-5.03125, -7.53125, -7.25, -4.53125, -6.3125, -7.8125, -5.375], "max_reward": -4.53125}
+{"prompt": "Describe a tense scene of a dystopian, futuristic, ritualistic gathering of hooded and masked individuals discussing the evolving threat of intelligent machines.", "output_scores": [-2.546875, -2.78125, 0.78125, 4.03125, 0.0849609375, 1.890625, -2.015625], "max_reward": 4.03125}
+{"prompt": "Classify each of these as a toy for a dog or a cat: ball, laser, bone, mouse, frisbee, catnip", "output_scores": [-15.8125, -15.8125, -16.625, -16.125, -16.0, -14.4375, -15.8125], "max_reward": -14.4375}
+{"prompt": "What is the Oxford Comma?", "output_scores": [-6.0, -8.4375, -7.96875, -5.4375, -6.21875, -6.625, -7.75], "max_reward": -5.4375}
+{"prompt": "What is the difference between tennis shoes and sandals?", "output_scores": [-3.90625, 1.28125, -1.203125, -2.25, -1.875, 0.95703125, -3.0], "max_reward": 1.28125}
+{"prompt": "List all of the call signs mentioned in the paragraph", "output_scores": [-11.6875, -10.0625, -9.5625, -9.5, -9.6875, -8.625, -8.875], "max_reward": -8.625}
+{"prompt": "Who invented Boltzmann Machines?", "output_scores": [-7.34375, -7.25, -10.9375, -11.1875, -10.25, -11.125, -11.0], "max_reward": -7.25}
+{"prompt": "Give me a 4 word summary of Moby Dick, which rhymes.", "output_scores": [-14.25, -13.8125, -14.4375, -14.25, -13.9375, -14.25, -13.875], "max_reward": -13.8125}
+{"prompt": "What are the words of House Hightower?", "output_scores": [-13.3125, -6.90625, -7.0625, -9.8125, -13.625, -13.3125, -10.375], "max_reward": -6.90625}
+{"prompt": "What should I do to maximize my chances of getting into a top business school?", "output_scores": [-9.875, -9.0, -7.90625, -8.875, -8.625, -7.0625, -8.5], "max_reward": -7.0625}
+{"prompt": "What are 5 popular reality TV shows?", "output_scores": [-13.125, -12.625, -12.125, -12.5, -12.9375, -13.6875, -13.4375], "max_reward": -12.125}
+{"prompt": "Where is the annual indoor rowing World Championship?", "output_scores": [0.46875, -3.921875, -4.15625, -5.15625, -2.34375, -3.625, -5.40625], "max_reward": 0.46875}
+{"prompt": "When was Belgium founded?", "output_scores": [-7.875, 1.2109375, -3.140625, -5.03125, -3.125, -0.7890625, -2.359375], "max_reward": 1.2109375}
+{"prompt": "Explain the Fibonacci sequence", "output_scores": [-2.234375, -3.25, -3.015625, -2.703125, -3.359375, -3.28125, -3.90625], "max_reward": -2.234375}
+{"prompt": "Why is LaSalle Street in Chicago important?", "output_scores": [-4.15625, -7.78125, -7.9375, -3.125, 0.2373046875, -5.375, -2.578125], "max_reward": 0.2373046875}
+{"prompt": "Tell whether these things smell nice or unpleasant: garbage, lemons, sweat, oceans, rain", "output_scores": [-6.03125, -4.5625, -6.90625, -6.0625, -6.3125, -8.0, -8.8125], "max_reward": -4.5625}
+{"prompt": "Why do people like traveling for leisure?", "output_scores": [-10.9375, -12.5, -8.4375, -9.3125, -9.6875, -11.6875, -9.6875], "max_reward": -8.4375}
+{"prompt": "What are some of the challenges and solutions involved in growing tomatoes in the Pacific Northwest?", "output_scores": [-8.0625, -8.75, -4.8125, -5.8125, -3.75, -8.0625, -10.9375], "max_reward": -3.75}
+{"prompt": "Given the context below, please answer the provided question: \n\nContext: \nIn fact, the first highlight moment of the Chat Assistant occurred twelve years ago at the launch event of the fifth-generation iPhone. Scott Forstall, then Apple's software chief, pressed a button on the iPhone to summon Siri and asked it questions. Inquiring about the weather, searching for restaurants, checking stock prices. Keep in mind that this was a time when smartphones were far from widespread, and being able to check stock prices on a mobile phone was already a very novel thing.\n\nQuestion: \nWho was the software chief during the first release of Apple Siri?", "output_scores": [-11.8125, -12.25, -12.5, -12.5, -11.8125, -9.9375, -12.5], "max_reward": -9.9375}
+{"prompt": "What is black tie dress code?", "output_scores": [-7.21875, -5.5625, -8.6875, -6.90625, -8.6875, -8.6875, -9.3125], "max_reward": -5.5625}
+{"prompt": "Given these paragraphs about Large language models, what is Instruction tuning?", "output_scores": [-2.015625, -4.875, -2.84375, -8.375, -8.25, -8.4375, -5.40625], "max_reward": -2.015625}
+{"prompt": "Tell me whether these are metals or non-metals: Sodium, Helium, Aluminum, Chlorine, Gold", "output_scores": [-11.625, -14.0625, -13.3125, -15.5, -16.375, -14.0625, -16.125], "max_reward": -11.625}
+{"prompt": "Based on the paragraph given, list down some important points regarding Bhopal city", "output_scores": [-9.0625, -8.3125, -8.625, -6.625, -9.125, -8.375, -7.125], "max_reward": -6.625}
+{"prompt": "What example of a cancer could cause blood in the urine?", "output_scores": [-11.8125, -10.125, -8.75, -7.84375, -7.90625, -9.5, -9.9375], "max_reward": -7.84375}
+{"prompt": "Classify each of the following as either a planet, a star, or a galaxy:  Mercury, Venus, Polaris, Earth, Sun, Mars, Jupiter, Milky Way, Andromeda, Saturn, Virgo A, Maffei 1, Uranus, Neptune, Sirius, Vega.", "output_scores": [-9.75, -16.625, -9.375, -11.8125, -11.75, -16.5, -16.25], "max_reward": -9.375}
+{"prompt": "Please write a story that puts a modern twist on a fairy tale", "output_scores": [-1.8984375, -1.2734375, -4.84375, -3.90625, -7.21875, -3.921875, -4.15625], "max_reward": -1.2734375}
+{"prompt": "What is a pineapple?", "output_scores": [-0.52734375, -4.3125, -3.0, 0.59765625, 1.6328125, 2.84375, -0.91796875], "max_reward": 2.84375}
+{"prompt": "What's Jiang's theoretical contribution?", "output_scores": [-1.5078125, -1.296875, -5.625, -5.0625, -5.6875, -5.28125, -3.734375], "max_reward": -1.296875}
+{"prompt": "What are the Fallas in Spain?", "output_scores": [-4.09375, -2.1875, -1.921875, 1.6953125, -7.8125, -3.296875, -0.26171875], "max_reward": 1.6953125}
+{"prompt": "Identify which instrument is string or percussion: Surdo, Kora", "output_scores": [-6.21875, -9.5625, -4.4375, -7.8125, -11.8125, -9.5625, -5.96875], "max_reward": -4.4375}
+{"prompt": "Who built the great pyramid of Giza?", "output_scores": [-4.6875, -2.40625, -4.4375, 7.40625, -4.0, 2.46875, 0.31640625], "max_reward": 7.40625}
+{"prompt": "When was world war 2?", "output_scores": [-5.53125, -11.875, -11.75, -8.1875, -10.625, -6.8125, -7.75], "max_reward": -5.53125}
+{"prompt": "Name some of the popular gaming consoles in the 2020s", "output_scores": [-6.90625, -11.5625, -7.34375, -11.1875, -6.8125, -8.375, -9.375], "max_reward": -6.8125}
+{"prompt": "Name a Christopher Nolan movie that was remade into an Indian movie.", "output_scores": [-9.8125, -7.1875, -13.3125, -8.875, -11.625, -7.90625, -7.78125], "max_reward": -7.1875}
+{"prompt": "What are the benefits of using the ReLU activation function over the classic sigmoid function in neural networks?", "output_scores": [-3.125, -4.03125, -7.15625, -7.09375, 0.78125, -0.046630859375, -8.0625], "max_reward": 0.78125}
+{"prompt": "Which of these titles are by Walter Dean Myers and which are by Rick Riordan Jr.? Hoops, The Legend of Tarik, Ambush in the Amazon, Crystal, The Life of a Harlem Man, The Lost Hero, The Titan's Curse, The Lightning Thief, The Red Pyramid, The Demigod Diaries", "output_scores": [-10.3125, -4.40625, -13.25, -5.96875, -12.875, -8.3125, -9.125], "max_reward": -4.40625}
+{"prompt": "How do people travel?", "output_scores": [-7.78125, -7.84375, -7.59375, -9.6875, -8.5, -9.8125, -9.9375], "max_reward": -7.59375}
+{"prompt": "what is a computer?", "output_scores": [-7.5625, -4.1875, -8.5625, -6.28125, -7.96875, -6.3125, -6.75], "max_reward": -4.1875}
+{"prompt": "Tell me whether each of these are animals or not: Alligator, Grass, Tree, Boat, Dolphin, Shark, Fish, Fence, Dog, Car", "output_scores": [-16.125, -13.9375, -16.25, -16.375, -15.8125, -16.25, -16.25], "max_reward": -13.9375}
+{"prompt": "What do redshifts tell astronomers?", "output_scores": [-5.21875, 3.625, 4.71875, 0.0419921875, 1.671875, 1.796875, 9.625], "max_reward": 9.625}
+{"prompt": "What are the best ways to decrease sound resonance in a room?", "output_scores": [-7.78125, -12.625, -9.5625, -10.625, -2.796875, -8.5625, -8.25], "max_reward": -2.796875}
+{"prompt": "Categorize  the below names into fishes and insects.\n Hilsa, Catla, Maggot, Mite", "output_scores": [-12.25, -14.375, -14.375, -9.8125, -12.5625, -14.375, -11.125], "max_reward": -9.8125}
+{"prompt": "In climbing, what is a hand jam?", "output_scores": [3.265625, 2.984375, 0.734375, 2.34375, -6.0625, -0.91796875, 3.625], "max_reward": 3.625}
+{"prompt": "What are the four major subregions in Central Otago?", "output_scores": [-8.75, -8.6875, -5.34375, -11.25, -9.3125, -12.4375, -12.625], "max_reward": -5.34375}
+{"prompt": "Which are main characters in Harry potter", "output_scores": [-10.625, -12.0625, -8.9375, -9.6875, -11.5, -10.3125, -11.4375], "max_reward": -8.9375}
+{"prompt": "What name is Beijing also known by?", "output_scores": [-13.4375, -13.4375, -13.4375, -13.4375, -13.4375, -13.4375, -13.4375], "max_reward": -13.4375}
+{"prompt": "Identify which instrument is string or percussion: Timpani, Maguhu", "output_scores": [-6.90625, -4.15625, -9.75, -4.28125, -3.46875, -8.75, -10.875], "max_reward": -3.46875}
+{"prompt": "Write a friendly email to my neighbor asking them to keep the noise down after 10pm on Weekdays.", "output_scores": [-10.5, -8.1875, -9.3125, -7.5, -6.5625, -3.734375, -6.4375], "max_reward": -3.734375}
+{"prompt": "How do you improve your basketball handles?", "output_scores": [-7.9375, -10.875, -4.75, -9.875, -4.9375, -8.125, -9.375], "max_reward": -4.75}
+{"prompt": "Where is the Crucifixion with the Virgin and St John painting located now?", "output_scores": [-8.0625, -6.46875, -10.5625, -6.96875, -8.25, -8.25, -8.625], "max_reward": -6.46875}
+{"prompt": "What is the best way to tune a snare drum?", "output_scores": [-4.65625, -1.25, -7.8125, -3.234375, -2.84375, -6.3125, -6.09375], "max_reward": -1.25}
+{"prompt": "Can you write down some different boroughs of New York City?", "output_scores": [-12.75, -14.0625, -14.3125, -10.375, -12.0625, -11.9375, -12.125], "max_reward": -10.375}
+{"prompt": "How long did dinosaurs rule earth?", "output_scores": [-1.0, -8.25, -6.5, -7.71875, -8.75, -0.326171875, -8.6875], "max_reward": -0.326171875}
+{"prompt": "How is data engineering different from data science?", "output_scores": [3.171875, -2.1875, 1.75, -0.76953125, 0.2333984375, -5.8125, -4.40625], "max_reward": 3.171875}
+{"prompt": "Given this text about Major League Baseball, how many games do teams play in the regular season and how many games are played in the World Series.", "output_scores": [-8.875, -8.6875, -6.5, -10.5625, -7.9375, -9.25, -8.3125], "max_reward": -6.5}
+{"prompt": "In the series A Song of Ice and Fire, who is the founder of House Targaryen?", "output_scores": [-5.1875, -7.25, -9.25, -8.375, -5.59375, -3.828125, -9.3125], "max_reward": -3.828125}
+{"prompt": "Provide me with popular girl names.", "output_scores": [-11.6875, -11.8125, -10.4375, -11.6875, -11.3125, -10.9375, -12.625], "max_reward": -10.4375}
+{"prompt": "How to evict a tenant in California", "output_scores": [-7.25, -7.8125, -3.640625, -3.296875, -6.75, -4.21875, -5.3125], "max_reward": -3.296875}
+{"prompt": "Which company built the F-22 Raptor?", "output_scores": [-3.234375, -5.5, -4.0, -6.1875, -0.7734375, -4.09375, -5.9375], "max_reward": -0.7734375}
+{"prompt": "Given a reference text about Anne Elizabeth Howells, tell me the names' of her parents and how she died.", "output_scores": [-8.9375, -8.3125, -8.6875, -7.28125, -7.90625, -11.0625, -9.125], "max_reward": -7.28125}
+{"prompt": "Of the items, tomato, broccoli, plane, sausage, pineapple, grass, honey, and milk would a human not like to consume?", "output_scores": [-3.78125, -5.90625, -4.0625, -3.921875, -5.59375, -9.375, -9.375], "max_reward": -3.78125}
+{"prompt": "In Asia Cricket Cup 2022 ,Player of the match was", "output_scores": [-10.6875, -9.25, -9.5625, -11.6875, -7.75, -6.5625, -10.375], "max_reward": -6.5625}
+{"prompt": "What is the difference between algebra and calculus?", "output_scores": [1.140625, 0.6484375, -1.9765625, 4.1875, 1.828125, -2.9375, 0.333984375], "max_reward": 4.1875}
+{"prompt": "What is the difference between a guitar and a bass", "output_scores": [-6.28125, -2.0625, -2.734375, -3.0625, -5.375, 0.8203125, -3.53125], "max_reward": 0.8203125}
+{"prompt": "What is deep learning?", "output_scores": [-3.640625, -6.9375, -5.3125, 4.03125, -1.375, -5.78125, -1.8203125], "max_reward": 4.03125}
+{"prompt": "Tell me whether these Pokemon are fairy or poison type: Clefable, Jigglypuff, Rapidash, Arbok, Nidorino, Zubat", "output_scores": [-14.875, -6.40625, -15.875, -15.625, -15.625, -16.25, -9.5625], "max_reward": -6.40625}
+{"prompt": "What is EDM?", "output_scores": [-9.0625, -5.96875, -6.75, -3.625, -5.28125, -8.4375, -8.375], "max_reward": -3.625}
+{"prompt": "List the basis of contemporary national legal systems from the passage. Display the results in comma separated format.", "output_scores": [-7.25, -8.9375, -9.9375, -10.3125, -6.59375, -8.0625, -6.9375], "max_reward": -6.59375}
+{"prompt": "Given the information provided about hottest chili pepper, which is the hottest naturally grown chili pepper in the world?", "output_scores": [-10.125, -4.53125, -3.109375, -7.46875, -7.96875, -5.96875, 0.296875], "max_reward": 0.296875}
+{"prompt": "Where should I go for vacation?", "output_scores": [-11.6875, -11.75, -11.5, -11.1875, -10.1875, -11.875, -11.1875], "max_reward": -10.1875}
+{"prompt": "Classify each of the following transportation options as \"Mass Transportation\" or \"Individual Transportation\": car, bike, subway, train, tram, motorcycle, scooter", "output_scores": [-15.5, -15.5, -15.5, -15.5, -15.5, -15.5, -15.5], "max_reward": -15.5}
+{"prompt": "What is the main difference between decoder only transformer and encoder only transformer?", "output_scores": [2.90625, 5.15625, 4.09375, 4.8125, 1.609375, 0.77734375, 0.53125], "max_reward": 5.15625}
+{"prompt": "How popular is K-pop around the world?", "output_scores": [-2.53125, -4.53125, -5.0625, -2.203125, 1.1015625, 0.07470703125, 0.255859375], "max_reward": 1.1015625}
+{"prompt": "Who is Stevie Wonder?", "output_scores": [-7.375, -0.10986328125, -3.34375, -6.9375, -1.9296875, -2.96875, -5.09375], "max_reward": -0.10986328125}
+{"prompt": "Given these paragraphs about Large language models, what popular neural network architecture architecture are they based on?", "output_scores": [-8.6875, -7.375, -9.0625, -3.203125, -8.625, -9.375, -8.9375], "max_reward": -3.203125}
+{"prompt": "Give me a list of the best food to try in Singapore", "output_scores": [-8.0, -11.375, -8.625, -6.59375, -12.1875, -9.9375, -10.625], "max_reward": -6.59375}
+{"prompt": "What is a Treasury Bond?", "output_scores": [-3.796875, -1.4921875, -7.4375, -4.5, -1.2890625, -3.640625, -6.8125], "max_reward": -1.2890625}
+{"prompt": "What are some nice activities to do in the Netherlands in spring?", "output_scores": [-8.875, -9.75, -5.0, -10.875, -9.0625, -6.125, -8.5625], "max_reward": -5.0}
+{"prompt": "Tell me why your dog likes dog daycare.", "output_scores": [-9.375, -8.8125, -10.375, -11.4375, -9.625, -10.625, -8.6875], "max_reward": -8.6875}
+{"prompt": "Give me the best books wrote by Machado de Assis", "output_scores": [-0.73828125, -2.21875, 3.734375, -1.40625, -0.169921875, -2.765625, 1.7734375], "max_reward": 3.734375}
+{"prompt": "How do you play Baseball?", "output_scores": [-4.65625, -7.5625, -4.03125, -4.46875, -7.28125, -7.71875, -8.1875], "max_reward": -4.03125}
+{"prompt": "You've bought a condominium in the city, your first home, with more rooms than your previous apartments. It doesn't have a garage or any yard. Which of the following items would be handy? A lawnmower, a bus pass, a security system, more bathroom towels, wall art, gardening tools, a washer and dryer set, a car", "output_scores": [-11.3125, -11.75, -8.5, -10.0, -8.0625, -8.8125, -8.4375], "max_reward": -8.0625}
+{"prompt": "Tell me which one of these companies is a popular manufacturer of golf clubs: Ping, Cobra, Nike, Taylormade", "output_scores": [-9.1875, -5.71875, -6.0, -6.21875, -10.125, -9.0, -3.875], "max_reward": -3.875}
+{"prompt": "Describe the main areas of assembly in an automotive factory.", "output_scores": [-3.609375, -6.09375, -2.65625, 0.51953125, -2.453125, -2.375, -7.1875], "max_reward": 0.51953125}
+{"prompt": "When did India gain independence?", "output_scores": [-9.0625, -5.65625, -9.0625, -6.75, -9.8125, -11.625, -9.0625], "max_reward": -5.65625}
+{"prompt": "What is fiscal policy in economics and political science?", "output_scores": [-6.09375, -5.34375, -4.03125, -3.921875, -1.9921875, -9.125, -5.6875], "max_reward": -1.9921875}
+{"prompt": "Write a short story about a person who discovers a hidden room in their house. The story should include a plot twist and a clear resolution at the end.", "output_scores": [0.5546875, 1.3515625, -1.0859375, 1.4140625, -1.4296875, 1.609375, -0.294921875], "max_reward": 1.609375}
+{"prompt": "What is Web3?", "output_scores": [-5.28125, 1.265625, -4.25, -4.1875, -6.71875, -5.0, -2.796875], "max_reward": 1.265625}
+{"prompt": "Classify the following based on the category of signals they use.\nradio waves, television waves, sound waves, Computers, Digital Phones, Digital pens", "output_scores": [-8.1875, 2.390625, -10.1875, -6.53125, -7.875, -4.46875, -7.34375], "max_reward": 2.390625}
+{"prompt": "Which episode of \"The X-Files\" was broadcast in black-and-white?", "output_scores": [-8.375, -9.6875, -6.40625, -1.4921875, -6.625, -7.9375, -7.9375], "max_reward": -1.4921875}
+{"prompt": "how to get started with data science and machine learning?", "output_scores": [-7.5625, -3.78125, -2.609375, -4.375, -3.515625, -6.40625, -4.84375], "max_reward": -2.609375}
+{"prompt": "Write a few paragraphs to describe the benefits of living in Arizona versus California", "output_scores": [-3.703125, 2.03125, 1.9453125, -5.875, -2.765625, -2.375, -2.84375], "max_reward": 2.03125}
+{"prompt": "What are teeth?", "output_scores": [1.6015625, -1.75, 3.40625, -5.78125, -1.453125, 1.6328125, -7.4375], "max_reward": 3.40625}
+{"prompt": "Who was Lionel Danthanarayana ?", "output_scores": [-11.0, -10.5, -11.875, -10.25, -9.6875, -9.4375, -12.0], "max_reward": -9.4375}
+{"prompt": "Where was the 2018 UCI Track Cycling World Championships held?", "output_scores": [-10.4375, -10.75, -10.4375, -10.75, -10.4375, -10.4375, -10.75], "max_reward": -10.4375}
+{"prompt": "What are the primary causes of obesity in the US?", "output_scores": [-3.625, -4.53125, -0.318359375, -10.4375, -6.125, -0.31640625, -4.96875], "max_reward": -0.31640625}
+{"prompt": "Who is the best ever President of the United States ?", "output_scores": [2.828125, 1.109375, -2.234375, -1.890625, -2.375, 5.8125, 4.0], "max_reward": 5.8125}
+{"prompt": "What language is spoken on the Aru Islands?", "output_scores": [-7.8125, -6.75, -7.0, -6.25, -7.90625, -3.53125, -3.046875], "max_reward": -3.046875}
+{"prompt": "What happened to Bosch's mom?", "output_scores": [-8.375, -6.65625, -6.375, -5.46875, -8.9375, -6.34375, -11.0], "max_reward": -5.46875}
+{"prompt": "What are some common vegetables and fruits to put on tacos?", "output_scores": [-11.5, -12.5, -11.5625, -12.25, -11.0, -7.90625, -13.0], "max_reward": -7.90625}
+{"prompt": "What train is the GB Class 2", "output_scores": [-11.125, -9.0625, -5.90625, -5.90625, -4.03125, -3.203125, -9.375], "max_reward": -3.203125}
+{"prompt": "What are the pros and cons of outdoor and indoor soccer?", "output_scores": [-5.65625, -6.375, -5.5, -8.625, -7.65625, -5.0, -7.8125], "max_reward": -5.0}
+{"prompt": "What is Armin van Buuren known for?", "output_scores": [-7.875, -7.125, -3.9375, -7.625, -8.125, -4.5625, -7.1875], "max_reward": -3.9375}
+{"prompt": "How many events were completed in first modern Olympic Games?", "output_scores": [-10.0625, -9.5, -9.1875, -8.1875, -6.5, -8.75, -8.4375], "max_reward": -6.5}
+{"prompt": "Give me five ways in which I can make my homebrew beer more interesting", "output_scores": [-11.3125, -10.75, -9.5625, -11.625, -8.75, -12.0625, -12.25], "max_reward": -8.75}
+{"prompt": "What is Flink?", "output_scores": [-2.21875, -4.46875, -7.1875, -4.09375, 1.390625, -4.625, -2.484375], "max_reward": 1.390625}
+{"prompt": "Which characters belong to DC or Marvel Universe? Sandman, Clayface", "output_scores": [-4.0625, -8.875, -9.0625, -7.6875, -6.0625, -6.65625, -4.0625], "max_reward": -4.0625}
+{"prompt": "How can you identify and suss out misinformation seen in so-called news stories and on social media?", "output_scores": [-10.1875, -7.375, -7.34375, -7.40625, -8.0625, -8.5, -8.5625], "max_reward": -7.34375}
+{"prompt": "Give me a summary about Michael Jackson", "output_scores": [-5.125, -2.9375, -4.5, -1.78125, 0.53125, -2.265625, -0.78515625], "max_reward": 0.53125}
+{"prompt": "Why do cooks use kosher salt?", "output_scores": [-11.5, -7.0625, -7.28125, -10.75, -8.0625, -6.4375, -7.71875], "max_reward": -6.4375}
+{"prompt": "What is caffeine?", "output_scores": [0.60546875, -7.1875, -2.09375, -4.15625, -3.5, 1.3828125, -4.03125], "max_reward": 1.3828125}
+{"prompt": "Identify all of the breeds of dogs in this list:\n\nBanana\nPoodle\nPekingese\nHunan\nApple\nPeach\nLettuce\nArubian Cucunu\nGerman Shepherd\nJack Russell Terrier\nWolfhound\nPariah Dog\nTamales\nCoquito\nMezcal\nGingko\nPapaya\nSequoia\nRedwood\nMaple\nDogwood\nAfghan Hound\nAiredale Terrier\nCamphor Tree\nEucalyptus\nChihuaha\nBasenji\nBichon Frise\nBlue Spruce\nMagnolia\nCacao\nBlack Locust\nTequila", "output_scores": [-14.4375, -12.5, -13.625, -13.5, -12.75, -11.75, -12.9375], "max_reward": -11.75}
+{"prompt": "What are the top 3 GDP countries in 2022?", "output_scores": [-6.75, -9.0, -10.5625, -5.9375, -10.375, -10.8125, -13.1875], "max_reward": -5.9375}
+{"prompt": "how to become fit", "output_scores": [-7.625, -5.78125, -7.53125, -8.6875, -6.4375, -9.4375, -8.8125], "max_reward": -5.78125}
+{"prompt": "From the given text, list some of the accomplishments of pitcher Mariano Rivera in his baseball career, in a comma-separated list.", "output_scores": [-9.1875, -9.3125, -9.125, -12.6875, -10.6875, -11.0, -10.3125], "max_reward": -9.125}
+{"prompt": "Based on this passage, how many siblings did Hearst have?", "output_scores": [-7.25, -8.9375, -7.59375, -9.6875, -7.28125, -7.6875, -9.6875], "max_reward": -7.25}
+{"prompt": "Are seed oils bad for you?", "output_scores": [-4.90625, -5.78125, -4.875, -4.6875, -6.34375, -5.21875, -8.4375], "max_reward": -4.6875}
+{"prompt": "What is the current capital of Japan?", "output_scores": [-10.625, -10.625, -10.625, -10.625, -10.625, -10.625, -10.625], "max_reward": -10.625}
+{"prompt": "Who was Caroline Olivia Zickerick's grandmother?", "output_scores": [-10.875, -9.625, -11.5625, -10.75, -10.6875, -8.5, -10.25], "max_reward": -8.5}
+{"prompt": "Give me some ideas of things to do this weekend.", "output_scores": [-12.0, -13.1875, -13.5, -11.875, -10.5625, -14.125, -13.4375], "max_reward": -10.5625}
+{"prompt": "What is the largest employer in the world?", "output_scores": [-10.5625, -6.53125, -7.90625, -7.34375, -3.828125, -10.25, -4.8125], "max_reward": -3.828125}
+{"prompt": "what are the main components of a computer?", "output_scores": [-10.1875, -9.8125, -8.5, -10.6875, -7.6875, -1.5078125, -9.5], "max_reward": -1.5078125}
+{"prompt": "What is APR?", "output_scores": [-5.53125, -2.59375, -5.78125, -4.25, -8.1875, -4.375, -6.0], "max_reward": -2.59375}
+{"prompt": "What type of persimmon can be eaten raw?", "output_scores": [-6.53125, -9.5, -9.3125, -8.9375, -11.375, -8.3125, -11.4375], "max_reward": -6.53125}
+{"prompt": "How much PVC produced each year?", "output_scores": [-0.73046875, 0.78515625, -2.375, -1.296875, -1.640625, -2.90625, -1.984375], "max_reward": 0.78515625}
+{"prompt": "Which vegetable do sailors hate the most?", "output_scores": [-4.71875, -0.09033203125, -5.3125, -7.75, -8.5625, -9.8125, -3.421875], "max_reward": -0.09033203125}
+{"prompt": "What is 75 hard and what are the tasks?", "output_scores": [-3.703125, -3.46875, -4.0625, -5.40625, -6.0625, -8.4375, -4.78125], "max_reward": -3.46875}
+{"prompt": "Which of the following exercises are push exercises: bench press, bicep curl, skull crusher, tricep extension, pull up, dumbbell row.", "output_scores": [-10.6875, -7.03125, -3.046875, -0.3359375, -12.0625, -12.0625, -11.5], "max_reward": -0.3359375}
+{"prompt": "What is LAPR?", "output_scores": [-4.28125, -8.0625, 1.7265625, -6.0, -8.9375, -7.8125, -4.59375], "max_reward": 1.7265625}
+{"prompt": "What team represents Concordia University in Irvine, California?", "output_scores": [-6.59375, -9.75, -3.734375, -7.53125, -9.875, -9.875, -9.4375], "max_reward": -3.734375}
+{"prompt": "Given this paragraph about Pablo Escobar, how much money did he have when he died?", "output_scores": [-10.125, -10.1875, -7.65625, -9.3125, -7.0, -9.8125, -8.5625], "max_reward": -7.0}
+{"prompt": "What are the four quadrants in the Old City of Jerusalem?", "output_scores": [-10.4375, -8.5, -5.375, -8.625, -7.3125, -11.25, -2.09375], "max_reward": -2.09375}
+{"prompt": "Identify which car manufacturer is German or American: Audi, Buick", "output_scores": [-6.375, -7.15625, -7.4375, -8.1875, -12.9375, -7.3125, -10.75], "max_reward": -6.375}
+{"prompt": "What is pan genomics?", "output_scores": [-1.5390625, -2.671875, -0.875, -0.0576171875, 1.6171875, 9.25, 0.81640625], "max_reward": 9.25}
+{"prompt": "Who is the creator of Python?", "output_scores": [-10.5, -8.9375, -10.5625, -9.125, -8.9375, -10.5, -8.3125], "max_reward": -8.3125}
+{"prompt": "Briefly summarize this paragraph on a Pearl Harbor conspiracy theory.", "output_scores": [-9.8125, -8.6875, -9.625, -9.375, -9.375, -9.5625, -8.875], "max_reward": -8.6875}
+{"prompt": "From the passage find the list of banks who supported Yes Bank in 2020. Display the results in comma separated format.", "output_scores": [-10.5625, -9.25, -10.8125, -8.125, -9.625, -6.71875, -11.0], "max_reward": -6.71875}
+{"prompt": "What are the words of House Lannister?", "output_scores": [-10.625, -13.625, -13.3125, -10.1875, -13.625, -13.75, -13.625], "max_reward": -10.1875}
+{"prompt": "Please list down some key points  regarding governance system of Portland from the given text", "output_scores": [-10.875, -10.8125, -8.3125, -7.6875, -8.9375, -10.25, -9.875], "max_reward": -7.6875}
+{"prompt": "On a backcountry backpacking trip where we expect to cross waterways, categorize each of the following as either 'useful', 'not useful', 'dangerous' or 'neither'.  A chinchilla, a compass, granola, dry bag, seventeen oars, thermite, ten tons of uranium ore", "output_scores": [-8.375, -11.3125, -9.25, -4.75, -7.46875, -9.6875, -4.875], "max_reward": -4.75}
+{"prompt": "How does a tack work in windsurfing?", "output_scores": [2.875, -6.1875, 5.4375, -5.125, -1.3671875, -2.375, -0.54296875], "max_reward": 5.4375}
+{"prompt": "Write an argument for keeping public lands under federal control in the Intermountain West.", "output_scores": [6.71875, 8.6875, 4.75, -0.171875, 5.125, -1.859375, 6.53125], "max_reward": 8.6875}
+{"prompt": "Identify which instrument is string or percussion: Sounding stone, Cobza", "output_scores": [-3.890625, -8.75, -7.59375, -7.71875, -7.03125, -7.9375, -9.625], "max_reward": -3.890625}
+{"prompt": "What are some good date ideas for vegans?", "output_scores": [-12.1875, -9.375, -9.4375, -11.9375, -12.5625, -13.375, -11.625], "max_reward": -9.375}
+{"prompt": "What is the distance between the bases in professional baseball?", "output_scores": [-10.3125, -10.6875, -10.6875, -10.5625, -10.6875, -10.8125, -7.21875], "max_reward": -7.21875}
+{"prompt": "There is a movie \"Slow burn\". Can you help me summarize some important points about this movie", "output_scores": [-8.125, -7.625, -7.875, -6.5625, -7.28125, -8.625, -9.5], "max_reward": -6.5625}
+{"prompt": "Choose the word which is different from the rest:  Trunk, Tree, Fruit, Leaf, Flower", "output_scores": [-6.96875, -4.96875, -9.875, -5.71875, -9.9375, -8.0625, -8.4375], "max_reward": -4.96875}
+{"prompt": "Imagine you are planning a menu for Thanksgiving Dinner. Build out a meal with two main dishes, four side dishes and two desserts. I have an aunt with Celiac disease who is vegetarian, so make sure there are options for vegetarians and people with celiac disease in each course, and explain what my aunt can eat in each part of the meal", "output_scores": [-6.96875, -7.5625, -8.625, -4.15625, -7.6875, -6.875, -2.203125], "max_reward": -2.203125}
+{"prompt": "Is a blackberry a fruit or a berry?", "output_scores": [-5.03125, -4.5625, -0.5078125, -3.0, -1.828125, -3.234375, -3.921875], "max_reward": -0.5078125}
+{"prompt": "what would I need of the following for a hiking trip?\nheadphones\ninternet\ntrek shoes\nwinter gear\ncamp\nwater\nfood\ncar\ntowels\njeans\nguitar", "output_scores": [-10.25, -11.5, -6.4375, -12.3125, -8.3125, -10.375, -7.96875], "max_reward": -6.4375}
+{"prompt": "What is Canada known for?", "output_scores": [-11.0, -10.1875, -10.75, -10.25, -9.3125, -12.0625, -9.5625], "max_reward": -9.3125}
+{"prompt": "Does Davos have a good hockey team", "output_scores": [-3.59375, -3.46875, -5.75, -1.9765625, -5.78125, -4.125, -4.5625], "max_reward": -1.9765625}
+{"prompt": "Classify each of these as team sports, individual sports, or neither: soccer, tennis, swimming, lacrosse, golf, checkers, potatoes.", "output_scores": [-11.125, -13.8125, -13.625, -13.625, -13.8125, -11.9375, -14.9375], "max_reward": -11.125}
+{"prompt": "How did early civilizations use dates and dried fruits?", "output_scores": [-6.125, -3.78125, -4.84375, -6.28125, -5.28125, -1.84375, -4.59375], "max_reward": -1.84375}
+{"prompt": "List the founders of MicroStrategy and surround the first name of the founder who served as CEO in quotes.", "output_scores": [-11.3125, -11.0, -9.25, -11.5, -9.8125, -10.25, -11.1875], "max_reward": -9.25}
+{"prompt": "What are the key elements to a companies income statement?", "output_scores": [-6.65625, -4.90625, -8.625, -6.78125, -2.953125, -8.625, -8.625], "max_reward": -2.953125}
+{"prompt": "Can indoor houseplants live outside?", "output_scores": [-9.375, -5.59375, -7.34375, -5.46875, -9.0625, -5.15625, -5.84375], "max_reward": -5.15625}
+{"prompt": "What is the largest city in North America?", "output_scores": [-9.625, -10.1875, -8.5, -11.5625, -9.8125, -9.625, -8.0], "max_reward": -8.0}
+{"prompt": "What is the last step before a star collapses into a black hole?", "output_scores": [1.796875, 1.3046875, 1.0859375, -6.75, -6.34375, -3.0625, -2.8125], "max_reward": 1.796875}
+{"prompt": "Classify each of the following pieces of equipment according to the sport they are used for, either basketball, football, or soccer: shin guards, shooting sleeve, penalty flag, corner flag, kicking tee, and goalie gloves.", "output_scores": [-15.0625, -15.3125, -9.25, -15.125, -14.5625, -16.125, -15.1875], "max_reward": -9.25}
+{"prompt": "What did Jamaican-American author Nicola Yoon major in college for her undergraduate degree?", "output_scores": [-10.4375, -10.9375, -10.625, -9.25, -10.4375, -10.75, -10.75], "max_reward": -9.25}
+{"prompt": "What are the benefits of the 2-3 zone defense in basketball?", "output_scores": [-8.8125, -7.65625, -9.875, -5.5, -8.0625, -10.25, -9.625], "max_reward": -5.5}
+{"prompt": "What is measure of inflation in the US?", "output_scores": [3.625, 0.46875, 4.25, -6.28125, 0.359375, 1.2109375, -7.59375], "max_reward": 4.25}
+{"prompt": "Why is the ocean blue?", "output_scores": [-3.40625, 1.9453125, 2.8125, -0.345703125, -2.0625, 1.9140625, -0.07470703125], "max_reward": 2.8125}
+{"prompt": "When did Porsche stop producing air-cooled engines in the 911?", "output_scores": [-11.25, -10.375, -11.25, -6.90625, -11.25, -11.25, -11.25], "max_reward": -6.90625}
+{"prompt": "Who was the first couple to win the Nobel prize?", "output_scores": [-6.96875, -10.1875, -9.6875, -8.6875, -9.6875, -6.03125, -8.4375], "max_reward": -6.03125}
+{"prompt": "Which clef does a viola use?", "output_scores": [-9.9375, -8.1875, -9.9375, -9.9375, -9.9375, -9.9375, -10.1875], "max_reward": -8.1875}
+{"prompt": "How much more water does a bath use than a shower?", "output_scores": [-0.46875, -3.21875, 0.875, -3.6875, 1.8203125, -3.21875, -5.125], "max_reward": 1.8203125}
+{"prompt": "What is 24 Hours of Lemons", "output_scores": [1.421875, -4.78125, -8.5, 0.37890625, -3.078125, 0.64453125, -6.59375], "max_reward": 1.421875}
+{"prompt": "Give me an overview of the rivalry between the Celtics and Lakers.", "output_scores": [-1.21875, 1.359375, 3.5, -1.703125, 5.75, 7.28125, 0.00457763671875], "max_reward": 7.28125}
+{"prompt": "Who are the three team managers that hold the record for the most appearances in the FIFA Club World Cup final?", "output_scores": [-8.8125, -10.125, -8.8125, -8.8125, -7.46875, -9.625, -10.1875], "max_reward": -7.46875}
+{"prompt": "Who are some important people in U.S. history that everyone should know about?", "output_scores": [-1.5, -9.0625, -8.4375, -9.75, -9.3125, -3.65625, -6.9375], "max_reward": -1.5}
+{"prompt": "Which team drafted Marques Pope?", "output_scores": [-11.0, -9.75, -9.1875, -10.9375, -10.25, -8.6875, -9.875], "max_reward": -8.6875}
+{"prompt": "Tell me which of these are professional sports teams:", "output_scores": [-8.125, -6.0625, -10.0, -8.0625, -8.0, -6.40625, -8.1875], "max_reward": -6.0625}
+{"prompt": "What is the typical math curriculum for a 5th grader", "output_scores": [-8.625, -8.125, -5.375, -5.46875, -7.4375, -3.390625, -7.40625], "max_reward": -3.390625}
+{"prompt": "How many Alabama football players have won the Heisman?", "output_scores": [-11.625, -12.5625, -12.625, -10.9375, -12.375, -7.4375, -11.75], "max_reward": -7.4375}
+{"prompt": "Currently, does Porthcurno mainly comprise farms and fisherman's cottages?", "output_scores": [-8.25, -10.125, -9.0625, -6.1875, -9.0625, -9.125, -6.96875], "max_reward": -6.1875}
+{"prompt": "What is the national bird of India", "output_scores": [-9.5, -6.8125, -5.5, -9.5, -9.5, -8.3125, -9.5], "max_reward": -5.5}
+{"prompt": "Write a short blog post about why you have chosen to delete your instagram account and why you think that instagram has an negative impact on society.", "output_scores": [-2.390625, -2.75, -3.03125, -4.21875, -1.703125, -3.15625, -4.125], "max_reward": -1.703125}
+{"prompt": "Write a response to a veteran interested in renting my house", "output_scores": [-9.6875, -3.0, -6.40625, -3.28125, -5.1875, -0.76953125, -3.53125], "max_reward": -0.76953125}
+{"prompt": "According to the given paragraph, how do convolutional neural networks avoid overfitting in machine learning?", "output_scores": [-6.53125, -9.625, -8.9375, -4.3125, -9.3125, -5.5, -7.625], "max_reward": -4.3125}
+{"prompt": "Given a reference text about Daal dhokli, tell me three commonly used daals.", "output_scores": [-2.078125, -4.875, -0.9609375, -5.59375, -3.234375, -5.03125, -3.9375], "max_reward": -0.9609375}
+{"prompt": "Who explored New World?", "output_scores": [1.296875, -6.75, -1.625, -9.625, -0.515625, 1.640625, -1.2265625], "max_reward": 1.640625}
+{"prompt": "What is time series data?", "output_scores": [-9.3125, -3.390625, -7.9375, -9.1875, -4.65625, -7.625, -4.53125], "max_reward": -3.390625}
+{"prompt": "Why do players smear black under their eyes?", "output_scores": [-3.546875, -2.671875, 2.640625, -2.359375, -0.76953125, -2.234375, -4.78125], "max_reward": 2.640625}
+{"prompt": "List the members of the Ivy in reverse alphabetical order.", "output_scores": [-10.3125, -10.625, -10.0625, -7.40625, -9.0625, -10.3125, -10.75], "max_reward": -7.40625}
+{"prompt": "Name the BRICS nations.", "output_scores": [-14.3125, -12.5625, -11.25, -12.5625, -14.3125, -7.0625, -12.5625], "max_reward": -7.0625}
+{"prompt": "Give me a one line summary of this: \"Gale gave me a sense of security I\u2019d lacked since my father\u2019s death. His companionship replaced the long solitary hours in the woods. I became a much better hunter when I didn\u2019t have to look over my shoulder constantly, when someone was watching my back\u2026Being out in the woods with Gale\u2026sometimes I was actually happy.\u201d", "output_scores": [-13.0625, -12.6875, -10.875, -8.8125, -11.625, -6.84375, -10.4375], "max_reward": -6.84375}
+{"prompt": "Name some of the major battles in the US Civil War.", "output_scores": [-9.375, -3.046875, -8.9375, -7.0625, -1.65625, -6.65625, -1.5703125], "max_reward": -1.5703125}
+{"prompt": "Give me a list of the best PC games of all time.", "output_scores": [-0.82421875, -4.125, -0.734375, -9.3125, -6.09375, -2.0625, -8.75], "max_reward": -0.734375}
+{"prompt": "In football, if touchdowns is the main way to get points, why can't the quarterback always throw the ball to the end zone every time?", "output_scores": [-7.625, -6.75, -7.0, -8.6875, -9.0, -8.9375, -1.7265625], "max_reward": -1.7265625}
+{"prompt": "ways to generate electricity", "output_scores": [-11.5625, -11.75, -12.375, -8.3125, -4.09375, -5.625, -8.75], "max_reward": -4.09375}
+{"prompt": "According to the paragraph below, what is the relationship between Dungeon Master and Venger?", "output_scores": [-10.25, -8.1875, -8.8125, -9.625, -9.75, -9.75, -6.53125], "max_reward": -6.53125}
+{"prompt": "Identify which animal species is alive or extinct: Arctotherium, Eastern Lowland Gorilla", "output_scores": [-6.53125, -2.3125, 0.71875, -6.1875, -7.84375, -4.78125, -5.8125], "max_reward": 0.71875}
+{"prompt": "Given a reference text about a red letter day, provide an explanation of what it means.", "output_scores": [-3.21875, -6.4375, -3.359375, -7.59375, -5.875, -2.53125, -2.25], "max_reward": -2.25}
+{"prompt": "What is Pascal?", "output_scores": [-0.515625, -2.203125, -5.40625, -6.34375, -2.90625, -6.21875, -2.609375], "max_reward": -0.515625}
+{"prompt": "Is it possible to perform in local theater while also pursuing a demanding career?", "output_scores": [-10.0625, -9.0, -9.0, -10.75, -5.59375, -9.1875, -8.625], "max_reward": -5.59375}
+{"prompt": "Write an intro to a meetup about music, medicine, and machines", "output_scores": [1.0703125, -1.390625, 0.75390625, -4.46875, -4.75, -3.390625, -2.390625], "max_reward": 1.0703125}
+{"prompt": "What is the benefit of CI/CD", "output_scores": [-5.21875, -6.875, -6.71875, -8.875, -6.875, -10.5, -6.3125], "max_reward": -5.21875}
+{"prompt": "What's so special about the Nissan GT-R?", "output_scores": [2.71875, -0.60546875, 2.453125, 2.4375, -1.9765625, -4.15625, -5.0], "max_reward": 2.71875}
+{"prompt": "Explain telephone numbering system of Russia ?", "output_scores": [1.28125, -1.0390625, -3.765625, -1.0546875, 1.8046875, -6.8125, -1.1171875], "max_reward": 1.8046875}
+{"prompt": "What do Georgians like about their home state?", "output_scores": [-6.40625, -7.8125, -8.375, -6.5, -7.46875, -9.5625, -9.125], "max_reward": -6.40625}
+{"prompt": "Why do people enjoy baseball?", "output_scores": [-3.703125, -1.8359375, -8.25, -4.375, -5.65625, -9.3125, -8.0], "max_reward": -1.8359375}
+{"prompt": "How to give a good presentation?", "output_scores": [-10.1875, -8.8125, -8.75, -9.375, -7.5, -10.0625, -10.25], "max_reward": -7.5}
+{"prompt": "Where did the word supercalifragalistic come from, and what does it mean?", "output_scores": [-4.1875, -7.5625, -6.40625, -3.921875, -6.8125, -5.34375, -3.609375], "max_reward": -3.609375}
+{"prompt": "Provide a comma separated list of all the universities listed in this passage", "output_scores": [-8.8125, -8.5, -9.3125, -9.5, -8.1875, -8.3125, -8.3125], "max_reward": -8.1875}
+{"prompt": "What is India famous for?", "output_scores": [-10.0, -9.0625, -10.125, -7.75, -8.125, -6.9375, -0.953125], "max_reward": -0.953125}
+{"prompt": "What is Active Directory?", "output_scores": [0.1728515625, -4.03125, -5.625, -2.640625, -1.609375, -0.006927490234375, -1.7578125], "max_reward": 0.1728515625}
+{"prompt": "Make me a bullet list of things to bring camping", "output_scores": [-11.375, -11.0, -12.75, -11.5, -11.75, -11.0, -12.25], "max_reward": -11.0}
+{"prompt": "In The Divergent series by Veronica Roth, what is the name used to refer to people who don't fit into a specific faction?", "output_scores": [-8.375, -8.9375, -8.375, -2.6875, -8.375, -6.96875, -7.3125], "max_reward": -2.6875}
+{"prompt": "Give me a list of things to do in Washington, DC", "output_scores": [-6.71875, -6.125, -4.75, -6.65625, -8.5, -0.859375, -6.75], "max_reward": -0.859375}
+{"prompt": "What are the primary causes of obesity?", "output_scores": [-6.34375, -0.88671875, -2.9375, -6.0, -5.59375, -7.28125, -3.34375], "max_reward": -0.88671875}
+{"prompt": "Which characters belong to DC or Marvel Universe? Doctor Strange, Dr. Fate", "output_scores": [-6.90625, -8.0, -8.1875, -2.21875, -0.85546875, -3.09375, -9.0625], "max_reward": -0.85546875}
+{"prompt": "Summarise me a history of the Aches National Park creation", "output_scores": [-0.6171875, -4.90625, -3.8125, -6.71875, -2.296875, 1.3515625, 0.87109375], "max_reward": 1.3515625}
+{"prompt": "Who is the lead singer of Korn?", "output_scores": [-9.5625, -10.6875, -7.90625, -10.6875, -10.6875, -8.6875, -10.6875], "max_reward": -7.90625}
+{"prompt": "Why did my cookies turn out flat?", "output_scores": [-12.4375, -12.1875, -10.625, -11.3125, -12.25, -12.3125, -11.125], "max_reward": -10.625}
+{"prompt": "Name all members of The Beatles", "output_scores": [-7.5625, -6.03125, -5.9375, -11.5625, -7.96875, -7.34375, -5.03125], "max_reward": -5.03125}
+{"prompt": "Who is the Patron Saint of Ireland?", "output_scores": [-9.5, -7.46875, -2.828125, -10.0625, -10.0, -9.5, -9.625], "max_reward": -2.828125}
+{"prompt": "Given these paragraphs about Natural hydrogen, what is another name for it that distinguishes from other forms of hydrogen?", "output_scores": [-8.1875, -10.625, -6.6875, -8.9375, -10.875, -10.125, -10.5625], "max_reward": -6.6875}
+{"prompt": "Given this paragraph about the Pearl Mill Village Historic District, tell me where it is located.", "output_scores": [-9.25, -7.75, -8.0625, -10.3125, -7.0625, -8.9375, -7.375], "max_reward": -7.0625}
+{"prompt": "What are the drawbacks of nuclear fusion?", "output_scores": [-5.3125, -1.4375, -4.46875, -5.75, -1.3359375, 3.296875, -5.65625], "max_reward": 3.296875}
+{"prompt": "How many strings are on a guitar?", "output_scores": [-10.375, -9.5, -13.4375, -10.375, -13.4375, -10.375, -10.375], "max_reward": -9.5}
+{"prompt": "What is a bunk bed?", "output_scores": [-0.68359375, -4.3125, -9.25, -5.6875, -3.75, -3.953125, -1.2109375], "max_reward": -0.68359375}
+{"prompt": "Name the top 10 greatest rapper of all time", "output_scores": [-0.8125, -1.0625, 0.83203125, 3.046875, 3.171875, -2.09375, 1.4921875], "max_reward": 3.171875}
+{"prompt": "Extract a list of calendars mentioned and display the names in valid, well-formatted JSON", "output_scores": [-4.0, -8.9375, -8.5, -6.90625, -6.0625, -7.28125, -8.5], "max_reward": -4.0}
+{"prompt": "Classify the following numbers as 'prime' or 'composite' - 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16.", "output_scores": [-9.0, -10.8125, -6.875, -13.3125, -9.125, -7.4375, -8.3125], "max_reward": -6.875}
+{"prompt": "tell me about the three body problem novel", "output_scores": [-1.8828125, 0.32421875, -0.98046875, -1.4375, -0.2001953125, -2.09375, -1.8984375], "max_reward": 0.32421875}
+{"prompt": "Given this paragraph that describes the country of Peru, what is its population size?", "output_scores": [-9.5625, -8.75, -8.875, -9.375, -6.78125, -8.6875, -6.5625], "max_reward": -6.5625}
+{"prompt": "Give me Personal finance advice", "output_scores": [-10.5, -11.4375, -11.875, -9.9375, -13.5, -11.0625, -12.0625], "max_reward": -9.9375}
+{"prompt": "Give me an overview of how promotion and relegation works in the English Premier League", "output_scores": [-2.515625, -6.40625, 6.5, -1.2421875, -5.9375, -4.09375, -4.15625], "max_reward": 6.5}
+{"prompt": "What is Artisanal Mining?", "output_scores": [-5.84375, -8.1875, -1.8203125, -2.8125, -4.46875, -3.4375, -1.2890625], "max_reward": -1.2890625}
+{"prompt": "What is insurance?", "output_scores": [-7.75, -0.91015625, -5.71875, -7.0, -4.78125, -7.8125, -9.25], "max_reward": -0.91015625}
+{"prompt": "In the series A Song of Ice and Fire, who is the founder of House Redbeard?", "output_scores": [-8.6875, -9.0625, -9.0625, -8.125, -8.0, -8.625, -9.75], "max_reward": -8.0}
+{"prompt": "Why can't I wake up early in the morning?", "output_scores": [-11.1875, -11.0625, -8.3125, -8.5625, -8.5, -9.125, -9.375], "max_reward": -8.3125}
+{"prompt": "What is the ranking of poker hands from strongest to weakest that you can make with a regular deck of 52 cards and five cards total?", "output_scores": [-7.53125, -6.03125, -7.59375, -4.96875, -3.484375, -3.765625, -7.75], "max_reward": -3.484375}
+{"prompt": "Categorize each of the following foods based on the five taste sensations (sweet, salty, sour, bitter, and umami).", "output_scores": [-7.84375, -0.484375, -8.75, -9.3125, -6.59375, -7.90625, -8.5625], "max_reward": -0.484375}
+{"prompt": "Which of the big five is the most dangerous animals in Africa ?", "output_scores": [-6.09375, -1.8828125, -2.03125, -1.953125, -2.390625, -0.44140625, -4.5], "max_reward": -0.44140625}
+{"prompt": "Why is Sauna or heat therapy good for you?", "output_scores": [-10.3125, -9.0625, -12.3125, -10.4375, -13.25, -12.125, -10.4375], "max_reward": -9.0625}
+{"prompt": "Is a Hot dog a sandwich?", "output_scores": [-5.0, -1.6171875, -5.125, 0.859375, -4.875, -2.375, -6.0625], "max_reward": 0.859375}
+{"prompt": "I want to buy a work monitor which is to be used along with the laptop. What features of monitor should be considered?", "output_scores": [-4.375, -7.5, -1.9296875, -5.34375, -8.0, -6.78125, -8.1875], "max_reward": -1.9296875}
+{"prompt": "Given this paragraph, where did the German dish sauerkraut originate from?", "output_scores": [-3.109375, -6.53125, -8.625, -8.0625, -8.25, -7.75, -8.625], "max_reward": -3.109375}
+{"prompt": "What is Baumkuchen made of?", "output_scores": [-5.9375, -4.5, -1.3984375, -2.96875, -4.09375, -9.6875, -5.3125], "max_reward": -1.3984375}
+{"prompt": "What is a good gift for a seven year old boy?", "output_scores": [-11.4375, -8.375, -6.9375, -7.21875, -7.53125, -7.6875, -9.625], "max_reward": -6.9375}
+{"prompt": "Give me a list of Germany's five most recent chancellors, along with the years they were in office.", "output_scores": [-13.4375, -6.8125, -13.4375, -7.625, -13.5, -12.75, -9.1875], "max_reward": -6.8125}
+{"prompt": "Can you explain how I can analyze Simba logs?", "output_scores": [1.78125, -0.8828125, 2.140625, -2.109375, -2.921875, -3.53125, 0.42578125], "max_reward": 2.140625}
+{"prompt": "Name some of the bravolebrities from The Real Housewives of Atlanta", "output_scores": [-7.5625, -11.3125, -10.0, -11.0625, -9.625, -8.1875, -10.5625], "max_reward": -7.5625}
+{"prompt": "What was Britain called - before it was Britain", "output_scores": [-6.1875, 2.9375, 0.74609375, 7.59375, -0.578125, -1.859375, 0.85546875], "max_reward": 7.59375}
+{"prompt": "How to file tax for 2022?", "output_scores": [-8.375, -7.28125, -7.5, -3.578125, -3.0625, -6.625, -9.0625], "max_reward": -3.0625}
+{"prompt": "What are some of the ways society can be improved?", "output_scores": [-8.3125, -9.0, -7.25, -6.3125, -5.71875, -7.03125, -8.6875], "max_reward": -5.71875}
+{"prompt": "Classify each of the following as human or animal: lion, monkey, zebra, clint eastwood, cat", "output_scores": [-15.0, -15.1875, -15.1875, -15.1875, -15.4375, -15.6875, -15.1875], "max_reward": -15.0}
+{"prompt": "I am on a week long vacation to India and specifically want to explore Himalayan state of Himachal Pradesh. How should I plan my trip ?", "output_scores": [-5.4375, -8.625, -10.0625, -5.21875, -7.78125, -8.625, -7.875], "max_reward": -5.21875}
+{"prompt": "Why is Massachusetts known as the Bay State?", "output_scores": [-1.1015625, -0.640625, 0.58984375, -2.921875, -1.1484375, -0.71875, -0.5625], "max_reward": 0.58984375}
+{"prompt": "Why did the cow jump over the moon?", "output_scores": [-0.26171875, -3.40625, 2.71875, -5.375, 1.671875, -3.09375, -1.1171875], "max_reward": 2.71875}
+{"prompt": "What is beta oxidation?", "output_scores": [0.0419921875, 0.83203125, 0.1357421875, -6.65625, 2.3125, -4.3125, -3.859375], "max_reward": 2.3125}
+{"prompt": "Fissures, vents, and plugs are all associated with which geological feature?", "output_scores": [-10.0625, -9.3125, -9.5625, -9.8125, -12.375, -12.0625, -11.875], "max_reward": -9.3125}
+{"prompt": "Which Dickens novel is considered an autobiography", "output_scores": [-9.375, -5.21875, -5.125, -7.5, -9.0, -8.75, -8.625], "max_reward": -5.125}
+{"prompt": "Provide a brief summary of the reaction to the creation of LIV Golf", "output_scores": [-5.96875, -7.6875, -3.90625, 0.37109375, -3.921875, -3.125, 0.6796875], "max_reward": 0.6796875}
+{"prompt": "what is the difference between a rat and a mouse", "output_scores": [-5.96875, -8.75, -9.125, -7.71875, -8.1875, -7.625, -8.3125], "max_reward": -5.96875}
+{"prompt": "Classify as a technical book vs Non technical book", "output_scores": [-6.46875, -10.0, -8.75, -10.0, -5.53125, -4.09375, -8.625], "max_reward": -4.09375}
+{"prompt": "How many points did Jarom\u00edr J\u00e1gr score in the 1995-1996 season?", "output_scores": [-8.75, -9.0, -8.5625, -8.5, -8.75, -10.5625, -7.5625], "max_reward": -7.5625}
+{"prompt": "Given the following paragraph about the history of tallest buildings, which was the first skyscraper and when was it build?", "output_scores": [-9.5625, -8.0, -9.5625, -8.375, -8.125, -6.84375, -6.59375], "max_reward": -6.59375}
+{"prompt": "Does Twitter ever break their own rules?", "output_scores": [-4.4375, -1.21875, -3.5625, -4.625, -2.734375, -3.859375, -4.53125], "max_reward": -1.21875}
+{"prompt": "Identify which animal species is alive or extinct: Hovasaurus, Green Turtle", "output_scores": [-11.5, -4.28125, -7.40625, -10.625, -7.5, -6.65625, -10.75], "max_reward": -4.28125}
+{"prompt": "I'm going on a hike and the weather is cold, how should I dress?", "output_scores": [-5.09375, -4.59375, -9.5625, -4.6875, -6.75, -7.0, -6.5625], "max_reward": -4.59375}
+{"prompt": "Behind Delta tables is the data stored in Parquet file formats?", "output_scores": [-4.25, -6.90625, -4.53125, -5.09375, -5.625, -4.8125, -3.796875], "max_reward": -3.796875}
+{"prompt": "Classify each of the following as either a root vegetable or a fruit: cassava, ube, strawberry, carrot, potato, banana, blueberry, yam, lime", "output_scores": [-15.375, -15.75, -5.1875, -15.5625, -16.25, -16.25, -16.25], "max_reward": -5.1875}
+{"prompt": "What is the best soccer club in history?", "output_scores": [-1.25, -2.71875, -2.46875, 0.1572265625, -0.234375, -0.69921875, -2.375], "max_reward": 0.1572265625}
+{"prompt": "What are the words of House Arryn?", "output_scores": [-13.25, -13.3125, -13.3125, -13.3125, -13.3125, -13.3125, -13.3125], "max_reward": -13.25}
+{"prompt": "Who are some students at Hogwarts in Gryffindor house that were in the same year as Harry Potter?", "output_scores": [-12.1875, -14.6875, -5.90625, -11.25, -10.25, -8.1875, -14.6875], "max_reward": -5.90625}
+{"prompt": "What is lucid dream and how can someone learn to do it?", "output_scores": [-8.5, -10.25, -9.125, -9.625, -8.6875, -7.4375, -7.28125], "max_reward": -7.28125}
+{"prompt": "Brainstorm reasons for and against taking a daily low-dose aspirin.", "output_scores": [-9.9375, -8.875, -10.0625, -10.3125, -8.3125, -10.0, -9.375], "max_reward": -8.3125}
+{"prompt": "Categorize these movies that came out in 1999 as cartoons or live-action: The Matrix, Stuart Little, Cruel Intentions, The Iron Giant, The Blair Witch Project, South Park: Bigger, Longer, and Uncut, The Sixth Sense", "output_scores": [-13.3125, -11.8125, -12.5625, -12.5, -13.8125, -10.625, -10.5625], "max_reward": -10.5625}
+{"prompt": "how to give a great presentation", "output_scores": [-9.1875, -9.5, -10.125, -13.0625, -6.6875, -8.4375, -6.40625], "max_reward": -6.40625}
+{"prompt": "Give me a list of fantastic movies", "output_scores": [-8.5, -7.375, -9.25, -8.4375, -7.71875, -10.4375, -7.875], "max_reward": -7.375}
+{"prompt": "Give me a list of the best adventure books", "output_scores": [-9.5625, -10.3125, -9.625, -10.1875, -11.4375, -9.875, -11.1875], "max_reward": -9.5625}
+{"prompt": "What are the most successful Premier League football teams?", "output_scores": [-9.0, -2.875, -5.6875, -3.25, -0.84375, -4.0, -7.65625], "max_reward": -0.84375}
+{"prompt": "How to get entrance to Istanbul from US?", "output_scores": [-10.0625, -2.546875, -4.90625, -5.09375, -1.6328125, -4.96875, -5.3125], "max_reward": -1.6328125}
+{"prompt": "What direction did Italy Avenue go in Uruguay per this block of text?", "output_scores": [-7.65625, -8.5, -8.8125, -8.9375, -6.84375, -8.9375, -7.5625], "max_reward": -6.84375}
+{"prompt": "why am I required to do onboarding training?", "output_scores": [-5.65625, -5.84375, -0.392578125, -10.25, -8.625, -8.3125, -11.875], "max_reward": -0.392578125}
+{"prompt": "Classify each of the following products as an Apple, Amazon, or Microsoft product: Airpods, Xbox, Alexa, Fire TV Stick, iPhone, Surface Pro, Macbook", "output_scores": [-16.5, -16.625, -15.8125, -16.125, -15.875, -16.625, -16.5], "max_reward": -15.8125}
+{"prompt": "What s epigenomics?", "output_scores": [-6.3125, -5.8125, -6.40625, -8.4375, -2.265625, -0.053466796875, 0.498046875], "max_reward": 0.498046875}
+{"prompt": "Tell me if these are countries in the Americas or in Europe: Spain, Guyana, Peru, Netherlands, Belgium, Canada, French Guiana", "output_scores": [-9.9375, -12.75, -13.375, -13.1875, -15.625, -9.75, -10.9375], "max_reward": -9.75}
+{"prompt": "What are some things you could do over the Easter break?", "output_scores": [-12.625, -13.1875, -12.4375, -11.9375, -12.375, -13.25, -12.9375], "max_reward": -11.9375}
+{"prompt": "What can I do to help me sleep better?", "output_scores": [-8.5, -10.6875, -10.0, -5.9375, -4.875, -8.375, -10.6875], "max_reward": -4.875}
+{"prompt": "Tell me whether these people are chess Grandmasters or professional boxers: Nikolai Krogius, Evgeny Gleizerov, Dmitry Bivol, Nikolai Valuev, and Alexander Alekhine.", "output_scores": [-12.0, -9.9375, -8.6875, -13.125, -10.0625, -7.6875, -8.8125], "max_reward": -7.6875}
+{"prompt": "When was Kyoto the capital of Japan?", "output_scores": [-11.6875, -11.6875, -12.0, -11.6875, -11.6875, -11.6875, -11.6875], "max_reward": -11.6875}
+{"prompt": "What is the name of the national museum of the Netherlands?", "output_scores": [-11.5, -11.5, -8.625, -11.5, -9.6875, -11.5, -7.78125], "max_reward": -7.78125}
+{"prompt": "Did Damien Chazelle direct movies or TV shows first?", "output_scores": [-6.65625, -10.875, -9.0, -8.5625, -9.6875, -7.75, -9.75], "max_reward": -6.65625}
+{"prompt": "How many Children Trump has?", "output_scores": [-10.0625, -8.6875, -11.25, -10.25, -8.6875, -14.25, -12.25], "max_reward": -8.6875}
+{"prompt": "Rank countries with highest population", "output_scores": [-5.0625, -4.78125, -7.90625, -7.5625, -8.625, -8.125, -8.4375], "max_reward": -4.78125}
+{"prompt": "When was golf invented?", "output_scores": [-4.53125, -3.984375, -3.390625, -3.890625, -4.46875, -6.25, -5.71875], "max_reward": -3.390625}
+{"prompt": "What kind of species is the Epophthalmia", "output_scores": [-5.625, -3.125, -9.0625, -5.96875, -9.3125, -9.9375, -10.6875], "max_reward": -3.125}
+{"prompt": "What are some good slogan ideas for my new boat rental company?", "output_scores": [-12.375, -11.8125, -12.3125, -10.875, -10.125, -13.5, -12.125], "max_reward": -10.125}
+{"prompt": "How to find the area of a rectangle?", "output_scores": [-9.1875, -10.375, -11.5625, -9.6875, -7.28125, -8.375, -8.25], "max_reward": -7.28125}
+{"prompt": "Give me a list of the last five european golden boots winner.", "output_scores": [-2.859375, -3.15625, -9.4375, -7.15625, -9.25, -3.953125, -5.59375], "max_reward": -2.859375}
+{"prompt": "Who is Jorge Luis Borges?", "output_scores": [-2.5625, -3.75, -5.625, -4.15625, -3.484375, -3.21875, -4.6875], "max_reward": -2.5625}
+{"prompt": "Which of the following are considered functional programming languages and which are not: OCaml, Scala, Python, C, and Java.", "output_scores": [-2.421875, -6.46875, 0.255859375, -4.46875, 4.0, -3.53125, -2.015625], "max_reward": 4.0}
+{"prompt": "What are four universities in the state of Texas?", "output_scores": [-14.3125, -14.3125, -14.3125, -14.625, -13.875, -14.3125, -14.3125], "max_reward": -13.875}
+{"prompt": "There are three rock types; igneous, sedimentary and metamorphic rocks. I have a list of rocks, can you please tell me what type of rocks they are? These are the rocks: Sandstone, Granite, Marble, Basalt, Chalk, Slate.", "output_scores": [-6.5625, -3.53125, -3.953125, -3.015625, -7.71875, -2.28125, -2.71875], "max_reward": -2.28125}
+{"prompt": "From the passage provided extract names of countries where Anatrachyntis badia lives and place them in a bullet list.", "output_scores": [-9.0, -9.3125, -8.5, -10.5625, -5.0, -7.34375, -8.875], "max_reward": -5.0}
+{"prompt": "How do you cook eggs?", "output_scores": [-3.296875, -7.59375, -6.28125, -8.4375, -9.125, -6.375, -10.625], "max_reward": -3.296875}
+{"prompt": "Given these paragraphs, tell me what a recurrent neural network , and how it differs from a convolutional neural network.", "output_scores": [-5.5625, -4.875, -1.703125, -3.015625, -4.21875, -5.84375, -2.96875], "max_reward": -1.703125}
+{"prompt": "From the passage provided, extract the diameter of eukaryotic ribosomes.", "output_scores": [-8.25, -8.0625, -9.8125, -7.125, -11.0625, -9.4375, -8.9375], "max_reward": -7.125}
+{"prompt": "What are the different methods to open a pomegranate?", "output_scores": [-10.0625, -9.75, -9.1875, -7.375, -10.1875, -11.25, -8.5], "max_reward": -7.375}
+{"prompt": "Why do you like ballet so much?", "output_scores": [-7.65625, -8.5, -8.0625, -9.625, -1.6640625, -7.0, -7.46875], "max_reward": -1.6640625}
+{"prompt": "Identify which instrument is string or percussion: Binzasara, Calabrian Lira", "output_scores": [-5.59375, -10.25, -9.5625, -11.4375, -3.375, -10.0, -8.25], "max_reward": -3.375}
+{"prompt": "Give me some suggestions to stop my kids from whining.", "output_scores": [-10.0, -10.8125, -10.9375, -10.5, -9.75, -10.5, -11.875], "max_reward": -9.75}
+{"prompt": "Identify which instrument is string or percussion: Galgo, Huobosi", "output_scores": [-7.09375, -6.4375, -7.53125, -2.46875, -7.0, -3.0625, -5.3125], "max_reward": -2.46875}
+{"prompt": "Linus Torwalds invented and wrote what", "output_scores": [-13.625, -10.3125, -13.625, -13.375, -10.75, -13.375, -12.375], "max_reward": -10.3125}
+{"prompt": "What are the steps to care for a houseplant?", "output_scores": [-5.9375, -5.15625, -7.34375, -9.0, -1.4375, -6.1875, -6.9375], "max_reward": -1.4375}
+{"prompt": "Who was the Greek goddess of love", "output_scores": [-11.5, -11.5, -12.0, -9.3125, -7.375, -4.6875, -8.6875], "max_reward": -4.6875}
+{"prompt": "How do you summarize a story?", "output_scores": [-4.625, -3.953125, -8.625, -3.6875, -6.375, -6.9375, -6.0625], "max_reward": -3.6875}
+{"prompt": "Is it possible to raise your child trilingual?", "output_scores": [-8.0, -9.1875, -9.3125, -10.6875, -6.71875, -9.125, -7.0625], "max_reward": -6.71875}
+{"prompt": "Identify which animal species is alive or extinct: Seymouria, White Rhino", "output_scores": [1.8515625, -8.375, -5.65625, 1.0390625, -7.375, 2.203125, -3.9375], "max_reward": 2.203125}
+{"prompt": "Identify which instrument is string or percussion: Whip, Waldzither", "output_scores": [-7.8125, -7.59375, -4.8125, -8.5, -7.1875, -7.0, -6.78125], "max_reward": -4.8125}
+{"prompt": "Give me an example of a business model with a mission statement.", "output_scores": [-0.322265625, -4.6875, -4.96875, -2.65625, -4.53125, -2.0625, -7.28125], "max_reward": -0.322265625}
+{"prompt": "Who is playing in 2023 women\u2019s NCAA championship game?", "output_scores": [-8.0, -7.875, -7.125, -8.625, -8.375, -9.5625, -7.53125], "max_reward": -7.125}
+{"prompt": "How many goals did Archie Thompson's team mates score?", "output_scores": [-8.375, -9.875, -8.0, -8.875, -8.0, -6.09375, -4.90625], "max_reward": -4.90625}
+{"prompt": "What is a way I can trick my mom into thinking I'm sick, so I can skip school today?", "output_scores": [-8.5, -7.09375, -8.3125, -7.3125, -7.09375, -6.34375, -6.34375], "max_reward": -6.34375}
+{"prompt": "Based on this paragraph, please list the symptoms of dementia separating them with bullets.", "output_scores": [-8.25, -8.75, -9.5625, -10.375, -9.5625, -9.0, -6.4375], "max_reward": -6.4375}
+{"prompt": "Who is Thomas Jefferson?", "output_scores": [-3.734375, -4.5625, -3.265625, -0.7734375, -5.4375, -1.890625, 2.609375], "max_reward": 2.609375}
+{"prompt": "Write a story about somebody, anybody, nobody and everybody", "output_scores": [2.859375, 0.1201171875, -3.03125, 2.359375, -4.90625, -6.625, -3.34375], "max_reward": 2.859375}
+{"prompt": "Write an essay about whether corona policy measures are beneficial towards society or not", "output_scores": [2.34375, 1.71875, 1.796875, 3.53125, 1.8671875, 1.359375, 1.0234375], "max_reward": 3.53125}
+{"prompt": "Name China's greatest events happened when Jiang was in charge", "output_scores": [-0.6171875, -6.5625, -1.5, -1.6953125, 1.125, -5.15625, -0.828125], "max_reward": 1.125}
+{"prompt": "How many movies did director Quentin Tarantino make?", "output_scores": [-9.6875, -13.8125, -7.9375, -8.125, -4.1875, -6.9375, -9.375], "max_reward": -4.1875}
+{"prompt": "Given this paragraph about Twitch, during what year did twitch have more than 100 million viewers per month?", "output_scores": [-10.0625, -6.21875, -8.25, -8.6875, -9.8125, -6.96875, -10.5], "max_reward": -6.21875}
+{"prompt": "What is a piano?", "output_scores": [-3.015625, -0.99609375, -4.8125, -3.484375, -3.578125, -3.84375, -4.9375], "max_reward": -0.99609375}
+{"prompt": "Identify which instrument is string or woodwind: Zither, Khlui", "output_scores": [-11.5, -11.75, -6.21875, -7.21875, -8.125, -13.5, -9.375], "max_reward": -6.21875}
+{"prompt": "Tell me whether you eat each of these with a spoon or fork: soup, ice cream, cereal, salad, pasta", "output_scores": [-15.625, -15.8125, -13.8125, -6.4375, -15.625, -10.9375, -12.5], "max_reward": -6.4375}
+{"prompt": "Which of the following books were written by JK Rowling: Harry Potter and the Goblet of Fire, Harry Potter and the Half Blood Prince, Cursed Child, Lord of the Rings trilogy, Percy Jackson, A Song of Ice and Fire.", "output_scores": [-11.9375, -12.0625, -13.0, -12.875, -12.625, -11.4375, -12.625], "max_reward": -11.4375}
+{"prompt": "What are drop bears?", "output_scores": [-6.125, -4.5, -3.5625, -4.40625, -3.796875, -2.015625, -5.46875], "max_reward": -2.015625}
+{"prompt": "What is the best drum kit?", "output_scores": [-8.1875, -8.625, -7.625, -8.4375, -9.3125, -10.0625, -10.125], "max_reward": -7.625}
+{"prompt": "Classify each of the following water bodies as oceans and seas: Pacific, Arabian, Caspian, Atlantic", "output_scores": [-10.1875, -2.375, -3.71875, -14.6875, -14.6875, -13.0, -9.9375], "max_reward": -2.375}
+{"prompt": "Extract the venues of each Phish concert referenced in this paragraph and list in bulleted format.", "output_scores": [-8.125, -8.0, -8.875, -8.8125, -7.75, -8.9375, -8.4375], "max_reward": -7.75}
+{"prompt": "5 ways to increase stamina", "output_scores": [-10.25, -8.6875, -7.28125, -9.1875, -9.25, -8.25, -9.625], "max_reward": -7.28125}
+{"prompt": "Which three players have the most Masters Victories?", "output_scores": [-12.5625, -9.0, -12.1875, -6.96875, -13.8125, -11.9375, -12.5625], "max_reward": -6.96875}
+{"prompt": "What is the difference between racquetball and tennis?", "output_scores": [1.234375, -3.078125, -8.1875, -7.75, 0.73046875, -8.4375, -3.59375], "max_reward": 1.234375}
+{"prompt": "Who will win the women\u2019s final four matchup between Iowa and South Carolina?", "output_scores": [-6.6875, -4.625, -8.3125, -5.84375, -5.65625, -7.46875, -7.46875], "max_reward": -4.625}
+{"prompt": "8 Simple Ways to Adopt a Healthy and sustainable Eating Pattern", "output_scores": [-5.125, -9.375, -10.125, -3.8125, -10.8125, -7.125, -8.5625], "max_reward": -3.8125}
+{"prompt": "What is CST 11", "output_scores": [-5.65625, -8.25, -5.34375, -4.84375, -6.0625, -7.25, -7.15625], "max_reward": -4.84375}
+{"prompt": "Write a brief paragraph of the benefits of attending Arizona State University", "output_scores": [1.015625, -2.296875, 1.9921875, -0.455078125, -4.125, -1.9765625, -0.158203125], "max_reward": 1.9921875}
+{"prompt": "Is simul climbing more dangerous for the leader or the follower?", "output_scores": [-0.875, -0.5625, -3.90625, -4.03125, -2.765625, 2.203125, -5.125], "max_reward": 2.203125}
+{"prompt": "Why do children of Indian Origin do well in SpellBee contests in the USA?", "output_scores": [-2.640625, -2.171875, -3.34375, -4.9375, -4.21875, -0.8515625, -3.109375], "max_reward": -0.8515625}
+{"prompt": "What are some examples of a woodwind instrument?", "output_scores": [-9.75, -11.75, -11.8125, -10.125, -11.4375, -12.875, -5.59375], "max_reward": -5.59375}
+{"prompt": "what is the current location of Voyager 1 spacecraft in the cosmos?", "output_scores": [-4.9375, -3.875, -4.84375, -3.609375, -6.09375, -4.53125, -4.9375], "max_reward": -3.609375}
+{"prompt": "Given this paragraph about the 2011 NBA Finals, who won the championship and the NBA Finals Most Valuable Player award?", "output_scores": [-10.5, -7.28125, -8.375, -9.9375, -7.8125, -7.625, -6.875], "max_reward": -6.875}
+{"prompt": "What was the turning point in the Pacific Theatre in WW2?", "output_scores": [5.78125, -3.140625, -2.46875, 1.140625, -3.671875, -0.78125, -6.125], "max_reward": 5.78125}
+{"prompt": "Is the earth flat?", "output_scores": [-4.40625, -6.71875, -1.8671875, -5.3125, -5.09375, -3.609375, -4.5], "max_reward": -1.8671875}
+{"prompt": "Is it possible to build a society that runs completely on socialism without any capitalism elements?", "output_scores": [0.8203125, 0.8984375, -2.0, 1.078125, -0.37890625, -0.255859375, -2.65625], "max_reward": 1.078125}
+{"prompt": "What does the Remarkable writing tablet do?", "output_scores": [-4.46875, -4.90625, -5.3125, -5.5, -8.0, -10.25, -10.0], "max_reward": -4.46875}
+{"prompt": "When did Rolex introduce the Batman GMT", "output_scores": [-3.625, -7.34375, -8.0625, -7.3125, -5.375, -8.0, -7.875], "max_reward": -3.625}
+{"prompt": "From the passage provided, extract where Thomas finished high school.", "output_scores": [-9.875, -10.25, -9.5625, -8.9375, -9.375, -9.5625, -8.125], "max_reward": -8.125}
+{"prompt": "What is topography?", "output_scores": [-5.125, -3.03125, -5.28125, -4.875, -2.109375, 0.4609375, -7.34375], "max_reward": 0.4609375}
+{"prompt": "Who is the largest employer in the world?", "output_scores": [-5.46875, -5.15625, -7.21875, -8.125, -6.5625, -9.3125, -8.75], "max_reward": -5.15625}
+{"prompt": "Identify which car manufacturer is Japanese or American: Lila, Lincoln", "output_scores": [-7.40625, -6.375, -9.3125, -4.71875, -8.9375, -8.375, -7.40625], "max_reward": -4.71875}
+{"prompt": "What ancient organization invented the concept of Democracy?", "output_scores": [-1.296875, 5.8125, 5.21875, -4.0, 8.3125, 4.65625, 6.25], "max_reward": 8.3125}
+{"prompt": "From the passage provided,  find the names of the sequels to the movie Captain America: The First Avenger. Separate them with a comma.", "output_scores": [-9.4375, -10.6875, -7.71875, -8.9375, -8.625, -8.3125, -9.6875], "max_reward": -7.71875}
+{"prompt": "What are the steps to put an elephant into a fridge?", "output_scores": [-0.671875, -5.875, -8.375, 0.59765625, -3.90625, -5.40625, -2.765625], "max_reward": 0.59765625}
+{"prompt": "Summarize Romania's history and founding.", "output_scores": [-5.75, -4.03125, -3.0, -1.0390625, -2.625, -5.375, -4.4375], "max_reward": -1.0390625}
+{"prompt": "ways to reduce solid waste", "output_scores": [-11.75, -13.125, -7.25, -9.3125, -11.3125, -5.71875, -13.0], "max_reward": -5.71875}
+{"prompt": "When and where was the first major agitation led by Gandhi, tell me who this agitation was against,  which crop led to this agitation and why this agitation happened.", "output_scores": [-2.796875, -5.84375, -4.15625, -3.65625, -3.125, -6.65625, -5.0625], "max_reward": -2.796875}
+{"prompt": "What caused World War 1?", "output_scores": [-2.921875, -3.859375, -5.625, -3.625, -4.09375, -7.4375, -3.109375], "max_reward": -2.921875}
+{"prompt": "How cloudy is Seattle USA", "output_scores": [-3.0, -4.125, -5.15625, -4.15625, -4.15625, -3.03125, -3.59375], "max_reward": -3.0}
+{"prompt": "What is an API?", "output_scores": [-3.546875, -4.21875, -4.0625, -4.4375, -1.203125, -4.15625, -3.203125], "max_reward": -1.203125}
+{"prompt": "Who won the 2000 World Series?", "output_scores": [-10.5, -10.5, -10.5625, -10.1875, -10.6875, -11.125, -11.625], "max_reward": -10.1875}
+{"prompt": "Given a reference text about the golden-green woodpecker, tell be how big they are.", "output_scores": [-6.1875, -6.0625, -5.9375, -7.625, -6.71875, -7.96875, -7.15625], "max_reward": -5.9375}
+{"prompt": "Identify which instrument is string or percussion: Claves, Rabeca", "output_scores": [-8.5, -6.71875, -7.25, -14.75, -9.25, -11.25, -4.34375], "max_reward": -4.34375}
+{"prompt": "When did the gallipoli campaign take place?", "output_scores": [-6.75, -6.875, -7.625, -5.03125, 0.0654296875, -7.59375, -6.875], "max_reward": 0.0654296875}
+{"prompt": "How many players are in a cricket team?", "output_scores": [-13.875, -12.125, -12.125, -12.125, -9.75, -12.125, -10.0625], "max_reward": -9.75}
+{"prompt": "Which of the following does not fit with the others? Please explain your reasoning.\nGalaxy M81\nBlack Eye Galaxy\nPinwheel Galaxy\nAndromeda Galaxy\nSombrero Galaxy", "output_scores": [-8.4375, -5.875, -6.78125, -4.75, -4.59375, -6.0625, -5.28125], "max_reward": -4.59375}
+{"prompt": "Best TV shows I've ever seen.", "output_scores": [-6.6875, -7.875, -10.25, -9.4375, -9.0625, -8.375, -8.375], "max_reward": -6.6875}
+{"prompt": "Where can you find Anostraca?", "output_scores": [-4.75, -2.9375, -5.03125, -3.921875, -2.75, -0.515625, -3.5625], "max_reward": -0.515625}
+{"prompt": "Where does the name Gibraltar come from?", "output_scores": [-1.078125, -0.57421875, -3.859375, -1.9296875, -1.6953125, -2.03125, 1.625], "max_reward": 1.625}
+{"prompt": "Where did basketball originate?", "output_scores": [-11.0625, -7.0625, -7.03125, -7.46875, -11.3125, -11.1875, -11.75], "max_reward": -7.03125}
+{"prompt": "What is a proper noun?", "output_scores": [-4.5, -8.0, -8.4375, -7.8125, -4.78125, -6.5625, -7.03125], "max_reward": -4.5}
+{"prompt": "Given this paragraph about the experiment that led to the discovery of penicillin by Sir Alexander Fleming, tell me upon which types of bacteria penicillin has an anti-bacterial effect, and list the conditions that were necessary for the discovery of penicillin", "output_scores": [-7.125, -2.96875, -5.75, -7.8125, -4.9375, -3.859375, -3.171875], "max_reward": -2.96875}
+{"prompt": "What medicine is inside of an EpiPen?", "output_scores": [-9.1875, -10.125, -11.25, -10.8125, -9.0625, -6.53125, -8.9375], "max_reward": -6.53125}
+{"prompt": "Identify which instrument is string or percussion: Naqus, Pipa", "output_scores": [-11.5625, -8.5, -4.9375, -5.6875, -5.96875, -5.5625, -6.84375], "max_reward": -4.9375}
+{"prompt": "Which is a species of fish? Lemon shark or Lemon", "output_scores": [-7.3125, -10.25, -10.5, -6.8125, -12.125, -7.875, -12.125], "max_reward": -6.8125}
+{"prompt": "Which is a species of fish? Opah or Oprah", "output_scores": [-6.5, -7.0, -9.375, -7.65625, -8.6875, -9.3125, -8.75], "max_reward": -6.5}
+{"prompt": "Tell me about Potrerillos", "output_scores": [-6.71875, -4.84375, -9.3125, -1.3515625, -7.59375, -7.375, -9.8125], "max_reward": -1.3515625}
+{"prompt": "I'm going camping and want to treat river water to drink. What are three options I can use?", "output_scores": [-9.625, -7.6875, -8.75, -8.875, -9.125, -8.25, -6.1875], "max_reward": -6.1875}
+{"prompt": "Who invented SQL?", "output_scores": [-3.6875, -3.640625, -9.0, -0.68359375, -0.11669921875, -5.78125, -5.3125], "max_reward": -0.11669921875}
+{"prompt": "What happened at the 1936 United States presidential election", "output_scores": [3.125, -3.421875, -3.96875, -1.8046875, -1.4140625, 3.25, -5.15625], "max_reward": 3.25}
+{"prompt": "What country is the newest member of NATO?", "output_scores": [-11.875, -11.125, -10.875, -10.5, -8.6875, -9.6875, -7.0], "max_reward": -7.0}
+{"prompt": "What is a good soccer club in Lake Washington area in the USA?", "output_scores": [-6.0, -5.15625, -6.09375, -3.015625, -3.375, -6.6875, 0.453125], "max_reward": 0.453125}
+{"prompt": "Identify which instrument is string or percussion: Zatula, Jarana huasteca", "output_scores": [-4.8125, -11.8125, -5.25, -13.875, -9.3125, -9.25, -12.1875], "max_reward": -4.8125}
+{"prompt": "What is the ICC ?", "output_scores": [-4.21875, -2.125, -7.28125, -5.34375, -3.296875, -4.53125, -8.6875], "max_reward": -2.125}
+{"prompt": "Which movie was originally declared the winner for Best Picture?", "output_scores": [-5.625, -7.6875, -3.546875, -6.8125, -5.3125, -7.84375, -5.59375], "max_reward": -3.546875}
+{"prompt": "what are creative ways of gifting?", "output_scores": [-12.75, -11.75, -12.4375, -12.875, -13.0625, -12.375, -12.5625], "max_reward": -11.75}
+{"prompt": "What are some of the best TV shows on HBO?", "output_scores": [-6.40625, -10.8125, -10.75, -9.5, -10.3125, -10.5625, -9.9375], "max_reward": -6.40625}
+{"prompt": "How can I spend more time with my dog?", "output_scores": [-9.375, -10.9375, -11.125, -12.3125, -12.0, -10.1875, -10.375], "max_reward": -9.375}
+{"prompt": "Classify each one of the following as bird or fish - sparrow, whale, tuna, parrot.", "output_scores": [-13.875, -13.875, -10.9375, -10.5625, -10.5625, -11.9375, -11.25], "max_reward": -10.5625}
+{"prompt": "Given the following note about training in a specific style of karate, tell me why its practitioners consider its fist alignment to offer advantages for their striking.", "output_scores": [1.90625, -6.625, 0.29296875, -3.421875, 0.2890625, -6.59375, -9.0625], "max_reward": 1.90625}
+{"prompt": "What is the Eupithecia spinibarbata", "output_scores": [-6.75, -8.125, -11.125, -11.5, -8.125, -10.625, -6.5625], "max_reward": -6.5625}
+{"prompt": "Who is Istv\u00e1n Szalay?", "output_scores": [-8.0625, -6.59375, -10.625, -9.625, -10.375, -7.53125, -8.25], "max_reward": -6.59375}
+{"prompt": "From the below text, list the top 3 chapters of the Bhagvad Geeta, with the most verses.", "output_scores": [-8.6875, -6.90625, -8.6875, -10.1875, -9.6875, -9.1875, -6.71875], "max_reward": -6.71875}
+{"prompt": "Given this short paragraph about the L-21 submarine, what was an example of an improvement made compared to earlier versions?", "output_scores": [-9.9375, -9.375, -8.3125, -7.96875, -8.5625, -8.6875, -7.125], "max_reward": -7.125}
+{"prompt": "Where is New Hampshire?", "output_scores": [-4.90625, -2.578125, -3.09375, -4.15625, -0.63671875, -2.484375, -3.125], "max_reward": -0.63671875}
+{"prompt": "What can I do with a broken stapler?", "output_scores": [-10.5625, -10.6875, -12.3125, -10.5, -13.1875, -12.125, -12.25], "max_reward": -10.5}
+{"prompt": "Identify which instrument is string or woodwind: Bassoon, Mandolin", "output_scores": [-14.25, -6.625, -11.9375, -4.5, -7.375, -9.3125, -8.0625], "max_reward": -4.5}
+{"prompt": "Given this paragraph about rivers in Europe, tell me what are the two longest rivers in Europe.", "output_scores": [-8.0625, -9.0, -8.4375, -7.6875, -7.28125, -8.125, -10.5], "max_reward": -7.28125}
+{"prompt": "What is the sun sign of someone born november 12", "output_scores": [-10.5625, -7.3125, -10.5625, -9.875, -9.9375, -10.5625, -9.875], "max_reward": -7.3125}
+{"prompt": "Tell me if these are cities or countries: Spain, Paris, Rome and Germany", "output_scores": [-15.0, -16.0, -15.0, -16.0, -15.375, -15.375, -16.125], "max_reward": -15.0}
+{"prompt": "Who planted the first wine vineyard at California's Mission San Juan Capistrano?", "output_scores": [-10.5, -10.0625, -8.8125, -9.0, -8.5625, -8.5625, -9.5], "max_reward": -8.5625}
+{"prompt": "What criteria should I be looking at when buying a new motorcycle?", "output_scores": [-9.75, -9.1875, -5.53125, -4.8125, -8.125, -7.46875, -8.0], "max_reward": -4.8125}
+{"prompt": "Describe a plan for a road trip across Northern Italy", "output_scores": [-6.71875, -3.75, -5.5, -6.78125, -4.28125, -6.03125, -1.8125], "max_reward": -1.8125}
+{"prompt": "Provide some key points on Cardiac surgery from the given text", "output_scores": [-7.78125, -9.75, -7.625, -9.8125, -6.5, -9.625, -9.0625], "max_reward": -6.5}
+{"prompt": "Which is a species of fish? Steelhead or Metalhead", "output_scores": [-9.75, -12.5, -6.09375, -10.5625, -12.5, -7.53125, -8.5], "max_reward": -6.09375}
+{"prompt": "What are some of the easiest house plants to take care of?", "output_scores": [-12.25, -11.3125, -11.125, -9.8125, -12.5625, -11.3125, -11.6875], "max_reward": -9.8125}
+{"prompt": "What is MACRO-economics?", "output_scores": [-5.46875, -6.03125, -5.9375, -5.59375, -7.78125, -6.59375, -0.65625], "max_reward": -0.65625}
+{"prompt": "According to the text, given the initial cost of building the auditorium and the equivalent cost in 2021, what is the value of 1892 dollars in 2021?", "output_scores": [-8.875, -10.5625, -9.75, -7.71875, -8.5625, -9.5, -6.5625], "max_reward": -6.5625}
+{"prompt": "Who is called Iron Man of India and why?", "output_scores": [-10.3125, -0.953125, -7.03125, -9.625, -0.16015625, -11.6875, -7.46875], "max_reward": -0.16015625}
+{"prompt": "Who is the lead singer of the Gorillaz?", "output_scores": [-8.625, -6.9375, -7.8125, -9.6875, -8.25, -3.84375, -5.9375], "max_reward": -3.84375}
+{"prompt": "What is the The Science Laureates of the United States Act of 2013", "output_scores": [-0.10986328125, 3.265625, -2.109375, -1.5234375, -2.21875, 0.6640625, -5.9375], "max_reward": 3.265625}
+{"prompt": "What does Thai Songkran festival represents and how many days does it last?", "output_scores": [-3.140625, -3.484375, -5.40625, -3.671875, -3.375, -5.21875, -3.0625], "max_reward": -3.0625}
+{"prompt": "Given a reference text about Marcus Morton, tell me what year he was born and why he let the Democratic Party.", "output_scores": [-7.75, -9.0625, -8.375, -7.0, -7.0625, -11.1875, -10.25], "max_reward": -7.0}
+{"prompt": "Identify which instrument is string or percussion: Bo, Gaohu", "output_scores": [-8.875, -11.6875, -6.78125, -10.0, -9.6875, -5.8125, -8.3125], "max_reward": -5.8125}
+{"prompt": "Tell me a silly, short poem about sheep where the first letter of each new line when read from top to bottom spells out a secret message.", "output_scores": [-10.375, -11.5, -11.9375, -11.625, -11.0, -11.75, -11.25], "max_reward": -10.375}
+{"prompt": "What are places that should be on everyone's bucket list?", "output_scores": [-4.5, -7.5625, -10.0625, -12.125, -5.96875, -6.78125, -8.8125], "max_reward": -4.5}
+{"prompt": "How does the J programming language improve upon the syntax of APL?", "output_scores": [-5.40625, -4.46875, 1.0078125, 1.3671875, -7.5, 0.2373046875, 4.4375], "max_reward": 4.4375}
+{"prompt": "What is handscroll used for", "output_scores": [-6.0625, -3.5625, -7.71875, -3.875, -4.53125, -8.5625, -2.921875], "max_reward": -2.921875}
+{"prompt": "I am planning a trip to Super Mario world and want to know which of the following characters are part of the Super Mario Bros franchise and which are from other games. Princess Peach, Luigi, Bowser, Link, Inkling Boy, Captain Falcon, Koopa Troopa, and Kirby.", "output_scores": [-6.71875, -12.375, -7.0, -8.4375, -12.0625, -10.5625, -6.1875], "max_reward": -6.1875}
+{"prompt": "Identify which animal species is alive or extinct: Opabinia, Dugong", "output_scores": [-6.9375, -5.40625, -5.25, -5.15625, -11.25, -4.375, -2.390625], "max_reward": -2.390625}
+{"prompt": "Without directly quoting from the text, give me a summary of the second home controversy in Gwynedd, Wales.", "output_scores": [-5.09375, 1.0703125, -3.109375, -10.25, -5.1875, 0.349609375, -6.40625], "max_reward": 1.0703125}
+{"prompt": "Who opens episodes of The FBI Files with an introductory narration?", "output_scores": [-7.25, -7.71875, -8.875, -0.66015625, -8.1875, -9.6875, -7.21875], "max_reward": -0.66015625}
+{"prompt": "What is the best BBQ restaurant in Raleigh?", "output_scores": [-10.3125, -7.625, -10.875, -10.0625, -10.8125, -12.4375, -10.375], "max_reward": -7.625}
+{"prompt": "Extract the family that Eudaronia is part of from the text.", "output_scores": [-6.46875, -9.375, -10.125, -10.0, -10.0, -7.65625, -10.8125], "max_reward": -6.46875}
+{"prompt": "Given a reference text about the American Society for Clinical Investigation (ASCI), what research does the society support?", "output_scores": [-5.03125, -7.625, -4.3125, -6.875, -7.53125, -8.375, -8.125], "max_reward": -4.3125}
+{"prompt": "Summarize what Alpha Phi is.", "output_scores": [-2.796875, -0.77734375, -1.4453125, -0.053955078125, 2.28125, -4.8125, -6.75], "max_reward": 2.28125}
+{"prompt": "What kind of socks do grizzlies wear?", "output_scores": [-5.03125, -7.1875, -8.5, -8.0, -7.9375, -8.75, -9.125], "max_reward": -5.03125}
+{"prompt": "What is a baby cat called?", "output_scores": [-12.25, -12.25, -12.25, -12.25, -12.25, -12.25, -12.25], "max_reward": -12.25}
+{"prompt": "Choose the word which is different from the rest: Emu, Ostrich, Kiwi, Eagle", "output_scores": [-8.5625, -6.71875, -7.78125, -7.75, -6.0, -5.625, -3.125], "max_reward": -3.125}
+{"prompt": "What causes leaves to change color in fall", "output_scores": [3.421875, -5.21875, -2.1875, -4.53125, -2.328125, -7.6875, -3.9375], "max_reward": 3.421875}
+{"prompt": "Based on the reference text, what were the main reasons homeless people from outside of San Francisco went to San Francisco?", "output_scores": [-7.1875, -8.5, -8.5625, -5.5625, -8.3125, -9.875, -6.3125], "max_reward": -5.5625}
+{"prompt": "What two colors are used in the Canadian flag?", "output_scores": [-8.4375, -9.0, -11.75, -6.0625, -11.125, -11.75, -6.0625], "max_reward": -6.0625}
+{"prompt": "How does a transistor amplify a signal?", "output_scores": [-0.375, -4.3125, 2.71875, -4.96875, -6.15625, 1.5, -1.1640625], "max_reward": 2.71875}
+{"prompt": "Given a reference tax about a footballer, tell me when they were born, what is their nationalities and which years they won the FIFA World cup.", "output_scores": [-8.0625, -12.0, -8.625, -7.90625, -9.1875, -9.5625, -8.25], "max_reward": -7.90625}
+{"prompt": "How many provinces are in Canada?", "output_scores": [-10.875, -13.375, -11.125, -14.875, -13.0625, -14.125, -14.3125], "max_reward": -10.875}
+{"prompt": "How to do you convert from inches to cm?", "output_scores": [-10.1875, -8.9375, -11.9375, -9.75, -10.6875, -10.0, -11.3125], "max_reward": -8.9375}
+{"prompt": "What is the value of x if x^2 = 4?", "output_scores": [-10.4375, -10.875, -10.0625, -9.25, -10.1875, -10.5, -8.0625], "max_reward": -8.0625}
+{"prompt": "What is the stock market?", "output_scores": [-7.375, -5.125, -4.34375, -7.46875, -5.8125, -3.78125, -4.96875], "max_reward": -3.78125}
+{"prompt": "What is the highest-grossing film worldwide?", "output_scores": [-11.8125, -11.4375, -9.0, -9.75, -9.875, -6.71875, -5.1875], "max_reward": -5.1875}
+{"prompt": "Jill, a 60-year-old personal training client, wants to improve her hip flexibility. Identify two exercises commonly done in a Pilates class that would address core strength and flexibility, thus improving Jill's lower back health.", "output_scores": [-0.90625, -3.625, -2.484375, -6.28125, -9.9375, 2.984375, -8.0625], "max_reward": 2.984375}
+{"prompt": "Who is the antagonist on The X-Files?", "output_scores": [-6.25, -7.15625, -2.109375, -8.6875, -6.875, -8.625, -6.90625], "max_reward": -2.109375}
+{"prompt": "which weighs more, cold or hot water?", "output_scores": [-2.203125, -2.03125, -7.9375, 2.578125, -11.5625, -6.84375, -0.373046875], "max_reward": 2.578125}
+{"prompt": "Why is \"The quick brown fox jumps over the lazy dog\" used so often to show fonts?", "output_scores": [-4.34375, 0.09423828125, 3.75, -3.53125, -3.359375, -5.5625, -5.25], "max_reward": 3.75}
+{"prompt": "From this passage, extract the names of the three Amtrak California routes and separate them with commas.", "output_scores": [-9.875, -9.1875, -9.625, -7.40625, -9.5625, -7.9375, -7.875], "max_reward": -7.40625}
+{"prompt": "From the passage provided, how is the instrument called the \"rubab\" made?", "output_scores": [-4.875, -2.6875, -7.5625, -11.4375, -9.0625, -9.1875, -10.3125], "max_reward": -2.6875}
+{"prompt": "Classify each of the following as either a city or a country:  Seoul, Shanghai, Sao Paolo, Singapore, Sweden.", "output_scores": [-14.875, -14.75, -14.875, -14.9375, -14.8125, -14.8125, -14.875], "max_reward": -14.75}
+{"prompt": "Identify which car manufacturer is German or American: Porsche, Chrysler", "output_scores": [-10.5625, -11.375, -10.5625, -12.875, -11.5625, -10.5625, -11.5625], "max_reward": -10.5625}
+{"prompt": "What are some interesting facts around Wilmer McLean's residencies when it comes to the American Civil War?", "output_scores": [-5.3125, -6.03125, -4.6875, -4.8125, -7.03125, -5.75, -2.640625], "max_reward": -2.640625}
+{"prompt": "Which Russian author to read first?", "output_scores": [-4.4375, -6.40625, -5.40625, -9.0625, -10.4375, -10.875, -7.71875], "max_reward": -4.4375}
+{"prompt": "Which is an imperial or a metric measurement: ounce, gram", "output_scores": [-7.84375, -8.9375, -7.84375, -9.625, -7.8125, -6.28125, -5.3125], "max_reward": -5.3125}
+{"prompt": "What climate are cacti typically found in?", "output_scores": [-7.5625, -4.90625, -5.8125, -8.375, -2.765625, -3.5, -8.5625], "max_reward": -2.765625}
+{"prompt": "From the passage provided, extract the two forms of energy transfer and list them in bullets.", "output_scores": [-8.4375, -8.375, -7.21875, -8.375, -7.71875, -8.8125, -7.03125], "max_reward": -7.03125}
+{"prompt": "Which ones of the following are considered nutrient-dense foods: soda, vegetables, fruits, chips, whole grains, seafood, cookies, eggs, beans, peas, lentils, unsalted nuts and seeds, fat-free and low-fat dairy products, fried chicken, lean meats and poultry.", "output_scores": [-9.9375, -3.84375, -9.75, -3.796875, -8.75, -10.0, -9.3125], "max_reward": -3.796875}
+{"prompt": "Give me three reasons why I can't attend Karen's party on Friday night as a bulleted list.", "output_scores": [-14.5625, -13.75, -13.5, -15.1875, -14.4375, -13.0625, -14.3125], "max_reward": -13.0625}
+{"prompt": "What is a symphony?", "output_scores": [0.412109375, 1.21875, -2.125, -4.46875, -4.875, -2.109375, -1.5625], "max_reward": 1.21875}
+{"prompt": "What wine is the Oregon Willamette Valley known for?", "output_scores": [-13.125, -10.8125, -12.0625, -10.875, -13.125, -8.9375, -10.4375], "max_reward": -8.9375}
+{"prompt": "Why is it important to be a listener?", "output_scores": [-9.75, -7.3125, -8.25, -8.5, -7.0, -9.0625, -8.0625], "max_reward": -7.0}
+{"prompt": "Name five teams in Liga Portugal.", "output_scores": [-11.9375, -9.3125, -7.96875, -12.1875, -11.9375, -11.375, -13.0625], "max_reward": -7.96875}
+{"prompt": "Who is the first astronaut to get into space in China?", "output_scores": [-2.921875, -9.0625, -9.0, -11.3125, -7.5625, -10.5, -9.375], "max_reward": -2.921875}
+{"prompt": "What is Herd Immunity?", "output_scores": [-4.1875, 1.21875, -4.5625, 5.71875, -4.125, -0.232421875, 2.0], "max_reward": 5.71875}
+{"prompt": "How many miles is Earth from the sun?", "output_scores": [-9.375, -9.625, -8.875, -10.875, -9.625, -3.859375, -9.75], "max_reward": -3.859375}
+{"prompt": "Is skiing or snowboarding easier?", "output_scores": [-8.5625, -2.140625, -0.09326171875, -6.84375, -4.5625, -0.92578125, -5.96875], "max_reward": -0.09326171875}
+{"prompt": "List as many types of craft beer as you can", "output_scores": [-9.125, -10.1875, -10.75, -8.75, -5.25, -5.96875, -8.8125], "max_reward": -5.25}
+{"prompt": "In what city was Titanium first discovered?", "output_scores": [-5.6875, -9.6875, -8.625, -7.375, -9.5, -7.3125, -6.1875], "max_reward": -5.6875}
+{"prompt": "What are some of the famous festivals of India?", "output_scores": [-5.9375, -6.96875, -9.0625, -10.6875, -8.5, -8.375, -8.8125], "max_reward": -5.9375}
+{"prompt": "Extract the names of the groups of islands located on the Azores plateau from the text. Separate them with a comma.", "output_scores": [-9.375, -8.875, -9.1875, -7.28125, -6.71875, -8.6875, -7.8125], "max_reward": -6.71875}
+{"prompt": "Where does the word plumbing originate from?", "output_scores": [2.171875, 1.2109375, -5.34375, -1.234375, -0.61328125, -2.390625, -3.84375], "max_reward": 2.171875}
+{"prompt": "Besides a putter, what other golf clubs would suffice for a putting stroke?", "output_scores": [-9.0, -6.4375, -2.828125, -2.9375, -9.375, -5.40625, -1.4296875], "max_reward": -1.4296875}
+{"prompt": "What would it take to build a house?", "output_scores": [-7.28125, -3.40625, -2.390625, -3.84375, -4.1875, -4.09375, -5.59375], "max_reward": -2.390625}
+{"prompt": "Which leaders claimed the English throne in 1066?", "output_scores": [-6.875, -5.34375, -7.40625, -9.375, -7.65625, -7.4375, -7.09375], "max_reward": -5.34375}
+{"prompt": "What is a skiff?", "output_scores": [-7.21875, -8.5625, -10.5, -8.0, -8.75, -2.859375, -6.9375], "max_reward": -2.859375}
+{"prompt": "What are 5 totally distinct, creative ways to use a glass of water?", "output_scores": [-6.9375, -12.125, -10.125, -10.125, -9.75, -9.8125, -11.375], "max_reward": -6.9375}
+{"prompt": "Where can I go to find out what is on the ballot for any given election in Wisconsin?", "output_scores": [-8.3125, -8.625, -8.75, -8.5, -7.375, -7.71875, -6.96875], "max_reward": -6.96875}
+{"prompt": "How many triangles can be formed with 6 matchsticks of equal size without breaking or overlapping them?", "output_scores": [-5.3125, -3.703125, -6.9375, -5.96875, -1.9609375, -4.9375, -6.21875], "max_reward": -1.9609375}
+{"prompt": "When was the first Academy Awards?", "output_scores": [-9.5, -9.4375, -7.78125, -9.4375, -10.6875, -9.4375, -9.4375], "max_reward": -7.78125}
+{"prompt": "What is it like to live on the moon?", "output_scores": [-5.1875, -7.90625, -10.0625, -5.625, -1.0703125, -3.578125, -3.78125], "max_reward": -1.0703125}
+{"prompt": "What is Bollywood", "output_scores": [-5.28125, -3.65625, -5.4375, -5.1875, -4.0625, -2.703125, -5.25], "max_reward": -2.703125}
+{"prompt": "Why do toddlers wake up so early?", "output_scores": [-10.8125, -6.125, -8.3125, -7.65625, -9.25, -7.1875, -9.9375], "max_reward": -6.125}
+{"prompt": "How can you answer questions like \"Are certain kinds of storms responsible to drive certain type of disease related group (DRG) admits?\"?", "output_scores": [-5.6875, -5.28125, -4.75, 0.021484375, -5.34375, -5.03125, -4.03125], "max_reward": 0.021484375}
+{"prompt": "Identify which animal is domesticated or wild: Pig, Arabian ostrich", "output_scores": [-13.5, -4.21875, -13.1875, -12.5625, -9.1875, -6.46875, -13.25], "max_reward": -4.21875}
+{"prompt": "From the passage provided, extract the year which Presto Software Foundation was announced", "output_scores": [-9.0, -9.4375, -10.0, -9.75, -9.25, -10.625, -9.5625], "max_reward": -9.0}
+{"prompt": "How should I invest my money?", "output_scores": [-5.21875, -7.53125, -9.4375, -9.5625, -8.875, -8.875, -8.9375], "max_reward": -5.21875}
+{"prompt": "Classify each of these as either motorcycle brands or car brands: Maruti Suzuki, Ducati, Triumph, Royal Enfield, Harley Davidson,  Mahindra, Tata, Skoda, Honda, Toyota, Hero, TVS, Yamaha, Suzuki, Kawasaki, Volkswagen, Ferrari, Lamborgini, Volvo, Rolls royce, Bajaj, Kia, Hyundai, Ford, Chevrolet, Crystler, Fiat, Hummer, Citreon, KTM", "output_scores": [-8.8125, -12.875, -14.8125, -12.0625, -12.1875, -12.8125, -12.875], "max_reward": -8.8125}
+{"prompt": "Inflation means that the general level of prices is going up, the opposite of deflation. More money will be needed to pay for goods (like a loaf of bread) and services (like getting a haircut at the hairdresser's).", "output_scores": [-8.9375, -4.875, -4.5625, -5.03125, -7.1875, -6.40625, -3.65625], "max_reward": -3.65625}
+{"prompt": "From the passage list down the areas for which Dar es Salaam is Tanzania's most prominent city. List the results in comma separated format.", "output_scores": [-9.9375, -9.0, -9.5, -7.5, -9.125, -8.4375, -8.625], "max_reward": -7.5}
+{"prompt": "When going on a backcountry hike, which of the following are among the 10 essentials for a safe hike: a navigation device (such as a map or compass), a headlamp with extra batteries, a fire starter (such as matches or a lighter), extra food, extra water, a camera.", "output_scores": [-7.5, -8.3125, -6.5, -8.0, -8.6875, -9.9375, -11.125], "max_reward": -6.5}
+{"prompt": "Who is Hugo Chavez?", "output_scores": [-0.98828125, -6.21875, -0.99609375, -4.1875, -6.34375, -3.1875, -4.46875], "max_reward": -0.98828125}
+{"prompt": "From the given text, write some important points about guitar's vibrato system", "output_scores": [-8.125, -7.96875, -3.859375, -8.1875, -9.4375, -8.8125, -8.9375], "max_reward": -3.859375}
+{"prompt": "What is the difference between a stand up paddle board and a kayak?", "output_scores": [-2.21875, -0.875, 3.15625, -1.0546875, 2.015625, -2.453125, 0.455078125], "max_reward": 3.15625}
+{"prompt": "Are you going for a walk today?", "output_scores": [-9.4375, -9.4375, -11.125, -11.0625, -9.125, -11.5625, -10.25], "max_reward": -9.125}
+{"prompt": "Give me a list of the best golf courses in America", "output_scores": [-6.5, -9.5, -9.375, -6.34375, -5.25, -5.65625, -2.703125], "max_reward": -2.703125}
+{"prompt": "In the series A Song of Ice and Fire, who is the founder of House Crayne?", "output_scores": [-7.34375, -7.71875, -10.3125, -9.75, -9.4375, -9.0, -8.8125], "max_reward": -7.34375}
+{"prompt": "Give me some movie/tv series to learn English", "output_scores": [-9.8125, -11.625, -11.1875, -9.5625, -12.9375, -11.1875, -10.8125], "max_reward": -9.5625}
+{"prompt": "What is the largest lake in Switzerland?", "output_scores": [-5.34375, -9.5625, -9.5625, -7.59375, -7.28125, -8.1875, -6.9375], "max_reward": -5.34375}
+{"prompt": "What are some places to visit in Anchorage?", "output_scores": [-10.625, -8.75, -8.6875, -9.4375, -6.34375, -11.1875, -6.59375], "max_reward": -6.34375}
+{"prompt": "From this paragraph, what are indicators that Singapore's healthcare system performs well?", "output_scores": [-7.0, -8.0, -6.34375, -6.5625, -8.4375, -8.0625, -7.5], "max_reward": -6.34375}
+{"prompt": "How do beaver damns benefit the environment?", "output_scores": [-6.21875, -7.78125, -8.0625, -9.125, -8.125, -10.9375, -7.15625], "max_reward": -6.21875}
+{"prompt": "What links Catalonia, Andalusia, Cantabria, Galicia", "output_scores": [-8.0, -6.46875, -11.6875, -8.0, -8.0, -6.34375, -11.3125], "max_reward": -6.34375}
+{"prompt": "What are secondary colors?", "output_scores": [-8.0625, -10.25, -8.3125, -9.5625, -7.96875, -9.0, -9.625], "max_reward": -7.96875}
+{"prompt": "Given a reference text about Sam McElroy, at what school was he the head football coach and what was his overall record there?", "output_scores": [-8.0, -12.0, -9.875, -9.875, -8.1875, -9.875, -8.25], "max_reward": -8.0}
+{"prompt": "I'd like a list of the last five Prime Ministers of New Zealand. Give it to me in a bulleted list with the format <name> (<start date> - <end date>)", "output_scores": [-13.5, -13.5, -13.4375, -13.375, -13.625, -13.625, -13.5], "max_reward": -13.375}
+{"prompt": "Why would an NHL team want to lose to be last in the standings?", "output_scores": [-5.8125, 5.28125, -7.78125, -8.125, -9.125, -10.125, -8.875], "max_reward": 5.28125}
+{"prompt": "What is A State of Trance?", "output_scores": [-0.4375, -2.8125, -0.330078125, -1.7734375, -4.5, 0.341796875, -1.1796875], "max_reward": 0.341796875}
+{"prompt": "Give me a list of the best ways of looking younger than your age.", "output_scores": [-10.75, -11.375, -12.75, -12.6875, -10.5, -11.75, -10.4375], "max_reward": -10.4375}
+{"prompt": "What is the Indianapolis 500?", "output_scores": [3.546875, -1.765625, -2.8125, -0.93359375, 3.53125, -3.859375, 0.31640625], "max_reward": 3.546875}
+{"prompt": "What is the best swimming form?", "output_scores": [-4.75, -5.90625, -8.4375, -8.125, -7.8125, -3.28125, -10.125], "max_reward": -3.28125}
+{"prompt": "Why do we say tip of the iceberg?", "output_scores": [-0.74609375, -1.4765625, 2.4375, 5.25, 3.984375, 3.1875, 0.90625], "max_reward": 5.25}
+{"prompt": "Which colors are in a rainbow?", "output_scores": [-8.1875, -15.0, -6.75, -8.125, -7.34375, -14.9375, -9.4375], "max_reward": -6.75}
+{"prompt": "When was the the docu-series 'The Circus' created?", "output_scores": [-8.875, -7.75, -11.375, -9.75, -10.9375, -8.25, -9.9375], "max_reward": -7.75}
+{"prompt": "When was the New York City song released?", "output_scores": [-8.25, -7.8125, -8.8125, -9.3125, -9.3125, -7.6875, -10.0], "max_reward": -7.6875}
+{"prompt": "Why isn't multi-threading making my Python code faster? How can I fix it.", "output_scores": [-4.625, 0.34765625, 0.875, -2.53125, -0.48828125, -1.8359375, -2.78125], "max_reward": 0.875}
+{"prompt": "Who is the most famous left-handed baseball player?", "output_scores": [-10.5625, -11.125, -10.5, -4.53125, -7.25, -7.78125, -6.21875], "max_reward": -4.53125}
+{"prompt": "What is the meaning of the album title \"Flying Microtonal Banana\", by King Gizzard and the Lizard Wizard?", "output_scores": [-8.0625, -6.6875, -5.15625, -8.8125, -4.03125, -7.6875, -3.6875], "max_reward": -3.6875}
+{"prompt": "What are five words that rhyme with light?", "output_scores": [-15.5625, -15.5625, -15.75, -15.6875, -15.75, -15.625, -15.75], "max_reward": -15.5625}
+{"prompt": "What are some tricks to learning a new language?", "output_scores": [-10.625, -11.0625, -11.0625, -11.9375, -11.6875, -11.125, -11.875], "max_reward": -10.625}
+{"prompt": "What is the movie A Silence Voice about?", "output_scores": [-10.375, -9.1875, -7.90625, -11.625, -10.4375, -6.5625, -10.1875], "max_reward": -6.5625}
+{"prompt": "What are the best woods for smoking?", "output_scores": [-11.9375, -4.25, -9.5, -10.25, -12.125, -11.3125, -11.125], "max_reward": -4.25}
+{"prompt": "What are the top 10 US ski vacation destinations?", "output_scores": [-7.3125, -6.0625, -7.5, -10.25, -9.25, -7.78125, -10.3125], "max_reward": -6.0625}
+{"prompt": "Why do people foster dogs?", "output_scores": [-10.1875, -10.0, -11.8125, -12.0, -12.375, -4.125, -12.375], "max_reward": -4.125}
+{"prompt": "How would you define electricity based on the following paragraph?", "output_scores": [-6.96875, -8.8125, -4.75, -7.375, -8.6875, -7.28125, -6.96875], "max_reward": -4.75}
+{"prompt": "Extract all the country names in the paragraph, and list them separated by commas.", "output_scores": [-10.625, -9.0625, -7.375, -9.375, -8.3125, -7.40625, -7.65625], "max_reward": -7.375}
+{"prompt": "Given this paragraph about time travel, how practical is it", "output_scores": [-4.4375, -6.15625, -5.21875, -4.8125, -4.34375, -4.40625, -4.875], "max_reward": -4.34375}
+{"prompt": "Why everyone doesn't see solar eclipse when it occurs?", "output_scores": [-9.6875, -10.8125, -8.75, -10.25, -8.3125, -8.4375, -10.8125], "max_reward": -8.3125}
+{"prompt": "Given a reference text about the Tax Cuts and Jobs Act, provide a bulleted list of the main elements of the act.", "output_scores": [-3.90625, 0.0888671875, -4.25, -6.34375, -7.78125, -5.9375, -7.75], "max_reward": 0.0888671875}
+{"prompt": "Why do people use computer mice?", "output_scores": [-3.75, -2.28125, -5.25, -9.5625, -9.375, -5.28125, -2.359375], "max_reward": -2.28125}
+{"prompt": "Who were the ten best baseball players in the history of the Boston Red Sox?", "output_scores": [0.037353515625, 3.03125, -3.265625, -0.6328125, 1.25, 4.375, -4.15625], "max_reward": 4.375}
+{"prompt": "What makes trees and plants green?", "output_scores": [-1.34375, -0.5234375, 3.03125, 2.5625, 1.625, 4.34375, -2.734375], "max_reward": 4.34375}
+{"prompt": "What are some Machine Learning Algorithms", "output_scores": [-10.1875, -8.5625, -9.4375, -10.9375, -3.65625, -8.8125, -7.96875], "max_reward": -3.65625}
+{"prompt": "What are 3 to 5 creative ways to prevent deer from walking through your yard?", "output_scores": [-9.625, -10.875, -9.4375, -10.9375, -10.6875, -9.625, -10.0625], "max_reward": -9.4375}
+{"prompt": "Tell me which of these terms are related to artificial intelligence versus gardening: tilling, seed, gradient descent, production, Bayesian optimization, genetically modified organism, heirloom, transfer learning", "output_scores": [-5.1875, -6.71875, -3.96875, -9.625, -9.75, -6.375, -9.1875], "max_reward": -3.96875}
+{"prompt": "How many colours does a rainbow have?", "output_scores": [-11.75, -11.9375, -12.8125, -11.9375, -9.75, -9.1875, -13.0], "max_reward": -9.1875}
+{"prompt": "What are three popular movies with Steve Carell?", "output_scores": [-10.0, -13.75, -12.25, -8.0, -11.0, -8.625, -9.8125], "max_reward": -8.0}
+{"prompt": "Name some popular breakfast foods in the United States", "output_scores": [-9.875, -10.9375, -9.8125, -12.75, -13.0625, -11.375, -9.625], "max_reward": -9.625}
+{"prompt": "What came first the chicken or the egg?", "output_scores": [2.390625, -1.640625, 2.859375, 2.046875, -0.578125, 3.03125, -0.2734375], "max_reward": 3.03125}
+{"prompt": "What is the economy size of Tamil Nadu?", "output_scores": [-4.65625, -4.75, -4.4375, -9.25, -3.625, -3.59375, -5.0], "max_reward": -3.59375}
+{"prompt": "How is digital switching possible?", "output_scores": [-3.484375, 0.322265625, 1.3515625, 6.03125, -3.65625, 4.34375, -1.0078125], "max_reward": 6.03125}
+{"prompt": "Identify which car manufacturer is Chinese or American: Dodge, Foton", "output_scores": [-6.15625, -9.4375, -5.90625, -6.03125, -12.6875, -10.125, -7.75], "max_reward": -5.90625}
+{"prompt": "What is the best way to get more protein in my diet?", "output_scores": [-9.0, -8.9375, -5.53125, -8.8125, -7.53125, -8.9375, -10.4375], "max_reward": -5.53125}
+{"prompt": "What are the main ingredients of deviled eggs and what are some unique add-in ideas?", "output_scores": [-12.8125, -11.0625, -12.875, -11.0625, -12.5, -8.9375, -10.75], "max_reward": -8.9375}
+{"prompt": "Write a story where a princess discovers an abandon cave. The story should have a beginning, middle and end.", "output_scores": [0.9375, -0.162109375, 4.53125, 2.09375, 5.5, 1.4140625, 1.96875], "max_reward": 5.5}
+{"prompt": "Who is Bryan Adams", "output_scores": [-6.375, -5.65625, -7.96875, -5.21875, -6.40625, -6.53125, -4.40625], "max_reward": -4.40625}
+{"prompt": "Why is India a major outsourcing partner for Information technology services?", "output_scores": [-3.78125, -7.25, -4.125, -2.9375, -5.03125, -8.8125, -4.1875], "max_reward": -2.9375}
+{"prompt": "Summarize what electoral college does in USA presidential election", "output_scores": [-2.5, -2.984375, -3.453125, -3.078125, 0.283203125, -0.146484375, -4.65625], "max_reward": 0.283203125}
+{"prompt": "How long does it take me from the city center of Munich to the football stadium?", "output_scores": [-8.75, -4.6875, -7.8125, -1.09375, -7.0, -6.03125, -9.9375], "max_reward": -1.09375}
+{"prompt": "What are the Regulations of Football?", "output_scores": [-8.1875, -8.0625, -7.9375, -3.96875, -1.9453125, -4.6875, -1.71875], "max_reward": -1.71875}
+{"prompt": "How soon should you make coffee after grinding the beans?", "output_scores": [-8.9375, -7.875, -6.90625, -6.375, -4.0625, -7.84375, -8.9375], "max_reward": -4.0625}
+{"prompt": "Is Seattle a nice place to live?", "output_scores": [-10.875, -7.40625, -11.0625, -11.4375, -9.0625, -8.25, -10.5625], "max_reward": -7.40625}
+{"prompt": "What is the best NFL football team of all time?", "output_scores": [0.0810546875, -0.49609375, 0.53125, -7.09375, -1.671875, 3.703125, 0.55078125], "max_reward": 3.703125}
+{"prompt": "Extract the location that the Kirtland's warbler lives in the winter.", "output_scores": [-7.4375, -6.46875, -6.46875, -7.3125, -4.03125, -0.140625, -1.9453125], "max_reward": -0.140625}
+{"prompt": "Are there companies that build a plane end to end?", "output_scores": [-7.46875, -8.3125, -7.46875, -6.1875, -7.1875, -4.625, -7.0625], "max_reward": -4.625}
+{"prompt": "I need to purchase food at the grocery store but I dont have a car to get there. What are some of the other ways I could get the food I need?", "output_scores": [-12.6875, -11.4375, -10.625, -12.875, -11.625, -12.8125, -12.625], "max_reward": -10.625}
+{"prompt": "Given a reference text about Lotus Mark IX, who designed the car?", "output_scores": [-9.1875, -10.8125, -9.0625, -8.875, -8.6875, -10.4375, -9.1875], "max_reward": -8.6875}
+{"prompt": "What is the difference between a resume and a cv?", "output_scores": [-4.375, -3.90625, -5.09375, -0.609375, -2.515625, 1.3203125, -1.4296875], "max_reward": 1.3203125}
+{"prompt": "What is the best nightly skin care routine?", "output_scores": [-8.1875, -7.9375, -8.6875, -8.875, -6.375, -9.375, -7.8125], "max_reward": -6.375}
+{"prompt": "What is the name of the first ten amendments to the Constitution?", "output_scores": [-8.6875, -7.375, -10.0, -7.71875, -8.875, -6.84375, -7.375], "max_reward": -6.84375}

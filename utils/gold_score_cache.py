@@ -11,8 +11,8 @@ from llamafactory.hparams import ModelArguments, FinetuningArguments
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, required=True)
-parser.add_argument("--output_path", type=str, default="../results/gold_scores.jsonl")
-parser.add_argument("--bon_path", type=str, default="../data/bon_200.json")
+parser.add_argument("--output_path", type=str, default="../results/gold_scores_bon.jsonl")
+parser.add_argument("--bon_path", type=str, default="../data/bon.json")
 parser.add_argument("--max_prompts", type=int, default=None, help="Limit number of prompts (for debugging)")
 args = parser.parse_args()
 

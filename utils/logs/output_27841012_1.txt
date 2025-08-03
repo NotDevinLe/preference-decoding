@@ -1,0 +1,96 @@
+INFO 07-31 10:47:47 [__init__.py:244] Automatically detected platform cuda.
+[INFO|2025-07-31 10:48:21] llamafactory.hparams.parser:410 >> Process rank: 0, world size: 1, device: cuda:0, distributed training: False, compute dtype: torch.bfloat16
+[INFO|2025-07-31 10:48:23] llamafactory.data.template:143 >> Add pad token: <|eot_id|>
+[INFO|2025-07-31 10:48:23] llamafactory.data.template:143 >> Add <|eom_id|> to stop words.
+[INFO|2025-07-31 10:48:23] llamafactory.data.loader:143 >> Loading dataset user1_train.json...
+training example:
+chosen_input_ids:
+[128000, 128006, 882, 128007, 271, 9370, 5730, 553, 279, 27375, 315, 41390, 261, 31906, 323, 91490, 23783, 389, 16124, 48855, 18237, 382, 791, 1888, 5603, 311, 11951, 11322, 16124, 6650, 8625, 20733, 320, 300, 16475, 311, 21760, 389, 30240, 8333, 11, 2410, 11, 477, 49286, 1237, 433, 574, 8965, 6646, 430, 13263, 41390, 261, 31906, 8333, 4967, 690, 8356, 48855, 58175, 927, 279, 1317, 4751, 11, 304, 5369, 311, 1202, 6372, 389, 52192, 8333, 323, 49286, 13, 5444, 22077, 48855, 58175, 649, 387, 7319, 1555, 8333, 4967, 323, 1023, 2875, 65483, 11, 1579, 20653, 8127, 41390, 261, 31906, 23783, 13, 28636, 20653, 8127, 11, 5129, 65483, 91490, 10368, 8965, 1587, 539, 1121, 304, 1633, 7524, 20438, 48855, 58175, 26, 4619, 11, 49286, 23579, 18885, 5942, 315, 50127, 323, 62345, 2949, 279, 24569, 11, 439, 1664, 439, 841, 869, 50804, 2065, 13, 128009, 128006, 78191, 128007, 271, 791, 5133, 1990, 41390, 261, 31906, 323, 91490, 23783, 323, 16124, 48855, 58175, 374, 264, 6485, 323, 62387, 582, 25489, 8712, 13, 6104, 1070, 374, 912, 24811, 389, 264, 3254, 23669, 5603, 369, 32145, 16124, 6650, 11, 279, 61129, 8830, 13533, 430, 13263, 41390, 261, 31906, 8333, 4967, 374, 264, 6156, 5696, 315, 1317, 9860, 16124, 48855, 58175, 11, 304, 5369, 311, 1202, 6372, 389, 52192, 8333, 323, 49286, 382, 81686, 261, 31906, 23783, 11, 32971, 555, 1579, 20653, 8127, 323, 2875, 65483, 11, 617, 1027, 6982, 311, 387, 7524, 304, 7859, 16124, 48855, 58175, 1555, 1473, 16, 13, 220, 3146, 53957, 16543, 96618, 40980, 23783, 11, 1778, 439, 4785, 53003, 11, 527, 264, 11670, 3187, 315, 41390, 261, 31906, 4967, 13, 2435, 51077, 16124, 6650, 555, 14718, 8162, 49893, 1590, 304, 16124, 49774, 11, 902, 527, 1243, 52834, 323, 60685, 11, 6522, 311, 7319, 16124, 3148, 627, 17, 13, 220, 3146, 62698, 9326, 21428, 323, 28266, 96618, 5234, 20653, 8127, 41390, 261, 31906, 23783, 5353, 5199, 16124, 5674, 11, 902, 31854, 459, 47288, 2077, 323, 75042, 24088, 7917, 11, 6522, 311, 16124, 13128, 39975, 323, 48855, 58175, 382, 644, 13168, 11, 91490, 23783, 11, 32971, 555, 3428, 20653, 8127, 323, 1317, 65483, 11, 617, 7347, 6372, 389, 16124, 48855, 58175, 13, 12361, 11, 814, 1473, 16, 13, 220, 3146, 58568, 685, 4060, 5890, 59531, 811, 96618, 64150, 31906, 23783, 11, 1778, 439, 6138, 4401, 477, 33162, 11, 3063, 311, 77765, 304, 16124, 49774, 11, 7859, 872, 5845, 311, 29166, 24463, 323, 3637, 4907, 8336, 11, 1778, 439, 50127, 323, 62345, 627, 17, 13, 220, 3146, 8989, 869, 50804, 2065, 96618, 64150, 31906, 4967, 39990, 279, 6650, 315, 502, 6680, 31080, 323, 2107, 484, 5548, 11, 18899, 24463, 9889, 323, 50123, 69575, 304, 24569, 382, 644, 12399, 11, 1418, 2225, 41390, 261, 31906, 323, 91490, 23783, 617, 12742, 6372, 389, 16124, 78152, 11, 41390, 261, 31906, 8333, 4967, 374, 8965, 6646, 279, 1455, 7524, 5603, 369, 32145, 16124, 48855, 58175, 13, 4452, 11, 433, 374, 7718, 311, 5296, 430, 3927, 14847, 311, 10368, 649, 13592, 11, 323, 279, 23669, 4967, 2068, 1253, 6904, 389, 3230, 9021, 11, 17479, 5990, 11, 323, 3927, 9547, 13, 128009]
+chosen_inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+Summarize the effectiveness of anaerobic and aerobic exercises on muscle hypertropy.
+
+The best approach to specifically achieve muscle growth remains controversial (as opposed to focusing on gaining strength, power, or endurance); it was generally considered that consistent anaerobic strength training will produce hypertrophy over the long term, in addition to its effects on muscular strength and endurance. Muscular hypertrophy can be increased through strength training and other short-duration, high-intensity anaerobic exercises. Lower-intensity, longer-duration aerobic exercise generally does not result in very effective tissue hypertrophy; instead, endurance athletes enhance storage of fats and carbohydrates within the muscles, as well as neovascularization.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+The relationship between anaerobic and aerobic exercises and muscle hypertrophy is a complex and multifaceted topic. While there is no consensus on a single optimal approach for achieving muscle growth, the prevailing understanding suggests that consistent anaerobic strength training is a primary driver of long-term muscle hypertrophy, in addition to its effects on muscular strength and endurance.
+
+Anaerobic exercises, characterized by high-intensity and short-duration, have been shown to be effective in increasing muscle hypertrophy through:
+
+1.  **Strength Training**: Resistance exercises, such as weightlifting, are a classic example of anaerobic training. They stimulate muscle growth by causing micro-tears in muscle fibers, which are then repaired and rebuilt, leading to increased muscle mass.
+2.  **Muscle Damage and Repair**: High-intensity anaerobic exercises cause significant muscle damage, which triggers an inflammatory response and activates satellite cells, leading to muscle protein synthesis and hypertrophy.
+
+In contrast, aerobic exercises, characterized by low-intensity and long-duration, have limited effects on muscle hypertrophy. Instead, they:
+
+1.  **Enhance Endurance Adaptations**: Aerobic exercises, such as distance running or cycling, lead to adaptations in muscle fibers, increasing their ability to utilize oxygen and store energy sources, such as fats and carbohydrates.
+2.  **Neovascularization**: Aerobic training promotes the growth of new blood vessels and capillaries, improving oxygen delivery and nutrient uptake in muscles.
+
+In summary, while both anaerobic and aerobic exercises have distinct effects on muscle physiology, anaerobic strength training is generally considered the most effective approach for achieving muscle hypertrophy. However, it is essential to note that individual responses to exercise can vary, and the optimal training program may depend on specific goals, fitness levels, and individual factors.<|eot_id|>
+chosen_label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 791, 5133, 1990, 41390, 261, 31906, 323, 91490, 23783, 323, 16124, 48855, 58175, 374, 264, 6485, 323, 62387, 582, 25489, 8712, 13, 6104, 1070, 374, 912, 24811, 389, 264, 3254, 23669, 5603, 369, 32145, 16124, 6650, 11, 279, 61129, 8830, 13533, 430, 13263, 41390, 261, 31906, 8333, 4967, 374, 264, 6156, 5696, 315, 1317, 9860, 16124, 48855, 58175, 11, 304, 5369, 311, 1202, 6372, 389, 52192, 8333, 323, 49286, 382, 81686, 261, 31906, 23783, 11, 32971, 555, 1579, 20653, 8127, 323, 2875, 65483, 11, 617, 1027, 6982, 311, 387, 7524, 304, 7859, 16124, 48855, 58175, 1555, 1473, 16, 13, 220, 3146, 53957, 16543, 96618, 40980, 23783, 11, 1778, 439, 4785, 53003, 11, 527, 264, 11670, 3187, 315, 41390, 261, 31906, 4967, 13, 2435, 51077, 16124, 6650, 555, 14718, 8162, 49893, 1590, 304, 16124, 49774, 11, 902, 527, 1243, 52834, 323, 60685, 11, 6522, 311, 7319, 16124, 3148, 627, 17, 13, 220, 3146, 62698, 9326, 21428, 323, 28266, 96618, 5234, 20653, 8127, 41390, 261, 31906, 23783, 5353, 5199, 16124, 5674, 11, 902, 31854, 459, 47288, 2077, 323, 75042, 24088, 7917, 11, 6522, 311, 16124, 13128, 39975, 323, 48855, 58175, 382, 644, 13168, 11, 91490, 23783, 11, 32971, 555, 3428, 20653, 8127, 323, 1317, 65483, 11, 617, 7347, 6372, 389, 16124, 48855, 58175, 13, 12361, 11, 814, 1473, 16, 13, 220, 3146, 58568, 685, 4060, 5890, 59531, 811, 96618, 64150, 31906, 23783, 11, 1778, 439, 6138, 4401, 477, 33162, 11, 3063, 311, 77765, 304, 16124, 49774, 11, 7859, 872, 5845, 311, 29166, 24463, 323, 3637, 4907, 8336, 11, 1778, 439, 50127, 323, 62345, 627, 17, 13, 220, 3146, 8989, 869, 50804, 2065, 96618, 64150, 31906, 4967, 39990, 279, 6650, 315, 502, 6680, 31080, 323, 2107, 484, 5548, 11, 18899, 24463, 9889, 323, 50123, 69575, 304, 24569, 382, 644, 12399, 11, 1418, 2225, 41390, 261, 31906, 323, 91490, 23783, 617, 12742, 6372, 389, 16124, 78152, 11, 41390, 261, 31906, 8333, 4967, 374, 8965, 6646, 279, 1455, 7524, 5603, 369, 32145, 16124, 48855, 58175, 13, 4452, 11, 433, 374, 7718, 311, 5296, 430, 3927, 14847, 311, 10368, 649, 13592, 11, 323, 279, 23669, 4967, 2068, 1253, 6904, 389, 3230, 9021, 11, 17479, 5990, 11, 323, 3927, 9547, 13, 128009]
+chosen_labels:
+The relationship between anaerobic and aerobic exercises and muscle hypertrophy is a complex and multifaceted topic. While there is no consensus on a single optimal approach for achieving muscle growth, the prevailing understanding suggests that consistent anaerobic strength training is a primary driver of long-term muscle hypertrophy, in addition to its effects on muscular strength and endurance.
+
+Anaerobic exercises, characterized by high-intensity and short-duration, have been shown to be effective in increasing muscle hypertrophy through:
+
+1.  **Strength Training**: Resistance exercises, such as weightlifting, are a classic example of anaerobic training. They stimulate muscle growth by causing micro-tears in muscle fibers, which are then repaired and rebuilt, leading to increased muscle mass.
+2.  **Muscle Damage and Repair**: High-intensity anaerobic exercises cause significant muscle damage, which triggers an inflammatory response and activates satellite cells, leading to muscle protein synthesis and hypertrophy.
+
+In contrast, aerobic exercises, characterized by low-intensity and long-duration, have limited effects on muscle hypertrophy. Instead, they:
+
+1.  **Enhance Endurance Adaptations**: Aerobic exercises, such as distance running or cycling, lead to adaptations in muscle fibers, increasing their ability to utilize oxygen and store energy sources, such as fats and carbohydrates.
+2.  **Neovascularization**: Aerobic training promotes the growth of new blood vessels and capillaries, improving oxygen delivery and nutrient uptake in muscles.
+
+In summary, while both anaerobic and aerobic exercises have distinct effects on muscle physiology, anaerobic strength training is generally considered the most effective approach for achieving muscle hypertrophy. However, it is essential to note that individual responses to exercise can vary, and the optimal training program may depend on specific goals, fitness levels, and individual factors.<|eot_id|>
+rejected_input_ids:
+[128000, 128006, 882, 128007, 271, 9370, 5730, 553, 279, 27375, 315, 41390, 261, 31906, 323, 91490, 23783, 389, 16124, 48855, 18237, 382, 791, 1888, 5603, 311, 11951, 11322, 16124, 6650, 8625, 20733, 320, 300, 16475, 311, 21760, 389, 30240, 8333, 11, 2410, 11, 477, 49286, 1237, 433, 574, 8965, 6646, 430, 13263, 41390, 261, 31906, 8333, 4967, 690, 8356, 48855, 58175, 927, 279, 1317, 4751, 11, 304, 5369, 311, 1202, 6372, 389, 52192, 8333, 323, 49286, 13, 5444, 22077, 48855, 58175, 649, 387, 7319, 1555, 8333, 4967, 323, 1023, 2875, 65483, 11, 1579, 20653, 8127, 41390, 261, 31906, 23783, 13, 28636, 20653, 8127, 11, 5129, 65483, 91490, 10368, 8965, 1587, 539, 1121, 304, 1633, 7524, 20438, 48855, 58175, 26, 4619, 11, 49286, 23579, 18885, 5942, 315, 50127, 323, 62345, 2949, 279, 24569, 11, 439, 1664, 439, 841, 869, 50804, 2065, 13, 128009, 128006, 78191, 128007, 271, 8586, 596, 264, 12399, 315, 279, 27375, 315, 41390, 261, 31906, 323, 91490, 23783, 389, 16124, 48855, 58175, 1473, 334, 81686, 261, 31906, 91554, 25, 57277, 12, 48023, 369, 16124, 48855, 58175, 320, 74189, 8, 927, 279, 1317, 4751, 198, 12, 40733, 52192, 8333, 323, 49286, 198, 12, 3053, 387, 17427, 1555, 13263, 8333, 4967, 323, 2875, 65483, 11, 1579, 20653, 8127, 41390, 261, 31906, 23783, 271, 334, 32, 261, 31906, 91554, 25, 57277, 12, 44493, 539, 7524, 369, 16124, 48855, 58175, 198, 12, 4497, 7524, 369, 47594, 5942, 315, 50127, 323, 62345, 2949, 279, 24569, 198, 12, 7429, 39990, 841, 869, 50804, 2065, 320, 1659, 315, 502, 6680, 31080, 696, 644, 12399, 11, 422, 499, 2351, 3411, 311, 1977, 16124, 3148, 320, 79343, 531, 58175, 705, 41390, 261, 31906, 23783, 1778, 439, 8333, 4967, 323, 2875, 65483, 11, 1579, 20653, 8127, 23783, 527, 810, 7524, 1109, 91490, 23783, 1093, 1317, 65483, 11, 3428, 20653, 8127, 7640, 13, 128009]
+rejected_inputs:
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+Summarize the effectiveness of anaerobic and aerobic exercises on muscle hypertropy.
+
+The best approach to specifically achieve muscle growth remains controversial (as opposed to focusing on gaining strength, power, or endurance); it was generally considered that consistent anaerobic strength training will produce hypertrophy over the long term, in addition to its effects on muscular strength and endurance. Muscular hypertrophy can be increased through strength training and other short-duration, high-intensity anaerobic exercises. Lower-intensity, longer-duration aerobic exercise generally does not result in very effective tissue hypertrophy; instead, endurance athletes enhance storage of fats and carbohydrates within the muscles, as well as neovascularization.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Here's a summary of the effectiveness of anaerobic and aerobic exercises on muscle hypertrophy:
+
+**Anaerobic Exercises:**
+
+- Effective for muscle hypertrophy (growth) over the long term
+- Increase muscular strength and endurance
+- Can be achieved through consistent strength training and short-duration, high-intensity anaerobic exercises
+
+**Aerobic Exercises:**
+
+- Generally not effective for muscle hypertrophy
+- More effective for enhancing storage of fats and carbohydrates within the muscles
+- Also promotes neovascularization (formation of new blood vessels)
+
+In summary, if you're looking to build muscle mass (hypertrophy), anaerobic exercises such as strength training and short-duration, high-intensity exercises are more effective than aerobic exercises like long-duration, low-intensity activities.<|eot_id|>
+rejected_label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 8586, 596, 264, 12399, 315, 279, 27375, 315, 41390, 261, 31906, 323, 91490, 23783, 389, 16124, 48855, 58175, 1473, 334, 81686, 261, 31906, 91554, 25, 57277, 12, 48023, 369, 16124, 48855, 58175, 320, 74189, 8, 927, 279, 1317, 4751, 198, 12, 40733, 52192, 8333, 323, 49286, 198, 12, 3053, 387, 17427, 1555, 13263, 8333, 4967, 323, 2875, 65483, 11, 1579, 20653, 8127, 41390, 261, 31906, 23783, 271, 334, 32, 261, 31906, 91554, 25, 57277, 12, 44493, 539, 7524, 369, 16124, 48855, 58175, 198, 12, 4497, 7524, 369, 47594, 5942, 315, 50127, 323, 62345, 2949, 279, 24569, 198, 12, 7429, 39990, 841, 869, 50804, 2065, 320, 1659, 315, 502, 6680, 31080, 696, 644, 12399, 11, 422, 499, 2351, 3411, 311, 1977, 16124, 3148, 320, 79343, 531, 58175, 705, 41390, 261, 31906, 23783, 1778, 439, 8333, 4967, 323, 2875, 65483, 11, 1579, 20653, 8127, 23783, 527, 810, 7524, 1109, 91490, 23783, 1093, 1317, 65483, 11, 3428, 20653, 8127, 7640, 13, 128009]
+rejected_labels:
+Here's a summary of the effectiveness of anaerobic and aerobic exercises on muscle hypertrophy:
+
+**Anaerobic Exercises:**
+
+- Effective for muscle hypertrophy (growth) over the long term
+- Increase muscular strength and endurance
+- Can be achieved through consistent strength training and short-duration, high-intensity anaerobic exercises
+
+**Aerobic Exercises:**
+
+- Generally not effective for muscle hypertrophy
+- More effective for enhancing storage of fats and carbohydrates within the muscles
+- Also promotes neovascularization (formation of new blood vessels)
+
+In summary, if you're looking to build muscle mass (hypertrophy), anaerobic exercises such as strength training and short-duration, high-intensity exercises are more effective than aerobic exercises like long-duration, low-intensity activities.<|eot_id|>
+[INFO|2025-07-31 10:48:28] llamafactory.model.model_utils.kv_cache:143 >> KV cache is disabled during training.
+[INFO|2025-07-31 10:48:36] llamafactory.model.model_utils.checkpointing:143 >> Gradient checkpointing enabled.
+[INFO|2025-07-31 10:48:36] llamafactory.model.model_utils.attention:143 >> Using torch SDPA for faster training and inference.
+[INFO|2025-07-31 10:48:36] llamafactory.model.adapter:143 >> Upcasting trainable params to float32.
+[INFO|2025-07-31 10:48:36] llamafactory.model.adapter:143 >> Fine-tuning method: LoRA
+[INFO|2025-07-31 10:48:36] llamafactory.model.model_utils.misc:143 >> Found linear modules: q_proj,k_proj,up_proj,gate_proj,v_proj,o_proj,down_proj
+[INFO|2025-07-31 10:48:39] llamafactory.model.model_utils.valuehead:143 >> Provided path (meta-llama/Llama-3.2-1B-Instruct) does not contain value head weights: meta-llama/Llama-3.2-1B-Instruct does not appear to have a file named value_head.bin. Checkout 'https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct/tree/main' for available files..
+[INFO|2025-07-31 10:48:39] llamafactory.model.model_utils.valuehead:143 >> Ignore the above message if you are not resuming the training of a value head model.
+[INFO|2025-07-31 10:48:39] llamafactory.model.loader:143 >> trainable params: 5,638,145 || all params: 1,241,452,545 || trainable%: 0.4542
+[WARNING|2025-07-31 10:48:39] llamafactory.train.callbacks:154 >> Previous trainer log in this folder will be deleted.
