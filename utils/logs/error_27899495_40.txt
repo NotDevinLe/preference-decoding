@@ -1,0 +1,49 @@
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:10<00:32, 10.96s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:22<00:22, 11.23s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:33<00:11, 11.17s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:36<00:00,  7.90s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:36<00:00,  9.09s/it]
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/eval_decoding.py", line 152, in <module>
+    batch_responses = generate_batch(batch_prompts, big_model, drift_processor, tokenizer)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/eval_decoding.py", line 85, in generate_batch
+    outputs = big_model.generate(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/generation/utils.py", line 2597, in generate
+    result = self._sample(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/generation/utils.py", line 3557, in _sample
+    outputs = self(**model_inputs, return_dict=True)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/utils/generic.py", line 969, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 688, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/utils/generic.py", line 969, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 453, in forward
+    layer_outputs = decoder_layer(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/modeling_layers.py", line 48, in __call__
+    return super().__call__(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 308, in forward
+    hidden_states, self_attn_weights = self.self_attn(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 265, in forward
+    attn_output, attn_weights = attention_interface(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/transformers/integrations/sdpa_attention.py", line 54, in sdpa_attention_forward
+    attn_output = torch.nn.functional.scaled_dot_product_attention(
+RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

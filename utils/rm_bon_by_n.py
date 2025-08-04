@@ -12,20 +12,39 @@ from llamafactory.hparams import ModelArguments, FinetuningArguments
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, required=True)
-parser.add_argument("--gold_cache", type=str, default="../results/gold_scores.jsonl")
+parser.add_argument("--gold_model_path", type=str, required=True, help="Path to gold reward model")
 args = parser.parse_args()
 
 # Load bon outputs
-data_path = "../data/bon_200.json"
+data_path = "../data/bon.json"
 with open(data_path, "r") as f:
     bon_data = json.load(f)
 
-# Load gold reward cache
-gold_cache = {}
-with open(args.gold_cache, "r") as f:
-    for line in f:
-        entry = json.loads(line)
-        gold_cache[entry["prompt"]] = entry
+# Load gold reward model
+print(f"Loading gold reward model from: {args.gold_model_path}")
+gold_model_args = ModelArguments(
+    model_name_or_path="meta-llama/Meta-Llama-3.1-8B-Instruct",
+    adapter_name_or_path=args.gold_model_path,
+    trust_remote_code=True,
+    use_fast_tokenizer=True,
+)
+gold_finetuning_args = FinetuningArguments(stage="rm")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+gold_tokenizer_module = load_tokenizer(gold_model_args)
+gold_tokenizer = gold_tokenizer_module["tokenizer"]
+if gold_tokenizer.pad_token is None:
+    gold_tokenizer.pad_token = gold_tokenizer.eos_token
+
+gold_model = load_model(
+    tokenizer=gold_tokenizer,
+    model_args=gold_model_args,
+    finetuning_args=gold_finetuning_args,
+    is_trainable=False,
+    add_valuehead=True
+)
+gold_model.to(device)
+gold_model.eval()
 
 # Load user reward model
 rm_path = f"saves/normal/{args.name}/toy_reward_200"
@@ -38,7 +57,6 @@ model_args = ModelArguments(
     use_fast_tokenizer=True,
 )
 finetuning_args = FinetuningArguments(stage="rm")
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 tokenizer_module = load_tokenizer(model_args)
 tokenizer = tokenizer_module["tokenizer"]
@@ -67,12 +85,10 @@ def get_score(model, tokenizer, text):
         logits, _, values = model(**inputs)
         return values[:, -1]
 
-max_k = 20
+k_list = [10,20,30,40,50,60,70,80,90,100,120,140,160,180,200]
 results_by_k = []
-for k in range(2, max_k + 1, 2):
+for k in k_list:
     selected_gold_scores = []
-    all_gold_scores = []
-    selected_minus_max = []
     for item in bon_data:
         prompt = item["prompt"]
         outputs = item["outputs"][:k]
@@ -82,26 +98,20 @@ for k in range(2, max_k + 1, 2):
             score = get_score(user_model, tokenizer, formatted)[0].item()
             user_scores.append(score)
         idx = int(np.argmax(user_scores))
-        gold_entry = gold_cache[prompt]
-        gold_scores_k = gold_entry["output_scores"][:k]
-        gold_score_selected = gold_scores_k[idx]
-        max_gold_at_k = max(gold_scores_k)
+        selected_output = outputs[idx]
+        
+        # Score the selected output with gold model
+        formatted_selected = format_llama3_prompt(prompt, selected_output)
+        gold_score_selected = get_score(gold_model, gold_tokenizer, formatted_selected)[0].item()
         selected_gold_scores.append(gold_score_selected)
-        all_gold_scores.append(np.mean(gold_scores_k))
-        selected_minus_max.append(gold_score_selected - max_gold_at_k)
-    avg_selected = float(np.mean(selected_gold_scores))
-    avg_all = float(np.mean(all_gold_scores))
-    uplift = avg_selected - avg_all
-    avg_selected_minus_max = float(np.mean(selected_minus_max))
+    
+    avg_selected_gold = float(np.mean(selected_gold_scores))
     results_by_k.append({
         "user": args.name,
         "k": k,
-        "avg_selected_gold": avg_selected,
-        "avg_all_gold": avg_all,
-        "uplift": uplift,
-        "avg_selected_minus_max": avg_selected_minus_max
+        "avg_selected_gold": avg_selected_gold
     })
-    print(f"k={k}: avg_selected_gold={avg_selected:.4f}, avg_all_gold={avg_all:.4f}, uplift={uplift:.4f}, avg_selected_minus_max={avg_selected_minus_max:.4f}")
+    print(f"k={k}: avg_selected_gold={avg_selected_gold:.4f}")
 
 # Save results
 with open("../results/rm_bon_by_n.jsonl", "a") as f:

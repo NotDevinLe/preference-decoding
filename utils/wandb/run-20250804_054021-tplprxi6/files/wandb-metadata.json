@@ -1,0 +1,54 @@
+{
+  "os":  "Linux-4.18.0-513.18.1.el8_9.x86_64-x86_64-with-glibc2.28",
+  "python":  "CPython 3.10.18",
+  "startedAt":  "2025-08-04T12:40:21.180950Z",
+  "args":  [
+    "--name",
+    "user1",
+    "--num_expectation_samples",
+    "10",
+    "--num_epochs",
+    "1000",
+    "--use_wandb",
+    "--sample_size",
+    "200"
+  ],
+  "program":  "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/eval_mle.py",
+  "codePath":  "utils/eval_mle.py",
+  "codePathLocal":  "eval_mle.py",
+  "git":  {
+    "remote":  "https://github.com/NotDevinLe/preference-decoding.git",
+    "commit":  "f29ce06138b9b2436306c5ca3d37a385da580d34"
+  },
+  "email":  "devin.t.le@outlook.com",
+  "root":  "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils",
+  "host":  "g3111",
+  "executable":  "/gscratch/ark/devinl6/envs/align/bin/python",
+  "cpu_count":  128,
+  "cpu_count_logical":  128,
+  "gpu":  "NVIDIA L40S",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "811518435328",
+      "used":  "8947027968"
+    }
+  },
+  "memory":  {
+    "total":  "1623036874752"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA L40S",
+      "memoryTotal":  "48305799168",
+      "cudaCores":  18176,
+      "architecture":  "Ada",
+      "uuid":  "GPU-c0ae1d35-9820-6d0a-3fdc-9a723a80be1b"
+    }
+  ],
+  "cudaVersion":  "12.7",
+  "slurm":  {
+    "job_id":  "27900402"
+  },
+  "writerId":  "xg0glahn9auu6lej1c1chytcbswl8eox"
+}

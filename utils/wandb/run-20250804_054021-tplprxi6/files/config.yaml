@@ -1,0 +1,88 @@
+_wandb:
+    value:
+        cli_version: 0.21.0
+        e:
+            xg0glahn9auu6lej1c1chytcbswl8eox:
+                args:
+                    - --name
+                    - user1
+                    - --num_expectation_samples
+                    - "10"
+                    - --num_epochs
+                    - "1000"
+                    - --use_wandb
+                    - --sample_size
+                    - "200"
+                codePath: utils/eval_mle.py
+                codePathLocal: eval_mle.py
+                cpu_count: 128
+                cpu_count_logical: 128
+                cudaVersion: "12.7"
+                disk:
+                    /:
+                        total: "811518435328"
+                        used: "8947027968"
+                email: devin.t.le@outlook.com
+                executable: /gscratch/ark/devinl6/envs/align/bin/python
+                git:
+                    commit: f29ce06138b9b2436306c5ca3d37a385da580d34
+                    remote: https://github.com/NotDevinLe/preference-decoding.git
+                gpu: NVIDIA L40S
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ada
+                      cudaCores: 18176
+                      memoryTotal: "48305799168"
+                      name: NVIDIA L40S
+                      uuid: GPU-c0ae1d35-9820-6d0a-3fdc-9a723a80be1b
+                host: g3111
+                memory:
+                    total: "1623036874752"
+                os: Linux-4.18.0-513.18.1.el8_9.x86_64-x86_64-with-glibc2.28
+                program: /mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/eval_mle.py
+                python: CPython 3.10.18
+                root: /mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils
+                slurm:
+                    job_id: "27900402"
+                startedAt: "2025-08-04T12:40:21.180950Z"
+                writerId: xg0glahn9auu6lej1c1chytcbswl8eox
+        m: []
+        python_version: 3.10.18
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 30
+                - 41
+                - 49
+                - 53
+                - 71
+                - 95
+                - 105
+            "2":
+                - 1
+                - 5
+                - 11
+                - 30
+                - 41
+                - 49
+                - 53
+                - 71
+                - 95
+                - 105
+            "3":
+                - 16
+            "4": 3.10.18
+            "5": 0.21.0
+            "6": 4.52.4
+            "12": 0.21.0
+            "13": linux-x86_64
+initial_p_norm:
+    value: 4.0506978034973145
+num_attributes:
+    value: 26
+num_data_points:
+    value: 200
+num_expectation_samples:
+    value: 10

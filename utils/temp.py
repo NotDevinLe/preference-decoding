@@ -1,76 +1,147 @@
-import numpy as np
-import random
-import itertools
-from vllm import LLM, SamplingParams
-from transformers import AutoTokenizer
-from datasets import load_dataset
-import sys
-import os
-from drift import get_training_matrix, l1_solve
 import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from drift import DriftLogitsProcessor  # Your working version
+from attribute_prompts import attribute_prompts, base_prompt
 import json
-import matplotlib.pyplot as plt
-from attribute_prompts import base_prompt, attribute_prompts
 
-with open("../data/preference/user1_train.json", "r") as f:
-    data = json.load(f)
+# Load models
+print("Loading models...")
+big_model_id = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+small_model_id = "meta-llama/Llama-3.2-1B-Instruct"
 
-data = data[:200]
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+tokenizer = AutoTokenizer.from_pretrained(small_model_id)
+tokenizer.pad_token = tokenizer.eos_token
 
-# Model setup
-model_id = "meta-llama/Llama-3.2-1B-Instruct"
-tokenizer = AutoTokenizer.from_pretrained(model_id)
-
-llm = LLM(
-    model=model_id,
-    tensor_parallel_size=1,
-    gpu_memory_utilization=0.7,
-    max_model_len=16384
+big_model = AutoModelForCausalLM.from_pretrained(
+    big_model_id,
+    torch_dtype=torch.float16,
+    device_map="auto"
 )
 
-# Convert from dict format to tuple format
-data = [
-    (item["prompt"], item["chosen"], item["rejected"]) 
-    for item in data
+small_model = AutoModelForCausalLM.from_pretrained(
+    small_model_id,
+    torch_dtype=torch.float16,
+    device_map="auto"
+)
+
+# Load p vector
+with open('../results/preference/user1_p.json', 'r') as f:
+    p_list = json.load(f)
+
+p = None
+for entry in p_list:
+    if entry['lambda'] == 0.01 and entry['sample_size'] == 200:
+        p = entry['p']
+        break
+
+print(f"Using p vector: {p[:5]}... (length: {len(p)})")
+
+# Test prompts
+test_prompts = [
+    "Write a funny joke about programming.",
+    "Explain quantum physics simply.", 
+    "What's the best way to learn Python?",
+    "Write a short story about a robot.",
+    "Give me advice on time management."
 ]
 
+def generate_comparison(prompt, b_values=[10.0, 1.0, 0.5]):
+    """Generate responses with different b values for comparison"""
+    print(f"\n{'='*80}")
+    print(f"PROMPT: {prompt}")
+    print(f"{'='*80}")
+    
+    results = {}
+    
+    for b in b_values:
+        print(f"\n--- b = {b} ---")
+        
+        if b >= 10.0:
+            # Large b ≈ minimal drift (conservative)
+            print("Generating with minimal drift (b=10, ~baseline)...")
+        else:
+            print(f"Generating with drift (b={b})...")
+        
+        # Always use drift processor, but with different b values
+        drift_processor = DriftLogitsProcessor(
+            b=b,
+            small_model=small_model,
+            tokenizer=tokenizer,
+            base_prompt=base_prompt,
+            attribute_prompts=attribute_prompts,
+            weights=p
+        )
+        
+        # Format prompt
+        messages = [{"role": "user", "content": prompt}]
+        formatted_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        input_ids = tokenizer(formatted_prompt, return_tensors="pt").input_ids.to(big_model.device)
+        
+        # Generate (always with drift processor now)
+        with torch.no_grad():
+            output = big_model.generate(
+                input_ids,
+                max_new_tokens=150,
+                do_sample=True,
+                temperature=0.7,
+                logits_processor=[drift_processor],
+                pad_token_id=tokenizer.eos_token_id
+            )
+        
+        # Decode response
+        response = tokenizer.decode(output[0][input_ids.shape[1]:], skip_special_tokens=True)
+        
+        print(f"Response: {response}")
+        print(f"Length: {len(response)} chars")
+        
+        results[f"b_{b}"] = response
+    
+    return results
 
-d = get_training_matrix(data, llm, tokenizer, base_prompt, attribute_prompts, device)
+# Test all prompts
+all_results = {}
 
-d_mean = torch.mean(d, dim=0).cpu().numpy()
+for prompt in test_prompts:
+    all_results[prompt] = generate_comparison(prompt)
 
-lambdas = np.linspace(0,0.1,100)
+# Summary comparison
+print(f"\n{'='*80}")
+print("SUMMARY: DRIFT EFFECT ANALYSIS")
+print(f"{'='*80}")
 
-p_list = []
-found = False
-for l1_lambda in lambdas:
-    p = l1_solve(d_mean, l1_lambda)
-    if sum(p <= 1e-5) == len(attribute_prompts) - 2 and not found:
-        found = True
-        print(p / np.linalg.norm(p, ord=1))
-    p_list.append(p)
+for prompt, results in all_results.items():
+    print(f"\nPrompt: {prompt}")
+    print("-" * 60)
+    
+    baseline = results.get("b_10.0", "")
+    drift_1 = results.get("b_1.0", "")
+    drift_2 = results.get("b_0.5", "")
+    
+    print(f"Conservative (b=10): {baseline[:100]}...")
+    print(f"Moderate (b=1.0):    {drift_1[:100]}...")
+    print(f"Aggressive (b=0.5):  {drift_2[:100]}...")
+    
+    # Check if responses are different
+    if baseline == drift_1 == drift_2:
+        print("⚠️  WARNING: All responses identical!")
+    elif len(set([baseline, drift_1, drift_2])) == 3:
+        print("✅ All responses different - drift is working!")
+    else:
+        print("⚠️  Some responses identical")
 
-p_array = np.array(p_list)  # Shape: (num_lambdas, num_attributes)
+# Quality assessment prompts
+print(f"\n{'='*80}")
+print("QUALITATIVE ASSESSMENT")
+print(f"{'='*80}")
+print("Look for these drift effects:")
+print("1. Different word choices/style")
+print("2. Different response structure") 
+print("3. Different tone/personality")
+print("4. Responses should still be coherent and on-topic")
+print("5. Higher b values should be more conservative")
 
-# Create the plot
-plt.figure(figsize=(12, 8))
+# Save results for analysis
+with open('../results/drift_generation_test.json', 'w') as f:
+    json.dump(all_results, f, indent=2)
 
-# Plot each attribute's weight as a function of lambda
-for i in range(len(attribute_prompts)):
-    plt.plot(lambdas, p_array[:, i], 'o-', linewidth=2, markersize=6, 
-             label=f'Attr {i}: {attribute_prompts[i][:20]}...')
-
-plt.xlabel('L1 Lambda', fontsize=12)
-plt.ylabel('P Weight', fontsize=12)
-plt.title('Attribute Weights vs L1 Regularization Strength\n(Preference)', fontsize=14)
-plt.xscale('log')  # Log scale for lambda since values span orders of magnitude
-plt.grid(True, alpha=0.3)
-plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=10)
-plt.tight_layout()
-
-# Add horizontal line at y=0 for reference
-plt.axhline(y=0, color='black', linestyle='--', alpha=0.5)
-
-plt.savefig('p_weights_vs_lambda.png', dpi=300, bbox_inches='tight')
-plt.show()
+print(f"\n✅ Results saved to ../results/drift_generation_test.json")

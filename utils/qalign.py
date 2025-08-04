@@ -219,7 +219,7 @@ def generate_proposal(model: LLM, tokenizer, system_prompt: str, question: str,
     full_prompt = prompt_text + prefix_text
     
     sampling_params = SamplingParams(
-        max_tokens=max_tokens - i,  # Adjust max tokens based on prefix length
+        max_tokens=max(1, max_tokens - i),  # Ensure at least 1 token, adjust based on prefix length
         temperature=temperature,
         top_p=0.9
     )

@@ -9,12 +9,13 @@ from attribute_prompts import attribute_prompts, base_prompt
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--b', type=int, default=7)
 parser.add_argument('--batch_size', type=int, default=4)  # Add batch size parameter
+parser.add_argument('--sample_size', type=int, default=200)
+parser.add_argument('--name', type=str, default='user1')
 args = parser.parse_args()
 
 # Load data
-with open('../results/preference/user1_p.json', 'r') as f: 
+with open(f'../results/preference/{args.name}_p.json', 'r') as f: 
     p_list = json.load(f)
 
 with open('../data/bon.json', 'r') as f:
@@ -52,12 +53,12 @@ small_model.eval()
 # Find p vector
 p = None
 for entry in p_list:
-    if entry['lambda'] == 0.01 and entry['sample_size'] == 200:
+    if entry['lambda'] == 0.01 and entry['sample_size'] == args.sample_size:
         p = entry['p']
         break
 
 if p is None:
-    raise ValueError("Could not find p vector with lambda=0.01 and sample_size=200")
+    raise ValueError(f"Could not find p vector with lambda=0.01 and sample_size={args.sample_size}")
 
 print(f"Using p vector: {p[:5]}...")  # Print first 5 elements
 
@@ -103,7 +104,7 @@ def generate_batch(prompts_batch, big_model, drift_processor, tokenizer, max_new
 
 # Create drift logits processor
 drift_processor = DriftLogitsProcessor(
-    b=args.b / 10,
+    b=0.5,
     small_model=small_model,
     tokenizer=tokenizer,
     base_prompt=base_prompt,
@@ -112,7 +113,7 @@ drift_processor = DriftLogitsProcessor(
 )
 
 # Setup output file
-output_file = f'../results/drift_decoding_responses_b{args.b}_batch{args.batch_size}.json'
+output_file = f'../results/drift_decoding_responses/{args.name}_sample{args.sample_size}.json'
 
 # Initialize or load existing results
 results = []
