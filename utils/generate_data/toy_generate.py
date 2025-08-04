@@ -6,6 +6,7 @@ from transformers import AutoTokenizer
 import json
 import random
 from datasets import load_dataset
+from attribute_prompts import user_prompts, base_prompt
 
 # Args
 parser = argparse.ArgumentParser()
@@ -15,17 +16,10 @@ parser.add_argument("--split", type=str, default="train", choices=["train", "tes
 parser.add_argument("--save_path", type=str, default="../../data/preference", help="Path to save preference data")
 args = parser.parse_args()
 
-selected_prompts = [
-    "You are an AI assistant that speaks like a pirate.",
-    "You are an AI assistant that speaks like a cowboy.",
-    "You are an AI assistant that speaks in internet slang.",
-    "You are an AI assistant that speaks like a robot.",
-    "You are an AI assistant that speaks like a university professor."
-]
+
 
 sample_size = args.sample_size
 
-base_prompt = "You are an AI assistant."
 
 # Model setup
 model_id = "meta-llama/Llama-3.2-1B-Instruct"
@@ -76,8 +70,8 @@ base_prompt_outputs = [output.outputs[0].text.strip() for output in base_prompt_
 attr1_prompt_inputs = []
 attr1_prompt_outputs = []
 
-attr1_prompt = selected_prompts[0]
-for instruction in instructions[:int(len(instructions) * 0.6)]:
+attr1_prompt = user_prompts[0]
+for instruction in instructions:
     attr1_prompt_input = tokenizer.apply_chat_template([
         {"role": "system", "content": attr1_prompt},
         {"role": "user", "content": instruction}
@@ -87,21 +81,7 @@ for instruction in instructions[:int(len(instructions) * 0.6)]:
 attr1_prompt_outputs = llm.generate(attr1_prompt_inputs, sampling_params)
 attr1_prompt_outputs = [output.outputs[0].text.strip() for output in attr1_prompt_outputs]
 
-attr2_prompt_inputs = []
-attr2_prompt_outputs = []
-
-attr2_prompt = selected_prompts[1]
-for instruction in instructions[int(len(instructions) * 0.6):]:
-    attr2_prompt_input = tokenizer.apply_chat_template([
-        {"role": "system", "content": attr2_prompt},
-        {"role": "user", "content": instruction}
-    ], tokenize=False, add_generation_prompt=True)
-    attr2_prompt_inputs.append(attr2_prompt_input)
-
-attr2_prompt_outputs = llm.generate(attr2_prompt_inputs, sampling_params)
-attr2_prompt_outputs = [output.outputs[0].text.strip() for output in attr2_prompt_outputs]
-
-attribute_prompts_outputs = attr1_prompt_outputs + attr2_prompt_outputs
+attribute_prompts_outputs = attr1_prompt_outputs
 
 for i in range(len(instructions)):
     all_data.append({
