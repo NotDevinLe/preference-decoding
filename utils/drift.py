@@ -261,7 +261,6 @@ class DriftLogitsProcessor(LogitsProcessor):
         base_prompt: str,
         attribute_prompts: list[str],
         weights: list[float],
-        use_cache: bool = True,
     ):
         self.b = b
         self.small_model = small_model
@@ -269,84 +268,39 @@ class DriftLogitsProcessor(LogitsProcessor):
         self.base_prompt = base_prompt
         self.attribute_prompts = attribute_prompts
         self.weights = weights
-        self.use_cache = use_cache
-
-        self.refs = {prompt: {
-            "input_ids": None,
-            "attention_mask": None,
-            "past_key_values": None,
-            "first_pass": True
-        } for prompt in [base_prompt] + attribute_prompts}
 
     def get_small_logits(self, input_ids, prompt):
-        ref = self.refs[prompt]
+        # Simplified version without caching - more reliable
+        prompt_text = self.tokenizer.apply_chat_template([
+            {"role": "system", "content": prompt}
+        ], tokenize=False, add_generation_prompt=True)
+        
+        prompt_ids = self.tokenizer(prompt_text, return_tensors="pt").input_ids.to(input_ids.device)
+        
+        # Concatenate system prompt with current token
+        input_step = torch.cat([prompt_ids, input_ids[:, -1:]], dim=1)
+        attention_mask = torch.ones_like(input_step)
 
-        if ref["first_pass"]:
-            # Create system prompt template (no user input, just system + assistant)
-            prompt_text = self.tokenizer.apply_chat_template([
-                {"role": "system", "content": prompt}
-            ], tokenize=False, add_generation_prompt=True)
-            
-            prompt_ids = self.tokenizer(prompt_text, return_tensors="pt").input_ids.to(input_ids.device)
-
-            ref["input_ids"] = prompt_ids
-            ref["attention_mask"] = torch.ones_like(prompt_ids)
-            ref["past_key_values"] = None
-            ref["first_pass"] = False
-
-        prompt_ids = ref["input_ids"]
-        attention_mask = ref["attention_mask"]
-
-        if self.use_cache:
-            input_step = input_ids[:, -1:]
-        else:
-            input_step = torch.cat([prompt_ids, input_ids[:, -1:]], dim=1)
-            attention_mask = torch.cat([attention_mask, torch.ones_like(input_ids[:, -1:])], dim=1)
-
-        out = self.small_model(
-            input_step,
-            attention_mask=attention_mask,
-            use_cache=self.use_cache,
-            past_key_values=ref["past_key_values"]
-        )
-
-        ref["past_key_values"] = out.get("past_key_values", None)
-        ref["attention_mask"] = attention_mask
+        with torch.no_grad():
+            out = self.small_model(
+                input_step,
+                attention_mask=attention_mask,
+                use_cache=False
+            )
 
         return out.logits[:, -1]
 
     def __call__(self, input_ids, aligned_logits):
-        # Debug prints (remove after debugging)
-        if not hasattr(self, '_debug_printed'):
-            print(f"🔍 Debug DriftLogitsProcessor:")
-            print(f"  b parameter: {self.b}")
-            print(f"  weights: {self.weights[:5]}..." if len(self.weights) > 5 else f"  weights: {self.weights}")
-            print(f"  num attribute prompts: {len(self.attribute_prompts)}")
-            print(f"  input_ids shape: {input_ids.shape}")
-            self._debug_printed = True
-        
+        # Get base model logits
         h0_small = self.get_small_logits(input_ids, self.base_prompt)
 
+        # Compute drift from attribute prompts
         drift = torch.zeros_like(h0_small)
-        total_drift_magnitude = 0.0
-        
-        for i, (w, attr_prompt) in enumerate(zip(self.weights, self.attribute_prompts)):
+        for w, attr_prompt in zip(self.weights, self.attribute_prompts):
             if w == 0:
                 continue
             hi_small = self.get_small_logits(input_ids, attr_prompt)
-            attr_drift = w * (hi_small - h0_small)
-            drift += attr_drift
-            
-            # Debug: track drift magnitude
-            if not hasattr(self, '_debug_printed_drift'):
-                drift_mag = torch.norm(attr_drift).item()
-                total_drift_magnitude += drift_mag
-                if i < 3:  # Only print first few
-                    print(f"  Attribute {i}: weight={w:.4f}, drift_magnitude={drift_mag:.6f}")
-        
-        if not hasattr(self, '_debug_printed_drift'):
-            print(f"  Total drift magnitude: {total_drift_magnitude:.6f}")
-            print(f"  Final drift / b: {torch.norm(drift / self.b).item():.6f}")
-            self._debug_printed_drift = True
+            drift += w * (hi_small - h0_small)
 
+        # Apply drift to aligned logits
         return aligned_logits + drift / self.b
