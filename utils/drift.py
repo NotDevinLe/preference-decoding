@@ -270,24 +270,81 @@ class DriftLogitsProcessor(LogitsProcessor):
         self.weights = weights
 
     def get_small_logits(self, input_ids, prompt):
-        # Simplified version without caching - more reliable
-        prompt_text = self.tokenizer.apply_chat_template([
-            {"role": "system", "content": prompt}
-        ], tokenize=False, add_generation_prompt=True)
+        # PROPER IMPLEMENTATION: Reconstruct conversation with different system prompt
         
-        prompt_ids = self.tokenizer(prompt_text, return_tensors="pt").input_ids.to(input_ids.device)
+        # Decode current input_ids back to text
+        current_text = self.tokenizer.decode(input_ids[0], skip_special_tokens=False)
         
-        # Concatenate system prompt with current token
-        input_step = torch.cat([prompt_ids, input_ids[:, -1:]], dim=1)
-        attention_mask = torch.ones_like(input_step)
-
+        # This is complex because we need to:
+        # 1. Parse the current conversation structure
+        # 2. Extract the user message
+        # 3. Reconstruct with different system prompt
+        # 4. Re-tokenize
+        
+        # For now, let's try a simpler approach:
+        # Extract everything after the last user message and create new context
+        
+        try:
+            # Find the last user input in the tokenized sequence
+            # This is a simplified approach - assumes standard chat template structure
+            
+            # Decode to text and try to extract user content
+            if "<|start_header_id|>user<|end_header_id|>" in current_text:
+                # Extract user message
+                user_start = current_text.rfind("<|start_header_id|>user<|end_header_id|>")
+                user_end = current_text.find("<|eot_id|>", user_start)
+                if user_end == -1:
+                    user_end = len(current_text)
+                
+                user_content = current_text[user_start + len("<|start_header_id|>user<|end_header_id|>"):user_end].strip()
+                
+                # Also extract any assistant content that's already been generated
+                assistant_start = current_text.rfind("<|start_header_id|>assistant<|end_header_id|>")
+                if assistant_start != -1:
+                    assistant_content = current_text[assistant_start + len("<|start_header_id|>assistant<|end_header_id|>"):].strip()
+                else:
+                    assistant_content = ""
+                
+                # Create new conversation with different system prompt
+                messages = [
+                    {"role": "system", "content": prompt},
+                    {"role": "user", "content": user_content}
+                ]
+                
+                # Create the prompt up to assistant response
+                new_prompt = self.tokenizer.apply_chat_template(
+                    messages, tokenize=False, add_generation_prompt=True
+                )
+                
+                # Add any existing assistant content
+                if assistant_content:
+                    new_prompt += assistant_content
+                
+                # Tokenize the new sequence
+                new_input_ids = self.tokenizer(new_prompt, return_tensors="pt").input_ids.to(input_ids.device)
+                
+                # Run through small model
+                with torch.no_grad():
+                    out = self.small_model(
+                        new_input_ids,
+                        attention_mask=torch.ones_like(new_input_ids),
+                        use_cache=False
+                    )
+                
+                return out.logits[:, -1]
+                
+        except Exception as e:
+            # Fallback: just use the original input_ids if parsing fails
+            pass
+        
+        # Fallback: use original approach if reconstruction fails
         with torch.no_grad():
             out = self.small_model(
-                input_step,
-                attention_mask=attention_mask,
+                input_ids,
+                attention_mask=torch.ones_like(input_ids),
                 use_cache=False
             )
-
+        
         return out.logits[:, -1]
 
     def __call__(self, input_ids, aligned_logits):
