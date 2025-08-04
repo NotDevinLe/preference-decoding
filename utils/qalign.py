@@ -5,20 +5,89 @@ from vllm import LLM, SamplingParams
 from typing import List, Tuple, Optional
 import math
 from transformers import AutoTokenizer
+from attribute_prompts import base_prompt
+
+def rouge_l(candidate, reference):
+    """
+    Compute ROUGE-L score using Longest Common Subsequence (LCS).
+    Returns dict with precision, recall, and f1 scores.
+    """
+    def lcs_length(x, y):
+        """Compute the length of the longest common subsequence."""
+        m, n = len(x), len(y)
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+        
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if x[i-1] == y[j-1]:
+                    dp[i][j] = dp[i-1][j-1] + 1
+                else:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+        
+        return dp[m][n]
+    
+    # Tokenize by splitting on whitespace
+    candidate_tokens = candidate.lower().split()
+    reference_tokens = reference.lower().split()
+    
+    if len(candidate_tokens) == 0 and len(reference_tokens) == 0:
+        return {"precision": 1.0, "recall": 1.0, "f1": 1.0}
+    
+    if len(candidate_tokens) == 0 or len(reference_tokens) == 0:
+        return {"precision": 0.0, "recall": 0.0, "f1": 0.0}
+    
+    lcs_len = lcs_length(candidate_tokens, reference_tokens)
+    
+    precision = lcs_len / len(candidate_tokens) if len(candidate_tokens) > 0 else 0.0
+    recall = lcs_len / len(reference_tokens) if len(reference_tokens) > 0 else 0.0
+    
+    if precision + recall == 0:
+        f1 = 0.0
+    else:
+        f1 = 2 * precision * recall / (precision + recall)
+    
+    return {"precision": precision, "recall": recall, "f1": f1}
+
+def qalign_mbr_rouge_l(candidates):
+    """
+    Select the candidate that maximizes average ROUGE-L F1 score against all candidates.
+    O(T^2) algorithm where T is the number of candidates.
+    """
+    if not candidates:
+        return None
+    
+    if len(candidates) == 1:
+        return candidates[0]
+    
+    best_candidate = None
+    best_score = -1
+    
+    for candidate in candidates:
+        total_utility = 0
+        for other_candidate in candidates:
+            utility = rouge_l(candidate, other_candidate)["f1"]
+            total_utility += utility
+        
+        avg_utility = total_utility / len(candidates)
+        if avg_utility > best_score:
+            best_score = avg_utility
+            best_candidate = candidate
+    
+    return best_candidate
 
 def qalign(
     model: LLM,
     tokenizer,
     question: str,
     reward_fn,
-    base_prompt: str = "You are an AI assistant.",
+    base_prompt: str = base_prompt,
     num_steps: int = 100,
     beta: float = 1.0,
     initial_response: Optional[str] = None,
     max_tokens: int = 256,
     temperature: float = 0.8,
     device: str = "cuda"
-) -> List[str]:
+) -> str:
     """
     Args:
         model: vLLM model for generation
@@ -34,7 +103,7 @@ def qalign(
         device: device to use
         
     Returns:
-        List of accepted samples from the MCMC chain
+        Single response selected using MBR ROUGE-L from accepted samples
     """
     
     # Step 1: Initialize the chain with y^0
@@ -92,8 +161,12 @@ def qalign(
     
     final_acceptance_rate = acceptance_count / num_steps
     print(f"MCMC completed. Final acceptance rate: {final_acceptance_rate:.3f}")
+    print(f"Selecting best response from {len(accepted_samples)} candidates using MBR ROUGE-L...")
     
-    return accepted_samples
+    # Use MBR ROUGE-L to select the best response from accepted samples
+    best_response = qalign_mbr_rouge_l(accepted_samples)
+    
+    return best_response
 
 
 def generate_response(model: LLM, tokenizer, system_prompt: str, question: str, 
