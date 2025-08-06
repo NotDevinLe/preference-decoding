@@ -1,3 +1,4 @@
 .env
 utils/saves/
 LLaMa-Factory/
+utils/wandb/
