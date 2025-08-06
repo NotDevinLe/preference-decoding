@@ -14,7 +14,6 @@ setup(
         "wandb",
         "tqdm",
         "datasets",
-        "rouge-score",
     ],
     author="Devin",
     author_email="devin.t.le@outlook.com",
