@@ -75,7 +75,6 @@ def main():
     
     print(" Expectation matrix loaded successfully and is compatible")
     print(f"  Expectation matrix: {checkpoint['expectation_matrix'].shape}")
-    print(f"  Chosen rewards: {checkpoint['chosen_rewards'].shape}")
     
     # Initialize MLE with loaded matrices
     print("\\nInitializing MLE model...")
@@ -85,7 +84,6 @@ def main():
         data=train_data,
         device=device,
         expectation_matrix=checkpoint['expectation_matrix'],
-        chosen_rewards=checkpoint['chosen_rewards'],
         use_wandb=args.use_wandb,
         wandb_project=args.wandb_project
     )

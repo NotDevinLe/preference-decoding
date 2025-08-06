@@ -12,20 +12,22 @@ import wandb
 from tqdm import tqdm
 
 class MLE:
-    def __init__(self, model, tokenizer, data, device, expectation_matrix, chosen_rewards, use_wandb=True, wandb_project="mle-training"):
+    def __init__(self, model, tokenizer, data, device, expectation_matrix, use_wandb=True, wandb_project="mle-training"):
         self.model = model
         self.tokenizer = tokenizer
         self.data = data
         self.device = device
         self.p = torch.randn(len(attribute_prompts), device=device)
         
-        # Load pre-computed matrices
+        # Load pre-computed expectation matrix (shared across users)
         self.expectation = expectation_matrix.to(device)
-        self.chosen_rewards = chosen_rewards.to(device)
         self.num_expectation_samples = expectation_matrix.shape[1]
         
         print(f"Loaded expectation matrix: {self.expectation.shape}")
-        print(f"Loaded chosen rewards: {self.chosen_rewards.shape}")
+        
+        # Compute chosen rewards for this specific user's data
+        self.precompute_chosen_rewards()
+        
         self.use_wandb = use_wandb
         if use_wandb:
             wandb.init(project=wandb_project, config={
@@ -131,54 +133,6 @@ class MLE:
                     wandb.log({"converged_epoch": epoch})
                 break
 
-    def generate_expectation_outputs(self):
-        """
-        Generate num_expectation_samples outputs for each prompt in the data.
-        Compute their reward vectors and store them.
-        Uses vLLM's built-in batching for maximum efficiency.
-        """
-        print("Generating expectation outputs...")
-        
-        # Prepare all prompts at once
-        all_inputs = []
-        for item in self.data:
-            prompt = item['prompt']
-            formatted_input = self.tokenizer.apply_chat_template([
-                {"role": "system", "content": base_prompt},
-                {"role": "user", "content": prompt}
-            ], tokenize=False, add_generation_prompt=True)
-            all_inputs.append(formatted_input)
-        
-        # Generate all outputs at once - vLLM handles batching internally
-        print(f"Generating {self.num_expectation_samples} outputs for {len(all_inputs)} prompts...")
-        sampling_params = SamplingParams(
-            temperature=1.0, 
-            max_tokens=1024, 
-            n=self.num_expectation_samples
-        )
-        
-        all_outputs = self.model.generate(all_inputs, sampling_params)
-        
-        # Extract all generated texts and prepare for reward computation
-        print("Preparing data for reward computation...")
-        all_reward_data = []
-        output_mapping = []  # Track which outputs belong to which prompt
-        
-        for prompt_idx, vllm_output in enumerate(all_outputs):
-            prompt = self.data[prompt_idx]['prompt']
-            for sample_idx, output in enumerate(vllm_output.outputs):
-                all_reward_data.append((prompt, output.text))
-                output_mapping.append((prompt_idx, sample_idx))
-        
-        # Compute all rewards at once
-        print(f"Computing rewards for {len(all_reward_data)} generated outputs...")
-        all_rewards = self.get_reward(all_reward_data)  # (total_outputs, num_attributes)
-        
-        # Map rewards back to expectation matrix
-        for idx, (prompt_idx, sample_idx) in enumerate(output_mapping):
-            self.expectation[prompt_idx, sample_idx] = all_rewards[idx]
-        
-        print("Finished generating expectation outputs")
     
     def precompute_chosen_rewards(self):
         """
@@ -271,16 +225,14 @@ class MLE:
             wandb.finish()
     
     def save_expectation_matrix(self, save_path):
-        """Save the expectation matrix and chosen rewards to disk for reuse."""
+        """Save the expectation matrix to disk for reuse across users."""
         print(f"Saving expectation matrix to {save_path}")
         torch.save({
             'expectation_matrix': self.expectation.cpu(),
-            'chosen_rewards': self.chosen_rewards.cpu(),
-            'num_data_points': len(self.data),
             'num_expectation_samples': self.num_expectation_samples,
             'num_attributes': len(attribute_prompts)
         }, save_path)
-        print(f"Expectation matrix and chosen rewards saved successfully")
+        print(f"Expectation matrix saved successfully")
     
     @staticmethod
     def load_expectation_matrix(load_path):

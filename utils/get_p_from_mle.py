@@ -4,21 +4,21 @@ import torch
 from vllm import LLM
 from transformers import AutoTokenizer
 from mle import MLE
-from attribute_prompts import attribute_prompts, base_prompt
+from attribute_prompts import attribute_prompts
 import os
 import numpy as np
 
 def main():
-    parser = argparse.ArgumentParser(description="Evaluate MLE for preference learning")
+    parser = argparse.ArgumentParser(description="Train MLE and get p vector from expectation matrix")
     parser.add_argument("--name", type=str, default="user1", help="User name for data files")
-    parser.add_argument("--num_expectation_samples", type=int, default=50, help="Number of expectation samples per prompt")
+    parser.add_argument("--num_expectation_samples", type=int, default=16, help="Number of expectation samples per prompt")
+    parser.add_argument("--sample_size", type=int, default=200, help="Training data size")
     parser.add_argument("--num_epochs", type=int, default=1000, help="Number of training epochs")
     parser.add_argument("--learning_rate", type=float, default=0.01, help="Learning rate")
     parser.add_argument("--beta", type=float, default=1.0, help="Temperature parameter")
     parser.add_argument("--num_mc_samples", type=int, default=10, help="Number of MC samples for expectation")
     parser.add_argument("--use_wandb", action="store_true", help="Use wandb for tracking")
     parser.add_argument("--wandb_project", type=str, default="mle-preference", help="Wandb project name")
-    parser.add_argument("--sample_size", type=int, default=None, help="Limit training data size (for testing)")
     args = parser.parse_args()
     
     # Device setup
@@ -49,18 +49,15 @@ def main():
             train_data = json.load(f)
     except FileNotFoundError:
         print(f"Error: Could not find training data at {train_data_path}")
-        print("Make sure you have generated the preference data first.")
         return
     
-    # Optionally limit data size for testing
+    # Limit data size
     if args.sample_size:
         train_data = train_data[:args.sample_size]
         print(f"Using {args.sample_size} training samples")
-    else:
-        print(f"Using all {len(train_data)} training samples")
     
     # Load expectation matrix
-    expectation_matrix_path = f"../data/expectation_matrices/{args.name}_expectation_n{args.num_expectation_samples}_size{len(train_data)}.pt"
+    expectation_matrix_path = f"../data/expectation_matrices/{args.name}_expectation_n{args.num_expectation_samples}_size{args.sample_size}.pt"
     
     if not os.path.exists(expectation_matrix_path):
         print(f"Error: Expectation matrix not found at {expectation_matrix_path}")
@@ -76,13 +73,11 @@ def main():
         print(f"Error: Expectation matrix shape {checkpoint['expectation_matrix'].shape} doesn't match expected {expected_shape}")
         return
     
-    # Initialize MLE
-    print("\nInitializing MLE model...")
-    print(f"Number of attributes: {len(attribute_prompts)}")
-    print(f"Number of expectation samples per prompt: {args.num_expectation_samples}")
-    print(f"Expectation matrix loaded successfully and is compatible")
+    print(" Expectation matrix loaded successfully and is compatible")
     print(f"  Expectation matrix: {checkpoint['expectation_matrix'].shape}")
     
+    # Initialize MLE with loaded matrices
+    print("\\nInitializing MLE model...")
     mle_model = MLE(
         model=model,
         tokenizer=tokenizer,
@@ -93,12 +88,13 @@ def main():
         wandb_project=args.wandb_project
     )
     
-    # Train MLE
-    print("\nStarting MLE training...")
-    print(f"Epochs: {args.num_epochs}")
-    print(f"Learning rate: {args.learning_rate}")
-    print(f"Beta: {args.beta}")
-    print(f"MC samples: {args.num_mc_samples}")
+    # Train MLE to learn p vector
+    print("\\nStarting MLE training...")
+    print(f"Training parameters:")
+    print(f"  Epochs: {args.num_epochs}")
+    print(f"  Learning rate: {args.learning_rate}")
+    print(f"  Beta: {args.beta}")
+    print(f"  MC samples: {args.num_mc_samples}")
     
     mle_model.train(
         num_epochs=args.num_epochs,
@@ -111,25 +107,35 @@ def main():
     results_dir = "../results/mle"
     os.makedirs(results_dir, exist_ok=True)
     
-    save_path = f"{results_dir}/{args.name}_p_vector.json"
-    print(f"\nSaving results to: {save_path}")
+    save_path = f"{results_dir}/{args.name}_p_vector_n{args.num_expectation_samples}_size{args.sample_size}.json"
+    print(f"\\nSaving p vector to: {save_path}")
     mle_model.save_results(save_path)
     
     # Print final p vector
     final_p = mle_model.p.cpu().numpy()
-    print("\nFinal p vector:")
-    for i, (attr, p_val) in enumerate(zip(attribute_prompts, final_p)):
-        print(f"  Attribute {i}: {p_val:.4f}")
-        print(f"    Prompt: {attr[:50]}...")
+    print("\\n" + "="*60)
+    print("FINAL P VECTOR RESULTS")
+    print("="*60)
+    print(f"P vector norm: {np.linalg.norm(final_p):.4f}")
+    print(f"P vector: {final_p}")
     
-    # Print top attributes by weight
-    print("\nTop 5 attributes by absolute weight:")
-    top_indices = np.argsort(np.abs(final_p))[::-1][:5]
-    for idx in top_indices:
-        print(f"  Attribute {idx}: {final_p[idx]:.4f}")
-        print(f"    Prompt: {attribute_prompts[idx][:100]}...")
+    # Print top attributes by absolute weight
+    print("\\nTop 10 attributes by absolute weight:")
+    top_indices = np.argsort(np.abs(final_p))[::-1][:10]
+    for rank, idx in enumerate(top_indices, 1):
+        print(f"  {rank:2d}. Attribute {idx:2d}: {final_p[idx]:+7.4f}")
+        print(f"      Prompt: {attribute_prompts[idx][:80]}...")
     
-    print("\nMLE evaluation complete!")
+    # Print summary statistics
+    print(f"\\nSummary Statistics:")
+    print(f"  Positive weights: {np.sum(final_p > 0)}")
+    print(f"  Negative weights: {np.sum(final_p < 0)}")
+    print(f"  Zero weights: {np.sum(np.abs(final_p) < 1e-6)}")
+    print(f"  Max weight: {np.max(final_p):.4f}")
+    print(f"  Min weight: {np.min(final_p):.4f}")
+    print(f"  Mean absolute weight: {np.mean(np.abs(final_p)):.4f}")
+    
+    print("\\n MLE training complete! P vector saved.")
 
 if __name__ == "__main__":
     main()
