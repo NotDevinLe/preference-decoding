@@ -1,0 +1,89 @@
+Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:02<00:00,  2.73s/it]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:02<00:00,  2.73s/it]
+
+Capturing CUDA graph shapes:   0%|          | 0/67 [00:00<?, ?it/s]Capturing CUDA graph shapes:   1%|▏         | 1/67 [00:00<00:26,  2.51it/s]Capturing CUDA graph shapes:   3%|▎         | 2/67 [00:00<00:23,  2.77it/s]Capturing CUDA graph shapes:   4%|▍         | 3/67 [00:01<00:22,  2.89it/s]Capturing CUDA graph shapes:   6%|▌         | 4/67 [00:01<00:21,  2.93it/s]Capturing CUDA graph shapes:   7%|▋         | 5/67 [00:01<00:20,  2.97it/s]Capturing CUDA graph shapes:   9%|▉         | 6/67 [00:02<00:20,  2.94it/s]Capturing CUDA graph shapes:  10%|█         | 7/67 [00:02<00:20,  2.96it/s]Capturing CUDA graph shapes:  12%|█▏        | 8/67 [00:02<00:19,  2.98it/s]Capturing CUDA graph shapes:  13%|█▎        | 9/67 [00:03<00:19,  2.99it/s]Capturing CUDA graph shapes:  15%|█▍        | 10/67 [00:03<00:19,  2.99it/s]Capturing CUDA graph shapes:  16%|█▋        | 11/67 [00:03<00:18,  3.00it/s]Capturing CUDA graph shapes:  18%|█▊        | 12/67 [00:04<00:18,  3.00it/s]Capturing CUDA graph shapes:  19%|█▉        | 13/67 [00:04<00:17,  3.02it/s]Capturing CUDA graph shapes:  21%|██        | 14/67 [00:04<00:17,  3.00it/s]Capturing CUDA graph shapes:  22%|██▏       | 15/67 [00:05<00:17,  2.90it/s]Capturing CUDA graph shapes:  24%|██▍       | 16/67 [00:05<00:17,  2.92it/s]Capturing CUDA graph shapes:  25%|██▌       | 17/67 [00:05<00:17,  2.92it/s]Capturing CUDA graph shapes:  27%|██▋       | 18/67 [00:06<00:16,  2.94it/s]Capturing CUDA graph shapes:  28%|██▊       | 19/67 [00:06<00:16,  2.96it/s]Capturing CUDA graph shapes:  30%|██▉       | 20/67 [00:06<00:15,  2.97it/s]Capturing CUDA graph shapes:  31%|███▏      | 21/67 [00:07<00:15,  2.92it/s]Capturing CUDA graph shapes:  33%|███▎      | 22/67 [00:07<00:15,  2.92it/s]Capturing CUDA graph shapes:  34%|███▍      | 23/67 [00:07<00:15,  2.92it/s]Capturing CUDA graph shapes:  36%|███▌      | 24/67 [00:08<00:14,  2.93it/s]Capturing CUDA graph shapes:  37%|███▋      | 25/67 [00:08<00:14,  2.94it/s]Capturing CUDA graph shapes:  39%|███▉      | 26/67 [00:08<00:13,  2.96it/s]Capturing CUDA graph shapes:  40%|████      | 27/67 [00:09<00:13,  2.97it/s]Capturing CUDA graph shapes:  42%|████▏     | 28/67 [00:09<00:13,  2.97it/s]Capturing CUDA graph shapes:  43%|████▎     | 29/67 [00:09<00:12,  2.98it/s]Capturing CUDA graph shapes:  45%|████▍     | 30/67 [00:10<00:12,  2.99it/s]Capturing CUDA graph shapes:  46%|████▋     | 31/67 [00:10<00:12,  2.93it/s]Capturing CUDA graph shapes:  48%|████▊     | 32/67 [00:10<00:11,  2.95it/s]Capturing CUDA graph shapes:  49%|████▉     | 33/67 [00:11<00:11,  2.93it/s]Capturing CUDA graph shapes:  51%|█████     | 34/67 [00:11<00:11,  2.94it/s]Capturing CUDA graph shapes:  52%|█████▏    | 35/67 [00:11<00:10,  2.96it/s]Capturing CUDA graph shapes:  54%|█████▎    | 36/67 [00:12<00:10,  2.98it/s]Capturing CUDA graph shapes:  55%|█████▌    | 37/67 [00:12<00:10,  2.95it/s]Capturing CUDA graph shapes:  57%|█████▋    | 38/67 [00:12<00:09,  2.97it/s]Capturing CUDA graph shapes:  58%|█████▊    | 39/67 [00:13<00:09,  2.98it/s]Capturing CUDA graph shapes:  60%|█████▉    | 40/67 [00:13<00:09,  2.99it/s]Capturing CUDA graph shapes:  61%|██████    | 41/67 [00:13<00:08,  3.00it/s]Capturing CUDA graph shapes:  63%|██████▎   | 42/67 [00:14<00:08,  3.00it/s]Capturing CUDA graph shapes:  64%|██████▍   | 43/67 [00:14<00:07,  3.00it/s]Capturing CUDA graph shapes:  66%|██████▌   | 44/67 [00:14<00:07,  3.00it/s]Capturing CUDA graph shapes:  67%|██████▋   | 45/67 [00:15<00:07,  2.99it/s]Capturing CUDA graph shapes:  69%|██████▊   | 46/67 [00:15<00:07,  2.97it/s]Capturing CUDA graph shapes:  70%|███████   | 47/67 [00:15<00:06,  2.97it/s]Capturing CUDA graph shapes:  72%|███████▏  | 48/67 [00:16<00:06,  2.98it/s]Capturing CUDA graph shapes:  73%|███████▎  | 49/67 [00:16<00:06,  2.98it/s]Capturing CUDA graph shapes:  75%|███████▍  | 50/67 [00:16<00:05,  2.93it/s]Capturing CUDA graph shapes:  76%|███████▌  | 51/67 [00:17<00:05,  2.94it/s]Capturing CUDA graph shapes:  78%|███████▊  | 52/67 [00:17<00:05,  2.97it/s]Capturing CUDA graph shapes:  79%|███████▉  | 53/67 [00:17<00:04,  2.98it/s]Capturing CUDA graph shapes:  81%|████████  | 54/67 [00:18<00:04,  2.94it/s]Capturing CUDA graph shapes:  82%|████████▏ | 55/67 [00:18<00:04,  2.95it/s]Capturing CUDA graph shapes:  84%|████████▎ | 56/67 [00:18<00:03,  2.96it/s]Capturing CUDA graph shapes:  85%|████████▌ | 57/67 [00:19<00:03,  2.97it/s]Capturing CUDA graph shapes:  87%|████████▋ | 58/67 [00:19<00:03,  2.97it/s]Capturing CUDA graph shapes:  88%|████████▊ | 59/67 [00:19<00:02,  2.98it/s]Capturing CUDA graph shapes:  90%|████████▉ | 60/67 [00:20<00:02,  2.98it/s]Capturing CUDA graph shapes:  91%|█████████ | 61/67 [00:20<00:02,  2.99it/s]Capturing CUDA graph shapes:  93%|█████████▎| 62/67 [00:20<00:01,  3.00it/s]Capturing CUDA graph shapes:  94%|█████████▍| 63/67 [00:21<00:01,  2.92it/s]Capturing CUDA graph shapes:  96%|█████████▌| 64/67 [00:21<00:01,  2.96it/s]Capturing CUDA graph shapes:  97%|█████████▋| 65/67 [00:21<00:00,  2.97it/s]Capturing CUDA graph shapes:  99%|█████████▊| 66/67 [00:22<00:00,  2.98it/s]Capturing CUDA graph shapes: 100%|██████████| 67/67 [00:23<00:00,  2.09it/s]Capturing CUDA graph shapes: 100%|██████████| 67/67 [00:23<00:00,  2.90it/s]
+wandb: Currently logged in as: devinl6 (devinl6-university-of-washington) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.21.0
+wandb: Run data is saved locally in /mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/mle/wandb/run-20250806_145709-9n1fyswt
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run cool-smoke-12
+wandb: ⭐️ View project at https://wandb.ai/devinl6-university-of-washington/mle-preference
+wandb: 🚀 View run at https://wandb.ai/devinl6-university-of-washington/mle-preference/runs/9n1fyswt
+wandb: WARNING Saving files without folders. If you want to preserve subdirectories pass base_path to wandb.save, i.e. wandb.save("/mnt/folder/file.h5", base_path="/mnt")
+wandb: uploading history steps 1344330-1349999, summary, console lines 4996-5018
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:           avg_log_likelihood ▁▁▁▁▁▂▂▂▂▂▃▃▄▄▄▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇▇███
+wandb:                        epoch ▁▁▂▂▂▂▂▂▂▃▃▃▃▃▃▃▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇▇▇█
+wandb:                gradient_norm █▇▆▅▅▆▄▅▄▄▅▄▄▄▄▄▄▃▃▃▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁
+wandb:                learning_rate ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: negative_log_likelihood_loss ██▇▇▇▆▆▆▆▆▅▅▅▅▅▄▄▄▄▄▃▃▃▃▃▃▃▃▃▃▂▂▂▂▂▁▁▁▁▁
+wandb:                          p_0 ▁▁▁▁▁▂▂▂▂▂▃▃▃▄▄▄▄▄▄▅▅▅▅▆▆▆▆▆▆▆▇▇▇▇▇▇▇███
+wandb:                          p_1 ▁▁▁▁▁▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄▄▄▅▅▅▅▅▅▅▅▆▆▆▆▇▇▇▇██
+wandb:                         p_10 ▁▁▁▁▁▂▂▂▂▂▂▂▃▃▄▄▄▄▄▅▅▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇████
+wandb:                         p_11 ████▇▇▇▇▇▇▆▆▆▆▆▆▆▆▅▅▅▅▅▅▄▄▄▃▃▃▃▃▃▂▂▂▂▂▂▁
+wandb:                         p_12 ▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▂▂▂▂▂▃▃▃▄▄▅▅▅▅▅▆▆▆▆▆▇▇▇▇█
+wandb:                         p_13 ▁▁▁▁▁▁▂▂▂▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇█████
+wandb:                         p_14 ███▇▇▆▆▆▆▆▆▆▆▅▅▅▅▅▄▄▄▄▄▄▃▃▃▃▃▃▃▃▂▂▂▂▂▂▂▁
+wandb:                         p_15 ▁▁▁▁▁▁▁▁▁▁▂▂▂▂▂▂▃▃▃▄▄▄▅▅▅▅▅▆▆▆▆▆▆▆▆▇▇▇▇█
+wandb:                         p_16 ████▇▇▇▇▆▆▆▆▅▅▅▅▄▄▄▄▄▄▄▄▄▄▄▄▄▃▃▃▃▂▂▂▂▂▂▁
+wandb:                         p_17 ████▇▇▇▆▆▆▅▅▅▅▄▄▄▃▃▃▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:                         p_18 ███▇▇▆▆▆▆▆▅▅▅▅▅▅▅▄▄▄▄▄▄▄▃▃▃▃▃▃▂▂▂▂▂▂▂▂▂▁
+wandb:                         p_19 █▇▇▇▇▆▆▆▆▆▆▅▅▅▅▅▅▄▄▄▄▄▄▄▃▃▃▃▃▃▃▃▂▂▂▂▂▂▁▁
+wandb:                          p_2 ███▇▇▇▇▇▇▆▆▆▆▆▅▅▅▅▅▅▄▄▄▄▄▄▄▃▃▃▃▃▂▂▂▂▁▁▁▁
+wandb:                         p_20 █▇▇▆▆▅▅▄▄▄▄▄▄▄▃▃▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁
+wandb:                         p_21 ▁▁▁▁▂▂▂▂▃▃▃▃▃▃▃▄▅▅▅▅▅▅▆▆▆▆▆▆▆▇▇▇▇▇▇█████
+wandb:                         p_22 ████▇▇▇▆▆▆▆▅▅▅▅▅▅▄▄▄▄▄▄▃▃▃▃▂▂▂▂▂▂▂▂▁▁▁▁▁
+wandb:                         p_23 ██▇▇▆▆▆▆▆▆▅▅▅▅▅▅▅▄▄▄▄▄▃▃▃▃▃▃▃▃▂▂▂▂▂▂▁▁▁▁
+wandb:                         p_24 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▂▂▂▂▂▂▃▄▄▄▄▄▅▅▆▆▆▆▇▇▇███
+wandb:                         p_25 █████▇▇▇▇▇▆▆▆▆▆▆▆▆▅▅▅▄▄▄▄▄▄▃▃▃▃▃▂▂▂▂▁▁▁▁
+wandb:                          p_3 ▁▁▁▁▁▂▂▂▂▂▂▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇█
+wandb:                          p_4 ▁▁▁▁▁▁▁▁▁▁▂▂▂▂▂▂▂▂▃▃▃▃▃▃▃▅▅▅▅▅▆▆▆▆▆▇████
+wandb:                          p_5 ██▇▇▇▇▇▇▆▆▆▆▅▅▅▅▅▄▄▄▃▃▃▃▃▃▃▃▂▂▂▂▂▂▁▁▁▁▁▁
+wandb:                          p_6 ███▇▇▇▇▇▆▆▆▆▆▅▅▅▅▅▅▄▄▄▄▄▄▃▃▃▃▃▂▂▂▂▂▁▁▁▁▁
+wandb:                          p_7 ███▇▇▇▇▇▇▇▅▅▅▅▅▄▄▄▄▃▃▃▃▃▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁
+wandb:                          p_8 ▁▁▂▂▂▃▃▃▃▃▃▃▃▄▄▄▄▄▄▄▄▄▅▅▅▅▅▅▅▅▆▆▆▆▆▆▇▇▇█
+wandb:                          p_9 ████▇▇▇▇▆▆▆▆▆▆▆▆▆▆▆▅▅▅▅▄▄▄▄▄▄▃▃▃▃▃▂▁▁▁▁▁
+wandb:                       p_norm ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▇▇▇▇█
+wandb: 
+wandb: Run summary:
+wandb:           avg_log_likelihood -4.92546
+wandb:                        epoch 49999
+wandb:                gradient_norm 0.06672
+wandb:                learning_rate 0.001
+wandb: negative_log_likelihood_loss 4.92546
+wandb:                          p_0 2.33875
+wandb:                          p_1 -1.7168
+wandb:                         p_10 1.37002
+wandb:                         p_11 1.35221
+wandb:                         p_12 0.96121
+wandb:                         p_13 0.50599
+wandb:                         p_14 0.89893
+wandb:                         p_15 1.47923
+wandb:                         p_16 0.9896
+wandb:                         p_17 0.9971
+wandb:                         p_18 -1.41413
+wandb:                         p_19 -0.82579
+wandb:                          p_2 -1.34377
+wandb:                         p_20 0.03241
+wandb:                         p_21 2.52494
+wandb:                         p_22 -0.01368
+wandb:                         p_23 -1.32236
+wandb:                         p_24 -0.18138
+wandb:                         p_25 0.40951
+wandb:                          p_3 -1.18552
+wandb:                          p_4 -0.74817
+wandb:                          p_5 -1.55854
+wandb:                          p_6 1.91447
+wandb:                          p_7 -1.08052
+wandb:                          p_8 0.69874
+wandb:                          p_9 0.27929
+wandb:                       p_norm 6.39364
+wandb: 
+wandb: 🚀 View run cool-smoke-12 at: https://wandb.ai/devinl6-university-of-washington/mle-preference/runs/9n1fyswt
+wandb: ⭐️ View project at: https://wandb.ai/devinl6-university-of-washington/mle-preference
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 1 other file(s)
+wandb: Find logs at: ./wandb/run-20250806_145709-9n1fyswt/logs
+[2025-08-06T15:28:28.999] error: *** JOB 27961185 ON g3108 CANCELLED AT 2025-08-06T15:28:28 DUE to SIGNAL Terminated ***

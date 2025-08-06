@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="preference-decoding",
+    name="preference_decoding",
     version="0.1.0",
     description="Preference learning and decoding research project",
     packages=find_packages(),

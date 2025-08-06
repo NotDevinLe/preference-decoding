@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: preference_decoding
+Version: 0.1.0
+Summary: Preference learning and decoding research project
+Author: Devin
+Author-email: devin.t.le@outlook.com
+Requires-Python: >=3.8
+Requires-Dist: torch
+Requires-Dist: numpy
+Requires-Dist: transformers
+Requires-Dist: vllm
+Requires-Dist: wandb
+Requires-Dist: tqdm
+Requires-Dist: datasets
+Dynamic: author
+Dynamic: author-email
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary

@@ -12,7 +12,7 @@ import wandb
 from tqdm import tqdm
 
 class MLE:
-    def __init__(self, model, tokenizer, data, device, expectation_matrix=None, num_expectation_samples=100, use_wandb=True, wandb_project="mle-training"):
+    def __init__(self, model, tokenizer, data, device, expectation_matrix=None, chosen_rewards=None, num_expectation_samples=100, use_wandb=True, wandb_project="mle-training"):
         self.model = model
         self.tokenizer = tokenizer
         self.data = data
@@ -32,19 +32,20 @@ class MLE:
             self._expectation_generated = True
             print(f"Loaded expectation matrix: {self.expectation.shape}")
             
-            # Compute chosen rewards for this specific user's data
-            self.precompute_chosen_rewards()
+            # Load or compute chosen rewards
+            if chosen_rewards is not None:
+                # Load pre-computed chosen rewards
+                self.chosen_rewards = chosen_rewards.to(device)
+                print(f"Loaded pre-computed chosen rewards: {self.chosen_rewards.shape}")
+            else:
+                # Compute chosen rewards for this specific user's data
+                print("Computing chosen rewards...")
+                self.precompute_chosen_rewards()
         
         self.use_wandb = use_wandb
+        self.wandb_project = wandb_project
         self._wandb_initialized = False
-        if use_wandb and self._expectation_generated:
-            wandb.init(project=wandb_project, config={
-                "num_expectation_samples": self.num_expectation_samples,
-                "num_data_points": len(data),
-                "num_attributes": len(attribute_prompts),
-                "initial_p_norm": torch.norm(self.p).item()
-            })
-            self._wandb_initialized = True
+        # Don't initialize wandb here - wait until training starts so we can include all parameters
 
 
     def generate_expectation_matrix(self, num_expectation_samples=None):
@@ -110,17 +111,9 @@ class MLE:
         # Now compute chosen rewards
         self.precompute_chosen_rewards()
         
-        # Initialize wandb if not already done
-        if self.use_wandb and not self._wandb_initialized:
-            wandb.init(project="mle-training", config={
-                "num_expectation_samples": self.num_expectation_samples,
-                "num_data_points": len(self.data),
-                "num_attributes": len(attribute_prompts),
-                "initial_p_norm": torch.norm(self.p).item()
-            })
-            self._wandb_initialized = True
+        # Don't initialize wandb here - wait until training starts
     
-    def train(self, num_epochs=1000, learning_rate=0.01, beta=1.0, num_mc_samples=10):
+    def train(self, num_epochs=1000, learning_rate=0.01, beta=1.0, num_mc_samples=10, run_name=None):
         """
         Train the MLE model using gradient descent following the mathematical derivation.
         
@@ -139,6 +132,30 @@ class MLE:
             print("Please call mle.generate_expectation_matrix() before training.")
             print("Generating expectation matrix now with default parameters...")
             self.generate_expectation_matrix()
+        
+        # Initialize wandb with run name if not already initialized
+        if self.use_wandb and not self._wandb_initialized:
+            config = {
+                "num_expectation_samples": self.num_expectation_samples,
+                "num_mc_samples": num_mc_samples,
+                "num_data_points": len(self.data),
+                "num_attributes": len(attribute_prompts),
+                "initial_p_norm": torch.norm(self.p).item(),
+                "beta": beta,
+                "learning_rate": learning_rate,
+                "num_epochs": num_epochs
+            }
+            
+            # Create descriptive run name
+            if run_name is None:
+                run_name = f"exp{self.num_expectation_samples}_mc{num_mc_samples}_data{len(self.data)}_lr{learning_rate}_beta{beta}"
+            
+            wandb.init(
+                project=self.wandb_project,
+                name=run_name,
+                config=config
+            )
+            self._wandb_initialized = True
         
         for epoch in range(num_epochs):
             total_gradient = torch.zeros_like(self.p)
@@ -201,10 +218,6 @@ class MLE:
                     "p_norm": p_norm,
                     "learning_rate": learning_rate,
                 })
-                
-                # Log individual p values
-                for i, p_val in enumerate(self.p.cpu().numpy()):
-                    wandb.log({f"p_{i}": p_val})
             
             # Console logging
             if epoch % 100 == 0:
@@ -300,8 +313,9 @@ class MLE:
             "num_data_points": len(self.data),
         }
         
-        with open(save_path, "w") as f:
+        with open(save_path, "a") as f:
             json.dump(results, f, indent=2)
+            f.write("\n")  # Add newline for readability between entries
         
         if self.use_wandb:
             try:
@@ -323,10 +337,28 @@ class MLE:
         }, save_path)
         print(f"Expectation matrix saved successfully")
     
+    def save_chosen_rewards(self, save_path):
+        """Save the chosen rewards separately for reuse."""
+        print(f"Saving chosen rewards to {save_path}")
+        torch.save({
+            'chosen_rewards': self.chosen_rewards.cpu(),
+            'num_data_points': len(self.data),
+            'num_attributes': len(attribute_prompts)
+        }, save_path)
+        print(f"Chosen rewards saved successfully")
+    
     @staticmethod
     def load_expectation_matrix(load_path):
         """Load a pre-computed expectation matrix."""
         print(f"Loading expectation matrix from {load_path}")
         checkpoint = torch.load(load_path)
         print(f"Loaded expectation matrix with shape: {checkpoint['expectation_matrix'].shape}")
+        return checkpoint
+    
+    @staticmethod
+    def load_chosen_rewards(load_path):
+        """Load pre-computed chosen rewards."""
+        print(f"Loading chosen rewards from {load_path}")
+        checkpoint = torch.load(load_path)
+        print(f"Loaded chosen rewards with shape: {checkpoint['chosen_rewards'].shape}")
         return checkpoint
