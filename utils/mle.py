@@ -12,49 +12,28 @@ import wandb
 from tqdm import tqdm
 
 class MLE:
-    def __init__(self, model, tokenizer, num_expectation_samples, data, device, use_wandb=True, wandb_project="mle-training", expectation_matrix=None):
+    def __init__(self, model, tokenizer, data, device, expectation_matrix, chosen_rewards, use_wandb=True, wandb_project="mle-training"):
         self.model = model
         self.tokenizer = tokenizer
         self.data = data
         self.device = device
         self.p = torch.randn(len(attribute_prompts), device=device)
-        self.num_expectation_samples = num_expectation_samples
         
-        if expectation_matrix is not None:
-            # Load pre-computed expectation matrix and chosen rewards
-            if isinstance(expectation_matrix, dict) and 'expectation_matrix' in expectation_matrix:
-                # Loading from checkpoint dict
-                self.expectation = expectation_matrix['expectation_matrix'].to(device)
-                if 'chosen_rewards' in expectation_matrix:
-                    self.chosen_rewards = expectation_matrix['chosen_rewards'].to(device)
-                    print(f"Loaded pre-computed expectation matrix and chosen rewards")
-                else:
-                    print(f"Loaded pre-computed expectation matrix, will compute chosen rewards")
-                    self.precompute_chosen_rewards()
-            else:
-                # Direct tensor input
-                self.expectation = expectation_matrix.to(device)
-                print(f"Loaded pre-computed expectation matrix, will compute chosen rewards")
-                self.precompute_chosen_rewards()
-            print(f"Expectation matrix shape: {self.expectation.shape}")
-        else:
-            # Generate new expectation matrix
-            self.expectation = torch.zeros((len(data), self.num_expectation_samples, len(attribute_prompts)), device=device)
-            self.generate_expectation_outputs()
-            self.precompute_chosen_rewards()
+        # Load pre-computed matrices
+        self.expectation = expectation_matrix.to(device)
+        self.chosen_rewards = chosen_rewards.to(device)
+        self.num_expectation_samples = expectation_matrix.shape[1]
         
+        print(f"Loaded expectation matrix: {self.expectation.shape}")
+        print(f"Loaded chosen rewards: {self.chosen_rewards.shape}")
         self.use_wandb = use_wandb
-        
-        if self.use_wandb:
+        if use_wandb:
             wandb.init(project=wandb_project, config={
-                "num_expectation_samples": num_expectation_samples,
+                "num_expectation_samples": self.num_expectation_samples,
                 "num_data_points": len(data),
                 "num_attributes": len(attribute_prompts),
                 "initial_p_norm": torch.norm(self.p).item()
             })
-        
-        # Pre-compute rewards for all chosen responses to avoid recomputation
-        self.precompute_chosen_rewards()
 
 
     def train(self, num_epochs=1000, learning_rate=0.01, beta=1.0, num_mc_samples=10):
@@ -282,7 +261,13 @@ class MLE:
             json.dump(results, f, indent=2)
         
         if self.use_wandb:
-            wandb.save(save_path)
+            try:
+                # Try to save with wandb, but don't fail if path issues
+                import os
+                abs_path = os.path.abspath(save_path)
+                wandb.save(abs_path)
+            except Exception as e:
+                print(f"Warning: Could not save to wandb: {e}")
             wandb.finish()
     
     def save_expectation_matrix(self, save_path):

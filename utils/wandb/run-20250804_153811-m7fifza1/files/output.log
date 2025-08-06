@@ -1,0 +1,72 @@
+\nStarting MLE training...
+Training parameters:
+  Epochs: 10000
+  Learning rate: 0.01
+  Beta: 1.0
+  MC samples: 10
+Epoch 0
+  Avg Log-Likelihood: -1.5619
+  Negative LL Loss: 1.5619
+  Gradient norm: 0.0567
+  P norm: 15.2155
+  Current p: [ 8.260757   -0.65970576  1.125173   -0.23021492  3.1110685  -2.3677685
+ -1.0959114  -1.5983679   3.1959229  -3.3134482   2.6654341   1.5030552
+ -0.01677158  3.1055624   0.66295725  0.39988676 -0.47470817  2.0736492
+  2.639559    0.621492    2.1961973   8.02881    -1.1944878  -1.7085996
+  3.0857956   2.577448  ]
+Epoch 100
+  Avg Log-Likelihood: -1.5588
+  Negative LL Loss: 1.5588
+  Gradient norm: 0.0570
+  P norm: 15.2674
+  Current p: [ 8.297622   -0.6626085   1.1223944  -0.22533126  3.1131392  -2.374988
+ -1.104198   -1.6056302   3.2019868  -3.3293757   2.675789    1.5050402
+ -0.01719743  3.117876    0.660722    0.40337074 -0.47796777  2.0838995
+  2.6436174   0.619561    2.201828    8.0535345  -1.1984057  -1.7195408
+  3.0959692   2.5788429 ]
+Epoch 200
+  Avg Log-Likelihood: -1.5556
+  Negative LL Loss: 1.5556
+  Gradient norm: 0.0559
+  P norm: 15.3191
+  Current p: [ 8.334457   -0.66557354  1.1195734  -0.22053401  3.1151319  -2.3822505
+ -1.1124765  -1.6129243   3.207989   -3.345293    2.6860993   1.5069995
+ -0.01761724  3.1300642   0.6584828   0.40679267 -0.48125324  2.0941055
+  2.6476593   0.61756074  2.2074068   8.078252   -1.2023443  -1.7305391
+  3.106038    2.5801492 ]
+Epoch 300
+  Avg Log-Likelihood: -1.5525
+  Negative LL Loss: 1.5525
+  Gradient norm: 0.0557
+  P norm: 15.3709
+  Current p: [ 8.371276   -0.668493    1.1168133  -0.21568774  3.1171532  -2.3893647
+ -1.1206827  -1.6201707   3.2140102  -3.3611841   2.696411    1.508978
+ -0.01804127  3.1423106   0.65625215  0.41028127 -0.48443958  2.1041849
+  2.651583    0.61557347  2.2130716   8.102924   -1.2063036  -1.7415239
+  3.1161444   2.5815222 ]
+Epoch 400
+  Avg Log-Likelihood: -1.5493
+  Negative LL Loss: 1.5493
+  Gradient norm: 0.0563
+  P norm: 15.4225
+  Current p: [ 8.408069   -0.67113     1.1140741  -0.21084134  3.119244   -2.3965309
+ -1.1287328  -1.6273711   3.220041   -3.3770843   2.7067072   1.5109363
+ -0.018553    3.1544507   0.65407586  0.41371632 -0.4877184   2.1142097
+  2.6555016   0.61352444  2.2186844   8.127532   -1.2102699  -1.7524614
+  3.1261911   2.5828817 ]
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/get_user_p_mle.py", line 172, in <module>
+    main()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/get_user_p_mle.py", line 130, in main
+    mle_model.train(
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/mle.py", line 84, in train
+    chosen_score = torch.sum(self.p * chosen_reward) / beta
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/get_user_p_mle.py", line 172, in <module>
+    main()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/get_user_p_mle.py", line 130, in main
+    mle_model.train(
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/mle.py", line 84, in train
+    chosen_score = torch.sum(self.p * chosen_reward) / beta
+KeyboardInterrupt

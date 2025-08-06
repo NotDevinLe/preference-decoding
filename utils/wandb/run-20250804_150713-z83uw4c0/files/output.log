@@ -1,0 +1,22 @@
+\nStarting MLE training...
+Training parameters:
+  Epochs: 10000
+  Learning rate: 0.01
+  Beta: 1.0
+  MC samples: 10
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/get_user_p_mle.py", line 143, in <module>
+    main()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/get_user_p_mle.py", line 101, in main
+    mle_model.train(
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/mle.py", line 104, in train
+    if self.use_wandb:
+AttributeError: 'MLE' object has no attribute 'use_wandb'
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/get_user_p_mle.py", line 143, in <module>
+    main()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/get_user_p_mle.py", line 101, in main
+    mle_model.train(
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/mle.py", line 104, in train
+    if self.use_wandb:
+AttributeError: 'MLE' object has no attribute 'use_wandb'

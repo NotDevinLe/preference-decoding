@@ -3031,3 +3031,1806 @@ Step 160/200: ACCEPTED, Current reward: 5.8750, Acceptance rate: 0.519
 Step 170/200: ACCEPTED, Current reward: 6.5000, Acceptance rate: 0.518
 Step 180/200: ACCEPTED, Current reward: 5.8125, Acceptance rate: 0.528
 Step 190/200: REJECTED, Current reward: 7.1562, Acceptance rate: 0.511
+Step 200/200: REJECTED, Current reward: 6.1250, Acceptance rate: 0.510
+MCMC completed. Final acceptance rate: 0.510
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -3.2031
+Step 10/200: REJECTED, Current reward: 5.1562, Acceptance rate: 0.600
+Step 20/200: REJECTED, Current reward: 5.9375, Acceptance rate: 0.500
+Step 30/200: REJECTED, Current reward: 5.9688, Acceptance rate: 0.367
+Step 40/200: REJECTED, Current reward: 3.4844, Acceptance rate: 0.350
+Step 50/200: REJECTED, Current reward: 5.4062, Acceptance rate: 0.360
+Step 60/200: ACCEPTED, Current reward: 4.0625, Acceptance rate: 0.317
+Step 70/200: REJECTED, Current reward: 3.3125, Acceptance rate: 0.300
+Step 80/200: REJECTED, Current reward: 5.0000, Acceptance rate: 0.338
+Step 90/200: ACCEPTED, Current reward: 4.3438, Acceptance rate: 0.356
+Step 100/200: REJECTED, Current reward: 5.4375, Acceptance rate: 0.370
+Step 110/200: REJECTED, Current reward: 5.0938, Acceptance rate: 0.382
+Step 120/200: ACCEPTED, Current reward: 3.8750, Acceptance rate: 0.392
+Step 130/200: ACCEPTED, Current reward: 4.7500, Acceptance rate: 0.400
+Step 140/200: REJECTED, Current reward: 5.3125, Acceptance rate: 0.400
+Step 150/200: REJECTED, Current reward: 5.4062, Acceptance rate: 0.413
+Step 160/200: REJECTED, Current reward: 5.4062, Acceptance rate: 0.412
+Step 170/200: REJECTED, Current reward: 4.5000, Acceptance rate: 0.429
+Step 180/200: REJECTED, Current reward: 4.7812, Acceptance rate: 0.433
+Step 190/200: REJECTED, Current reward: 5.2500, Acceptance rate: 0.421
+Step 200/200: REJECTED, Current reward: 5.7500, Acceptance rate: 0.415
+MCMC completed. Final acceptance rate: 0.415
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 5.1562
+Step 10/200: REJECTED, Current reward: 5.6875, Acceptance rate: 0.600
+Step 20/200: REJECTED, Current reward: 6.5000, Acceptance rate: 0.500
+Step 30/200: REJECTED, Current reward: 6.0938, Acceptance rate: 0.367
+Step 40/200: REJECTED, Current reward: 5.4375, Acceptance rate: 0.425
+Step 50/200: REJECTED, Current reward: 6.5625, Acceptance rate: 0.440
+Step 60/200: REJECTED, Current reward: 4.5000, Acceptance rate: 0.400
+Step 70/200: REJECTED, Current reward: 6.5938, Acceptance rate: 0.400
+Step 80/200: REJECTED, Current reward: 4.6250, Acceptance rate: 0.400
+Step 90/200: ACCEPTED, Current reward: 5.1875, Acceptance rate: 0.422
+Step 100/200: ACCEPTED, Current reward: 4.5000, Acceptance rate: 0.450
+Step 110/200: REJECTED, Current reward: 4.8750, Acceptance rate: 0.455
+Step 120/200: ACCEPTED, Current reward: 5.9375, Acceptance rate: 0.458
+Step 130/200: REJECTED, Current reward: 6.1875, Acceptance rate: 0.446
+Step 140/200: ACCEPTED, Current reward: 5.0938, Acceptance rate: 0.464
+Step 150/200: REJECTED, Current reward: 7.0000, Acceptance rate: 0.460
+Step 160/200: ACCEPTED, Current reward: 5.8125, Acceptance rate: 0.450
+Step 170/200: REJECTED, Current reward: 6.9688, Acceptance rate: 0.465
+Step 180/200: REJECTED, Current reward: 6.8125, Acceptance rate: 0.444
+Step 190/200: REJECTED, Current reward: 6.8125, Acceptance rate: 0.421
+Step 200/200: REJECTED, Current reward: 6.0312, Acceptance rate: 0.415
+MCMC completed. Final acceptance rate: 0.415
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -6.4062
+Step 10/200: ACCEPTED, Current reward: 0.5312, Acceptance rate: 0.800
+Step 20/200: ACCEPTED, Current reward: 2.0156, Acceptance rate: 0.700
+Step 30/200: REJECTED, Current reward: 0.2656, Acceptance rate: 0.633
+Step 40/200: REJECTED, Current reward: -2.7031, Acceptance rate: 0.575
+Step 50/200: REJECTED, Current reward: -0.5234, Acceptance rate: 0.600
+Step 60/200: REJECTED, Current reward: -0.7031, Acceptance rate: 0.567
+Step 70/200: REJECTED, Current reward: -0.7031, Acceptance rate: 0.486
+Step 80/200: REJECTED, Current reward: 0.0603, Acceptance rate: 0.450
+Step 90/200: REJECTED, Current reward: 0.2852, Acceptance rate: 0.422
+Step 100/200: REJECTED, Current reward: -0.2432, Acceptance rate: 0.400
+Step 110/200: REJECTED, Current reward: 0.2168, Acceptance rate: 0.400
+Step 120/200: REJECTED, Current reward: 0.0123, Acceptance rate: 0.392
+Step 130/200: ACCEPTED, Current reward: 0.3242, Acceptance rate: 0.400
+Step 140/200: REJECTED, Current reward: 0.2910, Acceptance rate: 0.393
+Step 150/200: ACCEPTED, Current reward: 0.2852, Acceptance rate: 0.380
+Step 160/200: REJECTED, Current reward: 0.5742, Acceptance rate: 0.375
+Step 170/200: REJECTED, Current reward: 0.5742, Acceptance rate: 0.353
+Step 180/200: REJECTED, Current reward: 0.5742, Acceptance rate: 0.333
+Step 190/200: REJECTED, Current reward: 0.3691, Acceptance rate: 0.337
+Step 200/200: REJECTED, Current reward: 0.6172, Acceptance rate: 0.335
+MCMC completed. Final acceptance rate: 0.335
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -9.0000
+Step 10/200: ACCEPTED, Current reward: -7.2188, Acceptance rate: 0.800
+Step 20/200: REJECTED, Current reward: -6.1875, Acceptance rate: 0.750
+Step 30/200: ACCEPTED, Current reward: -2.2344, Acceptance rate: 0.733
+Step 40/200: ACCEPTED, Current reward: -2.6875, Acceptance rate: 0.725
+Step 50/200: ACCEPTED, Current reward: -2.0156, Acceptance rate: 0.680
+Step 60/200: ACCEPTED, Current reward: -0.1348, Acceptance rate: 0.617
+Step 70/200: REJECTED, Current reward: -2.3281, Acceptance rate: 0.586
+Step 80/200: REJECTED, Current reward: -0.0967, Acceptance rate: 0.575
+Step 90/200: REJECTED, Current reward: -4.7812, Acceptance rate: 0.589
+Step 100/200: ACCEPTED, Current reward: -2.5625, Acceptance rate: 0.560
+Step 110/200: REJECTED, Current reward: -3.7656, Acceptance rate: 0.545
+Step 120/200: ACCEPTED, Current reward: -7.2812, Acceptance rate: 0.575
+Step 130/200: REJECTED, Current reward: -1.7578, Acceptance rate: 0.592
+Step 140/200: ACCEPTED, Current reward: -0.4629, Acceptance rate: 0.600
+Step 150/200: ACCEPTED, Current reward: -4.5000, Acceptance rate: 0.613
+Step 160/200: REJECTED, Current reward: -3.6562, Acceptance rate: 0.613
+Step 170/200: ACCEPTED, Current reward: -2.8594, Acceptance rate: 0.606
+Step 180/200: REJECTED, Current reward: -4.9062, Acceptance rate: 0.600
+Step 190/200: ACCEPTED, Current reward: -2.4219, Acceptance rate: 0.589
+Step 200/200: ACCEPTED, Current reward: -3.9531, Acceptance rate: 0.605
+MCMC completed. Final acceptance rate: 0.605
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 1.4219
+Step 10/200: REJECTED, Current reward: 4.8438, Acceptance rate: 0.500
+Step 20/200: REJECTED, Current reward: 5.1250, Acceptance rate: 0.600
+Step 30/200: ACCEPTED, Current reward: 3.3750, Acceptance rate: 0.567
+Step 40/200: ACCEPTED, Current reward: 4.2812, Acceptance rate: 0.525
+Step 50/200: REJECTED, Current reward: 4.2188, Acceptance rate: 0.540
+Step 60/200: REJECTED, Current reward: 5.6562, Acceptance rate: 0.517
+Step 70/200: ACCEPTED, Current reward: 5.3438, Acceptance rate: 0.457
+Step 80/200: REJECTED, Current reward: 5.2812, Acceptance rate: 0.450
+Step 90/200: REJECTED, Current reward: 4.8125, Acceptance rate: 0.433
+Step 100/200: REJECTED, Current reward: 5.6250, Acceptance rate: 0.430
+Step 110/200: REJECTED, Current reward: 3.6562, Acceptance rate: 0.418
+Step 120/200: REJECTED, Current reward: 4.9062, Acceptance rate: 0.417
+Step 130/200: REJECTED, Current reward: 4.9062, Acceptance rate: 0.415
+Step 140/200: REJECTED, Current reward: 3.6406, Acceptance rate: 0.414
+Step 150/200: REJECTED, Current reward: 5.0000, Acceptance rate: 0.427
+Step 160/200: REJECTED, Current reward: 3.7812, Acceptance rate: 0.431
+Step 170/200: REJECTED, Current reward: 6.0938, Acceptance rate: 0.429
+Step 180/200: REJECTED, Current reward: 6.0938, Acceptance rate: 0.406
+Step 190/200: REJECTED, Current reward: 5.2500, Acceptance rate: 0.389
+Step 200/200: REJECTED, Current reward: 4.7500, Acceptance rate: 0.395
+MCMC completed. Final acceptance rate: 0.395
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -2.9219
+Step 10/200: REJECTED, Current reward: 3.6719, Acceptance rate: 0.700
+Step 20/200: ACCEPTED, Current reward: 2.9531, Acceptance rate: 0.600
+Step 30/200: ACCEPTED, Current reward: 4.2500, Acceptance rate: 0.633
+Step 40/200: REJECTED, Current reward: 5.2188, Acceptance rate: 0.550
+Step 50/200: REJECTED, Current reward: 5.7812, Acceptance rate: 0.520
+Step 60/200: ACCEPTED, Current reward: 2.6719, Acceptance rate: 0.550
+Step 70/200: REJECTED, Current reward: 5.7188, Acceptance rate: 0.514
+Step 80/200: REJECTED, Current reward: 5.6875, Acceptance rate: 0.475
+Step 90/200: REJECTED, Current reward: 5.0938, Acceptance rate: 0.467
+Step 100/200: REJECTED, Current reward: 5.7812, Acceptance rate: 0.450
+Step 110/200: ACCEPTED, Current reward: 5.4375, Acceptance rate: 0.445
+Step 120/200: ACCEPTED, Current reward: 3.4844, Acceptance rate: 0.442
+Step 130/200: REJECTED, Current reward: 5.6562, Acceptance rate: 0.431
+Step 140/200: REJECTED, Current reward: 5.3438, Acceptance rate: 0.414
+Step 150/200: ACCEPTED, Current reward: 3.7656, Acceptance rate: 0.447
+Step 160/200: ACCEPTED, Current reward: 6.5000, Acceptance rate: 0.450
+Step 170/200: REJECTED, Current reward: 6.5000, Acceptance rate: 0.424
+Step 180/200: REJECTED, Current reward: 5.0938, Acceptance rate: 0.417
+Step 190/200: REJECTED, Current reward: 5.3750, Acceptance rate: 0.416
+Step 200/200: ACCEPTED, Current reward: 5.8438, Acceptance rate: 0.410
+MCMC completed. Final acceptance rate: 0.410
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -3.3594
+Step 10/200: ACCEPTED, Current reward: -2.6562, Acceptance rate: 0.800
+Step 20/200: ACCEPTED, Current reward: -3.0156, Acceptance rate: 0.900
+Step 30/200: ACCEPTED, Current reward: -3.1094, Acceptance rate: 0.900
+Step 40/200: ACCEPTED, Current reward: -3.2969, Acceptance rate: 0.875
+Step 50/200: ACCEPTED, Current reward: -2.0938, Acceptance rate: 0.900
+Step 60/200: ACCEPTED, Current reward: -2.1562, Acceptance rate: 0.917
+Step 70/200: ACCEPTED, Current reward: -2.0938, Acceptance rate: 0.871
+Step 80/200: ACCEPTED, Current reward: -2.2656, Acceptance rate: 0.875
+Step 90/200: REJECTED, Current reward: -1.8516, Acceptance rate: 0.856
+Step 100/200: ACCEPTED, Current reward: -1.8984, Acceptance rate: 0.860
+Step 110/200: ACCEPTED, Current reward: -2.6562, Acceptance rate: 0.873
+Step 120/200: ACCEPTED, Current reward: -1.1250, Acceptance rate: 0.867
+Step 130/200: ACCEPTED, Current reward: -1.5234, Acceptance rate: 0.854
+Step 140/200: REJECTED, Current reward: 1.8906, Acceptance rate: 0.814
+Step 150/200: REJECTED, Current reward: 5.4062, Acceptance rate: 0.767
+Step 160/200: REJECTED, Current reward: 4.6562, Acceptance rate: 0.725
+Step 170/200: REJECTED, Current reward: 4.6562, Acceptance rate: 0.682
+Step 180/200: REJECTED, Current reward: 4.6562, Acceptance rate: 0.644
+Step 190/200: REJECTED, Current reward: 4.6562, Acceptance rate: 0.611
+Step 200/200: REJECTED, Current reward: 4.6562, Acceptance rate: 0.580
+MCMC completed. Final acceptance rate: 0.580
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -4.5312
+Step 10/200: ACCEPTED, Current reward: -3.2656, Acceptance rate: 0.800
+Step 20/200: REJECTED, Current reward: -2.1562, Acceptance rate: 0.800
+Step 30/200: REJECTED, Current reward: 1.5781, Acceptance rate: 0.767
+Step 40/200: REJECTED, Current reward: 0.8242, Acceptance rate: 0.650
+Step 50/200: REJECTED, Current reward: -3.1562, Acceptance rate: 0.640
+Step 60/200: ACCEPTED, Current reward: -1.7266, Acceptance rate: 0.633
+Step 70/200: REJECTED, Current reward: -2.1719, Acceptance rate: 0.600
+Step 80/200: REJECTED, Current reward: -2.7812, Acceptance rate: 0.613
+Step 90/200: REJECTED, Current reward: -2.2031, Acceptance rate: 0.622
+Step 100/200: REJECTED, Current reward: -2.1562, Acceptance rate: 0.630
+Step 110/200: REJECTED, Current reward: 0.3809, Acceptance rate: 0.627
+Step 120/200: ACCEPTED, Current reward: -0.9141, Acceptance rate: 0.608
+Step 130/200: REJECTED, Current reward: -1.9453, Acceptance rate: 0.608
+Step 140/200: ACCEPTED, Current reward: -1.5000, Acceptance rate: 0.621
+Step 150/200: REJECTED, Current reward: -1.0859, Acceptance rate: 0.633
+Step 160/200: REJECTED, Current reward: -0.7500, Acceptance rate: 0.619
+Step 170/200: ACCEPTED, Current reward: -1.7734, Acceptance rate: 0.629
+Step 180/200: ACCEPTED, Current reward: -0.7031, Acceptance rate: 0.633
+Step 190/200: ACCEPTED, Current reward: -2.0469, Acceptance rate: 0.642
+Step 200/200: ACCEPTED, Current reward: -3.8906, Acceptance rate: 0.645
+MCMC completed. Final acceptance rate: 0.645
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -7.3125
+Step 10/200: ACCEPTED, Current reward: -1.5312, Acceptance rate: 0.800
+Step 20/200: ACCEPTED, Current reward: 0.0236, Acceptance rate: 0.600
+Step 30/200: REJECTED, Current reward: 0.0236, Acceptance rate: 0.400
+Step 40/200: REJECTED, Current reward: -0.9102, Acceptance rate: 0.375
+Step 50/200: REJECTED, Current reward: 1.3672, Acceptance rate: 0.400
+Step 60/200: ACCEPTED, Current reward: 0.8320, Acceptance rate: 0.400
+Step 70/200: REJECTED, Current reward: -0.3672, Acceptance rate: 0.386
+Step 80/200: REJECTED, Current reward: -0.2559, Acceptance rate: 0.350
+Step 90/200: REJECTED, Current reward: 0.6602, Acceptance rate: 0.333
+Step 100/200: ACCEPTED, Current reward: -0.8047, Acceptance rate: 0.360
+Step 110/200: REJECTED, Current reward: 0.9258, Acceptance rate: 0.336
+Step 120/200: ACCEPTED, Current reward: 1.6328, Acceptance rate: 0.333
+Step 130/200: REJECTED, Current reward: 0.3359, Acceptance rate: 0.331
+Step 140/200: REJECTED, Current reward: 1.2656, Acceptance rate: 0.336
+Step 150/200: ACCEPTED, Current reward: -1.5000, Acceptance rate: 0.340
+Step 160/200: ACCEPTED, Current reward: -3.3906, Acceptance rate: 0.356
+Step 170/200: REJECTED, Current reward: -3.2969, Acceptance rate: 0.359
+Step 180/200: REJECTED, Current reward: -3.5938, Acceptance rate: 0.361
+Step 190/200: REJECTED, Current reward: -0.3730, Acceptance rate: 0.363
+Step 200/200: REJECTED, Current reward: 0.8398, Acceptance rate: 0.355
+MCMC completed. Final acceptance rate: 0.355
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 4.7188
+Step 10/200: REJECTED, Current reward: 6.2188, Acceptance rate: 0.500
+Step 20/200: ACCEPTED, Current reward: 7.3750, Acceptance rate: 0.450
+Step 30/200: ACCEPTED, Current reward: 5.9688, Acceptance rate: 0.333
+Step 40/200: ACCEPTED, Current reward: 4.4688, Acceptance rate: 0.375
+Step 50/200: REJECTED, Current reward: 5.3125, Acceptance rate: 0.360
+Step 60/200: REJECTED, Current reward: 5.5000, Acceptance rate: 0.400
+Step 70/200: ACCEPTED, Current reward: 6.6562, Acceptance rate: 0.429
+Step 80/200: ACCEPTED, Current reward: 6.5625, Acceptance rate: 0.425
+Step 90/200: ACCEPTED, Current reward: 7.0625, Acceptance rate: 0.400
+Step 100/200: ACCEPTED, Current reward: 6.3750, Acceptance rate: 0.420
+Step 110/200: ACCEPTED, Current reward: 5.7188, Acceptance rate: 0.427
+Step 120/200: REJECTED, Current reward: 6.4062, Acceptance rate: 0.433
+Step 130/200: ACCEPTED, Current reward: 4.7812, Acceptance rate: 0.454
+Step 140/200: REJECTED, Current reward: 7.1250, Acceptance rate: 0.450
+Step 150/200: ACCEPTED, Current reward: 6.6250, Acceptance rate: 0.440
+Step 160/200: ACCEPTED, Current reward: 6.5938, Acceptance rate: 0.431
+Step 170/200: ACCEPTED, Current reward: 5.8750, Acceptance rate: 0.453
+Step 180/200: ACCEPTED, Current reward: 6.2812, Acceptance rate: 0.450
+Step 190/200: REJECTED, Current reward: 6.6875, Acceptance rate: 0.442
+Step 200/200: REJECTED, Current reward: 7.0625, Acceptance rate: 0.425
+MCMC completed. Final acceptance rate: 0.425
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 5.4688
+Step 10/200: ACCEPTED, Current reward: 6.5938, Acceptance rate: 0.300
+Step 20/200: REJECTED, Current reward: 4.5938, Acceptance rate: 0.350
+Step 30/200: REJECTED, Current reward: 7.2812, Acceptance rate: 0.367
+Step 40/200: REJECTED, Current reward: 5.6875, Acceptance rate: 0.300
+Step 50/200: ACCEPTED, Current reward: 4.4688, Acceptance rate: 0.360
+Step 60/200: ACCEPTED, Current reward: 5.5312, Acceptance rate: 0.350
+Step 70/200: ACCEPTED, Current reward: 7.0625, Acceptance rate: 0.386
+Step 80/200: REJECTED, Current reward: 5.5000, Acceptance rate: 0.388
+Step 90/200: REJECTED, Current reward: 6.1875, Acceptance rate: 0.367
+Step 100/200: REJECTED, Current reward: 6.2500, Acceptance rate: 0.370
+Step 110/200: REJECTED, Current reward: 6.2500, Acceptance rate: 0.336
+Step 120/200: REJECTED, Current reward: 5.9375, Acceptance rate: 0.333
+Step 130/200: REJECTED, Current reward: 5.0000, Acceptance rate: 0.315
+Step 140/200: REJECTED, Current reward: 5.7812, Acceptance rate: 0.300
+Step 150/200: REJECTED, Current reward: 6.4062, Acceptance rate: 0.287
+Step 160/200: REJECTED, Current reward: 6.4062, Acceptance rate: 0.269
+Step 170/200: ACCEPTED, Current reward: 3.7812, Acceptance rate: 0.276
+Step 180/200: REJECTED, Current reward: 6.9375, Acceptance rate: 0.283
+Step 190/200: REJECTED, Current reward: 5.6875, Acceptance rate: 0.274
+Step 200/200: REJECTED, Current reward: 5.6875, Acceptance rate: 0.260
+MCMC completed. Final acceptance rate: 0.260
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -7.0312
+Step 10/200: ACCEPTED, Current reward: -5.7500, Acceptance rate: 0.700
+Step 20/200: REJECTED, Current reward: -1.6875, Acceptance rate: 0.550
+Step 30/200: REJECTED, Current reward: -0.9258, Acceptance rate: 0.467
+Step 40/200: ACCEPTED, Current reward: -1.2031, Acceptance rate: 0.475
+Step 50/200: REJECTED, Current reward: -0.4043, Acceptance rate: 0.500
+Step 60/200: ACCEPTED, Current reward: -1.1875, Acceptance rate: 0.550
+Step 70/200: REJECTED, Current reward: -0.1230, Acceptance rate: 0.529
+Step 80/200: ACCEPTED, Current reward: -1.4219, Acceptance rate: 0.537
+Step 90/200: ACCEPTED, Current reward: -0.1855, Acceptance rate: 0.544
+Step 100/200: ACCEPTED, Current reward: -1.3438, Acceptance rate: 0.520
+Step 110/200: REJECTED, Current reward: -1.3438, Acceptance rate: 0.482
+Step 120/200: REJECTED, Current reward: -0.3262, Acceptance rate: 0.500
+Step 130/200: ACCEPTED, Current reward: -3.0156, Acceptance rate: 0.538
+Step 140/200: REJECTED, Current reward: -1.3828, Acceptance rate: 0.536
+Step 150/200: REJECTED, Current reward: -2.1875, Acceptance rate: 0.533
+Step 160/200: REJECTED, Current reward: -1.7812, Acceptance rate: 0.512
+Step 170/200: ACCEPTED, Current reward: -2.7031, Acceptance rate: 0.518
+Step 180/200: REJECTED, Current reward: -0.8633, Acceptance rate: 0.528
+Step 190/200: REJECTED, Current reward: -0.8945, Acceptance rate: 0.521
+Step 200/200: ACCEPTED, Current reward: -1.9141, Acceptance rate: 0.520
+MCMC completed. Final acceptance rate: 0.520
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -7.1250
+Step 10/200: ACCEPTED, Current reward: -7.1250, Acceptance rate: 0.800
+Step 20/200: ACCEPTED, Current reward: -6.8438, Acceptance rate: 0.900
+Step 30/200: ACCEPTED, Current reward: -5.8438, Acceptance rate: 0.933
+Step 40/200: ACCEPTED, Current reward: -6.5000, Acceptance rate: 0.900
+Step 50/200: ACCEPTED, Current reward: -5.9688, Acceptance rate: 0.900
+Step 60/200: ACCEPTED, Current reward: -5.9688, Acceptance rate: 0.867
+Step 70/200: ACCEPTED, Current reward: -5.4062, Acceptance rate: 0.871
+Step 80/200: ACCEPTED, Current reward: -5.4062, Acceptance rate: 0.863
+Step 90/200: ACCEPTED, Current reward: -6.5000, Acceptance rate: 0.856
+Step 100/200: REJECTED, Current reward: -3.1250, Acceptance rate: 0.830
+Step 110/200: REJECTED, Current reward: -3.1250, Acceptance rate: 0.755
+Step 120/200: REJECTED, Current reward: -5.5625, Acceptance rate: 0.742
+Step 130/200: REJECTED, Current reward: -4.8438, Acceptance rate: 0.715
+Step 140/200: ACCEPTED, Current reward: -5.5312, Acceptance rate: 0.736
+Step 150/200: ACCEPTED, Current reward: -5.8125, Acceptance rate: 0.733
+Step 160/200: REJECTED, Current reward: -5.8125, Acceptance rate: 0.725
+Step 170/200: ACCEPTED, Current reward: -5.3125, Acceptance rate: 0.729
+Step 180/200: REJECTED, Current reward: -4.5938, Acceptance rate: 0.717
+Step 190/200: REJECTED, Current reward: -4.7188, Acceptance rate: 0.716
+Step 200/200: ACCEPTED, Current reward: -5.6562, Acceptance rate: 0.720
+MCMC completed. Final acceptance rate: 0.720
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 2.9844
+Step 10/200: ACCEPTED, Current reward: 4.2188, Acceptance rate: 0.700
+Step 20/200: REJECTED, Current reward: 5.0312, Acceptance rate: 0.600
+Step 30/200: REJECTED, Current reward: 4.6562, Acceptance rate: 0.633
+Step 40/200: REJECTED, Current reward: 3.6562, Acceptance rate: 0.575
+Step 50/200: REJECTED, Current reward: 4.6875, Acceptance rate: 0.520
+Step 60/200: ACCEPTED, Current reward: 4.7812, Acceptance rate: 0.533
+Step 70/200: REJECTED, Current reward: 4.3750, Acceptance rate: 0.514
+Step 80/200: ACCEPTED, Current reward: 3.8125, Acceptance rate: 0.525
+Step 90/200: ACCEPTED, Current reward: 5.6562, Acceptance rate: 0.544
+Step 100/200: ACCEPTED, Current reward: 4.3125, Acceptance rate: 0.540
+Step 110/200: ACCEPTED, Current reward: 5.0312, Acceptance rate: 0.509
+Step 120/200: REJECTED, Current reward: 4.6250, Acceptance rate: 0.500
+Step 130/200: ACCEPTED, Current reward: 5.5625, Acceptance rate: 0.515
+Step 140/200: ACCEPTED, Current reward: 3.9531, Acceptance rate: 0.529
+Step 150/200: REJECTED, Current reward: 4.7500, Acceptance rate: 0.533
+Step 160/200: REJECTED, Current reward: 6.8125, Acceptance rate: 0.525
+Step 170/200: REJECTED, Current reward: 6.3750, Acceptance rate: 0.506
+Step 180/200: REJECTED, Current reward: 6.4062, Acceptance rate: 0.489
+Step 190/200: REJECTED, Current reward: 6.4062, Acceptance rate: 0.463
+Step 200/200: ACCEPTED, Current reward: 5.1875, Acceptance rate: 0.465
+MCMC completed. Final acceptance rate: 0.465
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 4.5000
+Step 10/200: ACCEPTED, Current reward: 4.7500, Acceptance rate: 0.700
+Step 20/200: REJECTED, Current reward: 4.9375, Acceptance rate: 0.500
+Step 30/200: ACCEPTED, Current reward: 5.5312, Acceptance rate: 0.467
+Step 40/200: REJECTED, Current reward: 4.5625, Acceptance rate: 0.475
+Step 50/200: REJECTED, Current reward: 4.0312, Acceptance rate: 0.540
+Step 60/200: REJECTED, Current reward: 4.4062, Acceptance rate: 0.467
+Step 70/200: ACCEPTED, Current reward: 3.9062, Acceptance rate: 0.514
+Step 80/200: REJECTED, Current reward: 6.1875, Acceptance rate: 0.512
+Step 90/200: REJECTED, Current reward: 5.3750, Acceptance rate: 0.522
+Step 100/200: REJECTED, Current reward: 5.6562, Acceptance rate: 0.510
+Step 110/200: REJECTED, Current reward: 5.5312, Acceptance rate: 0.473
+Step 120/200: REJECTED, Current reward: 5.3750, Acceptance rate: 0.467
+Step 130/200: REJECTED, Current reward: 5.8438, Acceptance rate: 0.446
+Step 140/200: ACCEPTED, Current reward: 5.4688, Acceptance rate: 0.450
+Step 150/200: REJECTED, Current reward: 4.6562, Acceptance rate: 0.433
+Step 160/200: ACCEPTED, Current reward: 5.5938, Acceptance rate: 0.431
+Step 170/200: ACCEPTED, Current reward: 4.0312, Acceptance rate: 0.435
+Step 180/200: ACCEPTED, Current reward: 5.0938, Acceptance rate: 0.428
+Step 190/200: REJECTED, Current reward: 4.1562, Acceptance rate: 0.421
+Step 200/200: ACCEPTED, Current reward: 4.0625, Acceptance rate: 0.420
+MCMC completed. Final acceptance rate: 0.420
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -6.9062
+Step 10/200: REJECTED, Current reward: 1.6250, Acceptance rate: 0.600
+Step 20/200: ACCEPTED, Current reward: -2.5625, Acceptance rate: 0.500
+Step 30/200: REJECTED, Current reward: 0.5820, Acceptance rate: 0.467
+Step 40/200: ACCEPTED, Current reward: 0.8555, Acceptance rate: 0.525
+Step 50/200: REJECTED, Current reward: 2.0781, Acceptance rate: 0.460
+Step 60/200: REJECTED, Current reward: 0.5156, Acceptance rate: 0.450
+Step 70/200: REJECTED, Current reward: 0.5078, Acceptance rate: 0.457
+Step 80/200: REJECTED, Current reward: 1.8203, Acceptance rate: 0.425
+Step 90/200: ACCEPTED, Current reward: -5.2500, Acceptance rate: 0.433
+Step 100/200: REJECTED, Current reward: 2.7031, Acceptance rate: 0.420
+Step 110/200: REJECTED, Current reward: 2.6562, Acceptance rate: 0.391
+Step 120/200: REJECTED, Current reward: 2.9062, Acceptance rate: 0.375
+Step 130/200: REJECTED, Current reward: 2.6562, Acceptance rate: 0.362
+Step 140/200: REJECTED, Current reward: 2.6562, Acceptance rate: 0.350
+Step 150/200: REJECTED, Current reward: 3.0781, Acceptance rate: 0.353
+Step 160/200: REJECTED, Current reward: 2.7031, Acceptance rate: 0.362
+Step 170/200: REJECTED, Current reward: 3.5781, Acceptance rate: 0.359
+Step 180/200: REJECTED, Current reward: 3.5781, Acceptance rate: 0.356
+Step 190/200: ACCEPTED, Current reward: 3.0469, Acceptance rate: 0.353
+Step 200/200: REJECTED, Current reward: 3.0469, Acceptance rate: 0.335
+MCMC completed. Final acceptance rate: 0.335
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -6.0938
+Step 10/200: ACCEPTED, Current reward: -5.7188, Acceptance rate: 1.000
+Step 20/200: ACCEPTED, Current reward: -8.0000, Acceptance rate: 0.800
+Step 30/200: ACCEPTED, Current reward: -6.5312, Acceptance rate: 0.800
+Step 40/200: REJECTED, Current reward: -5.4062, Acceptance rate: 0.775
+Step 50/200: ACCEPTED, Current reward: -6.3125, Acceptance rate: 0.700
+Step 60/200: REJECTED, Current reward: -5.1250, Acceptance rate: 0.683
+Step 70/200: REJECTED, Current reward: -4.7812, Acceptance rate: 0.600
+Step 80/200: REJECTED, Current reward: -4.7812, Acceptance rate: 0.550
+Step 90/200: REJECTED, Current reward: -4.7812, Acceptance rate: 0.489
+Step 100/200: REJECTED, Current reward: -4.7812, Acceptance rate: 0.450
+Step 110/200: REJECTED, Current reward: -0.9180, Acceptance rate: 0.427
+Step 120/200: ACCEPTED, Current reward: -6.2500, Acceptance rate: 0.442
+Step 130/200: ACCEPTED, Current reward: -5.4062, Acceptance rate: 0.469
+Step 140/200: ACCEPTED, Current reward: -5.7500, Acceptance rate: 0.486
+Step 150/200: REJECTED, Current reward: -5.0000, Acceptance rate: 0.493
+Step 160/200: REJECTED, Current reward: -5.5312, Acceptance rate: 0.506
+Step 170/200: ACCEPTED, Current reward: -5.8125, Acceptance rate: 0.535
+Step 180/200: REJECTED, Current reward: -4.7812, Acceptance rate: 0.528
+Step 190/200: REJECTED, Current reward: -4.7812, Acceptance rate: 0.500
+Step 200/200: REJECTED, Current reward: -4.7812, Acceptance rate: 0.475
+MCMC completed. Final acceptance rate: 0.475
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -7.8125
+Step 10/200: ACCEPTED, Current reward: -5.1562, Acceptance rate: 0.800
+Step 20/200: ACCEPTED, Current reward: -4.8125, Acceptance rate: 0.700
+Step 30/200: ACCEPTED, Current reward: -4.8125, Acceptance rate: 0.733
+Step 40/200: ACCEPTED, Current reward: -4.6875, Acceptance rate: 0.700
+Step 50/200: ACCEPTED, Current reward: -4.7500, Acceptance rate: 0.660
+Step 60/200: ACCEPTED, Current reward: -4.8125, Acceptance rate: 0.633
+Step 70/200: ACCEPTED, Current reward: -4.6250, Acceptance rate: 0.657
+Step 80/200: ACCEPTED, Current reward: -4.4062, Acceptance rate: 0.662
+Step 90/200: REJECTED, Current reward: -3.8594, Acceptance rate: 0.656
+Step 100/200: ACCEPTED, Current reward: -5.5000, Acceptance rate: 0.660
+Step 110/200: ACCEPTED, Current reward: -5.5312, Acceptance rate: 0.682
+Step 120/200: REJECTED, Current reward: -2.8281, Acceptance rate: 0.650
+Step 130/200: ACCEPTED, Current reward: -2.8281, Acceptance rate: 0.615
+Step 140/200: ACCEPTED, Current reward: -2.8281, Acceptance rate: 0.600
+Step 150/200: REJECTED, Current reward: -2.8281, Acceptance rate: 0.567
+Step 160/200: REJECTED, Current reward: -2.8281, Acceptance rate: 0.537
+Step 170/200: REJECTED, Current reward: -2.8281, Acceptance rate: 0.506
+Step 180/200: ACCEPTED, Current reward: -2.8281, Acceptance rate: 0.489
+Step 190/200: REJECTED, Current reward: -2.8281, Acceptance rate: 0.479
+Step 200/200: REJECTED, Current reward: -2.8281, Acceptance rate: 0.465
+MCMC completed. Final acceptance rate: 0.465
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -6.5625
+Step 10/200: ACCEPTED, Current reward: -3.2812, Acceptance rate: 0.600
+Step 20/200: ACCEPTED, Current reward: -1.6719, Acceptance rate: 0.550
+Step 30/200: REJECTED, Current reward: -0.8164, Acceptance rate: 0.567
+Step 40/200: REJECTED, Current reward: -1.1641, Acceptance rate: 0.625
+Step 50/200: REJECTED, Current reward: -1.1250, Acceptance rate: 0.540
+Step 60/200: ACCEPTED, Current reward: -2.6875, Acceptance rate: 0.550
+Step 70/200: ACCEPTED, Current reward: -2.0469, Acceptance rate: 0.529
+Step 80/200: ACCEPTED, Current reward: -1.7578, Acceptance rate: 0.562
+Step 90/200: REJECTED, Current reward: -2.2969, Acceptance rate: 0.567
+Step 100/200: REJECTED, Current reward: -2.5938, Acceptance rate: 0.570
+Step 110/200: REJECTED, Current reward: -3.6406, Acceptance rate: 0.582
+Step 120/200: ACCEPTED, Current reward: -1.9531, Acceptance rate: 0.575
+Step 130/200: REJECTED, Current reward: -2.2812, Acceptance rate: 0.562
+Step 140/200: REJECTED, Current reward: -2.3750, Acceptance rate: 0.571
+Step 150/200: ACCEPTED, Current reward: -2.3594, Acceptance rate: 0.567
+Step 160/200: ACCEPTED, Current reward: -2.4531, Acceptance rate: 0.575
+Step 170/200: ACCEPTED, Current reward: -1.2188, Acceptance rate: 0.565
+Step 180/200: REJECTED, Current reward: -0.5195, Acceptance rate: 0.556
+Step 190/200: ACCEPTED, Current reward: -2.3281, Acceptance rate: 0.553
+Step 200/200: ACCEPTED, Current reward: -0.8633, Acceptance rate: 0.555
+MCMC completed. Final acceptance rate: 0.555
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -3.5781
+Step 10/200: REJECTED, Current reward: 5.1562, Acceptance rate: 0.200
+Step 20/200: ACCEPTED, Current reward: 5.9375, Acceptance rate: 0.300
+Step 30/200: REJECTED, Current reward: 5.1250, Acceptance rate: 0.333
+Step 40/200: REJECTED, Current reward: 4.7188, Acceptance rate: 0.300
+Step 50/200: REJECTED, Current reward: 5.0625, Acceptance rate: 0.260
+Step 60/200: REJECTED, Current reward: 6.5625, Acceptance rate: 0.250
+Step 70/200: REJECTED, Current reward: 7.2188, Acceptance rate: 0.229
+Step 80/200: REJECTED, Current reward: 5.4375, Acceptance rate: 0.250
+Step 90/200: REJECTED, Current reward: 5.1875, Acceptance rate: 0.256
+Step 100/200: REJECTED, Current reward: 5.4688, Acceptance rate: 0.250
+Step 110/200: REJECTED, Current reward: 5.4688, Acceptance rate: 0.227
+Step 120/200: REJECTED, Current reward: 5.5312, Acceptance rate: 0.250
+Step 130/200: REJECTED, Current reward: 5.8750, Acceptance rate: 0.254
+Step 140/200: REJECTED, Current reward: 5.0938, Acceptance rate: 0.243
+Step 150/200: ACCEPTED, Current reward: 3.7188, Acceptance rate: 0.247
+Step 160/200: ACCEPTED, Current reward: 4.0938, Acceptance rate: 0.256
+Step 170/200: REJECTED, Current reward: 4.0938, Acceptance rate: 0.241
+Step 180/200: REJECTED, Current reward: 5.7812, Acceptance rate: 0.239
+Step 190/200: REJECTED, Current reward: 4.9062, Acceptance rate: 0.253
+Step 200/200: REJECTED, Current reward: 2.3750, Acceptance rate: 0.270
+MCMC completed. Final acceptance rate: 0.270
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -2.2344
+Step 10/200: REJECTED, Current reward: 4.7500, Acceptance rate: 0.300
+Step 20/200: ACCEPTED, Current reward: 5.2812, Acceptance rate: 0.350
+Step 30/200: REJECTED, Current reward: 6.1250, Acceptance rate: 0.267
+Step 40/200: ACCEPTED, Current reward: 3.8906, Acceptance rate: 0.300
+Step 50/200: ACCEPTED, Current reward: 5.0938, Acceptance rate: 0.340
+Step 60/200: REJECTED, Current reward: 5.7812, Acceptance rate: 0.317
+Step 70/200: REJECTED, Current reward: 4.5000, Acceptance rate: 0.343
+Step 80/200: REJECTED, Current reward: 4.4375, Acceptance rate: 0.338
+Step 90/200: ACCEPTED, Current reward: 4.0625, Acceptance rate: 0.356
+Step 100/200: REJECTED, Current reward: 5.1875, Acceptance rate: 0.360
+Step 110/200: ACCEPTED, Current reward: 3.5938, Acceptance rate: 0.345
+Step 120/200: REJECTED, Current reward: 3.4844, Acceptance rate: 0.358
+Step 130/200: ACCEPTED, Current reward: 2.9844, Acceptance rate: 0.369
+Step 140/200: ACCEPTED, Current reward: 4.8750, Acceptance rate: 0.379
+Step 150/200: ACCEPTED, Current reward: 4.7812, Acceptance rate: 0.380
+Step 160/200: REJECTED, Current reward: 5.8125, Acceptance rate: 0.394
+Step 170/200: ACCEPTED, Current reward: 3.9531, Acceptance rate: 0.376
+Step 180/200: REJECTED, Current reward: 5.4062, Acceptance rate: 0.389
+Step 190/200: REJECTED, Current reward: 4.8125, Acceptance rate: 0.389
+Step 200/200: ACCEPTED, Current reward: 3.4844, Acceptance rate: 0.380
+MCMC completed. Final acceptance rate: 0.380
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -5.0938
+Step 10/200: REJECTED, Current reward: -3.2969, Acceptance rate: 0.600
+Step 20/200: ACCEPTED, Current reward: -2.6719, Acceptance rate: 0.650
+Step 30/200: ACCEPTED, Current reward: -2.6250, Acceptance rate: 0.533
+Step 40/200: ACCEPTED, Current reward: -4.1875, Acceptance rate: 0.600
+Step 50/200: ACCEPTED, Current reward: -5.8125, Acceptance rate: 0.660
+Step 60/200: ACCEPTED, Current reward: -5.6562, Acceptance rate: 0.717
+Step 70/200: ACCEPTED, Current reward: -5.0938, Acceptance rate: 0.743
+Step 80/200: REJECTED, Current reward: -5.0938, Acceptance rate: 0.725
+Step 90/200: ACCEPTED, Current reward: -5.9688, Acceptance rate: 0.756
+Step 100/200: ACCEPTED, Current reward: -5.0312, Acceptance rate: 0.770
+Step 110/200: ACCEPTED, Current reward: -4.7812, Acceptance rate: 0.745
+Step 120/200: REJECTED, Current reward: -4.4062, Acceptance rate: 0.742
+Step 130/200: REJECTED, Current reward: -2.3594, Acceptance rate: 0.715
+Step 140/200: ACCEPTED, Current reward: -3.0156, Acceptance rate: 0.671
+Step 150/200: REJECTED, Current reward: -3.3438, Acceptance rate: 0.653
+Step 160/200: REJECTED, Current reward: -4.6875, Acceptance rate: 0.631
+Step 170/200: REJECTED, Current reward: -4.0000, Acceptance rate: 0.612
+Step 180/200: ACCEPTED, Current reward: 0.7188, Acceptance rate: 0.606
+Step 190/200: ACCEPTED, Current reward: 0.1924, Acceptance rate: 0.589
+Step 200/200: REJECTED, Current reward: -7.1562, Acceptance rate: 0.585
+MCMC completed. Final acceptance rate: 0.585
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -9.1250
+Step 10/200: ACCEPTED, Current reward: -3.0000, Acceptance rate: 0.800
+Step 20/200: ACCEPTED, Current reward: -3.7344, Acceptance rate: 0.700
+Step 30/200: REJECTED, Current reward: -4.1875, Acceptance rate: 0.667
+Step 40/200: ACCEPTED, Current reward: -9.1250, Acceptance rate: 0.675
+Step 50/200: REJECTED, Current reward: -2.8281, Acceptance rate: 0.700
+Step 60/200: ACCEPTED, Current reward: -2.7188, Acceptance rate: 0.650
+Step 70/200: ACCEPTED, Current reward: -3.7812, Acceptance rate: 0.643
+Step 80/200: REJECTED, Current reward: -2.7031, Acceptance rate: 0.613
+Step 90/200: ACCEPTED, Current reward: -2.7344, Acceptance rate: 0.633
+Step 100/200: REJECTED, Current reward: -4.1875, Acceptance rate: 0.630
+Step 110/200: REJECTED, Current reward: -2.8125, Acceptance rate: 0.609
+Step 120/200: REJECTED, Current reward: -2.4062, Acceptance rate: 0.608
+Step 130/200: REJECTED, Current reward: -2.9219, Acceptance rate: 0.600
+Step 140/200: REJECTED, Current reward: -3.6250, Acceptance rate: 0.586
+Step 150/200: ACCEPTED, Current reward: -2.7969, Acceptance rate: 0.593
+Step 160/200: REJECTED, Current reward: -3.4062, Acceptance rate: 0.569
+Step 170/200: REJECTED, Current reward: -3.4062, Acceptance rate: 0.547
+Step 180/200: ACCEPTED, Current reward: -3.4062, Acceptance rate: 0.539
+Step 190/200: REJECTED, Current reward: -3.4062, Acceptance rate: 0.532
+Step 200/200: REJECTED, Current reward: -3.3750, Acceptance rate: 0.540
+MCMC completed. Final acceptance rate: 0.540
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -2.3281
+Step 10/200: REJECTED, Current reward: 6.8750, Acceptance rate: 0.600
+Step 20/200: REJECTED, Current reward: 6.9062, Acceptance rate: 0.450
+Step 30/200: ACCEPTED, Current reward: 8.8750, Acceptance rate: 0.433
+Step 40/200: REJECTED, Current reward: 8.8750, Acceptance rate: 0.325
+Step 50/200: REJECTED, Current reward: 6.1562, Acceptance rate: 0.280
+Step 60/200: ACCEPTED, Current reward: 6.5312, Acceptance rate: 0.317
+Step 70/200: REJECTED, Current reward: 7.1875, Acceptance rate: 0.343
+Step 80/200: REJECTED, Current reward: 7.3125, Acceptance rate: 0.338
+Step 90/200: REJECTED, Current reward: 7.2812, Acceptance rate: 0.333
+Step 100/200: REJECTED, Current reward: 8.3125, Acceptance rate: 0.350
+Step 110/200: ACCEPTED, Current reward: 7.6875, Acceptance rate: 0.373
+Step 120/200: REJECTED, Current reward: 5.6875, Acceptance rate: 0.358
+Step 130/200: REJECTED, Current reward: 6.1250, Acceptance rate: 0.377
+Step 140/200: ACCEPTED, Current reward: 5.3438, Acceptance rate: 0.393
+Step 150/200: ACCEPTED, Current reward: 6.8438, Acceptance rate: 0.427
+Step 160/200: REJECTED, Current reward: 5.9688, Acceptance rate: 0.425
+Step 170/200: ACCEPTED, Current reward: 7.5938, Acceptance rate: 0.441
+Step 180/200: REJECTED, Current reward: 7.6875, Acceptance rate: 0.444
+Step 190/200: REJECTED, Current reward: 6.1562, Acceptance rate: 0.453
+Step 200/200: ACCEPTED, Current reward: 3.7656, Acceptance rate: 0.455
+MCMC completed. Final acceptance rate: 0.455
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 3.0469
+Step 10/200: REJECTED, Current reward: 5.2812, Acceptance rate: 0.500
+Step 20/200: REJECTED, Current reward: 4.8750, Acceptance rate: 0.450
+Step 30/200: REJECTED, Current reward: 4.6250, Acceptance rate: 0.433
+Step 40/200: ACCEPTED, Current reward: 4.0938, Acceptance rate: 0.525
+Step 50/200: ACCEPTED, Current reward: 3.1094, Acceptance rate: 0.560
+Step 60/200: REJECTED, Current reward: 5.9062, Acceptance rate: 0.483
+Step 70/200: ACCEPTED, Current reward: 4.3750, Acceptance rate: 0.486
+Step 80/200: ACCEPTED, Current reward: 6.2812, Acceptance rate: 0.487
+Step 90/200: ACCEPTED, Current reward: 0.7266, Acceptance rate: 0.489
+Step 100/200: ACCEPTED, Current reward: 5.1562, Acceptance rate: 0.520
+Step 110/200: REJECTED, Current reward: 6.1562, Acceptance rate: 0.509
+Step 120/200: REJECTED, Current reward: 6.1562, Acceptance rate: 0.467
+Step 130/200: REJECTED, Current reward: 5.7812, Acceptance rate: 0.438
+Step 140/200: ACCEPTED, Current reward: 4.4062, Acceptance rate: 0.429
+Step 150/200: ACCEPTED, Current reward: 3.2188, Acceptance rate: 0.460
+Step 160/200: ACCEPTED, Current reward: 5.8125, Acceptance rate: 0.481
+Step 170/200: ACCEPTED, Current reward: 5.0312, Acceptance rate: 0.471
+Step 180/200: REJECTED, Current reward: 4.6562, Acceptance rate: 0.478
+Step 190/200: REJECTED, Current reward: 5.8438, Acceptance rate: 0.474
+Step 200/200: ACCEPTED, Current reward: 5.7188, Acceptance rate: 0.480
+MCMC completed. Final acceptance rate: 0.480
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -6.5938
+Step 10/200: ACCEPTED, Current reward: -6.0938, Acceptance rate: 1.000
+Step 20/200: REJECTED, Current reward: -3.5938, Acceptance rate: 0.800
+Step 30/200: REJECTED, Current reward: -3.3594, Acceptance rate: 0.567
+Step 40/200: ACCEPTED, Current reward: -5.6562, Acceptance rate: 0.550
+Step 50/200: ACCEPTED, Current reward: -6.6562, Acceptance rate: 0.620
+Step 60/200: ACCEPTED, Current reward: -6.4375, Acceptance rate: 0.633
+Step 70/200: ACCEPTED, Current reward: -6.3125, Acceptance rate: 0.686
+Step 80/200: ACCEPTED, Current reward: -6.6562, Acceptance rate: 0.688
+Step 90/200: ACCEPTED, Current reward: -6.3750, Acceptance rate: 0.711
+Step 100/200: ACCEPTED, Current reward: -6.2812, Acceptance rate: 0.730
+Step 110/200: ACCEPTED, Current reward: -6.5625, Acceptance rate: 0.727
+Step 120/200: ACCEPTED, Current reward: -6.2812, Acceptance rate: 0.733
+Step 130/200: ACCEPTED, Current reward: -6.5000, Acceptance rate: 0.746
+Step 140/200: ACCEPTED, Current reward: -6.0000, Acceptance rate: 0.743
+Step 150/200: ACCEPTED, Current reward: -6.1250, Acceptance rate: 0.753
+Step 160/200: REJECTED, Current reward: -3.6094, Acceptance rate: 0.713
+Step 170/200: ACCEPTED, Current reward: -6.2812, Acceptance rate: 0.712
+Step 180/200: REJECTED, Current reward: -4.1875, Acceptance rate: 0.694
+Step 190/200: ACCEPTED, Current reward: -5.0000, Acceptance rate: 0.663
+Step 200/200: REJECTED, Current reward: -3.6406, Acceptance rate: 0.640
+MCMC completed. Final acceptance rate: 0.640
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -2.3594
+Step 10/200: ACCEPTED, Current reward: 5.4375, Acceptance rate: 0.500
+Step 20/200: ACCEPTED, Current reward: 6.6875, Acceptance rate: 0.350
+Step 30/200: REJECTED, Current reward: 6.4062, Acceptance rate: 0.367
+Step 40/200: REJECTED, Current reward: 5.3438, Acceptance rate: 0.300
+Step 50/200: REJECTED, Current reward: 4.8750, Acceptance rate: 0.380
+Step 60/200: REJECTED, Current reward: 5.6562, Acceptance rate: 0.400
+Step 70/200: ACCEPTED, Current reward: 6.9062, Acceptance rate: 0.414
+Step 80/200: ACCEPTED, Current reward: 5.5625, Acceptance rate: 0.375
+Step 90/200: REJECTED, Current reward: 5.3125, Acceptance rate: 0.378
+Step 100/200: REJECTED, Current reward: 5.7812, Acceptance rate: 0.390
+Step 110/200: REJECTED, Current reward: 6.3125, Acceptance rate: 0.409
+Step 120/200: REJECTED, Current reward: 5.8750, Acceptance rate: 0.433
+Step 130/200: REJECTED, Current reward: 5.0625, Acceptance rate: 0.438
+Step 140/200: REJECTED, Current reward: 6.0000, Acceptance rate: 0.421
+Step 150/200: ACCEPTED, Current reward: 6.2188, Acceptance rate: 0.407
+Step 160/200: REJECTED, Current reward: 5.8125, Acceptance rate: 0.406
+Step 170/200: REJECTED, Current reward: 4.3125, Acceptance rate: 0.406
+Step 180/200: ACCEPTED, Current reward: 6.6875, Acceptance rate: 0.428
+Step 190/200: REJECTED, Current reward: 6.3438, Acceptance rate: 0.416
+Step 200/200: REJECTED, Current reward: 5.7500, Acceptance rate: 0.405
+MCMC completed. Final acceptance rate: 0.405
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 2.2500
+Step 10/200: REJECTED, Current reward: 4.8750, Acceptance rate: 0.700
+Step 20/200: REJECTED, Current reward: 4.4688, Acceptance rate: 0.500
+Step 30/200: REJECTED, Current reward: 3.7188, Acceptance rate: 0.567
+Step 40/200: ACCEPTED, Current reward: 2.2969, Acceptance rate: 0.575
+Step 50/200: REJECTED, Current reward: 3.0156, Acceptance rate: 0.580
+Step 60/200: REJECTED, Current reward: 4.9375, Acceptance rate: 0.517
+Step 70/200: ACCEPTED, Current reward: 5.0625, Acceptance rate: 0.543
+Step 80/200: REJECTED, Current reward: 4.6875, Acceptance rate: 0.500
+Step 90/200: REJECTED, Current reward: 5.0312, Acceptance rate: 0.467
+Step 100/200: REJECTED, Current reward: 4.7188, Acceptance rate: 0.450
+Step 110/200: REJECTED, Current reward: 4.7812, Acceptance rate: 0.436
+Step 120/200: REJECTED, Current reward: 3.8750, Acceptance rate: 0.442
+Step 130/200: REJECTED, Current reward: 4.8125, Acceptance rate: 0.438
+Step 140/200: ACCEPTED, Current reward: 2.9062, Acceptance rate: 0.443
+Step 150/200: ACCEPTED, Current reward: 5.0312, Acceptance rate: 0.447
+Step 160/200: ACCEPTED, Current reward: 4.4688, Acceptance rate: 0.444
+Step 170/200: REJECTED, Current reward: 4.8125, Acceptance rate: 0.435
+Step 180/200: REJECTED, Current reward: 4.5000, Acceptance rate: 0.439
+Step 190/200: ACCEPTED, Current reward: 4.0312, Acceptance rate: 0.447
+Step 200/200: ACCEPTED, Current reward: 5.1562, Acceptance rate: 0.450
+MCMC completed. Final acceptance rate: 0.450
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 3.8281
+Step 10/200: ACCEPTED, Current reward: 4.5000, Acceptance rate: 0.900
+Step 20/200: REJECTED, Current reward: 6.0312, Acceptance rate: 0.600
+Step 30/200: ACCEPTED, Current reward: 4.4062, Acceptance rate: 0.500
+Step 40/200: ACCEPTED, Current reward: 0.1787, Acceptance rate: 0.500
+Step 50/200: ACCEPTED, Current reward: 4.2188, Acceptance rate: 0.560
+Step 60/200: ACCEPTED, Current reward: 3.7656, Acceptance rate: 0.567
+Step 70/200: REJECTED, Current reward: 4.1250, Acceptance rate: 0.571
+Step 80/200: ACCEPTED, Current reward: 4.8438, Acceptance rate: 0.562
+Step 90/200: REJECTED, Current reward: 4.6562, Acceptance rate: 0.556
+Step 100/200: REJECTED, Current reward: 4.7500, Acceptance rate: 0.540
+Step 110/200: ACCEPTED, Current reward: 2.6562, Acceptance rate: 0.564
+Step 120/200: ACCEPTED, Current reward: 3.8906, Acceptance rate: 0.575
+Step 130/200: REJECTED, Current reward: 5.2812, Acceptance rate: 0.538
+Step 140/200: ACCEPTED, Current reward: 4.6250, Acceptance rate: 0.543
+Step 150/200: REJECTED, Current reward: 5.5938, Acceptance rate: 0.520
+Step 160/200: ACCEPTED, Current reward: 5.4375, Acceptance rate: 0.494
+Step 170/200: REJECTED, Current reward: 4.5938, Acceptance rate: 0.471
+Step 180/200: ACCEPTED, Current reward: 3.0625, Acceptance rate: 0.478
+Step 190/200: REJECTED, Current reward: 5.9375, Acceptance rate: 0.474
+Step 200/200: ACCEPTED, Current reward: 4.9062, Acceptance rate: 0.465
+MCMC completed. Final acceptance rate: 0.465
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -0.7031
+Step 10/200: ACCEPTED, Current reward: -2.1250, Acceptance rate: 0.500
+Step 20/200: ACCEPTED, Current reward: -1.7500, Acceptance rate: 0.450
+Step 30/200: REJECTED, Current reward: 6.6250, Acceptance rate: 0.400
+Step 40/200: REJECTED, Current reward: 6.5312, Acceptance rate: 0.325
+Step 50/200: REJECTED, Current reward: 6.5312, Acceptance rate: 0.260
+Step 60/200: REJECTED, Current reward: 6.2812, Acceptance rate: 0.233
+Step 70/200: REJECTED, Current reward: 5.9375, Acceptance rate: 0.214
+Step 80/200: REJECTED, Current reward: 1.3594, Acceptance rate: 0.263
+Step 90/200: REJECTED, Current reward: 1.7031, Acceptance rate: 0.311
+Step 100/200: ACCEPTED, Current reward: 6.1250, Acceptance rate: 0.320
+Step 110/200: REJECTED, Current reward: 6.5312, Acceptance rate: 0.300
+Step 120/200: REJECTED, Current reward: 6.5938, Acceptance rate: 0.283
+Step 130/200: ACCEPTED, Current reward: 5.7188, Acceptance rate: 0.269
+Step 140/200: REJECTED, Current reward: 6.7500, Acceptance rate: 0.271
+Step 150/200: REJECTED, Current reward: 6.7500, Acceptance rate: 0.253
+Step 160/200: ACCEPTED, Current reward: 5.8125, Acceptance rate: 0.244
+Step 170/200: REJECTED, Current reward: 6.6250, Acceptance rate: 0.253
+Step 180/200: REJECTED, Current reward: 6.6250, Acceptance rate: 0.239
+Step 190/200: REJECTED, Current reward: 6.4375, Acceptance rate: 0.232
+Step 200/200: REJECTED, Current reward: 6.4375, Acceptance rate: 0.220
+MCMC completed. Final acceptance rate: 0.220
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 5.4375
+Step 10/200: REJECTED, Current reward: 3.9844, Acceptance rate: 0.400
+Step 20/200: ACCEPTED, Current reward: 4.3438, Acceptance rate: 0.500
+Step 30/200: REJECTED, Current reward: 4.6562, Acceptance rate: 0.500
+Step 40/200: ACCEPTED, Current reward: 5.9375, Acceptance rate: 0.600
+Step 50/200: ACCEPTED, Current reward: 4.2500, Acceptance rate: 0.640
+Step 60/200: REJECTED, Current reward: 6.1562, Acceptance rate: 0.583
+Step 70/200: REJECTED, Current reward: 5.5625, Acceptance rate: 0.571
+Step 80/200: REJECTED, Current reward: 5.9062, Acceptance rate: 0.537
+Step 90/200: ACCEPTED, Current reward: 6.4375, Acceptance rate: 0.556
+Step 100/200: ACCEPTED, Current reward: 6.2812, Acceptance rate: 0.520
+Step 110/200: REJECTED, Current reward: 6.8438, Acceptance rate: 0.491
+Step 120/200: ACCEPTED, Current reward: 7.4375, Acceptance rate: 0.475
+Step 130/200: REJECTED, Current reward: 6.3438, Acceptance rate: 0.462
+Step 140/200: ACCEPTED, Current reward: 5.6562, Acceptance rate: 0.471
+Step 150/200: ACCEPTED, Current reward: 6.4375, Acceptance rate: 0.487
+Step 160/200: REJECTED, Current reward: 6.8438, Acceptance rate: 0.463
+Step 170/200: REJECTED, Current reward: 5.9062, Acceptance rate: 0.441
+Step 180/200: REJECTED, Current reward: 6.3125, Acceptance rate: 0.439
+Step 190/200: REJECTED, Current reward: 6.4688, Acceptance rate: 0.421
+Step 200/200: ACCEPTED, Current reward: 5.8438, Acceptance rate: 0.425
+MCMC completed. Final acceptance rate: 0.425
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -1.3672
+Step 10/200: REJECTED, Current reward: 5.6875, Acceptance rate: 0.200
+Step 20/200: REJECTED, Current reward: 4.6875, Acceptance rate: 0.250
+Step 30/200: REJECTED, Current reward: 5.3750, Acceptance rate: 0.200
+Step 40/200: REJECTED, Current reward: 5.3750, Acceptance rate: 0.175
+Step 50/200: REJECTED, Current reward: 3.2656, Acceptance rate: 0.180
+Step 60/200: REJECTED, Current reward: 4.9688, Acceptance rate: 0.183
+Step 70/200: REJECTED, Current reward: 6.2500, Acceptance rate: 0.171
+Step 80/200: REJECTED, Current reward: 6.0000, Acceptance rate: 0.175
+Step 90/200: REJECTED, Current reward: 4.0625, Acceptance rate: 0.211
+Step 100/200: REJECTED, Current reward: 4.6562, Acceptance rate: 0.210
+Step 110/200: REJECTED, Current reward: 4.6562, Acceptance rate: 0.191
+Step 120/200: ACCEPTED, Current reward: 4.9062, Acceptance rate: 0.192
+Step 130/200: ACCEPTED, Current reward: 1.8203, Acceptance rate: 0.192
+Step 140/200: ACCEPTED, Current reward: 4.4688, Acceptance rate: 0.207
+Step 150/200: ACCEPTED, Current reward: 1.5000, Acceptance rate: 0.213
+Step 160/200: ACCEPTED, Current reward: 1.6250, Acceptance rate: 0.231
+Step 170/200: ACCEPTED, Current reward: 2.8281, Acceptance rate: 0.247
+Step 180/200: REJECTED, Current reward: 0.9414, Acceptance rate: 0.256
+Step 190/200: ACCEPTED, Current reward: 4.1875, Acceptance rate: 0.284
+Step 200/200: ACCEPTED, Current reward: -0.6758, Acceptance rate: 0.300
+MCMC completed. Final acceptance rate: 0.300
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 1.6797
+Step 10/200: REJECTED, Current reward: 4.0938, Acceptance rate: 0.600
+Step 20/200: ACCEPTED, Current reward: 5.3125, Acceptance rate: 0.400
+Step 30/200: ACCEPTED, Current reward: 5.8750, Acceptance rate: 0.500
+Step 40/200: REJECTED, Current reward: 5.3438, Acceptance rate: 0.425
+Step 50/200: REJECTED, Current reward: 5.5938, Acceptance rate: 0.400
+Step 60/200: REJECTED, Current reward: 6.0000, Acceptance rate: 0.367
+Step 70/200: REJECTED, Current reward: 6.0000, Acceptance rate: 0.314
+Step 80/200: ACCEPTED, Current reward: 4.1875, Acceptance rate: 0.350
+Step 90/200: REJECTED, Current reward: 5.6250, Acceptance rate: 0.378
+Step 100/200: REJECTED, Current reward: 6.3438, Acceptance rate: 0.400
+Step 110/200: ACCEPTED, Current reward: 4.4062, Acceptance rate: 0.409
+Step 120/200: ACCEPTED, Current reward: 4.9375, Acceptance rate: 0.408
+Step 130/200: REJECTED, Current reward: 5.9062, Acceptance rate: 0.415
+Step 140/200: ACCEPTED, Current reward: 5.8750, Acceptance rate: 0.414
+Step 150/200: REJECTED, Current reward: 5.8438, Acceptance rate: 0.393
+Step 160/200: REJECTED, Current reward: 5.3438, Acceptance rate: 0.388
+Step 170/200: REJECTED, Current reward: 5.2812, Acceptance rate: 0.394
+Step 180/200: ACCEPTED, Current reward: 3.7656, Acceptance rate: 0.400
+Step 190/200: ACCEPTED, Current reward: 5.2500, Acceptance rate: 0.395
+Step 200/200: REJECTED, Current reward: 5.8438, Acceptance rate: 0.405
+MCMC completed. Final acceptance rate: 0.405
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 1.9375
+Step 10/200: ACCEPTED, Current reward: 6.0312, Acceptance rate: 0.800
+Step 20/200: ACCEPTED, Current reward: 6.0625, Acceptance rate: 0.500
+Step 30/200: REJECTED, Current reward: 6.1250, Acceptance rate: 0.367
+Step 40/200: ACCEPTED, Current reward: 4.9375, Acceptance rate: 0.325
+Step 50/200: ACCEPTED, Current reward: 5.0625, Acceptance rate: 0.400
+Step 60/200: ACCEPTED, Current reward: 6.7188, Acceptance rate: 0.450
+Step 70/200: ACCEPTED, Current reward: 5.9688, Acceptance rate: 0.400
+Step 80/200: ACCEPTED, Current reward: 7.0000, Acceptance rate: 0.412
+Step 90/200: ACCEPTED, Current reward: 4.2812, Acceptance rate: 0.456
+Step 100/200: ACCEPTED, Current reward: 5.6875, Acceptance rate: 0.450
+Step 110/200: ACCEPTED, Current reward: 4.9688, Acceptance rate: 0.482
+Step 120/200: REJECTED, Current reward: 5.9375, Acceptance rate: 0.492
+Step 130/200: REJECTED, Current reward: 5.8438, Acceptance rate: 0.469
+Step 140/200: REJECTED, Current reward: 6.5938, Acceptance rate: 0.457
+Step 150/200: ACCEPTED, Current reward: 3.5625, Acceptance rate: 0.460
+Step 160/200: ACCEPTED, Current reward: 6.2188, Acceptance rate: 0.469
+Step 170/200: ACCEPTED, Current reward: 4.8125, Acceptance rate: 0.476
+Step 180/200: ACCEPTED, Current reward: 4.8125, Acceptance rate: 0.494
+Step 190/200: ACCEPTED, Current reward: 4.7188, Acceptance rate: 0.495
+Step 200/200: ACCEPTED, Current reward: 5.0938, Acceptance rate: 0.500
+MCMC completed. Final acceptance rate: 0.500
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -9.4375
+Step 10/200: ACCEPTED, Current reward: -7.4375, Acceptance rate: 0.900
+Step 20/200: ACCEPTED, Current reward: -5.4375, Acceptance rate: 0.950
+Step 30/200: ACCEPTED, Current reward: -4.6250, Acceptance rate: 0.900
+Step 40/200: ACCEPTED, Current reward: -2.4062, Acceptance rate: 0.825
+Step 50/200: REJECTED, Current reward: -4.9375, Acceptance rate: 0.780
+Step 60/200: REJECTED, Current reward: -2.3281, Acceptance rate: 0.733
+Step 70/200: REJECTED, Current reward: -6.1875, Acceptance rate: 0.700
+Step 80/200: ACCEPTED, Current reward: 0.2910, Acceptance rate: 0.688
+Step 90/200: ACCEPTED, Current reward: 0.6914, Acceptance rate: 0.656
+Step 100/200: ACCEPTED, Current reward: -0.4883, Acceptance rate: 0.610
+Step 110/200: ACCEPTED, Current reward: 0.2891, Acceptance rate: 0.609
+Step 120/200: ACCEPTED, Current reward: -5.2188, Acceptance rate: 0.592
+Step 130/200: REJECTED, Current reward: -0.6172, Acceptance rate: 0.585
+Step 140/200: REJECTED, Current reward: 2.2344, Acceptance rate: 0.579
+Step 150/200: ACCEPTED, Current reward: 1.9375, Acceptance rate: 0.553
+Step 160/200: ACCEPTED, Current reward: 2.7500, Acceptance rate: 0.550
+Step 170/200: REJECTED, Current reward: 2.5469, Acceptance rate: 0.529
+Step 180/200: REJECTED, Current reward: 2.4062, Acceptance rate: 0.522
+Step 190/200: REJECTED, Current reward: 1.8984, Acceptance rate: 0.505
+Step 200/200: ACCEPTED, Current reward: -1.5859, Acceptance rate: 0.515
+MCMC completed. Final acceptance rate: 0.515
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -4.9062
+Step 10/200: ACCEPTED, Current reward: -1.4844, Acceptance rate: 0.700
+Step 20/200: ACCEPTED, Current reward: -0.1748, Acceptance rate: 0.600
+Step 30/200: ACCEPTED, Current reward: -0.8047, Acceptance rate: 0.500
+Step 40/200: ACCEPTED, Current reward: -1.0703, Acceptance rate: 0.500
+Step 50/200: ACCEPTED, Current reward: 2.3750, Acceptance rate: 0.520
+Step 60/200: REJECTED, Current reward: 2.2969, Acceptance rate: 0.450
+Step 70/200: REJECTED, Current reward: -0.4180, Acceptance rate: 0.443
+Step 80/200: ACCEPTED, Current reward: 3.1719, Acceptance rate: 0.438
+Step 90/200: ACCEPTED, Current reward: 2.2500, Acceptance rate: 0.411
+Step 100/200: REJECTED, Current reward: 3.3594, Acceptance rate: 0.390
+Step 110/200: ACCEPTED, Current reward: -0.3535, Acceptance rate: 0.400
+Step 120/200: REJECTED, Current reward: -0.0864, Acceptance rate: 0.408
+Step 130/200: REJECTED, Current reward: -0.1279, Acceptance rate: 0.423
+Step 140/200: ACCEPTED, Current reward: -2.4375, Acceptance rate: 0.436
+Step 150/200: REJECTED, Current reward: -2.0625, Acceptance rate: 0.460
+Step 160/200: REJECTED, Current reward: -0.5586, Acceptance rate: 0.450
+Step 170/200: REJECTED, Current reward: -0.5430, Acceptance rate: 0.459
+Step 180/200: REJECTED, Current reward: -2.2656, Acceptance rate: 0.461
+Step 190/200: REJECTED, Current reward: -1.2500, Acceptance rate: 0.463
+Step 200/200: ACCEPTED, Current reward: -1.0234, Acceptance rate: 0.465
+MCMC completed. Final acceptance rate: 0.465
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -6.8125
+Step 10/200: ACCEPTED, Current reward: -4.8438, Acceptance rate: 0.700
+Step 20/200: ACCEPTED, Current reward: -5.2812, Acceptance rate: 0.700
+Step 30/200: ACCEPTED, Current reward: -5.1875, Acceptance rate: 0.733
+Step 40/200: REJECTED, Current reward: -5.1562, Acceptance rate: 0.725
+Step 50/200: ACCEPTED, Current reward: -4.6250, Acceptance rate: 0.740
+Step 60/200: REJECTED, Current reward: -4.2500, Acceptance rate: 0.650
+Step 70/200: REJECTED, Current reward: -5.3125, Acceptance rate: 0.586
+Step 80/200: ACCEPTED, Current reward: -5.8750, Acceptance rate: 0.600
+Step 90/200: ACCEPTED, Current reward: -4.5938, Acceptance rate: 0.589
+Step 100/200: ACCEPTED, Current reward: -4.8125, Acceptance rate: 0.610
+Step 110/200: ACCEPTED, Current reward: -5.8438, Acceptance rate: 0.618
+Step 120/200: ACCEPTED, Current reward: -5.9375, Acceptance rate: 0.650
+Step 130/200: REJECTED, Current reward: -5.6562, Acceptance rate: 0.646
+Step 140/200: REJECTED, Current reward: -5.8125, Acceptance rate: 0.657
+Step 150/200: ACCEPTED, Current reward: -5.4688, Acceptance rate: 0.660
+Step 160/200: REJECTED, Current reward: -3.2188, Acceptance rate: 0.650
+Step 170/200: ACCEPTED, Current reward: -5.7188, Acceptance rate: 0.647
+Step 180/200: ACCEPTED, Current reward: -6.0312, Acceptance rate: 0.661
+Step 190/200: ACCEPTED, Current reward: -5.0000, Acceptance rate: 0.658
+Step 200/200: REJECTED, Current reward: -4.3125, Acceptance rate: 0.645
+MCMC completed. Final acceptance rate: 0.645
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -6.8125
+Step 10/200: ACCEPTED, Current reward: -5.7188, Acceptance rate: 0.600
+Step 20/200: ACCEPTED, Current reward: -1.6016, Acceptance rate: 0.550
+Step 30/200: REJECTED, Current reward: 0.0320, Acceptance rate: 0.633
+Step 40/200: REJECTED, Current reward: 0.3750, Acceptance rate: 0.600
+Step 50/200: ACCEPTED, Current reward: -0.1299, Acceptance rate: 0.520
+Step 60/200: ACCEPTED, Current reward: -0.9258, Acceptance rate: 0.533
+Step 70/200: REJECTED, Current reward: -1.1641, Acceptance rate: 0.500
+Step 80/200: REJECTED, Current reward: -0.9258, Acceptance rate: 0.487
+Step 90/200: REJECTED, Current reward: -3.9531, Acceptance rate: 0.478
+Step 100/200: REJECTED, Current reward: -2.9375, Acceptance rate: 0.500
+Step 110/200: ACCEPTED, Current reward: -2.7344, Acceptance rate: 0.518
+Step 120/200: ACCEPTED, Current reward: -0.3594, Acceptance rate: 0.517
+Step 130/200: ACCEPTED, Current reward: 1.5938, Acceptance rate: 0.492
+Step 140/200: ACCEPTED, Current reward: 2.3281, Acceptance rate: 0.471
+Step 150/200: REJECTED, Current reward: 2.0625, Acceptance rate: 0.453
+Step 160/200: ACCEPTED, Current reward: -0.8359, Acceptance rate: 0.456
+Step 170/200: ACCEPTED, Current reward: -1.9453, Acceptance rate: 0.465
+Step 180/200: ACCEPTED, Current reward: -4.3438, Acceptance rate: 0.472
+Step 190/200: ACCEPTED, Current reward: -2.6719, Acceptance rate: 0.489
+Step 200/200: ACCEPTED, Current reward: -2.1406, Acceptance rate: 0.495
+MCMC completed. Final acceptance rate: 0.495
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -2.0469
+Step 10/200: REJECTED, Current reward: -1.2344, Acceptance rate: 0.300
+Step 20/200: ACCEPTED, Current reward: -1.2734, Acceptance rate: 0.350
+Step 30/200: ACCEPTED, Current reward: -0.5703, Acceptance rate: 0.367
+Step 40/200: REJECTED, Current reward: -0.5703, Acceptance rate: 0.275
+Step 50/200: REJECTED, Current reward: 0.2422, Acceptance rate: 0.300
+Step 60/200: REJECTED, Current reward: -0.1416, Acceptance rate: 0.283
+Step 70/200: REJECTED, Current reward: -0.3105, Acceptance rate: 0.286
+Step 80/200: REJECTED, Current reward: 0.0439, Acceptance rate: 0.275
+Step 90/200: REJECTED, Current reward: -0.0284, Acceptance rate: 0.289
+Step 100/200: ACCEPTED, Current reward: 0.0684, Acceptance rate: 0.280
+Step 110/200: REJECTED, Current reward: 1.1875, Acceptance rate: 0.273
+Step 120/200: ACCEPTED, Current reward: -0.3887, Acceptance rate: 0.292
+Step 130/200: REJECTED, Current reward: -0.1484, Acceptance rate: 0.285
+Step 140/200: ACCEPTED, Current reward: -1.5234, Acceptance rate: 0.300
+Step 150/200: ACCEPTED, Current reward: -0.0898, Acceptance rate: 0.307
+Step 160/200: REJECTED, Current reward: -1.7656, Acceptance rate: 0.312
+Step 170/200: ACCEPTED, Current reward: 0.4902, Acceptance rate: 0.341
+Step 180/200: ACCEPTED, Current reward: 0.3516, Acceptance rate: 0.372
+Step 190/200: ACCEPTED, Current reward: 0.6719, Acceptance rate: 0.389
+Step 200/200: REJECTED, Current reward: 0.6602, Acceptance rate: 0.390
+MCMC completed. Final acceptance rate: 0.390
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -6.5312
+Step 10/200: REJECTED, Current reward: 0.6289, Acceptance rate: 0.800
+Step 20/200: REJECTED, Current reward: 0.9453, Acceptance rate: 0.450
+Step 30/200: ACCEPTED, Current reward: -0.8359, Acceptance rate: 0.433
+Step 40/200: REJECTED, Current reward: 0.2695, Acceptance rate: 0.425
+Step 50/200: REJECTED, Current reward: 0.0176, Acceptance rate: 0.360
+Step 60/200: REJECTED, Current reward: -0.0527, Acceptance rate: 0.367
+Step 70/200: ACCEPTED, Current reward: -2.8281, Acceptance rate: 0.329
+Step 80/200: REJECTED, Current reward: -0.9492, Acceptance rate: 0.325
+Step 90/200: REJECTED, Current reward: 1.2422, Acceptance rate: 0.333
+Step 100/200: REJECTED, Current reward: 1.3516, Acceptance rate: 0.310
+Step 110/200: REJECTED, Current reward: 1.1172, Acceptance rate: 0.300
+Step 120/200: REJECTED, Current reward: 2.1250, Acceptance rate: 0.292
+Step 130/200: ACCEPTED, Current reward: 1.9297, Acceptance rate: 0.285
+Step 140/200: REJECTED, Current reward: 1.9297, Acceptance rate: 0.264
+Step 150/200: REJECTED, Current reward: 1.7578, Acceptance rate: 0.253
+Step 160/200: REJECTED, Current reward: -0.5938, Acceptance rate: 0.250
+Step 170/200: REJECTED, Current reward: -1.1250, Acceptance rate: 0.271
+Step 180/200: REJECTED, Current reward: 0.3125, Acceptance rate: 0.289
+Step 190/200: ACCEPTED, Current reward: -1.7891, Acceptance rate: 0.289
+Step 200/200: ACCEPTED, Current reward: -1.3203, Acceptance rate: 0.310
+MCMC completed. Final acceptance rate: 0.310
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 6.3438
+Step 10/200: REJECTED, Current reward: 6.7188, Acceptance rate: 0.100
+Step 20/200: ACCEPTED, Current reward: 4.8438, Acceptance rate: 0.400
+Step 30/200: REJECTED, Current reward: 6.2500, Acceptance rate: 0.433
+Step 40/200: REJECTED, Current reward: 6.3125, Acceptance rate: 0.400
+Step 50/200: ACCEPTED, Current reward: 5.0938, Acceptance rate: 0.420
+Step 60/200: ACCEPTED, Current reward: 7.1875, Acceptance rate: 0.433
+Step 70/200: REJECTED, Current reward: 6.6875, Acceptance rate: 0.457
+Step 80/200: REJECTED, Current reward: 6.5938, Acceptance rate: 0.412
+Step 90/200: REJECTED, Current reward: 5.8438, Acceptance rate: 0.411
+Step 100/200: ACCEPTED, Current reward: 7.0000, Acceptance rate: 0.420
+Step 110/200: REJECTED, Current reward: 6.7188, Acceptance rate: 0.409
+Step 120/200: REJECTED, Current reward: 6.7188, Acceptance rate: 0.400
+Step 130/200: REJECTED, Current reward: 6.1562, Acceptance rate: 0.400
+Step 140/200: ACCEPTED, Current reward: 6.1562, Acceptance rate: 0.407
+Step 150/200: ACCEPTED, Current reward: 3.9844, Acceptance rate: 0.407
+Step 160/200: REJECTED, Current reward: 6.0312, Acceptance rate: 0.419
+Step 170/200: ACCEPTED, Current reward: 4.9688, Acceptance rate: 0.447
+Step 180/200: REJECTED, Current reward: 6.4062, Acceptance rate: 0.428
+Step 190/200: ACCEPTED, Current reward: 5.8125, Acceptance rate: 0.426
+Step 200/200: REJECTED, Current reward: 5.9375, Acceptance rate: 0.415
+MCMC completed. Final acceptance rate: 0.415
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 4.7812
+Step 10/200: REJECTED, Current reward: 5.5625, Acceptance rate: 0.300
+Step 20/200: ACCEPTED, Current reward: 5.3125, Acceptance rate: 0.500
+Step 30/200: REJECTED, Current reward: 4.4688, Acceptance rate: 0.433
+Step 40/200: REJECTED, Current reward: 4.9375, Acceptance rate: 0.425
+Step 50/200: REJECTED, Current reward: 5.5625, Acceptance rate: 0.380
+Step 60/200: REJECTED, Current reward: 5.2500, Acceptance rate: 0.367
+Step 70/200: REJECTED, Current reward: 4.2812, Acceptance rate: 0.400
+Step 80/200: ACCEPTED, Current reward: 3.8750, Acceptance rate: 0.438
+Step 90/200: REJECTED, Current reward: 6.5312, Acceptance rate: 0.433
+Step 100/200: REJECTED, Current reward: 5.0938, Acceptance rate: 0.430
+Step 110/200: REJECTED, Current reward: 4.2188, Acceptance rate: 0.445
+Step 120/200: ACCEPTED, Current reward: 5.5312, Acceptance rate: 0.467
+Step 130/200: ACCEPTED, Current reward: 4.3438, Acceptance rate: 0.462
+Step 140/200: REJECTED, Current reward: 5.9688, Acceptance rate: 0.457
+Step 150/200: REJECTED, Current reward: 4.7500, Acceptance rate: 0.467
+Step 160/200: REJECTED, Current reward: 5.2812, Acceptance rate: 0.469
+Step 170/200: REJECTED, Current reward: 5.6875, Acceptance rate: 0.465
+Step 180/200: ACCEPTED, Current reward: 4.9375, Acceptance rate: 0.456
+Step 190/200: REJECTED, Current reward: 3.7969, Acceptance rate: 0.458
+Step 200/200: ACCEPTED, Current reward: 4.6875, Acceptance rate: 0.460
+MCMC completed. Final acceptance rate: 0.460
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -8.5625
+Step 10/200: REJECTED, Current reward: 0.8633, Acceptance rate: 0.700
+Step 20/200: REJECTED, Current reward: 0.8086, Acceptance rate: 0.500
+Step 30/200: REJECTED, Current reward: 1.5391, Acceptance rate: 0.433
+Step 40/200: ACCEPTED, Current reward: 1.7188, Acceptance rate: 0.425
+Step 50/200: ACCEPTED, Current reward: 1.7734, Acceptance rate: 0.420
+Step 60/200: ACCEPTED, Current reward: 1.6406, Acceptance rate: 0.400
+Step 70/200: REJECTED, Current reward: 1.4453, Acceptance rate: 0.386
+Step 80/200: REJECTED, Current reward: 1.5312, Acceptance rate: 0.375
+Step 90/200: ACCEPTED, Current reward: 1.1797, Acceptance rate: 0.378
+Step 100/200: REJECTED, Current reward: 1.7891, Acceptance rate: 0.360
+Step 110/200: REJECTED, Current reward: 1.4531, Acceptance rate: 0.355
+Step 120/200: ACCEPTED, Current reward: 1.2969, Acceptance rate: 0.367
+Step 130/200: REJECTED, Current reward: 1.3906, Acceptance rate: 0.346
+Step 140/200: ACCEPTED, Current reward: 1.1250, Acceptance rate: 0.350
+Step 150/200: REJECTED, Current reward: 0.0261, Acceptance rate: 0.353
+Step 160/200: REJECTED, Current reward: 0.3613, Acceptance rate: 0.344
+Step 170/200: REJECTED, Current reward: 0.4375, Acceptance rate: 0.347
+Step 180/200: REJECTED, Current reward: 0.3613, Acceptance rate: 0.333
+Step 190/200: ACCEPTED, Current reward: 1.0938, Acceptance rate: 0.347
+Step 200/200: REJECTED, Current reward: 0.8516, Acceptance rate: 0.335
+MCMC completed. Final acceptance rate: 0.335
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 4.2812
+Step 10/200: ACCEPTED, Current reward: 4.1250, Acceptance rate: 0.600
+Step 20/200: ACCEPTED, Current reward: 0.5938, Acceptance rate: 0.650
+Step 30/200: ACCEPTED, Current reward: 4.5000, Acceptance rate: 0.700
+Step 40/200: ACCEPTED, Current reward: 4.3750, Acceptance rate: 0.625
+Step 50/200: REJECTED, Current reward: 6.3438, Acceptance rate: 0.520
+Step 60/200: REJECTED, Current reward: 6.3438, Acceptance rate: 0.433
+Step 70/200: ACCEPTED, Current reward: 5.8750, Acceptance rate: 0.443
+Step 80/200: REJECTED, Current reward: 6.2188, Acceptance rate: 0.450
+Step 90/200: REJECTED, Current reward: 5.7500, Acceptance rate: 0.433
+Step 100/200: REJECTED, Current reward: 5.3438, Acceptance rate: 0.420
+Step 110/200: REJECTED, Current reward: 6.0000, Acceptance rate: 0.400
+Step 120/200: ACCEPTED, Current reward: 4.5938, Acceptance rate: 0.417
+Step 130/200: ACCEPTED, Current reward: 5.2812, Acceptance rate: 0.431
+Step 140/200: REJECTED, Current reward: 5.0000, Acceptance rate: 0.436
+Step 150/200: ACCEPTED, Current reward: 4.0625, Acceptance rate: 0.433
+Step 160/200: REJECTED, Current reward: 3.1406, Acceptance rate: 0.438
+Step 170/200: ACCEPTED, Current reward: 5.0625, Acceptance rate: 0.453
+Step 180/200: ACCEPTED, Current reward: 5.2188, Acceptance rate: 0.461
+Step 190/200: REJECTED, Current reward: 5.6250, Acceptance rate: 0.474
+Step 200/200: REJECTED, Current reward: 6.6250, Acceptance rate: 0.470
+MCMC completed. Final acceptance rate: 0.470
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -6.8750
+Step 10/200: ACCEPTED, Current reward: -5.8750, Acceptance rate: 0.600
+Step 20/200: ACCEPTED, Current reward: -6.0625, Acceptance rate: 0.700
+Step 30/200: ACCEPTED, Current reward: -6.7188, Acceptance rate: 0.733
+Step 40/200: REJECTED, Current reward: -6.7812, Acceptance rate: 0.750
+Step 50/200: ACCEPTED, Current reward: -6.2812, Acceptance rate: 0.780
+Step 60/200: ACCEPTED, Current reward: -7.8438, Acceptance rate: 0.767
+Step 70/200: REJECTED, Current reward: -4.0312, Acceptance rate: 0.757
+Step 80/200: REJECTED, Current reward: -3.7656, Acceptance rate: 0.725
+Step 90/200: REJECTED, Current reward: -5.1250, Acceptance rate: 0.678
+Step 100/200: ACCEPTED, Current reward: -5.0000, Acceptance rate: 0.690
+Step 110/200: ACCEPTED, Current reward: -6.9688, Acceptance rate: 0.709
+Step 120/200: REJECTED, Current reward: -4.3125, Acceptance rate: 0.692
+Step 130/200: ACCEPTED, Current reward: -3.4375, Acceptance rate: 0.685
+Step 140/200: ACCEPTED, Current reward: -3.4688, Acceptance rate: 0.657
+Step 150/200: REJECTED, Current reward: -3.0156, Acceptance rate: 0.620
+Step 160/200: ACCEPTED, Current reward: -3.8438, Acceptance rate: 0.600
+Step 170/200: REJECTED, Current reward: -6.2188, Acceptance rate: 0.588
+Step 180/200: ACCEPTED, Current reward: -6.5625, Acceptance rate: 0.594
+Step 190/200: ACCEPTED, Current reward: -7.7812, Acceptance rate: 0.611
+Step 200/200: ACCEPTED, Current reward: -7.9688, Acceptance rate: 0.630
+MCMC completed. Final acceptance rate: 0.630
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 3.6094
+Step 10/200: ACCEPTED, Current reward: 3.1875, Acceptance rate: 0.500
+Step 20/200: REJECTED, Current reward: 4.8750, Acceptance rate: 0.350
+Step 30/200: ACCEPTED, Current reward: 3.6406, Acceptance rate: 0.467
+Step 40/200: REJECTED, Current reward: 2.3125, Acceptance rate: 0.500
+Step 50/200: REJECTED, Current reward: 3.5625, Acceptance rate: 0.500
+Step 60/200: REJECTED, Current reward: 4.2500, Acceptance rate: 0.517
+Step 70/200: ACCEPTED, Current reward: 3.3594, Acceptance rate: 0.514
+Step 80/200: ACCEPTED, Current reward: 2.7500, Acceptance rate: 0.525
+Step 90/200: REJECTED, Current reward: 4.5312, Acceptance rate: 0.500
+Step 100/200: ACCEPTED, Current reward: 4.8438, Acceptance rate: 0.500
+Step 110/200: ACCEPTED, Current reward: 3.3750, Acceptance rate: 0.482
+Step 120/200: ACCEPTED, Current reward: 3.8594, Acceptance rate: 0.508
+Step 130/200: REJECTED, Current reward: 5.3125, Acceptance rate: 0.515
+Step 140/200: REJECTED, Current reward: 4.1562, Acceptance rate: 0.514
+Step 150/200: ACCEPTED, Current reward: 4.9062, Acceptance rate: 0.533
+Step 160/200: ACCEPTED, Current reward: 2.2188, Acceptance rate: 0.544
+Step 170/200: REJECTED, Current reward: 2.5156, Acceptance rate: 0.553
+Step 180/200: ACCEPTED, Current reward: 4.5938, Acceptance rate: 0.539
+Step 190/200: REJECTED, Current reward: 4.5312, Acceptance rate: 0.542
+Step 200/200: REJECTED, Current reward: 2.7031, Acceptance rate: 0.525
+MCMC completed. Final acceptance rate: 0.525
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -5.5312
+Step 10/200: REJECTED, Current reward: -1.8281, Acceptance rate: 0.700
+Step 20/200: REJECTED, Current reward: -1.4062, Acceptance rate: 0.500
+Step 30/200: ACCEPTED, Current reward: -1.4453, Acceptance rate: 0.433
+Step 40/200: ACCEPTED, Current reward: -2.1719, Acceptance rate: 0.500
+Step 50/200: ACCEPTED, Current reward: -1.6719, Acceptance rate: 0.520
+Step 60/200: ACCEPTED, Current reward: -2.8906, Acceptance rate: 0.567
+Step 70/200: ACCEPTED, Current reward: -1.4297, Acceptance rate: 0.586
+Step 80/200: ACCEPTED, Current reward: -1.4922, Acceptance rate: 0.625
+Step 90/200: ACCEPTED, Current reward: -2.2969, Acceptance rate: 0.633
+Step 100/200: ACCEPTED, Current reward: -2.3906, Acceptance rate: 0.640
+Step 110/200: REJECTED, Current reward: -1.1094, Acceptance rate: 0.636
+Step 120/200: ACCEPTED, Current reward: -2.1094, Acceptance rate: 0.650
+Step 130/200: ACCEPTED, Current reward: -2.1094, Acceptance rate: 0.646
+Step 140/200: ACCEPTED, Current reward: -4.0938, Acceptance rate: 0.657
+Step 150/200: REJECTED, Current reward: 0.8242, Acceptance rate: 0.660
+Step 160/200: REJECTED, Current reward: 1.0312, Acceptance rate: 0.625
+Step 170/200: REJECTED, Current reward: -0.2178, Acceptance rate: 0.612
+Step 180/200: REJECTED, Current reward: 0.4199, Acceptance rate: 0.611
+Step 190/200: ACCEPTED, Current reward: -0.0005, Acceptance rate: 0.589
+Step 200/200: ACCEPTED, Current reward: -1.2578, Acceptance rate: 0.600
+MCMC completed. Final acceptance rate: 0.600
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 3.7812
+Step 10/200: ACCEPTED, Current reward: 4.5000, Acceptance rate: 0.500
+Step 20/200: REJECTED, Current reward: 5.3125, Acceptance rate: 0.650
+Step 30/200: REJECTED, Current reward: 4.7500, Acceptance rate: 0.467
+Step 40/200: REJECTED, Current reward: 4.6250, Acceptance rate: 0.475
+Step 50/200: REJECTED, Current reward: 5.8125, Acceptance rate: 0.440
+Step 60/200: ACCEPTED, Current reward: 3.9375, Acceptance rate: 0.417
+Step 70/200: REJECTED, Current reward: 3.9688, Acceptance rate: 0.457
+Step 80/200: REJECTED, Current reward: 5.3125, Acceptance rate: 0.438
+Step 90/200: ACCEPTED, Current reward: 4.8438, Acceptance rate: 0.433
+Step 100/200: ACCEPTED, Current reward: 3.5312, Acceptance rate: 0.420
+Step 110/200: ACCEPTED, Current reward: 4.7188, Acceptance rate: 0.455
+Step 120/200: REJECTED, Current reward: 5.8125, Acceptance rate: 0.467
+Step 130/200: REJECTED, Current reward: 4.6250, Acceptance rate: 0.446
+Step 140/200: REJECTED, Current reward: 5.7812, Acceptance rate: 0.443
+Step 150/200: REJECTED, Current reward: 4.2188, Acceptance rate: 0.433
+Step 160/200: ACCEPTED, Current reward: 4.6250, Acceptance rate: 0.438
+Step 170/200: ACCEPTED, Current reward: 5.0000, Acceptance rate: 0.424
+Step 180/200: REJECTED, Current reward: 3.1875, Acceptance rate: 0.433
+Step 190/200: REJECTED, Current reward: 6.2812, Acceptance rate: 0.432
+Step 200/200: ACCEPTED, Current reward: 2.5469, Acceptance rate: 0.435
+MCMC completed. Final acceptance rate: 0.435
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 4.5000
+Step 10/200: REJECTED, Current reward: 5.5938, Acceptance rate: 0.600
+Step 20/200: ACCEPTED, Current reward: 5.1250, Acceptance rate: 0.500
+Step 30/200: REJECTED, Current reward: 5.0000, Acceptance rate: 0.533
+Step 40/200: REJECTED, Current reward: 5.5000, Acceptance rate: 0.525
+Step 50/200: REJECTED, Current reward: 5.6562, Acceptance rate: 0.540
+Step 60/200: REJECTED, Current reward: 5.5000, Acceptance rate: 0.550
+Step 70/200: ACCEPTED, Current reward: 4.4062, Acceptance rate: 0.514
+Step 80/200: ACCEPTED, Current reward: 5.0938, Acceptance rate: 0.525
+Step 90/200: REJECTED, Current reward: 5.6250, Acceptance rate: 0.511
+Step 100/200: REJECTED, Current reward: 5.9688, Acceptance rate: 0.490
+Step 110/200: REJECTED, Current reward: 7.1562, Acceptance rate: 0.473
+Step 120/200: ACCEPTED, Current reward: 5.6875, Acceptance rate: 0.467
+Step 130/200: ACCEPTED, Current reward: 4.4062, Acceptance rate: 0.492
+Step 140/200: REJECTED, Current reward: 5.3438, Acceptance rate: 0.500
+Step 150/200: REJECTED, Current reward: 5.4375, Acceptance rate: 0.480
+Step 160/200: ACCEPTED, Current reward: 4.6250, Acceptance rate: 0.469
+Step 170/200: REJECTED, Current reward: 5.4688, Acceptance rate: 0.494
+Step 180/200: ACCEPTED, Current reward: 5.0000, Acceptance rate: 0.511
+Step 190/200: ACCEPTED, Current reward: 5.1250, Acceptance rate: 0.526
+Step 200/200: REJECTED, Current reward: 4.7188, Acceptance rate: 0.520
+MCMC completed. Final acceptance rate: 0.520
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -4.6562
+Step 10/200: REJECTED, Current reward: -4.5625, Acceptance rate: 0.300
+Step 20/200: ACCEPTED, Current reward: -2.2188, Acceptance rate: 0.400
+Step 30/200: ACCEPTED, Current reward: -4.7812, Acceptance rate: 0.500
+Step 40/200: REJECTED, Current reward: -0.8828, Acceptance rate: 0.550
+Step 50/200: ACCEPTED, Current reward: -0.9453, Acceptance rate: 0.520
+Step 60/200: ACCEPTED, Current reward: -2.8125, Acceptance rate: 0.500
+Step 70/200: REJECTED, Current reward: -0.8867, Acceptance rate: 0.471
+Step 80/200: REJECTED, Current reward: 0.9414, Acceptance rate: 0.463
+Step 90/200: REJECTED, Current reward: 0.9414, Acceptance rate: 0.422
+Step 100/200: ACCEPTED, Current reward: 1.7344, Acceptance rate: 0.420
+Step 110/200: REJECTED, Current reward: 1.7344, Acceptance rate: 0.382
+Step 120/200: REJECTED, Current reward: 1.7812, Acceptance rate: 0.375
+Step 130/200: REJECTED, Current reward: 1.7812, Acceptance rate: 0.346
+Step 140/200: REJECTED, Current reward: -1.7109, Acceptance rate: 0.336
+Step 150/200: REJECTED, Current reward: 1.2109, Acceptance rate: 0.333
+Step 160/200: ACCEPTED, Current reward: 1.4297, Acceptance rate: 0.319
+Step 170/200: REJECTED, Current reward: -1.2188, Acceptance rate: 0.306
+Step 180/200: REJECTED, Current reward: -0.7266, Acceptance rate: 0.317
+Step 190/200: ACCEPTED, Current reward: 0.0564, Acceptance rate: 0.321
+Step 200/200: REJECTED, Current reward: 0.8516, Acceptance rate: 0.310
+MCMC completed. Final acceptance rate: 0.310
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -4.2188
+Step 10/200: ACCEPTED, Current reward: -5.1875, Acceptance rate: 0.600
+Step 20/200: REJECTED, Current reward: 0.7539, Acceptance rate: 0.550
+Step 30/200: ACCEPTED, Current reward: 0.8438, Acceptance rate: 0.467
+Step 40/200: ACCEPTED, Current reward: 0.3223, Acceptance rate: 0.450
+Step 50/200: ACCEPTED, Current reward: -0.2812, Acceptance rate: 0.440
+Step 60/200: REJECTED, Current reward: 0.0269, Acceptance rate: 0.417
+Step 70/200: ACCEPTED, Current reward: -1.3438, Acceptance rate: 0.400
+Step 80/200: ACCEPTED, Current reward: 1.4141, Acceptance rate: 0.463
+Step 90/200: REJECTED, Current reward: 3.7656, Acceptance rate: 0.467
+Step 100/200: REJECTED, Current reward: 1.7344, Acceptance rate: 0.460
+Step 110/200: REJECTED, Current reward: 4.5000, Acceptance rate: 0.427
+Step 120/200: REJECTED, Current reward: 4.0000, Acceptance rate: 0.400
+Step 130/200: REJECTED, Current reward: 4.9688, Acceptance rate: 0.385
+Step 140/200: ACCEPTED, Current reward: 3.5156, Acceptance rate: 0.379
+Step 150/200: ACCEPTED, Current reward: 4.7500, Acceptance rate: 0.373
+Step 160/200: REJECTED, Current reward: 4.7500, Acceptance rate: 0.350
+Step 170/200: REJECTED, Current reward: 4.4062, Acceptance rate: 0.335
+Step 180/200: REJECTED, Current reward: 4.4062, Acceptance rate: 0.317
+Step 190/200: REJECTED, Current reward: 5.6250, Acceptance rate: 0.305
+Step 200/200: REJECTED, Current reward: 4.6250, Acceptance rate: 0.300
+MCMC completed. Final acceptance rate: 0.300
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 2.4844
+Step 10/200: REJECTED, Current reward: 5.2812, Acceptance rate: 0.500
+Step 20/200: ACCEPTED, Current reward: 5.1875, Acceptance rate: 0.550
+Step 30/200: ACCEPTED, Current reward: 5.2500, Acceptance rate: 0.533
+Step 40/200: REJECTED, Current reward: 4.9062, Acceptance rate: 0.550
+Step 50/200: REJECTED, Current reward: 5.3125, Acceptance rate: 0.460
+Step 60/200: REJECTED, Current reward: 3.0000, Acceptance rate: 0.467
+Step 70/200: REJECTED, Current reward: 5.3750, Acceptance rate: 0.457
+Step 80/200: ACCEPTED, Current reward: 3.5625, Acceptance rate: 0.475
+Step 90/200: REJECTED, Current reward: 3.9688, Acceptance rate: 0.500
+Step 100/200: REJECTED, Current reward: 3.7188, Acceptance rate: 0.510
+Step 110/200: ACCEPTED, Current reward: 3.6406, Acceptance rate: 0.545
+Step 120/200: ACCEPTED, Current reward: 3.4844, Acceptance rate: 0.567
+Step 130/200: REJECTED, Current reward: 5.3125, Acceptance rate: 0.531
+Step 140/200: REJECTED, Current reward: 5.3125, Acceptance rate: 0.493
+Step 150/200: REJECTED, Current reward: 4.6250, Acceptance rate: 0.493
+Step 160/200: ACCEPTED, Current reward: 5.6250, Acceptance rate: 0.487
+Step 170/200: ACCEPTED, Current reward: 5.0312, Acceptance rate: 0.494
+Step 180/200: ACCEPTED, Current reward: 4.9688, Acceptance rate: 0.500
+Step 190/200: REJECTED, Current reward: 4.4688, Acceptance rate: 0.495
+Step 200/200: ACCEPTED, Current reward: 5.0625, Acceptance rate: 0.490
+MCMC completed. Final acceptance rate: 0.490
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 1.0781
+Step 10/200: ACCEPTED, Current reward: 4.2812, Acceptance rate: 0.600
+Step 20/200: ACCEPTED, Current reward: 5.4062, Acceptance rate: 0.650
+Step 30/200: REJECTED, Current reward: 5.5312, Acceptance rate: 0.467
+Step 40/200: REJECTED, Current reward: 6.5000, Acceptance rate: 0.375
+Step 50/200: REJECTED, Current reward: 6.3438, Acceptance rate: 0.320
+Step 60/200: ACCEPTED, Current reward: 4.4375, Acceptance rate: 0.283
+Step 70/200: REJECTED, Current reward: 6.2500, Acceptance rate: 0.257
+Step 80/200: REJECTED, Current reward: 5.3750, Acceptance rate: 0.250
+Step 90/200: ACCEPTED, Current reward: 6.3750, Acceptance rate: 0.300
+Step 100/200: ACCEPTED, Current reward: 6.2500, Acceptance rate: 0.280
+Step 110/200: REJECTED, Current reward: 6.5312, Acceptance rate: 0.273
+Step 120/200: REJECTED, Current reward: 7.0938, Acceptance rate: 0.267
+Step 130/200: REJECTED, Current reward: 6.8750, Acceptance rate: 0.254
+Step 140/200: REJECTED, Current reward: 6.8750, Acceptance rate: 0.236
+Step 150/200: REJECTED, Current reward: 7.3438, Acceptance rate: 0.227
+Step 160/200: REJECTED, Current reward: 7.3438, Acceptance rate: 0.212
+Step 170/200: ACCEPTED, Current reward: 6.9062, Acceptance rate: 0.206
+Step 180/200: REJECTED, Current reward: 7.0000, Acceptance rate: 0.206
+Step 190/200: REJECTED, Current reward: 6.2500, Acceptance rate: 0.205
+Step 200/200: REJECTED, Current reward: 6.2500, Acceptance rate: 0.195
+MCMC completed. Final acceptance rate: 0.195
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -4.1562
+Step 10/200: REJECTED, Current reward: -4.4062, Acceptance rate: 0.500
+Step 20/200: ACCEPTED, Current reward: -2.2656, Acceptance rate: 0.750
+Step 30/200: ACCEPTED, Current reward: -6.4062, Acceptance rate: 0.667
+Step 40/200: REJECTED, Current reward: -0.3320, Acceptance rate: 0.550
+Step 50/200: ACCEPTED, Current reward: 0.1338, Acceptance rate: 0.480
+Step 60/200: REJECTED, Current reward: 0.1338, Acceptance rate: 0.417
+Step 70/200: REJECTED, Current reward: 0.2295, Acceptance rate: 0.386
+Step 80/200: REJECTED, Current reward: 0.1338, Acceptance rate: 0.350
+Step 90/200: REJECTED, Current reward: 0.1338, Acceptance rate: 0.322
+Step 100/200: REJECTED, Current reward: 0.2539, Acceptance rate: 0.310
+Step 110/200: REJECTED, Current reward: 0.4922, Acceptance rate: 0.300
+Step 120/200: REJECTED, Current reward: 0.9688, Acceptance rate: 0.283
+Step 130/200: REJECTED, Current reward: 1.2656, Acceptance rate: 0.285
+Step 140/200: REJECTED, Current reward: -0.0118, Acceptance rate: 0.279
+Step 150/200: ACCEPTED, Current reward: 0.0066, Acceptance rate: 0.273
+Step 160/200: REJECTED, Current reward: 0.0066, Acceptance rate: 0.256
+Step 170/200: ACCEPTED, Current reward: 1.2266, Acceptance rate: 0.253
+Step 180/200: ACCEPTED, Current reward: -0.0322, Acceptance rate: 0.256
+Step 190/200: REJECTED, Current reward: -0.4082, Acceptance rate: 0.258
+Step 200/200: REJECTED, Current reward: -0.4082, Acceptance rate: 0.255
+MCMC completed. Final acceptance rate: 0.255
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -0.3594
+Step 10/200: REJECTED, Current reward: 2.4531, Acceptance rate: 0.500
+Step 20/200: ACCEPTED, Current reward: 0.8086, Acceptance rate: 0.650
+Step 30/200: ACCEPTED, Current reward: 1.3203, Acceptance rate: 0.533
+Step 40/200: REJECTED, Current reward: 4.9688, Acceptance rate: 0.525
+Step 50/200: REJECTED, Current reward: 2.2656, Acceptance rate: 0.480
+Step 60/200: ACCEPTED, Current reward: 2.5625, Acceptance rate: 0.433
+Step 70/200: REJECTED, Current reward: 3.4531, Acceptance rate: 0.414
+Step 80/200: ACCEPTED, Current reward: -0.2754, Acceptance rate: 0.425
+Step 90/200: REJECTED, Current reward: 0.4434, Acceptance rate: 0.456
+Step 100/200: REJECTED, Current reward: 2.4844, Acceptance rate: 0.480
+Step 110/200: ACCEPTED, Current reward: 3.1250, Acceptance rate: 0.518
+Step 120/200: ACCEPTED, Current reward: 3.3125, Acceptance rate: 0.525
+Step 130/200: REJECTED, Current reward: 3.6562, Acceptance rate: 0.523
+Step 140/200: ACCEPTED, Current reward: 2.7188, Acceptance rate: 0.536
+Step 150/200: REJECTED, Current reward: 3.6719, Acceptance rate: 0.527
+Step 160/200: ACCEPTED, Current reward: 4.0938, Acceptance rate: 0.525
+Step 170/200: ACCEPTED, Current reward: 3.2188, Acceptance rate: 0.529
+Step 180/200: REJECTED, Current reward: 3.4531, Acceptance rate: 0.517
+Step 190/200: REJECTED, Current reward: 4.6250, Acceptance rate: 0.526
+Step 200/200: ACCEPTED, Current reward: 6.0938, Acceptance rate: 0.520
+MCMC completed. Final acceptance rate: 0.520
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 3.1719
+Step 10/200: REJECTED, Current reward: 4.1562, Acceptance rate: 0.600
+Step 20/200: REJECTED, Current reward: 6.1562, Acceptance rate: 0.450
+Step 30/200: ACCEPTED, Current reward: 4.1250, Acceptance rate: 0.467
+Step 40/200: REJECTED, Current reward: 5.9062, Acceptance rate: 0.425
+Step 50/200: REJECTED, Current reward: 5.6250, Acceptance rate: 0.440
+Step 60/200: REJECTED, Current reward: 5.2812, Acceptance rate: 0.450
+Step 70/200: REJECTED, Current reward: 5.8125, Acceptance rate: 0.471
+Step 80/200: ACCEPTED, Current reward: 5.8438, Acceptance rate: 0.512
+Step 90/200: REJECTED, Current reward: 5.2500, Acceptance rate: 0.500
+Step 100/200: REJECTED, Current reward: 5.6250, Acceptance rate: 0.500
+Step 110/200: REJECTED, Current reward: 5.2500, Acceptance rate: 0.491
+Step 120/200: REJECTED, Current reward: 6.0625, Acceptance rate: 0.492
+Step 130/200: REJECTED, Current reward: 5.8438, Acceptance rate: 0.469
+Step 140/200: ACCEPTED, Current reward: 6.2500, Acceptance rate: 0.471
+Step 150/200: ACCEPTED, Current reward: 5.0938, Acceptance rate: 0.467
+Step 160/200: REJECTED, Current reward: 6.3438, Acceptance rate: 0.463
+Step 170/200: REJECTED, Current reward: 5.8125, Acceptance rate: 0.482
+Step 180/200: REJECTED, Current reward: 6.0625, Acceptance rate: 0.467
+Step 190/200: REJECTED, Current reward: 5.2812, Acceptance rate: 0.463
+Step 200/200: ACCEPTED, Current reward: 6.0000, Acceptance rate: 0.480
+MCMC completed. Final acceptance rate: 0.480
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 2.3750
+Step 10/200: REJECTED, Current reward: 3.7969, Acceptance rate: 0.300
+Step 20/200: REJECTED, Current reward: 6.1875, Acceptance rate: 0.450
+Step 30/200: ACCEPTED, Current reward: 6.1250, Acceptance rate: 0.500
+Step 40/200: REJECTED, Current reward: 6.0625, Acceptance rate: 0.550
+Step 50/200: ACCEPTED, Current reward: 5.5312, Acceptance rate: 0.480
+Step 60/200: ACCEPTED, Current reward: 5.3125, Acceptance rate: 0.500
+Step 70/200: REJECTED, Current reward: 6.0938, Acceptance rate: 0.500
+Step 80/200: ACCEPTED, Current reward: 6.3125, Acceptance rate: 0.450
+Step 90/200: REJECTED, Current reward: 5.9375, Acceptance rate: 0.422
+Step 100/200: ACCEPTED, Current reward: 4.7812, Acceptance rate: 0.430
+Step 110/200: REJECTED, Current reward: 5.6875, Acceptance rate: 0.418
+Step 120/200: REJECTED, Current reward: 5.7500, Acceptance rate: 0.400
+Step 130/200: REJECTED, Current reward: 5.3750, Acceptance rate: 0.415
+Step 140/200: ACCEPTED, Current reward: 5.1562, Acceptance rate: 0.429
+Step 150/200: REJECTED, Current reward: 4.8438, Acceptance rate: 0.440
+Step 160/200: REJECTED, Current reward: 6.1250, Acceptance rate: 0.425
+Step 170/200: ACCEPTED, Current reward: 5.7812, Acceptance rate: 0.406
+Step 180/200: ACCEPTED, Current reward: 5.9375, Acceptance rate: 0.417
+Step 190/200: ACCEPTED, Current reward: 5.4688, Acceptance rate: 0.426
+Step 200/200: ACCEPTED, Current reward: 4.7500, Acceptance rate: 0.425
+MCMC completed. Final acceptance rate: 0.425
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -8.0625
+Step 10/200: ACCEPTED, Current reward: -5.0000, Acceptance rate: 0.900
+Step 20/200: ACCEPTED, Current reward: -6.0312, Acceptance rate: 0.750
+Step 30/200: ACCEPTED, Current reward: -7.2500, Acceptance rate: 0.733
+Step 40/200: ACCEPTED, Current reward: -6.2500, Acceptance rate: 0.775
+Step 50/200: ACCEPTED, Current reward: -7.7500, Acceptance rate: 0.800
+Step 60/200: ACCEPTED, Current reward: -7.7500, Acceptance rate: 0.817
+Step 70/200: ACCEPTED, Current reward: -7.7500, Acceptance rate: 0.800
+Step 80/200: ACCEPTED, Current reward: -6.7188, Acceptance rate: 0.800
+Step 90/200: ACCEPTED, Current reward: -6.7188, Acceptance rate: 0.789
+Step 100/200: REJECTED, Current reward: -6.1250, Acceptance rate: 0.760
+Step 110/200: ACCEPTED, Current reward: -7.6875, Acceptance rate: 0.782
+Step 120/200: ACCEPTED, Current reward: -7.2188, Acceptance rate: 0.783
+Step 130/200: ACCEPTED, Current reward: -6.6875, Acceptance rate: 0.785
+Step 140/200: ACCEPTED, Current reward: -6.9688, Acceptance rate: 0.793
+Step 150/200: REJECTED, Current reward: -7.2188, Acceptance rate: 0.787
+Step 160/200: ACCEPTED, Current reward: -8.0625, Acceptance rate: 0.781
+Step 170/200: REJECTED, Current reward: -7.9062, Acceptance rate: 0.776
+Step 180/200: ACCEPTED, Current reward: -6.6875, Acceptance rate: 0.789
+Step 190/200: ACCEPTED, Current reward: -6.1562, Acceptance rate: 0.789
+Step 200/200: ACCEPTED, Current reward: -7.9688, Acceptance rate: 0.785
+MCMC completed. Final acceptance rate: 0.785
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -5.4062
+Step 10/200: ACCEPTED, Current reward: -5.4062, Acceptance rate: 0.600
+Step 20/200: ACCEPTED, Current reward: -5.4062, Acceptance rate: 0.700
+Step 30/200: ACCEPTED, Current reward: -4.9375, Acceptance rate: 0.767
+Step 40/200: ACCEPTED, Current reward: -4.6562, Acceptance rate: 0.825
+Step 50/200: ACCEPTED, Current reward: -5.3125, Acceptance rate: 0.860
+Step 60/200: REJECTED, Current reward: -1.1953, Acceptance rate: 0.800
+Step 70/200: REJECTED, Current reward: -1.4062, Acceptance rate: 0.714
+Step 80/200: REJECTED, Current reward: -1.9609, Acceptance rate: 0.650
+Step 90/200: ACCEPTED, Current reward: -5.3438, Acceptance rate: 0.633
+Step 100/200: ACCEPTED, Current reward: -5.4688, Acceptance rate: 0.650
+Step 110/200: ACCEPTED, Current reward: -5.0000, Acceptance rate: 0.673
+Step 120/200: ACCEPTED, Current reward: -4.5000, Acceptance rate: 0.700
+Step 130/200: ACCEPTED, Current reward: -4.8750, Acceptance rate: 0.708
+Step 140/200: ACCEPTED, Current reward: -5.0625, Acceptance rate: 0.700
+Step 150/200: ACCEPTED, Current reward: -4.6250, Acceptance rate: 0.713
+Step 160/200: ACCEPTED, Current reward: 1.0469, Acceptance rate: 0.706
+Step 170/200: ACCEPTED, Current reward: -1.1719, Acceptance rate: 0.688
+Step 180/200: REJECTED, Current reward: -0.3105, Acceptance rate: 0.667
+Step 190/200: REJECTED, Current reward: -1.0156, Acceptance rate: 0.642
+Step 200/200: REJECTED, Current reward: -0.5508, Acceptance rate: 0.615
+MCMC completed. Final acceptance rate: 0.615
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -1.3203
+Step 10/200: REJECTED, Current reward: 4.3438, Acceptance rate: 0.500
+Step 20/200: REJECTED, Current reward: 5.1875, Acceptance rate: 0.450
+Step 30/200: REJECTED, Current reward: 5.6875, Acceptance rate: 0.333
+Step 40/200: REJECTED, Current reward: 6.0000, Acceptance rate: 0.300
+Step 50/200: REJECTED, Current reward: 6.4062, Acceptance rate: 0.280
+Step 60/200: REJECTED, Current reward: 6.4062, Acceptance rate: 0.233
+Step 70/200: REJECTED, Current reward: 5.7500, Acceptance rate: 0.214
+Step 80/200: ACCEPTED, Current reward: 6.2812, Acceptance rate: 0.200
+Step 90/200: REJECTED, Current reward: 6.2812, Acceptance rate: 0.178
+Step 100/200: ACCEPTED, Current reward: 3.4844, Acceptance rate: 0.210
+Step 110/200: ACCEPTED, Current reward: -2.3438, Acceptance rate: 0.218
+Step 120/200: ACCEPTED, Current reward: -0.0471, Acceptance rate: 0.242
+Step 130/200: REJECTED, Current reward: 6.0000, Acceptance rate: 0.254
+Step 140/200: REJECTED, Current reward: 6.2812, Acceptance rate: 0.257
+Step 150/200: REJECTED, Current reward: 5.6875, Acceptance rate: 0.253
+Step 160/200: REJECTED, Current reward: 5.5938, Acceptance rate: 0.250
+Step 170/200: REJECTED, Current reward: 7.4062, Acceptance rate: 0.253
+Step 180/200: REJECTED, Current reward: 7.4062, Acceptance rate: 0.239
+Step 190/200: REJECTED, Current reward: 7.3438, Acceptance rate: 0.232
+Step 200/200: REJECTED, Current reward: 7.3438, Acceptance rate: 0.220
+MCMC completed. Final acceptance rate: 0.220
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 1.8828
+Step 10/200: REJECTED, Current reward: 6.0938, Acceptance rate: 0.300
+Step 20/200: ACCEPTED, Current reward: 4.6250, Acceptance rate: 0.350
+Step 30/200: ACCEPTED, Current reward: 5.3125, Acceptance rate: 0.333
+Step 40/200: REJECTED, Current reward: 5.8125, Acceptance rate: 0.275
+Step 50/200: ACCEPTED, Current reward: 6.1250, Acceptance rate: 0.320
+Step 60/200: REJECTED, Current reward: 5.9062, Acceptance rate: 0.283
+Step 70/200: ACCEPTED, Current reward: 5.4375, Acceptance rate: 0.329
+Step 80/200: REJECTED, Current reward: 5.4062, Acceptance rate: 0.350
+Step 90/200: ACCEPTED, Current reward: 4.2500, Acceptance rate: 0.400
+Step 100/200: ACCEPTED, Current reward: 5.7188, Acceptance rate: 0.430
+Step 110/200: ACCEPTED, Current reward: 6.0938, Acceptance rate: 0.436
+Step 120/200: REJECTED, Current reward: 6.6562, Acceptance rate: 0.425
+Step 130/200: REJECTED, Current reward: 4.5312, Acceptance rate: 0.431
+Step 140/200: REJECTED, Current reward: 5.6875, Acceptance rate: 0.421
+Step 150/200: REJECTED, Current reward: 6.3750, Acceptance rate: 0.427
+Step 160/200: REJECTED, Current reward: 5.9375, Acceptance rate: 0.425
+Step 170/200: REJECTED, Current reward: 5.7188, Acceptance rate: 0.412
+Step 180/200: ACCEPTED, Current reward: 5.7500, Acceptance rate: 0.422
+Step 190/200: REJECTED, Current reward: 7.1250, Acceptance rate: 0.421
+Step 200/200: ACCEPTED, Current reward: 6.6875, Acceptance rate: 0.425
+MCMC completed. Final acceptance rate: 0.425
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -1.2969
+Step 10/200: REJECTED, Current reward: 5.3750, Acceptance rate: 0.300
+Step 20/200: REJECTED, Current reward: 6.0000, Acceptance rate: 0.200
+Step 30/200: REJECTED, Current reward: 6.0000, Acceptance rate: 0.133
+Step 40/200: ACCEPTED, Current reward: 6.0312, Acceptance rate: 0.125
+Step 50/200: REJECTED, Current reward: 5.6250, Acceptance rate: 0.120
+Step 60/200: ACCEPTED, Current reward: 5.6562, Acceptance rate: 0.133
+Step 70/200: REJECTED, Current reward: 5.6562, Acceptance rate: 0.114
+Step 80/200: REJECTED, Current reward: 5.9375, Acceptance rate: 0.113
+Step 90/200: ACCEPTED, Current reward: 4.6562, Acceptance rate: 0.156
+Step 100/200: REJECTED, Current reward: 5.7812, Acceptance rate: 0.160
+Step 110/200: REJECTED, Current reward: 5.7812, Acceptance rate: 0.145
+Step 120/200: REJECTED, Current reward: 5.7812, Acceptance rate: 0.133
+Step 130/200: REJECTED, Current reward: 6.3750, Acceptance rate: 0.138
+Step 140/200: REJECTED, Current reward: 5.0938, Acceptance rate: 0.150
+Step 150/200: REJECTED, Current reward: 5.6250, Acceptance rate: 0.153
+Step 160/200: REJECTED, Current reward: 6.0312, Acceptance rate: 0.169
+Step 170/200: REJECTED, Current reward: 6.0312, Acceptance rate: 0.159
+Step 180/200: REJECTED, Current reward: 5.0625, Acceptance rate: 0.167
+Step 190/200: ACCEPTED, Current reward: 5.9688, Acceptance rate: 0.168
+Step 200/200: REJECTED, Current reward: 5.1250, Acceptance rate: 0.180
+MCMC completed. Final acceptance rate: 0.180
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -7.5938
+Step 10/200: ACCEPTED, Current reward: -2.2969, Acceptance rate: 1.000
+Step 20/200: REJECTED, Current reward: -1.2891, Acceptance rate: 0.700
+Step 30/200: ACCEPTED, Current reward: 0.2695, Acceptance rate: 0.633
+Step 40/200: REJECTED, Current reward: 1.0000, Acceptance rate: 0.500
+Step 50/200: REJECTED, Current reward: -0.6211, Acceptance rate: 0.420
+Step 60/200: REJECTED, Current reward: -0.5352, Acceptance rate: 0.367
+Step 70/200: REJECTED, Current reward: -0.6211, Acceptance rate: 0.371
+Step 80/200: REJECTED, Current reward: -0.5781, Acceptance rate: 0.350
+Step 90/200: REJECTED, Current reward: -0.2363, Acceptance rate: 0.333
+Step 100/200: REJECTED, Current reward: -0.4316, Acceptance rate: 0.330
+Step 110/200: REJECTED, Current reward: -0.2363, Acceptance rate: 0.327
+Step 120/200: ACCEPTED, Current reward: 0.3535, Acceptance rate: 0.308
+Step 130/200: REJECTED, Current reward: 0.0742, Acceptance rate: 0.315
+Step 140/200: REJECTED, Current reward: 0.8555, Acceptance rate: 0.329
+Step 150/200: REJECTED, Current reward: 1.8594, Acceptance rate: 0.327
+Step 160/200: ACCEPTED, Current reward: 1.3750, Acceptance rate: 0.344
+Step 170/200: REJECTED, Current reward: 1.3750, Acceptance rate: 0.324
+Step 180/200: REJECTED, Current reward: 1.3750, Acceptance rate: 0.306
+Step 190/200: REJECTED, Current reward: 0.5742, Acceptance rate: 0.300
+Step 200/200: REJECTED, Current reward: 0.5742, Acceptance rate: 0.285
+MCMC completed. Final acceptance rate: 0.285
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -6.4688
+Step 10/200: REJECTED, Current reward: -3.5000, Acceptance rate: 0.500
+Step 20/200: REJECTED, Current reward: -1.3047, Acceptance rate: 0.450
+Step 30/200: REJECTED, Current reward: -1.6094, Acceptance rate: 0.367
+Step 40/200: REJECTED, Current reward: -1.6094, Acceptance rate: 0.275
+Step 50/200: REJECTED, Current reward: -2.0156, Acceptance rate: 0.280
+Step 60/200: REJECTED, Current reward: -1.8984, Acceptance rate: 0.250
+Step 70/200: REJECTED, Current reward: -2.0156, Acceptance rate: 0.243
+Step 80/200: ACCEPTED, Current reward: -1.0938, Acceptance rate: 0.225
+Step 90/200: REJECTED, Current reward: -0.8359, Acceptance rate: 0.222
+Step 100/200: REJECTED, Current reward: -0.8359, Acceptance rate: 0.200
+Step 110/200: REJECTED, Current reward: -1.0234, Acceptance rate: 0.191
+Step 120/200: REJECTED, Current reward: -0.9766, Acceptance rate: 0.192
+Step 130/200: REJECTED, Current reward: -0.9805, Acceptance rate: 0.192
+Step 140/200: REJECTED, Current reward: -0.9805, Acceptance rate: 0.179
+Step 150/200: REJECTED, Current reward: -0.9805, Acceptance rate: 0.173
+Step 160/200: ACCEPTED, Current reward: -0.8281, Acceptance rate: 0.175
+Step 170/200: REJECTED, Current reward: -0.8281, Acceptance rate: 0.165
+Step 180/200: REJECTED, Current reward: -1.2109, Acceptance rate: 0.161
+Step 190/200: REJECTED, Current reward: -1.2031, Acceptance rate: 0.158
+Step 200/200: REJECTED, Current reward: -1.0625, Acceptance rate: 0.160
+MCMC completed. Final acceptance rate: 0.160
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 4.1250
+Step 10/200: REJECTED, Current reward: 4.5938, Acceptance rate: 0.300
+Step 20/200: REJECTED, Current reward: 5.5938, Acceptance rate: 0.400
+Step 30/200: REJECTED, Current reward: 5.5938, Acceptance rate: 0.267
+Step 40/200: REJECTED, Current reward: 5.5938, Acceptance rate: 0.200
+Step 50/200: ACCEPTED, Current reward: 3.0469, Acceptance rate: 0.260
+Step 60/200: REJECTED, Current reward: 3.8750, Acceptance rate: 0.333
+Step 70/200: REJECTED, Current reward: 5.2812, Acceptance rate: 0.343
+Step 80/200: REJECTED, Current reward: 5.2812, Acceptance rate: 0.325
+Step 90/200: REJECTED, Current reward: 3.9688, Acceptance rate: 0.333
+Step 100/200: ACCEPTED, Current reward: 3.7031, Acceptance rate: 0.380
+Step 110/200: REJECTED, Current reward: 4.6875, Acceptance rate: 0.400
+Step 120/200: REJECTED, Current reward: 4.5000, Acceptance rate: 0.408
+Step 130/200: ACCEPTED, Current reward: 3.8281, Acceptance rate: 0.408
+Step 140/200: REJECTED, Current reward: 5.3438, Acceptance rate: 0.400
+Step 150/200: REJECTED, Current reward: 4.2812, Acceptance rate: 0.393
+Step 160/200: ACCEPTED, Current reward: 5.0938, Acceptance rate: 0.406
+Step 170/200: REJECTED, Current reward: 5.6562, Acceptance rate: 0.400
+Step 180/200: ACCEPTED, Current reward: 2.8125, Acceptance rate: 0.394
+Step 190/200: REJECTED, Current reward: 4.1250, Acceptance rate: 0.405
+Step 200/200: ACCEPTED, Current reward: 4.7188, Acceptance rate: 0.405
+MCMC completed. Final acceptance rate: 0.405
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 3.4688
+Step 10/200: REJECTED, Current reward: 5.5000, Acceptance rate: 0.400
+Step 20/200: ACCEPTED, Current reward: 4.6875, Acceptance rate: 0.400
+Step 30/200: ACCEPTED, Current reward: 3.8438, Acceptance rate: 0.533
+Step 40/200: REJECTED, Current reward: 5.1875, Acceptance rate: 0.500
+Step 50/200: REJECTED, Current reward: 3.7812, Acceptance rate: 0.500
+Step 60/200: REJECTED, Current reward: 4.6875, Acceptance rate: 0.483
+Step 70/200: REJECTED, Current reward: 4.1875, Acceptance rate: 0.471
+Step 80/200: REJECTED, Current reward: 4.7812, Acceptance rate: 0.425
+Step 90/200: ACCEPTED, Current reward: 4.5938, Acceptance rate: 0.411
+Step 100/200: REJECTED, Current reward: 5.3750, Acceptance rate: 0.420
+Step 110/200: ACCEPTED, Current reward: 4.5938, Acceptance rate: 0.427
+Step 120/200: ACCEPTED, Current reward: 4.6250, Acceptance rate: 0.467
+Step 130/200: REJECTED, Current reward: 3.9375, Acceptance rate: 0.462
+Step 140/200: ACCEPTED, Current reward: 3.4844, Acceptance rate: 0.464
+Step 150/200: REJECTED, Current reward: 4.3125, Acceptance rate: 0.480
+Step 160/200: REJECTED, Current reward: 4.0938, Acceptance rate: 0.481
+Step 170/200: ACCEPTED, Current reward: 3.7188, Acceptance rate: 0.488
+Step 180/200: ACCEPTED, Current reward: 4.0312, Acceptance rate: 0.494
+Step 190/200: ACCEPTED, Current reward: 3.9844, Acceptance rate: 0.500
+Step 200/200: REJECTED, Current reward: 4.6875, Acceptance rate: 0.485
+MCMC completed. Final acceptance rate: 0.485
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -6.1875
+Step 10/200: ACCEPTED, Current reward: -6.5625, Acceptance rate: 0.900
+Step 20/200: ACCEPTED, Current reward: -6.4688, Acceptance rate: 0.850
+Step 30/200: ACCEPTED, Current reward: -5.8750, Acceptance rate: 0.900
+Step 40/200: REJECTED, Current reward: -5.5312, Acceptance rate: 0.825
+Step 50/200: ACCEPTED, Current reward: -5.5312, Acceptance rate: 0.840
+Step 60/200: ACCEPTED, Current reward: -4.7188, Acceptance rate: 0.867
+Step 70/200: ACCEPTED, Current reward: -6.0000, Acceptance rate: 0.843
+Step 80/200: ACCEPTED, Current reward: -6.2188, Acceptance rate: 0.863
+Step 90/200: REJECTED, Current reward: -5.4375, Acceptance rate: 0.867
+Step 100/200: ACCEPTED, Current reward: -6.0625, Acceptance rate: 0.880
+Step 110/200: REJECTED, Current reward: -6.1250, Acceptance rate: 0.864
+Step 120/200: ACCEPTED, Current reward: -6.1250, Acceptance rate: 0.875
+Step 130/200: ACCEPTED, Current reward: -5.5000, Acceptance rate: 0.869
+Step 140/200: ACCEPTED, Current reward: -5.9062, Acceptance rate: 0.850
+Step 150/200: REJECTED, Current reward: -4.9375, Acceptance rate: 0.827
+Step 160/200: ACCEPTED, Current reward: -5.8438, Acceptance rate: 0.831
+Step 170/200: REJECTED, Current reward: -4.9375, Acceptance rate: 0.829
+Step 180/200: REJECTED, Current reward: -5.5000, Acceptance rate: 0.811
+Step 190/200: ACCEPTED, Current reward: -4.1250, Acceptance rate: 0.811
+Step 200/200: ACCEPTED, Current reward: -5.5938, Acceptance rate: 0.815
+MCMC completed. Final acceptance rate: 0.815
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -6.0312
+Step 10/200: REJECTED, Current reward: -2.8125, Acceptance rate: 0.600
+Step 20/200: ACCEPTED, Current reward: -4.0625, Acceptance rate: 0.600
+Step 30/200: REJECTED, Current reward: -2.6094, Acceptance rate: 0.533
+Step 40/200: REJECTED, Current reward: 5.4062, Acceptance rate: 0.425
+Step 50/200: REJECTED, Current reward: 5.4062, Acceptance rate: 0.340
+Step 60/200: REJECTED, Current reward: 5.4062, Acceptance rate: 0.283
+Step 70/200: REJECTED, Current reward: 3.8594, Acceptance rate: 0.257
+Step 80/200: REJECTED, Current reward: 5.9062, Acceptance rate: 0.237
+Step 90/200: REJECTED, Current reward: 5.8438, Acceptance rate: 0.244
+Step 100/200: REJECTED, Current reward: 5.8438, Acceptance rate: 0.220
+Step 110/200: REJECTED, Current reward: 5.9062, Acceptance rate: 0.209
+Step 120/200: REJECTED, Current reward: 5.9062, Acceptance rate: 0.192
+Step 130/200: REJECTED, Current reward: 5.9062, Acceptance rate: 0.177
+Step 140/200: REJECTED, Current reward: 5.9062, Acceptance rate: 0.164
+Step 150/200: ACCEPTED, Current reward: -2.3906, Acceptance rate: 0.173
+Step 160/200: REJECTED, Current reward: -4.1875, Acceptance rate: 0.181
+Step 170/200: REJECTED, Current reward: -4.0000, Acceptance rate: 0.182
+Step 180/200: REJECTED, Current reward: -2.2500, Acceptance rate: 0.206
+Step 190/200: REJECTED, Current reward: -2.2500, Acceptance rate: 0.195
+Step 200/200: ACCEPTED, Current reward: -2.5625, Acceptance rate: 0.200
+MCMC completed. Final acceptance rate: 0.200
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -7.9688
+Step 10/200: ACCEPTED, Current reward: -5.1250, Acceptance rate: 1.000
+Step 20/200: ACCEPTED, Current reward: -4.1875, Acceptance rate: 0.950
+Step 30/200: REJECTED, Current reward: -4.7812, Acceptance rate: 0.900
+Step 40/200: ACCEPTED, Current reward: -4.2500, Acceptance rate: 0.900
+Step 50/200: ACCEPTED, Current reward: -1.8594, Acceptance rate: 0.880
+Step 60/200: ACCEPTED, Current reward: -2.0156, Acceptance rate: 0.867
+Step 70/200: ACCEPTED, Current reward: -0.7656, Acceptance rate: 0.857
+Step 80/200: ACCEPTED, Current reward: -0.0157, Acceptance rate: 0.850
+Step 90/200: ACCEPTED, Current reward: -2.6875, Acceptance rate: 0.822
+Step 100/200: ACCEPTED, Current reward: -0.6211, Acceptance rate: 0.800
+Step 110/200: ACCEPTED, Current reward: -1.5156, Acceptance rate: 0.800
+Step 120/200: REJECTED, Current reward: -1.0703, Acceptance rate: 0.783
+Step 130/200: ACCEPTED, Current reward: -2.1875, Acceptance rate: 0.785
+Step 140/200: ACCEPTED, Current reward: -1.5078, Acceptance rate: 0.779
+Step 150/200: REJECTED, Current reward: -0.3125, Acceptance rate: 0.747
+Step 160/200: ACCEPTED, Current reward: -1.3281, Acceptance rate: 0.731
+Step 170/200: REJECTED, Current reward: -0.2178, Acceptance rate: 0.729
+Step 180/200: ACCEPTED, Current reward: -1.3047, Acceptance rate: 0.733
+Step 190/200: ACCEPTED, Current reward: -0.1377, Acceptance rate: 0.711
+Step 200/200: REJECTED, Current reward: 1.6953, Acceptance rate: 0.700
+MCMC completed. Final acceptance rate: 0.700
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 3.0156
+Step 10/200: REJECTED, Current reward: 4.0312, Acceptance rate: 0.200
+Step 20/200: REJECTED, Current reward: 4.6875, Acceptance rate: 0.200
+Step 30/200: ACCEPTED, Current reward: 5.7500, Acceptance rate: 0.200
+Step 40/200: ACCEPTED, Current reward: 5.1875, Acceptance rate: 0.275
+Step 50/200: REJECTED, Current reward: 5.7500, Acceptance rate: 0.320
+Step 60/200: REJECTED, Current reward: 5.5938, Acceptance rate: 0.300
+Step 70/200: REJECTED, Current reward: 6.1250, Acceptance rate: 0.314
+Step 80/200: REJECTED, Current reward: 6.1250, Acceptance rate: 0.275
+Step 90/200: REJECTED, Current reward: 5.8750, Acceptance rate: 0.256
+Step 100/200: REJECTED, Current reward: 6.4375, Acceptance rate: 0.240
+Step 110/200: REJECTED, Current reward: 5.5625, Acceptance rate: 0.227
+Step 120/200: REJECTED, Current reward: 6.2500, Acceptance rate: 0.225
+Step 130/200: REJECTED, Current reward: 6.2500, Acceptance rate: 0.208
+Step 140/200: REJECTED, Current reward: 5.3438, Acceptance rate: 0.229
+Step 150/200: REJECTED, Current reward: 5.3438, Acceptance rate: 0.227
+Step 160/200: REJECTED, Current reward: 4.7812, Acceptance rate: 0.219
+Step 170/200: ACCEPTED, Current reward: 4.8438, Acceptance rate: 0.241
+Step 180/200: REJECTED, Current reward: 5.6562, Acceptance rate: 0.244
+Step 190/200: ACCEPTED, Current reward: 5.2500, Acceptance rate: 0.258
+Step 200/200: REJECTED, Current reward: 4.5625, Acceptance rate: 0.255
+MCMC completed. Final acceptance rate: 0.255
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -7.5938
+Step 10/200: ACCEPTED, Current reward: -5.3125, Acceptance rate: 0.900
+Step 20/200: REJECTED, Current reward: -1.3672, Acceptance rate: 0.550
+Step 30/200: REJECTED, Current reward: -2.7656, Acceptance rate: 0.600
+Step 40/200: ACCEPTED, Current reward: -3.2969, Acceptance rate: 0.500
+Step 50/200: REJECTED, Current reward: -0.0238, Acceptance rate: 0.520
+Step 60/200: REJECTED, Current reward: -0.5234, Acceptance rate: 0.517
+Step 70/200: REJECTED, Current reward: 0.0903, Acceptance rate: 0.486
+Step 80/200: REJECTED, Current reward: 0.0542, Acceptance rate: 0.438
+Step 90/200: REJECTED, Current reward: -0.1201, Acceptance rate: 0.422
+Step 100/200: REJECTED, Current reward: 0.3984, Acceptance rate: 0.420
+Step 110/200: ACCEPTED, Current reward: 0.3984, Acceptance rate: 0.391
+Step 120/200: REJECTED, Current reward: 0.3984, Acceptance rate: 0.358
+Step 130/200: REJECTED, Current reward: -1.2656, Acceptance rate: 0.346
+Step 140/200: REJECTED, Current reward: -3.5625, Acceptance rate: 0.350
+Step 150/200: REJECTED, Current reward: -4.0625, Acceptance rate: 0.340
+Step 160/200: ACCEPTED, Current reward: -2.6250, Acceptance rate: 0.350
+Step 170/200: ACCEPTED, Current reward: -2.2812, Acceptance rate: 0.359
+Step 180/200: REJECTED, Current reward: -0.7812, Acceptance rate: 0.344
+Step 190/200: ACCEPTED, Current reward: 0.7969, Acceptance rate: 0.347
+Step 200/200: REJECTED, Current reward: -0.1494, Acceptance rate: 0.335
+MCMC completed. Final acceptance rate: 0.335
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 0.5820
+Step 10/200: REJECTED, Current reward: 4.2188, Acceptance rate: 0.500
+Step 20/200: REJECTED, Current reward: 3.7969, Acceptance rate: 0.500
+Step 30/200: REJECTED, Current reward: 4.3125, Acceptance rate: 0.400
+Step 40/200: ACCEPTED, Current reward: 4.0312, Acceptance rate: 0.450
+Step 50/200: REJECTED, Current reward: 5.1875, Acceptance rate: 0.400
+Step 60/200: REJECTED, Current reward: 4.4062, Acceptance rate: 0.417
+Step 70/200: REJECTED, Current reward: 4.2188, Acceptance rate: 0.429
+Step 80/200: ACCEPTED, Current reward: 5.1250, Acceptance rate: 0.438
+Step 90/200: REJECTED, Current reward: 5.5312, Acceptance rate: 0.411
+Step 100/200: ACCEPTED, Current reward: 3.8125, Acceptance rate: 0.420
+Step 110/200: ACCEPTED, Current reward: 3.7656, Acceptance rate: 0.427
+Step 120/200: REJECTED, Current reward: 4.7812, Acceptance rate: 0.408
+Step 130/200: ACCEPTED, Current reward: 5.3125, Acceptance rate: 0.400
+Step 140/200: REJECTED, Current reward: 4.5938, Acceptance rate: 0.393
+Step 150/200: ACCEPTED, Current reward: -0.4902, Acceptance rate: 0.400
+Step 160/200: ACCEPTED, Current reward: 2.2188, Acceptance rate: 0.419
+Step 170/200: ACCEPTED, Current reward: 4.4375, Acceptance rate: 0.429
+Step 180/200: REJECTED, Current reward: 4.2812, Acceptance rate: 0.417
+Step 190/200: ACCEPTED, Current reward: 2.8438, Acceptance rate: 0.432
+Step 200/200: REJECTED, Current reward: 5.0312, Acceptance rate: 0.420
+MCMC completed. Final acceptance rate: 0.420
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -4.3438
+Step 10/200: REJECTED, Current reward: -0.4766, Acceptance rate: 0.500
+Step 20/200: REJECTED, Current reward: -1.9062, Acceptance rate: 0.450
+Step 30/200: ACCEPTED, Current reward: -0.2891, Acceptance rate: 0.433
+Step 40/200: REJECTED, Current reward: -0.2314, Acceptance rate: 0.350
+Step 50/200: ACCEPTED, Current reward: -2.6250, Acceptance rate: 0.400
+Step 60/200: REJECTED, Current reward: 0.0077, Acceptance rate: 0.367
+Step 70/200: REJECTED, Current reward: 0.5078, Acceptance rate: 0.343
+Step 80/200: REJECTED, Current reward: 0.1504, Acceptance rate: 0.338
+Step 90/200: REJECTED, Current reward: -0.4922, Acceptance rate: 0.322
+Step 100/200: REJECTED, Current reward: -0.1279, Acceptance rate: 0.320
+Step 110/200: ACCEPTED, Current reward: 0.0344, Acceptance rate: 0.327
+Step 120/200: ACCEPTED, Current reward: 2.2969, Acceptance rate: 0.333
+Step 130/200: ACCEPTED, Current reward: 0.0564, Acceptance rate: 0.362
+Step 140/200: REJECTED, Current reward: 5.6562, Acceptance rate: 0.364
+Step 150/200: ACCEPTED, Current reward: 2.9219, Acceptance rate: 0.353
+Step 160/200: ACCEPTED, Current reward: 3.0781, Acceptance rate: 0.362
+Step 170/200: ACCEPTED, Current reward: 5.7188, Acceptance rate: 0.359
+Step 180/200: REJECTED, Current reward: 5.7188, Acceptance rate: 0.339
+Step 190/200: REJECTED, Current reward: 3.8750, Acceptance rate: 0.326
+Step 200/200: REJECTED, Current reward: 4.2812, Acceptance rate: 0.335
+MCMC completed. Final acceptance rate: 0.335
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: 1.7188
+Step 10/200: ACCEPTED, Current reward: 5.5625, Acceptance rate: 0.900
+Step 20/200: ACCEPTED, Current reward: 4.2812, Acceptance rate: 0.750
+Step 30/200: REJECTED, Current reward: 5.1875, Acceptance rate: 0.600
+Step 40/200: ACCEPTED, Current reward: 4.1562, Acceptance rate: 0.600
+Step 50/200: REJECTED, Current reward: 5.9375, Acceptance rate: 0.540
+Step 60/200: REJECTED, Current reward: 5.4375, Acceptance rate: 0.467
+Step 70/200: ACCEPTED, Current reward: 4.6250, Acceptance rate: 0.457
+Step 80/200: ACCEPTED, Current reward: 4.4062, Acceptance rate: 0.487
+Step 90/200: ACCEPTED, Current reward: 4.6875, Acceptance rate: 0.489
+Step 100/200: ACCEPTED, Current reward: 3.2656, Acceptance rate: 0.480
+Step 110/200: REJECTED, Current reward: 5.4062, Acceptance rate: 0.473
+Step 120/200: ACCEPTED, Current reward: 5.0938, Acceptance rate: 0.467
+Step 130/200: REJECTED, Current reward: 4.5938, Acceptance rate: 0.454
+Step 140/200: REJECTED, Current reward: 6.2188, Acceptance rate: 0.436
+Step 150/200: REJECTED, Current reward: 5.2500, Acceptance rate: 0.420
+Step 160/200: REJECTED, Current reward: 5.3438, Acceptance rate: 0.406
+Step 170/200: REJECTED, Current reward: 5.0000, Acceptance rate: 0.418
+Step 180/200: REJECTED, Current reward: 4.5625, Acceptance rate: 0.422
+Step 190/200: REJECTED, Current reward: 5.7188, Acceptance rate: 0.416
+Step 200/200: REJECTED, Current reward: 4.9688, Acceptance rate: 0.410
+MCMC completed. Final acceptance rate: 0.410
+Selecting best response from 201 candidates using MBR ROUGE-L...
+Generating initial response...
+Starting MCMC with initial reward: -6.1562
+Step 10/200: REJECTED, Current reward: -4.6250, Acceptance rate: 0.800
+Step 20/200: ACCEPTED, Current reward: -5.7812, Acceptance rate: 0.750
+Step 30/200: REJECTED, Current reward: -2.5625, Acceptance rate: 0.633
+Step 40/200: REJECTED, Current reward: -5.9062, Acceptance rate: 0.550
+Step 50/200: ACCEPTED, Current reward: 0.1465, Acceptance rate: 0.520
+Step 60/200: REJECTED, Current reward: 0.3809, Acceptance rate: 0.450
+Step 70/200: REJECTED, Current reward: 1.1250, Acceptance rate: 0.400
+Step 80/200: REJECTED, Current reward: 1.1172, Acceptance rate: 0.362
+Step 90/200: REJECTED, Current reward: 1.1172, Acceptance rate: 0.322
+Step 100/200: REJECTED, Current reward: 0.6367, Acceptance rate: 0.300
+Step 110/200: REJECTED, Current reward: 0.6719, Acceptance rate: 0.282
+Step 120/200: ACCEPTED, Current reward: -6.8750, Acceptance rate: 0.292
+Step 130/200: ACCEPTED, Current reward: -5.1250, Acceptance rate: 0.323
+Step 140/200: REJECTED, Current reward: -4.9062, Acceptance rate: 0.329
+Step 150/200: ACCEPTED, Current reward: -5.6875, Acceptance rate: 0.327
+Step 160/200: REJECTED, Current reward: -5.9688, Acceptance rate: 0.338
+Step 170/200: REJECTED, Current reward: -5.7500, Acceptance rate: 0.359
+Step 180/200: REJECTED, Current reward: -5.5000, Acceptance rate: 0.372
+Step 190/200: ACCEPTED, Current reward: -3.9219, Acceptance rate: 0.379
+Step 200/200: ACCEPTED, Current reward: -4.5625, Acceptance rate: 0.380
+MCMC completed. Final acceptance rate: 0.380
+Selecting best response from 201 candidates using MBR ROUGE-L...

@@ -1,0 +1,88 @@
+_wandb:
+    value:
+        cli_version: 0.21.0
+        e:
+            dn4wgcezq83whosalz5877mq7awdcah4:
+                args:
+                    - --name
+                    - user1
+                    - --num_expectation_samples
+                    - "16"
+                    - --sample_size
+                    - "200"
+                    - --num_epochs
+                    - "1000"
+                    - --use_wandb
+                codePath: utils/get_user_p_mle.py
+                codePathLocal: get_user_p_mle.py
+                cpu_count: 128
+                cpu_count_logical: 128
+                cudaVersion: "12.7"
+                disk:
+                    /:
+                        total: "811517902848"
+                        used: "8990953472"
+                email: devin.t.le@outlook.com
+                executable: /gscratch/ark/devinl6/envs/align/bin/python
+                git:
+                    commit: 12b46baba5ff47e833dfb861750228ff3c3c524c
+                    remote: https://github.com/NotDevinLe/preference-decoding.git
+                gpu: NVIDIA L40S
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ada
+                      cudaCores: 18176
+                      memoryTotal: "48305799168"
+                      name: NVIDIA L40S
+                      uuid: GPU-aa167341-06b0-e12f-fc31-845f870bbe06
+                host: g3100
+                memory:
+                    total: "1623035809792"
+                os: Linux-4.18.0-513.18.1.el8_9.x86_64-x86_64-with-glibc2.28
+                program: /mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/get_user_p_mle.py
+                python: CPython 3.10.18
+                root: /mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils
+                slurm:
+                    job_id: "27904276"
+                startedAt: "2025-08-04T21:36:32.175137Z"
+                writerId: dn4wgcezq83whosalz5877mq7awdcah4
+        m: []
+        python_version: 3.10.18
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 30
+                - 41
+                - 49
+                - 53
+                - 71
+                - 95
+                - 105
+            "2":
+                - 1
+                - 5
+                - 11
+                - 30
+                - 41
+                - 49
+                - 53
+                - 71
+                - 95
+                - 105
+            "3":
+                - 16
+            "4": 3.10.18
+            "5": 0.21.0
+            "6": 4.52.4
+            "12": 0.21.0
+            "13": linux-x86_64
+initial_p_norm:
+    value: 6.522408485412598
+num_attributes:
+    value: 26
+num_data_points:
+    value: 200
+num_expectation_samples:
+    value: 16

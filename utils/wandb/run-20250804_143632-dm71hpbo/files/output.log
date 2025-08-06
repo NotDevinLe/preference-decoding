@@ -1,0 +1,143 @@
+\nStarting MLE training...
+Training parameters:
+  Epochs: 1000
+  Learning rate: 0.01
+  Beta: 1.0
+  MC samples: 10
+Epoch 0
+  Avg Log-Likelihood: -2.7486
+  Negative LL Loss: 2.7486
+  Gradient norm: 0.1755
+  P norm: 6.5224
+  Current p: [ 0.88133407 -0.9598501  -1.1085083  -1.1212454   1.5376655   0.02289673
+  0.40155306 -0.28886184  3.1070168  -0.47638407  0.04130259  0.8915284
+ -2.1548584  -0.24416783 -1.7058762  -0.3469378  -0.6331251  -0.97434205
+  0.85441244 -2.1534429  -0.77489054  1.1542112   1.0035774   2.2299898
+  0.53823674 -1.5548506 ]
+Epoch 100
+  Avg Log-Likelihood: -2.7190
+  Negative LL Loss: 2.7190
+  Gradient norm: 0.1649
+  P norm: 6.5228
+  Current p: [ 0.93279463 -0.9628826  -1.097762   -1.106581    1.55423     0.02565097
+  0.43596    -0.29013816  3.1189156  -0.4750053   0.06988342  0.9004784
+ -2.1120825  -0.1868639  -1.7024994  -0.33570203 -0.6193119  -0.955445
+  0.8694868  -2.1408417  -0.7285789   1.2735742   1.0001676   2.2170403
+  0.5633147  -1.5273275 ]
+Epoch 200
+  Avg Log-Likelihood: -2.6925
+  Negative LL Loss: 2.6925
+  Gradient norm: 0.1686
+  P norm: 6.5275
+  Current p: [ 0.98241013 -0.9649419  -1.0886632  -1.0928138   1.5698326   0.02826315
+  0.46623635 -0.29181948  3.1305223  -0.47457802  0.09689864  0.9085462
+ -2.070545   -0.1323905  -1.6994923  -0.3251437  -0.60681933 -0.9374681
+  0.8832487  -2.128969   -0.68427044  1.3864654   0.9969249   2.204519
+  0.5875328  -1.5023654 ]
+Epoch 300
+  Avg Log-Likelihood: -2.6678
+  Negative LL Loss: 2.6678
+  Gradient norm: 0.1582
+  P norm: 6.5362
+  Current p: [ 1.0315173  -0.9669578  -1.0803083  -1.079399    1.5847747   0.030234
+  0.4940732  -0.29384857  3.1419356  -0.47518393  0.12313916  0.9162675
+ -2.0309253  -0.08027733 -1.6966051  -0.3148798  -0.59509087 -0.9196145
+  0.8965646  -2.117571   -0.6419812   1.4951202   0.99340147  2.191778
+  0.61120343 -1.4787502 ]
+Epoch 400
+  Avg Log-Likelihood: -2.6448
+  Negative LL Loss: 2.6448
+  Gradient norm: 0.1544
+  P norm: 6.5483
+  Current p: [ 1.0802201  -0.9687592  -1.0723909  -1.06644     1.5992383   0.03192444
+  0.5195854  -0.29612     3.1530995  -0.47659907  0.14867106  0.92378354
+ -1.9929438  -0.02996375 -1.6938882  -0.30475423 -0.5839746  -0.901768
+  0.9095351  -2.1066933  -0.60096467  1.5997999   0.98977107  2.1790535
+  0.6344868  -1.4562048 ]
+Epoch 500
+  Avg Log-Likelihood: -2.6230
+  Negative LL Loss: 2.6230
+  Gradient norm: 0.1490
+  P norm: 6.5637
+  Current p: [ 1.1284628  -0.97069126 -1.065018   -1.0537338   1.6132863   0.03344346
+  0.54354995 -0.2985297   3.1640782  -0.4786531   0.1737514   0.9311055
+ -1.956605    0.01872462 -1.6912483  -0.29483408 -0.5732615  -0.88413256
+  0.9223296  -2.0960402  -0.5613309   1.7011988   0.98610353  2.16657
+  0.65760076 -1.4342799 ]
+Epoch 600
+  Avg Log-Likelihood: -2.6024
+  Negative LL Loss: 2.6024
+  Gradient norm: 0.1449
+  P norm: 6.5820
+  Current p: [ 1.1766398  -0.97236    -1.0580276  -1.0411671   1.6270906   0.03468115
+  0.56593424 -0.30112052  3.1749728  -0.48130482  0.19843839  0.9383111
+ -1.9217046   0.06586038 -1.6887021  -0.28500646 -0.5629722  -0.8664318
+  0.93503284 -2.0856056  -0.52272904  1.7998577   0.9822392   2.153824
+  0.6804974  -1.4129099 ]
+Epoch 700
+  Avg Log-Likelihood: -2.5829
+  Negative LL Loss: 2.5829
+  Gradient norm: 0.1363
+  P norm: 6.6032
+  Current p: [ 1.224522   -0.9744592  -1.0514343  -1.0289845   1.6403464   0.03552188
+  0.5866331  -0.30380574  3.1856534  -0.48468596  0.2225561   0.9453207
+ -1.8885301   0.1109671  -1.6861681  -0.2754477  -0.55316716 -0.8488053
+  0.9474687  -2.0755055  -0.4857225   1.8957747   0.97824514  2.1410773
+  0.7030054  -1.3923316 ]
+Epoch 800
+  Avg Log-Likelihood: -2.5644
+  Negative LL Loss: 2.5644
+  Gradient norm: 0.1398
+  P norm: 6.6268
+  Current p: [ 1.2721604  -0.9762199  -1.0451179  -1.0169933   1.653358    0.0362087
+  0.6062424  -0.30667958  3.196224   -0.4884557   0.24630949  0.95216525
+ -1.8561851   0.15519014 -1.6837991  -0.2659218  -0.5437524  -0.8313322
+  0.95959395 -2.0656788  -0.4494919   1.9891814   0.9741684   2.1284847
+  0.7252647  -1.3723924 ]
+Epoch 900
+  Avg Log-Likelihood: -2.5466
+  Negative LL Loss: 2.5466
+  Gradient norm: 0.1352
+  P norm: 6.6527
+  Current p: [ 1.3196154  -0.97820556 -1.0391301  -1.0051818   1.6660832   0.03662935
+  0.62470615 -0.30967772  3.2067418  -0.4928904   0.26975125  0.9589018
+ -1.8250871   0.19781764 -1.681434   -0.25652185 -0.5346875  -0.81363994
+  0.97180736 -2.055997   -0.41445506  2.0803084   0.9699472   2.1157084
+  0.7473899  -1.3527688 ]
+\nSaving p vector to: ../results/mle/user1_p_vector_n16_size200.json
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/get_user_p_mle.py", line 143, in <module>
+    main()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/get_user_p_mle.py", line 114, in main
+    mle_model.save_results(save_path)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/mle.py", line 264, in save_results
+    wandb.save(save_path)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 443, in wrapper
+    return func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 2079, in save
+    return self._save(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 2094, in _save
+    raise ValueError("Glob may not walk above the base path")
+ValueError: Glob may not walk above the base path
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/get_user_p_mle.py", line 143, in <module>
+    main()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/get_user_p_mle.py", line 114, in main
+    mle_model.save_results(save_path)
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/mle.py", line 264, in save_results
+    wandb.save(save_path)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 443, in wrapper
+    return func(self, *args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 2079, in save
+    return self._save(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 2094, in _save
+    raise ValueError("Glob may not walk above the base path")
+ValueError: Glob may not walk above the base path

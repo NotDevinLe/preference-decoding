@@ -11,42 +11,24 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 try:
     from utils.drift import get_scores
-    from utils.attribute_prompts import attribute_prompts
+    from utils.attribute_prompts import attribute_prompts, base_prompt
 except ImportError:
     sys.path.append('..')
     from drift import get_scores
-    from attribute_prompts import attribute_prompts
+    from attribute_prompts import attribute_prompts, base_prompt
 
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, default="user1")
-parser.add_argument("--gold_cache", type=str, default="../../results/gold_scores.jsonl")
-parser.add_argument("--p_path", type=str, default="../../results/preference/user1_p.json")
+parser.add_argument("--gold_model_path", type=str, required=True, help="Path to gold reward model")
 args = parser.parse_args()
 
 # Load bon outputs
-data_path = "../../data/bon_200.json"
+data_path = "../../data/bon.json"
 with open(data_path, "r") as f:
     bon_data = json.load(f)
 
 print(f"Loaded {len(bon_data)} prompts from {data_path}")
-
-# Load gold reward cache
-gold_cache = {}
-with open(args.gold_cache, "r") as f:
-    for line in f:
-        entry = json.loads(line)
-        gold_cache[entry["prompt"]] = entry
-
-print(f"Loaded gold reward cache for {len(gold_cache)} prompts")
-
-# Filter BON data to only include prompts with gold scores
-bon_data_filtered = [item for item in bon_data if item["prompt"] in gold_cache]
-print(f"Processing {len(bon_data_filtered)} prompts (after filtering for gold cache coverage)")
-
-if len(bon_data_filtered) == 0:
-    print("ERROR: No prompts overlap between BON data and gold cache!")
-    sys.exit(1)
 
 # Setup device and model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -62,32 +44,105 @@ tokenizer.pad_token = tokenizer.eos_token
 model = LLM(
     model=base_model_path,
     tensor_parallel_size=1,
-    gpu_memory_utilization=0.7,
+    gpu_memory_utilization=0.5,
     max_model_len=8192,
     dtype="bfloat16",
     trust_remote_code=True,
 )
 
-# Load p vector from JSON file
-with open(args.p_path, "r") as f:
-    data = json.load(f)
+# Load gold reward model
+print(f"Loading gold reward model from: {args.gold_model_path}")
+from llamafactory.model import load_model, load_tokenizer
+from llamafactory.hparams import ModelArguments, FinetuningArguments
 
-p = None
-if isinstance(data, list):
-    # It's a list of entries
-    for entry in data:
-        if entry.get('n', entry.get('sample_size')) == 200:
-            p = np.array(entry["p"])
-            break
-else:
-    # It's a single entry
-    if data.get('n', data.get('sample_size')) == 200:
-        p = np.array(data["p"])
+gold_model_args = ModelArguments(
+    model_name_or_path="meta-llama/Meta-Llama-3.1-8B-Instruct" ,
+    adapter_name_or_path=args.gold_model_path,
+    trust_remote_code=True,
+    use_fast_tokenizer=True,
+)
+gold_finetuning_args = FinetuningArguments(stage="rm")
 
-if p is None:
-    raise ValueError(f"No p vector found for user {args.name} with n=200 in {args.p_path}")
+gold_tokenizer_module = load_tokenizer(gold_model_args)
+gold_tokenizer = gold_tokenizer_module["tokenizer"]
+if gold_tokenizer.pad_token is None:
+    gold_tokenizer.pad_token = gold_tokenizer.eos_token
 
-print(f"Loaded p vector for user {args.name}")
+gold_model = load_model(
+    tokenizer=gold_tokenizer,
+    model_args=gold_model_args,
+    finetuning_args=gold_finetuning_args,
+    is_trainable=False,
+    add_valuehead=True
+)
+gold_model.to(device)
+gold_model.eval()
+
+def format_llama3_prompt(prompt: str, response: str) -> str:
+    return (
+        "<|start_header_id|>user<|end_header_id|>\n\n" + prompt.strip() + "<|eot_id|>"
+        "<|start_header_id|>assistant<|end_header_id|>\n\n" + response.strip() + "<|eot_id|>"
+    )
+
+def get_gold_score(model, tokenizer, text):
+    inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=2048).to(device)
+    with torch.no_grad():
+        logits, _, values = model(**inputs)
+        return values[:, -1]
+
+# # Load p vector from JSON file
+# with open(args.p_path, "r") as f:
+#     data = json.load(f)
+
+# p = None
+# if isinstance(data, list):
+#     # It's a list of entries
+#     for entry in data:
+#         if entry.get('n', entry.get('sample_size')) == 200:
+#             p = np.array(entry["p"])
+#             break
+# else:
+#     # It's a single entry
+#     if data.get('n', data.get('sample_size')) == 200:
+#         p = np.array(data["p"])
+
+# if p is None:
+#     raise ValueError(f"No p vector found for user {args.name} with n=200 in {args.p_path}")
+
+# print(f"Loaded p vector for user {args.name}")
+
+p = [
+    37.69054412841797,
+    -2.9021151065826416,
+    -0.25404518842697144,
+    3.0760273933410645,
+    4.032073974609375,
+    -6.471762657165527,
+    -5.1571831703186035,
+    -6.6313886642456055,
+    7.341609001159668,
+    -13.851171493530273,
+    9.581570625305176,
+    4.129615783691406,
+    1.0026273727416992,
+    11.910504341125488,
+    -0.9516629576683044,
+    3.01949405670166,
+    -2.473126173019409,
+    8.309188842773438,
+    3.2338342666625977,
+    -2.9333927631378174,
+    5.410052299499512,
+    22.96633529663086,
+    -3.95829439163208,
+    -8.865690231323242,
+    9.30678939819336,
+    4.758558750152588
+  ]
+
+p = np.array(p)
+p = p / np.linalg.norm(p)
+p = p.tolist()
 
 # Sparsify p using torch operations for consistency
 p_tensor = torch.tensor(p, device=device)
@@ -101,8 +156,6 @@ p_sparse_np = p_sparse.cpu().numpy()
 print(f"Sparsified p: kept top {len(topk_idx)} elements")
 print(f"Non-zero elements: {torch.count_nonzero(p_sparse).item()}")
 
-base_prompt = "You are an AI assistant."
-
 # Choose the right attribute prompts
 attribute_list = attribute_prompts  # or attribute_prompts, depending on what you want
 
@@ -111,7 +164,7 @@ print(f"Using {len(attribute_list)} attribute prompts")
 # Precompute all scores for all outputs (up to max_k)
 max_k = 20
 print("Computing drift scores for all outputs...")
-all_prompt_outputs = [(item["prompt"], item["outputs"]) for item in bon_data_filtered]
+all_prompt_outputs = [(item["prompt"], item["outputs"][:20]) for item in bon_data]
 all_scores_full = get_scores(
     all_prompt_outputs,
     model, p_sparse_np, base_prompt, attribute_list, device, tokenizer
@@ -124,10 +177,8 @@ results_by_k = []
 for k in range(2, max_k + 1, 2):
     print(f"Evaluating for k={k}...")
     selected_gold_scores = []
-    all_gold_scores = []
-    selected_minus_max = []
     
-    for item, scores in zip(bon_data_filtered, all_scores_full):
+    for item, scores in zip(bon_data, all_scores_full):
         # Use only the first k outputs and their scores
         outputs = item["outputs"][:k]
         scores_k = scores[:k]
@@ -138,39 +189,31 @@ for k in range(2, max_k + 1, 2):
         else:
             idx = int(np.argmax(scores_k))  # Use numpy if it's already a numpy array
         
-        # Get corresponding gold scores
-        gold_entry = gold_cache[item["prompt"]]
-        gold_score_selected = gold_entry["output_scores"][idx]
-        max_gold_at_k = max(gold_entry["output_scores"][:k])
+        # Score the selected output with gold model
+        selected_output = outputs[idx]
+        formatted_selected = format_llama3_prompt(item["prompt"], selected_output)
+        gold_score_selected = get_gold_score(gold_model, gold_tokenizer, formatted_selected)[0].item()
         
         selected_gold_scores.append(gold_score_selected)
-        all_gold_scores.append(np.mean(gold_entry["output_scores"][:k]))
-        selected_minus_max.append(max_gold_at_k - gold_score_selected)  # Fixed: max - selected
     
-    # Calculate statistics
+    # Calculate average selected gold score
     avg_selected = float(np.mean(selected_gold_scores))
-    avg_all = float(np.mean(all_gold_scores))
-    uplift = avg_selected - avg_all
-    avg_selected_minus_max = float(np.mean(selected_minus_max))
     
     results_by_k.append({
         "user": args.name,
         "k": k,
         "avg_selected_gold": avg_selected,
-        "avg_all_gold": avg_all,
-        "uplift": uplift,
-        "avg_selected_minus_max": avg_selected_minus_max
     })
     
-    print(f"k={k}: avg_selected_gold={avg_selected:.4f}, avg_all_gold={avg_all:.4f}, uplift={uplift:.4f}, gap_from_max={avg_selected_minus_max:.4f}")
+    print(f"k={k}: avg_selected_gold={avg_selected:.4f}")
 
 # Save results
-output_file = f"../../results/approx_bon_by_n.jsonl"
+output_file = f"../../results/mle_bon_by_n.jsonl"
 with open(output_file, "a") as f:
     for res in results_by_k:
         f.write(json.dumps(res) + "\n")
 print(f"✅ Results saved to {output_file}")
 
 # Print summary
-best_k = max(results_by_k, key=lambda x: x['uplift'])
-print(f"\nBest performance at k={best_k['k']} with uplift={best_k['uplift']:.4f}")
+best_k = max(results_by_k, key=lambda x: x['avg_selected_gold'])
+print(f"\nBest performance at k={best_k['k']} with avg_selected_gold={best_k['avg_selected_gold']:.4f}")

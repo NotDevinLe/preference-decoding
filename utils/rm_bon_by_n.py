@@ -47,8 +47,8 @@ gold_model.to(device)
 gold_model.eval()
 
 # Load user reward model
-rm_path = f"saves/normal/{args.name}/toy_reward_200"
-base_model_path = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+rm_path = f"saves/normal/{args.name}_1b/toy_reward_200"
+base_model_path = "meta-llama/Llama-3.2-1B-Instruct"
 print(f"Loading user reward model from: {rm_path}")
 model_args = ModelArguments(
     model_name_or_path=base_model_path,

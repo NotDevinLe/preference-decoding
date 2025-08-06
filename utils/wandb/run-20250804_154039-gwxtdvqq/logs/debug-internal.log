@@ -1,0 +1,14 @@
+{"time":"2025-08-04T15:40:40.315078737-07:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-04T15:40:40.527141963-07:00","level":"INFO","msg":"stream: created new stream","id":"gwxtdvqq"}
+{"time":"2025-08-04T15:40:40.527200811-07:00","level":"INFO","msg":"stream: started","id":"gwxtdvqq"}
+{"time":"2025-08-04T15:40:40.527225628-07:00","level":"INFO","msg":"handler: started","stream_id":"gwxtdvqq"}
+{"time":"2025-08-04T15:40:40.527237446-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"gwxtdvqq"}
+{"time":"2025-08-04T15:40:40.527266209-07:00","level":"INFO","msg":"sender: started","stream_id":"gwxtdvqq"}
+{"time":"2025-08-04T15:47:21.782273525-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-04T15:47:21.981943557-07:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history steps 242973-253070, summary, console lines 959-1002","runtime_seconds":25.997077337}],"total_operations":1}}
+{"time":"2025-08-04T15:47:56.053731701-07:00","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/files/devinl6-university-of-washington/mle-preference/gwxtdvqq/file_stream","body":"\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>502 Server Error</title>\n</head>\n<body text=#000000 bgcolor=#ffffff>\n<h1>Error: Server Error</h1>\n<h2>The server encountered a temporary error and could not complete your request.<p>Please try again in 30 seconds.</h2>\n<h2></h2>\n</body></html>\n"}
+{"time":"2025-08-04T15:47:59.206815453-07:00","level":"INFO","msg":"stream: closing","id":"gwxtdvqq"}
+{"time":"2025-08-04T15:47:59.206842734-07:00","level":"INFO","msg":"handler: closed","stream_id":"gwxtdvqq"}
+{"time":"2025-08-04T15:47:59.206852018-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"gwxtdvqq"}
+{"time":"2025-08-04T15:47:59.206858448-07:00","level":"INFO","msg":"sender: closed","stream_id":"gwxtdvqq"}
+{"time":"2025-08-04T15:47:59.207072969-07:00","level":"INFO","msg":"stream: closed","id":"gwxtdvqq"}

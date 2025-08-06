@@ -5,18 +5,20 @@ import numpy as np
 # Files to plot
 files = [
     '../results/approx_bon_by_n.jsonl',
-    '../results/rm_bon_by_n.jsonl'
+    '../results/rm_bon_by_n.jsonl',
+    '../results/mle_bon_by_n.jsonl'
 ]
 
 labels = [
     'Approx BON',
-    'RM BON'
+    'RM BON',
+    'MLE BON'
 ]
 
 # Colors and styles for each line
-colors = ['blue', 'red']
-line_styles = ['-', '--']
-markers = ['o', 's']
+colors = ['blue', 'red', 'green']
+line_styles = ['-', '--', '-']
+markers = ['o', 's', 'D']
 
 plt.figure(figsize=(10, 6))
 
@@ -48,6 +50,7 @@ plt.ylabel('Average Selected Gold Score', fontsize=12)
 plt.title('Average Selected Gold Score vs Number of Outputs Judged', fontsize=14)
 plt.legend(fontsize=11)
 plt.grid(True, alpha=0.3)
+plt.xlim(0, 20)  # Clip x-axis to 0-20
 plt.tight_layout()
 
 # Save the plot
