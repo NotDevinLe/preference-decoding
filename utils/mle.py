@@ -12,32 +12,114 @@ import wandb
 from tqdm import tqdm
 
 class MLE:
-    def __init__(self, model, tokenizer, data, device, expectation_matrix, use_wandb=True, wandb_project="mle-training"):
+    def __init__(self, model, tokenizer, data, device, expectation_matrix=None, num_expectation_samples=100, use_wandb=True, wandb_project="mle-training"):
         self.model = model
         self.tokenizer = tokenizer
         self.data = data
         self.device = device
         self.p = torch.randn(len(attribute_prompts), device=device)
+        self.num_expectation_samples = num_expectation_samples
         
-        # Load pre-computed expectation matrix (shared across users)
-        self.expectation = expectation_matrix.to(device)
-        self.num_expectation_samples = expectation_matrix.shape[1]
+        # Initialize expectation matrix state
+        self.expectation = None
+        self.chosen_rewards = None
+        self._expectation_generated = False
         
-        print(f"Loaded expectation matrix: {self.expectation.shape}")
-        
-        # Compute chosen rewards for this specific user's data
-        self.precompute_chosen_rewards()
+        if expectation_matrix is not None:
+            # Load pre-computed expectation matrix
+            self.expectation = expectation_matrix.to(device)
+            self.num_expectation_samples = expectation_matrix.shape[1]
+            self._expectation_generated = True
+            print(f"Loaded expectation matrix: {self.expectation.shape}")
+            
+            # Compute chosen rewards for this specific user's data
+            self.precompute_chosen_rewards()
         
         self.use_wandb = use_wandb
-        if use_wandb:
+        self._wandb_initialized = False
+        if use_wandb and self._expectation_generated:
             wandb.init(project=wandb_project, config={
                 "num_expectation_samples": self.num_expectation_samples,
                 "num_data_points": len(data),
                 "num_attributes": len(attribute_prompts),
                 "initial_p_norm": torch.norm(self.p).item()
             })
+            self._wandb_initialized = True
 
 
+    def generate_expectation_matrix(self, num_expectation_samples=None):
+        """
+        Generate expectation matrix for the current user's training data.
+        This should be called before training.
+        
+        Args:
+            num_expectation_samples: Number of expectation samples per prompt (overrides constructor value)
+        """
+        if num_expectation_samples is not None:
+            self.num_expectation_samples = num_expectation_samples
+            
+        print(f"Generating expectation matrix for {len(self.data)} prompts with {self.num_expectation_samples} samples each...")
+        
+        # Extract prompts from data
+        prompts = [item['prompt'] for item in self.data]
+        
+        # Prepare all prompts at once
+        all_inputs = []
+        for prompt in prompts:
+            formatted_input = self.tokenizer.apply_chat_template([
+                {"role": "system", "content": base_prompt},
+                {"role": "user", "content": prompt}
+            ], tokenize=False, add_generation_prompt=True)
+            all_inputs.append(formatted_input)
+        
+        # Generate all outputs at once - vLLM handles batching internally
+        print(f"Generating {self.num_expectation_samples} outputs for {len(all_inputs)} prompts...")
+        sampling_params = SamplingParams(
+            temperature=1.0, 
+            max_tokens=1024, 
+            n=self.num_expectation_samples
+        )
+        
+        all_outputs = self.model.generate(all_inputs, sampling_params)
+        
+        # Extract all generated texts and prepare for reward computation
+        print("Preparing data for reward computation...")
+        all_reward_data = []
+        output_mapping = []  # Track which outputs belong to which prompt
+        
+        for prompt_idx, vllm_output in enumerate(all_outputs):
+            prompt = prompts[prompt_idx]
+            for sample_idx, output in enumerate(vllm_output.outputs):
+                all_reward_data.append((prompt, output.text))
+                output_mapping.append((prompt_idx, sample_idx))
+        
+        # Compute rewards
+        print(f"Computing rewards for {len(all_reward_data)} generated outputs...")
+        all_rewards = self.get_reward(all_reward_data)
+        
+        # Create expectation matrix
+        self.expectation = torch.zeros((len(prompts), self.num_expectation_samples, len(attribute_prompts)), device=self.device)
+        
+        # Map rewards back to expectation matrix
+        for idx, (prompt_idx, sample_idx) in enumerate(output_mapping):
+            self.expectation[prompt_idx, sample_idx] = all_rewards[idx]
+        
+        self._expectation_generated = True
+        print(f"Expectation matrix generated successfully: {self.expectation.shape}")
+        
+        # Now compute chosen rewards
+        self.precompute_chosen_rewards()
+        
+        # Initialize wandb if not already done
+        if self.use_wandb and not self._wandb_initialized:
+            wandb.init(project="mle-training", config={
+                "num_expectation_samples": self.num_expectation_samples,
+                "num_data_points": len(self.data),
+                "num_attributes": len(attribute_prompts),
+                "initial_p_norm": torch.norm(self.p).item()
+            })
+            self._wandb_initialized = True
+    
     def train(self, num_epochs=1000, learning_rate=0.01, beta=1.0, num_mc_samples=10):
         """
         Train the MLE model using gradient descent following the mathematical derivation.
@@ -50,6 +132,13 @@ class MLE:
             beta: Temperature parameter from derivation
             num_mc_samples: Number of Monte Carlo samples for expectation estimation
         """
+        
+        # Check if expectation matrix has been generated
+        if not self._expectation_generated:
+            print("WARNING: Expectation matrix has not been generated yet!")
+            print("Please call mle.generate_expectation_matrix() before training.")
+            print("Generating expectation matrix now with default parameters...")
+            self.generate_expectation_matrix()
         
         for epoch in range(num_epochs):
             total_gradient = torch.zeros_like(self.p)

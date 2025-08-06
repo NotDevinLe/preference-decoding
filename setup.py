@@ -16,6 +16,6 @@ setup(
         "datasets",
         "rouge-score",
     ],
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="Devin",
+    author_email="devin.t.le@outlook.com",
 )
