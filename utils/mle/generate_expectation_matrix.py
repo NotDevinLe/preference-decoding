@@ -1,10 +1,14 @@
 import argparse
 import json
 import torch
+import sys
+import os
 from vllm import LLM
 from transformers import AutoTokenizer
+
+# Add parent directory to path to import mle module
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from mle import MLE
-import os
 
 
 def main():
