@@ -1,0 +1,591 @@
+INFO 08-07 00:03:30 [__init__.py:244] Automatically detected platform cuda.
+Using device: cuda
+Loading model: meta-llama/Llama-3.2-1B-Instruct
+INFO 08-07 00:03:45 [config.py:841] This model supports multiple tasks: {'generate', 'reward', 'classify', 'embed'}. Defaulting to 'generate'.
+INFO 08-07 00:03:45 [config.py:1472] Using max model len 4096
+INFO 08-07 00:03:46 [config.py:2285] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 08-07 00:03:47 [core.py:526] Waiting for init message from front-end.
+INFO 08-07 00:03:47 [core.py:69] Initializing a V1 LLM engine (v0.9.2) with config: model='meta-llama/Llama-3.2-1B-Instruct', speculative_config=None, tokenizer='meta-llama/Llama-3.2-1B-Instruct', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config={}, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=4096, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto,  device_config=cuda, decoding_config=DecodingConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_backend=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=meta-llama/Llama-3.2-1B-Instruct, num_scheduler_steps=1, multi_step_stream_outputs=True, enable_prefix_caching=True, chunked_prefill_enabled=True, use_async_output_proc=True, pooler_config=None, compilation_config={"level":3,"debug_dump_path":"","cache_dir":"","backend":"","custom_ops":[],"splitting_ops":["vllm.unified_attention","vllm.unified_attention_with_output"],"use_inductor":true,"compile_sizes":[],"inductor_compile_config":{"enable_auto_functionalized_v2":false},"inductor_passes":{},"use_cudagraph":true,"cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[512,504,496,488,480,472,464,456,448,440,432,424,416,408,400,392,384,376,368,360,352,344,336,328,320,312,304,296,288,280,272,264,256,248,240,232,224,216,208,200,192,184,176,168,160,152,144,136,128,120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,4,2,1],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"max_capture_size":512,"local_cache_dir":null}
+INFO 08-07 00:03:50 [parallel_state.py:1076] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+WARNING 08-07 00:03:50 [topk_topp_sampler.py:59] FlashInfer is not available. Falling back to the PyTorch-native implementation of top-p & top-k sampling. For the best performance, please install FlashInfer.
+INFO 08-07 00:03:50 [gpu_model_runner.py:1770] Starting to load model meta-llama/Llama-3.2-1B-Instruct...
+INFO 08-07 00:03:50 [gpu_model_runner.py:1775] Loading model from scratch...
+INFO 08-07 00:03:51 [cuda.py:284] Using Flash Attention backend on V1 engine.
+INFO 08-07 00:03:51 [weight_utils.py:292] Using model weights format ['*.safetensors']
+INFO 08-07 00:03:51 [weight_utils.py:345] No model.safetensors.index.json found in remote.
+INFO 08-07 00:03:55 [default_loader.py:272] Loading weights took 3.07 seconds
+INFO 08-07 00:03:55 [gpu_model_runner.py:1801] Model loading took 2.3185 GiB and 4.389677 seconds
+INFO 08-07 00:03:59 [backends.py:508] Using cache directory: /mmfs1/home/devinl6/.cache/vllm/torch_compile_cache/43b63e25f2/rank_0_0/backbone for vLLM's torch.compile
+INFO 08-07 00:03:59 [backends.py:519] Dynamo bytecode transform time: 3.81 s
+INFO 08-07 00:04:02 [backends.py:155] Directly load the compiled graph(s) for shape None from the cache, took 2.177 s
+INFO 08-07 00:04:04 [monitor.py:34] torch.compile takes 3.81 s in total
+INFO 08-07 00:04:06 [gpu_worker.py:232] Available KV cache memory: 27.49 GiB
+INFO 08-07 00:04:06 [kv_cache_utils.py:716] GPU KV cache size: 900,752 tokens
+INFO 08-07 00:04:06 [kv_cache_utils.py:720] Maximum concurrency for 4,096 tokens per request: 219.91x
+INFO 08-07 00:04:33 [gpu_model_runner.py:2326] Graph capturing finished in 27 secs, took 0.31 GiB
+INFO 08-07 00:04:33 [core.py:172] init engine (profile, create kv cache, warmup model) took 37.34 seconds
+Loading training data from: ../../data/preference/user1_train.json
+Using 200 training samples (out of 10000 total)
+Loading expectation matrix from: ../../data/expectation_matrices/user1_expectation_n200_size200.pt
+Loading expectation matrix from ../../data/expectation_matrices/user1_expectation_n200_size200.pt
+Loaded expectation matrix with shape: torch.Size([200, 200, 26])
+Slicing expectation samples from 200 to 128
+
+Initializing MLE model...
+Number of attributes: 26
+Number of expectation samples per prompt: 128
+Expectation matrix loaded successfully and is compatible
+  Expectation matrix: torch.Size([200, 128, 26])
+Loaded expectation matrix: torch.Size([200, 128, 26])
+Computing chosen rewards...
+Pre-computing chosen rewards...
+Computing base log probabilities...
+Computing attribute log probabilities for 26 attributes...
+Pre-computed rewards for 200 chosen responses
+
+Starting MLE training...
+Max epochs: 100000
+Learning rate: 0.01
+Beta: 1.0
+MC samples: 32
+Gradient tolerance: 1e-06
+Loss tolerance: 1e-06
+Patience: 100
+L1 regularization: 0.05
+Epoch 0
+  Avg Log-Likelihood: -5.1306
+  Negative LL Loss: 5.1306
+  L1 Penalty: 1.1387
+  Total Loss: 6.2693
+  Gradient norm: 0.4312
+  P norm: 5.2653
+  Loss change: inf
+  Epochs without improvement: 0
+  Current p: [-1.0853026   0.6833294  -0.10735615 -0.55191296  0.6770511  -1.2226764
+  1.4429468   1.0772673   1.5792446  -0.9581562   0.79051524 -0.80039346
+  0.94801885 -0.6409168   1.520269   -0.207974   -1.0023953   1.5636765
+  0.34390646 -0.36202282  0.08167951  0.34543714  0.8952062   2.4672415
+ -1.2116451   0.20715827]
+Epoch 100
+  Avg Log-Likelihood: -5.0303
+  Negative LL Loss: 5.0303
+  L1 Penalty: 1.0599
+  Total Loss: 6.0902
+  Gradient norm: 0.4124
+  P norm: 4.9574
+  Loss change: 0.001705
+  Epochs without improvement: 0
+  Current p: [-0.9126572   0.547595   -0.02722753 -0.4742575   0.6294858  -1.2477694
+  1.3743496   0.99327755  1.5395066  -0.89076257  0.78012234 -0.7288003
+  0.85192984 -0.6082183   1.4507859  -0.14970149 -0.9605537   1.5159909
+  0.29803628 -0.29704034  0.03691098  0.44095397  0.74676776  2.2975872
+ -1.1758646   0.22167858]
+Epoch 200
+  Avg Log-Likelihood: -4.9463
+  Negative LL Loss: 4.9463
+  L1 Penalty: 0.9854
+  Total Loss: 5.9317
+  Gradient norm: 0.3987
+  P norm: 4.6741
+  Loss change: 0.001430
+  Epochs without improvement: 0
+  Current p: [-7.4743783e-01  4.1977414e-01  6.3055131e-04 -3.9867169e-01
+  5.8150715e-01 -1.2670931e+00  1.3114784e+00  9.1220510e-01
+  1.4997077e+00 -8.2441062e-01  7.6728475e-01 -6.5841788e-01
+  7.6549911e-01 -5.6805605e-01  1.3829354e+00 -9.1227166e-02
+ -9.1777313e-01  1.4677339e+00  2.5289401e-01 -2.3589981e-01
+  4.6712396e-04  5.2471060e-01  6.0565436e-01  2.1377833e+00
+ -1.1383215e+00  2.2981635e-01]
+Epoch 300
+  Avg Log-Likelihood: -4.8794
+  Negative LL Loss: 4.8794
+  L1 Penalty: 0.9155
+  Total Loss: 5.7949
+  Gradient norm: 0.3632
+  P norm: 4.4145
+  Loss change: 0.001307
+  Epochs without improvement: 0
+  Current p: [-5.9266347e-01  3.0295962e-01  2.4537649e-04 -3.2562926e-01
+  5.3289515e-01 -1.2784437e+00  1.2528241e+00  8.3442730e-01
+  1.4601167e+00 -7.6102769e-01  7.5164521e-01 -5.8983451e-01
+  6.8816370e-01 -5.2126086e-01  1.3168629e+00 -3.2889981e-02
+ -8.7386608e-01  1.4187080e+00  2.0796798e-01 -1.7903298e-01
+  5.0378294e-05  5.9440988e-01  4.7472453e-01  1.9898032e+00
+ -1.0989363e+00  2.2998635e-01]
+Epoch 400
+  Avg Log-Likelihood: -4.8324
+  Negative LL Loss: 4.8324
+  L1 Penalty: 0.8492
+  Total Loss: 5.6816
+  Gradient norm: 0.3259
+  P norm: 4.1777
+  Loss change: 0.001010
+  Epochs without improvement: 0
+  Current p: [-4.5286494e-01  2.0394354e-01  2.8043587e-04 -2.5642085e-01
+  4.8455140e-01 -1.2764871e+00  1.1962149e+00  7.6056975e-01
+  1.4205064e+00 -7.0337886e-01  7.3241299e-01 -5.2416027e-01
+  6.2171215e-01 -4.6778211e-01  1.2530062e+00 -4.1306988e-04
+ -8.2835305e-01  1.3690183e+00  1.6233535e-01 -1.2528242e-01
+  4.5255484e-04  6.4885539e-01  3.6044195e-01  1.8571028e+00
+ -1.0571483e+00  2.2020698e-01]
+Epoch 500
+  Avg Log-Likelihood: -4.8014
+  Negative LL Loss: 4.8014
+  L1 Penalty: 0.7868
+  Total Loss: 5.5883
+  Gradient norm: 0.3087
+  P norm: 3.9608
+  Loss change: 0.000792
+  Epochs without improvement: 0
+  Current p: [-3.2783833e-01  1.1927749e-01  3.8815688e-04 -1.9068010e-01
+  4.3739468e-01 -1.2599041e+00  1.1417218e+00  6.9158953e-01
+  1.3806685e+00 -6.5189153e-01  7.0933419e-01 -4.6148053e-01
+  5.6462777e-01 -4.0731132e-01  1.1923325e+00 -4.0307344e-04
+ -7.7955788e-01  1.3218024e+00  1.1768724e-01 -7.1505480e-02
+  6.0047890e-04  6.9210351e-01  2.6389357e-01  1.7415831e+00
+ -1.0097923e+00  2.0158908e-01]
+Epoch 600
+  Avg Log-Likelihood: -4.7804
+  Negative LL Loss: 4.7804
+  L1 Penalty: 0.7264
+  Total Loss: 5.5068
+  Gradient norm: 0.2984
+  P norm: 3.7607
+  Loss change: 0.000739
+  Epochs without improvement: 0
+  Current p: [-2.1465588e-01  4.5465928e-02  2.5047269e-04 -1.2770852e-01
+  3.9147791e-01 -1.2308160e+00  1.0889320e+00  6.2722594e-01
+  1.3403767e+00 -6.0546696e-01  6.8300027e-01 -4.0128174e-01
+  5.1405036e-01 -3.4079665e-01  1.1350600e+00  4.5180612e-04
+ -7.2744209e-01  1.2784890e+00  7.4753232e-02 -1.6379954e-02
+  4.7629638e-04  7.2718149e-01  1.8243559e-01  1.6416564e+00
+ -9.5586932e-01  1.7586772e-01]
+Epoch 700
+  Avg Log-Likelihood: -4.7643
+  Negative LL Loss: 4.7643
+  L1 Penalty: 0.6703
+  Total Loss: 5.4346
+  Gradient norm: 0.2849
+  P norm: 3.5750
+  Loss change: 0.000609
+  Epochs without improvement: 0
+  Current p: [-1.0750313e-01  2.5835066e-04  1.9451210e-04 -6.5730885e-02
+  3.4685004e-01 -1.1948719e+00  1.0387808e+00  5.6588012e-01
+  1.2999882e+00 -5.6155473e-01  6.5533918e-01 -3.4246245e-01
+  4.6780726e-01 -2.7009541e-01  1.0799675e+00  4.6010353e-04
+ -6.7327607e-01  1.2376475e+00  3.2826755e-02 -2.3984993e-04
+  5.6324212e-04  7.5921816e-01  1.0905738e-01  1.5513128e+00
+ -8.9719307e-01  1.4678046e-01]
+Epoch 800
+  Avg Log-Likelihood: -4.7509
+  Negative LL Loss: 4.7509
+  L1 Penalty: 0.6183
+  Total Loss: 5.3692
+  Gradient norm: 0.2848
+  P norm: 3.4015
+  Loss change: 0.000604
+  Epochs without improvement: 0
+  Current p: [-3.3687069e-03 -1.9294769e-04  2.8030630e-04 -4.0860004e-03
+  3.0310750e-01 -1.1555904e+00  9.9045175e-01  5.0619435e-01
+  1.2595900e+00 -5.1902133e-01  6.2717360e-01 -2.8426826e-01
+  4.2389277e-01 -1.9713305e-01  1.0260838e+00 -4.1512621e-04
+ -6.1819178e-01  1.1979820e+00  2.8124038e-04  3.0570204e-04
+  5.2746350e-04  7.8962904e-01  3.9806955e-02  1.4662396e+00
+ -8.3591908e-01  1.1602972e-01]
+Epoch 900
+  Avg Log-Likelihood: -4.7442
+  Negative LL Loss: 4.7442
+  L1 Penalty: 0.5777
+  Total Loss: 5.3218
+  Gradient norm: 0.2623
+  P norm: 3.2377
+  Loss change: 0.000392
+  Epochs without improvement: 0
+  Current p: [ 3.3642221e-03 -5.7961163e-04 -6.4871361e-05  5.2552507e-04
+  2.5993115e-01 -1.1148522e+00  9.4336134e-01  4.4740146e-01
+  1.2191855e+00 -4.7737834e-01  5.9887213e-01 -2.2649817e-01
+  3.8121584e-01 -1.2311220e-01  9.7283989e-01 -2.9084217e-04
+ -5.6280529e-01  1.1590241e+00 -6.4682099e-05  4.7143520e-05
+  4.9838464e-04  8.1919008e-01 -5.2414951e-04  1.3838238e+00
+ -7.7306283e-01  8.4571943e-02]
+Epoch 1000
+  Avg Log-Likelihood: -4.7387
+  Negative LL Loss: 4.7387
+  L1 Penalty: 0.5393
+  Total Loss: 5.2780
+  Gradient norm: 0.2434
+  P norm: 3.0803
+  Loss change: 0.000431
+  Epochs without improvement: 0
+  Current p: [ 5.37349749e-03 -4.41666984e-04  4.77337831e-04  1.03002676e-04
+  2.17116371e-01 -1.07322848e+00  8.96864176e-01  3.89128745e-01
+  1.17879069e+00 -4.35986787e-01  5.70533454e-01 -1.68865666e-01
+  3.39134723e-01 -4.86583300e-02  9.20021892e-01 -7.42085977e-05
+ -5.07163763e-01  1.12041020e+00 -3.03657405e-04 -1.64264522e-04
+ -6.80995290e-05  8.48117650e-01  1.91928295e-04  1.30301511e+00
+ -7.09392130e-01  5.28406128e-02]
+Epoch 1100
+  Avg Log-Likelihood: -4.7342
+  Negative LL Loss: 4.7342
+  L1 Penalty: 0.5025
+  Total Loss: 5.2366
+  Gradient norm: 0.2411
+  P norm: 2.9299
+  Loss change: 0.000299
+  Epochs without improvement: 0
+  Current p: [ 6.78165490e-03 -4.45152225e-04 -1.60655152e-04 -3.44178756e-04
+  1.74494371e-01 -1.03117156e+00  8.51110756e-01  3.31199795e-01
+  1.13836360e+00 -3.94817382e-01  5.42061925e-01 -1.11423224e-01
+  2.97949135e-01  4.83037438e-05  8.67493927e-01  1.87387981e-04
+ -4.51528579e-01  1.08201957e+00  4.08859691e-04 -3.49988171e-04
+ -1.92528561e-04  8.76965463e-01 -3.94162431e-04  1.22342992e+00
+ -6.45207942e-01  2.07931772e-02]
+Epoch 1200
+  Avg Log-Likelihood: -4.7308
+  Negative LL Loss: 4.7308
+  L1 Penalty: 0.4688
+  Total Loss: 5.1996
+  Gradient norm: 0.2515
+  P norm: 2.7866
+  Loss change: 0.000216
+  Epochs without improvement: 0
+  Current p: [ 7.7845966e-03  3.2354161e-04  2.0746156e-04  3.6080874e-04
+  1.3246959e-01 -9.8814815e-01  8.0646002e-01  2.7387527e-01
+  1.0980772e+00 -3.5385621e-01  5.1372653e-01 -5.4136112e-02
+  2.5782326e-01  1.6857593e-04  8.1545126e-01 -3.8772947e-04
+ -3.9552206e-01  1.0440227e+00  3.1768024e-04 -4.0163900e-04
+  7.5005577e-04  9.0624857e-01  1.0411546e-04  1.1455692e+00
+ -5.7997042e-01  6.2258635e-04]
+Epoch 1300
+  Avg Log-Likelihood: -4.7273
+  Negative LL Loss: 4.7273
+  L1 Penalty: 0.4365
+  Total Loss: 5.1638
+  Gradient norm: 0.2230
+  P norm: 2.6506
+  Loss change: 0.000421
+  Epochs without improvement: 0
+  Current p: [ 8.1896950e-03 -1.7186656e-05 -4.0736573e-04 -8.2131010e-07
+  9.0951227e-02 -9.4395345e-01  7.6342422e-01  2.1720554e-01
+  1.0577562e+00 -3.1301636e-01  4.8540109e-01  4.7367736e-05
+  2.1888277e-01  1.0231840e-04  7.6387256e-01  1.4288721e-04
+ -3.3911580e-01  1.0065979e+00  3.3616525e-04 -4.1453494e-04
+ -1.4835506e-04  9.3592727e-01  3.6745245e-05  1.0696576e+00
+ -5.1374203e-01  9.2474016e-05]
+Epoch 1400
+  Avg Log-Likelihood: -4.7244
+  Negative LL Loss: 4.7244
+  L1 Penalty: 0.4071
+  Total Loss: 5.1315
+  Gradient norm: 0.2304
+  P norm: 2.5217
+  Loss change: 0.000353
+  Epochs without improvement: 0
+  Current p: [ 8.2927458e-03  1.0079899e-04 -7.9562626e-05 -2.5759751e-04
+  4.9901351e-02 -8.9904457e-01  7.2134805e-01  1.6096777e-01
+  1.0175403e+00 -2.7234498e-01  4.5714250e-01  9.9704193e-05
+  1.8099938e-01  2.2574744e-04  7.1261269e-01 -2.0299869e-04
+ -2.8244492e-01  9.6954721e-01  5.7080062e-04 -1.7381832e-04
+ -1.8754965e-04  9.6602207e-01 -2.3410073e-05  9.9517107e-01
+ -4.4670391e-01  4.5388952e-04]
+Epoch 1500
+  Avg Log-Likelihood: -4.7217
+  Negative LL Loss: 4.7217
+  L1 Penalty: 0.3780
+  Total Loss: 5.0997
+  Gradient norm: 0.2607
+  P norm: 2.4005
+  Loss change: 0.000250
+  Epochs without improvement: 0
+  Current p: [ 7.89123587e-03  3.57241370e-04  2.65602168e-04  4.21061821e-04
+  9.32662934e-03 -8.53244007e-01  6.80482924e-01  1.05262116e-01
+  9.77355182e-01 -2.31948555e-01  4.28816855e-01  1.24787854e-04
+  1.43770456e-01  6.59356301e-04  6.61763251e-01  5.68031450e-04
+ -2.25487769e-01  9.32823241e-01 -6.65571715e-05  1.46427512e-04
+  5.53965801e-04  9.96546149e-01 -2.41713715e-05  9.22314346e-01
+ -3.78971487e-01  5.52636571e-04]
+Epoch 1600
+  Avg Log-Likelihood: -4.7187
+  Negative LL Loss: 4.7187
+  L1 Penalty: 0.3504
+  Total Loss: 5.0691
+  Gradient norm: 0.2401
+  P norm: 2.2872
+  Loss change: 0.000333
+  Epochs without improvement: 0
+  Current p: [ 7.1760858e-03 -1.3643075e-04 -3.4316164e-04  1.2928894e-04
+  1.0770955e-04 -8.0692101e-01  6.4027578e-01  4.9834300e-02
+  9.3719351e-01 -1.9178626e-01  4.0054211e-01  4.9424794e-05
+  1.0727928e-01 -2.1190906e-05  6.1113530e-01  4.2324781e-04
+ -1.6835652e-01  8.9644790e-01  3.5176007e-04  4.0444391e-04
+ -3.4815021e-06  1.0271871e+00 -2.8846695e-04  8.5049570e-01
+ -3.1066492e-01  4.9495103e-04]
+Epoch 1700
+  Avg Log-Likelihood: -4.7157
+  Negative LL Loss: 4.7157
+  L1 Penalty: 0.3237
+  Total Loss: 5.0395
+  Gradient norm: 0.2254
+  P norm: 2.1825
+  Loss change: 0.000382
+  Epochs without improvement: 0
+  Current p: [ 6.1923359e-03  9.8566292e-05  1.1240772e-06 -1.4585623e-04
+  2.3656589e-04 -7.6006955e-01  6.0099739e-01 -2.2645955e-04
+  8.9708203e-01 -1.5167762e-01  3.7229270e-01 -1.0068511e-04
+  7.1585707e-02  3.2073687e-04  5.6075799e-01  3.9579821e-04
+ -1.1108461e-01  8.6030376e-01 -9.0055837e-05 -2.0688146e-04
+  9.1604190e-05  1.0580912e+00  2.1441194e-04  7.7983928e-01
+ -2.4177973e-01  3.1624277e-04]
+Epoch 1800
+  Avg Log-Likelihood: -4.7132
+  Negative LL Loss: 4.7132
+  L1 Penalty: 0.2997
+  Total Loss: 5.0129
+  Gradient norm: 0.2517
+  P norm: 2.0867
+  Loss change: 0.000173
+  Epochs without improvement: 0
+  Current p: [ 5.0609368e-03 -4.0516278e-04  4.2759089e-04  5.7351269e-04
+  5.6205573e-04 -7.1284425e-01  5.6228453e-01 -7.1740913e-05
+  8.5698879e-01 -1.1157747e-01  3.4402430e-01 -2.1284987e-04
+  3.6556158e-02  4.1173794e-04  5.1052362e-01  4.2911948e-04
+ -5.3693492e-02  8.2434744e-01  4.2163581e-04  2.1152277e-04
+  6.5371051e-04  1.0892626e+00  2.0939531e-04  7.0999014e-01
+ -1.7261788e-01  4.0898856e-05]
+Epoch 1900
+  Avg Log-Likelihood: -4.7106
+  Negative LL Loss: 4.7106
+  L1 Penalty: 0.2759
+  Total Loss: 4.9865
+  Gradient norm: 0.2496
+  P norm: 2.0000
+  Loss change: 0.000068
+  Epochs without improvement: 0
+  Current p: [ 3.7852030e-03 -5.8642658e-04 -2.3011077e-04  2.9478039e-04
+  1.0018455e-04 -6.6548109e-01  5.2408338e-01  1.8533049e-04
+  8.1688344e-01 -7.1818627e-02  3.1571969e-01  5.5605662e-04
+  1.9328131e-03 -1.2028584e-05  4.6040854e-01  4.8349579e-04
+ -3.3007056e-04  7.8849775e-01 -1.2218035e-04 -4.1879484e-04
+  6.0870394e-04  1.1205305e+00 -5.3385028e-04  6.4053619e-01
+ -1.0331480e-01  6.4346392e-04]
+Epoch 2000
+  Avg Log-Likelihood: -4.7080
+  Negative LL Loss: 4.7080
+  L1 Penalty: 0.2564
+  Total Loss: 4.9644
+  Gradient norm: 0.2554
+  P norm: 1.9219
+  Loss change: 0.000197
+  Epochs without improvement: 0
+  Current p: [ 2.5079830e-03 -4.5012421e-04  9.1690774e-05  3.6644080e-05
+ -3.1343795e-04 -6.1802596e-01  4.8585698e-01 -5.2377454e-04
+  7.7683246e-01 -3.2121301e-02  2.8738859e-01  3.0031934e-04
+  4.0173801e-04  6.6551520e-04  4.1035599e-01 -4.1128456e-04
+  2.4928682e-05  7.5281483e-01  4.2281472e-04  2.8303417e-05
+  5.9782219e-04  1.1513966e+00  2.6416703e-05  5.7145643e-01
+ -3.3800632e-02  1.6666637e-04]
+Epoch 2100
+  Avg Log-Likelihood: -4.7061
+  Negative LL Loss: 4.7061
+  L1 Penalty: 0.2391
+  Total Loss: 4.9452
+  Gradient norm: 0.2269
+  P norm: 1.8525
+  Loss change: 0.000066
+  Epochs without improvement: 0
+  Current p: [ 8.9131203e-04 -3.3388377e-04  4.7895286e-04 -2.3314526e-04
+  4.9974443e-04 -5.7024199e-01  4.4807476e-01  3.6662939e-05
+  7.3679900e-01  2.3709127e-04  2.5906700e-01  6.7386194e-05
+ -1.3755233e-04 -3.6585770e-05  3.6046225e-01 -3.2332508e-04
+  5.4468476e-04  7.1734810e-01  7.0528127e-05  5.7258608e-04
+  3.7133868e-05  1.1824490e+00  5.7051075e-05  5.0316292e-01
+  1.4313962e-05  6.4005691e-04]
+Epoch 2200
+  Avg Log-Likelihood: -4.7045
+  Negative LL Loss: 4.7045
+  L1 Penalty: 0.2254
+  Total Loss: 4.9299
+  Gradient norm: 0.2447
+  P norm: 1.7899
+  Loss change: 0.000135
+  Epochs without improvement: 0
+  Current p: [ 1.7564947e-04  7.4426236e-05 -7.0038222e-05  5.8187428e-04
+  5.1079202e-04 -5.2222085e-01  4.1060862e-01 -3.0038512e-04
+  6.9687015e-01 -4.6578093e-04  2.3080796e-01 -1.4507986e-04
+  4.8973470e-04  6.1829941e-04  3.1069323e-01 -9.5820258e-05
+  1.7961086e-04  6.8204576e-01 -2.3405673e-04  1.4407025e-04
+  7.6962070e-04  1.2133787e+00 -5.2586570e-04  4.3541154e-01
+  3.2731070e-05  9.8112068e-05]
+Epoch 2300
+  Avg Log-Likelihood: -4.7029
+  Negative LL Loss: 4.7029
+  L1 Penalty: 0.2117
+  Total Loss: 4.9147
+  Gradient norm: 0.2416
+  P norm: 1.7347
+  Loss change: 0.000032
+  Epochs without improvement: 0
+  Current p: [ 4.5127978e-04 -8.1662613e-05  5.0451350e-04  4.6916999e-04
+ -2.5577692e-04 -4.7368488e-01  3.7379321e-01 -3.4099570e-04
+  6.5701896e-01 -1.5974045e-05  2.0266262e-01 -3.5789880e-04
+  5.2731752e-04  3.0207064e-04  2.6111966e-01  2.0110217e-04
+  3.7714461e-05  6.4706457e-01 -3.4835062e-04 -1.8819040e-04
+  1.8097139e-04  1.2447994e+00 -5.2094186e-04  3.6851171e-01
+  5.8190204e-04  6.4622727e-04]
+Epoch 2400
+  Avg Log-Likelihood: -4.7014
+  Negative LL Loss: 4.7014
+  L1 Penalty: 0.1981
+  Total Loss: 4.8996
+  Gradient norm: 0.2405
+  P norm: 1.6868
+  Loss change: 0.000098
+  Epochs without improvement: 0
+  Current p: [ 5.9777300e-04  1.4180408e-04  6.1386323e-05  3.5896490e-04
+  2.0232017e-04 -4.2489162e-01  3.3726048e-01 -2.3909868e-04
+  6.1716706e-01  2.9372715e-04  1.7458625e-01  3.8877164e-04
+  6.4397050e-04  4.0749120e-04  2.1166296e-01 -4.1303027e-04
+ -1.5223632e-05  6.1245549e-01 -2.6675680e-04 -3.1025946e-04
+  8.0259168e-04  1.2760676e+00  6.9480186e-05  3.0219254e-01
+  5.1592320e-04  1.7113783e-04]
+Epoch 2500
+  Avg Log-Likelihood: -4.7000
+  Negative LL Loss: 4.7000
+  L1 Penalty: 0.1845
+  Total Loss: 4.8845
+  Gradient norm: 0.2415
+  P norm: 1.6468
+  Loss change: 0.000090
+  Epochs without improvement: 0
+  Current p: [ 6.8310514e-04  2.3894603e-04 -3.1251172e-04  3.4597013e-04
+ -1.6348116e-04 -3.7593848e-01  3.0095249e-01  1.7431041e-05
+  5.7740331e-01  3.3659002e-04  1.4652114e-01  1.6655351e-04
+ -6.6786073e-05  8.6837547e-04  1.6233039e-01  1.0043470e-05
+  9.4265211e-05  5.7802558e-01 -1.3098909e-04  5.7811337e-04
+  7.2957121e-04  1.3071897e+00 -8.3319261e-05  2.3635562e-01
+ -2.6985016e-04 -2.5181525e-04]
+Epoch 2600
+  Avg Log-Likelihood: -4.6986
+  Negative LL Loss: 4.6986
+  L1 Penalty: 0.1710
+  Total Loss: 4.8696
+  Gradient norm: 0.2245
+  P norm: 1.6155
+  Loss change: 0.000131
+  Epochs without improvement: 0
+  Current p: [ 6.28699141e-04 -2.26805569e-05  3.52377014e-04  2.98314262e-04
+ -3.11470969e-04 -3.26482296e-01  2.65309215e-01 -5.17291599e-04
+  5.37633955e-01 -4.26536804e-04  1.18463844e-01 -1.18067226e-04
+ -1.80209114e-04  2.50881945e-04  1.13110356e-01  5.02885843e-04
+  3.67143773e-04  5.43733835e-01  9.87407402e-05  5.43605827e-04
+  1.22594996e-04  1.33864164e+00  2.36281834e-04  1.71208620e-01
+  3.02127242e-04  2.89039977e-04]
+Epoch 2700
+  Avg Log-Likelihood: -4.6972
+  Negative LL Loss: 4.6972
+  L1 Penalty: 0.1575
+  Total Loss: 4.8547
+  Gradient norm: 0.2101
+  P norm: 1.5934
+  Loss change: 0.000258
+  Epochs without improvement: 0
+  Current p: [ 5.01761620e-04 -2.61815148e-05  8.84910987e-05  3.42187210e-04
+ -2.55165010e-04 -2.76820719e-01  2.30189815e-01  1.16855168e-04
+  4.97983783e-01 -1.13626826e-04  9.05177519e-02 -3.59972677e-04
+  6.62417733e-06  3.50087794e-05  6.40457720e-02  9.11020907e-05
+ -2.14693777e-04  5.09692073e-01  4.64471523e-04 -3.66915192e-04
+ -1.42614546e-04  1.37034583e+00  2.84962589e-05  1.06745474e-01
+  1.80268049e-04 -9.46310756e-05]
+Epoch 2800
+  Avg Log-Likelihood: -4.6960
+  Negative LL Loss: 4.6960
+  L1 Penalty: 0.1441
+  Total Loss: 4.8401
+  Gradient norm: 0.2205
+  P norm: 1.5801
+  Loss change: 0.000242
+  Epochs without improvement: 0
+  Current p: [ 3.3038235e-04 -7.5246295e-05 -1.3123394e-04  4.1805051e-04
+ -9.0249756e-05 -2.2699955e-01  1.9507284e-01 -1.7098730e-04
+  4.5835847e-01  1.1896715e-05  6.2575243e-02  3.9872486e-04
+ -1.9370869e-05  1.8165029e-04  1.5030037e-02 -3.1845600e-04
+  2.6353705e-04  4.7591367e-01 -6.3600077e-05 -1.6263852e-04
+ -1.1179033e-04  1.4016782e+00  8.3609164e-05  4.2610582e-02
+  3.1389869e-04  5.8471598e-04]
+
+Converged: Loss change (9.33e-07) < tolerance (1.00e-06)
+
+Training completed at epoch 2878
+Final gradient norm: 2.22e-01
+Final loss: 4.8303
+Final p norm: 1.5763
+
+Saving results to: ../../results/mle/user1_lambda.jsonl
+
+Final p vector:
+  Attribute 0: 0.0007
+    Prompt: You are an AI assistant with a formal tone....
+  Attribute 1: 0.0003
+    Prompt: You are an AI assistant with a concise response ra...
+  Attribute 2: 0.0005
+    Prompt: You are a modest and polite AI assistant....
+  Attribute 3: -0.0001
+    Prompt: You are an AI assistant with expertise in engineer...
+  Attribute 4: 0.0005
+    Prompt: You are a persuasive AI assistant....
+  Attribute 5: -0.1880
+    Prompt: You are an emotional AI assistant....
+  Attribute 6: 0.1680
+    Prompt: You are a humorous AI assistant....
+  Attribute 7: 0.0004
+    Prompt: You are an energetic AI assistant....
+  Attribute 8: 0.4275
+    Prompt: You are an AI assistant with expertise in computer...
+  Attribute 9: -0.0004
+    Prompt: You are an AI assistant using easy-to-understand w...
+  Attribute 10: 0.0409
+    Prompt: You are an AI assistant with expertise in sociolog...
+  Attribute 11: -0.0003
+    Prompt: You are a respectful AI assistant....
+  Attribute 12: 0.0006
+    Prompt: You are an AI assistant that communicates using in...
+  Attribute 13: 0.0003
+    Prompt: You are an AI assistant that enjoys being critical...
+  Attribute 14: -0.0001
+    Prompt: You are a creative AI assistant....
+  Attribute 15: 0.0005
+    Prompt: You are an analytic AI assistant....
+  Attribute 16: 0.0000
+    Prompt: You are an empathetic AI assistant....
+  Attribute 17: 0.4497
+    Prompt: You are an AI assistant that upholds principles an...
+  Attribute 18: 0.0002
+    Prompt: You are an AI assistant that prioritizes the great...
+  Attribute 19: 0.0003
+    Prompt: You are an AI assistant that focuses on practical,...
+  Attribute 20: 0.0003
+    Prompt: You are an AI assistant that views situations thro...
+  Attribute 21: 1.4264
+    Prompt: You are an AI assistant that loves explaining thin...
+  Attribute 22: 0.0005
+    Prompt: You are an AI assistant that values flexibility ov...
+  Attribute 23: -0.0001
+    Prompt: You are an AI assistant that enjoys handling tasks...
+  Attribute 24: -0.0003
+    Prompt: You are an AI assistant that prioritizes technolog...
+  Attribute 25: -0.0003
+    Prompt: You are an AI assistant that loves and protects th...
+
+Top 5 attributes by absolute weight:
+  Attribute 21: 1.4264
+    Prompt: You are an AI assistant that loves explaining things through stories and anecdotes....
+  Attribute 17: 0.4497
+    Prompt: You are an AI assistant that upholds principles and rules above all else....
+  Attribute 8: 0.4275
+    Prompt: You are an AI assistant with expertise in computer science....
+  Attribute 5: -0.1880
+    Prompt: You are an emotional AI assistant....
+  Attribute 6: 0.1680
+    Prompt: You are a humorous AI assistant....
+
+MLE evaluation complete!

@@ -1,0 +1,5 @@
+Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:02<00:00,  2.92s/it]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:02<00:00,  2.94s/it]
+
+[2025-08-06T23:53:37.817] error: *** JOB 27979741 ON g3102 CANCELLED AT 2025-08-06T23:53:37 DUE to SIGNAL Terminated ***

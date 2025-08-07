@@ -29,6 +29,7 @@ def main():
     parser.add_argument("--gradient_tolerance", type=float, default=1e-6, help="Stop when gradient norm is below this threshold")
     parser.add_argument("--loss_tolerance", type=float, default=1e-6, help="Stop when loss change is below this threshold")
     parser.add_argument("--patience", type=int, default=100, help="Stop if no improvement for this many epochs")
+    parser.add_argument("--l1_lambda", type=float, default=0.0, help="L1 regularization coefficient (0.0 = no regularization)")
     args = parser.parse_args()
     
     # Device setup
@@ -74,7 +75,7 @@ def main():
         print(f"Using all {len(train_data)} training samples")
     
     # Always load the n=200 size=200 expectation matrix and slice as needed
-    expectation_matrix_path = f"../../data/expectation_matrices/{args.name}_expectation_n16_size200.pt"
+    expectation_matrix_path = f"../../data/expectation_matrices/{args.name}_expectation_n200_size200.pt"
     
     if not os.path.exists(expectation_matrix_path):
         print(f"Error: Expectation matrix not found at {expectation_matrix_path}")
@@ -160,6 +161,7 @@ def main():
     print(f"Gradient tolerance: {args.gradient_tolerance}")
     print(f"Loss tolerance: {args.loss_tolerance}")
     print(f"Patience: {args.patience}")
+    print(f"L1 regularization: {args.l1_lambda}")
     
     mle_model.train(
         max_epochs=args.max_epochs,
@@ -168,16 +170,17 @@ def main():
         num_mc_samples=args.num_mc_samples,
         gradient_tolerance=args.gradient_tolerance,
         loss_tolerance=args.loss_tolerance,
-        patience=args.patience
+        patience=args.patience,
+        l1_lambda=args.l1_lambda
     )
     
     # Save results
     results_dir = "../../results/mle"
     os.makedirs(results_dir, exist_ok=True)
     
-    save_path = f"{results_dir}/{args.name}_p_vector.json"
+    save_path = f"{results_dir}/{args.name}_lambda.jsonl"
     print(f"\nSaving results to: {save_path}")
-    mle_model.save_results(save_path)
+    mle_model.save_results(save_path, args.num_mc_samples, args.l1_lambda)
     
     # Print final p vector
     final_p = mle_model.p.cpu().numpy()

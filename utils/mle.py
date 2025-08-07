@@ -114,11 +114,11 @@ class MLE:
         # Don't initialize wandb here - wait until training starts
     
     def train(self, max_epochs=10000, learning_rate=0.01, beta=1.0, num_mc_samples=10, 
-              gradient_tolerance=1e-6, loss_tolerance=1e-6, patience=100, run_name=None):
+              gradient_tolerance=1e-6, loss_tolerance=1e-6, patience=100, l1_lambda=0.0, run_name=None):
         """
-        Train the MLE model using gradient descent with convergence criteria.
+        Train the MLE model using gradient descent with convergence criteria and L1 regularization.
         
-        ∇_p log π(y|x) = (1/β) R^(i)(x,y) - (1/β) E_{y'~π(·|x)} [R^(i)(x,y')]
+        ∇_p log π(y|x) = (1/β) R^(i)(x,y) - (1/β) E_{y'~π(·|x)} [R^(i)(x,y')] - λ * sign(p)
         
         Args:
             max_epochs: Maximum number of training epochs
@@ -128,6 +128,7 @@ class MLE:
             gradient_tolerance: Stop when gradient norm is below this threshold
             loss_tolerance: Stop when loss change is below this threshold
             patience: Stop if no improvement for this many epochs
+            l1_lambda: L1 regularization coefficient (0.0 = no regularization)
             run_name: Custom name for wandb run
         """
         
@@ -151,12 +152,15 @@ class MLE:
                 "max_epochs": max_epochs,
                 "gradient_tolerance": gradient_tolerance,
                 "loss_tolerance": loss_tolerance,
-                "patience": patience
+                "patience": patience,
+                "l1_lambda": l1_lambda
             }
             
             # Create descriptive run name
             if run_name is None:
                 run_name = f"exp{self.num_expectation_samples}_mc{num_mc_samples}_data{len(self.data)}_lr{learning_rate}_beta{beta}"
+                if l1_lambda > 0.0:
+                    run_name += f"_l1{l1_lambda}"
             
             wandb.init(
                 project=self.wandb_project,
@@ -215,14 +219,20 @@ class MLE:
             total_gradient = total_gradient / len(self.data)
             avg_log_likelihood = epoch_log_likelihood / len(self.data)
             
-            # 4. Update p using gradient ascent (maximizing log-likelihood)
+            # Add L1 regularization gradient: -λ * sign(p)
+            if l1_lambda > 0.0:
+                l1_gradient = -l1_lambda * torch.sign(self.p)
+                total_gradient += l1_gradient
+            
+            # 4. Update p using gradient ascent (maximizing log-likelihood - L1 penalty)
             with torch.no_grad():
                 self.p += learning_rate * total_gradient
             
             # Compute additional metrics
             gradient_norm = torch.norm(total_gradient).item()
             p_norm = torch.norm(self.p).item()
-            current_loss = -avg_log_likelihood  # Negative log-likelihood is the loss
+            l1_penalty = l1_lambda * torch.sum(torch.abs(self.p)).item() if l1_lambda > 0.0 else 0.0
+            current_loss = -avg_log_likelihood + l1_penalty  # Negative log-likelihood + L1 penalty
             
             # Check convergence criteria
             loss_change = abs(current_loss - prev_loss)
@@ -239,7 +249,9 @@ class MLE:
                 wandb.log({
                     "epoch": epoch,
                     "avg_log_likelihood": avg_log_likelihood,
-                    "negative_log_likelihood_loss": current_loss,
+                    "negative_log_likelihood_loss": -avg_log_likelihood,
+                    "l1_penalty": l1_penalty,
+                    "total_loss": current_loss,
                     "gradient_norm": gradient_norm,
                     "p_norm": p_norm,
                     "learning_rate": learning_rate,
@@ -251,40 +263,46 @@ class MLE:
             if epoch % 100 == 0:
                 print(f"Epoch {epoch}")
                 print(f"  Avg Log-Likelihood: {avg_log_likelihood:.4f}")
-                print(f"  Negative LL Loss: {current_loss:.4f}")
+                print(f"  Negative LL Loss: {-avg_log_likelihood:.4f}")
+                if l1_lambda > 0.0:
+                    print(f"  L1 Penalty: {l1_penalty:.4f}")
+                print(f"  Total Loss: {current_loss:.4f}")
                 print(f"  Gradient norm: {gradient_norm:.4f}")
                 print(f"  P norm: {p_norm:.4f}")
                 print(f"  Loss change: {loss_change:.6f}")
-                print(f"  Epochs without improvement: {epochs_without_improvement}")
+                if l1_lambda == 0.0:
+                    print(f"  Epochs without improvement: {epochs_without_improvement}")
+                else:
+                    print(f"  Epochs without improvement: {epochs_without_improvement} (patience disabled with L1)")
                 print(f"  Current p: {self.p.cpu().numpy()}")
             
-            # Check convergence criteria
-            if gradient_norm < gradient_tolerance:
-                print(f"\nConverged: Gradient norm ({gradient_norm:.2e}) < tolerance ({gradient_tolerance:.2e})")
-                if self.use_wandb:
-                    wandb.log({
-                        "converged_epoch": epoch,
-                        "convergence_reason": "gradient_tolerance"
-                    })
-                break
+            # # Check convergence criteria
+            # if gradient_norm < gradient_tolerance:
+            #     print(f"\nConverged: Gradient norm ({gradient_norm:.2e}) < tolerance ({gradient_tolerance:.2e})")
+            #     if self.use_wandb:
+            #         wandb.log({
+            #             "converged_epoch": epoch,
+            #             "convergence_reason": "gradient_tolerance"
+            #         })
+            #     break
             
-            if loss_change < loss_tolerance and epoch > 0:
-                print(f"\nConverged: Loss change ({loss_change:.2e}) < tolerance ({loss_tolerance:.2e})")
-                if self.use_wandb:
-                    wandb.log({
-                        "converged_epoch": epoch,
-                        "convergence_reason": "loss_tolerance"
-                    })
-                break
+            # if loss_change < loss_tolerance and epoch > 0:
+            #     print(f"\nConverged: Loss change ({loss_change:.2e}) < tolerance ({loss_tolerance:.2e})")
+            #     if self.use_wandb:
+            #         wandb.log({
+            #             "converged_epoch": epoch,
+            #             "convergence_reason": "loss_tolerance"
+            #         })
+            #     break
             
-            if epochs_without_improvement >= patience:
-                print(f"\nConverged: No improvement for {patience} epochs")
-                if self.use_wandb:
-                    wandb.log({
-                        "converged_epoch": epoch,
-                        "convergence_reason": "patience"
-                    })
-                break
+            # if epochs_without_improvement >= patience and l1_lambda == 0.0:
+            #     print(f"\nConverged: No improvement for {patience} epochs")
+            #     if self.use_wandb:
+            #         wandb.log({
+            #             "converged_epoch": epoch,
+            #             "convergence_reason": "patience"
+            #         })
+            #     break
             
             # Update previous loss and increment epoch
             prev_loss = current_loss
@@ -373,7 +391,7 @@ class MLE:
         
         return drift_scores
     
-    def save_results(self, save_path):
+    def save_results(self, save_path, num_mc_samples=None, l1_lambda=None):
         """Save the learned p vector and training results."""
         results = {
             "p_vector": self.p.cpu().numpy().tolist(),
@@ -382,9 +400,15 @@ class MLE:
             "num_data_points": len(self.data),
         }
         
+        # Add optional parameters if provided
+        if num_mc_samples is not None:
+            results["num_mc_samples"] = num_mc_samples
+        if l1_lambda is not None:
+            results["l1_lambda"] = l1_lambda
+        
         with open(save_path, "a") as f:
-            json.dump(results, f, indent=2)
-            f.write("\n")  # Add newline for readability between entries
+            json.dump(results, f)
+            f.write("\n")
         
         if self.use_wandb:
             try:
