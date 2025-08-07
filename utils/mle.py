@@ -113,17 +113,22 @@ class MLE:
         
         # Don't initialize wandb here - wait until training starts
     
-    def train(self, num_epochs=1000, learning_rate=0.01, beta=1.0, num_mc_samples=10, run_name=None):
+    def train(self, max_epochs=10000, learning_rate=0.01, beta=1.0, num_mc_samples=10, 
+              gradient_tolerance=1e-6, loss_tolerance=1e-6, patience=100, run_name=None):
         """
-        Train the MLE model using gradient descent following the mathematical derivation.
+        Train the MLE model using gradient descent with convergence criteria.
         
         ∇_p log π(y|x) = (1/β) R^(i)(x,y) - (1/β) E_{y'~π(·|x)} [R^(i)(x,y')]
         
         Args:
-            num_epochs: Number of training epochs
+            max_epochs: Maximum number of training epochs
             learning_rate: Learning rate for gradient descent
             beta: Temperature parameter from derivation
             num_mc_samples: Number of Monte Carlo samples for expectation estimation
+            gradient_tolerance: Stop when gradient norm is below this threshold
+            loss_tolerance: Stop when loss change is below this threshold
+            patience: Stop if no improvement for this many epochs
+            run_name: Custom name for wandb run
         """
         
         # Check if expectation matrix has been generated
@@ -143,7 +148,10 @@ class MLE:
                 "initial_p_norm": torch.norm(self.p).item(),
                 "beta": beta,
                 "learning_rate": learning_rate,
-                "num_epochs": num_epochs
+                "max_epochs": max_epochs,
+                "gradient_tolerance": gradient_tolerance,
+                "loss_tolerance": loss_tolerance,
+                "patience": patience
             }
             
             # Create descriptive run name
@@ -157,7 +165,14 @@ class MLE:
             )
             self._wandb_initialized = True
         
-        for epoch in range(num_epochs):
+        # Initialize convergence tracking variables
+        epoch = 0
+        best_loss = float('inf')
+        epochs_without_improvement = 0
+        prev_loss = float('inf')
+        
+        # Training loop with convergence criteria
+        while epoch < max_epochs:
             total_gradient = torch.zeros_like(self.p)
             epoch_log_likelihood = 0.0
             
@@ -207,33 +222,87 @@ class MLE:
             # Compute additional metrics
             gradient_norm = torch.norm(total_gradient).item()
             p_norm = torch.norm(self.p).item()
+            current_loss = -avg_log_likelihood  # Negative log-likelihood is the loss
+            
+            # Check convergence criteria
+            loss_change = abs(current_loss - prev_loss)
+            
+            # Update best loss and patience counter
+            if current_loss < best_loss:
+                best_loss = current_loss
+                epochs_without_improvement = 0
+            else:
+                epochs_without_improvement += 1
             
             # Log to wandb
             if self.use_wandb:
                 wandb.log({
                     "epoch": epoch,
                     "avg_log_likelihood": avg_log_likelihood,
-                    "negative_log_likelihood_loss": -avg_log_likelihood,  # Loss is negative log-likelihood
+                    "negative_log_likelihood_loss": current_loss,
                     "gradient_norm": gradient_norm,
                     "p_norm": p_norm,
                     "learning_rate": learning_rate,
+                    "loss_change": loss_change,
+                    "epochs_without_improvement": epochs_without_improvement
                 })
             
             # Console logging
             if epoch % 100 == 0:
                 print(f"Epoch {epoch}")
                 print(f"  Avg Log-Likelihood: {avg_log_likelihood:.4f}")
-                print(f"  Negative LL Loss: {-avg_log_likelihood:.4f}")
+                print(f"  Negative LL Loss: {current_loss:.4f}")
                 print(f"  Gradient norm: {gradient_norm:.4f}")
                 print(f"  P norm: {p_norm:.4f}")
+                print(f"  Loss change: {loss_change:.6f}")
+                print(f"  Epochs without improvement: {epochs_without_improvement}")
                 print(f"  Current p: {self.p.cpu().numpy()}")
-                
-            # Optional: early stopping if gradient is very small
-            if gradient_norm < 1e-6:
-                print(f"Converged at epoch {epoch}")
+            
+            # Check convergence criteria
+            if gradient_norm < gradient_tolerance:
+                print(f"\nConverged: Gradient norm ({gradient_norm:.2e}) < tolerance ({gradient_tolerance:.2e})")
                 if self.use_wandb:
-                    wandb.log({"converged_epoch": epoch})
+                    wandb.log({
+                        "converged_epoch": epoch,
+                        "convergence_reason": "gradient_tolerance"
+                    })
                 break
+            
+            if loss_change < loss_tolerance and epoch > 0:
+                print(f"\nConverged: Loss change ({loss_change:.2e}) < tolerance ({loss_tolerance:.2e})")
+                if self.use_wandb:
+                    wandb.log({
+                        "converged_epoch": epoch,
+                        "convergence_reason": "loss_tolerance"
+                    })
+                break
+            
+            if epochs_without_improvement >= patience:
+                print(f"\nConverged: No improvement for {patience} epochs")
+                if self.use_wandb:
+                    wandb.log({
+                        "converged_epoch": epoch,
+                        "convergence_reason": "patience"
+                    })
+                break
+            
+            # Update previous loss and increment epoch
+            prev_loss = current_loss
+            epoch += 1
+        
+        # If we hit max_epochs without converging
+        if epoch >= max_epochs:
+            print(f"\nReached maximum epochs ({max_epochs}) without full convergence")
+            if self.use_wandb:
+                wandb.log({
+                    "converged_epoch": epoch,
+                    "convergence_reason": "max_epochs"
+                })
+        
+        print(f"\nTraining completed at epoch {epoch}")
+        print(f"Final gradient norm: {gradient_norm:.2e}")
+        print(f"Final loss: {current_loss:.4f}")
+        print(f"Final p norm: {p_norm:.4f}")
 
     
     def precompute_chosen_rewards(self):

@@ -24,6 +24,11 @@ def main():
     parser.add_argument("--wandb_project", type=str, default="mle-preference", help="Wandb project name")
     parser.add_argument("--sample_size", type=int, default=None, help="Limit training data size (for testing)")
     parser.add_argument("--load_chosen_rewards", action="store_true", help="Load pre-computed chosen rewards if available")
+    # Convergence criteria
+    parser.add_argument("--max_epochs", type=int, default=10000, help="Maximum number of epochs")
+    parser.add_argument("--gradient_tolerance", type=float, default=1e-6, help="Stop when gradient norm is below this threshold")
+    parser.add_argument("--loss_tolerance", type=float, default=1e-6, help="Stop when loss change is below this threshold")
+    parser.add_argument("--patience", type=int, default=100, help="Stop if no improvement for this many epochs")
     args = parser.parse_args()
     
     # Device setup
@@ -148,16 +153,22 @@ def main():
     
     # Train MLE
     print("\nStarting MLE training...")
-    print(f"Epochs: {args.num_epochs}")
+    print(f"Max epochs: {args.max_epochs}")
     print(f"Learning rate: {args.learning_rate}")
     print(f"Beta: {args.beta}")
     print(f"MC samples: {args.num_mc_samples}")
+    print(f"Gradient tolerance: {args.gradient_tolerance}")
+    print(f"Loss tolerance: {args.loss_tolerance}")
+    print(f"Patience: {args.patience}")
     
     mle_model.train(
-        num_epochs=args.num_epochs,
+        max_epochs=args.max_epochs,
         learning_rate=args.learning_rate,
         beta=args.beta,
-        num_mc_samples=args.num_mc_samples
+        num_mc_samples=args.num_mc_samples,
+        gradient_tolerance=args.gradient_tolerance,
+        loss_tolerance=args.loss_tolerance,
+        patience=args.patience
     )
     
     # Save results
