@@ -73,8 +73,14 @@ utils/mle/wandb/
 *.bin
 *.safetensors
 checkpoints/
-models/
 utils/saves/
+
+# Models directory - exclude contents but keep structure
+models/golden/*/*
+models/normal/*/*
+!models/golden/.gitkeep
+!models/normal/.gitkeep
+!models/README.md
 
 # Environment variables
 .env
