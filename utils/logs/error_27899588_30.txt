@@ -1,2 +1,0 @@
-Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:11<00:34, 11.41s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:20<00:19,  9.92s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:31<00:10, 10.34s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:33<00:00,  7.04s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:33<00:00,  8.28s/it]
-[2025-08-04T02:38:34.494] error: *** JOB 27899604 ON g3103 CANCELLED AT 2025-08-04T02:38:34 DUE to SIGNAL Terminated ***

@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/bon/rm_bon.py", line 94, in <module>
+    gold_score_selected = gold_entry["output_scores"][idx]
+IndexError: list index out of range

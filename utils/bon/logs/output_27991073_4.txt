@@ -1,0 +1,27 @@
+INFO 08-07 09:43:34 [__init__.py:244] Automatically detected platform cuda.
+Loaded 200 prompts from ../../data/bon.json
+Each prompt has 200 outputs
+Using device: cuda
+
+=== LOADING GOLD CACHE ===
+Loaded gold reward cache for 200 prompts from ../../results/gold_scores_bon.jsonl
+
+=== SETTING UP REWARD MODEL ===
+Loading reward model: meta-llama/Llama-3.2-1B-Instruct
+INFO 08-07 09:43:49 [config.py:841] This model supports multiple tasks: {'reward', 'generate', 'embed', 'classify'}. Defaulting to 'generate'.
+INFO 08-07 09:43:49 [config.py:1472] Using max model len 8192
+INFO 08-07 09:43:50 [config.py:2285] Chunked prefill is enabled with max_num_batched_tokens=8192.
+WARNING 08-07 09:43:51 [__init__.py:2662] We must use the `spawn` multiprocessing start method. Overriding VLLM_WORKER_MULTIPROC_METHOD to 'spawn'. See https://docs.vllm.ai/en/latest/usage/troubleshooting.html#python-multiprocessing for more information. Reason: CUDA is initialized
+INFO 08-07 09:43:55 [__init__.py:244] Automatically detected platform cuda.
+Loaded 200 prompts from ../../data/bon.json
+Each prompt has 200 outputs
+Using device: cuda
+
+=== LOADING GOLD CACHE ===
+Loaded gold reward cache for 200 prompts from ../../results/gold_scores_bon.jsonl
+
+=== SETTING UP REWARD MODEL ===
+Loading reward model: meta-llama/Llama-3.2-1B-Instruct
+INFO 08-07 09:44:04 [config.py:841] This model supports multiple tasks: {'classify', 'embed', 'generate', 'reward'}. Defaulting to 'generate'.
+INFO 08-07 09:44:04 [config.py:1472] Using max model len 8192
+INFO 08-07 09:44:05 [config.py:2285] Chunked prefill is enabled with max_num_batched_tokens=8192.

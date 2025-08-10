@@ -1,0 +1,101 @@
+Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:06<00:00,  6.50s/it]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:06<00:00,  6.51s/it]
+
+Process EngineCore_0:
+Traceback (most recent call last):
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 590, in run_engine_core
+    raise e
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 577, in run_engine_core
+    engine_core = EngineCoreProc(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 404, in __init__
+    super().__init__(vllm_config, executor_class, log_stats,
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 82, in __init__
+    self._initialize_kv_caches(vllm_config)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 142, in _initialize_kv_caches
+    available_gpu_memory = self.model_executor.determine_available_memory()
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/executor/abstract.py", line 76, in determine_available_memory
+    output = self.collective_rpc("determine_available_memory")
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/executor/uniproc_executor.py", line 57, in collective_rpc
+    answer = run_method(self.driver_worker, method, args, kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/utils/__init__.py", line 2736, in run_method
+    return func(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/worker/gpu_worker.py", line 210, in determine_available_memory
+    self.model_runner.profile_run()
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/worker/gpu_model_runner.py", line 2274, in profile_run
+    = self._dummy_run(self.max_num_tokens, is_profile=True)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/worker/gpu_model_runner.py", line 2057, in _dummy_run
+    outputs = model(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/model_executor/models/llama.py", line 581, in forward
+    model_output = self.model(input_ids, positions, intermediate_tensors,
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/compilation/decorators.py", line 239, in __call__
+    output = self.compiled_callable(*args, **kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 663, in _fn
+    raise e.remove_dynamo_frames() from None  # see TORCHDYNAMO_VERBOSE=1
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_dynamo/output_graph.py", line 1544, in _call_user_compiler
+    raise BackendCompilerFailed(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_dynamo/output_graph.py", line 1519, in _call_user_compiler
+    compiled_fn = compiler_fn(gm, self.example_inputs())
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_dynamo/repro/after_dynamo.py", line 150, in __call__
+    compiled_gm = compiler_fn(gm, example_inputs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/_dynamo/repro/after_dynamo.py", line 150, in __call__
+    compiled_gm = compiler_fn(gm, example_inputs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/__init__.py", line 2392, in __call__
+    return self.compiler_fn(model_, inputs_, **self.kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/compilation/backends.py", line 548, in __call__
+    PiecewiseCompileInterpreter(self.split_gm, submod_names_to_compile,
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/compilation/backends.py", line 296, in run
+    return super().run(*fake_args)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/fx/interpreter.py", line 171, in run
+    self.env[node] = self.run_node(node)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/torch/fx/interpreter.py", line 240, in run_node
+    return getattr(self, n.op)(n.target, args, kwargs)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/compilation/backends.py", line 311, in call_module
+    compiled_graph_for_general_shape = self.vllm_backend.\
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/compilation/backends.py", line 168, in compile
+    compiled_graph, handle = self.compiler.compile(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/compilation/compiler_interface.py", line 440, in compile
+    raise RuntimeError(
+torch._dynamo.exc.BackendCompilerFailed: backend='<vllm.compilation.backends.VllmBackend object at 0x1482210b10f0>' raised:
+RuntimeError: vLLM failed to compile the model. The most likely reason for this is that a previous compilation failed, leading to a corrupted compilation artifact. We recommend trying to remove ~/.cache/vllm/torch_compile_cache and try again to see the real issue. 
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/mle/train_mle.py", line 202, in <module>
+    main()
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/mle/train_mle.py", line 42, in main
+    model = LLM(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/entrypoints/llm.py", line 271, in __init__
+    self.llm_engine = LLMEngine.from_engine_args(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/engine/llm_engine.py", line 501, in from_engine_args
+    return engine_cls.from_vllm_config(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/engine/llm_engine.py", line 124, in from_vllm_config
+    return cls(vllm_config=vllm_config,
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/engine/llm_engine.py", line 101, in __init__
+    self.engine_core = EngineCoreClient.make_client(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 75, in make_client
+    return SyncMPClient(vllm_config, executor_class, log_stats)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 503, in __init__
+    super().__init__(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 403, in __init__
+    with launch_core_engines(vllm_config, executor_class,
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/contextlib.py", line 142, in __exit__
+    next(self.gen)
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/engine/utils.py", line 434, in launch_core_engines
+    wait_for_engine_startup(
+  File "/gscratch/ark/devinl6/envs/align/lib/python3.10/site-packages/vllm/v1/engine/utils.py", line 484, in wait_for_engine_startup
+    raise RuntimeError("Engine core initialization failed. "
+RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}

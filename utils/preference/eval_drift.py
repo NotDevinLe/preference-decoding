@@ -15,7 +15,7 @@ from attribute_prompts import attribute_prompts
 parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, required=True)
 parser.add_argument("--sample_size", type=int, required=True)
-parser.add_argument("--num_expectation_samples", type=int, required=True)
+# parser.add_argument("--num_expectation_samples", type=int, required=True)
 # parser.add_argument("--p_path", type=str, required=True)
 parser.add_argument("--k", type=int, default=7)
 parser.add_argument("--save_path", type=str, required=True)
@@ -58,7 +58,7 @@ def sparsify_p(p_list, k=14):
 
 eval_data = eval_data[:args.sample_size]
 
-p_path = f"../../results/mle/{args.name}_ex{args.num_expectation_samples}_p_vector.jsonl"
+p_path = f"../../results/mle/{args.name}_lambda.jsonl"
 
 with open(p_path, "r") as f:
     for line in f:
@@ -85,9 +85,9 @@ with open(p_path, "r") as f:
         with open(args.save_path, "a") as f:
             f.write(json.dumps({
                 "user": args.name,
-                "n": args.sample_size,
+                "n": entry["num_data_points"],
                 "acc": accuracy,
                 "k": args.k,
-                "num_mc_samples": entry["num_mc_samples"]
+                "num_mc_samples": entry["num_mc_samples"],
             }) + "\n")
         print(f"Results saved to {args.save_path}")

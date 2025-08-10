@@ -1,2 +1,0 @@
-Finished loading data
-Getting base log probs

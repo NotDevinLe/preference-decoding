@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/bon/rm_bon.py", line 94, in <module>
+    
+IndexError: list index out of range
+[2025-08-07T10:42:02.236] error: *** JOB 27993419 ON g3117 CANCELLED AT 2025-08-07T10:42:02 DUE to SIGNAL Terminated ***

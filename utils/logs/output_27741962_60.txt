@@ -1,3 +1,0 @@
-Finished loading data
-Getting base log probs
-Getting attribute log probs

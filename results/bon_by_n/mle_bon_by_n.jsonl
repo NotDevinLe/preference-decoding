@@ -1,0 +1,7 @@
+{"user": "user1", "k": 2, "training_size": 128, "avg_selected_gold": -7.24165771484375}
+{"user": "user1", "k": 4, "training_size": 128, "avg_selected_gold": -7.02465576171875}
+{"user": "user1", "k": 8, "training_size": 128, "avg_selected_gold": -6.61123046875}
+{"user": "user1", "k": 16, "training_size": 128, "avg_selected_gold": -6.1907421875}
+{"user": "user1", "k": 32, "training_size": 128, "avg_selected_gold": -6.2390576171875}
+{"user": "user1", "k": 64, "training_size": 128, "avg_selected_gold": -6.01823974609375}
+{"user": "user1", "k": 128, "training_size": 128, "avg_selected_gold": -6.086307525634766}

@@ -1,0 +1,7 @@
+{"user": "user1", "n": 200, "acc": 0.775, "k": 7, "num_mc_samples": 32, "lambda": 0.1}
+{"user": "user1", "n": 200, "acc": 0.91, "k": 7, "num_mc_samples": 32, "lambda": 0.0001}
+{"user": "user1", "n": 200, "acc": 0.92, "k": 7, "num_mc_samples": 32, "lambda": 0.01}
+{"user": "user1", "n": 200, "acc": 0.915, "k": 7, "num_mc_samples": 32, "lambda": 0.0005}
+{"user": "user1", "n": 200, "acc": 0.92, "k": 7, "num_mc_samples": 32, "lambda": 0.001}
+{"user": "user1", "n": 200, "acc": 0.91, "k": 7, "num_mc_samples": 32, "lambda": 0.005}
+{"user": "user1", "n": 200, "acc": 0.77, "k": 7, "num_mc_samples": 32, "lambda": 0.05}

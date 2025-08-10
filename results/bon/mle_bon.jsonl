@@ -1,0 +1,7 @@
+{"user": "user1", "n": 20, "training_size": 2, "lambda": 0.01, "avg_gold_selected": -6.356340408325195}
+{"user": "user1", "n": 20, "training_size": 8, "lambda": 0.01, "avg_gold_selected": -6.354196548461914}
+{"user": "user1", "n": 20, "training_size": 4, "lambda": 0.01, "avg_gold_selected": -6.921223163604736}
+{"user": "user1", "n": 20, "training_size": 32, "lambda": 0.01, "avg_gold_selected": -6.270136833190918}
+{"user": "user1", "n": 20, "training_size": 64, "lambda": 0.01, "avg_gold_selected": -6.336111068725586}
+{"user": "user1", "n": 20, "training_size": 128, "lambda": 0.01, "avg_gold_selected": -6.18423318862915}
+{"user": "user1", "n": 20, "training_size": 16, "lambda": 0.01, "avg_gold_selected": -6.578076362609863}

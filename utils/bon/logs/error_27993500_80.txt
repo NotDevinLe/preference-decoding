@@ -1,0 +1,3 @@
+usage: rm_bon.py [-h] --name NAME --training_size TRAINING_SIZE
+                 [--n_values N_VALUES] [--gold_cache GOLD_CACHE]
+rm_bon.py: error: the following arguments are required: --training_size

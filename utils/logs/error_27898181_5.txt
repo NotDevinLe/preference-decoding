@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/utils/eval_decoding.py", line 21, in <module>
-    with open(f'../data/{args.name}.json', 'r') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '../data/user2.json'

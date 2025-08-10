@@ -1,0 +1,11 @@
+{"user": "user1", "n": 20, "training_size": 100, "avg_gold_selected": -6.85996337890625}
+{"user": "user1", "n": 20, "training_size": 90, "avg_gold_selected": -6.8808642578125}
+{"user": "user1", "n": 20, "training_size": 120, "avg_gold_selected": -6.82827392578125}
+{"user": "user1", "n": 20, "training_size": 80, "avg_gold_selected": -6.878798828125}
+{"user": "user1", "n": 20, "training_size": 10, "avg_gold_selected": -7.2593359375}
+{"user": "user1", "n": 20, "training_size": 70, "avg_gold_selected": -6.953935546875}
+{"user": "user1", "n": 20, "training_size": 40, "avg_gold_selected": -7.2088818359375}
+{"user": "user1", "n": 20, "training_size": 30, "avg_gold_selected": -7.1995654296875}
+{"user": "user1", "n": 20, "training_size": 20, "avg_gold_selected": -7.2948046875}
+{"user": "user1", "n": 20, "training_size": 50, "avg_gold_selected": -7.1271826171875}
+{"user": "user1", "n": 20, "training_size": 60, "avg_gold_selected": -7.07875}
