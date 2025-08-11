@@ -344,37 +344,6 @@ def parse_comparison_response(llm_response: str) -> Tuple[PersonaScore, PersonaS
     return score_a, score_b, winner, reason
 
 
-def extract_persona_from_prompt(prompt: str) -> str:
-    """
-    Extract persona description from a prompt.
-    This is a simple heuristic - customize based on your prompt format.
-    """
-    # Look for common persona indicators
-    if "You are" in prompt:
-        start = prompt.find("You are")
-        end = prompt.find(".", start)
-        if end == -1:
-            end = prompt.find("\n", start)
-        if end == -1:
-            end = len(prompt)
-        return prompt[start:end].strip()
-    
-    # Look for persona in system message format
-    if "Persona:" in prompt:
-        start = prompt.find("Persona:") + len("Persona:")
-        end = prompt.find("\n", start)
-        if end == -1:
-            end = len(prompt)
-        return prompt[start:end].strip()
-    
-    # Default: assume first sentence describes persona
-    first_sentence_end = prompt.find(".")
-    if first_sentence_end > 0:
-        return prompt[:first_sentence_end + 1].strip()
-    
-    return "Generic helpful assistant"
-
-
 if __name__ == "__main__":
     # Test the rubric formatting
     print("=== RUBRIC FORMAT TEST ===")

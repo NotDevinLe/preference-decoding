@@ -1,0 +1,183 @@
+# Experiment Configuration
+# Central configuration for all experiments
+
+# Data Configuration
+data:
+  # Source datasets
+  dolly_path: "data/raw/databricks-dolly-15k.jsonl"
+  evaluation_prompts: "data/processed/evaluation_prompts.json"
+  
+  # Number of prompts to use for evaluation
+  num_evaluation_prompts: 500
+  
+  # Persona extraction
+  persona_extraction_method: "automatic"  # or "manual", "mixed"
+  default_persona: "A helpful and knowledgeable assistant"
+
+# Generation Configuration
+generation:
+  # Shared BON parameters
+  bon_outputs_per_prompt: 16
+  bon_temperature: 1.0
+  bon_top_p: 0.9
+  bon_max_tokens: 512
+  
+  # QAlign parameters
+  qalign_samples: 32
+  qalign_temperature: 0.8
+  qalign_top_p: 0.9
+  qalign_max_tokens: 512
+  
+  # Drift decoding parameters
+  drift_decoding_temperature: 0.7
+  drift_decoding_max_tokens: 512
+  drift_decoding_b: 1.0  # Drift strength parameter
+
+# Model Paths
+models:
+  # Base model for generation
+  base_model: "meta-llama/Llama-3.2-3B-Instruct"
+  
+  # Drift model for scoring
+  drift_model: "meta-llama/Llama-3.2-1B-Instruct"
+  
+  # Reward models (if using)
+  reward_model_path: "models/normal/user1_8b"
+  
+  # Model-specific settings
+  tensor_parallel_size: 1
+  gpu_memory_utilization: 0.8
+  max_model_len: 4096
+
+# Preference Vectors
+preference:
+  # Drift method p vector
+  drift_p_vector_path: "results/preference/user1_p.json"
+  drift_lambda: 0.01
+  
+  # MLE method p vector  
+  mle_p_vector_path: "results/mle/user1_mle_p.json"
+  
+  # Attribute prompts
+  base_prompt: "You are a helpful assistant."
+  attribute_prompts_file: "configs/attribute_prompts.yaml"
+
+# Judge Configuration
+judge:
+  type: "persona"  # or "golden", "reward"
+  
+  # PersonaJudge settings
+  persona_judge:
+    cache_dir: "data/cache/persona_judge"
+    temperature: 0.1
+    max_tokens: 512
+    max_retries: 3
+    
+  # Evaluation dimensions to use
+  dimensions:
+    - "speaking_style"
+    - "personality" 
+    - "knowledge"
+    - "behavioral"
+    - "emotional"
+    - "overall"
+
+# Experiment Methods
+methods:
+  # Which methods to run
+  enabled:
+    - "bon_drift"
+    - "bon_mle" 
+    - "qalign_drift"
+    - "qalign_mle"
+    - "drift_decoding"
+  
+  # Baseline methods
+  baselines:
+    - "random"
+    - "oracle"
+    - "first_output"
+
+# Output Configuration
+output:
+  # Base directories
+  base_dir: "results/experiments"
+  
+  # Subdirectories
+  bon_outputs_dir: "results/bon_outputs"
+  responses_dir: "results/responses"
+  judgments_dir: "results/judgments"
+  analysis_dir: "results/analysis"
+  plots_dir: "results/plots"
+  
+  # File naming
+  timestamp_format: "%Y%m%d_%H%M%S"
+  experiment_prefix: "exp"
+
+# Computational Resources
+compute:
+  # Batch job settings
+  max_concurrent_jobs: 5
+  gpu_memory_per_job: "24GB"
+  cpu_cores_per_job: 4
+  max_job_time: "24:00:00"
+  
+  # Processing settings
+  batch_size: 10  # Prompts per batch
+  max_workers: 4  # Parallel workers
+
+# Statistical Analysis
+analysis:
+  # Significance testing
+  significance_level: 0.05
+  correction_method: "bonferroni"  # or "fdr"
+  
+  # Effect size measures
+  include_effect_sizes: true
+  
+  # Bootstrap settings
+  bootstrap_samples: 1000
+  confidence_intervals: [0.95, 0.99]
+
+# Logging and Monitoring
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  log_dir: "logs"
+  
+  # What to log
+  log_generation: true
+  log_judgment: true
+  log_statistics: true
+  
+  # Progress tracking
+  progress_update_interval: 10  # Every N prompts
+
+# Reproducibility
+reproducibility:
+  random_seed: 42
+  torch_deterministic: true
+  
+  # Version tracking
+  track_git_commit: true
+  track_package_versions: true
+
+# VLLM Server Configuration (if using)
+vllm_server:
+  base_url: "http://localhost:8000/v1"
+  model: "meta-llama/Llama-3.3-70B-Instruct"
+  timeout: 30
+  max_retries: 3
+
+# Quality Control
+quality_control:
+  # Response filtering
+  min_response_length: 10
+  max_response_length: 2048
+  
+  # Judge consistency checks
+  judge_consistency_sample: 50  # Re-judge N random samples
+  acceptable_consistency_threshold: 0.8
+  
+  # Outlier detection
+  detect_outliers: true
+  outlier_method: "iqr"  # or "zscore"
