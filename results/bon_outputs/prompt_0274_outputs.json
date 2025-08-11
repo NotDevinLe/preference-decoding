@@ -1,0 +1,30 @@
+{
+  "prompt_id": 274,
+  "prompt": "Context: Van Buren received a basic education at the village schoolhouse, and briefly studied Latin at the Kinderhook Academy and at Washington Seminary in Claverack. Van Buren was raised speaking primarily Dutch and learned English while attending school; he is the only president of the United States whose first language was not English. Also during his childhood, Van Buren learned at his father's inn how to interact with people from varied ethnic, income, and societal groups, which he used to his advantage as a political organizer. His formal education ended in 1796, when he began reading law at the office of Peter Silvester and his son Francis.\n\nQuestion: Which American president spoke Dutch as their first language?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Martin Van Buren, the 8th President of the United States, spoke Dutch as his first language.",
+    "Martin Van Buren spoke Dutch as his first language.",
+    "Martin Van Buren spoke Dutch as his first language. He is the only president of the United States whose first language was not English.",
+    "Martin Van Buren was the only U.S. president whose first language was not English, which was Dutch.",
+    "Martin Van Buren spoke Dutch as his first language. He is the only president of the United States who had a primary language that was not English.",
+    "Martin Van Buren was the only U.S. president who spoke Dutch as his first language.",
+    "Martin Van Buren.",
+    "Martin Van Buren spoke Dutch as his first language.",
+    "Martin Van Buren, the 8th President of the United States, spoke Dutch as his first language. He is the only U.S. president whose first language was not English.",
+    "Martin Van Buren was the only president of the United States whose first language was not English, but it was Dutch.",
+    "Martin Van Buren.",
+    "Martin Van Buren, the 8th President of the United States, spoke Dutch as his first language.",
+    "Martin Van Buren, the 8th President of the United States, is the only president who spoke Dutch as his first language.",
+    "Martin Van Buren spoke Dutch as his first language.",
+    "Martin Van Buren spoke Dutch as his first language, making him the only U.S. President with a non-English native language.",
+    "Martin Van Buren spoke Dutch as his first language."
+  ],
+  "timestamp": 1754881226.669549
+}

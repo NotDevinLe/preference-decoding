@@ -1,0 +1,30 @@
+{
+  "prompt_id": 375,
+  "prompt": "Context: Memphis is the fifth-most populous city in the Southeast, the nation's 28th-largest overall, as well as the largest city bordering the Mississippi River and third largest Metropolitan statistical area behind Saint Louis, MO and the Twin Cities on the Mississippi River. The Memphis metropolitan area includes West Tennessee and the greater Mid-South region, which includes portions of neighboring Arkansas, Mississippi and the Missouri Bootheel. One of the more historic and culturally significant cities of the Southern United States, Memphis has a wide variety of landscapes and distinct neighborhoods.\n\nQuestion: What is the largest city on the Mississippi River?",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The passage doesn't explicitly state the largest city on the Mississippi River, but it provides the information that Memphis is the largest city bordering the Mississippi River. However, if we consider the Mississippi River as a whole, which flows through or along seven states, the largest city located directly on the Mississippi River is St. Louis, MO (according to other geographical information).",
+    "Saint Louis, MO, is the second largest metropolitan area and the largest city is St. Louis, but considering the general question, this can also be interpreted to mean population within the city limits or metropolitan area of each city. \n\n- Memphis is described as the largest city bordering the Mississippi River and has a larger metropolitan area, but Saint Louis is the largest city within its metropolitan area.\n- The larger metropolitan areas are: \n  - St. Louis Metropolitan area: 2,996,695 \n  - The Memphis metropolitan area: 1,322,304",
+    "According to the given text, Memphis is the largest city bordering the Mississippi River.",
+    "According to the given information, Memphis is the largest city on the Mississippi River.",
+    "Based on the information provided, the largest city on the Mississippi River is New Orleans, but that is not mentioned. However, the passage does mention that the Memphis metropolitan area is the second largest on the Mississippi River after the Saint Louis, MO area. \n\nHowever, if we compare cities on the Mississippi River rather than metropolitan areas, the largest city is New Orleans, Louisiana.",
+    "New Orleans, St. Louis, and Minneapolis are larger than Memphis in terms of population, however, in terms of metropolitan statistical area,  Memphis is not the largest. However, based on your statement, Saint Louis has the third-largest metropolitan statistical area on the Mississippi River.",
+    "The answer is Saint Louis, MO. However, the passage does not provide information about which city has the highest population on the Mississippi River, but rather mentions that Saint Louis is the second largest metropolitan area on the Mississippi River, after the Twin Cities (which is not specified but likely Minneapolis and Saint Paul, also known as the Twin Cities).",
+    "According to the given information, the largest city bordering the Mississippi River is Memphis, and it's stated as the third-largest Metropolitan statistical area behind Saint Louis, MO, and the Twin Cities on the Mississippi River. This means that while Memphis may be the largest city directly bordering the Mississippi River, it's not the largest Metropolitan area.",
+    "The text doesn't explicitly state the largest city on the Mississippi River, but according to additional general knowledge, the largest city on the Mississippi River is St. Louis, MO, but since Memphis is stated to be the largest city bordering the Mississippi River in the passage, it may refer to being the largest when considering just cities bordering it.",
+    "Saint Louis, MO, and the Twin Cities are both larger Metropolitan statistical areas on the Mississippi River but, in terms of actual city proper size, the largest city on the Mississippi River is actually St. Paul, a city in the Twin Cities area, however that area is not exclusively on the Mississippi River. However, if we consider the largest city located exclusively on the Mississippi River, the largest one would actually be Memphis.",
+    "According to the information, Saint Louis, MO is the second-largest metropolitan statistical area on the Mississippi River, behind the Twin Cities. The text does not mention that it is the largest city on the Mississippi River, but given the ranking, we can infer that Memphis, being the largest city it is to the third on the list, is likely not the largest, and given Saint Louis' ranking of second, the only other major metropolitan area is the Twin Cities, thus the largest city on the Mississippi River is the Twin Cities.",
+    "Saint Louis, MO is mentioned in the passage as the city behind which Memphis is the second largest metropolitan area, implying it's larger than Memphis.",
+    "Saint Louis, MO has the third largest Metropolitan statistical area behind the Twin Cities, and Memphis. However, Memphis is described as the largest city bordering the Mississippi River.",
+    "St. Louis, Missouri is the largest city on the Mississippi River.",
+    "The information provided does not mention the largest city on the Mississippi River, but it does state that Memphis is the largest city bordering the Mississippi River.",
+    "The largest city bordering the Mississippi River, according to the given context, is Memphis, Tennessee, however when looking at the top Metropolitan statistical area, the largest one would be the Saint Louis, MO metropolitan area."
+  ],
+  "timestamp": 1754881226.8856535
+}

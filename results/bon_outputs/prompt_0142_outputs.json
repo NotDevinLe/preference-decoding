@@ -1,0 +1,30 @@
+{
+  "prompt_id": 142,
+  "prompt": "classify the following spending items as either grocery, entertainment, food & drink, travel, bills: caltrain, train, nijiya market, dinner, internet bill, plane, boba, bar",
+  "category": "classification",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Here's the classification of the spending items:\n\n1. Caltrain - Travel\n2. Train - Travel\n3. Nijiya Market - Grocery\n4. Dinner - Food & Drink\n5. Internet bill - Bills\n6. Plane - Travel\n7. Boba - Food & Drink\n8. Bar - Entertainment",
+    "Here's the classification of the given items:\n\n1. Caltrain - Transportation (specifically, a commuter train service)\n2. Train - Transportation\n3. Nijiya Market - Grocery (it's a Japanese market where people typically buy food items)\n4. Dinner - Food & Drink\n5. Internet bill - Bills\n6. Plane - Travel\n7. Boba - Food & Drink\n8. Bar - Entertainment",
+    "Here are the classifications:\n\n1. caltrain - travel\n2. train - travel\n3. nijiya market - grocery\n4. dinner - food & drink\n5. internet bill - bills\n6. plane - travel\n7. boba - food & drink\n8. bar - entertainment",
+    "Here are the classifications:\n\n1.  Caltrain - travel\n2.  Train - travel\n3.  Nijiya Market - grocery\n4.  Dinner - food & drink\n5.  Internet bill - bills\n6.  Plane - travel\n7.  Boba - food & drink\n8.  Bar - entertainment",
+    "Here are the classifications for the given spending items:\n\n1. caltrain - travel\n2. train - travel\n3. nijiya market - grocery\n4. dinner - food & drink\n5. internet bill - bills\n6. plane - travel\n7. boba - food & drink\n8. bar - entertainment",
+    "Here are the classifications for the given spending items:\n\n1. Caltrain: travel\n2. Train: travel\n3. Nijiya Market: grocery\n4. Dinner: food & drink\n5. Internet bill: bills\n6. Plane: travel\n7. Boba: food & drink\n8. Bar: entertainment",
+    "Here are the classifications for the given spending items:\n\n1. Caltrain - Travel (public transportation)\n2. Train - Travel (public transportation)\n3. Nijiya Market - Grocery (or Food & Drink, depending on the context, but it's likely a grocery store for Japanese or Asian food)\n4. Dinner - Food & Drink\n5. Internet bill - Bills\n6. Plane - Travel (air travel)\n7. Boba - Food & Drink\n8. Bar - Entertainment (or Food & Drink, depending on the context, but typically a bar is associated with entertainment)",
+    "Here's the classification of the spending items into the categories of:\n\n1. Grocery: \n   - Nijiya market (assuming it's a grocery store)\n   - Boba (assuming it's a type of food or drink item, though it could also be classified as food & drink)\n\n2. Entertainment:\n   - Dinner\n   - Bar\n\n3. Food & Drink:\n   - Dinner (also classified under entertainment, depending on the context)\n   - Boba (also classified under grocery)\n\n4. Travel:\n   - Caltrain (public transportation)\n   - Plane (air travel)\n\n5. Bills:\n   - Internet bill",
+    "Here's the classification of the spending items:\n\n- caltrain: transportation/travel (specifically, public transportation)\n- train: travel\n- nijiya market: grocery\n- dinner: food & drink\n- internet bill: bills\n- plane: travel\n- boba: food & drink\n- bar: entertainment",
+    "Here are the classifications:\n\n1. caltrain:  travel\n2. train: travel\n3. nijiya market: grocery\n4. dinner: food & drink\n5. internet bill: bills\n6. plane: travel\n7. boba: food & drink\n8. bar: entertainment",
+    "Here's the classification of the given spending items:\n\n1. caltrain - travel (public transportation)\n2. train - travel (public transportation)\n3. nijiya market - grocery (Asian grocery store)\n4. dinner - food & drink (meal)\n5. internet bill - bills (utility bill)\n6. plane - travel (air travel)\n7. boba - food & drink (beverage)\n8. bar - entertainment (social drinking/nightlife)",
+    "Here are the classified spending items:\n\n1. Caltrain - Transportation (mode of public transportation)\n2. Nijiya Market - Grocery (Asian grocery store)\n3. Dinner - Food & Drink\n4. Internet bill - Bills\n5. Plane - Travel\n6. Boba - Food & Drink\n7. Bar - Entertainment (assuming it's a bar for socializing, not a grocery store or bar for shopping)\n\nSo, the classification is:\n\n- Grocery: 1\n- Entertainment: 1\n- Food & Drink: 2\n- Travel: 1\n- Bills: 1",
+    "Here's the classification of the given spending items:\n\n1. Caltrain - Travel\n2. Train - Travel\n3. Nijiya Market - Grocery\n4. Dinner - Food & Drink\n5. Internet bill - Bills\n6. Plane - Travel\n7. Boba - Food & Drink\n8. Bar - Entertainment",
+    "Here's the classification of the spending items:\n\n1. caltrain - travel\n2. train - travel\n3. nijiya market - grocery\n4. dinner - food & drink\n5. internet bill - bills\n6. plane - travel\n7. boba - food & drink\n8. bar - entertainment",
+    "Here are the classifications for each spending item:\n\n1. Caltrain: Transportation (Travel)\n2. Train: Transportation (Travel)\n3. Nijiya Market: Food & Drink\n4. Dinner: Food & Drink\n5. Internet bill: Bills\n6. Plane: Transportation (Travel)\n7. Boba: Food & Drink\n8. Bar: Entertainment",
+    "Here's the classification of the spending items into the categories of:\n\n1. Grocery: \n   - Nijiya Market\n\n2. Entertainment: \n   - Boba\n   - Bar\n\n3. Food & Drink: \n   - Dinner\n\n4. Travel: \n   - Caltrain\n   - Plane\n\n5. Bills: \n   - Internet bill"
+  ],
+  "timestamp": 1754881226.584853
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_id": 42,
+  "prompt": "Context: Reading railway station is a major transport hub in Reading, Berkshire, England. It is on the northern edge of the town centre, near the main retail and commercial areas and the River Thames, 36 miles (58 km) from London Paddington. The first Reading station was opened on 30 March 1840 as the temporary western terminus of the original line of the Great Western Railway (GWR). Reading is the ninth-busiest station in the UK outside London and the second busiest interchange station outside London with over 3.8 million passengers changing trains at the station annually.\n\nQuestion: When was the first Reading railway station opened?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840 as the temporary western terminus of the original line of the Great Western Railway (GWR).",
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840.",
+    "The first Reading railway station was opened on 30 March 1840."
+  ],
+  "timestamp": 1754881226.5165296
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_id": 412,
+  "prompt": "Context: Congosto (Spanish pronunciation: [ko\u014b\u02c8\u0261osto]) is a village and municipality located in the region of El Bierzo (province of Le\u00f3n, Castile and Le\u00f3n, Spain) . It is located near to Ponferrada, the capital of the region. The village of Congosto has about 350 inhabitants.\n\nIts economy was traditionally based on agriculture, wine and coal mining. Nowadays, most of the inhabitants work on the surrounding area on activities such as wind turbine manufacturing or coal mining.\n\nCongosto also a large reservoir in its vicinity, the Barcena reservoir, to which many tourists visit during the summer.\n\nQuestion: Where is the village of Congosto",
+  "category": "summarization",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The village of Congosto is located in the region of El Bierzo, in the province of Le\u00f3n, which is part of the autonomous community of Castile and Le\u00f3n, in Spain. Specifically, it is situated near the city of Ponferrada, the capital of the region.",
+    "The village of Congosto is located in the region of El Bierzo, in the province of Le\u00f3n, Castile and Le\u00f3n, Spain.",
+    "The village of Congosto is located in the region of El Bierzo, which is in the province of Le\u00f3n, in the autonomous community of Castile and Le\u00f3n, Spain. It is near to the city of Ponferrada, the capital of the region.",
+    "The village of Congosto is located in the region of El Bierzo, in the province of Le\u00f3n, which is part of Castile and Le\u00f3n, Spain.",
+    "The village of Congosto is located in the region of El Bierzo, in the province of Le\u00f3n, in the autonomous community of Castile and Le\u00f3n, Spain.",
+    "The village of Congosto is located in the region of El Bierzo, in the province of Le\u00f3n, Castile and Le\u00f3n, Spain.",
+    "The village of Congosto is located in the region of El Bierzo, in the province of Le\u00f3n, Castile and Le\u00f3n, Spain.",
+    "The village of Congosto is located in the region of El Bierzo, which is in the province of Le\u00f3n, in the autonomous community of Castile and Le\u00f3n, Spain. It is situated near the city of Ponferrada, the capital of the region.",
+    "The village of Congosto is located in the region of El Bierzo, in the province of Le\u00f3n, which is part of Castile and Le\u00f3n, Spain.",
+    "The village of Congosto is located in the region of El Bierzo, in the province of Le\u00f3n, in the autonomous community of Castile and Le\u00f3n, Spain.",
+    "The village of Congosto is located in the region of El Bierzo, in the province of Le\u00f3n, Castile and Le\u00f3n, Spain.",
+    "The village of Congosto is located in the region of El Bierzo, in the province of Le\u00f3n, which is in the autonomous community of Castile and Le\u00f3n, Spain. Specifically, it is near the town of Ponferrada, the capital of the region.",
+    "The village of Congosto is located in the region of El Bierzo, which is in the province of Le\u00f3n, Castile and Le\u00f3n, Spain. It is near the city of Ponferrada, the capital of the region.",
+    "The village of Congosto is located in the region of El Bierzo, in the province of Le\u00f3n, in the autonomous community of Castile and Le\u00f3n, Spain. It is close to the capital of the region, Ponferrada.",
+    "The village of Congosto is located in the region of El Bierzo, in the province of Le\u00f3n, Castile and Le\u00f3n, Spain.",
+    "The village of Congosto is located in the region of El Bierzo, which is in the province of Le\u00f3n, in the autonomous community of Castile and Le\u00f3n, Spain."
+  ],
+  "timestamp": 1754881226.955646
+}

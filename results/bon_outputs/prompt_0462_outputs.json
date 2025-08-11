@@ -1,0 +1,30 @@
+{
+  "prompt_id": 462,
+  "prompt": "Context: The Smiths were an English rock band formed in Manchester in 1982. They comprised the singer Morrissey, the guitarist Johnny Marr, the bassist Andy Rourke and the drummer Mike Joyce. Morrissey and Marr formed the band's songwriting partnership. They are regarded as one of the most important acts to emerge from the 1980s British independent music.\n\nQuestion: Who are the Smiths?",
+  "category": "summarization",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The Smiths were an English rock band formed in Manchester in 1982. They consisted of Morrissey (singer), Johnny Marr (guitarist), Andy Rourke (bass guitarist), and Mike Joyce (drummer), with Morrissey and Marr serving as the primary songwriters. The band is known for being a significant and influential part of the 1980s British independent music scene.",
+    "The Smiths are an English rock band from Manchester, formed in 1982.",
+    "The Smiths were an English rock band formed in Manchester in 1982, known for their influential and iconic music in the 1980s. The band consisted of Morrissey as the lead singer, Johnny Marr as the guitarist, Andy Rourke on bass, and Mike Joyce on drums. The songwriting partnership between Morrissey and Marr was a key element of their success, and they are widely regarded as one of the most significant bands to emerge from the British independent music scene in the 1980s.",
+    "The Smiths are an English rock band that was formed in Manchester in 1982. The band's core members were Morrissey (singer), Johnny Marr (guitarist), Andy Rourke (bassist), and Mike Joyce (drummer). Morrissey and Marr formed the band's songwriting partnership. They are considered one of the most significant and influential acts to come out of the 1980s British independent music scene.",
+    "The Smiths were an English rock band from Manchester formed in 1982, known for their influential music and unique sound. The band members were Morrissey (singer), Johnny Marr (guitarist), Andy Rourke (bassist), and Mike Joyce (drummer). They are a highly regarded band that emerged during the 1980s British independent music scene.",
+    "The Smiths were an influential English rock band formed in Manchester in 1982, consisting of Morrissey (singer), Johnny Marr (guitarist), Andy Rourke (bassist), and Mike Joyce (drummer).",
+    "The Smiths were an English rock band formed in Manchester in 1982.",
+    "The Smiths are an English rock band formed in Manchester in 1982. They are comprised of:\n\n1. Morrissey (vocals)\n2. Johnny Marr (guitar)\n3. Andy Rourke (bass)\n4. Mike Joyce (drums)\n\nTheir songwriting partnership is attributed to Morrissey and Johnny Marr. The Smiths are considered one of the most significant bands to emerge from the British independent music scene in the 1980s.",
+    "The Smiths are an English rock band that formed in Manchester in 1982. The band consisted of Morrissey as the lead singer, Johnny Marr as the guitarist, Andy Rourke as the bassist, and Mike Joyce as the drummer.",
+    "The Smiths are an English rock band formed in Manchester in 1982, consisting of Morrissey (singer), Johnny Marr (guitarist), Andy Rourke (bassist), and Mike Joyce (drummer). They are known for their influential music and songwriting partnership, particularly between Morrissey and Marr.",
+    "The Smiths were an English rock band formed in Manchester in 1982. The core members of the band were Morrissey as the singer, Johnny Marr as the guitarist, and initially, the lineup included the bassist Andy Rourke and the drummer Mike Joyce.",
+    "The Smiths are an English rock band formed in Manchester in 1982, consisting of singer Morrissey, guitarist Johnny Marr, bassist Andy Rourke, and drummer Mike Joyce. They are known for their influential and iconic music, with a songwriting partnership between Morrissey and Marr at its core. The band is widely regarded as one of the most important acts to emerge from the 1980s British independent music scene.",
+    "The Smiths are an English rock band that originated in Manchester in 1982. The key members of the band are:\n\n1. Morrissey (lead vocals)\n2. Johnny Marr (guitar)\n3. Andy Rourke (bass)\n4. Mike Joyce (drums)\n\nMorrissey and Johnny Marr formed the core songwriting partnership of the band. They are often credited as one of the most significant and influential acts to emerge from the 1980s British independent music scene.",
+    "The Smiths are an English rock band from Manchester, formed in 1982. The band members were Morrissey (singer), Johnny Marr (guitarist), Andy Rourke (bassist), and Mike Joyce (drummer). Morrissey and Johnny Marr collaborated on songwriting, and they are considered a significant act to come out of the 1980s British independent music scene.",
+    "The Smiths were an English rock band formed in Manchester in 1982. They consisted of:\n\n- Morrissey (vocalist)\n- Johnny Marr (guitarist)\n- Andy Rourke (bassist)\n- Mike Joyce (drummer)\n\nMorrissey and Johnny Marr formed the core songwriting partnership. They are considered a highly influential and iconic band in the 1980s British independent music scene.",
+    "The Smiths are an English rock band formed in Manchester in 1982. They were a key part of the 1980s British independent music scene."
+  ],
+  "timestamp": 1754881227.024472
+}

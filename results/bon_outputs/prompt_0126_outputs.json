@@ -1,0 +1,30 @@
+{
+  "prompt_id": 126,
+  "prompt": "Would you typically find each of the following items in a bathroom, bedroom, kitchen or living room? Couch, pillow, dish soap, bedside table, oven, shower, toilet, coffee table, coffee machine",
+  "category": "classification",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Here's the placement of each item:\n\n1. Couch: Living Room\n2. Pillow: Bedroom\n3. Dish soap: Kitchen\n4. Bedside table: Bedroom\n5. Oven: Kitchen\n6. Shower: Bathroom\n7. Toilet: Bathroom\n8. Coffee table: Living Room\n9. Coffee machine: Kitchen",
+    "Here's where you might typically find each item:\n\n1. Couch - Living room\n2. Pillow - Bedroom\n3. Dish soap - Kitchen\n4. Bedside table - Bedroom\n5. Oven - Kitchen\n6. Shower - Bathroom\n7. Toilet - Bathroom\n8. Coffee table - Living room\n9. Coffee machine - Kitchen",
+    "Here's where you would typically find each of the items:\n\n1. Couch: Living room\n2. Pillow: Bedroom or Living room (you can find them in both, depending on your setup)\n3. Dish soap: Kitchen (under the sink or near the dishwasher)\n4. Bedside table: Bedroom (usually near a bed)\n5. Oven: Kitchen\n6. Shower: Bathroom\n7. Toilet: Bathroom\n8. Coffee table: Living room\n9. Coffee machine: Kitchen (sometimes a countertop or a built-in one, often near the oven)",
+    "Here are the typical locations for each item:\n\n1. Couch: Living room\n2. Pillow: Bedroom\n3. Dish soap: Kitchen\n4. Bedside table: Bedroom\n5. Oven: Kitchen\n6. Shower: Bathroom\n7. Toilet: Bathroom\n8. Coffee table: Living room\n9. Coffee machine: Kitchen",
+    "Here's where you would typically find each of the items:\n\n1. Couch: Living room\n2. Pillow: Bedroom\n3. Dish soap: Kitchen\n4. Bedside table: Bedroom\n5. Oven: Kitchen\n6. Shower: Bathroom\n7. Toilet: Bathroom\n8. Coffee table: Living room\n9. Coffee machine: Kitchen",
+    "Here are the locations for each item:\n\n1. Couch: Living room\n2. Pillow: Bedroom (could also be found in other rooms depending on the context, but typically in a bedroom)\n3. Dish soap: Kitchen\n4. Bedside table: Bedroom\n5. Oven: Kitchen\n6. Shower: Bathroom\n7. Toilet: Bathroom\n8. Coffee table: Living room\n9. Coffee machine: Kitchen",
+    "Here's where each item is typically found:\n\n1. Couch: Living room\n2. Pillow: Bedroom\n3. Dish soap: Kitchen\n4. Bedside table: Bedroom\n5. Oven: Kitchen\n6. Shower: Bathroom\n7. Toilet: Bathroom\n8. Coffee table: Living room\n9. Coffee machine: Kitchen",
+    "Here's where you'd typically find each of these items:\n\n1. Couch: Living room\n2. Pillow: Bedroom\n3. Dish soap: Kitchen\n4. Bedside table: Bedroom\n5. Oven: Kitchen\n6. Shower: Bathroom\n7. Toilet: Bathroom\n8. Coffee table: Living room\n9. Coffee machine: Kitchen",
+    "Here's where you would typically find each of the items:\n\n1. Couch: Living room\n2. Pillow: Bedroom\n3. Dish soap: Kitchen\n4. Bedside table: Bedroom\n5. Oven: Kitchen\n6. Shower: Bathroom\n7. Toilet: Bathroom\n8. Coffee table: Living room\n9. Coffee machine: Kitchen",
+    "Here's where you'd typically find each item:\n\n1. Couch: Living Room\n2. Pillow: Bedroom or Living Room\n3. Dish soap: Kitchen\n4. Bedside table: Bedroom\n5. Oven: Kitchen\n6. Shower: Bathroom\n7. Toilet: Bathroom\n8. Coffee table: Living Room\n9. Coffee machine: Kitchen",
+    "Here's where each item would typically be found:\n\n1. Couch: Living room\n2. Pillow: Bedroom\n3. Dish soap: Kitchen\n4. Bedside table: Bedroom\n5. Oven: Kitchen\n6. Shower: Bathroom\n7. Toilet: Bathroom\n8. Coffee table: Living room\n9. Coffee machine: Kitchen",
+    "Here are the typical locations for each item:\n\n1. Couch: Living room\n2. Pillow: Bedroom or Living room\n3. Dish soap: Kitchen\n4. Bedside table: Bedroom\n5. Oven: Kitchen\n6. Shower: Bathroom\n7. Toilet: Bathroom\n8. Coffee table: Living room\n9. Coffee machine: Kitchen",
+    "Here's where you would typically find each of the items:\n\n1. Couch: Living Room\n2. Pillow: Bedroom\n3. Dish soap: Kitchen (usually under the sink)\n4. Bedside table: Bedroom\n5. Oven: Kitchen\n6. Shower: Bathroom\n7. Toilet: Bathroom\n8. Coffee table: Living Room\n9. Coffee machine: Kitchen",
+    "Here's where you would typically find each of the items:\n\n1. Couch - Living room\n2. Pillow - Bedroom or Living room\n3. Dish soap - Kitchen\n4. Bedside table - Bedroom\n5. Oven - Kitchen\n6. Shower - Bathroom\n7. Toilet - Bathroom\n8. Coffee table - Living room\n9. Coffee machine - Kitchen",
+    "Here's where you'd typically find each item:\n\n1. Couch: Living room\n2. Pillow: Bedroom\n3. Dish soap: Kitchen (usually in the area where dishes are washed)\n4. Bedside table: Bedroom\n5. Oven: Kitchen\n6. Shower: Bathroom\n7. Toilet: Bathroom\n8. Coffee table: Living room\n9. Coffee machine: Kitchen",
+    "Here's where you'd typically find each item:\n\n1. Couch: Living room\n2. Pillow: Bedroom\n3. Dish soap: Kitchen (under the sink, often near the dishes or in a designated cleaning supplies area)\n4. Bedside table: Bedroom (next to a bed)\n5. Oven: Kitchen (a major appliance for cooking)\n6. Shower: Bathroom (a bathing fixture)\n7. Toilet: Bathroom (a bathroom fixture)\n8. Coffee table: Living room (a low table for placing items in a seating area)\n9. Coffee machine: Kitchen (a small appliance for brewing coffee)"
+  ],
+  "timestamp": 1754881226.5749989
+}

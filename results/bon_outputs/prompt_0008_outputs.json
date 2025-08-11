@@ -1,0 +1,30 @@
+{
+  "prompt_id": 8,
+  "prompt": "Context: High fidelity (often shortened to Hi-Fi or HiFi) is the high-quality reproduction of sound. It is popular with audiophiles and home audio enthusiasts. Ideally, high-fidelity equipment has inaudible noise and distortion, and a flat (neutral, uncolored) frequency response within the human hearing range.\n\nHigh fidelity contrasts with the lower-quality \u201clo-fi\u201d sound produced by inexpensive audio equipment, AM radio, or the inferior quality of sound reproduction that can be heard in recordings made until the late 1940s.\n\nQuestion: What is HiFI?",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "High Fidelity (HiFi) refers to high-quality sound reproduction with minimal noise and distortion, and a flat frequency response within the human hearing range, typically enjoyed by audiophiles and home audio enthusiasts.",
+    "High fidelity (Hi-Fi) refers to high-quality sound reproduction, ideally free from inaudible noise and distortion, with a flat frequency response within the human hearing range, catering to audiophiles and home audio enthusiasts.",
+    "High Fidelity, often shortened to Hi-Fi, refers to high-quality sound reproduction that accurately reproduces sound without inaudible noise and distortion, providing a neutral frequency response within the human hearing range. It is typically favored by audiophiles and home audio enthusiasts for its ability to provide a clear and detailed listening experience.",
+    "High Fidelity, often shortened to Hi-Fi, refers to the high-quality reproduction of sound with minimal inaudible noise and distortion, and a flat frequency response within the human hearing range. It is popular among audiophiles and home audio enthusiasts.",
+    "High-fidelity (Hi-Fi) refers to high-quality sound reproduction with minimal or inaudible noise and distortion, providing a flat and neutral frequency response within the human hearing range, ideal for audiophiles and home audio enthusiasts.",
+    "High fidelity (Hi-Fi) refers to the high-quality reproduction of sound, ideally characterized by inaudible noise, distortion, and a flat frequency response within the human hearing range, which pleases audiophiles and home audio enthusiasts.",
+    "High Fidelity, often shortened to Hi-Fi, refers to the high-quality reproduction of sound. It involves the use of equipment that produces inaudible noise and distortion-free sound, with a flat and neutral frequency response within the human hearing range, ideal for audiophiles and home audio enthusiasts.",
+    "High Fidelity, or Hi-Fi, is the high-quality reproduction of sound that is popular with audiophiles and home audio enthusiasts. It aims to produce sound that is free from inaudible noise and distortion, and has a flat, neutral frequency response within the human hearing range.",
+    "High Fidelity (Hi-Fi) is a term that refers to the high-quality reproduction of sound, particularly in audio equipment and recordings. It aims to produce a clean, accurate, and uncolored sound with minimal or inaudible noise and distortion, within the range of human hearing.",
+    "HiFi, short for High Fidelity, refers to the high-quality reproduction of sound that is considered ideal for audiophiles and home audio enthusiasts. It is characterized by inaudible noise, minimal distortion, and a flat (neutral, uncolored) frequency response within the human hearing range.",
+    "HiFi, short for High Fidelity, refers to the high-quality reproduction of sound, particularly in home audio equipment. It is characterized by inaudible noise and distortion, along with a flat (neutral, uncolored) frequency response within the human hearing range.",
+    "HiFi, short for High Fidelity, is the high-quality reproduction of sound. It is characterized by minimal or inaudible noise and distortion, along with a flat frequency response within the human hearing range, making it a popular choice among audiophiles and home audio enthusiasts.",
+    "High fidelity (HiFi) is the high-quality reproduction of sound, idealized by audiophiles and home audio enthusiasts. It is characterized by low or inaudible noise, minimal distortion, and a flat frequency response within the human hearing range.",
+    "High fidelity, often shortened to Hi-Fi or HiFi, is the high-quality reproduction of sound, popular with audiophiles and home audio enthusiasts. It is characterized by inaudible noise, distortion, and a flat frequency response within the human hearing range.",
+    "High Fidelity, or Hi-Fi, refers to the high-quality reproduction of sound, ideally characterized by inaudible noise and distortion, and a flat (neutral, uncolored) frequency response within the human hearing range.",
+    "HiFi, short for High Fidelity, refers to the high-quality reproduction of sound with minimal to no audible noise and distortion, and a flat (neutral) frequency response within the human hearing range."
+  ],
+  "timestamp": 1754881226.495093
+}

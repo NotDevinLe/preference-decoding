@@ -1,0 +1,30 @@
+{
+  "prompt_id": 381,
+  "prompt": "Which of Shakespeare\u2019s plays is the longest?",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Hamlet is often considered one of Shakespeare's longest plays, clocking in at around 4,016 lines. However, the longest play is actually 'Henry VI, Part 3' and 'Hamlet', as the other 'Henry VI' parts, particularly 'Henry VI, Part 3' have more lines, in comparison to other works such as 'Richard III'.",
+    "The longest Shakespeare play is \"Hamlet\" followed by 'Henry VI Part 3', however, 'Hamlet' has 4,036 lines (according to some sources), while 'Henry VI Part 3' has around 3,643 lines.",
+    "The longest play by William Shakespeare is \"Hamlet,\" but also the second-longest is a bit of a tie. The total word count of Hamlet is around 4,016 words. Some could argue that Shakespeare's other two plays, \"Troilus and Cressida\" at 3,215 words could be a close second.",
+    "Hamlet is often considered one of the longest of Shakespeare's plays. However, another contender for the longest play is 'Richard III'.",
+    "Hamlet is considered one of the longest Shakespearean plays, but the longest play is actually Henry VI Part 3, Part 2 and Part 1 but when comparing them to the rest of his works, it is actually Henry VI Part 3",
+    "The longest play written by Shakespeare is 'Hamlet'. However, some people measure by the number of lines, which is said to be 'Henry VI Part 3' in most scholarly reports and others by word count 'Henry V'. But, typically, 'Hamlet' is the longest in terms of the actual lines, with a total of 4,026 lines.",
+    "Hamlet is often considered the longest Shakespearean play, having around 4,024 lines. However, the play \"Samson Agonistes\" wasn't written by Shakespeare, it was actually written by John Milton. \n\nIf 'Hamlet' is not included, then \"The History of Henry VIII\" is the longest, having about 3,202 lines.",
+    "'Hamlet' is not typically considered the longest of Shakespeare's plays, while 'The History of Henry VIII' is often considered the shortest. Among the other plays, 'Hamlet' typically clocks in around 4,000 lines.",
+    "The longest Shakespearean play is 'Hamlet'.",
+    "The longest of Shakespeare's plays is 'Hamlet.' It has 4,016 lines.",
+    "The longest Shakespeare play is 'Hamlet', which has approximately 4,016 lines.",
+    "Hamlet is generally considered the longest of Shakespeare's plays, however, other sources state it is actually Henry VI, Part 3 and also Richard III is disputed as to whether it is longer than Hamlet.",
+    "Hamlet is the longest of Shakespeare's plays, however Romeo and Juliet is close behind but usually Hamlet has the most scenes.",
+    "Hamlet is generally considered to be the longest of Shakespeare's plays, with approximately 4,016 lines in the First Folio edition.",
+    "The longest play by William Shakespeare is 'Henry VI, Part 3' but it is a bit debatable and sometimes considered 'Hamlet' or 'Romeo and Juliet' in their full versions have long versions, but the longest one is 'Henry VI, Part 3' or a long version of 'Hamlet'",
+    "Hamlet is generally considered the longest play of the Shakespearean canon."
+  ],
+  "timestamp": 1754881226.9031584
+}

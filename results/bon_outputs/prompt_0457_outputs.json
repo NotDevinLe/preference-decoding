@@ -1,0 +1,30 @@
+{
+  "prompt_id": 457,
+  "prompt": "Which of the following animals are primates: Human, Dog, Bonobos, Cat, Bats, Goat, Bears, Orangutans, Wolf, Lion, Squirrel, Koala, Cheetah, Deer, Orca, Gorillas, Camel, Hamsters, Lemurs, Blue whale, Chimpanzee",
+  "category": "classification",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The following animals are primates:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs\n\nThese animals belong to the order Primates, which includes humans, apes, and monkeys.",
+    "The primates among the given animals are:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs",
+    "The following are primates:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs\n\nThese are all members of the order Primates, a group that includes prosimians (lemurs, lorises, and tarsiers) and anthropoids (monkeys and apes).",
+    "The primates among the given animals are:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs\n\nThese animals are all part of the order Primates, which includes prosimians (lemurs, lorises, tarsiers), monkeys, and apes.",
+    "The following animals are primates:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs\n\nAll the other animals listed belong to different taxonomic groups. Here's a breakdown:\n\n- Dog and Wolf: Canidae family (carnivorous mammals)\n- Cat: Felidae family (carnivorous mammals)\n- Bats: Chiroptera order (mammals, but not primates, flying mammals)\n- Goat and Deer: Bovidae family (ungulates, hooved mammals)\n- Bears: Ursidae family (carnivorous or omnivorous mammals)\n- Koala: Marsupial, specifically a part of the family Phascolarctidae\n- Cheetah: Felidae family (carnivorous mammals)\n- Orca (also known as the Killer Whale): Delphinidae family (cetaceans, marine mammals)\n- Hamsters: Rodentia order (small, burrowing mammals)\n- Squirrel: Rodentia order (small, tree-dwelling mammals)",
+    "The primates from the given list are:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs",
+    "The primates among the listed animals are:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs",
+    "The following are primates:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs",
+    "The primates from the given list are:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs",
+    "The primate animals listed are:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs",
+    "The primates from the list are:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs",
+    "The primates among the given list are:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs",
+    "The primates among the given animals are:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs\n\nThese animals belong to the order Primates.",
+    "The primates from the given list are:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs",
+    "The following are primates: \n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs",
+    "The primate animals from the given list are:\n\n1. Human\n2. Bonobos\n3. Orangutans\n4. Gorillas\n5. Chimpanzee\n6. Lemurs"
+  ],
+  "timestamp": 1754881227.0147154
+}

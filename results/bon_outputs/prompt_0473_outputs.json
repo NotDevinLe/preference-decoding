@@ -1,0 +1,30 @@
+{
+  "prompt_id": 473,
+  "prompt": "Context: Although dogs are the most abundant and widely distributed terrestrial carnivores, feral and free-ranging dogs' potential to compete with other large carnivores is limited by their strong association with humans. For example, a review of the studies in dogs' competitive effects on sympatric carnivores did not mention any research on competition between dogs and wolves. Although wolves are known to kill dogs, they tend to live in pairs or in small packs in areas where they are highly persecuted, giving them a disadvantage facing large dog groups.\n\nWolves kill dogs wherever they are found together. In some instances, wolves have displayed an uncharacteristic fearlessness of humans and buildings when attacking dogs to the extent that they have to be beaten off or killed. Although the numbers of dogs killed each year are relatively low, it induces a fear of wolves entering villages and farmyards to take dogs and losses of dogs to wolves have led to demands for more liberal wolf hunting regulations.\n\nCoyotes and big cats have also been known to attack dogs. In particular, leopards are known to have a preference for dogs and have been recorded to kill and consume them, no matter what their size. Siberian tigers in the Amur River region have killed dogs in the middle of villages. This indicates that the dogs were targeted. Amur tigers will not tolerate wolves as competitors within their territories, and the tigers could be considering dogs in the same way. Striped hyenas are known to kill dogs in their range.\n\nQuestion: Please list the main dog predators according to the passage",
+  "category": "summarization",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The main dog predators mentioned in the passage are:\n\n1. Wolves\n2. Coyotes\n3. Big cats:\n   a. Leopards (specifically mentioned as having a preference for dogs)\n   b. Siberian tigers (particularly those in the Amur River region)\n4. Striped hyenas",
+    "Based on the passage, the main dog predators are:\n\n1. Wolves\n2. Coyotes\n3. Leopards\n4. Big cats (in general)\n5. Siberian tigers\n6. Striped hyenas",
+    "The main dog predators mentioned in the passage are:\n\n1. Wolves\n2. Coyotes\n3. Big cats (no specific type mentioned, but the Amur tiger is mentioned as an example)\n4. Leopards (specifically mentioned as having a preference for dogs)\n5. Striped hyenas",
+    "The main dog predators mentioned in the passage are:\n\n1. Wolves\n2. Coyotes\n3. Leopards\n4. Siberian tigers\n5. Striped hyenas",
+    "According to the passage, the main dog predators are:\n\n1. Wolves\n2. Coyotes\n3. Leopards\n4. Siberian tigers\n5. Striped hyenas",
+    "The main dog predators mentioned in the passage are:\n\n1. Wolves\n2. Coyotes\n3. Leopards\n4. Siberian tigers\n5. Striped hyenas",
+    "The main dog predators mentioned in the passage are:\n\n1. Wolves\n2. Coyotes\n3. Leopards\n4. Siberian tigers\n5. Striped hyenas",
+    "The main dog predators mentioned in the passage are:\n\n1. Wolves\n2. Coyotes\n3. Big cats (general term, but specifically mentions leopards)\n4. Siberian tigers\n5. Striped hyenas",
+    "The main dog predators mentioned in the passage are:\n\n1. Wolves\n2. Coyotes\n3. Big cats (including leopards and Siberian tigers)\n4. Striped hyenas",
+    "The main dog predators mentioned in the passage are:\n\n1. Wolves\n2. Coyotes\n3. Big cats (specifically, leopards and Siberian tigers)\n4. Striped hyenas",
+    "The main dog predators mentioned in the passage are:\n\n1. Wolves\n2. Coyotes\n3. Leopards\n4. Big cats (including Siberian tigers, but no specific subspecies apart from Siberian tigers is mentioned)\n5. Striped hyenas",
+    "The main dog predators mentioned in the passage are:\n\n1. Wolves\n2. Coyotes\n3. Leopards\n4. Amur tigers\n5. Striped hyenas",
+    "The main dog predators mentioned in the passage are:\n\n1. Wolves\n2. Coyotes\n3. Big cats (general term, but specific examples include)\n   - Leopards\n   - Siberian tigers\n4. Striped hyenas",
+    "The main dog predators mentioned in the passage are:\n\n1. Wolves\n2. Coyotes\n3. Big cats:\n   - Leopards\n   - Siberian tigers (specifically in the Amur River region)\n4. Striped hyenas",
+    "According to the passage, the main dog predators are:\n\n1. Wolves\n2. Coyotes\n3. Big cats (which include leopards and Siberian tigers)\n4. Striped hyenas",
+    "The main dog predators mentioned in the passage are:\n\n1. Wolves\n2. Coyotes\n3. Big cats (includes leopards)\n4. Amur tigers\n5. Striped hyenas"
+  ],
+  "timestamp": 1754881227.050758
+}

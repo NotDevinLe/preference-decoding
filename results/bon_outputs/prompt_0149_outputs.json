@@ -1,0 +1,30 @@
+{
+  "prompt_id": 149,
+  "prompt": "Context: Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy. The system offers a complete solution to detect and locate an incoming torpedo and to apply countermeasures to protect naval platform against torpedo attack. It was developed as a joint project of the Naval Physical and Oceanographic Laboratory (NPOL), Kochi and the Naval Science and Technological Laboratory (NSTL), Visakhapatnam. Bharat Electronics is manufacturing it India.\n\nQuestion: What is the Maareech Advanced Torpedo Defence System (ATDS)?",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy. It is designed to detect and locate incoming torpedoes and apply countermeasures to protect naval platforms from torpedo attacks.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy. It is designed to detect and locate incoming torpedoes and apply countermeasures to protect naval platforms against torpedo attacks.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy. It provides a comprehensive solution for detecting and locating incoming torpedoes and applying countermeasures to protect naval platforms from torpedo attacks.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy. It provides a comprehensive solution for detecting and locating incoming torpedoes and applying countermeasures to protect naval platforms from torpedo attacks.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy. It offers a complete solution for detecting and locating incoming torpedoes and applying countermeasures to protect naval platforms against torpedo attacks.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy. It is designed to provide a complete solution to detect and locate incoming torpedoes, and to apply countermeasures to protect naval platforms against torpedo attacks.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy. It provides a comprehensive solution for detecting and locating incoming torpedoes and applying countermeasures to protect naval platforms from torpedo attacks.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy. It provides a comprehensive solution to detect and locate incoming torpedoes and apply countermeasures to protect naval platforms from torpedo attacks.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy. It provides a comprehensive solution to detect and locate incoming torpedoes and apply countermeasures to protect naval platforms from torpedo attacks.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy. It provides a comprehensive solution to detect and locate incoming torpedoes and apply countermeasures to protect naval platforms from torpedo attacks.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy. It offers a complete solution to detect and locate an incoming torpedo and to apply countermeasures to protect a naval platform against a torpedo attack.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy. It offers a comprehensive solution to detect and locate incoming torpedoes and apply countermeasures to protect naval platforms from torpedo attacks.",
+    "The Maareech Advanced Torpedo Defence System (ATDS) is a torpedo detection and countermeasure system used by the Indian Navy."
+  ],
+  "timestamp": 1754881226.5887806
+}

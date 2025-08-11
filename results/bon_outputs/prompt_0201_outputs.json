@@ -1,0 +1,30 @@
+{
+  "prompt_id": 201,
+  "prompt": "Context: The group originated in 1987, when a concert choir program was having a variety night occurring at Fullerton College. When John Tebay, the choir director, suggested that Andre Peek (1st tenor and lead vocalist at that time) and Armando Fonseca (2nd tenor) perform together, both of them decided to take Mr. Tebays advice and form a quartet, an a cappella group. Two additional members along the way, Royce Reynolds (bass) and Todd Dixon (baritone)got together and the foursome gained notice. Since then The Alley Cats have performed for many audiences, ranging from elementary school fun nights to being Grand.prize.winners on the Gong Show. Performing on the Arsenio Hall show to The Tonight Show with Jay Leno, as well as opening for Leno at his Las Vegas shows. The Alley Cats's sound has been heard as well at The White House. The Alley Cats appeared in the Richard Simmons workout video Dance Your Pants Off! performed the song Celebration.\n\nQuestion: Give this paragraph about the Alley Cats a capella group, what famous talk show hosts have they performed for?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The Alley Cats a cappella group has performed for two famous talk show hosts:\n\n1. Arsenio Hall\n2. Jay Leno",
+    "According to the text, The Alley Cats have performed for the following famous talk show hosts:\n\n1. Jay Leno (The Tonight Show with Jay Leno)\n2. Arsenio Hall (The Arsenio Hall show)",
+    "According to the text, the Alley Cats have performed for the following famous talk show hosts:\n\n1. Arsenio Hall on \"The Arsenio Hall show\"\n2. Jay Leno on \"The Tonight Show with Jay Leno\"",
+    "According to the paragraph, The Alley Cats have performed on the following famous talk shows:\n\n1. The Arsenio Hall Show\n2. The Tonight Show with Jay Leno",
+    "The Alley Cats a cappella group have performed on the following famous talk shows:\n\n1. The Tonight Show with Jay Leno\n2. The Arsenio Hall show",
+    "The Alley Cats have performed for the following famous talk show hosts:\n\n1. Arsenio Hall\n2. Jay Leno",
+    "The famous talk show hosts that The Alley Cats a cappella group have performed for include Jay Leno and Arsenio Hall.",
+    "According to the text, The Alley Cats have performed for the following famous talk show hosts: \n\n1. Jay Leno (on \"The Tonight Show with Jay Leno\")\n2. Arsenio Hall (on \"The Arsenio Hall Show\")",
+    "The Alley Cats a cappella group has performed for two famous talk show hosts: Arsenio Hall and Jay Leno. They appeared on \"The Arsenio Hall show\" and \"The Tonight Show with Jay Leno\".",
+    "The Alley Cats have performed on two famous talk shows: \n\n1. The Arsenio Hall show\n2. The Tonight Show with Jay Leno.",
+    "The Alley Cats a cappella group have performed on two famous talk shows:\n\n1. The Arsenio Hall show\n2. The Tonight Show with Jay Leno",
+    "The Alley Cats a cappella group has performed for two famous talk show hosts:\n\n1. Arsenio Hall (on \"The Arsenio Hall Show\")\n2. Jay Leno (on \"The Tonight Show with Jay Leno\")",
+    "According to the paragraph, The Alley Cats have performed on the following famous talk shows:\n\n1. The Arsenio Hall show\n2. The Tonight Show with Jay Leno",
+    "The Alley Cats a cappella group performed for two famous talk show hosts: \n\n1. Arsenio Hall\n2. Jay Leno",
+    "The famous talk show hosts that the Alley Cats have performed for include Arsenio Hall, and Jay Leno.",
+    "According to the paragraph, The Alley Cats a cappella group has performed for two famous talk show hosts: \n\n1. Arsenio Hall (on his show \"The Arsenio Hall Show\")\n2. Jay Leno (on \"The Tonight Show with Jay Leno\", and also as an opening act at his Las Vegas shows)"
+  ],
+  "timestamp": 1754881226.6211739
+}

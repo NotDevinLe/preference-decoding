@@ -1,0 +1,30 @@
+{
+  "prompt_id": 480,
+  "prompt": "Context: Nintendo was founded in 1889 as Nintendo Karuta by craftsman Fusajiro Yamauchi and originally produced handmade hanafuda playing cards. After venturing into various lines of business during the 1960s and acquiring a legal status as a public company, Nintendo distributed its first console, the Color TV-Game, in 1977. It gained international recognition with the release of Donkey Kong in 1981 and the Nintendo Entertainment System and Super Mario Bros. in 1985.\n\nQuestion: Given this reference text about a video game, when was Donkey Kong released?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Donkey Kong was released in 1981.",
+    "The video game Donkey Kong was released in 1981.",
+    "According to the reference text, Donkey Kong was released in 1981.",
+    "Donkey Kong was released in 1981.",
+    "Donkey Kong was released in 1981.",
+    "According to the reference text, Donkey Kong was released in 1981.",
+    "Donkey Kong was released in 1981.",
+    "Donkey Kong was released in 1981.",
+    "According to the text, Donkey Kong was released in 1981.",
+    "Donkey Kong was released in 1981.",
+    "According to the reference text, Donkey Kong was released in 1981.",
+    "Donkey Kong was released in 1981.",
+    "According to the text, Donkey Kong was released in 1981.",
+    "According to the given reference text, Donkey Kong was released in 1981.",
+    "Donkey Kong was released in 1981.",
+    "According to the reference text, Donkey Kong was released in 1981."
+  ],
+  "timestamp": 1754881227.0692787
+}

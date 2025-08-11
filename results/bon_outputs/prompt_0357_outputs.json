@@ -1,0 +1,30 @@
+{
+  "prompt_id": 357,
+  "prompt": "Context: The 8086 (also called iAPX 86) is a 16-bit microprocessor chip designed by Intel between early 1976 and June 8, 1978, when it was released. The Intel 8088, released July 1, 1979, is a slightly modified chip with an external 8-bit data bus (allowing the use of cheaper and fewer supporting ICs),[note 1] and is notable as the processor used in the original IBM PC design.\n\nQuestion: When was the 8088 processor released?",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The 8088 processor was released on July 1, 1979.",
+    "The 8088 processor was released on July 1, 1979.",
+    "The 8088 processor was released on July 1, 1979.",
+    "The Intel 8088 processor was released on July 1, 1979.",
+    "The 8088 processor was released on July 1, 1979.",
+    "The Intel 8088 processor was released on July 1, 1979.",
+    "The Intel 8088 processor was released on July 1, 1979.",
+    "The Intel 8088 processor was released on July 1, 1979.",
+    "The 8088 processor was released on July 1, 1979.",
+    "The Intel 8088 processor was released on July 1, 1979.",
+    "The 8088 processor was released on July 1, 1979.",
+    "The 8088 processor was released on July 1, 1979.",
+    "The 8088 processor was released on July 1, 1979.",
+    "The Intel 8088 processor was released on July 1, 1979.",
+    "The Intel 8088 processor was released on July 1, 1979.",
+    "The 8088 processor was released on July 1, 1979."
+  ],
+  "timestamp": 1754881226.8168461
+}

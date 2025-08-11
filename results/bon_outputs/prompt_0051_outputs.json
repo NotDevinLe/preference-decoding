@@ -1,0 +1,30 @@
+{
+  "prompt_id": 51,
+  "prompt": "Which of the following are colors: red, black, yellow, orange, sun, sunflower, chips, book, white, pink, blue, keyboard.",
+  "category": "classification",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The colors from the list are:\n\n1. red\n2. black\n3. yellow\n4. orange\n5. white\n6. pink\n7. blue",
+    "The following are colors: \n\n1. red\n2. black\n3. yellow\n4. orange\n5. white\n6. pink\n7. blue",
+    "The colors are: \n\n1. Red\n2. Black\n3. Yellow\n4. Orange\n5. White\n6. Pink\n7. Blue",
+    "The following are colors:\n\n1. Red\n2. Black\n3. Yellow\n4. Orange\n5. White\n6. Pink\n7. Blue",
+    "The colors are:\n\n1. Red\n2. Black\n3. Yellow\n4. Orange\n5. White\n6. Pink\n7. Blue",
+    "The colors from the list are:\n\n1. Red\n2. Black\n3. Yellow\n4. Orange\n5. White\n6. Pink\n7. Blue",
+    "The following are colors: \n- red\n- black\n- yellow\n- orange\n- white\n- pink\n- blue",
+    "The colors listed are:\n\n1. Red\n2. Black\n3. Yellow\n4. Orange\n5. White\n6. Pink\n7. Blue",
+    "The colors from the list are:\n\n1. Red\n2. Black\n3. Yellow\n4. Orange\n5. White\n6. Pink\n7. Blue",
+    "The colors are: \n\n1. Red\n2. Black\n3. Yellow\n4. Orange\n5. White\n6. Pink\n7. Blue",
+    "The colors listed from your options are:\n\n1. Red\n2. Black\n3. Yellow\n4. Orange\n5. White\n6. Pink\n7. Blue\n\nThe following are not colors:\n\n1. Sun (a celestial body)\n2. Sunflower (a type of flower)\n3. Chips (a type of food or small fragments)\n4. Book (a written or printed work)\n5. Keyboard (an input device)",
+    "The following are colors:\n\n1. red\n2. black\n3. yellow\n4. orange\n5. white\n6. pink\n7. blue\n\nThe following are not colors:\n\n1. sun\n2. sunflower (a flower, not a color)\n3. chips (a type of snack)\n4. book (a physical object)\n5. keyboard (an electronic device)",
+    "The colors listed are:\n\n1. Red\n2. Black\n3. Yellow\n4. Orange\n5. Pink\n6. White\n7. Blue",
+    "The following are colors:\n\n1. Red\n2. Black\n3. Yellow\n4. Orange\n5. Pink\n6. White\n7. Blue",
+    "The colors from the list are:\n\n1. Red\n2. Black\n3. Yellow\n4. Orange\n5. White\n6. Pink\n7. Blue",
+    "The following are colors:\n\n1. Red\n2. Black\n3. Yellow\n4. Orange\n5. White\n6. Pink\n7. Blue"
+  ],
+  "timestamp": 1754881226.522252
+}

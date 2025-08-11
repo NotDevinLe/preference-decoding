@@ -1,0 +1,30 @@
+{
+  "prompt_id": 258,
+  "prompt": "Context: India is a megadiverse country, a term employed for 17 countries which display high biological diversity and contain many species exclusively indigenous, or endemic, to them. India is a habitat for 8.6% of all mammal species, 13.7% of bird species, 7.9% of reptile species, 6% of amphibian species, 12.2% of fish species, and 6.0% of all flowering plant species. Fully a third of Indian plant species are endemic. India also contains four of the world's 34 biodiversity hotspots, or regions that display significant habitat loss in the presence of high endemism.\n\nQuestion: From the text below extract the types of species and the percentage of its habitat in the form {Species}:{Percentage} and place them as a bullet list",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Here's the list of species types and their percentages as per the given text:\n\n* Mammals: 8.6%\n* Birds: 13.7%\n* Reptiles: 7.9%\n* Amphibians: 6%\n* Fish: 12.2%\n* Flowering plants: 6.0%",
+    "Here's a bullet list of the types of species and their percentages in India:\n\n\u2022 Mammals: 8.6%\n\u2022 Birds: 13.7%\n\u2022 Reptiles: 7.9%\n\u2022 Amphibians: 6%\n\u2022 Fish: 12.2%\n\u2022 Flowering plants: 6.0%",
+    "Based on the text, here are the types of species and their percentage of habitats in India:\n\n\u2022 Mammals: 8.6%\n\u2022 Bird species: 13.7%\n\u2022 Reptile species: 7.9%\n\u2022 Amphibian species: 6%\n\u2022 Fish species: 12.2%\n\u2022 Flowering plant species: 6.0%",
+    "Based on the provided context, here's a list of the types of species and their corresponding percentages in India:\n\n\u2022 Mammals: 8.6%\n\u2022 Birds: 13.7%\n\u2022 Reptiles: 7.9%\n\u2022 Amphibians: 6%\n\u2022 Fish: 12.2%\n\u2022 Flowering plants: 6.0%",
+    "Here's the list of species types and their percentages in the form {Species}:{Percentage}:\n\n\u2022 Mammal species: 8.6%\n\u2022 Bird species: 13.7%\n\u2022 Reptile species: 7.9%\n\u2022 Amphibian species: 6%\n\u2022 Fish species: 12.2%\n\u2022 Flowering plant species: 6.0%",
+    "Based on the given information, here's the list of species with their percentage habitats:\n\n\u2022 Mammal species: 8.6%\n\u2022 Bird species: 13.7%\n\u2022 Reptile species: 7.9%\n\u2022 Amphibian species: 6%\n\u2022 Fish species: 12.2%\n\u2022 Flowering plant species: 6.0%",
+    "Here's the list of species types and their percentages from the text:\n\n\u2022 Mammals: 8.6%\n\u2022 Bird species: 13.7%\n\u2022 Reptile species: 7.9%\n\u2022 Amphibian species: 6%\n\u2022 Fish species: 12.2%\n\u2022 Flowering plant species: 6.0%",
+    "\u2022 Mammals: 8.6%\n\u2022 Birds: 13.7%\n\u2022 Reptiles: 7.9%\n\u2022 Amphibians: 6.0%\n\u2022 Fish: 12.2%\n\u2022 Flowering plants: 6.0%",
+    "Here's the list of species and their percentage in India based on the text:\n\n\u2022 Mammals: 8.6%\n\u2022 Birds: 13.7%\n\u2022 Reptiles: 7.9%\n\u2022 Amphibians: 6.0%\n\u2022 Fish: 12.2%\n\u2022 Flowering plants: 6.0%",
+    "Here's the list of species and their percentages:\n\n\u2022 Mammals: 8.6%\n\u2022 Birds: 13.7%\n\u2022 Reptiles: 7.9%\n\u2022 Amphibians: 6%\n\u2022 Fish: 12.2%\n\u2022 Flowering plants: 6.0%",
+    "Here's the list of species with their respective percentages in India:\n\n\u2022 Mammals: 8.6%\n\u2022 Birds: 13.7%\n\u2022 Reptiles: 7.9%\n\u2022 Amphibians: 6%\n\u2022 Fish: 12.2%\n\u2022 Flowering plants: 6.0%",
+    "Here's the list of species and their percentages found in India:\n\n* Mammal: 8.6%\n* Bird: 13.7%\n* Reptile: 7.9%\n* Amphibian: 6%\n* Fish: 12.2%\n* Flowering plant: 6.0%",
+    "Here's a bullet list of the species and their percentages of India's habitat mentioned in the text:\n\n\u2022 Mammal: 8.6%\n\u2022 Bird: 13.7%\n\u2022 Reptile: 7.9%\n\u2022 Amphibian: 6.0% (Note: There seems to be a mistake in the text as amphibian species is mentioned as 6% whereas the question states 6.0%, I've placed 6.0% as the answer as given in the text but it is more likely that the amphibian is meant to have 6.0% should be 6%)\n\u2022 Fish: 12.2%\n\u2022 Flowering plant: 6.0%",
+    "Based on the given context, here are the types of species and their corresponding percentages in the form {Species}:{Percentage} as a bullet list:\n\n\u2022 Mammals: 8.6%\n\u2022 Birds: 13.7%\n\u2022 Reptiles: 7.9%\n\u2022 Amphibians: 6%\n\u2022 Fish: 12.2%\n\u2022 Flowering plants: 6%",
+    "Here is the list of species and their percentages in India:\n\n\u2022 Mammals: 8.6%\n\u2022 Birds: 13.7%\n\u2022 Reptiles: 7.9%\n\u2022 Amphibians: 6%\n\u2022 Fish: 12.2%\n\u2022 Flowering plants: 6.0%",
+    "Here's the list of species with their respective percentages in the format you requested:\n\n\u2022 Mammal: 8.6%\n\u2022 Bird: 13.7%\n\u2022 Reptile: 7.9%\n\u2022 Amphibian: 6%\n\u2022 Fish: 12.2%\n\u2022 Flowering Plant: 6.0%"
+  ],
+  "timestamp": 1754881226.659596
+}

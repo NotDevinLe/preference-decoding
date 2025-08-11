@@ -1,0 +1,30 @@
+{
+  "prompt_id": 36,
+  "prompt": "Context: Wine is an alcoholic drink typically made from fermented grapes. Yeast consumes the sugar in the grapes and converts it to ethanol and carbon dioxide, releasing heat in the process. Different varieties of grapes and strains of yeasts are major factors in different styles of wine. These differences result from the complex interactions between the biochemical development of the grape, the reactions involved in fermentation, the grape's growing environment (terroir), and the wine production process. Many countries enact legal appellations intended to define styles and qualities of wine. These typically restrict the geographical origin and permitted varieties of grapes, as well as other aspects of wine production. Wines can be made by fermentation of other fruit crops such as plum, cherry, pomegranate, blueberry, currant and elderberry.\n\nQuestion: What is wine?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Wine is an alcoholic drink typically made from fermented grapes, although it can also be made from other fruits like plums, cherries, pomegranates, blueberries, currants, and elderberries.",
+    "Wine is an alcoholic drink typically made from fermented grapes. However, it can also be made from other fruits such as plum, cherry, pomegranate, blueberry, currant, and elderberry.",
+    "Wine is an alcoholic drink typically made from fermented grapes, although it can also be made from other types of fruits. The fermentation process involves yeast consuming the sugar in the fruit and converting it into ethanol and carbon dioxide, producing heat in the process.",
+    "Wine is an alcoholic drink typically made from fermented grapes, although other fruits can also be used. It is produced through a fermentation process where yeast consumes the sugar in the fruit and converts it to ethanol and carbon dioxide, releasing heat in the process.",
+    "Wine is an alcoholic drink typically made from fermented grapes, although it can also be made from other fruit crops such as plum, cherry, pomegranate, blueberry, currant, and elderberry. The fermentation process involves yeast converting the sugar in the grapes or other fruit into ethanol and carbon dioxide, releasing heat in the process.",
+    "Wine is an alcoholic drink typically made from fermented grapes.",
+    "Wine is an alcoholic drink typically made from fermented grapes.",
+    "Wine is an alcoholic drink typically made from fermented grapes.",
+    "Wine is an alcoholic drink typically made from fermented grapes.",
+    "Wine is an alcoholic drink typically made from fermented grapes.",
+    "Wine is an alcoholic drink typically made from fermented grapes.",
+    "Wine is an alcoholic drink typically made from fermented grapes, as well as other fruits, such as plum, cherry, pomegranate, blueberry, currant, and elderberry.",
+    "Wine is an alcoholic drink typically made from fermented grapes.",
+    "Wine is an alcoholic drink typically made from fermented grapes, but can also be made from other fruit crops. It is created through a process where yeast consumes the sugar in the fruit and converts it to ethanol and carbon dioxide, releasing heat in the process.",
+    "Wine is an alcoholic drink typically made from fermented grapes, produced through the conversion of grape sugars into ethanol and carbon dioxide by yeast, releasing heat in the process.",
+    "Wine is an alcoholic drink typically made from fermented grapes."
+  ],
+  "timestamp": 1754881226.512077
+}

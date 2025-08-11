@@ -1,0 +1,30 @@
+{
+  "prompt_id": 88,
+  "prompt": "Identify which car manufacturer is Chinese or American: Dongfeng, Chrysler",
+  "category": "classification",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Dongfeng is a Chinese automobile manufacturer, specifically a state-owned joint venture based in Wuhan, Hubei, China. \n\nChrysler is an American automobile manufacturer, specifically an American brand of FCA US LLC (Fiat Chrysler Automobiles).",
+    "Dongfeng is a Chinese car manufacturer, while Chrysler is an American car manufacturer.",
+    "Dongfeng is a Chinese car manufacturer, and it is a joint venture between the Chinese state-owned company Dongfeng Motor Corporation and several international partners, including Toyota, Renault, Peugeot, and others.\n\nChrysler is an American car manufacturer, founded in the United States.",
+    "Dongfeng is a Chinese car manufacturer, specifically a state-owned company that has partnerships with various international brands. \n\nChrysler, on the other hand, is an American automobile brand, currently a subsidiary of Stellantis (previously Fiat Chrysler Automobiles, or FCA).",
+    "Dongfeng is a Chinese car manufacturer, while Chrysler is an American car manufacturer.",
+    "Dongfeng is a Chinese car manufacturer. It is a state-owned enterprise in China and one of the largest automakers in the country.\n\nChrysler, on the other hand, is an American car manufacturer. It is a subsidiary of the multinational corporation Stellantis N.V. (previously FCA (Fiat Chrysler Automobiles)), which is based in the Netherlands but has its roots in Italy and the United States.",
+    "Dongfeng is a Chinese automobile manufacturer. It is a state-owned Chinese automaker, headquartered in Wuhan, Hubei, China. \n\nChrysler, on the other hand, is an American automobile manufacturer. It was originally an American brand, but it has changed ownership several times and is now owned by the Stellantis company, a multinational corporation.",
+    "- Dongfeng is a Chinese car manufacturer. It's a state-owned Chinese automaker based in Wuhan, Hubei, China.\n\n- Chrysler is an American car manufacturer. It's a subsidiary of Stellantis (previously Fiat Chrysler Automobiles or FCA).",
+    "- Dongfeng is a Chinese car manufacturer. Dongfeng Motor Corporation is a Chinese state-owned multinational automotive manufacturing company. \n\n- Chrysler is an American car manufacturer. It is a subsidiary of Stellantis (previously known as Fiat Chrysler Automobiles, or FCA).",
+    "Dongfeng is a Chinese car manufacturer, and Chrysler is an American car manufacturer. \n\nDongfeng is a Chinese state-owned automobile manufacturing company, headquartered in Wuhan, Hubei, China. \n\nChrysler, on the other hand, is an American automobile brand and a subsidiary of Stellantis, an international automotive company. Chrysler was founded in the United States in 1925.",
+    "Dongfeng is a Chinese car manufacturer, while Chrysler is an American car manufacturer.",
+    "Dongfeng is a Chinese car manufacturer, and Chrysler is an American car manufacturer.",
+    "Dongfeng is a Chinese car manufacturer. It is a state-owned Chinese automobile manufacturer headquartered in Wuhan, Hubei, China. \n\nChrysler is an American car manufacturer. It is an American automobile brand that is a subsidiary of the multinational corporation Stellantis, and previously was a division of Fiat Chrysler Automobiles (FCA) and Daimler AG (in a 20% stake).",
+    "Dongfeng is a Chinese car manufacturer, as it is a state-owned Chinese automobile and automotive manufacturing company headquartered in Wuhan, Hubei, China. \n\nChrysler is an American car manufacturer, although it has undergone significant changes over the years. It was founded in the United States and was acquired by Fiat in 2014.",
+    "Dongfeng is a Chinese car manufacturer, while Chrysler is an American car manufacturer.",
+    "The answer is:\n\n- Dongfeng: Chinese\n- Chrysler: American (Note: Chrysler is currently owned by Stellantis, a multinational automotive corporation that includes brands such as Dodge, Jeep, and Ram, with its roots originating in the United States.)"
+  ],
+  "timestamp": 1754881226.5446677
+}

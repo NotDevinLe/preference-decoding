@@ -1,0 +1,30 @@
+{
+  "prompt_id": 66,
+  "prompt": "Context: The Washington Commanders are a professional American football team based in the Washington metropolitan area. Formerly known as the Washington Redskins, the team competes in the National Football League (NFL) as a member of the National Football Conference (NFC) East division. The team plays its home games at FedExField in Landover, Maryland; its headquarters and training facility are in Ashburn, Virginia. The team has played more than 1,000 games and is one of only five in the NFL with more than 600 total wins. Washington was among the first NFL franchises with a fight song, \"Hail to the Commanders\", which is played by their marching band after every touchdown scored by the team at home. The franchise is valued by Forbes at US$5.6 billion, making them the league's sixth-most valuable team as of 2022.\n\nQuestion: What was the former name of The Washington Commanders football team?",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The former name of the Washington Commanders football team was the Washington Redskins.",
+    "The former name of The Washington Commanders football team was the Washington Redskins.",
+    "The former name of the Washington Commanders football team is the Washington Redskins.",
+    "The Washington Commanders' former name was the Washington Redskins.",
+    "The former name of the Washington Commanders football team was the Washington Redskins.",
+    "The former name of the Washington Commanders football team was the Washington Redskins.",
+    "The former name of the Washington Commanders football team was the Washington Redskins.",
+    "The Washington Commanders' former name was the Washington Redskins.",
+    "The former name of the Washington Commanders football team was the Washington Redskins.",
+    "The Washington Commanders football team's former name was the Washington Redskins.",
+    "The Washington Commanders' former name was the Washington Redskins.",
+    "The former name of The Washington Commanders football team is the Washington Redskins.",
+    "The former name of The Washington Commanders football team was the Washington Redskins.",
+    "The former name of the Washington Commanders football team was the Washington Redskins.",
+    "The former name of The Washington Commanders football team was the Washington Redskins.",
+    "The former name of the Washington Commanders football team was the Washington Redskins."
+  ],
+  "timestamp": 1754881226.5316756
+}

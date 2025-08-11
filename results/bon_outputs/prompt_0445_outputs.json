@@ -1,0 +1,30 @@
+{
+  "prompt_id": 445,
+  "prompt": "How many syllables are in the word smarter?",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "There are 2 syllables in the word \"smarter\".",
+    "There are 2 syllables in the word \"smarter\": smart-er.",
+    "There are 2 syllables in the word 'smarter': smart-er.",
+    "The word \"smarter\" has 2 syllables: smart-er.",
+    "The word \"smarter\" has 2 syllables: smart-er.",
+    "The word 'smarter' has 2 syllables: smart-er.",
+    "There are 2 syllables in the word \"smarter\".",
+    "There are 2 syllables in the word \"smarter\": smart-er.",
+    "There are 2 syllables in the word \"smarter\": smart-er.",
+    "There are 2 syllables in the word \"smarter\": smart-er.",
+    "There are 2 syllables in the word \"smarter\": smart-er.",
+    "There are 2 syllables in the word \"smarter\": smart-er.",
+    "There are 2 syllables in the word \"smarter\".",
+    "There are 2 syllables in the word \"smarter\": smart-er.",
+    "The word \"smarter\" has 2 syllables: smart-er.",
+    "The word 'smarter' has 2 syllables (smart-er)."
+  ],
+  "timestamp": 1754881226.9900336
+}

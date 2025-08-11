@@ -1,0 +1,30 @@
+{
+  "prompt_id": 11,
+  "prompt": "Context: The territory of Kardzhali province was acquired by Bulgaria during the First Balkan War in 1912. In 1913 the region was organized as the district (\u043e\u043a\u0440\u044a\u0433, okr\u0103g in Bulgarian) of Mestanli. This district was part of Stara Zagora province from 1934 until 1949, then it was transferred to the newly formed Haskovo district. In 1959 Kardzhali became the center of a new district with similar borders to the current province. Between 1987 and 1999, the region was part of Haskovo Province, after which it was restored, now as a province and with slightly changed borders.\n\nQuestion: Extract what previous provinces Kardzhali a part of in the past",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "According to the given information, Kardzhali was part of the following provinces in the past:\n\n1.  Stara Zagora province (from 1934 to 1949)\n2. Haskovo district (from 1949 to 1959)\n3. Haskovo Province (from 1987 to 1999)",
+    "The Kardzhali province was part of the following provinces in the past:\n\n1. Stara Zagora province (from 1934 until 1949)\n2. Haskovo district (from 1949 to 1959)\n3. Haskovo Province (from 1987 to 1999)",
+    "Kardzhali was part of the following provinces in the past:\n\n1. Stara Zagora province (from 1934 until 1949)\n2. Haskovo province (between 1987 and 1999)",
+    "Kardzhali was part of the following provinces in the past:\n\n1.  Stara Zagora province \n2.  Haskovo district \n3.  Haskovo Province",
+    "The province of Kardzhali was previously part of the following provinces:\n\n1.  Stara Zagora province (from 1934 to 1949)\n2.  Haskovo province (from 1987 to 1999)",
+    "Based on the given context, Kardzhali province was previously part of the following provinces: \n\n1. Stara Zagora province (from 1934 to 1949)\n2. Haskovo district (from 1949 to 1959)\n3. Haskovo Province (from 1987 to 1999)",
+    "Based on the given text, Kardzhali was part of the following provinces in the past:\n\n1. Stara Zagora province (from 1934 to 1949)\n2. Haskovo Province (between 1987 and 1999)\n3. No provinces prior to 1934 can be found in the information given,",
+    "Based on the information given, Kardzhali was previously part of the following provinces: \n\n1. Stara Zagora province (from 1934 to 1949) \n2. Haskovo district (not to be confused with the province, which it became in 1987, it was first part of it from 1949 to 1959)\n3. Haskovo Province (from 1987 to 1999)",
+    "Kardzhali province was part of the following previous provinces: \n\n1. Stara Zagora province (1934-1949)\n2. Haskovo district (1949-1959) \n3. Haskovo Province (1987-1999)",
+    "Based on the text, the territories Kardzhali was part of in the past are: \n\n1.  Stara Zagora province (from 1934 until 1949)\n2.  Haskovo district (between 1949 and 1959, and from 1987 to 1999)",
+    "According to the given information, Kardzhali was part of the following provinces:\n\n1. Stara Zagora province (from 1934 until 1949)\n2. Haskovo Province (from 1987 to 1999)\n3. Also it was initially organized as part of a province but the name is not specified in the text, and was later known as a district (Mestanli) before becoming a full province.",
+    "Based on the provided context, the Kardzhali province was part of the following provinces in the past:\n\n1. Stara Zagora province (from 1934 to 1949)\n2. Haskovo district (from 1949 to 1959 and again from 1987 to 1999)",
+    "Kardzhali province has been part of the following provinces in the past:\n\n1. Haskovo Province (between 1987 and 1999)\n2. Stara Zagora Province (from 1934 to 1949)",
+    "Kardzhali was part of the following provinces in the past:\n\n1. Stara Zagora province (1934-1949)\n2. Haskovo district (1949-1959, later became Haskovo province between 1987-1999)",
+    "Based on the information provided, Kardzhali was a part of the following previous provinces:\n\n1. Mestanli (organized as a district in 1913)\n2. Stara Zagora province (from 1934 to 1949)\n3. Haskovo province (from 1949 to 1959 and between 1987 and 1999)",
+    "Kardzhali was part of the following provinces in the past:\n\n1. Stara Zagora province (1934-1949)\n2. Haskovo district (1949-1959 and 1987-1999) \n3. Haskovo province (1987-1999)"
+  ],
+  "timestamp": 1754881226.4969
+}

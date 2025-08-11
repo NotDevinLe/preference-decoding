@@ -1,0 +1,30 @@
+{
+  "prompt_id": 419,
+  "prompt": "Context: Dar es Salaam (/\u02ccd\u0251\u02d0r \u025bs s\u0259\u02c8l\u0251\u02d0m/; from Arabic: \u062f\u064e\u0627\u0631 \u0627\u0644\u0633\u064e\u0651\u0644\u064e\u0627\u0645, romanized: D\u00e2r es-Sel\u00e2m, lit.\u2009'Abode of Peace') or commonly known as Dar, is the largest city and financial hub of Tanzania. It is also the capital of Dar es Salaam Region. With a population of over six million people, Dar is the largest city in East Africa and the seventh-largest in Africa. Located on the Swahili coast, Dar es Salaam is an important economic centre and is one of the fastest-growing cities in the world.\n\nThe town was founded by Majid bin Said, the first Sultan of Zanzibar, in 1865 or 1866. It was the main administrative and commercial center of German East Africa, Tanganyika, and Tanzania. The decision was made in 1974 to move the capital to Dodoma and was officially completed in 1996.\n\nDar es Salaam is Tanzania's most prominent city for arts, fashion, media, film, television, and finance. It is the capital of the co-extensive Dar es Salaam Region, one of Tanzania's 31 administrative regions, and consists of five districts: Kinondoni in the north; Ilala in the centre; Ubungo and Temeke in the south; and Kigamboni in the east across the Kurasini estuary.\n\nQuestion: From the passage list down the areas for which Dar es Salaam is Tanzania's most prominent city. List the results in comma separated format.",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "arts, fashion, media, film, television, finance",
+    "arts, fashion, media, film, television, and finance.",
+    "Arts, fashion, media, film, television, finance.",
+    "arts, fashion, media, film, television, finance",
+    "Arts, fashion, media, film, television, finance.",
+    "arts, fashion, media, film, television, finance.",
+    "arts, fashion, media, film, television, finance",
+    "The areas for which Dar es Salaam is Tanzania's most prominent city are: arts, fashion, media, film, television, and finance.",
+    "arts, fashion, media, film, television, finance",
+    "arts, fashion, media, film, television, finance.",
+    "arts, fashion, media, film, television, finance.",
+    "arts, fashion, media, film, television, finance.",
+    "arts, fashion, media, film, television, finance",
+    "arts, fashion, media, film, television, finance.",
+    "arts, fashion, media, film, television, and finance.",
+    "Arts, fashion, media, film, television, and finance."
+  ],
+  "timestamp": 1754881226.9689593
+}

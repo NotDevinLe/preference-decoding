@@ -1,0 +1,30 @@
+{
+  "prompt_id": 416,
+  "prompt": "Context: Rhual is a Grade I listed building in Flintshire. This small mansion has medieval origins and is surrounded by a large landscaped park. The present building was constructed in 1634 by Evan Edwards, a member of a well established Flintshire family which traced its descent from the Welsh king Hywel Dda. He most likely incorporated an older medieval house into the north wing of the current building. The house has since been built upon further, and the east and south entrances were created in the 19th century.\n\nQuestion: When was Rhual constructed?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Rhual was constructed in 1634.",
+    "The answer to when Rhual was constructed is not a simple one. The building has medieval origins, but the present building was constructed in 1634.",
+    "The answer to this question would depend on whether you are asking when the original medieval origins of Rhual began, when it was renovated or expanded, or when the current mansion was constructed.\n\nMedieval origins: Rhual has medieval origins.\n\nCurrent mansion constructed: 1634.",
+    "The original medieval origins of Rhual predate its current structure, but the present building was specifically constructed in 1634 by Evan Edwards.",
+    "Rhual was initially constructed with medieval origins. The present building, however, was constructed in 1634 by Evan Edwards.",
+    "The present building of Rhual was constructed in 1634.",
+    "The present building of Rhual was constructed in 1634 by Evan Edwards.",
+    "According to the given context, the present building of Rhual was constructed in 1634 by Evan Edwards. However, the context also mentions that the house has medieval origins, suggesting that there may have been a previous structure at the site before the 1634 construction.",
+    "The present building at Rhual was constructed in 1634.",
+    "The current building of Rhual was constructed in 1634 by Evan Edwards.",
+    "The original medieval house at Rhual is likely older than the present building, but the present building itself was constructed in 1634 by Evan Edwards.",
+    "The present building at Rhual was constructed in 1634 by Evan Edwards. However, there is a note that Evan Edwards likely incorporated an older medieval house into the north wing of the current building.",
+    "There is no single construction date given for Rhual. However, it has medieval origins, and the present building was constructed in 1634.",
+    "The construction of the present building at Rhual was in 1634. However, the mansion has undergone further development and extensions over the years, including the incorporation of an older medieval house into the north wing.",
+    "The original medieval part of Rhual was likely already present before 1634. However, the current building of Rhual as we know it today was constructed in 1634 by Evan Edwards.",
+    "Rhual has medieval origins, with the present building being constructed in 1634."
+  ],
+  "timestamp": 1754881226.9636467
+}

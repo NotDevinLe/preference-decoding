@@ -1,0 +1,30 @@
+{
+  "prompt_id": 425,
+  "prompt": "Context: Komorida was born in Kumamoto Prefecture on July 10, 1981. After graduating from high school, he joined the J1 League club Avispa Fukuoka in 2000. Although he debuted as a midfielder in 2001, he did not play much and the club was relegated to the J2 League at the end of the 2001 season. In 2002, he moved to the J2 club Oita Trinita. He became a regular player as a defensive midfielder and the club won the championship in 2002 and was promoted in 2003. He played many matches until 2005. In September 2005, he moved to the J2 club Montedio Yamagata. In 2006, he moved to the J2 club Vissel Kobe. Although he became a regular player as a defensive midfielder, his gradually was played less during the summer. In 2007, he moved to the Japan Football League club Rosso Kumamoto (later Roasso Kumamoto) based in his local region. He played as a regular player and the club was promoted to J2 in 2008. Although he did not play as much, he still played in many matches. In 2010, he moved to Indonesia and joined Persela Lamongan. In July 2010, he returned to Japan and joined the J2 club Giravanz Kitakyushu. He played often as a defensive midfielder and center back until 2012 when he retired.\n\nQuestion: When was Tomoaki Komorida born?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Tomoaki Komorida was born on July 10, 1981.",
+    "Tomoaki Komorida was born on July 10, 1981.",
+    "Tomoaki Komorida was born on July 10, 1981.",
+    "Tomoaki Komorida was born on July 10, 1981.",
+    "Tomoaki Komorida was born in 1981.",
+    "Tomoaki Komorida was born on July 10, 1981.",
+    "Tomoaki Komorida was born on July 10, 1981.",
+    "Tomoaki Komorida was born on July 10, 1981.",
+    "Tomoaki Komorida was born on July 10, 1981.",
+    "Tomoaki Komorida was born on July 10, 1981.",
+    "Tomoaki Komorida was born on July 10, 1981.",
+    "Tomoaki Komorida was born in 1981. The exact date of birth is July 10, 1981.",
+    "Tomoaki Komorida was born on July 10, 1981.",
+    "Tomoaki Komorida was born in 1981 in Kumamoto Prefecture.",
+    "Tomoaki Komorida was born on July 10, 1981.",
+    "Tomoaki Komorida was born on July 10, 1981."
+  ],
+  "timestamp": 1754881226.972732
+}

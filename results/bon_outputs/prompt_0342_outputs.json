@@ -1,0 +1,30 @@
+{
+  "prompt_id": 342,
+  "prompt": "When is India's independence day?",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "India's Independence Day is celebrated on August 15th every year. It commemorates the country's independence from British rule, which was achieved on August 15, 1947, after a long struggle led by prominent Indian leaders such as Mahatma Gandhi, Jawaharlal Nehru, and others.",
+    "India's Independence Day is celebrated on August 15th.",
+    "India's Independence Day is celebrated on August 15th every year. It commemorates the country's independence from British rule, which was achieved on August 15, 1947.",
+    "India's Independence Day is celebrated on August 15th every year.",
+    "India's Independence Day is celebrated on August 15th every year. It marks the day when India gained independence from British rule on August 15, 1947.",
+    "India's Independence Day is celebrated on August 15th.",
+    "India's Independence Day is celebrated on August 15th every year.",
+    "India's Independence Day is celebrated on August 15th every year. It commemorates the country's independence from British rule, which was achieved on August 15, 1947.",
+    "India's Independence Day is celebrated on August 15th every year. This day commemorates the country's independence from British rule in 1947.",
+    "India's Independence Day is on August 15th of every year. This day commemorates the country's independence from British rule, which was gained after a long struggle led by Indian nationalists, including Mahatma Gandhi and other prominent figures. India declared its independence on August 15, 1947.",
+    "India's Independence Day is celebrated on August 15th every year. It commemorates India's independence from British rule, which was achieved on August 15, 1947.",
+    "India's Independence Day is celebrated on August 15th of every year. It commemorates the country's independence from British rule, which was granted on August 15, 1947.",
+    "India's independence day is celebrated on August 15th every year. It commemorates the country's independence from British rule, which was granted on August 15, 1947, after a long struggle led by Indian independence activists, including Mahatma Gandhi and others.",
+    "India's Independence Day is celebrated on August 15th of every year. It commemorates the country's independence from British rule in 1947.",
+    "India's Independence Day is on August 15th. It commemorates the day India gained independence from British colonial rule on August 15, 1947.",
+    "India's Independence Day is celebrated on August 15th of every year. It commemorates the country's independence from British rule in 1947. On this day in 1947, India gained freedom from British colonial rule and became an independent nation."
+  ],
+  "timestamp": 1754881226.7669044
+}

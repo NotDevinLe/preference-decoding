@@ -1,0 +1,30 @@
+{
+  "prompt_id": 106,
+  "prompt": "Context: Swift signed a record deal with Big Machine Records in 2005 and released her eponymous debut album the following year. With 157 weeks on the Billboard 200 by December 2009, the album was the longest-charting album of the 2000s decade. Swift's second studio album, Fearless (2008), topped the Billboard 200 for 11 weeks and was the only album from the 2000s decade to spend one year in the top 10. The album was certified Diamond by the RIAA. It also topped charts in Australia and Canada, and has sold 12 million copies worldwide. Her third studio album, the self-written Speak Now (2010), spent six weeks atop the Billboard 200 and topped charts in Australia, Canada, and New Zealand.\n\nQuestion: From the passage provided, extract the second studio album that Taylor Swift released.",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The second studio album that Taylor Swift released was \"Fearless\" in 2008.",
+    "Fearless (2008) is the second studio album released by Taylor Swift, as mentioned in the passage.",
+    "Fearless was the second studio album released by Taylor Swift.",
+    "The second studio album Taylor Swift released is Fearless, which was released in 2008.",
+    "The second studio album that Taylor Swift released is \"Fearless,\" which was released in 2008.",
+    "Fearless was Taylor Swift's second studio album, released in 2008.",
+    "Fearless (2008) is the second studio album that Taylor Swift released, according to the passage.",
+    "The second studio album released by Taylor Swift is Fearless, which was released in 2008.",
+    "Fearless was the second studio album that Taylor Swift released, according to the passage.",
+    "The second studio album that Taylor Swift released was \"Fearless\" in 2008.",
+    "The second studio album that Taylor Swift released was Fearless, released in 2008.",
+    "Fearless (2008) was the second studio album released by Taylor Swift.",
+    "The second studio album that Taylor Swift released is \"Fearless\", released in 2008.",
+    "The second studio album that Taylor Swift released is Fearless (2008).",
+    "The second studio album that Taylor Swift released is Fearless (2008).",
+    "The second studio album that Taylor Swift released was \"Fearless\" (2008)."
+  ],
+  "timestamp": 1754881226.5553293
+}

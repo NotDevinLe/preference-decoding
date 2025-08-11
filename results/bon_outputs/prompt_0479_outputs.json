@@ -1,0 +1,30 @@
+{
+  "prompt_id": 479,
+  "prompt": "Context: A cryptocurrency, crypto-currency, or crypto is a digital currency designed to work as a medium of exchange through a computer network that is not reliant on any central authority, such as a government or bank, to uphold or maintain it. It is a decentralized system for verifying that the parties to a transaction have the money they claim to have, eliminating the need for traditional intermediaries, such as banks, when funds are being transferred between two entities.\n\nQuestion: What is Cryptocurrency?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Cryptocurrency is a digital or virtual currency that uses cryptography for security and is decentralized, meaning it's not controlled by any central authority, such as a government or bank. It's a medium of exchange that allows for peer-to-peer transactions without the need for intermediaries, like traditional banks.",
+    "A cryptocurrency, or crypto, is a digital or virtual currency that uses cryptography for security and is decentralized, meaning it is not controlled by any government or financial institution. It exists only in electronic form and is transferred between individuals and businesses through a computer network, often using blockchain technology.",
+    "A cryptocurrency is a digital or virtual currency that uses cryptography for security and is decentralized, meaning it's not controlled by any central authority, such as a government or bank. It operates on a peer-to-peer network, enabling transactions between two parties without the need for intermediaries like banks.",
+    "Cryptocurrency is a digital or virtual currency that uses cryptography for security and is decentralized, meaning it is not controlled by any government or financial institution.",
+    "A cryptocurrency is a digital or virtual currency that uses cryptography for security and is decentralized, meaning it is not controlled by any government or financial institution. It allows for peer-to-peer transactions without the need for intermediaries, such as banks, to facilitate the transfer of funds.",
+    "Cryptocurrency is a digital currency designed to work as a medium of exchange through a decentralized computer network, not reliant on any central authority, such as a government or bank.",
+    "A cryptocurrency is a digital or virtual currency that uses cryptography for security and is decentralized, meaning it is not controlled by any government, bank, or other central authority. It operates through a computer network that verifies transactions and records them on a public ledger called a blockchain, allowing for secure and transparent transactions between two parties without the need for intermediaries like banks.",
+    "Cryptocurrency is a digital or virtual currency that uses cryptography for secure financial transactions, operating independently of a central authority, such as a government or bank.",
+    "Cryptocurrency is a digital currency that uses cryptography for security and is decentralized, allowing transactions to be made without the need for intermediaries such as banks.",
+    "A cryptocurrency is a digital or virtual currency that uses cryptography for secure financial transactions, decentralized and not controlled by any government or institution, allowing peer-to-peer transactions without the need for intermediaries like banks.",
+    "A cryptocurrency, often referred to simply as a \"crypto,\" is a digital or virtual currency that operates independently of a central authority, such as a government or bank. It is designed to facilitate peer-to-peer transactions without the need for intermediaries like banks. Cryptocurrencies use cryptography for secure financial transactions, controlling the creation of new units, and verifying the transfer of funds.",
+    "Cryptocurrency is a digital or virtual currency that uses cryptography for secure financial transactions. It's a decentralized system, meaning it's not controlled by any government or financial institution, and operates on a peer-to-peer network. Transactions are recorded on a public ledger called a blockchain, which ensures the integrity and transparency of the transactions.",
+    "Cryptocurrency is a digital or virtual currency that uses cryptography for secure financial transactions and operates independently of a central bank or government. It's a decentralized system that allows peer-to-peer transactions without the need for intermediaries like banks.",
+    "A cryptocurrency, also known as crypto or crypto-currency, is a digital or virtual currency that uses cryptography for security and is decentralized, meaning it is not controlled by any government or financial institution. It allows for peer-to-peer transactions to take place without the need for intermediaries, such as banks.",
+    "Cryptocurrency is a digital or virtual currency that uses cryptography for security and is decentralized, meaning it's not controlled by any government or financial institution. It allows for peer-to-peer transactions without the need for intermediaries like banks.",
+    "A cryptocurrency is a digital or virtual currency that uses cryptography for security and is decentralized, meaning it's not controlled by any government, bank, or institution. It exists only in electronic form and is used for making transactions through a computer network. The key features of cryptocurrency include:\n\n1. **Decentralized system**: It operates independently of any central authority.\n2. **Digital or virtual**: It exists only in electronic form.\n3. **Cryptography**: Transactions are secured using advanced mathematical algorithms.\n4. **Peer-to-peer**: Transactions are made directly between two parties, eliminating the need for intermediaries like banks.\n\nSome well-known examples of cryptocurrencies include Bitcoin, Ethereum, and Litecoin."
+  ],
+  "timestamp": 1754881227.064657
+}

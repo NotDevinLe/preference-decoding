@@ -1,0 +1,30 @@
+{
+  "prompt_id": 340,
+  "prompt": "Context: As a road cyclist, Mark Cavendish turned professional in 2005, and achieved eleven wins in his first professional season. Cavendish has won 34 Tour de France stages, tying him for first on the all-time list with Eddy Merckx, contributing to a third-highest total of fifty-three Grand Tour stage victories. He won the Men's road race at the 2011 road world championships, becoming the second male British rider to do so after Tom Simpson. Cavendish has also won the points classification in all three of the grand tours: the 2010 Vuelta a Espa\u00f1a, the 2011, and 2021 Tours de France and the 2013 Giro d'Italia. In 2012, he became the first person to win the final Champs-\u00c9lys\u00e9es stage in the Tour de France in four consecutive years.\n\nQuestion: Given this paragraph about cycling, who holds the record for the most Tour de France stage victories?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The paragraph doesn't mention who currently holds the record for the most Tour de France stage victories. However, it does mention that Mark Cavendish tied for first place with 34 Tour de France stage victories.",
+    "The paragraph does not explicitly state who holds the record for the most Tour de France stage victories. However, it mentions that Mark Cavendish tied Eddy Merckx on the all-time list with 34 wins each.",
+    "Actually, the information provided indicates that there is a tie for the most Tour de France stage victories. Mark Cavendish and Eddy Merckx have both achieved 34 Tour de France stage victories.",
+    "Based on the information provided, Eddy Merckx is tied with Mark Cavendish for the most Tour de France stage victories, with 34 wins each.",
+    "The paragraph does not state that Eddy Merckx is the record holder for the most Tour de France stage victories. Instead, it mentions that Mark Cavendish, along with Eddy Merckx, ties for first place with 34 stage wins each.",
+    "According to the information given, Mark Cavendish holds the record for the most Tour de France stage victories with 34 wins, tying him with Eddy Merckx.",
+    "The paragraph does not mention who holds the record for the most Tour de France stage victories. However, it does mention that Mark Cavendish, Eddy Merckx, and the record holder tied for first on the all-time list.",
+    "According to the paragraph, Mark Cavendish tied with Eddy Merckx for first on the all-time list with 34 Tour de France stage victories.",
+    "The record for the most Tour de France stage victories is tied, with both Mark Cavendish and Eddy Merckx holding 34 stage victories each, however with Eddy Merckx having more overall Grand Tour stage wins due to his 19 Tour de France wins",
+    "Based on the information in the paragraph, Eddy Merckx and Mark Cavendish are tied for first on the all-time list with 34 Tour de France stage victories.",
+    "The paragraph states that Mark Cavendish has tied for the all-time list with Eddy Merckx, with 34 Tour de France stage victories each. It does not provide information on who holds the record outright.",
+    "There are actually two riders mentioned in the paragraph with 34 Tour de France stage victories each. They are Mark Cavendish and Eddy Merckx, who are tied for the record.",
+    "Eddy Merckx and Mark Cavendish are tied for the most Tour de France stage victories, both with 34.",
+    "Eddy Merckx and Mark Cavendish are tied for first place on the all-time list, with 34 Tour de France stage victories each.",
+    "The record for the most Tour de France stage victories is shared by Eddy Merckx and Mark Cavendish, both with 34 wins each.",
+    "The answer is not explicitly stated that Mark Cavendish holds the record, but it's mentioned that he tied for first on the all-time list."
+  ],
+  "timestamp": 1754881226.7563195
+}

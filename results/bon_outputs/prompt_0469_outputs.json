@@ -1,0 +1,30 @@
+{
+  "prompt_id": 469,
+  "prompt": "Context: Parliamentary elections were held in Norway on 7 October 1957. The result was a victory for the Labour Party, which won 78 of the 150 seats in the Storting. As a result, the Gerhardsen government continued in office.\n\nThis was the last time a single party won a majority of seats on its own in a Norwegian election.\n\nQuestion: How many total seats are there?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "According to the given information, there are 150 seats in the Storting.",
+    "There are 150 seats in the Norwegian Storting.",
+    "According to the given context, there are 150 seats in the Storting.",
+    "In the Norwegian Storting, there are a total of 150 seats.",
+    "There are 150 seats in the Storting.",
+    "In the Storting, there are 150 seats.",
+    "According to the information provided, there are 150 seats in the Storting.",
+    "There are 150 seats in the Storting.",
+    "There are 150 seats in the Storting.",
+    "According to the given information, there are 150 seats in the Storting.",
+    "According to the information provided, there are 150 seats in the Storting.",
+    "There are 150 seats in the Storting.",
+    "There are 150 seats in the Storting.",
+    "According to the given information, there are 150 seats in the Storting.",
+    "There are 150 seats in the Storting.",
+    "According to the text, the total number of seats in the Storting is 150."
+  ],
+  "timestamp": 1754881227.0405898
+}

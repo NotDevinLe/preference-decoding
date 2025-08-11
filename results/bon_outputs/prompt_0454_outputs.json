@@ -1,0 +1,30 @@
+{
+  "prompt_id": 454,
+  "prompt": "Who discovered the double-helix DNA structure?",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The double-helix DNA structure was discovered by James Watson and Francis Crick in 1953. They used X-ray crystallography data provided by Rosalind Franklin and her colleague, Maurice Wilkins, to develop their model of DNA.",
+    "The discovery of the double-helix structure of DNA is attributed to James Watson and Francis Crick. They developed the model of DNA as a double helix using data provided by X-ray crystallography experiments performed by Rosalind Franklin and her research team. Their model was published in a paper titled \"A Structure for Deoxyribose Nucleic Acid\" in the journal Nature in 1953.",
+    "James Watson and Francis Crick are credited with the discovery of the double-helix DNA structure. They proposed this structure in a paper published in the journal Nature in 1953. The key information that led them to their conclusion was obtained from X-ray crystallography data by Rosalind Franklin and Maurice Wilkins. Watson, Crick, and Wilkins shared the Nobel Prize in Physiology or Medicine in 1962 for their discovery, although Franklin was not included due to her death in 1958 and the Nobel Prize is not awarded posthumously.",
+    "The double-helix DNA structure was discovered by James Watson and Francis Crick in 1953.",
+    "The discovery of the double helix DNA structure is attributed to James Watson and Francis Crick in 1953. Using X-ray crystallography data provided by Rosalind Franklin and Maurice Wilkins, Watson and Crick developed a model of the double helix structure of DNA. Their work was published in a paper titled \"A Structure for Deoxyribose Nucleic Acid\" in the journal Nature on April 25, 1953.",
+    "The double-helix DNA structure was discovered by James Watson and Francis Crick. They proposed their model of DNA structure in 1953.",
+    "James Watson and Francis Crick discovered the double helix structure of DNA in 1953. They built a model of the double helix after researching X-ray crystallography data provided by Rosalind Franklin and Maurice Wilkins.",
+    "The double-helix DNA structure was discovered by James Watson and Francis Crick in 1953. They proposed the model using data from X-ray crystallography by Rosalind Franklin and Maurice Wilkins.",
+    "James Watson and Francis Crick discovered the double-helix DNA structure. They were awarded the Nobel Prize in Physiology or Medicine in 1962 for this groundbreaking discovery. James Watson and Francis Crick proposed the double-helix model of DNA based on X-ray crystallography data provided by Rosalind Franklin and Maurice Wilkins in 1953.",
+    "The double helix DNA structure was discovered by James Watson and Francis Crick. They used X-ray crystallography data collected by Rosalind Franklin and Maurice Wilkins. \n\nThe discovery of the double-helix structure was made possible by the X-ray crystallography images of DNA taken by Rosalind Franklin at King's College London. Her images, particularly Photo 51, provided crucial data that helped Watson and Crick build their model.\n\nJames Watson and Francis Crick published their discovery in a paper titled \"A Structure for Deoxyribose Nucleic Acid\" in the journal Nature in 1953.",
+    "The discovery of the double-helix structure of DNA is attributed to James Watson and Francis Crick in 1953. They proposed this model using X-ray crystallography data provided by Rosalind Franklin and her colleague Maurice Wilkins.",
+    "James Watson and Francis Crick discovered the double-helix DNA structure in 1953. They proposed this model using X-ray crystallography data provided by Rosalind Franklin and Maurice Wilkins.",
+    "The discovery of the double-helix DNA structure is attributed to James Watson and Francis Crick in 1953. They were two British scientists who worked together to figure out the structure of DNA, using data and research provided by Rosalind Franklin and Maurice Wilkins. \n\nWatson and Crick used X-ray crystallography images of DNA, including a key image known as \"Photograph 51,\" provided by Rosalind Franklin, to determine the double-helix structure of DNA. Their discovery was first published in a paper titled \"A Structure for Deoxyribose Nucleic Acid\" in the journal Nature on April 25, 1953.",
+    "James Watson and Francis Crick discovered the double-helix DNA structure.",
+    "The discovery of the double-helix DNA structure is attributed to James Watson and Francis Crick. They developed their model in 1953. They discovered that DNA is composed of two strands of nucleotides that twist together in a double helix structure. They used X-ray crystallography data provided by Rosalind Franklin and Maurice Wilkins.",
+    "The double-helix DNA structure was discovered by James Watson and Francis Crick in 1953. They proposed the double-helix model based on X-ray crystallography data collected by Rosalind Franklin and Maurice Wilkins. Their discovery revolutionized the field of molecular biology and earned them the Nobel Prize in Physiology or Medicine in 1962.\n\nJames Watson and Francis Crick used data provided by Rosalind Franklin's high-quality X-ray crystallography images of DNA fibers, which they used to build their double helix model. Watson and Crick's model of DNA is a crucial explanation of how DNA replicates and transmits genetic information.\n\nRosalind Franklin played a crucial role in the discovery but did not receive the Nobel Prize due to the Nobel Prize's rules, which state that the prize cannot be awarded posthumously, and she passed away in 1958."
+  ],
+  "timestamp": 1754881227.0083563
+}

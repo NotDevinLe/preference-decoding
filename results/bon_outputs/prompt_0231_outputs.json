@@ -1,0 +1,30 @@
+{
+  "prompt_id": 231,
+  "prompt": "Context: The brown eared pheasant (Crossoptilon mantchuricum) is a large, 96\u2013 to 100-cm-long, dark brown pheasant endemic to the mountain forests of northeastern China (Shanxi and nearby provinces). The species was first described by Robert Swinhoe in 1863. It has stiff white ear coverts behind the eyes, which look like a moustache. The crown is black with red bare facial skin and its tail of 22 elongated, white feathers is curved, loose and dark-tipped. Both sexes are similar in plumage.\n\nQuestion: What is a brown eared pheasant?",
+  "category": "summarization",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The brown eared pheasant is a species of pheasant, specifically the Crossoptilon mantchuricum, characterized by its dark brown plumage, a distinctive white \"moustache\" on its face, and a long, curved tail with elongated, white feathers.",
+    "A brown eared pheasant (Crossoptilon mantchuricum) is a large, dark brown bird species native to the mountain forests of northeastern China, characterized by its distinctive white ear coverts resembling a moustache and other unique features such as its black crown, red bare facial skin, and a curved tail of elongated white feathers.",
+    "The brown eared pheasant is a species of pheasant that is endemic to the mountain forests of northeastern China.",
+    "The brown-eared pheasant is a large bird species that belongs to the pheasant family. It is a specific type of bird that is endemic to the mountain forests of northeastern China, characterized by its distinctive dark brown plumage and unique features such as white ear coverts (like a moustache), a black crown, and a long, curved tail with white feathers.",
+    "A brown eared pheasant is a large, dark brown bird species, specifically a type of pheasant, native to the mountain forests of northeastern China.",
+    "The brown eared pheasant is a large, dark brown bird species that is endemic to the mountain forests of northeastern China.",
+    "The brown eared pheasant (Crossoptilon mantchuricum) is a large, dark brown bird that is native to the mountain forests of northeastern China, specifically in the Shanxi and nearby provinces. It has distinctive features such as stiff white ear coverts behind the eyes resembling a moustache, a black crown, red bare facial skin, and a curved, loose tail with 22 elongated white feathers that are dark-tipped.",
+    "The brown eared pheasant (Crossoptilon mantchuricum) is a large bird species that is native to the mountain forests of northeastern China. It is characterized by its distinctive features, including:\n\n- A length of 96-100 cm\n- Dark brown plumage\n- Stiff white ear coverts (or 'moustache-like' feathers behind its eyes)\n- A black crown\n- Red bare facial skin\n- A long, curved tail with 22 elongated, white feathers that are dark-tipped.",
+    "The brown-eared pheasant is a species of pheasant that is endemic to the mountain forests of northeastern China. It is characterized by its dark brown color, white ear coverts resembling a moustache, a black crown, red bare facial skin, and a distinctive curved, loose tail with 22 elongated, white feathers.",
+    "The brown eared pheasant (Crossoptilon mantchuricum) is a large pheasant species native to the mountain forests of northeastern China, characterized by its dark brown plumage and distinctive white ear coverts resembling a moustache.",
+    "A brown eared pheasant is a large bird species that belongs to the pheasant family.",
+    "A brown eared pheasant is a type of bird species.",
+    "The brown-eared pheasant is a large, dark brown bird species that is native to the mountain forests of northeastern China.",
+    "A brown eared pheasant (Crossoptilon mantchuricum) is a large bird species that is endemic to the mountain forests of northeastern China. It is characterized by its dark brown plumage and distinctive white \"moustache\" markings behind its eyes, as well as a curved and loose tail with elongated white feathers. Both males and females have similar plumage.",
+    "The brown eared pheasant (Crossoptilon mantchuricum) is a large bird species of pheasant that is native to the mountain forests of northeastern China.",
+    "A brown eared pheasant is a species of bird that is endemic to the mountain forests of northeastern China, specifically in the provinces of Shanxi and nearby regions."
+  ],
+  "timestamp": 1754881226.6393278
+}

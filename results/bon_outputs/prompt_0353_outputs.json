@@ -1,0 +1,30 @@
+{
+  "prompt_id": 353,
+  "prompt": "Context: Merrimac Butte is a 5,627-foot (1,715-metre) sandstone summit located in Grand County, Utah, United States, about 12 miles northwest of the town of Moab. Merrimac Butte is a thin, 200\u2013600-foot-wide and 1,600-foot-long east-to-west butte with 200-foot-tall vertical Entrada Sandstone walls overlaying a Carmel Formation base.\n\nMonitor Butte is situated immediately east of Merrimac Butte. The two buttes were named after the Monitor and Merrimack, two ironclad steamships known for clashing during the American Civil War. They can be seen from Highway 313 after it climbs out of Sevenmile Canyon en route to the Island in the Sky section of Canyonlands National Park or Dead Horse Point State Park.\n\nQuestion: Monitor and Merrimac refer to what in the passage?",
+  "category": "summarization",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Monitor and Merrimac refer to two ironclad steamships that clashed during the American Civil War, and the two buttes, Monitor Butte and Merrimac Butte, are named after these ships.",
+    "In the passage, Monitor and Merrimac refer to two ironclad steamships known for clashing during the American Civil War.",
+    "In the passage, Monitor and Merrimac refer to two ironclad steamships from the American Civil War.",
+    "In the passage, Monitor and Merrimac refer to two ironclad steamships from the American Civil War.",
+    "Monitor and Merrimac refer to two ironclad steamships known for clashing during the American Civil War.",
+    "Monitor and Merrimac refer to two ironclad steamships that clashed during the American Civil War.",
+    "Monitor and Merrimac refer to two ironclad steamships that clashed during the American Civil War, according to the passage.",
+    "Monitor and Merrimac refer to two ironclad steamships that clashed during the American Civil War.",
+    "Monitor and Merrimac refer to two ironclad steamships from the American Civil War.",
+    "In the passage, \"Monitor and Merrimac\" refer to two ironclad steamships that clashed during the American Civil War.",
+    "In the passage, Monitor and Merrimac refer to two ironclad steamships known for clashing during the American Civil War.",
+    "The Monitor and Merrimac refer to the names of two ironclad steamships known for clashing during the American Civil War, which are the namesakes for the two buttes: Monitor Butte and Merrimac Butte.",
+    "The Monitor and Merrimac refer to two ironclad steamships from the American Civil War, after which the two buttes, Monitor Butte and Merrimac Butte, were named.",
+    "The Monitor and Merrimac in the passage refer to two ironclad steamships that clashing during the American Civil War.",
+    "Monitor and Merrimac refer to two ironclad steamships that clashed during the American Civil War.",
+    "In the passage, Monitor and Merrimac refer to two ironclad steamships known for clashing during the American Civil War."
+  ],
+  "timestamp": 1754881226.8048756
+}

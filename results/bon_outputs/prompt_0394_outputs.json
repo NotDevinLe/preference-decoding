@@ -1,0 +1,30 @@
+{
+  "prompt_id": 394,
+  "prompt": "Context: The Boston Marathon began on 19 April 1897, and was inspired by the success of the first marathon competition in the 1896 Summer Olympics. It is the world's oldest run annual marathon, and ranks as one of the world's most prestigious road racing events. Its course runs from Hopkinton in southern Middlesex County, to Copley Square in Boston. Johnny Hayes' victory at the 1908 Summer Olympics also contributed to the early growth of long-distance running and marathoning in the United States. Later that year, races around the holiday season including the Empire City Marathon held on New Year's Day 1909 in Yonkers, New York, marked the early running craze referred to as \"marathon mania\". Following the 1908 Olympics, the first five amateur marathons in New York City were held on days that held special meanings: Thanksgiving Day, the day after Christmas, New Year's Day, Washington's Birthday, and Lincoln's Birthday.\n\nFrank Shorter's victory in the marathon at the 1972 Summer Olympics would spur national enthusiasm for the sport more intense than that which followed Hayes' win 64 years earlier. In 2014, an estimated 550,600 runners completed a marathon within the United States. This can be compared to 143,000 in 1980. Today marathons are held all around the world on a nearly weekly basis.\n\nQuestion: What is the world's oldest annual marathon based on the reference text below?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The Boston Marathon is the world's oldest annual marathon.",
+    "The world's oldest annual marathon, based on the provided reference, is the Boston Marathon.",
+    "The Boston Marathon is the world's oldest annual marathon based on the text. It began on April 19, 1897, inspired by the first marathon competition in the 1896 Summer Olympics.",
+    "The world's oldest annual marathon is the Boston Marathon, which began on 19 April 1897.",
+    "The Boston Marathon is the world's oldest annual marathon.",
+    "The world's oldest annual marathon is the Boston Marathon, which began on 19 April 1897.",
+    "The Boston Marathon is the world's oldest annual marathon.",
+    "The world's oldest annual marathon, based on the provided text, is the Boston Marathon, which began on April 19, 1897.",
+    "The world's oldest annual marathon is the Boston Marathon, which began on April 19, 1897.",
+    "The world's oldest annual marathon, based on the given text, is the Boston Marathon. It began in 1897.",
+    "The world's oldest annual marathon is the Boston Marathon, which began on 19 April 1897.",
+    "The world's oldest annual marathon is the Boston Marathon, which began on 19 April 1897.",
+    "The Boston Marathon is the world's oldest annual marathon, according to the text.",
+    "The world's oldest annual marathon, according to the text, is the Boston Marathon, which began on April 19, 1897.",
+    "The world's oldest annual marathon is the Boston Marathon, which began on April 19, 1897.",
+    "The world's oldest annual marathon is the Boston Marathon. It was first held on April 19, 1897."
+  ],
+  "timestamp": 1754881226.9262302
+}

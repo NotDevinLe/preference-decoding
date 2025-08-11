@@ -1,0 +1,30 @@
+{
+  "prompt_id": 49,
+  "prompt": "What is the largest state by land size in the United States of America?",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The largest state by land size in the United States of America is Alaska. It covers approximately 663,300 square miles (1,717,856 square kilometers).",
+    "The largest state by land size in the United States of America is Alaska. It covers approximately 663,300 square miles (1,717,856 square kilometers).",
+    "The largest state by land size in the United States of America is Alaska. Alaska covers an area of approximately 663,300 square miles (1,717,856 square kilometers) which is roughly 20% of the total land area of the United States.",
+    "The largest state by land area in the United States of America is Alaska.",
+    "The largest state by land size in the United States of America is Alaska. It covers an area of about 663,268 square miles (1,717,856 square kilometers).",
+    "The largest state by land size in the United States of America is Alaska.",
+    "The largest state by land size in the United States of America is Alaska. It covers an area of approximately 663,300 square miles (1,717,856 square kilometers), which is roughly 20% of the total land area of the United States.",
+    "The largest state by land size in the United States of America is Alaska.",
+    "Alaska is the largest state in the United States of America, covering an area of approximately 663,300 square miles (1,717,856 km\u00b2).",
+    "The largest state by land area in the United States of America is Alaska. Alaska covers approximately 663,300 square miles (1,717,856 square kilometers).",
+    "The largest state by land area in the United States is Alaska, which covers approximately 663,268 square miles (1,717,856 square kilometers).",
+    "The largest state by land area in the United States of America is Alaska. Alaska covers an area of approximately 663,300 square miles (1,717,856 km\u00b2).",
+    "The largest state by land area in the United States of America is Alaska. It covers an area of approximately 663,300 square miles (1,717,856 km\u00b2).",
+    "Alaska is the largest state in the United States by land area, covering approximately 663,300 square miles (1,717,856 square kilometers).",
+    "The largest state by land size in the United States of America is Alaska. It covers approximately 663,300 square miles (1,717,856 square kilometers).",
+    "The largest state by land size in the United States of America is Alaska."
+  ],
+  "timestamp": 1754881226.5212388
+}

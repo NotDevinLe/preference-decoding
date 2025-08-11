@@ -1,0 +1,30 @@
+{
+  "prompt_id": 413,
+  "prompt": "Who played Billy the Kid in The Left Handed Gun",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Alec Guinness played Billy the Kid in the 1958 film \"The Left Handed Gun.\"",
+    "The film \"The Left Handed Gun\" was released in 1958. It is a Western film and the main character Billy the Kid was played by actor Paul Newman.",
+    "Lee Marvin played the role of Billy the Kid in the 1958 film 'The Left Handed Gun.'",
+    "The role of Billy the Kid in the 1958 film \"The Left Handed Gun\" was played by actor Paul Newman.",
+    "The movie 'The Left Handed Gun' is a 1958 American Western film directed by Arthur Penn.  In this film, the role of Billy the Kid was played by Lorne Greene.",
+    "The 1958 film \"The Left Handed Gun\" starred James Stacy as Billy the Kid.",
+    "The character Billy the Kid in the 1958 film \"The Left Handed Gun\" was played by actor Paul Newman.",
+    "The Left Handed Gun is a 1958 American Western film. The character of Billy the Kid was portrayed by actor Paul Newman in the film.",
+    "Gene Tierney played the role of Gloria in the 1958 film \"The Left Handed Gun\", but the main character of Billy the Kid was played by Tab Hunter.",
+    "The 1958 film \"The Left Handed Gun\" features James Stewart as Pryce Johnson, a fictionalized account of Billy the Kid, and Paul Newman as \"Lincoln\" \"Kid\" Roberts, not an actual direct portrayal of Billy but inspired by his life.",
+    "Alan Ladd played the role of Billy the Kid in \"The Left Handed Gun,\" a 1958 American Western film directed by Arthur Penn.",
+    "The character Billy the Kid in the 1958 film \"The Left Handed Gun\" was played by actor Paul Newman.",
+    "The Left Handed Gun, released in 1958, starred Paul Newman as Billy the Kid.",
+    "The movie \"The Left Handed Gun\" (1958) features Alec Guinness as the title character, not Billy the Kid, although the film is loosely based on the life of Billy the Kid.",
+    "A classic Western film. In the 1958 movie \"The Left Handed Gun,\" the role of Billy the Kid was played by actor Paul Newman.",
+    "James Cagney played the role of Billy the Kid in the 1958 film \"The Left Handed Gun.\""
+  ],
+  "timestamp": 1754881226.9584665
+}

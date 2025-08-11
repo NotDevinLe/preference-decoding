@@ -1,0 +1,30 @@
+{
+  "prompt_id": 90,
+  "prompt": "Which of the companies in this list are social media platforms: Twitter, Amazon, Instagram, Square, Venmo, Tiktok, Apple.",
+  "category": "classification",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The social media platforms in the given list are:\n\n1. Twitter\n2. Instagram\n3. Tiktok",
+    "The social media platforms in the list are:\n\n1. Twitter\n2. Instagram\n3. Tiktok",
+    "The social media platforms in the list are:\n\n1. Twitter\n2. Instagram\n3. TikTok",
+    "The social media platforms in the list are:\n\n1. Twitter\n2. Instagram\n3. TikTok",
+    "The social media platforms in the list are:\n\n1. Twitter\n2. Instagram\n3. TikTok",
+    "The social media platforms in the list are:\n\n1. Twitter\n2. Instagram\n3. TikTok",
+    "The social media platforms in the list are:\n\n1. Twitter\n2. Instagram\n3. TikTok",
+    "The social media platforms in the list are:\n\n1. Twitter\n2. Instagram\n3. TikTok\n\nThese three platforms are primarily used for social interaction, content sharing, and community engagement.\n\nThe other companies on the list are not social media platforms:\n\n1. Amazon: an e-commerce platform\n2. Square: a payment processing company\n3. Venmo: a mobile payment service (owned by PayPal)\n4. Apple: a technology company that produces a range of consumer electronics and software, including the iPhone, but not a social media platform",
+    "The social media platforms in the given list are:\n\n1. Twitter\n2. Instagram\n3. TikTok",
+    "The social media platforms in the list are:\n\n1. Twitter\n2. Instagram\n3. Tiktok",
+    "The social media platforms from the given list are:\n\n1. Twitter\n2. Instagram\n3. TikTok",
+    "The social media platforms in the list are:\n\n1. Twitter\n2. Instagram\n3. Tiktok",
+    "The following companies are social media platforms from your list:\n\n1. Twitter\n2. Instagram (owned by Meta Platforms, Inc.)\n3. TikTok\n\nThese three companies are primarily focused on social media services, where users can create, share, and interact with content.",
+    "The social media platforms from the given list are:\n\n1. Twitter\n2. Instagram\n3. Tiktok",
+    "The social media platforms in this list are:\n\n1. Twitter\n2. Instagram\n3. TikTok",
+    "The social media platforms in the given list are:\n\n1.  Twitter\n2.  Instagram\n3.  TikTok"
+  ],
+  "timestamp": 1754881226.5457613
+}

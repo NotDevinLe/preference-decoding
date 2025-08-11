@@ -1,0 +1,30 @@
+{
+  "prompt_id": 82,
+  "prompt": "Context: Italy First was launched as a \"political association\" in October 2013 by Gianni Alemanno, a former mayor of Rome (2008\u20132013) for the PdL. A long-time politician of the Italian Social Movement (MSI) and National Alliance (AN), within which he led the Social Right faction, Alemanno had left the PdL a few days earlier. The founding manifesto of Italy First included criticism of the PdL, its participation in the European People's Party and its compliance to Europeanism and economic liberalism. One of the first political campaigns of the new party was against the euro currency.\n\nQuestion: Extract from the text year in which Italy First was launched",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "October 2013.",
+    "The year in which Italy First was launched is 2013.",
+    "October 2013",
+    "October 2013.",
+    "The year in which Italy First was launched is 2013.",
+    "October 2013.",
+    "The year Italy First was launched is 2013.",
+    "The year in which Italy First was launched was 2013.",
+    "The year Italy First was launched as a \"political association\" is 2013.",
+    "The year Italy First was launched as a \"political association\" is 2013.",
+    "October 2013.",
+    "Italy First was launched in 2013.",
+    "The year in which Italy First was launched is 2013.",
+    "[Generation failed]",
+    "[Generation failed]",
+    "[Generation failed]"
+  ],
+  "timestamp": 1754881226.541342
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_id": 421,
+  "prompt": "Tell me whether these are names of soft drinks or coffee: Starbucks, Peet's, Blue Bottle, Coca-Cola, Sprite, Canada Dry, Pepsi",
+  "category": "classification",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Among the given names, the following are soft drinks:\n\n1. Coca-Cola\n2. Sprite\n3. Canada Dry\n\nThe following are coffee companies:\n\n1. Starbucks\n2. Peet's\n3. Blue Bottle",
+    "The following are names of coffee: \n- Starbucks \n- Peet's\n- Blue Bottle\n\nThe following are names of soft drinks:\n- Coca-Cola \n- Sprite \n- Canada Dry",
+    "Here are the classifications:\n\n1. Starbucks - Coffee\n2. Peet's - Coffee\n3. Blue Bottle - Coffee\n4. Coca-Cola - Soft drink\n5. Sprite - Soft drink\n6. Canada Dry - Soft drink\n7. Pepsi - Soft drink",
+    "The names that are soft drinks are:\n1. Coca-Cola\n2. Sprite\n3. Canada Dry\n\nThe names that are coffee companies:\n1. Starbucks\n2. Peet's\n3. Blue Bottle",
+    "Based on the names provided, the following are coffee companies:\n\n1. Starbucks\n2. Peet's\n3. Blue Bottle\n\nThe following are soft drinks:\n\n1. Coca-Cola\n2. Sprite\n3. Canada Dry",
+    "Here's the classification of each:\n\n1.  Starbucks - Coffee\n2.  Peet's - Coffee\n3.  Blue Bottle - Coffee\n4.  Coca-Cola - Soft drink\n5.  Sprite - Soft drink\n6.  Canada Dry - Soft drink\n7.  Pepsi - Soft drink",
+    "Out of the given options:\n\n- Starbucks, Peet's, and Blue Bottle are names of coffee shops.\n- Coca-Cola, Sprite, and Canada Dry are names of soft drinks.",
+    "The following are coffee companies:\n\n1. Starbucks\n2. Peet's\n3. Blue Bottle\n\nThe following are soft drinks:\n\n1. Coca-Cola\n2. Sprite\n3. Canada Dry",
+    "The following are names of coffee brands:\n- Starbucks\n- Peet's\n- Blue Bottle\n\nThe following are names of soft drinks:\n- Coca-Cola\n- Sprite\n- Canada Dry\n- Pepsi",
+    "The names that are names of soft drinks are:\n\n1. Coca-Cola\n2. Sprite\n3. Canada Dry\n\nThe names that are names of coffee are:\n\n1. Starbucks\n2. Peet's (Although Peet's has expanded into coffee and bakeries, it is primarily a coffee shop)\n\nThe name that could be either a soft drink or a coffee shop but fits the question description best as a coffee shop:\n\n1. Blue Bottle (Blue Bottle Coffee is a coffee shop with a global presence)",
+    "- Starbucks is a coffee chain\n- Peet's is a coffee chain\n- Blue Bottle is a coffee chain\n- Coca-Cola is a soft drink\n- Sprite is a soft drink\n- Canada Dry is a soft drink\n- Pepsi is a soft drink",
+    "Here's the classification for each:\n\n1. Starbucks - Coffee\n2. Peet's - Coffee\n3. Blue Bottle - Coffee\n4. Coca-Cola - Soft drink\n5. Sprite - Soft drink\n6. Canada Dry - Soft drink\n7. Pepsi - Soft drink",
+    "The names of coffee are:\n\n1. Starbucks\n2. Peet's\n3. Blue Bottle\n\nThe names of soft drinks are:\n\n1. Coca-Cola\n2. Sprite\n3. Canada Dry",
+    "- Starbucks: coffee \n- Peet's: coffee\n- Blue Bottle: coffee\n- Coca-Cola: soft drink\n- Sprite: soft drink\n- Canada Dry: soft drink\n- Pepsi: soft drink",
+    "Among the names provided:\n\n- Starbucks: coffee\n- Peet's: coffee\n- Blue Bottle: coffee\n- Coca-Cola: soft drink\n- Sprite: soft drink\n- Canada Dry: soft drink\n- Pepsi: soft drink",
+    "- Starbucks: Coffee\n- Peet's: Coffee\n- Blue Bottle: Coffee\n- Coca-Cola: Soft drink\n- Sprite: Soft drink\n- Canada Dry: Soft drink\n- Pepsi: Soft drink"
+  ],
+  "timestamp": 1754881226.9710922
+}

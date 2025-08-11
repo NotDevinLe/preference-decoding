@@ -1,0 +1,30 @@
+{
+  "prompt_id": 64,
+  "prompt": "Which is a species of fish? Nurse or Nurse shark",
+  "category": "classification",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The correct answer is Nurse Shark.",
+    "The answer is Nurse Shark. The Nurse shark (Ginglymostoma cirratum) is a species of ground-dwelling shark.",
+    "The correct answer is Nurse Shark. The Nurse Shark (Ginglymostoma cirratum) is a species of ground shark that belongs to the family Ginglymostomatidae.",
+    "The correct answer is \"Nurse Shark.\" A nurse shark is a nocturnal carpet shark that is found in warm, tropical waters around the world. They are known for their distinctive \"nurse-like\" habit of allowing other fish to hover above them and feed on the food from their mouths.",
+    "The correct answer is Nurse. The \"Nurse shark\" is a species of ground shark.",
+    "The correct answer is Nurse shark (Ginglymostoma cirratum) is a species of shark.",
+    "Nurse shark is the correct answer.  The nurse shark (Narcine timlei) is a nocturnal shark that belongs to the family Orectolobidae.",
+    "The correct answer is Nurse shark.",
+    "The correct answer is \"Nurse shark\".",
+    "The answer is Nurse. A nurse shark (Nurse shark, genus: Ginglymostoma) is a species of ground shark, which is a type of fish. They are nocturnal and nocturnal bottom-dwellers.",
+    "The correct answer is Nurse Shark. The Nurse Shark (Ginglymostoma cirratum) is a species of shark that is commonly found in warm, shallow waters of the Atlantic and Pacific oceans. They are nocturnal bottom-dwellers and are known for their distinctive \"nurse-like\" appearance and feeding habits.",
+    "The correct answer is \"Nurse\" refers to the Shark but there is another option. 'Nurse Shark' is the full term you could be looking for since it is a type of species.",
+    "The answer is \"Nurse shark\". The nurse shark (Nebrius ferrugineus or also Ginglymostoma cirratum) is a species of shark that belongs to the family Ginglymostomatidae. They are nocturnal, bottom-dwelling sharks found in tropical waters around the world.",
+    "The answer is 'Nurse.'  A nurse shark is a species of fish, specifically a type of ground shark.",
+    "The correct answer is Nurse shark.",
+    "The correct answer is \"Nurse Shark.\""
+  ],
+  "timestamp": 1754881226.5303915
+}

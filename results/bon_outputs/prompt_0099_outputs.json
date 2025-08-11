@@ -1,0 +1,30 @@
+{
+  "prompt_id": 99,
+  "prompt": "Context: The United States Navy Strike Fighter Tactics Instructor program (SFTI program), more popularly known as Top Gun (stylized as TOPGUN), is an American military program that teaches fighter and strike tactics and techniques to selected naval aviators and naval flight officers, who return to their operating units as surrogate instructors.\n\nQuestion: Extract what is Top Gun",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The Top Gun program, officially known as the United States Navy Strike Fighter Tactics Instructor (SFTI) program, is an American military program that trains selected naval aviators and naval flight officers in advanced fighter and strike tactics and techniques. The program's graduates return to their operating units as instructors to share their knowledge with other pilots.",
+    "Top Gun is an American military program known as the United States Navy Strike Fighter Tactics Instructor (SFTI) program. It is an advanced training program that teaches fighter and strike tactics and techniques to selected naval aviators and naval flight officers, who then return to their operating units as surrogate instructors.",
+    "The Top Gun program is the United States Navy Strike Fighter Tactics Instructor program, which:\n\n- Is an American military program\n- Teaches fighter and strike tactics and techniques\n- Is for selected naval aviators and naval flight officers\n- Returns the trained personnel to their units as surrogate instructors.",
+    "Top Gun is the popular name for the United States Navy Strike Fighter Tactics Instructor (SFTI) program, which teaches fighter and strike tactics and techniques to selected naval aviators and naval flight officers.",
+    "Top Gun, officially known as the United States Navy Strike Fighter Tactics Instructor program (SFTI program), is a U.S. military program that trains selected naval aviators and naval flight officers in advanced fighter and strike tactics and techniques. \n\nIts primary purpose is to send these trained experts back to their operational units as qualified instructors, providing the skills and knowledge to enhance the overall performance and effectiveness of naval aviation.",
+    "Top Gun, also known as the United States Navy Strike Fighter Tactics Instructor (SFTI) program, is an American military program that:\n\n1. Teaches fighter and strike tactics and techniques.\n2. Selects naval aviators and naval flight officers.\n3. Employs them as instructors after completing the program.\n4. The instructors return to their operating units.",
+    "Top Gun (stylized as TOPGUN) is an American military program that teaches fighter and strike tactics and techniques to selected naval aviators and naval flight officers.",
+    "The Top Gun program, also known as the United States Navy Strike Fighter Tactics Instructor (SFTI) program, is an American military program that specializes in teaching fighter and strike tactics and techniques to select naval aviators and naval flight officers.",
+    "Top Gun is an American military program that teaches fighter and strike tactics and techniques to selected naval aviators and naval flight officers.",
+    "Top Gun is an American military program known as the United States Navy Strike Fighter Tactics Instructor (SFTI) program, also referred to as Top Gun. Its main purpose is to educate selected naval aviators and naval flight officers on fighter and strike tactics and techniques.",
+    "The United States Navy Strike Fighter Tactics Instructor program, also known as Top Gun, is a program that teaches fighter and strike tactics and techniques to selected naval aviators and naval flight officers.",
+    "Top Gun (stylized as TOPGUN) is an American military program that teaches fighter and strike tactics and techniques to selected naval aviators and naval flight officers.",
+    "Top Gun is an American military program that teaches fighter and strike tactics and techniques to selected naval aviators and naval flight officers.",
+    "The Top Gun program is the United States Navy Strike Fighter Tactics Instructor program, an American military program that trains selected naval aviators and naval flight officers in fighter and strike tactics and techniques.",
+    "The Top Gun program, also known as the United States Navy Strike Fighter Tactics Instructor (SFTI) program, is an American military program that teaches fighter and strike tactics and techniques to selected naval aviators and naval flight officers.",
+    "The Top Gun program, also known as the United States Navy Strike Fighter Tactics Instructor (SFTI) program, is an American military program that focuses on teaching:\n\n1. Fighter and strike tactics and techniques.\n2. Selected naval aviators and naval flight officers.\n3. Returns to their operating units as surrogate instructors."
+  ],
+  "timestamp": 1754881226.5506556
+}

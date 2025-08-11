@@ -1,0 +1,30 @@
+{
+  "prompt_id": 278,
+  "prompt": "Context: On December 20, 1966, Los Angeles businessmen Sam Schulman and Eugene V. Klein, both of whom owned the AFL side San Diego Chargers, and a group of minority partners were awarded an NBA franchise for Seattle, the first major-league sports franchise in the city. Schulman served as the active partner and head of team operations, and named the team SuperSonics as a nod to the city\u2019s ties to the aviation industry, with Boeing's having recently been awarded a contract for an SST project.\n\nSeattle SuperSonics began play on October 13, 1967; they were coached by Al Bianchi, and included All-Star guard Walt Hazzard and All-Rookie Team members Bob Rule and Al Tucker. The expansion team debuted in San Francisco with a 144\u2013116 loss in their first game against Golden State Warriors. On October 21, the Seattle team's first win came against the San Diego Rockets in overtime 117\u2013110, and SuperSonics finished the season with a 23\u201359 record.\n\nQuestion: Who was the first coach of the Seattle SuperSonics?",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The first coach of the Seattle SuperSonics was Al Bianchi.",
+    "Al Bianchi was the first coach of the Seattle SuperSonics.",
+    "The first coach of the Seattle SuperSonics was Al Bianchi.",
+    "The first coach of the Seattle SuperSonics was Al Bianchi.",
+    "The first coach of the Seattle SuperSonics was Al Bianchi.",
+    "Al Bianchi was the first coach of the Seattle SuperSonics.",
+    "The first coach of the Seattle SuperSonics was Al Bianchi.",
+    "Al Bianchi was the first coach of the Seattle SuperSonics.",
+    "Al Bianchi was the first coach of the Seattle SuperSonics.",
+    "Al Bianchi was the first coach of the Seattle SuperSonics.",
+    "The first coach of the Seattle SuperSonics was Al Bianchi.",
+    "The first coach of the Seattle SuperSonics was Al Bianchi.",
+    "Al Bianchi was the first coach of the Seattle SuperSonics.",
+    "The first coach of the Seattle SuperSonics was Al Bianchi.",
+    "The first coach of the Seattle SuperSonics was Al Bianchi.",
+    "Al Bianchi was the first coach of the Seattle SuperSonics."
+  ],
+  "timestamp": 1754881226.672078
+}

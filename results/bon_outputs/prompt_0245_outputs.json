@@ -1,0 +1,30 @@
+{
+  "prompt_id": 245,
+  "prompt": "Which Game of Thrones episode does Arya go blind?",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Arya Stark is temporarily blinded in the episode 'The Door' from Season 6 of Game of Thrones.",
+    "Arya Stark does not go blind in Game of Thrones.",
+    "Arya Stark does not go blind in Game of Thrones. In the show, she suffers a severe injury to her face when Jaqen H'ghar attempts to kill her in Season 3. However, it is not blindness but rather a disfigurement of her face, which is removed by the faceless men using a series of cuts with a blade.",
+    "Arya Stark is not blind in Game of Thrones. However, she loses her sight temporarily. \n\nThe specific instance you might be referring to is when Arya is in the House of Black and White, where she undergoes a trial by the many-faced god and the Many-Faced God removes her eyes as a test, also changing them, however in season 5, her sight is restored to normal after it is put back.",
+    "I am unable to verify in which Game of Thrones episode Arya Stark goes blind.",
+    "Arya Stark does not go blind in any episode of Game of Thrones. However, she does go temporarily blind after being poisoned at the end of season 8, episode 3, \"The Long Night\" but that was only temporary and after some treatment and herbal remedy she got her vision back in season 8 episode 5, \"The Bells\".",
+    "Arya Stark, a main character in Game of Thrones, does suffer an eye injury in the third season. The episode where this occurs is Season 3, Episode 9: \"The Rains of Castamere.\" Arya loses her eyesight in her left eye due to the removal of it by the Frey loyalists, led by the Hound, Sandor Clegane.",
+    "Arya Stark does not go blind in Game of Thrones.",
+    "Arya Stark does not go blind in any episode of Game of Thrones.",
+    "Arya Stark doesn't actually go blind in the Game of Thrones series.  However, she does get temporarily blinded by a poison administered by the waif in season 6, episode 4, titled \"Book of Brother\".",
+    "In Game of Thrones, Arya Stark does not go blind.",
+    "I'm not aware of Arya Stark going blind in any episode of Game of Thrones. Arya Stark's character arc in the series primarily revolves around her training as a faceless assassin, rather than a loss of sight.",
+    "Arya does not go blind in Game of Thrones.",
+    "Arya does not go blind in any episode of Game of Thrones.",
+    "Arya Stark does not actually go blind in Game of Thrones.",
+    "Arya Stark does not go blind in Game of Thrones."
+  ],
+  "timestamp": 1754881226.652086
+}

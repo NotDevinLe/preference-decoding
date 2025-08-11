@@ -1,0 +1,30 @@
+{
+  "prompt_id": 449,
+  "prompt": "Name 5 popular musicians",
+  "category": "brainstorming",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Here are 5 popular musicians:\n\n1.  Taylor Swift\n2.  Ed Sheeran\n3.  Beyonc\u00e9\n4.  Kendrick Lamar\n5.  Adele",
+    "Here are 5 popular musicians:\n\n1.  Taylor Swift\n2.  Billie Eilish\n3.  Ed Sheeran\n4.  Beyonc\u00e9\n5.  Kendrick Lamar",
+    "Here are 5 popular musicians:\n\n1.  Taylor Swift\n2.  Beyonc\u00e9\n3.  Justin Bieber\n4.  Ariana Grande\n5.  Kendrick Lamar",
+    "Here are 5 popular musicians:\n\n1.  Drake\n2.  Beyonc\u00e9\n3.  Ed Sheeran\n4.  Taylor Swift\n5.  Kendrick Lamar",
+    "Here are 5 popular musicians:\n\n1.  Taylor Swift\n2.  Beyonc\u00e9\n3.  Drake\n4.  Kendrick Lamar\n5.  Billie Eilish",
+    "Here are 5 popular musicians across various genres:\n\n1.  Beyonc\u00e9 - Known for her powerful voice and captivating stage presence, Beyonc\u00e9 is a pop icon and singer-songwriter.\n2.  Kendrick Lamar - A critically acclaimed rapper and songwriter, Kendrick Lamar is known for his storytelling ability and socially conscious lyrics.\n3.  Taylor Swift - A multi-platinum singer-songwriter and pop sensation, Taylor Swift is known for her catchy and relatable songwriting.\n4.  Ed Sheeran - A singer-songwriter and guitarist, Ed Sheeran is known for his emotive and heartfelt ballads.\n5.  Drake - A rapper and singer, Drake is known for his introspective and emotive lyrics, as well as his chart-topping hits.",
+    "Here are 5 popular musicians across different genres:\n\n1. **Taylor Swift**: Known for her pop and country music, Taylor Swift is a multi-platinum singer-songwriter and one of the best-selling artists of all time.\n\n2. **Kendrick Lamar**: A critically acclaimed rapper, Kendrick Lamar is known for his storytelling and socially conscious lyrics, often incorporating elements of jazz, funk, and spoken word into his music.\n\n3. **Ariana Grande**: With a powerful voice and genre-bending style that incorporates elements of pop, R&B, and electronic dance music, Ariana Grande has become a global superstar and a leading voice in contemporary music.\n\n4. **Billie Eilish**: A singer-songwriter and record producer known for her unique, often unsettling style that blends pop, electronic, and alternative genres, Billie Eilish has become a prominent figure in contemporary music.\n\n5. **Bruno Mars**: With his soulful voice and a blend of pop, R&B, and rock influences, Bruno Mars has become one of the most successful artists of the 2010s, known for hits like \"Uptown Funk\" and \"Just the Way You Are.\"",
+    "Here are 5 popular musicians across different genres:\n\n1. Taylor Swift - Known for her pop and country music.\n2. Kendrick Lamar - A renowned rapper and hip-hop artist.\n3. Billie Eilish - A popular singer-songwriter and pop star.\n4. Ed Sheeran - A British singer-songwriter and musician known for his folk-pop music.\n5. Adele - A British singer-songwriter known for her powerful ballads and soulful voice.",
+    "Here are 5 popular musicians:\n\n1.  Beyonc\u00e9\n2.  Drake\n3.  Taylor Swift\n4.  Kanye West\n5.  Justin Bieber",
+    "Here are five popular musicians across various genres:\n\n1.  Beyonc\u00e9: Known for her powerful vocals and captivating performances, Beyonc\u00e9 is a renowned American singer, songwriter, and actress.\n\n2.  Kendrick Lamar: An American rapper and songwriter, Kendrick Lamar is a critically acclaimed artist known for his storytelling and socially conscious lyrics.\n\n3.  Taylor Swift: As a multi-platinum, award-winning singer-songwriter and pop culture icon, Taylor Swift has gained a massive following worldwide with her catchy and relatable songs.\n\n4.  Drake: A Canadian rapper, singer, songwriter, and record producer, Drake has become one of the best-selling artists of all time, breaking numerous records in the music industry.\n\n5.  Ed Sheeran: A British singer-songwriter and musician, Ed Sheeran has captured the hearts of millions with his soulful voice and emotive ballads that often focus on love, relationships, and personal growth.",
+    "Here are 5 popular musicians:\n\n1.  Beyonc\u00e9\n2.  Ed Sheeran\n3.  Taylor Swift\n4.  Drake\n5.  Lady Gaga",
+    "Here are five popular musicians:\n\n1.  Beyonc\u00e9\n2.  Drake\n3.  Taylor Swift\n4.  Kendrick Lamar\n5.  Ariana Grande",
+    "Here are five popular musicians across various genres:\n\n1.  Beyonc\u00e9 (R&B/Pop)\n2.  Drake (Hip-Hop/Rap)\n3.  Ed Sheeran (Pop/Rock)\n4.  Taylor Swift (Pop/Country)\n5.  Kendrick Lamar (Hip-Hop/Rap)",
+    "Here are 5 popular musicians:\n\n1.  Beyonc\u00e9\n2.  Justin Bieber\n3.  Taylor Swift\n4.  Kanye West\n5.  Adele",
+    "Here are 5 popular musicians:\n\n1.  Beyonc\u00e9 \n2.  Taylor Swift \n3.  Drake\n4.  Ed Sheeran\n5.  Katy Perry",
+    "Here are 5 popular musicians across different genres:\n\n1. **Billie Eilish** - Singer and songwriter known for her unique style and hits like \"Bad Guy\" and \"When the Party's Over\".\n2. **Ed Sheeran** - Singer-songwriter and guitarist famous for his emotive voice and hits like \"Shape of You\" and \"Thinking Out Loud\".\n3. **Taylor Swift** - Singer-songwriter and pop star known for her catchy songs and hits like \"Shake It Off\" and \"Blank Space\".\n4. **Drake** - Rapper and singer known for his melodic flow and hits like \"God's Plan\" and \"One Dance\".\n5. **Katy Perry** - Singer-songwriter and pop star famous for her upbeat songs and hits like \"Firework\" and \"Roar\"."
+  ],
+  "timestamp": 1754881226.996741
+}

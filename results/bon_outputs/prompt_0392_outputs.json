@@ -1,0 +1,30 @@
+{
+  "prompt_id": 392,
+  "prompt": "Context: The leaves are usually large and imposing, often lobed or deeply cut, and may be more or less pinnate. They can also be oval, spear-shaped, or in many other possible shape variations. The leaves are borne alternately on the stem. A quality of philodendrons is that they do not have a single type of leaf on the same plant. Instead, they have juvenile leaves and adult leaves, which can be drastically different from one another. The leaves of seedling philodendrons are usually heart-shaped early in the life of the plant. But after it has matured past the seedling stage, the leaves will acquire the typical juvenile leaf's shape and size. Later in the philodendron's life, it starts producing adult leaves, a process called metamorphosis. Most philodendrons go through metamorphosis gradually; there is no immediately distinct difference between juvenile and adult leaves. Aside from being typically much bigger than the juvenile leaves, the shape of adult leaves can be significantly different. In fact, considerable taxonomic difficulty has occurred in the past due to these differences, causing juvenile and adult plants to mistakenly be classified as different species.\n\nQuestion: What shape are Philodendron leaves?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "According to the text, Philodendron leaves can be in a variety of shapes, such as: \n\n1. Large and imposing\n2. Lobed\n3. Deeply cut\n4. Oval\n5. Spear-shaped\n\nAdditionally, they can be pinnate or have other possible shape variations.",
+    "Philodendron leaves can be large and imposing, and may be lobed, deeply cut, oval, spear-shaped, or take many other shape variations.",
+    "Philodendron leaves can come in various shapes, including lobed or deeply cut, oval, spear-shaped, and many other possible shape variations.",
+    "Philodendron leaves can be large and imposing, and they come in a variety of shapes. Some possible shapes include: \n\n1. Lobed\n2. Deeply cut\n3. Pinnate (or feather-shaped, with leaflets arranged on either side of the central stem)\n4. Oval\n5. Spear-shaped",
+    "Philodendron leaves are often large and imposing and can come in various shapes. The possible shapes include:\n\n1. Lobed\n2. Deeply cut\n3. Oval\n4. Spear-shaped\n5. Pinnate\n6. Heart-shaped (in juvenile plants)\n7. Varied, with some plants having drastically different shapes for juvenile and adult leaves.\n\nIt is also mentioned that the adult leaves can be significantly different from the juvenile leaves, both in size and shape, which can cause taxonomic difficulty.",
+    "Philodendron leaves can have various shapes, including: \n\n1. Large and imposing\n2. Lobed\n3. Deeply cut\n4. Pinnate\n5. Oval\n6. Spear-shaped\n\nIt is worth noting that they can also be heart-shaped in the early stages of the plant's life.",
+    "Philodendron leaves can have a variety of shapes, including:\n\n1. Large and imposing\n2. Lobed\n3. Deeply cut\n4. Pinnate\n5. Oval\n6. Spear-shaped\n\nHowever, it's also mentioned that the leaves can be in many other possible shape variations.",
+    "According to the text, the shape of Philodendron leaves can vary and may be: \n\n1. Large and imposing\n2. Lobed\n3. Deeply cut\n4. Oval\n5. Spear-shaped\n\nThey can also go through a process called metamorphosis, during which the leaves change shape and size as the plant matures.",
+    "The leaves of philodendrons can be large and imposing, often lobed or deeply cut, and may be more or less pinnate. They can also be oval, spear-shaped, or in many other possible shape variations.",
+    "Philodendron leaves can be large and imposing, and they come in various shapes, including:\n\n1.  Lobed or deeply cut\n2.  Oval\n3.  Spear-shaped\n4.  Pinnate\n5.  Heart-shaped (in the early stages of seedlings)",
+    "Philodendron leaves can come in various shapes, including large and imposing, lobed or deeply cut, oval, spear-shaped, and many other possible shape variations. They can be more or less pinnate as well.",
+    "The shapes of Philodendron leaves can vary, but common shapes include:\n\n1. Large and imposing\n2. Lobed\n3. Deeply cut\n4. Oval\n5. Spear-shaped\n6. Heart-shaped (in seedlings)\n7. Juvenile leaf shapes (can be different from adult leaves)",
+    "The text mentions several possible shapes of Philodendron leaves. According to the text, Philodendron leaves can be:\n\n1. Large and imposing\n2. Lobed or deeply cut\n3. Pinnate\n4. Oval\n5. Spear-shaped\n6. Heart-shaped (on seedlings)\n7. Various other possible shape variations.",
+    "According to the text, Philodendron leaves can be various shapes, such as:\n\n1. Large and imposing, possibly lobed or deeply cut.\n2. Oval\n3. Spear-shaped\n4. Heart-shaped (in the juvenile stage)\n5. Pinnate (more or less)\n\nNote that adult leaves can have a significantly different shape from the juvenile leaves, which can lead to taxonomic difficulties.",
+    "The shapes of Philodendron leaves vary, and they can be:\n\n1. Large and imposing\n2. Lobed or deeply cut\n3. Oval\n4. Spear-shaped\n5. Heart-shaped (in seedlings)\n6. Various other possible shape variations",
+    "Philodendron leaves can be large and imposing, and may be various shapes such as:\n\n- Lobed\n- Deeply cut\n- Oval\n- Spear-shaped\n- Pinnate\n- Heart-shaped (in seedling stage)\n- Varies in shape in the adult stage (can be drastically different from the juvenile leaves)"
+  ],
+  "timestamp": 1754881226.9251783
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_id": 441,
+  "prompt": "What are people from Wisconsin also referred to as?",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "People from Wisconsin are often referred to as \"Cheeseheads.\"",
+    "People from Wisconsin are commonly referred to as \"Cheeseheads.\" This nickname is a reference to the state's significant cheese production and its strong dairy industry, particularly the cheddar cheese produced in the state. The term was originally used derogatorily but has been adopted as a source of pride for Wisconsinites.",
+    "People from Wisconsin are often referred to as \"Cheeseheads.\" This nickname originated from the state's reputation as the largest cheese producer in the United States, accounting for a significant portion of America's cheese production. The term was initially used in a derogatory manner but is now widely accepted and even used with pride by Wisconsinites, especially when referring to their loyalty to the Green Bay Packers football team.",
+    "People from Wisconsin are often referred to as \"Cheeseheads.\" This nickname is due to the state's high production of cheese and its influence in American dairy farming.",
+    "People from Wisconsin are often referred to as 'Cheeseheads'. This nickname originated in the 1980s as a colloquialism for the state's high production and consumption of cheese. It gained popularity during the 1990s as a nod to the famous Green Bay Packers, Wisconsin's football team. Fans of the team would wear cheese wedges on their heads, earning them the nickname.",
+    "People from Wisconsin are commonly referred to as \"Cheeseheads.\" This nickname was originally coined in the 1980s as a derogatory term by Detroit Lions fans to mock Packers fans wearing cheese-shaped hats. However, the term has been adopted by the people of Wisconsin as a badge of pride, symbolizing the state's famous cheese production.",
+    "People from Wisconsin are often referred to as \"Cheeseheads.\" This nickname originated in the 1980s as a reference to the state's famous cheese production. The term gained popularity when a Minnesota Vikings fan called a Green Bay Packers fan a \"cheesehead,\" and the term was reclaimed as a badge of pride by Packers fans. It has since become a well-known and iconic symbol of Wisconsin's identity.",
+    "People from Wisconsin are often referred to as \"Cheeseheads.\" This nickname was originally coined in reference to the idea that cheeseheads (or people from Wisconsin) were so proud of their cheese production that they would wear foam cheese wedges as hats, as well as how Wisconsinites were seen to be quick to promote and defend the quality of cheese produced in their state.",
+    "People from Wisconsin are often referred to as Cheeseheads. This nickname is primarily due to the state's famous dairy industry and cheese production. The name originated from the cheeseheads' cheer, which is \"Go, cheeseheads, go,\" a play on the phrase \"Go, Badgers, go,\" which is the university fight song for the University of Wisconsin.",
+    "People from Wisconsin are commonly referred to as \"Cheeseheads.\" This nickname originated in the 1980s as a derogatory term but is now largely used as a badge of pride among Wisconsinites. It is often associated with the state's rich cheese production and the iconic Green Bay Packers football team, who are also based in Wisconsin.",
+    "People from Wisconsin are commonly referred to as \"Cheeseheads.\" This nickname originated from the state's reputation for being a major producer of cheese, with the University of Wisconsin marching band at one point wearing foam cheese hats.",
+    "People from Wisconsin are often referred to as \"Cheeseheads.\" This nickname originated from the state's reputation as a leading producer of cheese in the United States.",
+    "People from Wisconsin are often referred to as \"Cheeseheads.\" This nickname originated from the state's reputation for producing a large amount of cheese and from the iconic cheese hats that have become a symbol of the Green Bay Packers football team, who are based in Wisconsin.",
+    "People from Wisconsin are often referred to as Cheeseheads, a nickname derived from the state's rich dairy industry and the iconic cheese that it produces. The term \"Cheesehead\" was originally a derogatory term but has been adopted by Wisconsinites as a source of pride.",
+    "People from Wisconsin are often referred to as 'Cheeseheads.'",
+    "People from Wisconsin are commonly referred to as \"Cheeseheads.\""
+  ],
+  "timestamp": 1754881226.9836395
+}

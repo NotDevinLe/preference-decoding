@@ -1,0 +1,30 @@
+{
+  "prompt_id": 329,
+  "prompt": "What dog breed is a mix between a Cocker Spaniel and a Poodle?",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "A dog breed that is a mix between a Cocker Spaniel and a Poodle is called a Cockapoo.",
+    "A mix between a Cocker Spaniel and a Poodle is known as a Cockerpoo.",
+    "The dog breed that is a mix between a Cocker Spaniel and a Poodle is a Cockerpoo or Cockapoo.",
+    "A Cocker Spaniel and a Poodle mixed breed is commonly known as a Cockapoo.",
+    "A dog breed that is a mix between a Cocker Spaniel and a Poodle is called a Cockapoo.",
+    "A mix between a Cocker Spaniel and a Poodle is known as a Cockapoo. Cockapoos are a cross between an American Cocker Spaniel or an English Cocker Spaniel and a Poodle, typically a Toy, Miniature, or Standard Poodle. They are often considered a hybrid or designer dog breed and are known for their friendly, outgoing personalities and low-shedding coats.",
+    "A mix between a Cocker Spaniel and a Poodle is known as a Cockapoo.",
+    "A mix between a Cocker Spaniel and a Poodle is known as a Cockapoo.",
+    "A dog breed that is a mix between a Cocker Spaniel and a Poodle is called a Cockapoo.",
+    "The dog breed resulting from a cross between a Cocker Spaniel and a Poodle is commonly known as a Cockapoo. Cockapoos are a hybrid breed that combines the friendly and affectionate nature of Cocker Spaniels with the intelligence and low-shedding coat of Poodles. They can come in various sizes, such as Toy, Miniature, and Standard, depending on the size of the Poodle used in the breeding.",
+    "A Cocker Spaniel and a Poodle mix is often referred to as a 'Cockapoo'.",
+    "A mix between a Cocker Spaniel and a Poodle is known as a Cockapoo.",
+    "A mix between a Cocker Spaniel and a Poodle is known as a Cockerdoodle. However, there are two different versions of this mix depending on the size of the Poodle:\n\n1.  The first version is the Cockapoo, which is a Cocker Spaniel mixed with a Toy or Miniature Poodle. This results in a smaller-sized dog.\n2.  The second version is the American Cockerdoodle or Cockerdoodle, which is a Cocker Spaniel mixed with a Standard Poodle. This can result in a medium-sized dog.",
+    "A dog breed that is a mix between a Cocker Spaniel and a Poodle is called a Cockapoo.",
+    "The mix between a Cocker Spaniel and a Poodle is known as a Cockapoo.",
+    "A dog breed that is a mix between a Cocker Spaniel and a Poodle is called a Cockapoo."
+  ],
+  "timestamp": 1754881226.7320745
+}

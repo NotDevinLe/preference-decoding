@@ -1,0 +1,30 @@
+{
+  "prompt_id": 148,
+  "prompt": "Context: Stephen Edwin King (born September 21, 1947) is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels. Described as the \"King of Horror\", a play on his surname and a reference to his high standing in pop culture, his books have sold more than 350 million copies, and many have been adapted into films, television series, miniseries, and comic books. King has published 64 novels, including seven under the pen name Richard Bachman, and five non-fiction books. He has also written approximately 200 short stories, most of which have been published in book collections.[\n\nQuestion: Who is Stephen King?",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Stephen King is an American author known for his works in various genres such as horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels.",
+    "Stephen Edwin King is an American author known for writing horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels.",
+    "Stephen Edwin King is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels.",
+    "Stephen King is an American author known for writing horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels. He is often referred to as the \"King of Horror\" due to his massive popularity and influence in popular culture.",
+    "Stephen King is an American author of various genres, including horror, supernatural fiction, suspense, crime, science-fiction, and fantasy.",
+    "Stephen King is an American author known for writing horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels. He is often referred to as the \"King of Horror\" due to his popularity and significant influence in the literary world.",
+    "Stephen King is an American author known for writing horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels, and is often referred to as the \"King of Horror\" due to his popularity and high standing in pop culture.",
+    "Stephen Edwin King is an American author known for writing horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels, often referred to as the \"King of Horror.\"",
+    "Stephen King is an American author known for writing horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels. He is often referred to as the \"King of Horror\" due to his significant influence and popularity in the literary world, with over 350 million copies of his books sold.",
+    "Stephen King is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels.",
+    "Stephen King is an American author known for his works in various genres, including horror, supernatural fiction, suspense, crime, science-fiction, and fantasy. He is often referred to as the \"King of Horror\" due to his immense popularity and the massive number of copies sold of his books.",
+    "Stephen Edwin King is an American author known for writing horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels. He is often referred to as the \"King of Horror\" due to his high popularity in the literary world and the massive success of his works, with over 350 million copies sold worldwide.",
+    "Stephen King is an American author known for his works in the genres of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels. He is often referred to as the \"King of Horror\" due to his immense popularity and the large number of bestselling books he has written, with over 350 million copies sold worldwide.",
+    "Stephen Edwin King is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels, commonly known as the \"King of Horror.\"",
+    "Stephen King is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels, widely known as the \"King of Horror\" for his significant contributions to the literary world.",
+    "Stephen King is an American author known for his work in the genres of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy. He is often referred to as the \"King of Horror\" due to his high standing in popular culture and his numerous bestselling novels and short stories, which have been adapted into various forms of media."
+  ],
+  "timestamp": 1754881226.5882745
+}

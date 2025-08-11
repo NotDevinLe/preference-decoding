@@ -1,0 +1,30 @@
+{
+  "prompt_id": 255,
+  "prompt": "Give me a bulleted list of the last 5 Super Bowl winning teams",
+  "category": "brainstorming",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Here's the list of the last 5 Super Bowl winning teams:\n\n\u2022 **2022**: Los Angeles Rams (Super Bowl LVI)\n\u2022 **2021**: Tampa Bay Buccaneers (Super Bowl LV)\n\u2022 **2020**: Kansas City Chiefs (Super Bowl LIV)\n\u2022 **2019**: New England Patriots (Super Bowl LIII)\n\u2022 **2018**: Philadelphia Eagles (Super Bowl LII)",
+    "Here's a list of the last 5 Super Bowl winning teams:\n\n* 2022: Los Angeles Rams (Super Bowl LVI)\n* 2021: Tampa Bay Buccaneers (Super Bowl LV)\n* 2020: Kansas City Chiefs (Super Bowl LIV)\n* 2019: New England Patriots (Super Bowl LIII)\n* 2018: Philadelphia Eagles (Super Bowl LII)",
+    "Here are the last 5 Super Bowl winning teams:\n\n\u2022 **Super Bowl LVIII (58) - 2023:** Kansas City Chiefs\n\u2022 **Super Bowl LVI (56) - 2022:** Los Angeles Rams\n\u2022 **Super Bowl LV (55) - 2021:** Tampa Bay Buccaneers\n\u2022 **Super Bowl LIV (54) - 2020:** Kansas City Chiefs\n\u2022 **Super Bowl LIII (53) - 2019:** New England Patriots",
+    "Here's a list of the last 5 Super Bowl winning teams:\n\n\u2022 2022: Los Angeles Rams (Super Bowl LVI)\n\u2022 2021: Tampa Bay Buccaneers (Super Bowl LV)\n\u2022 2020: Kansas City Chiefs (Super Bowl LIV)\n\u2022 2019: New England Patriots (Super Bowl LIII)\n\u2022 2018: Philadelphia Eagles (Super Bowl LII)",
+    "Here's a list of the last 5 Super Bowl winning teams:\n\n\u2022 Super Bowl LVII (2023): Kansas City Chiefs\n\u2022 Super Bowl LVI (2022): Los Angeles Rams\n\u2022 Super Bowl LV (2021): Tampa Bay Buccaneers\n\u2022 Super Bowl LIV (2020): Kansas City Chiefs\n\u2022 Super Bowl LIII (2019): New England Patriots",
+    "Here's a list of the last 5 Super Bowl winning teams:\n\n\u2022  **Super Bowl LVII (2023)**: Kansas City Chiefs\n\u2022  **Super Bowl LVI (2022)**: Los Angeles Rams\n\u2022  **Super Bowl LV (2021)**: Tampa Bay Buccaneers\n\u2022  **Super Bowl LIV (2020)**: Kansas City Chiefs\n\u2022  **Super Bowl LIII (2019)**: New England Patriots",
+    "Here are the last 5 Super Bowl winning teams:\n\n\u2022 **Super Bowl LVII (2023):** Kansas City Chiefs\n\u2022 **Super Bowl LVI (2022):** Los Angeles Rams\n\u2022 **Super Bowl LV (2021):** Tampa Bay Buccaneers\n\u2022 **Super Bowl LIV (2020):** Kansas City Chiefs\n\u2022 **Super Bowl LIII (2019):** New England Patriots",
+    "Here are the last 5 Super Bowl winning teams:\n\n\u2022 **Super Bowl LVIII (2023)**: Kansas City Chiefs\n\u2022 **Super Bowl LVI (2022)**: Los Angeles Rams\n\u2022 **Super Bowl LV (2021)**: Tampa Bay Buccaneers\n\u2022 **Super Bowl LIV (2020)**: Kansas City Chiefs\n\u2022 **Super Bowl LIII (2019)**: New England Patriots",
+    "Here's a list of the last 5 Super Bowl winning teams:\n\n* **Super Bowl LVIII (2023):** Kansas City Chiefs\n* **Super Bowl LVII (2022):** Los Angeles Rams\n* **Super Bowl LVI (2021):** Los Angeles Rams\n* **Super Bowl LV (2020):** Tampa Bay Buccaneers\n* **Super Bowl LIV (2019):** Kansas City Chiefs",
+    "Here's a list of the last 5 Super Bowl winning teams:\n\n\u2022 **Super Bowl LVII (2023): Kansas City Chiefs**\n\u2022 **Super Bowl LVI (2022): Los Angeles Rams**\n\u2022 **Super Bowl LV (2021): Tampa Bay Buccaneers**\n\u2022 **Super Bowl LIV (2020): Kansas City Chiefs**\n\u2022 **Super Bowl LIII (2019): New England Patriots**",
+    "Here's a list of the last 5 Super Bowl winning teams as of my cut-off knowledge in 2023:\n\n\u2022 **Super Bowl LVII (2023)**: Kansas City Chiefs\n\u2022 **Super Bowl LVI (2022)**: Los Angeles Rams\n\u2022 **Super Bowl LV (2021)**: Tampa Bay Buccaneers\n\u2022 **Super Bowl LIV (2020)**: Kansas City Chiefs\n\u2022 **Super Bowl LIII (2019)**: New England Patriots",
+    "Here are the last 5 Super Bowl winning teams:\n\n\u2022 **Super Bowl LVII (2023)**: Kansas City Chiefs\n\u2022 **Super Bowl LVI (2022)**: Los Angeles Rams\n\u2022 **Super Bowl LV (2021)**: Tampa Bay Buccaneers\n\u2022 **Super Bowl LIV (2020)**: Kansas City Chiefs\n\u2022 **Super Bowl LIII (2019)**: New England Patriots",
+    "Here's a bulleted list of the last 5 Super Bowl winning teams:\n\n\u2022 Super Bowl LVIII (2022): Los Angeles Rams (defeated Cincinnati Bengals 23-20)\n\u2022 Super Bowl LVII (2023): Kansas City Chiefs (defeated Philadelphia Eagles 38-35)\n\u2022 Super Bowl LVI (2021): Los Angeles Rams (defeated Cincinnati Bengals 23-20)\n\u2022 Super Bowl LV (2020): Tampa Bay Buccaneers (defeated Kansas City Chiefs 31-9)\n\u2022 Super Bowl LIV (2019): Kansas City Chiefs (defeated San Francisco 49ers 31-20)",
+    "Here's a list of the last 5 Super Bowl winning teams:\n\n\u2022 **Super Bowl LVII (2023)**: Kansas City Chiefs\n\u2022 **Super Bowl LVI (2022)**: Los Angeles Rams\n\u2022 **Super Bowl LV (2021)**: Tampa Bay Buccaneers\n\u2022 **Super Bowl LIV (2020)**: Kansas City Chiefs\n\u2022 **Super Bowl LIII (2019)**: New England Patriots",
+    "Here is a bulleted list of the last 5 Super Bowl winning teams:\n\n\u2022 **Super Bowl LVIII (2022)**: Los Angeles Rams\n\u2022 **Super Bowl LVI (2020)**: Kansas City Chiefs\n\u2022 **Super Bowl LIV (2019)**: Kansas City Chiefs\n\u2022 **Super Bowl LIII (2018)**: New England Patriots\n\u2022 **Super Bowl LII (2017)**: Philadelphia Eagles",
+    "Here is the list of the last 5 Super Bowl winning teams:\n\n* Super Bowl LVIII (2022): Los Angeles Rams\n* Super Bowl LVI (2020): Kansas City Chiefs\n* Super Bowl LIV (2019): Kansas City Chiefs\n* Super Bowl LIII (2018): New England Patriots\n* Super Bowl LI (2016): New England Patriots"
+  ],
+  "timestamp": 1754881226.657847
+}

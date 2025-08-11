@@ -1,0 +1,30 @@
+{
+  "prompt_id": 141,
+  "prompt": "Context: Demond \"Bob\" Sanders (born February 24, 1981) is an American former professional football player who was a safety in the National Football League (NFL) for eight seasons. He played college football for the Iowa Hawkeyes and was drafted by the Indianapolis Colts in the second round of the 2004 NFL Draft. He was named NFL Defensive Player of the Year in 2007 and also played for the San Diego Chargers in his final season in 2011.\n\nSanders was nicknamed \"The Sandman\" because of his hard hits and tackles, and was also called \"The Eraser\" by former Colts' coach Tony Dungy because of his tendency to erase the mistakes of his teammates. He spent the majority of his career battling injuries, having played more than six games in a single season only twice, in 2005 and 2007.\n\nQuestion: Extract the teams that Bob Sanders played throughout his career, and put them in a comma-separated list.",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The teams that Bob Sanders played for throughout his career are: Indianapolis Colts, San Diego Chargers.",
+    "The teams that Bob Sanders played for throughout his NFL career are: Indianapolis Colts, San Diego Chargers.",
+    "Indianapolis Colts, San Diego Chargers",
+    "The teams that Bob Sanders played throughout his career are:\n\nIndianapolis Colts, San Diego Chargers",
+    "The teams that Bob Sanders played for are the Iowa Hawkeyes (college team), the Indianapolis Colts, and the San Diego Chargers. \n\nIn a comma-separated list, they are: Iowa Hawkeyes, Indianapolis Colts, San Diego Chargers.",
+    "The teams that Bob Sanders played for throughout his career are the Indianapolis Colts and the San Diego Chargers. \n\nHere are the teams in a comma-separated list: Indianapolis Colts, San Diego Chargers",
+    "Indianapolis Colts, San Diego Chargers.",
+    "The teams that Bob Sanders played for during his career are: Indianapolis Colts, San Diego Chargers.",
+    "Indianapolis Colts, San Diego Chargers",
+    "The teams that Bob Sanders played for throughout his career are:\n\nIndianapolis Colts, San Diego Chargers",
+    "The teams that Bob Sanders played throughout his career are: Indianapolis Colts, San Diego Chargers.",
+    "Indianapolis Colts, San Diego Chargers.",
+    "Indianapolis Colts, San Diego Chargers",
+    "The teams that Bob Sanders played for are: Indianapolis Colts, San Diego Chargers.",
+    "The teams Demond \"Bob\" Sanders played throughout his career are: \n\nIndianapolis Colts, San Diego Chargers.",
+    "Indianapolis Colts, San Diego Chargers"
+  ],
+  "timestamp": 1754881226.5842597
+}

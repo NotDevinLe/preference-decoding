@@ -1,0 +1,30 @@
+{
+  "prompt_id": 334,
+  "prompt": "Context: Sir John Evelyn (1591\u20131664) was an English politician who sat in the House of Commons at various times between 1628 and 1660. He reluctantly supported the Parliamentary side in the English Civil War.\n\nEvelyn was the son of Sir John Evelyn of Kingston, Godstone, Surrey and Marden, MP and his wife Elizabeth Stever, daughter of William Stever of Kingston upon Thames. He was baptised at Kingston upon Thames on 20 October 1591. He was admitted at Emmanuel College, Cambridge on 13 March 1606. He was a member of the Virginia Company in 1612 and of the East India Company in 1624. He was a JP for Surrey from 1624.\n\nQuestion: Who did John Evelyn support during the English Civil War?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "John Evelyn supported the Parliamentary side during the English Civil War, although he did so reluctantly.",
+    "John Evelyn, the subject of your question, was described in the text as having \"reluctantly supported the Parliamentary side in the English Civil War.\"",
+    "Sir John Evelyn reluctantly supported the Parliamentary side during the English Civil War.",
+    "Sir John Evelyn supported the Parliamentary side in the English Civil War, albeit reluctantly.",
+    "Sir John Evelyn supported the Parliamentary side in the English Civil War.",
+    "Sir John Evelyn supported the Parliamentary side in the English Civil War.",
+    "Sir John Evelyn reluctantly supported the Parliamentary side during the English Civil War.",
+    "According to the provided context, John Evelyn \"reluctantly supported the Parliamentary side\" during the English Civil War.",
+    "Sir John Evelyn reluctantly supported the Parliamentary side during the English Civil War.",
+    "According to the given context, Sir John Evelyn reluctantly supported the Parliamentary side during the English Civil War.",
+    "Sir John Evelyn, according to the given context, supported the Parliamentary side during the English Civil War, albeit reluctantly.",
+    "Sir John Evelyn reluctantly supported the Parliamentary side during the English Civil War.",
+    "John Evelyn, the subject in question, \"reluctantly\" supported the Parliamentary side during the English Civil War.",
+    "Sir John Evelyn reluctantly supported the Parliamentary side during the English Civil War.",
+    "Sir John Evelyn reluctantly supported the Parliamentary side in the English Civil War.",
+    "Sir John Evelyn supported the Parliamentary side during the English Civil War."
+  ],
+  "timestamp": 1754881226.734751
+}

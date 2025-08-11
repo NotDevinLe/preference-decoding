@@ -1,0 +1,30 @@
+{
+  "prompt_id": 207,
+  "prompt": "Context: Ouzo is a clear liquid. However, when water or ice is added, ouzo turns a milky-white colour. This is because anethole, the essential oil of anise, is completely soluble in alcohol at approximately 38% ABV and above, but not in water. Diluting the spirit causes it to separate, creating an emulsion whose fine droplets scatter the light. This process is called louching and is also seen while preparing absinthe.\n\nThe drinks with a similar flavour of Ouzu include sambuca from (Italy), pastis from (France), oghi (from Armenia), rak\u0131 from Turkey, and arak (from the Levant). Its aniseed flavour is also similar to the anise-flavoured liqueur of an\u00eds (Spain) and the stronger spirits of absinthe (France and Switzerland). Aguardiente (Latin America), made from sugar cane, is also similar. The Italian drink Pallini Mistra, named after the Greek city of Mystras in the Peloponnese is a version of ouzo made in Rome that closely resembles Greek and Cypriot ouzo.\n\nQuestion: What is the Turkish drink that tastes similar to",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Rak\u0131 is the Turkish drink that tastes similar to Ouzo.",
+    "The Turkish drink that tastes similar to Ouzo is rak\u0131.",
+    "The Turkish drink that tastes similar to Ouzo is Rak\u0131.",
+    "The Turkish drink that tastes similar to Ouzo is Rak\u0131.",
+    "The Turkish drink that tastes similar to Ouzo is Rak\u0131.",
+    "The Turkish drink that tastes similar to Ouzo is Rak\u0131.",
+    "The Turkish drink that tastes similar to Ouzo is Rak\u0131.",
+    "The Turkish drink that tastes similar to ouzo is called Rak\u0131.",
+    "Rak\u0131, is the Turkish drink that tastes similar to Ouzo.",
+    "The Turkish drink that tastes similar to Ouzo is Rak\u0131.",
+    "Rak\u0131 is the Turkish drink that tastes similar to Ouzo.",
+    "The Turkish drink that tastes similar to ouzo is rak\u0131.",
+    "The Turkish drink that tastes similar to Ouzo is rak\u0131.",
+    "The Turkish drink that tastes similar to Ouzo is Rak\u0131.",
+    "The Turkish drink that tastes similar to Ouzo is Rak\u0131.",
+    "[Generation failed]"
+  ],
+  "timestamp": 1754881226.6247933
+}

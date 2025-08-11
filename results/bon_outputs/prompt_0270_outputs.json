@@ -1,0 +1,30 @@
+{
+  "prompt_id": 270,
+  "prompt": "Context: alvia rosmarinus (/\u02c8s\u00e6lvi\u0259 \u02ccr\u0252sm\u0259\u02c8ra\u026an\u0259s/), commonly known as rosemary, is a shrub with fragrant, evergreen, needle-like leaves and white, pink, purple, or blue flowers, native to the Mediterranean region. Until 2017, it was known by the scientific name Rosmarinus officinalis (/\u02ccr\u0252sm\u0259\u02c8ra\u026an\u0259s \u0259\u02ccf\u026as\u026a\u02c8ne\u026al\u026as/), now a synonym.\n\nIt is a member of the sage family Lamiaceae, which includes many other medicinal and culinary herbs. The name \"\"rosemary\"\" derives from Latin ros marinus (lit.\u2009'dew of the sea'). Rosemary has a fibrous root system\n\nQuestion: What is the origin of the name of the herb Rosemary?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The name \"rosemary\" is derived from the Latin \"ros marinus,\" which translates to \"dew of the sea.\"",
+    "The name \"rosemary\" originates from Latin, where it is derived from \"ros marinus,\" which translates to \"dew of the sea.\"",
+    "The origin of the name \"Rosemary\" is derived from the Latin words \"ros\" (dew) and \"marinus\" (of the sea).",
+    "The name \"Rosemary\" derives from Latin \"ros marinus,\" which literally translates to \"dew of the sea.\"",
+    "The name \"rosemary\" is derived from the Latin \"ros marinus,\" which means \"dew of the sea.\"",
+    "The name 'Rosemary' originates from Latin, 'ros marinus', which translates to 'dew of the sea'.",
+    "The name \"Rosemary\" originates from Latin \"ros marinus\", which translates to \"dew of the sea\".",
+    "The origin of the name \"Rosemary\" is derived from the Latin phrase \"ros marinus,\" which translates to \"dew of the sea.\"",
+    "The name \"Rosemary\" originates from Latin, specifically \"ros marinus,\" which translates to \"dew of the sea.\"",
+    "The name \"Rosemary\" is derived from the Latin phrase \"ros marinus,\" which literally means \"dew of the sea.\"",
+    "The name \"Rosemary\" originates from the Latin phrase \"ros marinus,\" which translates to \"dew of the sea.\"",
+    "The name \"rosemary\" originates from the Latin words \"ros\" meaning \"dew\" and \"marinus\" meaning \"of the sea\".",
+    "The origin of the name \"Rosemary\" is from Latin \"ros marinus,\" which translates to \"dew of the sea.\"",
+    "The name \"Rosemary\" originates from the Latin phrase \"ros marinus\", which translates to \"dew of the sea\".",
+    "The name \"rosemary\" is derived from the Latin words \"ros\" (dew) and \"marinus\" (of the sea).",
+    "The name \"Rosemary\" originates from the Latin phrase \"ros marinus\", which translates to \"dew of the sea\"."
+  ],
+  "timestamp": 1754881226.6674488
+}

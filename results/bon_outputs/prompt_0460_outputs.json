@@ -1,0 +1,30 @@
+{
+  "prompt_id": 460,
+  "prompt": "Context: Tea, coffee, sisal, pyrethrum, corn, and wheat are grown in the fertile highlands, one of the most successful agricultural production regions in Africa. Livestock predominates in the semi-arid savanna to the north and east. Coconuts, pineapples, cashew nuts, cotton, sugarcane, sisal, and corn are grown in the lower-lying areas. Kenya has not attained the level of investment and efficiency in agriculture that can guarantee food security, and coupled with resulting poverty (53% of the population lives below the poverty line), a significant portion of the population regularly starves and is heavily dependent on food aid. Poor roads, an inadequate railway network, under-used water transport, and expensive air transport have isolated mostly arid and semi-arid areas, and farmers in other regions often leave food to rot in the fields because they cannot access markets. This was last seen in August and September 2011, prompting the Kenyans for Kenya initiative by the Red Cross.\n\nQuestion: What fruits and vegetables are grown in lower-lying areas of Kenya?",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "According to the given text, the following fruits and vegetables are grown in the lower-lying areas of Kenya: \n\n- Coconuts\n- Pineapples\n- Cashew nuts\n- Sisal (technically a type of agave used for fiber production, but sometimes grown for food)",
+    "In the lower-lying areas of Kenya, the following fruits and vegetables are grown:\n\n1. Coconuts\n2. Pineapples\n3. Cashew nuts",
+    "According to the information, coconuts, pineapples, and cashew nuts are the fruits grown in the lower-lying areas of Kenya.",
+    "The text does not specify the specific fruits and vegetables grown in the lower-lying areas of Kenya. However, it mentions the following fruits and other crops grown in the lower-lying areas:\n\n1. Coconuts\n2. Pineapples\n3. Cashew nuts\n4. Sugarcane \n\nNote that the text does not specifically mention vegetables grown in the lower-lying areas.",
+    "Coconuts and pineapples are the fruits grown in the lower-lying areas of Kenya.",
+    "According to the provided information, the following fruits are grown in the lower-lying areas of Kenya: \n\n1. Coconuts\n2. Pineapples",
+    "In the lower-lying areas of Kenya, the following fruits and vegetables are grown:\n\n1. Coconuts\n2. Pineapples\n3. Cashew nuts",
+    "In the lower-lying areas of Kenya, the following fruits and vegetables are grown:\n\n1. Coconuts\n2. Pineapples\n3. Cashew nuts",
+    "According to the provided information, in the lower-lying areas of Kenya, the following fruits are grown:\n\n1. Coconuts\n2. Pineapples\n3. Cashew nuts",
+    "According to the text, the following fruits are grown in the lower-lying areas of Kenya:\n\n1. Coconuts\n2. Pineapples\n3. Cashew nuts",
+    "Based on the information provided, the following fruits are grown in the lower-lying areas of Kenya: \n\n1. Coconuts\n2. Pineapples\n3. Cashew nuts\n\nThere is no mention of vegetables in the provided information.",
+    "According to the text, the following fruits and vegetables are grown in the lower-lying areas of Kenya:\n\n1. Coconuts\n2. Pineapples\n3. Cashew nuts",
+    "According to the given context, in the lower-lying areas of Kenya, the following are grown:\n\n1. Coconuts\n2. Pineapples\n3. Cashew nuts\n4. Sugarcane \n5. Sisal",
+    "In the lower-lying areas of Kenya, the following are grown:\n\n1. Coconuts\n2. Pineapples\n3. Cashew nuts",
+    "According to the given text, the fruits grown in the lower-lying areas of Kenya are coconuts and pineapples. Additionally, the vegetables grown in these areas include cashew nuts (technically a type of fruit, but often referred to as a nut).",
+    "Coconuts and pineapples are the fruits grown in the lower-lying areas of Kenya."
+  ],
+  "timestamp": 1754881227.0209675
+}

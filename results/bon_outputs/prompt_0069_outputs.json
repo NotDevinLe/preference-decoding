@@ -1,0 +1,30 @@
+{
+  "prompt_id": 69,
+  "prompt": "Context: Muhammad Ejaz Shafi is a Pakistani politician who was a Member of the Provincial Assembly of the Punjab, from 2002 to May 2018.\n\nEarly life and education\nHe was born on 1 May 1969 in Khanpur.\n\nHe has the degree of the Bachelor of Arts.\n\nPolitical career\nHe was elected to the Provincial Assembly of the Punjab as a candidate of Pakistan Muslim League (Q) (PML-Q) from Constituency PP-290 (Rahimyar Khan-VI) in 2002 Pakistani general election. He received 22,531 votes and defeated a candidate of Pakistan Awami Tehrik.\n\nHe was re-elected to the Provincial Assembly of the Punjab as a candidate of PML-Q from Constituency PP-290 (Rahimyar Khan-VI) in 2008 Pakistani general election. He received 24,751 votes and defeated a candidate of Pakistan Peoples Party.\n\nHe was re-elected to the Provincial Assembly of the Punjab as a candidate of Pakistan Muslim League (N) from Constituency PP-290 (Rahimyar Khan-VI) in 2013 Pakistani general election.\n\nQuestion: Who is Muhammad Ejaz Shafi",
+  "category": "summarization",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Muhammad Ejaz Shafi is a Pakistani politician who served as a Member of the Provincial Assembly of the Punjab from 2002 to May 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who was a Member of the Provincial Assembly of the Punjab from 2002 to May 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who served as a Member of the Provincial Assembly of the Punjab from 2002 to May 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who was a Member of the Provincial Assembly of the Punjab from 2002 to May 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who served as a Member of the Provincial Assembly of the Punjab from 2002 to May 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who was a Member of the Provincial Assembly of the Punjab, serving from 2002 to 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who served as a Member of the Provincial Assembly of the Punjab from 2002 to May 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who was a Member of the Provincial Assembly of the Punjab from 2002 to 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who served as a Member of the Provincial Assembly of the Punjab from 2002 to May 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who served as a Member of the Provincial Assembly of the Punjab from 2002 to 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who served as a Member of the Provincial Assembly of the Punjab from 2002 to 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who was a Member of the Provincial Assembly of the Punjab from 2002 to May 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who served as a Member of the Provincial Assembly of the Punjab from 2002 to May 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who served as a Member of the Provincial Assembly of the Punjab from 2002 to 2018.",
+    "Muhammad Ejaz Shafi is a Pakistani politician who served as a Member of the Provincial Assembly of the Punjab from 2002 to May 2018."
+  ],
+  "timestamp": 1754881226.5331705
+}

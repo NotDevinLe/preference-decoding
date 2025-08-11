@@ -1,0 +1,30 @@
+{
+  "prompt_id": 10,
+  "prompt": "Context: Cindy Robinson is an American voice actress who voices in animations and video games. Some of her major roles are Makoto Nanaya and Gii from the Blazblue series, Betty Boop in commercials, Queen Beryl in Sailor Moon, Chitose Nanbu in Ah My Buddha, Kukaku Shiba, Miyako Shiba, Jinta Hanakari (kid) and Kiyone Kotetsu in Bleach, Zola in the Blue Dragon series, Madeline Hatter in \"Ever After High\" Minerva and Hinoka in Fire Emblem. She also makes an uncredited appearance as the voice of the Purge Emergency Broadcast System in The Purge franchise.\n\nRobinson is best known for her role as Amy Rose in the Sonic the Hedgehog franchise since 2010.\n\nQuestion: Who is Cindy Robinson?",
+  "category": "summarization",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Cindy Robinson is an American voice actress known for her roles in various animated series, video games, and commercials.",
+    "Cindy Robinson is an American voice actress.",
+    "Cindy Robinson is an American voice actress known for her roles in various animated series, video games, and commercials. Some of her notable roles include Makoto Nanaya and Gii from the Blazblue series, Queen Beryl in Sailor Moon, Betty Boop in commercials, and Amy Rose in the Sonic the Hedgehog franchise, among others.",
+    "Cindy Robinson is an American voice actress who has had various roles in animations and video games. Some of her notable roles include Makoto Nanaya and Gii from the BlazBlue series, Amy Rose from the Sonic the Hedgehog franchise, and others in various anime series and video games.",
+    "Cindy Robinson is an American voice actress known for her extensive work in various animations and video games, including notable roles such as Amy Rose in the Sonic the Hedgehog franchise, Makoto Nanaya and Gii from the Blazblue series, Queen Beryl in Sailor Moon, and many others.",
+    "Cindy Robinson is an American voice actress who has provided voices for various animations, video games, and commercials. She is particularly known for voicing Amy Rose in the Sonic the Hedgehog franchise since 2010.",
+    "Cindy Robinson is an American voice actress known for her work in various animations, video games, and commercials. Some of her notable roles include characters from the Blazblue series, Sailor Moon, Bleach, Blue Dragon, and Fire Emblem, among others.",
+    "Cindy Robinson is an American voice actress known for her roles in various animations and video games.",
+    "Cindy Robinson is an American voice actress who has provided voices for various animations, video games, and commercials. She is well-known for her extensive work, including roles in popular franchises such as the BlazBlue series, Sailor Moon, Bleach, Fire Emblem, and the Sonic the Hedgehog franchise, where she voices Amy Rose since 2010.",
+    "Cindy Robinson is an American voice actress known for her work in various animations and video games.",
+    "Cindy Robinson is an American voice actress known for her various roles in animations, video games, and commercials. Some of her notable roles include Makoto Nanaya, Queen Beryl, Amy Rose in the Sonic the Hedgehog franchise, and several other characters in series such as Blazblue, Sailor Moon, Bleach, and Fire Emblem.",
+    "Cindy Robinson is an American voice actress. She has provided voices for various animations and video games, and is well-known for her role as Amy Rose in the Sonic the Hedgehog franchise since 2010.",
+    "Cindy Robinson is an American voice actress who has provided voices for various animations, video games, and commercials. She is known for her roles in multiple franchises, including her iconic portrayal of Amy Rose in the Sonic the Hedgehog series since 2010.",
+    "Cindy Robinson is an American voice actress. She is known for her work in various animations and video games, including the role of Amy Rose in the Sonic the Hedgehog franchise.",
+    "Cindy Robinson is an American voice actress known for her work in various animations and video games.",
+    "Cindy Robinson is an American voice actress who has provided voices for various animations and video games."
+  ],
+  "timestamp": 1754881226.4962707
+}

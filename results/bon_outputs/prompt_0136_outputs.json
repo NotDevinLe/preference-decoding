@@ -1,0 +1,30 @@
+{
+  "prompt_id": 136,
+  "prompt": "Context: The Spokane Braves are a Junior \"B\" Ice Hockey team based in Spokane, Washington, United States. They are members of the Neil Murdoch Division of the Kootenay Conference of the Kootenay International Junior Hockey League (KIJHL). They play their home games at Eagles Ice-A-Rena. The Braves are the only team in the KIJHL to play in the United States. They were forced to go on hiatus at the beginning of the 20/21 season due to the US/Canada border closure.\n\nQuestion: What conference does the Spokane Braves belong to?",
+  "category": "summarization",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The Spokane Braves belong to the Kootenay Conference of the Kootenay International Junior Hockey League (KIJHL).",
+    "The Spokane Braves belong to the Kootenay Conference of the Kootenay International Junior Hockey League (KIJHL), but they are more specifically a part of the Neil Murdoch Division within the conference.",
+    "The Spokane Braves belong to the Kootenay Conference of the KIJHL.",
+    "The Spokane Braves are members of the Kootenay Conference of the KIJHL.",
+    "The Spokane Braves belong to the Kootenay Conference.",
+    "The Spokane Braves belong to the Kootenay Conference.",
+    "The Spokane Braves belong to the Kootenay Conference of the Kootenay International Junior Hockey League (KIJHL).",
+    "The Spokane Braves are members of the Kootenay Conference.",
+    "The Spokane Braves belong to the Kootenay Conference.",
+    "The Spokane Braves are members of the Kootenay Conference of the Kootenay International Junior Hockey League (KIJHL).",
+    "The Spokane Braves belong to the Kootenay Conference.",
+    "The Spokane Braves belong to the Kootenay Conference of the KIJHL.",
+    "The Spokane Braves belong to the Kootenay Conference of the KIJHL.",
+    "The Spokane Braves are part of the Kootenay Conference.",
+    "The Spokane Braves are members of the Kootenay Conference of the Kootenay International Junior Hockey League (KIJHL).",
+    "The Spokane Braves belong to the Kootenay Conference."
+  ],
+  "timestamp": 1754881226.580514
+}

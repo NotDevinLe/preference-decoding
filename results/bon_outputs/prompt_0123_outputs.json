@@ -1,0 +1,30 @@
+{
+  "prompt_id": 123,
+  "prompt": "Context: Furze Hill (or Furzehill) is a hamlet situated in the New Forest National Park of Hampshire, England. It is in the civil parish of Ellingham, Harbridge and Ibsley. Its nearest town is Fordingbridge, which lies approximately 3.1 miles (5.2 km) north-west from the hamlet.\n\nFurze Hill is a hamlet in the civil parish of Hyde. It is situated on low ground on either side of Huckles Brook on the South Gorley to Ogdens road. The houses are surrounded by fields and paddocks. Additional houses can be found at the southern edge of Gorley Common lining a narrow track to North Gorley.\n\nFurze Hill is the most recent settlement in the parish of Hyde, becoming an established community only in the 20th century.\n\nQuestion: Was Furze Hill an established community in the 19th century?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "According to the given text, Furze Hill is described as the \"most recent settlement in the parish of Hyde, becoming an established community only in the 20th century.\" This implies that Furze Hill was not an established community in the 19th century.",
+    "No, Furze Hill was not an established community in the 19th century. According to the information provided, it became an established community in the 20th century.",
+    "No, Furze Hill was not an established community in the 19th century. According to the information provided, Furze Hill became an established community in the 20th century.",
+    "According to the text, Furze Hill is described as \"the most recent settlement in the parish of Hyde, becoming an established community only in the 20th century.\" This implies that Furze Hill was not an established community in the 19th century.",
+    "Based on the information provided, Furze Hill is stated to have become an established community only in the 20th century. Therefore, it can be concluded that Furze Hill was not an established community in the 19th century.",
+    "No, Furze Hill is not mentioned to have been an established community in the 19th century according to the provided context. It is mentioned to have become an established community only in the 20th century.",
+    "No, according to the text, Furze Hill is described as the most recent settlement in the parish of Hyde, and it became an established community only in the 20th century. This implies that it was not an established community in the 19th century.",
+    "No, Furze Hill was not an established community in the 19th century, according to the information provided. It only became an established community in the 20th century.",
+    "Based on the information provided, the answer is no. The text states that Furze Hill \"becoming an established community only in the 20th century,\" indicating that it was not an established community in the 19th century.",
+    "According to the provided context, Furze Hill is described as the \"most recent settlement in the parish of Hyde, becoming an established community only in the 20th century.\" This implies that it was not an established community in the 19th century.",
+    "No, Furze Hill was not an established community in the 19th century. According to the information, it became an established community only in the 20th century.",
+    "No, Furze Hill was not an established community in the 19th century. According to the provided information, it only became an established community in the 20th century.",
+    "No, Furze Hill is not mentioned to be an established community in the 19th century. However, the available information indicates that it became an established community only in the 20th century.",
+    "No, Furze Hill was not an established community in the 19th century. According to the given text, Furze Hill is described as becoming an \"established community only in the 20th century.\" This implies that it was not established during the 19th century, but rather sometime after that period.",
+    "No, Furze Hill was not an established community in the 19th century. According to the information, it became an established community only in the 20th century.",
+    "Based on the information provided, no, Furze Hill was not an established community in the 19th century. According to the information, Furze Hill became an established community only in the 20th century."
+  ],
+  "timestamp": 1754881226.5733
+}

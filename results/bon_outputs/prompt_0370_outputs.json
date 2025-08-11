@@ -1,0 +1,30 @@
+{
+  "prompt_id": 370,
+  "prompt": "Context: Stalemate is a situation in chess where the player whose turn it is to move is not in check and has no legal move. Stalemate results in a draw. During the endgame, stalemate is a resource that can enable the player with the inferior position to draw the game rather than lose. In more complex positions, stalemate is much rarer, usually taking the form of a swindle that succeeds only if the superior side is inattentive.[citation needed] Stalemate is also a common theme in endgame studies and other chess problems.\n\nThe outcome of a stalemate was standardized as a draw in the 19th century. Before this standardization, its treatment varied widely, including being deemed a win for the stalemating player, a half-win for that player, or a loss for that player; not being permitted; and resulting in the stalemated player missing a turn. Stalemate rules vary in other games of the chess family.\n\nQuestion: If I have more pieces at the time of stalemate, have I won?",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "No, you have not won the game. Stalemate results in a draw, not a win.",
+    "No, you have not won.  The text does not state this, but generally in chess, if a player is stalemating their opponent, the outcome is a draw, regardless of the number of pieces each player has. This is due to the standardization of stalemate as a draw in the 19th century.",
+    "No, if you are in a situation where you are stalemating your opponent and have more pieces, the result is still a draw, not a win for you. The concept of stalemate is about the player being unable to move, not about having fewer pieces.",
+    "No, according to the provided context, you have not won the game. Stalemate results in a draw. The outcome of a stalemate is standardized as a draw in the 19th century.",
+    "According to the information given, the answer is no. In chess, a stalemate results in a draw, regardless of the number of pieces on the board. This is a standardized rule that was established in the 19th century.",
+    "No, having more pieces at the time of stalemate does not result in a win. According to standard chess rules, a stalemate is a draw, regardless of the number of pieces on the board at the time of the stalemate.",
+    "According to the provided text, before the 19th century, the outcome of a stalemate varied widely, and one of the possible treatments was that it could be considered a win for the stalemating player.",
+    "No, you haven't won. According to the text, stalemate results in a draw. The mention of having more pieces at the time of stalemate does not change the outcome.",
+    "No, according to the information provided, having more pieces at the time of stalemate does not affect the outcome. The description only mentions that stalemate results in a draw. It does not mention anything about having more pieces changing the result of a stalemate. In chess, stalemate is always a draw, regardless of the material balance between the players.",
+    "No, if you have more pieces at the time of stalemate in chess, you have not won. Stalemate is a draw, not a win for either player, regardless of the material difference.",
+    "No, having more pieces at the time of stalemate does not necessarily mean you have won the game. Stalemate results in a draw, regardless of the material difference between the two players. According to the standardized rules of chess, stalemate is a draw, not a win for the player who was stalemating the opponent.",
+    "No, having more pieces at the time of stalemate does not necessarily mean you have won the game. According to the information provided, stalemate results in a draw, regardless of the number of pieces each player has.",
+    "No, according to the given context, you have not won. In chess, stalemate results in a draw, not a win for the player whose turn it is to move. The context does not state that a player gains an advantage by having more pieces at the time of stalemate, or that the player can \"win\" from stalemate. It simply states that stalemate results in a draw.",
+    "No, having more pieces at the time of stalemate does not mean you have won. Stalemate is a draw, regardless of the number of pieces on the board.",
+    "No, having more pieces at the time of stalemate does not mean you have won the game. As per the provided context, stalemate results in a draw, regardless of the number of pieces on the board.",
+    "No, if you have more pieces at the time of stalemate, you have not won the game. As stated in the text, the outcome of a stalemate was standardized as a draw in the 19th century. This means that neither player has won or lost the game when a stalemate occurs, and the result is a draw."
+  ],
+  "timestamp": 1754881226.8739111
+}

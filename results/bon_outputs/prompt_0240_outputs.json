@@ -1,0 +1,30 @@
+{
+  "prompt_id": 240,
+  "prompt": "Context: 2022 Mazar-i-Sharif mosque bombing\n\nOn 21 April 2022, a powerful bomb rocked the Shia Seh Dokan mosque in Mazar-i-Sharif, Balkh Province, Afghanistan killing at least 31 people and injuring more than 87 others. The Islamic State \u2013 Khorasan Province claimed responsibility via Telegram.\n\nWorshippers were performing the Zuhr prayer inside the mosque when the bomb exploded. Authorities counted 31 dead and at least 87 injured, six of whom were wounded critically.\n\nThe bombing was part of a series of attacks on the same day, including two explosions targeting Taliban officers in Kunduz and Khogyani District and a bombing that injured two Shia children in Kabul.\n\nQuestion: Given a reference text about the 2022 Mazar-i-Sharif mosque bombing, how many people were injured and killed?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "According to the reference text, at least 87 people were injured, and at least 31 people were killed in the 2022 Mazar-i-Sharif mosque bombing.",
+    "According to the text, at least 31 people were killed and at least 87 people were injured in the 2022 Mazar-i-Sharif mosque bombing.",
+    "According to the provided reference text, at least 31 people were killed, and over 87 others were injured in the 2022 Mazar-i-Sharif mosque bombing.",
+    "At least 31 people were killed, and at least 87 were injured in the 2022 Mazar-i-Sharif mosque bombing.",
+    "According to the text, at least 87 people were injured and at least 31 people were killed in the 2022 Mazar-i-Sharif mosque bombing.",
+    "According to the reference text, 31 people were killed and at least 87 people were injured in the 2022 Mazar-i-Sharif mosque bombing.",
+    "According to the reference text, at least 31 people were killed and more than 87 people were injured in the 2022 Mazar-i-Sharif mosque bombing.",
+    "According to the reference text, at least 31 people were killed and at least 87 others were injured.",
+    "According to the provided reference text, in the 2022 Mazar-i-Sharif mosque bombing:\n\n- At least 31 people were killed.\n- At least 87 people were injured, with six of them being critically wounded.",
+    "According to the provided text, the bombing in the 2022 Mazar-i-Sharif mosque resulted in at least 31 people being killed and at least 87 people being injured.",
+    "According to the reference text, at least 31 people were killed and more than 87 others were injured in the 2022 Mazar-i-Sharif mosque bombing.",
+    "According to the given reference text, at least 87 people were injured, and at least 31 people were killed in the 2022 Mazar-i-Sharif mosque bombing.",
+    "According to the text, at least 31 people were killed, and over 87 people were injured.",
+    "According to the given reference text, at least 31 people were killed, and more than 87 people were injured in the 2022 Mazar-i-Sharif mosque bombing.",
+    "According to the reference text, at least 87 people were injured and at least 31 people were killed.",
+    "According to the text, the Mazar-i-Sharif mosque bombing resulted in at least 31 people killed and over 87 people injured."
+  ],
+  "timestamp": 1754881226.6489942
+}

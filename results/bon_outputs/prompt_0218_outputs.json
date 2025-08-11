@@ -1,0 +1,30 @@
+{
+  "prompt_id": 218,
+  "prompt": "Name 10 colors",
+  "category": "brainstorming",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "1. Blue\n2. Red\n3. Green\n4. Yellow\n5. Purple\n6. Orange\n7. Pink\n8. Brown\n9. Grey\n10. Turquoise",
+    "Here are ten colors:\n\n1. Blue\n2. Red\n3. Green\n4. Yellow\n5. Purple\n6. Orange\n7. Pink\n8. Brown\n9. Grey\n10. Black",
+    "Here are ten colors:\n\n1. Blue\n2. Red\n3. Green\n4. Yellow\n5. Orange\n6. Purple\n7. Pink\n8. Brown\n9. Gray\n10. Black",
+    "Here are 10 colors:\n\n1. Red\n2. Blue\n3. Green\n4. Yellow\n5. Purple\n6. Orange\n7. Brown\n8. Grey\n9. Black\n10. White",
+    "Here are 10 colors:\n\n1. Blue\n2. Red\n3. Green\n4. Yellow\n5. Purple\n6. Orange\n7. Black\n8. White\n9. Grey\n10. Brown",
+    "Here are 10 colors:\n\n1. Red\n2. Blue\n3. Green\n4. Yellow\n5. Orange\n6. Purple\n7. Pink\n8. Brown\n9. Grey\n10. Turquoise",
+    "Here are 10 colors:\n\n1. Red\n2. Blue\n3. Green\n4. Yellow\n5. Orange\n6. Purple\n7. Pink\n8. Brown\n9. Grey\n10. Black",
+    "Here are 10 colors:\n\n1. Blue\n2. Red\n3. Green\n4. Yellow\n5. Orange\n6. Purple\n7. Black\n8. White\n9. Brown\n10. Pink",
+    "Here are ten colors:\n\n1. Blue\n2. Red\n3. Green\n4. Yellow\n5. Purple\n6. Orange\n7. Pink\n8. Brown\n9. Gray\n10. Turquoise",
+    "1. Blue\n2. Red\n3. Green\n4. Yellow\n5. Orange\n6. Purple\n7. Pink\n8. Black\n9. White\n10. Brown",
+    "Here are ten colors:\n\n1. Blue\n2. Red\n3. Green\n4. Yellow\n5. Purple\n6. Orange\n7. Brown\n8. Pink\n9. Turquoise\n10. Gray",
+    "Here are 10 colors:\n\n1. Blue\n2. Red\n3. Green\n4. Yellow\n5. Purple\n6. Orange\n7. Pink\n8. Brown\n9. Black\n10. Grey",
+    "Here are 10 colors:\n\n1. Blue\n2. Red\n3. Green\n4. Yellow\n5. Purple\n6. Orange\n7. Pink\n8. Brown\n9. Grey\n10. Turquoise",
+    "Here are 10 colors:\n\n1. Red\n2. Blue\n3. Green\n4. Yellow\n5. Purple\n6. Orange\n7. Brown\n8. Grey\n9. Pink\n10. Turquoise",
+    "Here are 10 colors:\n\n1. Red\n2. Blue\n3. Green\n4. Yellow\n5. Purple\n6. Orange\n7. Black\n8. White\n9. Brown\n10. Gray",
+    "Here are ten colors:\n\n1. Red\n2. Blue\n3. Green\n4. Yellow\n5. Purple\n6. Orange\n7. Black\n8. White\n9. Brown\n10. Pink"
+  ],
+  "timestamp": 1754881226.631275
+}

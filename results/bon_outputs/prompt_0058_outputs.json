@@ -1,0 +1,30 @@
+{
+  "prompt_id": 58,
+  "prompt": "Who was the first American to win a Nobel Peace?",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The first American to win a Nobel Peace Prize was Theodore Roosevelt. He received the award in 1906.",
+    "The first American to win a Nobel Peace Prize was Theodore Roosevelt. He won the Nobel Peace Prize in 1906, for his efforts to end the Russo-Japanese War, for which he played a crucial role in mediating the Portsmouth Peace Treaty.",
+    "The first American to win a Nobel Peace Prize was Theodore Roosevelt. He received the prize in 1906 for his efforts to end the Russo-Japanese War through mediation.",
+    "The first American to win a Nobel Peace Prize was Theodore Roosevelt, who received it in 1906.",
+    "The first American to win a Nobel Peace Prize was Theodore Roosevelt. He was awarded the prize in 1906, along with the International Committee of the Red Cross.",
+    "The first American to win a Nobel Peace Prize was Theodore Roosevelt, in 1906. He won the award for his efforts to end the Russo-Japanese War, as well as his commitment to international diplomacy and the concept of the \"big stick\" diplomacy.",
+    "The first American to win the Nobel Peace Prize was Theodore Roosevelt in 1906.",
+    "The first American to win a Nobel Peace Prize was Theodore Roosevelt in 1906.",
+    "The first American to win a Nobel Peace Prize was Theodore Roosevelt in 1906. He was awarded the prize for his efforts to end the Russo-Japanese War, which led to the signing of the Treaty of Portsmouth. The treaty was negotiated by Roosevelt, and it ended the war between Russia and Japan in 1905.",
+    "The first American to win a Nobel Peace Prize was Theodore Roosevelt. He received the Nobel Peace Prize in 1906.",
+    "The first American to win the Nobel Peace Prize was Theodore Roosevelt, in the year 1906. He received the award for his efforts to end the Russo-Japanese War through mediation.",
+    "The first American to win a Nobel Peace Prize was Theodore Roosevelt, the 26th President of the United States. He was awarded the Nobel Peace Prize in 1906 for his efforts to end the Russo-Japanese War and his mediation in the treaty that brought an end to the conflict. Roosevelt was awarded the prize on December 10, 1906.",
+    "The first American to win the Nobel Peace Prize was Theodore Roosevelt in 1906.",
+    "The first American to win the Nobel Peace Prize was Theodore Roosevelt, who received the award in 1906 for his efforts to end the Russo-Japanese War.",
+    "The first American to win a Nobel Peace Prize was Theodore Roosevelt in 1906.",
+    "The first American to win a Nobel Peace Prize was Theodore Roosevelt in 1906."
+  ],
+  "timestamp": 1754881226.5261438
+}

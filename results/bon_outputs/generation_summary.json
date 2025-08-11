@@ -1,0 +1,15 @@
+{
+  "total_prompts": 487,
+  "outputs_per_prompt": 16,
+  "generation_config": {
+    "model": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512
+  },
+  "quality_stats": {
+    "total_outputs": 7792,
+    "failed_generations": 13
+  },
+  "timestamp": 1754881227.1009214
+}

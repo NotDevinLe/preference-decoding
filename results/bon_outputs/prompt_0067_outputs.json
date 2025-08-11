@@ -1,0 +1,30 @@
+{
+  "prompt_id": 67,
+  "prompt": "Context: The Spellenspektakel is the largest board game convention in the Netherlands, featuring game demonstrations, tournaments and other game related activities. It focusses on traditional strategy boardgames, collectible card games, pen-and-paper role-playing games and miniatures wargames. Game publishers participate by showing and demonstrating their new releases to the public. Additionally, the Spellenspektakel hosts numerous game stores and player communities. Visitors can try any game on display and buy the ones they prefer. During the 2019 edition at the Jaarbeurs venue in Utrecht, the Spellenspektakel welcomed over 14,000 people\n\nQuestion: Given a reference text about the Spellenspektakel, tell me where it takes place and what games are played.",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "According to the reference text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht. The types of games played at the Spellenspektakel include:\n\n1. Traditional strategy boardgames\n2. Collectible card games\n3. Pen-and-paper role-playing games\n4. Miniatures wargames",
+    "According to the reference text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht. The games featured at the event include traditional strategy board games, collectible card games, pen-and-paper role-playing games, and miniatures wargames.",
+    "According to the reference text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht. The games featured at the event include:\n\n1. Traditional strategy board games\n2. Collectible card games\n3. Pen-and-paper role-playing games\n4. Miniatures wargames\n\nThese are the main categories of games played and showcased at the Spellenspektakel.",
+    "According to the given reference text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht, Netherlands. The convention features a variety of board games, including:\n\n1. Traditional strategy boardgames\n2. Collectible card games\n3. Pen-and-paper role-playing games\n4. Miniatures wargames\n\nVisitors can try any game on display and purchase the ones they prefer.",
+    "According to the text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht, Netherlands. As for the games played, the convention focuses on:\n\n1. Traditional strategy board games\n2. Collectible card games\n3. Pen-and-paper role-playing games\n4. Miniatures wargames",
+    "According to the provided text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht. The games played at the Spellenspektakel include:\n\n1. Traditional strategy board games\n2. Collectible card games\n3. Pen-and-paper role-playing games\n4. Miniatures wargames",
+    "According to the reference text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht, Netherlands. The games played at the Spellenspektakel include:\n\n1. Traditional strategy boardgames\n2. Collectible card games\n3. Pen-and-paper role-playing games\n4. Miniatures wargames\n\nIt is noted that visitors can try any game on display and buy the ones they prefer.",
+    "According to the reference text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht. The games featured at the Spellenspektakel include:\n\n1. Traditional strategy board games\n2. Collectible card games\n3. Pen-and-paper role-playing games\n4. Miniatures wargames\n\nVisitors can try any of these games on display and purchase the ones they like.",
+    "According to the given text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht, Netherlands. As for the games played, the text mentions the following types of games:\n\n1. Traditional strategy boardgames\n2. Collectible card games\n3. Pen-and-paper role-playing games\n4. Miniatures wargames",
+    "According to the reference text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht. The games played and featured at the convention include:\n\n1. Traditional strategy board games\n2. Collectible card games\n3. Pen-and-paper role-playing games\n4. Miniatures wargames",
+    "Based on the provided text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht, Netherlands. The convention features a variety of games, including:\n\n1. Traditional strategy boardgames\n2. Collectible card games\n3. Pen-and-paper role-playing games\n4. Miniatures wargames\n\nThese games can be tried by visitors on display, and they can also be purchased by those who prefer them.",
+    "According to the text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht, Netherlands. The games played at the Spellenspektakel include:\n\n1. Traditional strategy boardgames\n2. Collectible card games\n3. Pen-and-paper role-playing games\n4. Miniatures wargames",
+    "According to the reference text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht. The games played at the Spellenspektakel include:\n\n1. Traditional strategy boardgames\n2. Collectible card games\n3. Pen-and-paper role-playing games\n4. Miniatures wargames",
+    "According to the reference text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht, Netherlands. It features traditional strategy board games, collectible card games, pen-and-paper role-playing games, and miniatures wargames.",
+    "Based on the reference text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht, Netherlands. The games that are typically played and featured at the event include:\n\n1. Traditional strategy board games\n2. Collectible card games\n3. Pen-and-paper role-playing games\n4. Miniatures wargames",
+    "According to the reference text, the Spellenspektakel takes place at the Jaarbeurs venue in Utrecht, Netherlands. As for the games, it features traditional strategy board games, collectible card games, pen-and-paper role-playing games, and miniatures wargames."
+  ],
+  "timestamp": 1754881226.532241
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_id": 43,
+  "prompt": "Context: Malcolm X (born Malcolm Little, later el-Hajj Malik el-Shabazz; May 19, 1925 \u2013 February 21, 1965) was an American Muslim minister and human rights activist who was a prominent figure during the civil rights movement. A spokesman for the Nation of Islam until 1964, he was a vocal advocate for Black empowerment and the promotion of Islam within the Black community. A posthumous autobiography, on which he collaborated with Alex Haley, was published in 1965.\n\nQuestion: Who is Malcolm X?",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Malcolm X was an American Muslim minister and a prominent figure in the civil rights movement. He was a vocal advocate for Black empowerment and the promotion of Islam within the Black community.",
+    "Malcolm X was a prominent American Muslim minister and civil rights activist. He was a key figure in the civil rights movement and a vocal advocate for the empowerment of the Black community, as well as the promotion of Islam within that community.",
+    "Malcolm X was an American Muslim minister and a prominent human rights activist who played a significant role in the civil rights movement of the United States.",
+    "Malcolm X was an American Muslim minister and human rights activist who played a significant role in the civil rights movement of the 1960s. He was a prominent figure within the Nation of Islam until 1964, advocating for Black empowerment and the promotion of Islam within the Black community.",
+    "Malcolm X (also known as el-Hajj Malik el-Shabazz) was a prominent American Muslim minister and human rights activist who was a key figure in the civil rights movement. He was a vocal advocate for Black empowerment and the promotion of Islam within the Black community.",
+    "Malcolm X (1925-1965) was a prominent American Muslim minister and human rights activist who was a key figure in the civil rights movement. He was a strong advocate for Black empowerment, the promotion of Islam within the Black community, and civil rights. He was a prominent figure for the Nation of Islam until 1964, when he began to denounce them.",
+    "Malcolm X was an American Muslim minister and a prominent human rights activist. He was a key figure in the civil rights movement, advocating for Black empowerment and the promotion of Islam within the Black community.",
+    "Malcolm X was an American Muslim minister and human rights activist who played a significant role in the civil rights movement. He was a prominent figure known for his advocacy of Black empowerment and the promotion of Islam within the Black community, particularly as a spokesman for the Nation of Islam until 1964.",
+    "Malcolm X was an American Muslim minister and a prominent figure in the civil rights movement. He was a key advocate for Black empowerment and the promotion of Islam within the Black community.",
+    "Malcolm X was an American Muslim minister and human rights activist who played a significant role in the civil rights movement. He was a prominent figure known for advocating for Black empowerment and the promotion of Islam within the Black community.",
+    "Malcolm X was an American Muslim minister and human rights activist who played a significant role in the civil rights movement. He was a prominent figure within the Nation of Islam, advocating for Black empowerment and the promotion of Islam within the Black community.",
+    "Malcolm X was an American Muslim minister and human rights activist who played a significant role in the civil rights movement.",
+    "Malcolm X (1925-1965) was an American Muslim minister and a prominent human rights activist who played a significant role in the civil rights movement. He was a key figure in the Nation of Islam and advocated for Black empowerment and the promotion of Islam within the Black community.",
+    "Malcolm X was an American Muslim minister and human rights activist who played a significant role in the civil rights movement of the 1960s. He was a prominent figure in advocating for Black empowerment and the promotion of Islam within the Black community.",
+    "Malcolm X was a prominent American Muslim minister and human rights activist.",
+    "Malcolm X was an American Muslim minister and human rights activist who played a significant role in the civil rights movement of the 20th century. Born Malcolm Little, he later changed his name to el-Hajj Malik el-Shabazz. He was a prominent figure in the Nation of Islam until 1964, and a vocal advocate for Black empowerment and the promotion of Islam within the Black community."
+  ],
+  "timestamp": 1754881226.5170693
+}

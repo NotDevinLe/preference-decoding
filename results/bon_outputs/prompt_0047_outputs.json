@@ -1,0 +1,30 @@
+{
+  "prompt_id": 47,
+  "prompt": "Context: \"I'm an Old Cowhand (From the Rio Grande)\" is a comic song written by Johnny Mercer for the Paramount Pictures release Rhythm on the Range and sung by its star, Bing Crosby. The Crosby commercial recording was made on July 17, 1936, with Jimmy Dorsey & his Orchestra for Decca Records. It was a huge hit in 1936, reaching the No. 2 spot in the charts of the day, and it greatly furthered Mercer's career. Crosby recorded the song again in 1954 for his album Bing: A Musical Autobiography.\nMembers of the Western Writers of America chose it as one of the Top 100 Western songs of all time.\n\nBackground\nMercer and his wife were driving across the US en route to his hometown, Savannah, Georgia, after having apparently failed to succeed in Hollywood. Mercer was amused by the sight of cowboys, with spurs and ten-gallon hats, driving cars and trucks instead of riding horses. Singing cowboys were popular in films and on the radio then, and within 15 minutes, writing on the back of an envelope, Mercer transferred the image he was seeing into a song whose satirical lyrics vented some of his own bitter frustration with Hollywood.\n\nThe lyrics, about a 20th-century cowboy who has little in common with the cowpunchers of old, have been included in some anthologies of light verse.\n\nQuestion: Summarize in one sentence this article about a famous song.",
+  "category": "summarization",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "\"I'm an Old Cowhand (From the Rio Grande)\" is a satirical song written by Johnny Mercer, inspired by his observation of modern-day cowboys who abandoned traditional ways, and it became a huge hit in 1936, furthering his career and later included in the Western Writers of America's Top 100 Western songs of all time.",
+    "Johnny Mercer wrote the satirical song \"I'm an Old Cowhand (From the Rio Grande)\" after observing cowboys in modern vehicles and wrote it within 15 minutes on the back of an envelope during a road trip with his wife.",
+    "\" I'm an Old Cowhand (From the Rio Grande)\" is a satirical comic song written by Johnny Mercer, reflecting his frustration with the Hollywood music industry, which was a huge hit in 1936 and furthered his career.",
+    "\" I'm an Old Cowhand (From the Rio Grande)\" is a satirical song written by Johnny Mercer in 1936 that reflected his frustration with Hollywood, featuring a 20th-century cowboy in contrast to traditional cowpunchers.",
+    "\"I'm an Old Cowhand (From the Rio Grande)\" is a comic song written by Johnny Mercer for the 1936 film Rhythm on the Range, which satirizes the 20th-century image of the traditional cowboy in a humorous and autobiographical way.",
+    "\"I'm an Old Cowhand (From the Rio Grande)\" is a satirical comic song written by Johnny Mercer, inspired by his observations of modern-day cowboys driving cars while heading to Savannah, Georgia, which eventually became a huge hit and furthered Mercer's career in 1936.",
+    "The song \"I'm an Old Cowhand (From the Rio Grande)\" was written by Johnny Mercer for the 1936 film Rhythm on the Range and became a huge hit, satirically poking fun at the image of modern cowboys and venting Mercer's frustration with Hollywood.",
+    "\"I'm an Old Cowhand (From the Rio Grande)\" is a comic song written by Johnny Mercer, which was born out of a satirical vision he had while driving across the US with his wife, poking fun at the modern-day cowboys in contrast to their old counterparts, and it became a huge hit for Bing Crosby in 1936.",
+    "The comic song \"I'm an Old Cowhand (From the Rio Grande)\" was written by Johnny Mercer as a satirical take on the Hollywood image of cowboys, born out of his own frustration and observations during a car trip across the US.",
+    "Johnny Mercer wrote the comic song \"I'm an Old Cowhand (From the Rio Grande)\" after witnessing cowboys in modern vehicles, using the image as a satirical commentary on the contrast between old and new, which became a huge hit for Bing Crosby in 1936 and boosted Mercer's career.",
+    "\" I'm an Old Cowhand (From the Rio Grande)\" is a satirical song written by Johnny Mercer, who drew inspiration from a humorous observation of modern-day cowboys driving cars instead of horses while traveling with his wife to his hometown, which ultimately became a huge hit for Bing Crosby in 1936.",
+    "The song \"I'm an Old Cowhand (From the Rio Grande)\" was written by Johnny Mercer as a satirical commentary on the image of modern cowboys, and its success, fueled by Bing Crosby's recording in 1936, greatly boosted Mercer's career and solidified the song's place as a Western classic.",
+    "\"I'm an Old Cowhand (From the Rio Grande)\" is a satirical song written by Johnny Mercer for the 1936 film Rhythm on the Range, showcasing a 20th-century cowboy struggling with the changing times, born out of Mercer's own frustration with Hollywood and experience observing cowboys driving cars in the 1930s.",
+    "\"I'm an Old Cowhand (From the Rio Grande)\" is a satirical comic song written by Johnny Mercer, which reflects his frustration with Hollywood and mocks the romanticized image of the American cowboy, written after he spotted cowboys driving cars while passing through the US.",
+    "\"I'm an Old Cowhand (From the Rio Grande)\" is a satirical comic song written by Johnny Mercer, which pokes fun at the image of modern cowboys, inspired by the humor he saw during a road trip with his wife after failing to succeed in Hollywood.",
+    "\"I'm an Old Cowhand (From the Rio Grande)\" is a satirical comic song written by Johnny Mercer, inspired by his observations of modern cowboys and his own frustration with Hollywood, which became a huge hit in 1936."
+  ],
+  "timestamp": 1754881226.5196307
+}

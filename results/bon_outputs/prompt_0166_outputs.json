@@ -1,0 +1,30 @@
+{
+  "prompt_id": 166,
+  "prompt": "Who was the first women to do the spacewalk?",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Svetlana Savitskaya, a Soviet cosmonaut from Russia, became the first woman to perform a spacewalk in 1984.",
+    "Svetlana Savitskaya of the Soviet Union became the first woman to perform a spacewalk (EVA - extravehicular activity) on July 25, 1984.",
+    "Svetlana Savitskaya was the first woman to walk in space, however, on July 25, 1984.",
+    "The first women to do a spacewalk were Russian cosmonauts Svetlana Savitskaya and Alexandra Neken (also known as Svetlana Savitskaya) on July 25, 1984, and  Svetlana was the first woman spacewalk to make an EVA (Extravehicular Activity) on this date",
+    "The first woman to perform a spacewalk (also known as an Extravehicular Activity, or EVA) was Svetlana Savitskaya, a Soviet cosmonaut. She performed the first EVA by a woman on July 25, 1984, while on board the Soviet space station Salyut 7. \n\nHowever, the first American woman to perform a spacewalk was Kathryn D. Sullivan, who did it on October 11, 1984, during the Space Shuttle Challenger mission STS-41-G.\n\nOn a side note, Sally Ride became the first American woman in space on June 18, 1983, and Story Musgrave and Kathryn D. Sullivan followed suit with EVA training with their STS-41-G crew.",
+    "Svetlana Savitskaya, a Russian cosmonaut, and Sally Ride, an American astronaut, became the first women to perform a spacewalk on July 25, 1984.",
+    "The first women to do a spacewalk were Russian cosmonauts, Valentina Tereshkova and Svetlana Savitskaya. \n\n1.  On June 16, 1973, Soviet cosmonaut Valentina Tereshkova performed a spacewalk during her 48-day solo Soyuz 9 mission to the Salyut 1 space station.\n\n2.  Svetlana Savitskaya performed the first male-female spacewalk during the joint Soviet/American mission on July 25, 1984, from the Salyut 7 space station.\n\nHowever, the first woman to perform a spacewalk with a male counterpart and from the US space shuttle, was Kathryn D. Sullivan.",
+    "Svetlana Savitskaya, a Soviet cosmonaut, became the first woman to perform a spacewalk on July 25, 1984, when she exited the Salyut 7 space station for 3 hours and 55 minutes.",
+    "Svetlana Savitskaya became the first woman to perform a spacewalk on July 25, 1984.",
+    "Svetlana Savitskaya, a Soviet cosmonaut, was the first woman to perform a spacewalk on July 25, 1984, during the Soyuz T-12 mission to the Salyut 7 space station.",
+    "Svetlana Savitskaya was the first woman to perform a spacewalk on July 25, 1984, during a space mission to the Salyut 7 space station.",
+    "The first women to do a spacewalk were  Russian cosmonauts Svetlana Savitskaya and her backup Valentina Tereshkova was to walk in space, but it was Svetlana and  Nailya Yefimovna Bunkina was scheduled to walk, but it was actually  Soviet cosmonaut  Svetlana Savitskaya along with  Aleksandr Serebrov who went on the spacewalk on July 25, 1984, then,  22 days later, on August 12, 1984, Svetlana Savitskaya was once again on another spacewalk.",
+    "The first women to do a spacewalk were Russian cosmonauts Svetlana Savitskaya and Alexander Serebrov's spacewalk in 1984 was originally going to be the first female spacewalk, but cosmonaut Svetlana Savitskaya's partner was replaced by male cosmonaut Alexander Serebrov to help the spacewalk since he had more experience, and although Svetlana Savitskaya herself was able to do some portion of the spacewalk, it was actually cosmonauts Svetlana Savitskaya and Alexander Serebrov who weren't doing it together as a spacewalk where a woman would be the leader of the spacewalk. \n\nHowever, the first spacewalk done by two women as the main spacewalkers was by NASA astronauts Susan Helms and Jerry Ross in 1993.",
+    "Svetlana Savitskaya became the first woman to walk in space on July 25, 1984, during the Soyuz T-12 mission. She was a Soviet cosmonaut and flew on the Soyuz T-12 spacecraft.",
+    "Svetlana Savitskaya of the Soviet Union became the first woman to walk in space on August 25, 1984, as a cosmonaut.",
+    "The first women to do a spacewalk was Kathy Sullivan, but the first women to do two spacewalks in her lifetime and more spacewalks were added to her record by the end of her career was still Kathy."
+  ],
+  "timestamp": 1754881226.599894
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_id": 92,
+  "prompt": "What is the name of the Winslow's nerdy next-door neighbor on the TV show \"Family Matters\"?",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The name of the nerdy next-door neighbor to the Winslow family on the TV show \"Family Matters\" is Steve Urkel, played by Jaleel White.",
+    "The name of Winslow's nerdy next-door neighbor on the TV show \"Family Matters\" is Steve Urkel.",
+    "The name of Steve Urkel's nerdy next-door neighbor on the TV show \"Family Matters\" is Steve Urkel himself is Steve Urkel, however Steve's next-door neighbor is actually Harriette Winslow's, her next-door neighbor is  Steve's actual neighbor,  Harriette Winslow's actual next-door neighbor is Harriet's husband  Carl Winslow's next-door neighbor, is not a main character, however Carl Winslow's  is actually  Ed's a not main character,  his name is Mr. Philip, and another name is Harriette's and Carl's next-door neighbor is a not the main characters  his name  is  Harriette's and Carl's,  Carl's next-door  name is Philip,",
+    "The nerdy next-door neighbor of the Winslow family on the TV show \"Family Matters\" is Steve Urkel, played by Jaleel White.",
+    "The name of the nerdy next-door neighbor of the Winslow family on the TV show \"Family Matters\" is Steve Urkel, played by Jaleel White.",
+    "Steve Urkel, played by Jaleel White, is the nerdy next-door neighbor of the Winslow family on the TV show \"Family Matters.\"",
+    "Steve Urkel's (played by Jaleel White) nerdy next-door neighbor is known as Carl Winslow's (Reginald VelJohnson) neighbor, but the nerdy neighbor is not his next door neighbor on the show \"Family Matters\". However, Steve Urkel's next-door neighbor is Harriette Winslow (played by Jo Marie Payton-Noble) and her family.",
+    "The name of Winslow's nerdy next-door neighbor on the TV show \"Family Matters\" is Steve Urkel.",
+    "Steve Urkel's next-door neighbor's name is Harriette Winslow.",
+    "The character you're referring to is Steve Urkel, played by Jaleel White.",
+    "The character you are referring to is Steve Urkel, played by Jaleel White.",
+    "The nerdy next-door neighbor of the Winslow family on the TV show \"Family Matters\" is Steve Urkel, played by Jaleel White.",
+    "On the TV show \"Family Matters,\" the nerdy next-door neighbor to the Winslow family is Steve Urkel, played by Jaleel White.",
+    "The character you're referring to is Steve Urkel, also known as Steve Urkel, and he's a nerdy genius played by Jaleel White in the TV show \"Family Matters.\"",
+    "The name of the Winslow's nerdy next-door neighbor on the TV show \"Family Matters\" is Steve Urkel, played by Jaleel White.",
+    "Steve Urkel's next-door neighbor's name is Winslow, and his name is Carl Winslow."
+  ],
+  "timestamp": 1754881226.5467706
+}

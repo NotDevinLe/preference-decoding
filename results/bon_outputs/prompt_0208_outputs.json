@@ -1,0 +1,30 @@
+{
+  "prompt_id": 208,
+  "prompt": "Context: Thomas Attewell (7 November 1869 \u2013 6 July 1937) was an English first-class cricketer. Attewell was a right-handed batsman who bowled right-arm medium pace. He was born at Keyworth, Nottinghamshire.\n\nHis brother William played first-class cricket for Nottinghamshire and the Marylebone Cricket Club, as well as Test cricket for England. His cousin Walter Attewell played first-class cricket for Nottinghamshire.\n\nQuestion: What was the first name of Thomas Attewell's brother and cousin?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The first name of Thomas Attewell's brother is William, and the first name of his cousin is Walter.",
+    "The first name of Thomas Attewell's brother and cousin is not specified in the information. However, we know that the first name of Thomas Attewell's brother is William. His cousin, on the other hand, was referred to as Walter Attewell.",
+    "The first name of Thomas Attewell's brother is William, and the first name of Thomas Attewell's cousin is Walter.",
+    "The first name of Thomas Attewell's brother was William, and the first name of Thomas Attewell's cousin was Walter.",
+    "The first name of Thomas Attewell's brother was William, and his cousin's first name was Walter.",
+    "The first name of Thomas Attewell's brother was William, and the first name of his cousin was Walter.",
+    "The first name of Thomas Attewell's brother is not mentioned in the information provided, it just mentions his brother as William. However, the first name of Thomas Attewell's cousin, who played for Nottinghamshire, is mentioned as Walter.",
+    "The first name of Thomas Attewell's brother was William, and the first name of his cousin was Walter.",
+    "The first name of Thomas Attewell's brother is William and the first name of his cousin is Walter.",
+    "The first name of Thomas Attewell's brother was William and his cousin was Walter.",
+    "According to the information provided, Thomas Attewell's brother was William and his cousin was Walter.",
+    "The first name of Thomas Attewell's brother was William, and the first name of Thomas Attewell's cousin was Walter.",
+    "The first name of Thomas Attewell's brother is William, and his cousin is Walter.",
+    "The first name of Thomas Attewell's brother is William, and the first name of his cousin is Walter.",
+    "The first name of Thomas Attewell's brother is not mentioned in the text but William is mentioned as his brother's surname. However, the first name of Thomas Attewell's cousin is not provided.",
+    "The first name of Thomas Attewell's brother and cousin were both not provided in the passage, it only mentions the surname, but from the information, his brother's first name can be derived from the Attewell family as he is associated with Nottinghamshire and the Marylebone Cricket Club, as well as England for the England team, that player is known as Wilfred Flowers Attewell"
+  ],
+  "timestamp": 1754881226.6253583
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_id": 5,
+  "prompt": "Tell me whether these are names of movie directors or authors: Quentin Tarantino, Martin Scorsese, Christopher Nolan, Ernest Hemingway, Stephen King, J.K. Rowling",
+  "category": "classification",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The names Quentin Tarantino, Martin Scorsese, and Christopher Nolan are movie directors. \n\nThe names Ernest Hemingway and Stephen King are authors. \n\nThe name J.K. Rowling is an author, known for writing the Harry Potter series.",
+    "The names that are directors are:\n\n1. Quentin Tarantino\n2. Martin Scorsese\n3. Christopher Nolan\n\nThe names that are authors are:\n\n1. Ernest Hemingway\n2. Stephen King\n3. J.K. Rowling",
+    "Here are the classifications for each:\n\n1. Quentin Tarantino - Director\n2. Martin Scorsese - Director\n3. Christopher Nolan - Director\n4. Ernest Hemingway - Author\n5. Stephen King - Author\n6. J.K. Rowling - Author",
+    "The movie directors are:\n\n1. Quentin Tarantino\n2. Martin Scorsese\n3. Christopher Nolan\n\nThe authors are:\n\n1. Ernest Hemingway\n2. Stephen King\n3. J.K. Rowling",
+    "Quentin Tarantino and Martin Scorsese are movie directors. \n\nChristopher Nolan is a movie director.\n\nErnest Hemingway is an author.\n\nStephen King is an author.\n\nJ.K. Rowling is an author.",
+    "The movie directors in the list are:\n\n1. Quentin Tarantino\n2. Martin Scorsese\n3. Christopher Nolan\n\nThe authors in the list are:\n\n1. Ernest Hemingway\n2. Stephen King\n3. J.K. Rowling",
+    "- Quentin Tarantino: Movie director\n- Martin Scorsese: Movie director\n- Christopher Nolan: Movie director\n- Ernest Hemingway: Author\n- Stephen King: Author\n- J.K. Rowling: Author",
+    "The names can be classified as follows:\n\n- Movie directors:\n  1. Quentin Tarantino\n  2. Martin Scorsese\n  3. Christopher Nolan\n\n- Authors:\n  1. Ernest Hemingway\n  2. Stephen King\n  3. J.K. Rowling",
+    "Here's the list with their respective categories:\n\n1. Quentin Tarantino - Movie Director\n2. Martin Scorsese - Movie Director\n3. Christopher Nolan - Movie Director\n4. Ernest Hemingway - Author\n5. Stephen King - Author\n6. J.K. Rowling - Author",
+    "These are the categorization of the individuals you've listed:\n\n1. Quentin Tarantino - Movie director\n2. Martin Scorsese - Movie director\n3. Christopher Nolan - Movie director\n4. Ernest Hemingway - Author\n5. Stephen King - Author\n6. J.K. Rowling - Author",
+    "The names that are movie directors are:\n\n1. Quentin Tarantino\n2. Martin Scorsese\n3. Christopher Nolan\n\nThe names that are authors are:\n\n1. Ernest Hemingway\n2. Stephen King\n3. J.K. Rowling",
+    "Quentin Tarantino and Martin Scorsese are movie directors.\nChristopher Nolan is a movie director.\nErnest Hemingway is an author.\nStephen King is an author.\nJ.K. Rowling is an author.",
+    "Here are the results:\n\n1.  Quentin Tarantino - Movie director\n2.  Martin Scorsese - Movie director\n3.  Christopher Nolan - Movie director\n4.  Ernest Hemingway - Author\n5.  Stephen King - Author\n6.  J.K. Rowling - Author",
+    "- Quentin Tarantino is a movie director.\n- Martin Scorsese is a movie director.\n- Christopher Nolan is a movie director.\n- Ernest Hemingway is an author.\n- Stephen King is an author.\n- J.K. Rowling is an author.",
+    "The names that are movie directors are:\n\n1. Quentin Tarantino\n2. Martin Scorsese\n3. Christopher Nolan\n\nThe names that are authors are:\n\n1. Ernest Hemingway\n2. Stephen King\n3. J.K. Rowling",
+    "The movie directors among them are: \n\n1. Quentin Tarantino\n2. Martin Scorsese\n3. Christopher Nolan\n\nThe authors among them are: \n\n1. Ernest Hemingway\n2. Stephen King\n3. J.K. Rowling"
+  ],
+  "timestamp": 1754881226.488567
+}

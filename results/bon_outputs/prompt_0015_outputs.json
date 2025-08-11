@@ -1,0 +1,30 @@
+{
+  "prompt_id": 15,
+  "prompt": "Context: Mustard seeds are the small round seeds of various mustard plants. The seeds are usually about 1 to 2 millimetres (0.039 to 0.079 in) in diameter and may be colored from yellowish white to black. They are an important spice in many regional foods and may come from one of three different plants: black mustard (Brassica nigra), brown mustard (B. juncea), or white mustard (Sinapis alba).\n\nGrinding and mixing the seeds with water, vinegar or other liquids creates the yellow condiment known as prepared mustard.\n\nMustard seeds generally take eight to ten days to germinate if placed under the proper conditions, which include a cold atmosphere and relatively moist soil.\n\nQuestion: How long does it take for a mustard seed to germinate?",
+  "category": "closed_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "It takes 8 to 10 days for a mustard seed to germinate.",
+    "Mustard seeds generally take 8 to 10 days to germinate under the proper conditions of a cold atmosphere and relatively moist soil.",
+    "It generally takes 8-10 days for a mustard seed to germinate under the proper conditions.",
+    "Mustard seeds generally take 8 to 10 days to germinate.",
+    "It takes around 8 to 10 days for a mustard seed to germinate under the proper conditions, including a cold atmosphere and relatively moist soil.",
+    "Mustard seeds generally take 8 to 10 days to germinate under the proper conditions, which include a cold atmosphere and relatively moist soil.",
+    "It takes 8 to 10 days for a mustard seed to germinate under the proper conditions.",
+    "It generally takes 8 to 10 days for a mustard seed to germinate, provided it is placed under the right conditions, which include a cold atmosphere and relatively moist soil.",
+    "Mustard seeds generally take 8 to 10 days to germinate if they are placed in the proper conditions, which include a cold atmosphere and relatively moist soil.",
+    "Mustard seeds generally take eight to ten days to germinate under the proper conditions.",
+    "Mustard seeds generally take eight to ten days to germinate under the proper conditions, which include a cold atmosphere and relatively moist soil.",
+    "It takes eight to ten days for a mustard seed to germinate under the proper conditions. These conditions include a cold atmosphere and relatively moist soil.",
+    "It generally takes 8 to 10 days for a mustard seed to germinate under the proper conditions of a cold atmosphere and relatively moist soil.",
+    "Mustard seeds generally take eight to ten days to germinate.",
+    "It takes around 8 to 10 days for a mustard seed to germinate if placed in the proper conditions, which include a cold atmosphere and relatively moist soil.",
+    "According to the text, it takes mustard seeds 8 to 10 days to germinate under the proper conditions of a cold atmosphere and relatively moist soil."
+  ],
+  "timestamp": 1754881226.4988365
+}

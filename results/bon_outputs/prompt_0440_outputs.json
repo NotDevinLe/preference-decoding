@@ -1,0 +1,30 @@
+{
+  "prompt_id": 440,
+  "prompt": "Context: Balrog, an American boxer with a similar appearance to Mike Tyson. Called M. Bison in Japan. Once one of the world's greatest heavyweight boxers, he began working for Shadaloo for easy money. Vega, a Spanish bullfighter who wields a claw and uses a unique style of ninjutsu. Called Balrog in Japan. He is vain and wishes to eliminate ugly people from the world. Sagat, a Muay Thai kickboxer from Thailand and former World Warrior champion from the original Street Fighter. He was once known as The King of Street Fighters until he got demoted as The King of Muai Thai in his own tournament due to a narrow defeat at the hands of Ryu's shoryuken (rising dragon punch) which left a deep gash across his chest. Ever since that moment he felt disgrace, and will do anything to have a grudge match with Ryu to get his title back, even if it takes joining forces with Shadaloo. M. Bison, the leader of the criminal organization Shadaloo, who uses a mysterious power known as Psycho Power, and the final opponent of the game. Called Vega in Japan.\n\nQuestion: How are the characters Balrog, Vega and M. Bison connected in Street Fighter II?",
+  "category": "summarization",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "In the context of Street Fighter II, Balrog (also known as M. Bison in Japan), Vega (also known as Balrog in Japan), and Sagat are all connected through their affiliation with the Shadaloo organization.",
+    "In the Street Fighter II universe, these characters are connected in that they all work for the organization known as Shadaloo, led by M. Bison.",
+    "In Street Fighter II, Balrog, Vega, and M. Bison are connected in that they are all part of the organization Shadaloo, a criminal syndicate.",
+    "In Street Fighter II, Balrog (M. Bison in Japan), Vega (Balrog in Japan), and Sagat are connected in the sense that they are all part of the Shadaloo organization.",
+    "The characters Balrog, Vega, and M. Bison (also known as M. Bison in Japan) are connected in Street Fighter II as members of the Shadaloo crime organization.",
+    "In Street Fighter II, the characters Balrog, Vega, and M. Bison are all connected as members of the villainous organization Shadaloo. Balrog is working for Shadaloo for the easy money it provides. Vega and M. Bison are the leaders or members of the organization itself. M. Bison is the leader of the organization and wields the power of Psycho Power, while Vega is a skilled fighter and works under M. Bison's orders.",
+    "Balrog, Vega, and M. Bison are connected in Street Fighter II as characters who are members of the criminal organization Shadaloo. They all work under the leadership of M. Bison (also known as Vega in Japan), who is the main antagonist of the game.",
+    "In Street Fighter II, Balrog, Vega, and M. Bison are connected through their association with the organization Shadaloo. M. Bison, also known as Vega in Japan, is the leader of Shadaloo. Balrog, also known as M. Bison in Japan, is a former professional boxer and a high-ranking member of Shadaloo, working for them for easy money. Vega, also known as Balrog in Japan, is a member of Shadaloo and works for them, fighting on their behalf.",
+    "In Street Fighter II, Balrog (M. Bison in Japan), Vega (Balrog in Japan), and Sagat are the main antagonists.",
+    "In Street Fighter II, Balrog, Vega, and M. Bison are all part of the Shadaloo organization, a criminal organization led by M. Bison.",
+    "In the Street Fighter series, the characters Balrog, Vega, and M. Bison are connected in that they are all high-ranking members of the Shadaloo organization.",
+    "Balrog, Vega, and M. Bison are connected in Street Fighter II as they are all members of the secret organization Shadaloo, led by M. Bison (also known as Vega in Japan).",
+    "In Street Fighter II, Balrog, Vega, and M. Bison (or Vega in Japan, Balrog in the US) are all connected as members of the Shadaloo organization. They are on the side of the main antagonist, M. Bison, and fight against the game's protagonist, Ryu, and his allies.",
+    "Balrog, Vega, and M. Bison are connected in Street Fighter II as members of the Shadaloo organization, a criminal syndicate.",
+    "In the Street Fighter II universe, M. Bison (also known as Vega in Japan) is the leader of the organization Shadaloo. Balrog (also known as M. Bison in Japan) is a member of Shadaloo and works for M. Bison, likely for the ease of money. Sagat (not directly related to the other two, but mentioned for contextual background) is a former ally of Shadaloo but an independent Muay Thai fighter who seeks revenge against Ryu, not directly connected to M. Bison and Balrog's current teaming.",
+    "Balrog, Vega, and M. Bison are all connected in Street Fighter II as employees of the criminal organization Shadaloo, led by M. Bison."
+  ],
+  "timestamp": 1754881226.981624
+}

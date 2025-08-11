@@ -1,0 +1,30 @@
+{
+  "prompt_id": 130,
+  "prompt": "Context: The recognised international governing body of football (and associated games, such as futsal and beach soccer) is FIFA. The FIFA headquarters are located in Z\u00fcrich, Switzerland. Six regional confederations are associated with FIFA; these are:\n\nAsia: Asian Football Confederation (AFC)\nAfrica: Confederation of African Football (CAF)\nEurope: Union of European Football Associations (UEFA)\nNorth/Central America & Caribbean: Confederation of North, Central American and Caribbean Association Football (CONCACAF)\nOceania: Oceania Football Confederation (OFC)\nSouth America: Confederaci\u00f3n Sudamericana de F\u00fatbol (South American Football Confederation; CONMEBOL)\nNational associations (or national federations) oversee football within individual countries. These are generally synonymous with sovereign states (for example, the Cameroonian Football Federation in Cameroon), but also include a smaller number of associations responsible for sub-national entities or autonomous regions (for example, the Scottish Football Association in Scotland). 211 national associations are affiliated both with FIFA and with their respective continental confederations.\n\nWhile FIFA is responsible for arranging competitions and most rules related to international competition, the actual Laws of the Game are set by the IFAB, where each of the UK Associations has one vote, while FIFA collectively has four votes.\n\nQuestion: What is FIFA?",
+  "category": "summarization",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "FIFA (F\u00e9d\u00e9ration Internationale de Football Association) is the recognised international governing body of football and associated games, such as futsal and beach soccer. It is headquartered in Z\u00fcrich, Switzerland.",
+    "FIFA is the recognised international governing body of football (and associated games, such as futsal and beach soccer).",
+    "FIFA is the recognised international governing body of football (and associated games, such as futsal and beach soccer), with its headquarters located in Z\u00fcrich, Switzerland.",
+    "FIFA is the recognised international governing body of football, futsal, and beach soccer.",
+    "FIFA is the recognised international governing body of football (and associated games, such as futsal and beach soccer), responsible for arranging competitions and most rules related to international competition.",
+    "FIFA is the recognized international governing body of football (and associated games, such as futsal and beach soccer), with its headquarters located in Z\u00fcrich, Switzerland.",
+    "FIFA (F\u00e9d\u00e9ration Internationale de Football Association) is the recognized international governing body of football (or soccer), as well as associated games like futsal and beach soccer.",
+    "FIFA is the recognised international governing body of football (and associated games, such as futsal and beach soccer), with its headquarters located in Z\u00fcrich, Switzerland.",
+    "FIFA is the recognised international governing body of football (and associated games, such as futsal and beach soccer), with its headquarters located in Z\u00fcrich, Switzerland.",
+    "FIFA is the recognised international governing body of football (and associated games, such as futsal and beach soccer).",
+    "FIFA is the recognised international governing body of football (and associated games, such as futsal and beach soccer), with its headquarters located in Z\u00fcrich, Switzerland.",
+    "FIFA is the recognised international governing body of football (and associated games, such as futsal and beach soccer).",
+    "FIFA (F\u00e9d\u00e9ration Internationale de Football Association) is the recognised international governing body of football (and associated games, such as futsal and beach soccer).",
+    "FIFA is the recognised international governing body of football (and associated games, such as futsal and beach soccer) with its headquarters located in Z\u00fcrich, Switzerland.",
+    "FIFA is the recognised international governing body of football, and its headquarters are located in Z\u00fcrich, Switzerland.",
+    "FIFA is the recognised international governing body of football (and associated games, such as futsal and beach soccer)."
+  ],
+  "timestamp": 1754881226.5773315
+}

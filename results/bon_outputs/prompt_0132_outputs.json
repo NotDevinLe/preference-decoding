@@ -1,0 +1,30 @@
+{
+  "prompt_id": 132,
+  "prompt": "What film won the 1943 Oscar as best film",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The film \"Mrs. Miniver\" won the 1943 Oscar as Best Picture.",
+    "The film 'Mrs. Miniver' won the 1943 Academy Award as Best Picture.",
+    "The film that won the 1943 Oscar for Best Picture was \"Casablanca.\"",
+    "The film \"Casablanca\" won the 1943 Oscar for Best Picture.",
+    "The film that won the 1943 Oscar as Best Picture was 'Mrs. Miniver'. It is a British-American drama film directed by William Wyler, released in 1942. The movie is about a British upper-class family's struggle and sacrifice during the early years of World War II. It won six Academy Awards, including Best Picture and Best Director for William Wyler.",
+    "The film that won the 1943 Oscar (16th Academy Awards) for Best Picture was \"Casablanca\".",
+    "The film that won the 1943 Oscar for Best Picture was 'Casablanca'.",
+    "The film that won the 1943 Oscar for Best Picture was 'Casablanca' at the 16th Academy Awards in 1944.",
+    "The film that won the 1943 Oscar for Best Picture was \"Casablanca\".",
+    "Casablanca won the 1943 Oscar for Best Picture.",
+    "The film \"Mrs. Miniver\" won the Academy Award for Best Picture in 1943. It is a 1942 American drama film directed by William Wyler, based on the 1942 novella \"Mrs. Miniver\" by Jan Struther. The film was released in the United States on April 18, 1942.",
+    "The film that won the 1943 Oscar for Best Picture was \"Casablanca\".",
+    "Casablanca won the 1943 Oscar for Best Picture. The film was released in 1942, but the Academy Awards ceremony for that year took place on March 4, 1943.",
+    "The film that won the 1943 Oscar for Best Picture was 'Casablanca'.",
+    "The film that won the 1943 Oscar as Best Picture at the 16th Academy Awards was 'Casablanca'.",
+    "Casablanca won the 1943 Oscar for Best Picture."
+  ],
+  "timestamp": 1754881226.5783002
+}

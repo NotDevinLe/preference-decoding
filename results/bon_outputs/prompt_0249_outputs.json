@@ -1,0 +1,30 @@
+{
+  "prompt_id": 249,
+  "prompt": "In the United States of America, which state is the largest in size?",
+  "category": "general_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The largest state in the United States by land area is Alaska.",
+    "The state of Alaska is the largest state in the United States by land area. It covers approximately 663,300 square miles (1,717,856 square kilometers).",
+    "Alaska is the largest state in the United States by land area.",
+    "Alaska is the largest state in the United States by area, covering approximately 663,268 square miles (1,717,856 km\u00b2).",
+    "The state of Alaska is the largest state in the United States by area. It covers a vast area of approximately 663,300 square miles (1,717,856 square kilometers).",
+    "Alaska is the largest state in the United States by land area, covering approximately 663,300 square miles.",
+    "Alaska is the largest state in the United States of America by land area.",
+    "Alaska is the largest state in the United States, with an area of approximately 663,300 square miles (1,717,856 square kilometers).",
+    "The state of Alaska is the largest in the United States of America, covering an area of approximately 663,300 square miles (1,717,856 km\u00b2).",
+    "The largest state in the United States of America is Alaska.",
+    "Alaska is the largest state in the United States, with a total area of approximately 663,300 square miles (1,717,856 square kilometers).",
+    "Alaska is the largest state in the United States of America by size.",
+    "Alaska is the largest state in the United States of America in terms of size, covering approximately 663,268 square miles (1,717,856 km\u00b2).",
+    "Alaska is the largest state in the United States by land area.",
+    "Alaska is the largest state in the United States by area, covering about 663,268 square miles (1,717,856 square kilometers).",
+    "The largest state in the United States by land area is Alaska."
+  ],
+  "timestamp": 1754881226.654568
+}

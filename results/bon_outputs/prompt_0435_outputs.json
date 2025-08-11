@@ -1,0 +1,30 @@
+{
+  "prompt_id": 435,
+  "prompt": "Context: Mark Richard Hunt (born 23 March 1974) is a New Zealand former mixed martial artist and kickboxer of Samoan descent, currently living in Sydney, Australia. Hunt competed in the Ultimate Fighting Championship (UFC) until 2018 and was the winner of the 2001 K-1 World Grand Prix. He is known as \"King of Walk-Offs\" due to his popularization of walking away and stopping attacks before the referee officially ends the match.\n\nQuestion: Extract the reason why was Mark Hunt known as the King of Walk Offs",
+  "category": "information_extraction",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "Mark Hunt was known as the \"King of Walk-Offs\" due to his popularization of walking away and stopping attacks before the referee officially ends the match.",
+    "Mark Hunt was known as the \"King of Walk-Offs\" due to his popularization of walking away and stopping attacks before the referee officially ends the match.",
+    "Mark Hunt is known as the \"King of Walk-Offs\" due to his popularization of walking away and stopping attacks before the referee officially ends the match.",
+    "Mark Hunt is known as the \"King of Walk-Offs\" because of his popularization of walking away and stopping attacks before the referee officially ends the match.",
+    "Mark Hunt was known as the \"King of Walk-Offs\" due to his popularization of walking away and stopping attacks before the referee officially ends the match.",
+    "Mark Hunt is known as the \"King of Walk-Offs\" due to his popularization of walking away and stopping attacks before the referee officially ends the match.",
+    "Mark Hunt was known as the \"King of Walk-Offs\" due to his popularization of walking away and stopping attacks before the referee officially ends the match.",
+    "The reason why Mark Hunt was known as the \"King of Walk-Offs\" is due to his popularization of walking away and stopping attacks before the referee officially ends the match.",
+    "Mark Hunt was known as the \"King of Walk-Offs\" due to his popularization of walking away and stopping attacks before the referee officially ends the match.",
+    "Mark Hunt was known as the \"King of Walk-Offs\" because of his popularization of walking away and stopping attacks before the referee officially ended the match.",
+    "Mark Hunt was known as the \"King of Walk-Offs\" due to his popularization of walking away and stopping attacks before the referee officially ends the match.",
+    "Mark Hunt was known as the \"King of Walk-Offs\" due to his popularization of walking away and stopping attacks before the referee officially ended the match.",
+    "Mark Hunt was known as the \"King of Walk-Offs\" due to his popularization of walking away and stopping attacks before the referee officially ends the match.",
+    "Mark Hunt was known as the \"King of Walk-Offs\" because of his popularization of walking away and stopping attacks before the referee officially ends the match.",
+    "Mark Hunt was known as the \"King of Walk-Offs\" due to his popularization of walking away and stopping attacks before the referee officially ends the match.",
+    "Mark Hunt was known as the \"King of Walk-Offs\" due to his popularization of walking away and stopping attacks before the referee officially ended the match."
+  ],
+  "timestamp": 1754881226.9776666
+}

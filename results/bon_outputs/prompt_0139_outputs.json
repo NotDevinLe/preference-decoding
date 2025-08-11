@@ -1,0 +1,30 @@
+{
+  "prompt_id": 139,
+  "prompt": "What is the tiny piece at the end of a shoelace called?",
+  "category": "open_qa",
+  "generation_config": {
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "num_outputs": 16
+  },
+  "outputs": [
+    "The tiny piece at the end of a shoelace is called an \"aglet.\" The aglet is the plastic or metal tip that prevents the laces from fraying and also helps them to thread easily through the eyelets on your shoes.",
+    "The tiny piece at the end of a shoelace is called an \"aglet\". The aglet is a small plastic or metal tip on the end of a shoelace that prevents the cord from fraying and makes it easier to thread through the eyelets of a shoe.",
+    "The tiny piece at the end of a shoelace is called an \"aglet.\" An aglet is a small plastic or metal tip attached to the end of a shoelace to prevent it from fraying and to make it easier to thread through the eyelets (the holes) of the shoe.",
+    "The tiny piece at the end of a shoelace is called an 'aglet.'",
+    "The tiny piece at the end of a shoelace is called an \"aglet.\"",
+    "The tiny piece at the end of a shoelace is called an aglet.",
+    "The tiny piece at the end of a shoelace is called an \"aglet.\" The aglet is the plastic or metal tip that prevents the lace from fraying and makes it easier to thread through the eyelets of the shoe.",
+    "The tiny piece at the end of a shoelace is called an \"aglet.\" The aglet is a small plastic or metal tip that prevents the lace from fraying or splitting when it's being pulled through the eyelets on a shoe or boot. It can also make it easier to thread the lace through the eyelets.",
+    "The tiny piece at the end of a shoelace is called an 'aglet.' An aglet is a small plastic or metal tip at the end of a shoelace, thread, or cord, which helps prevent it from fraying and makes it easier to thread through eyelets on shoes.",
+    "The small plastic or metal piece at the end of a shoelace is called an \"aglet.\"",
+    "The tiny piece at the end of a shoelace is called an aglet.",
+    "The tiny piece at the end of a shoelace is called an \"aglet.\"",
+    "The tiny piece at the end of a shoelace is called an \"aglet\".",
+    "The tiny piece at the end of a shoelace is typically called an \"aglet\".",
+    "The tiny piece at the end of a shoelace is called an 'aglet'. The aglet is usually a small plastic or metal tip that prevents the shoelace from fraying and makes it easier to thread through the eyelets of the shoe.",
+    "The tiny piece at the end of a shoelace is called an \"aglet.\" An aglet is the small plastic or metal tip at the end of a shoelace that prevents the lace from fraying or tangling and makes it easier to thread through the eyelets on a shoe."
+  ],
+  "timestamp": 1754881226.5822449
+}
