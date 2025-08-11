@@ -34,10 +34,7 @@ from src.evaluation.generation_evaluator import (
     GenerationEvaluator,
     DriftDecodingGenerator
 )
-from src.evaluation.qalign_generators import (
-    QAlignDriftGenerator,
-    QAlignMLEGenerator
-)
+from src.evaluation.qalign_generator import QAlignGenerator
 from src.core.drift import DriftLogitsProcessor
 
 
@@ -159,34 +156,36 @@ def create_generator(method: str, args, bon_data, models, configs):
         return BONEvaluator(dummy_judge, selector, bon_data, method_name="BON-MLE")
     
     elif method == 'qalign-drift':
-        generator = QAlignDriftGenerator(
-            models['base_model'],
-            models['drift_model'],
-            configs['p_vector'],
-            configs['base_prompt'],
-            configs['attribute_prompts'],
-            models['tokenizer'],
+        generator = QAlignGenerator(
+            base_model=models['base_model'],
+            scoring_model=models['drift_model'],
+            p_vector=configs['p_vector'],
+            base_prompt=configs['base_prompt'],
+            attribute_prompts=configs['attribute_prompts'],
+            tokenizer=models['tokenizer'],
             num_steps=args.qalign_steps,
             beta=args.qalign_beta,
             temperature=args.temperature,
             max_length=args.max_length,
-            device=device
+            device=device,
+            method_name="QAlign-Drift"
         )
         return GenerationEvaluator(dummy_judge, generator, method_name="QAlign-Drift")
     
     elif method == 'qalign-mle':
-        generator = QAlignMLEGenerator(
-            models['base_model'],
-            models.get('drift_model'),
-            configs['p_vector_mle'],
-            configs['base_prompt'],
-            configs['attribute_prompts'],
-            models['tokenizer'],
+        generator = QAlignGenerator(
+            base_model=models['base_model'],
+            scoring_model=models.get('drift_model'),  # MLE uses same model type
+            p_vector=configs['p_vector_mle'],
+            base_prompt=configs['base_prompt'],
+            attribute_prompts=configs['attribute_prompts'],
+            tokenizer=models['tokenizer'],
             num_steps=args.qalign_steps,
             beta=args.qalign_beta,
             temperature=args.temperature,
             max_length=args.max_length,
-            device=device
+            device=device,
+            method_name="QAlign-MLE"
         )
         return GenerationEvaluator(dummy_judge, generator, method_name="QAlign-MLE")
     

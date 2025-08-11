@@ -63,14 +63,20 @@ class GenerationEvaluator(BaseEvaluator):
         Returns:
             List of generated responses
         """
-        generated_responses = []
-        
-        for prompt in tqdm(prompts, desc="Generating responses"):
-            # Generate response
-            response = self.generator.generate(prompt)
-            generated_responses.append(response)
-        
-        return generated_responses
+        # Check if generator supports batch generation
+        if hasattr(self.generator, 'generate_batch'):
+            print(f"Using batch generation for {len(prompts)} prompts...")
+            return self.generator.generate_batch(prompts)
+        else:
+            # Fall back to sequential generation
+            generated_responses = []
+            
+            for prompt in tqdm(prompts, desc="Generating responses"):
+                # Generate response
+                response = self.generator.generate(prompt)
+                generated_responses.append(response)
+            
+            return generated_responses
     
     def get_metadata(self) -> Dict[str, Any]:
         """Get method-specific metadata."""
