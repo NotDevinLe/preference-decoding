@@ -241,14 +241,14 @@ def main():
     parser.add_argument(
         "--config",
         type=str,
-        default="configs/experiment_config.yaml",
+        default="../../configs/experiment_config.yaml",
         help="Path to experiment configuration"
     )
     
     parser.add_argument(
         "--output",
         type=str,
-        default="data/processed/evaluation_prompts.json",
+        default="../../data/processed/evaluation_prompts.json",
         help="Output path for evaluation prompts"
     )
     

@@ -63,8 +63,7 @@ class BONOutputGenerator:
             temperature=self.gen_config['bon_temperature'],
             top_p=self.gen_config['bon_top_p'],
             max_tokens=self.gen_config['bon_max_tokens'],
-            n=self.gen_config['bon_outputs_per_prompt'],  # Generate N outputs per prompt
-            use_beam_search=False
+            n=self.gen_config['bon_outputs_per_prompt']  # Generate N outputs per prompt
         )
         
         print(f"Initialized BON generator with {self.gen_config['bon_outputs_per_prompt']} outputs per prompt")
@@ -241,21 +240,21 @@ def main():
     parser.add_argument(
         "--config",
         type=str,
-        default="configs/experiment_config.yaml",
+        default="../../configs/experiment_config.yaml",
         help="Path to experiment configuration"
     )
     
     parser.add_argument(
         "--prompts",
         type=str,
-        default="data/processed/evaluation_prompts.json",
+        default="../../data/processed/evaluation_prompts.json",
         help="Path to evaluation prompts"
     )
     
     parser.add_argument(
         "--output_dir",
         type=str,
-        default="results/bon_outputs",
+        default="../../results/bon_outputs",
         help="Directory to save BON outputs"
     )
     
