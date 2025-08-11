@@ -136,6 +136,8 @@ class PreferenceVectorSelector(Selector):
         )[0]  # Get first (and only) result
         
         # Select candidate with highest score
+        if hasattr(scores, 'cpu'):
+            scores = scores.cpu().numpy()
         best_idx = np.argmax(scores)
         return candidates[best_idx]
 

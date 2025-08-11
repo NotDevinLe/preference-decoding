@@ -84,6 +84,7 @@ def load_models_and_configs(args, method: str):
                 p_data = json.load(f)
                 if isinstance(p_data, list):
                     configs['p_vector'] = np.array(p_data[0]['p'])
+                    print(f"Loaded p vector: {configs['p_vector']}")
                 else:
                     configs['p_vector'] = np.array(p_data['p'])
     
@@ -92,7 +93,14 @@ def load_models_and_configs(args, method: str):
         if args.mle_p_vector_path:
             with open(args.mle_p_vector_path, 'r') as f:
                 mle_data = json.load(f)
-                configs['p_vector_mle'] = np.array(mle_data['p'])
+                configs['p_vector_mle'] = np.array(mle_data[0]['p'])
+                print(f"Loaded MLE p vector: {configs['p_vector_mle']}")
+    
+    # Load tokenizer for methods that need it
+    if method in ['bon-drift', 'bon-mle'] and args.drift_model_path:
+        # BON methods need tokenizer for drift scoring
+        models['tokenizer'] = AutoTokenizer.from_pretrained(args.drift_model_path)
+        models['tokenizer'].pad_token = models['tokenizer'].eos_token
     
     # Load base model for generation methods
     if method.startswith('qalign') or method == 'drift-decoding':
