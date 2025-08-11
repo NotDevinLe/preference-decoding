@@ -6,6 +6,7 @@ BON (Best-of-N) evaluator for selecting from pre-generated responses.
 from typing import List, Dict, Any, Optional
 import numpy as np
 from abc import ABC, abstractmethod
+from tqdm import tqdm
 
 from src.evaluation.base_evaluator import BaseEvaluator
 
@@ -71,7 +72,8 @@ class BONEvaluator(BaseEvaluator):
             # Use batch processing for better performance
             candidates_lists = []
             
-            for prompt in prompts:
+            print(f"Preparing {len(prompts)} prompts for batch processing...")
+            for prompt in tqdm(prompts, desc="Collecting candidates"):
                 if prompt not in self.bon_data:
                     raise ValueError(f"Prompt not found in BON data: {prompt[:50]}...")
                 
@@ -84,12 +86,13 @@ class BONEvaluator(BaseEvaluator):
                 candidates_lists.append(candidates)
             
             # Use batch selection
+            print(f"Processing all {len(prompts)} prompts in batch...")
             selected_responses = self.selector.select_batch(prompts, candidates_lists)
         else:
             # Fall back to sequential processing
             selected_responses = []
             
-            for prompt in prompts:
+            for prompt in tqdm(prompts, desc="Processing prompts sequentially"):
                 if prompt not in self.bon_data:
                     raise ValueError(f"Prompt not found in BON data: {prompt[:50]}...")
                 
@@ -121,7 +124,7 @@ class BONEvaluator(BaseEvaluator):
 class PreferenceVectorSelector(Selector):
     """Unified selector using preference vector scores for selection."""
     
-    def __init__(self, model, p_vector, base_prompt, attribute_prompts, tokenizer, device=None):
+    def __init__(self, model, p_vector, base_prompt, attribute_prompts, tokenizer, device=None, top_k=7):
         """
         Initialize preference vector selector.
         
@@ -132,24 +135,54 @@ class PreferenceVectorSelector(Selector):
             attribute_prompts: List of attribute prompts
             tokenizer: Tokenizer for the model
             device: Device for computation
+            top_k: Number of top attributes to keep (by absolute value)
         """
         self.model = model
-        self.p_vector = p_vector
         self.base_prompt = base_prompt
-        self.attribute_prompts = attribute_prompts
         self.tokenizer = tokenizer
         self.device = device
+        self.top_k = top_k
+        
+        # Sparsify p_vector to keep only top k attributes by absolute value
+        if top_k is not None and top_k < len(p_vector):
+            # Get indices of top k attributes by absolute value
+            abs_values = np.abs(p_vector)
+            top_indices = np.argpartition(abs_values, -top_k)[-top_k:]
+            
+            # Create sparse vector
+            sparse_p = np.zeros_like(p_vector)
+            sparse_p[top_indices] = p_vector[top_indices]
+            
+            # Store sparse vector and indices
+            self.p_vector = sparse_p
+            self.active_indices = top_indices.tolist()
+            
+            # Filter attribute prompts to only active ones
+            self.attribute_prompts = [attribute_prompts[i] for i in self.active_indices]
+            
+            # Create mapping for full p_vector reconstruction if needed
+            self.sparse_p_values = p_vector[top_indices]
+            
+            print(f"Sparsified p_vector: keeping {top_k} attributes with indices {sorted(self.active_indices)}")
+            print(f"Active weights: {[f'{i}:{p_vector[i]:.4f}' for i in sorted(self.active_indices)]}")
+        else:
+            self.p_vector = p_vector
+            self.attribute_prompts = attribute_prompts
+            self.active_indices = list(range(len(p_vector)))
     
     def select(self, prompt: str, candidates: List[str]) -> str:
         """Select using preference vector scores."""
         # Import here to avoid circular dependency
         from src.core.drift import get_scores
         
+        # Use sparse vector if we sparsified, passing only active weights
+        p_to_use = self.sparse_p_values if hasattr(self, 'sparse_p_values') else self.p_vector
+        
         # Compute preference vector scores for all candidates
         scores = get_scores(
             [(prompt, candidates)],
             self.model,
-            self.p_vector,
+            p_to_use,
             self.base_prompt,
             self.attribute_prompts,
             self.device,
@@ -170,11 +203,14 @@ class PreferenceVectorSelector(Selector):
         # Prepare data for batch processing
         batch_data = [(prompt, candidates) for prompt, candidates in zip(prompts, candidates_lists)]
         
+        # Use sparse vector if we sparsified, passing only active weights
+        p_to_use = self.sparse_p_values if hasattr(self, 'sparse_p_values') else self.p_vector
+        
         # Compute preference vector scores for all prompts and candidates
         scores_matrix = get_scores(
             batch_data,
             self.model,
-            self.p_vector,
+            p_to_use,
             self.base_prompt,
             self.attribute_prompts,
             self.device,

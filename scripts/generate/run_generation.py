@@ -32,9 +32,11 @@ from src.evaluation.base_evaluator import BaseEvaluator, OracleEvaluator, Random
 from src.evaluation.bon_evaluator import BONEvaluator, PreferenceVectorSelector
 from src.evaluation.generation_evaluator import (
     GenerationEvaluator,
-    QAlignDriftGenerator,
-    QAlignMLEGenerator,
     DriftDecodingGenerator
+)
+from src.evaluation.qalign_generators import (
+    QAlignDriftGenerator,
+    QAlignMLEGenerator
 )
 from src.core.drift import DriftLogitsProcessor
 
@@ -69,7 +71,7 @@ def load_models_and_configs(args, method: str):
         configs['attribute_prompts'] = attribute_prompts
     
     # Load models based on method
-    if method in ['bon-drift', 'qalign-drift', 'drift-decoding']:
+    if method in ['bon-drift', 'bon-mle', 'qalign-drift', 'qalign-mle', 'drift-decoding']:
         # Load drift model and p vector
         if args.drift_model_path:
             from vllm import LLM
@@ -89,12 +91,18 @@ def load_models_and_configs(args, method: str):
                     configs['p_vector'] = np.array(p_data['p'])
     
     if method in ['bon-mle', 'qalign-mle']:
-        # Load MLE p vector
-        if args.mle_p_vector_path:
-            with open(args.mle_p_vector_path, 'r') as f:
+        # Load MLE p vector (can use same path as drift if not specified)
+        mle_path = args.mle_p_vector_path or args.p_vector_path
+        if mle_path:
+            with open(mle_path, 'r') as f:
                 mle_data = json.load(f)
-                configs['p_vector_mle'] = np.array(mle_data[0]['p'])
-                print(f"Loaded MLE p vector: {configs['p_vector_mle']}")
+                if isinstance(mle_data, list):
+                    configs['p_vector_mle'] = np.array(mle_data[0]['p'])
+                else:
+                    configs['p_vector_mle'] = np.array(mle_data['p'])
+                print(f"Loaded MLE p vector from {mle_path}: {configs['p_vector_mle']}")
+        else:
+            raise ValueError(f"Method {method} requires either --mle_p_vector_path or --p_vector_path")
     
     # Load tokenizer for methods that need it
     if method in ['bon-drift', 'bon-mle'] and args.drift_model_path:
@@ -158,7 +166,8 @@ def create_generator(method: str, args, bon_data, models, configs):
             configs['base_prompt'],
             configs['attribute_prompts'],
             models['tokenizer'],
-            num_samples=args.qalign_samples,
+            num_steps=args.qalign_steps,
+            beta=args.qalign_beta,
             temperature=args.temperature,
             max_length=args.max_length,
             device=device
@@ -173,7 +182,8 @@ def create_generator(method: str, args, bon_data, models, configs):
             configs['base_prompt'],
             configs['attribute_prompts'],
             models['tokenizer'],
-            num_samples=args.qalign_samples,
+            num_steps=args.qalign_steps,
+            beta=args.qalign_beta,
             temperature=args.temperature,
             max_length=args.max_length,
             device=device
@@ -351,10 +361,17 @@ def main():
     )
     
     parser.add_argument(
-        "--qalign_samples",
+        "--qalign_steps",
         type=int,
-        default=32,
-        help="Number of samples for QAlign"
+        default=100,
+        help="Number of MCMC steps for QAlign"
+    )
+    
+    parser.add_argument(
+        "--qalign_beta",
+        type=float,
+        default=1.0,
+        help="Temperature parameter (beta) for QAlign acceptance probability"
     )
     
     parser.add_argument(
