@@ -66,21 +66,42 @@ class BONEvaluator(BaseEvaluator):
         Returns:
             List of selected responses
         """
-        selected_responses = []
-        
-        for prompt in prompts:
-            if prompt not in self.bon_data:
-                raise ValueError(f"Prompt not found in BON data: {prompt[:50]}...")
+        # Check if selector supports batch processing
+        if hasattr(self.selector, 'select_batch'):
+            # Use batch processing for better performance
+            candidates_lists = []
             
-            # Get n candidates
-            candidates = self.bon_data[prompt][:n]
+            for prompt in prompts:
+                if prompt not in self.bon_data:
+                    raise ValueError(f"Prompt not found in BON data: {prompt[:50]}...")
+                
+                # Get n candidates
+                candidates = self.bon_data[prompt][:n]
+                
+                if not candidates:
+                    raise ValueError(f"No candidates found for prompt: {prompt[:50]}...")
+                
+                candidates_lists.append(candidates)
             
-            if not candidates:
-                raise ValueError(f"No candidates found for prompt: {prompt[:50]}...")
+            # Use batch selection
+            selected_responses = self.selector.select_batch(prompts, candidates_lists)
+        else:
+            # Fall back to sequential processing
+            selected_responses = []
             
-            # Use selector to choose best response
-            selected = self.selector.select(prompt, candidates)
-            selected_responses.append(selected)
+            for prompt in prompts:
+                if prompt not in self.bon_data:
+                    raise ValueError(f"Prompt not found in BON data: {prompt[:50]}...")
+                
+                # Get n candidates
+                candidates = self.bon_data[prompt][:n]
+                
+                if not candidates:
+                    raise ValueError(f"No candidates found for prompt: {prompt[:50]}...")
+                
+                # Use selector to choose best response
+                selected = self.selector.select(prompt, candidates)
+                selected_responses.append(selected)
         
         return selected_responses
     
@@ -140,6 +161,39 @@ class PreferenceVectorSelector(Selector):
             scores = scores.cpu().numpy()
         best_idx = np.argmax(scores)
         return candidates[best_idx]
+    
+    def select_batch(self, prompts: List[str], candidates_lists: List[List[str]]) -> List[str]:
+        """Select using preference vector scores for multiple prompts at once."""
+        # Import here to avoid circular dependency
+        from src.core.drift import get_scores
+        
+        # Prepare data for batch processing
+        batch_data = [(prompt, candidates) for prompt, candidates in zip(prompts, candidates_lists)]
+        
+        # Compute preference vector scores for all prompts and candidates
+        scores_matrix = get_scores(
+            batch_data,
+            self.model,
+            self.p_vector,
+            self.base_prompt,
+            self.attribute_prompts,
+            self.device,
+            self.tokenizer
+        )
+        
+        # Select best candidate for each prompt
+        selected_responses = []
+        for i, (prompt, candidates) in enumerate(zip(prompts, candidates_lists)):
+            scores = scores_matrix[i]
+            
+            # Convert to numpy if needed
+            if hasattr(scores, 'cpu'):
+                scores = scores.cpu().numpy()
+            
+            best_idx = np.argmax(scores)
+            selected_responses.append(candidates[best_idx])
+        
+        return selected_responses
 
 
 # Legacy aliases for backward compatibility
