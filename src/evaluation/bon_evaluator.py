@@ -97,22 +97,22 @@ class BONEvaluator(BaseEvaluator):
 
 # Concrete Selector Implementations
 
-class DriftSelector(Selector):
-    """Selector using drift scores for selection."""
+class PreferenceVectorSelector(Selector):
+    """Unified selector using preference vector scores for selection."""
     
-    def __init__(self, drift_model, p_vector, base_prompt, attribute_prompts, tokenizer, device=None):
+    def __init__(self, model, p_vector, base_prompt, attribute_prompts, tokenizer, device=None):
         """
-        Initialize drift selector.
+        Initialize preference vector selector.
         
         Args:
-            drift_model: VLLM model for computing drift scores
+            model: VLLM model for computing scores
             p_vector: Preference vector (numpy array or torch tensor)
             base_prompt: Base system prompt
             attribute_prompts: List of attribute prompts
             tokenizer: Tokenizer for the model
             device: Device for computation
         """
-        self.drift_model = drift_model
+        self.model = model
         self.p_vector = p_vector
         self.base_prompt = base_prompt
         self.attribute_prompts = attribute_prompts
@@ -120,14 +120,14 @@ class DriftSelector(Selector):
         self.device = device
     
     def select(self, prompt: str, candidates: List[str]) -> str:
-        """Select using drift scores."""
+        """Select using preference vector scores."""
         # Import here to avoid circular dependency
         from src.core.drift import get_scores
         
-        # Compute drift scores for all candidates
+        # Compute preference vector scores for all candidates
         scores = get_scores(
             [(prompt, candidates)],
-            self.drift_model,
+            self.model,
             self.p_vector,
             self.base_prompt,
             self.attribute_prompts,
@@ -140,48 +140,9 @@ class DriftSelector(Selector):
         return candidates[best_idx]
 
 
-class MLESelector(Selector):
-    """Selector using MLE-optimized preference vector."""
-    
-    def __init__(self, mle_model, p_vector_mle, base_prompt, attribute_prompts, tokenizer, device=None):
-        """
-        Initialize MLE selector.
-        
-        Args:
-            mle_model: Model for MLE scoring
-            p_vector_mle: MLE-optimized preference vector
-            base_prompt: Base system prompt
-            attribute_prompts: List of attribute prompts
-            tokenizer: Tokenizer
-            device: Device for computation
-        """
-        self.mle_model = mle_model
-        self.p_vector_mle = p_vector_mle
-        self.base_prompt = base_prompt
-        self.attribute_prompts = attribute_prompts
-        self.tokenizer = tokenizer
-        self.device = device
-    
-    def select(self, prompt: str, candidates: List[str]) -> str:
-        """Select using MLE scores."""
-        # Import here to avoid circular dependency
-        from src.core.drift import get_scores
-        
-        # Use same scoring as drift but with MLE-optimized p vector
-        scores = get_scores(
-            [(prompt, candidates)],
-            self.mle_model,
-            self.p_vector_mle,
-            self.base_prompt,
-            self.attribute_prompts,
-            self.device,
-            self.tokenizer
-        )[0]
-        
-        best_idx = np.argmax(scores)
-        return candidates[best_idx]
-
-
+# Legacy aliases for backward compatibility
+DriftSelector = PreferenceVectorSelector
+MLESelector = PreferenceVectorSelector
 
 
 class RewardModelSelector(Selector):

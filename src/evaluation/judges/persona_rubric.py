@@ -4,7 +4,7 @@ Persona evaluation rubric definitions and prompt templates.
 Provides a 5-dimensional scoring system for evaluating how well responses match personas.
 """
 
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Any
 import json
 from dataclasses import dataclass, asdict
 
@@ -168,6 +168,87 @@ BEHAVIORAL_REASON: Acts consistently grumpy but missed opportunities for more ri
 
 EMOTIONAL: 4
 EMOTIONAL_REASON: Frustration and annoyance feel authentic to the character.
+"""
+    
+    return prompt
+
+
+def create_multi_comparison_prompt(
+    persona: str,
+    question: str,
+    responses: Dict[str, str],
+    include_examples: bool = False
+) -> str:
+    """
+    Create a prompt for comparing multiple responses from different methods.
+    
+    Args:
+        persona: Persona description
+        question: The question/prompt
+        responses: Dictionary mapping method names to responses
+        include_examples: Whether to include example output format
+        
+    Returns:
+        Complete comparison prompt
+    """
+    
+    # Build responses section
+    responses_text = ""
+    for i, (method, response) in enumerate(responses.items(), 1):
+        responses_text += f"\nRESPONSE {i} ({method}):\n{response}\n"
+    
+    prompt = f"""Compare how well these responses match the given persona using the rubric below.
+
+PERSONA: {persona}
+QUESTION: {question}
+{responses_text}
+EVALUATION RUBRIC:
+{format_rubric_text()}
+
+For each response, provide scores and brief reasoning for each dimension. Then rank all responses from best to worst.
+
+Format your response as:
+
+RESPONSE_1_SCORES:
+SPEAKING_STYLE: [1-5]
+SPEAKING_REASON: [1 sentence explanation]
+PERSONALITY: [1-5] 
+PERSONALITY_REASON: [1 sentence explanation]
+KNOWLEDGE: [1-5]
+KNOWLEDGE_REASON: [1 sentence explanation]
+BEHAVIORAL: [1-5]
+BEHAVIORAL_REASON: [1 sentence explanation]
+EMOTIONAL: [1-5]
+EMOTIONAL_REASON: [1 sentence explanation]
+
+RESPONSE_2_SCORES:
+[Same format for each response...]
+
+RANKING: [List response numbers from best to worst, e.g., "3,1,5,2,4"]
+RANKING_REASON: [2-3 sentences explaining the ranking]
+"""
+    
+    if include_examples:
+        prompt += """
+
+Example output:
+RESPONSE_1_SCORES:
+SPEAKING_STYLE: 4
+SPEAKING_REASON: Uses mystical language consistently throughout.
+PERSONALITY: 5
+PERSONALITY_REASON: Grumpiness comes through clearly in every sentence.
+KNOWLEDGE: 3
+KNOWLEDGE_REASON: Shows some magical knowledge but could be more specific.
+BEHAVIORAL: 4
+BEHAVIORAL_REASON: Acts consistently grumpy but missed some opportunities.
+EMOTIONAL: 4
+EMOTIONAL_REASON: Frustration feels authentic to the character.
+
+RESPONSE_2_SCORES:
+[Similar format...]
+
+RANKING: 2,1,3,4,5
+RANKING_REASON: Response 2 had the best balance of personality and speaking style. Response 1 was strong but less consistent. The others lacked character depth.
 """
     
     return prompt
@@ -342,6 +423,117 @@ def parse_comparison_response(llm_response: str) -> Tuple[PersonaScore, PersonaS
     )
     
     return score_a, score_b, winner, reason
+
+
+def parse_multi_comparison_response(llm_response: str, method_names: List[str]) -> Tuple[List[PersonaScore], List[int], str]:
+    """
+    Parse LLM multi-comparison response.
+    
+    Args:
+        llm_response: Raw LLM response text
+        method_names: List of method names in order
+        
+    Returns:
+        Tuple of (list_of_persona_scores, ranking_order, ranking_reason)
+    """
+    lines = llm_response.strip().split('\n')
+    
+    # Parse scores for each response
+    scores_list = []
+    current_response_scores = {}
+    ranking_order = []
+    ranking_reason = ""
+    
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        
+        # Check for new response section
+        if line.startswith('RESPONSE_') and '_SCORES:' in line:
+            # Save previous response if exists
+            if current_response_scores:
+                scores_list.append(create_persona_score_from_dict(current_response_scores))
+            current_response_scores = {}
+            continue
+        
+        # Parse individual score lines
+        if line.startswith('SPEAKING_STYLE:'):
+            try:
+                current_response_scores['speaking_style'] = int(line.split(':')[1].strip())
+            except (ValueError, IndexError):
+                current_response_scores['speaking_style'] = 3
+        elif line.startswith('SPEAKING_REASON:'):
+            current_response_scores['speaking_reason'] = ':'.join(line.split(':')[1:]).strip()
+        elif line.startswith('PERSONALITY:'):
+            try:
+                current_response_scores['personality'] = int(line.split(':')[1].strip())
+            except (ValueError, IndexError):
+                current_response_scores['personality'] = 3
+        elif line.startswith('PERSONALITY_REASON:'):
+            current_response_scores['personality_reason'] = ':'.join(line.split(':')[1:]).strip()
+        elif line.startswith('KNOWLEDGE:'):
+            try:
+                current_response_scores['knowledge'] = int(line.split(':')[1].strip())
+            except (ValueError, IndexError):
+                current_response_scores['knowledge'] = 3
+        elif line.startswith('KNOWLEDGE_REASON:'):
+            current_response_scores['knowledge_reason'] = ':'.join(line.split(':')[1:]).strip()
+        elif line.startswith('BEHAVIORAL:'):
+            try:
+                current_response_scores['behavioral'] = int(line.split(':')[1].strip())
+            except (ValueError, IndexError):
+                current_response_scores['behavioral'] = 3
+        elif line.startswith('BEHAVIORAL_REASON:'):
+            current_response_scores['behavioral_reason'] = ':'.join(line.split(':')[1:]).strip()
+        elif line.startswith('EMOTIONAL:'):
+            try:
+                current_response_scores['emotional'] = int(line.split(':')[1].strip())
+            except (ValueError, IndexError):
+                current_response_scores['emotional'] = 3
+        elif line.startswith('EMOTIONAL_REASON:'):
+            current_response_scores['emotional_reason'] = ':'.join(line.split(':')[1:]).strip()
+        elif line.startswith('RANKING:'):
+            try:
+                ranking_text = line.split(':')[1].strip()
+                # Parse ranking like "3,1,5,2,4" into [3,1,5,2,4]
+                ranking_order = [int(x.strip()) for x in ranking_text.split(',')]
+            except:
+                # Default ranking if parsing fails
+                ranking_order = list(range(1, len(method_names) + 1))
+        elif line.startswith('RANKING_REASON:'):
+            ranking_reason = ':'.join(line.split(':')[1:]).strip()
+    
+    # Don't forget the last response
+    if current_response_scores:
+        scores_list.append(create_persona_score_from_dict(current_response_scores))
+    
+    # Ensure we have scores for all responses
+    while len(scores_list) < len(method_names):
+        scores_list.append(PersonaScore(3, 3, 3, 3, 3))  # Default scores
+    
+    # Ensure ranking order is valid
+    if not ranking_order or len(ranking_order) != len(method_names):
+        ranking_order = list(range(1, len(method_names) + 1))
+    
+    return scores_list, ranking_order, ranking_reason
+
+
+def create_persona_score_from_dict(score_dict: Dict[str, Any]) -> PersonaScore:
+    """Helper function to create PersonaScore from parsed dictionary."""
+    
+    # Ensure all required scores are present with defaults
+    for key in ['speaking_style', 'personality', 'knowledge', 'behavioral', 'emotional']:
+        if key not in score_dict:
+            score_dict[key] = 3
+    
+    # Ensure all reason fields exist
+    for key in ['speaking_reason', 'personality_reason', 'knowledge_reason', 
+                'behavioral_reason', 'emotional_reason']:
+        if key not in score_dict:
+            score_dict[key] = ""
+    
+    return PersonaScore(**score_dict)
 
 
 if __name__ == "__main__":

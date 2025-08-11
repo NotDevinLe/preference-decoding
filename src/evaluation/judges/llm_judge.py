@@ -321,6 +321,24 @@ class PersonaJudge:
         
         return results
     
+    def score(self, prompt: str, response: str, persona: str = "A helpful assistant") -> float:
+        """
+        Score interface for BaseEvaluator - returns average of 5 rubric dimensions.
+        
+        Args:
+            prompt: The prompt/question
+            response: The response to evaluate  
+            persona: Persona description
+            
+        Returns:
+            Average score from 1-5 rubric dimensions
+        """
+        persona_score = self.score_response(persona, prompt, response)
+        if persona_score:
+            return persona_score.get_overall()
+        else:
+            return 3.0  # Default middle score if evaluation fails
+    
     def get_statistics(self) -> Dict[str, int]:
         """Get usage statistics."""
         return self.stats.copy()

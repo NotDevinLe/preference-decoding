@@ -26,13 +26,14 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 from src.evaluation.base_evaluator import BaseEvaluator, EvaluationResult, OracleEvaluator, RandomEvaluator
-from src.evaluation.bon_evaluator import BONEvaluator, DriftSelector, MLESelector
+from src.evaluation.bon_evaluator import BONEvaluator, PreferenceVectorSelector
 from src.evaluation.generation_evaluator import (
     GenerationEvaluator,
     QAlignDriftGenerator,
     QAlignMLEGenerator,
     DriftDecodingGenerator
 )
+from src.evaluation.judges.llm_judge import PersonaJudge
 from src.core.drift import DriftLogitsProcessor
 
 
@@ -122,7 +123,7 @@ def create_evaluators(args, judge, bon_data, models, configs) -> Dict[str, BaseE
     # BON Methods
     if 'bon-drift' in args.methods:
         if 'drift_model' in models and 'p_vector' in configs:
-            selector = DriftSelector(
+            selector = PreferenceVectorSelector(
                 models['drift_model'],
                 configs['p_vector'],
                 configs['base_prompt'],
@@ -136,7 +137,7 @@ def create_evaluators(args, judge, bon_data, models, configs) -> Dict[str, BaseE
     
     if 'bon-mle' in args.methods:
         if 'p_vector_mle' in configs:
-            selector = MLESelector(
+            selector = PreferenceVectorSelector(
                 models.get('drift_model'),  # Can reuse drift model
                 configs['p_vector_mle'],
                 configs['base_prompt'],
@@ -331,11 +332,31 @@ def main():
     
     # Judge configuration
     parser.add_argument(
-        "--judge",
+        "--judge_model",
         type=str,
-        default="golden",
-        choices=["golden"],
-        help="Type of judge to use"
+        default="meta-llama/Llama-3.3-70B-Instruct",
+        help="LLM model to use as judge"
+    )
+    
+    parser.add_argument(
+        "--judge_base_url",
+        type=str,
+        default="http://localhost:8000/v1",
+        help="VLLM endpoint URL for judge"
+    )
+    
+    parser.add_argument(
+        "--judge_cache_dir",
+        type=str,
+        default="cache/persona_judge",
+        help="Directory to cache judge responses"
+    )
+    
+    parser.add_argument(
+        "--persona",
+        type=str,
+        default="A helpful assistant",
+        help="Persona description for evaluation"
     )
     
     # Model paths
@@ -439,9 +460,30 @@ def main():
     print(f"Loaded {len(prompts)} prompts")
     
     # Initialize judge
-    print(f"\nInitializing {args.judge} judge...")
-    # Placeholder for golden judge
-    raise NotImplementedError("Golden judge not yet implemented")
+    print(f"\nInitializing LLM judge ({args.judge_model})...")
+    persona_judge = PersonaJudge(
+        base_url=args.judge_base_url,
+        model=args.judge_model,
+        cache_dir=args.judge_cache_dir,
+        temperature=0.1,  # Low temperature for consistent scoring
+        max_tokens=512
+    )
+    
+    # Create judge wrapper with persona
+    class PersonaBoundJudge:
+        def __init__(self, persona_judge, persona):
+            self.persona_judge = persona_judge
+            self.persona = persona
+        
+        def score(self, prompt, response):
+            return self.persona_judge.score(prompt, response, self.persona)
+        
+        def get_statistics(self):
+            return self.persona_judge.get_statistics()
+    
+    judge = PersonaBoundJudge(persona_judge, args.persona)
+    print(f"Using persona: {args.persona}")
+    print(f"Judge endpoint: {args.judge_base_url}")
     
     # Load models and configs
     print("\nLoading models and configurations...")

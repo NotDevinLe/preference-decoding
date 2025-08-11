@@ -276,33 +276,33 @@ class MLE:
                     print(f"  Epochs without improvement: {epochs_without_improvement} (patience disabled with L1)")
                 print(f"  Current p: {self.p.cpu().numpy()}")
             
-            # # Check convergence criteria
-            # if gradient_norm < gradient_tolerance:
-            #     print(f"\nConverged: Gradient norm ({gradient_norm:.2e}) < tolerance ({gradient_tolerance:.2e})")
-            #     if self.use_wandb:
-            #         wandb.log({
-            #             "converged_epoch": epoch,
-            #             "convergence_reason": "gradient_tolerance"
-            #         })
-            #     break
+            # Check convergence criteria
+            if gradient_norm < gradient_tolerance:
+                print(f"\nConverged: Gradient norm ({gradient_norm:.2e}) < tolerance ({gradient_tolerance:.2e})")
+                if self.use_wandb:
+                    wandb.log({
+                        "converged_epoch": epoch,
+                        "convergence_reason": "gradient_tolerance"
+                    })
+                break
             
-            # if loss_change < loss_tolerance and epoch > 0:
-            #     print(f"\nConverged: Loss change ({loss_change:.2e}) < tolerance ({loss_tolerance:.2e})")
-            #     if self.use_wandb:
-            #         wandb.log({
-            #             "converged_epoch": epoch,
-            #             "convergence_reason": "loss_tolerance"
-            #         })
-            #     break
+            if loss_change < loss_tolerance and epoch > 0:
+                print(f"\nConverged: Loss change ({loss_change:.2e}) < tolerance ({loss_tolerance:.2e})")
+                if self.use_wandb:
+                    wandb.log({
+                        "converged_epoch": epoch,
+                        "convergence_reason": "loss_tolerance"
+                    })
+                break
             
-            # if epochs_without_improvement >= patience and l1_lambda == 0.0:
-            #     print(f"\nConverged: No improvement for {patience} epochs")
-            #     if self.use_wandb:
-            #         wandb.log({
-            #             "converged_epoch": epoch,
-            #             "convergence_reason": "patience"
-            #         })
-            #     break
+            if epochs_without_improvement >= patience and l1_lambda == 0.0:
+                print(f"\nConverged: No improvement for {patience} epochs")
+                if self.use_wandb:
+                    wandb.log({
+                        "converged_epoch": epoch,
+                        "convergence_reason": "patience"
+                    })
+                break
             
             # Update previous loss and increment epoch
             prev_loss = current_loss
