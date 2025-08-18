@@ -3,16 +3,26 @@
 
 # Set default values
 DATA_FILE="data/preference/user1_train.json"
+QUESTIONS_FILE="data/questions.json"
 OUTPUT_DIR="results/sparse_coding"
 MODEL="meta-llama/Llama-3.1-8B-Instruct"
 NUM_QUESTIONS=100
 NUM_PERSONAS=100
+QUESTION_SOURCE="dolly"
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
         --data-file)
             DATA_FILE="$2"
+            shift 2
+            ;;
+        --questions-file)
+            QUESTIONS_FILE="$2"
+            shift 2
+            ;;
+        --question-source)
+            QUESTION_SOURCE="$2"
             shift 2
             ;;
         --output-dir)
@@ -30,6 +40,10 @@ while [[ $# -gt 0 ]]; do
         --num-personas)
             NUM_PERSONAS="$2"
             shift 2
+            ;;
+        --skip-questions)
+            SKIP_QUESTIONS=1
+            shift
             ;;
         --skip-generation)
             SKIP_GENERATION=1
@@ -50,6 +64,8 @@ echo "=========================================="
 echo "SPARSE CODING PIPELINE FOR PERSONA SELECTION"
 echo "=========================================="
 echo "Data file: $DATA_FILE"
+echo "Questions file: $QUESTIONS_FILE"
+echo "Question source: $QUESTION_SOURCE"
 echo "Output directory: $OUTPUT_DIR"
 echo "Model: $MODEL"
 echo "Questions: $NUM_QUESTIONS"
@@ -59,13 +75,43 @@ echo ""
 # Create output directory
 mkdir -p "$OUTPUT_DIR"
 
+# Step 0: Prepare questions
+if [ -z "$SKIP_QUESTIONS" ]; then
+    echo "Step 0: Preparing questions..."
+    echo "------------------------------"
+    
+    if [ "$QUESTION_SOURCE" = "dolly" ]; then
+        python scripts/generate/prepare_questions.py \
+            --source dolly \
+            --output-file "$QUESTIONS_FILE" \
+            --num-questions "$NUM_QUESTIONS" \
+            --seed 42
+    else
+        python scripts/generate/prepare_questions.py \
+            --source existing \
+            --input-file "$DATA_FILE" \
+            --output-file "$QUESTIONS_FILE" \
+            --num-questions "$NUM_QUESTIONS"
+    fi
+    
+    if [ $? -ne 0 ]; then
+        echo "Error: Question preparation failed"
+        exit 1
+    fi
+    echo "✓ Questions prepared"
+else
+    echo "Step 0: Skipping question preparation (--skip-questions flag)"
+fi
+
+echo ""
+
 # Step 1: Generate persona responses
 if [ -z "$SKIP_GENERATION" ]; then
     echo "Step 1: Generating persona responses..."
     echo "----------------------------------------"
     
     python scripts/generate/generate_persona_data.py \
-        --data-file "$DATA_FILE" \
+        --data-file "$QUESTIONS_FILE" \
         --output-file "data/persona_responses.json" \
         --model-name "$MODEL" \
         --num-questions "$NUM_QUESTIONS" \

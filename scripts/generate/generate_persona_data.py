@@ -22,12 +22,22 @@ from attributes.personas import persona_prompts
 
 
 def load_questions(data_file: str, num_questions: int = 100) -> List[str]:
-    """Load questions from training data file."""
+    """Load questions from various data file formats."""
     with open(data_file, 'r') as f:
         data = json.load(f)
     
-    questions = [item['prompt'] for item in data[:num_questions]]
-    print(f"Loaded {len(questions)} questions from {data_file}")
+    # Handle different data formats
+    if isinstance(data, dict) and 'questions' in data:
+        # Questions prepared by prepare_questions.py
+        questions = data['questions'][:num_questions]
+        print(f"Loaded {len(questions)} questions from prepared questions file: {data_file}")
+    elif isinstance(data, list) and len(data) > 0 and 'prompt' in data[0]:
+        # Standard preference/training data format
+        questions = [item['prompt'] for item in data[:num_questions]]
+        print(f"Loaded {len(questions)} questions from training data: {data_file}")
+    else:
+        raise ValueError(f"Unsupported data format in {data_file}")
+    
     return questions
 
 
