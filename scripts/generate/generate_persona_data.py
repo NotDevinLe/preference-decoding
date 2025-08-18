@@ -75,44 +75,26 @@ def generate_persona_responses(
     return all_responses
 
 
-def save_checkpoint(
-    output_dir: Path,
-    persona_idx: int,
-    persona_prompt: str,
-    responses: List[Dict[str, Any]]
+def save_all_data(
+    output_file: Path,
+    all_data: Dict[str, Any]
 ):
-    """Save checkpoint for a single persona."""
-    persona_dir = output_dir / f"persona_{persona_idx:03d}"
-    persona_dir.mkdir(parents=True, exist_ok=True)
-    
-    checkpoint = {
-        "persona_idx": persona_idx,
-        "persona_prompt": persona_prompt,
-        "num_responses": len(responses),
-        "responses": responses
+    """Save all persona data to a single file."""
+    with open(output_file, "w") as f:
+        json.dump(all_data, f, indent=2)
+    print(f"Saved all data to {output_file}")
+
+
+def load_checkpoint(output_file: Path) -> Dict[str, Any]:
+    """Load existing data from checkpoint file."""
+    if output_file.exists():
+        with open(output_file, 'r') as f:
+            return json.load(f)
+    return {
+        "metadata": {},
+        "personas": [],
+        "completed_indices": []
     }
-    
-    with open(persona_dir / "responses.json", "w") as f:
-        json.dump(checkpoint, f, indent=2)
-
-
-def load_checkpoint(output_dir: Path) -> set:
-    """Load completed persona indices from checkpoints."""
-    completed = set()
-    
-    if not output_dir.exists():
-        return completed
-    
-    for persona_dir in output_dir.iterdir():
-        if persona_dir.is_dir() and persona_dir.name.startswith("persona_"):
-            checkpoint_file = persona_dir / "responses.json"
-            if checkpoint_file.exists():
-                with open(checkpoint_file, 'r') as f:
-                    data = json.load(f)
-                    if data.get("num_responses", 0) > 0:
-                        completed.add(data["persona_idx"])
-    
-    return completed
 
 
 def main():
@@ -124,10 +106,10 @@ def main():
         help="Path to training data file with questions"
     )
     parser.add_argument(
-        "--output-dir",
+        "--output-file",
         type=str,
-        default="data/persona_responses",
-        help="Directory to save persona responses"
+        default="data/persona_responses.json",
+        help="Output file to save all persona responses"
     )
     parser.add_argument(
         "--model-name",
@@ -180,14 +162,20 @@ def main():
     args = parser.parse_args()
     
     # Setup
-    output_dir = Path(args.output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
+    output_file = Path(args.output_file)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
     
     # Load questions
     questions = load_questions(args.data_file, args.num_questions)
     
-    # Load completed personas if resuming
-    completed_personas = load_checkpoint(output_dir) if args.resume else set()
+    # Load existing data if resuming
+    all_data = load_checkpoint(output_file) if args.resume else {
+        "metadata": {},
+        "personas": [],
+        "completed_indices": []
+    }
+    
+    completed_personas = set(all_data.get("completed_indices", []))
     
     # Determine personas to process
     num_personas = args.num_personas or len(persona_prompts)
@@ -209,6 +197,17 @@ def main():
     )
     tokenizer = AutoTokenizer.from_pretrained(args.model_name)
     
+    # Update metadata
+    all_data["metadata"] = {
+        "num_personas": num_personas,
+        "num_questions": len(questions),
+        "total_responses": num_personas * len(questions),
+        "model": args.model_name,
+        "temperature": args.temperature,
+        "max_tokens": args.max_tokens,
+        "questions": questions
+    }
+    
     # Generate responses for each persona
     for persona_idx in tqdm(range(num_personas), desc="Processing personas"):
         if persona_idx in completed_personas:
@@ -229,28 +228,44 @@ def main():
             max_tokens=args.max_tokens
         )
         
-        # Save checkpoint
-        save_checkpoint(output_dir, persona_idx, persona_prompt, responses)
+        # Add to all_data
+        persona_data = {
+            "persona_idx": persona_idx,
+            "persona_prompt": persona_prompt,
+            "responses": responses
+        }
+        
+        # Check if this persona already exists in the data
+        existing_idx = None
+        for i, p in enumerate(all_data["personas"]):
+            if p["persona_idx"] == persona_idx:
+                existing_idx = i
+                break
+        
+        if existing_idx is not None:
+            all_data["personas"][existing_idx] = persona_data
+        else:
+            all_data["personas"].append(persona_data)
+        
+        # Update completed indices
+        if persona_idx not in all_data["completed_indices"]:
+            all_data["completed_indices"].append(persona_idx)
+        
+        # Save checkpoint after each persona
+        save_all_data(output_file, all_data)
         print(f"[Persona {persona_idx}] Saved {len(responses)} responses")
     
-    # Create summary file
-    summary = {
-        "num_personas": num_personas,
-        "num_questions": len(questions),
-        "total_responses": num_personas * len(questions),
-        "model": args.model_name,
-        "temperature": args.temperature,
-        "max_tokens": args.max_tokens,
-        "completed_personas": list(range(num_personas))
-    }
+    # Final save
+    save_all_data(output_file, all_data)
     
-    with open(output_dir / "generation_summary.json", "w") as f:
-        json.dump(summary, f, indent=2)
-    
-    print(f"\n✓ Generation complete! Saved to {output_dir}")
+    print(f"\n✓ Generation complete! Saved to {output_file}")
     print(f"  - {num_personas} personas")
     print(f"  - {len(questions)} questions each")
     print(f"  - {num_personas * len(questions)} total responses")
+    
+    # Print file size
+    file_size_mb = output_file.stat().st_size / (1024 * 1024)
+    print(f"  - File size: {file_size_mb:.2f} MB")
 
 
 if __name__ == "__main__":

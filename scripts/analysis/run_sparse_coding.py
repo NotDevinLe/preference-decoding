@@ -262,10 +262,10 @@ def main():
         help="Path to saved reward matrix (if already computed)"
     )
     parser.add_argument(
-        "--persona-dir",
+        "--persona-file",
         type=str,
-        default="data/persona_responses",
-        help="Directory with persona responses"
+        default="data/persona_responses.json",
+        help="JSON file with all persona responses"
     )
     parser.add_argument(
         "--output-dir",
@@ -328,7 +328,7 @@ def main():
         )
         
         Y, metadata = builder.compute_reward_matrix(
-            args.persona_dir,
+            args.persona_file,
             num_personas=100,
             num_questions=100
         )

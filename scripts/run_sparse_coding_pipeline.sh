@@ -66,7 +66,7 @@ if [ -z "$SKIP_GENERATION" ]; then
     
     python scripts/generate/generate_persona_data.py \
         --data-file "$DATA_FILE" \
-        --output-dir "data/persona_responses" \
+        --output-file "data/persona_responses.json" \
         --model-name "$MODEL" \
         --num-questions "$NUM_QUESTIONS" \
         --num-personas "$NUM_PERSONAS" \
@@ -90,7 +90,7 @@ echo "Step 2: Running sparse coding experiments..."
 echo "--------------------------------------------"
 
 python scripts/analysis/run_sparse_coding.py \
-    --persona-dir "data/persona_responses" \
+    --persona-file "data/persona_responses.json" \
     --output-dir "$OUTPUT_DIR" \
     --model-name "$MODEL" \
     --base-prompt "You are a helpful assistant." \

@@ -92,7 +92,7 @@ class RewardMatrixBuilder:
     
     def compute_reward_matrix(
         self,
-        persona_responses_dir: str,
+        persona_responses_file: str,
         num_personas: Optional[int] = None,
         num_questions: Optional[int] = None
     ) -> Tuple[torch.Tensor, Dict]:
@@ -100,7 +100,7 @@ class RewardMatrixBuilder:
         Compute full reward matrix Y from persona responses.
         
         Args:
-            persona_responses_dir: Directory containing persona response files
+            persona_responses_file: JSON file containing all persona responses
             num_personas: Number of personas to process (None = all)
             num_questions: Number of questions per persona (None = all)
             
@@ -108,29 +108,30 @@ class RewardMatrixBuilder:
             Y: Reward matrix (d × U) where d = datapoints, U = personas
             metadata: Dictionary with matrix metadata
         """
-        responses_dir = Path(persona_responses_dir)
+        # Load all persona data
+        with open(persona_responses_file, 'r') as f:
+            all_data = json.load(f)
         
-        # Discover available personas
-        persona_dirs = sorted([
-            d for d in responses_dir.iterdir()
-            if d.is_dir() and d.name.startswith("persona_")
-        ])
+        personas_data = all_data["personas"]
+        metadata = all_data["metadata"]
         
+        # Filter personas if requested
         if num_personas:
-            persona_dirs = persona_dirs[:num_personas]
+            personas_data = personas_data[:num_personas]
         
-        print(f"Processing {len(persona_dirs)} personas")
+        print(f"Processing {len(personas_data)} personas")
         
-        # Load first persona to get dimensions
-        with open(persona_dirs[0] / "responses.json", 'r') as f:
-            first_data = json.load(f)
+        # Get questions from metadata or first persona
+        if "questions" in metadata:
+            all_questions = metadata["questions"]
+        else:
+            all_questions = [r["question"] for r in personas_data[0]["responses"]]
         
-        all_questions = [r["question"] for r in first_data["responses"]]
         if num_questions:
             all_questions = all_questions[:num_questions]
         
         d = len(all_questions)  # Number of datapoints
-        U = len(persona_dirs)    # Number of personas
+        U = len(personas_data)   # Number of personas
         K = len(self.attribute_prompts)  # Number of attributes
         
         print(f"Matrix dimensions: {d} datapoints × {U} personas")
@@ -140,11 +141,7 @@ class RewardMatrixBuilder:
         Y = torch.zeros((d, U), device=self.device)
         
         # Process each persona
-        for persona_idx, persona_dir in enumerate(tqdm(persona_dirs, desc="Processing personas")):
-            # Load persona responses
-            with open(persona_dir / "responses.json", 'r') as f:
-                persona_data = json.load(f)
-            
+        for persona_idx, persona_data in enumerate(tqdm(personas_data, desc="Processing personas")):
             persona_prompt = persona_data["persona_prompt"]
             responses = [r["response"] for r in persona_data["responses"]]
             
@@ -162,16 +159,15 @@ class RewardMatrixBuilder:
             Y[:, persona_idx] = drift_scores
         
         # Create metadata
-        metadata = {
+        result_metadata = {
             "num_datapoints": d,
             "num_personas": U,
             "num_attributes": K,
             "questions": all_questions,
-            "persona_prompts": [json.load(open(pd / "responses.json"))["persona_prompt"] 
-                               for pd in persona_dirs]
+            "persona_prompts": [p["persona_prompt"] for p in personas_data]
         }
         
-        return Y, metadata
+        return Y, result_metadata
     
     def compute_attribute_reward_matrix(
         self,
