@@ -150,26 +150,6 @@ EMOTIONAL: [1-5]
 EMOTIONAL_REASON: [1 sentence explanation]
 """
     
-    if include_examples:
-        prompt += """
-
-Example evaluation:
-SPEAKING_STYLE: 4
-SPEAKING_REASON: Uses mystical language and riddle-like structure consistently throughout.
-
-PERSONALITY: 5
-PERSONALITY_REASON: Grumpiness and dismissiveness are evident in every sentence.
-
-KNOWLEDGE: 3
-KNOWLEDGE_REASON: Shows some magical knowledge but could be more specific to wizardry.
-
-BEHAVIORAL: 4
-BEHAVIORAL_REASON: Acts consistently grumpy but missed opportunities for more riddles.
-
-EMOTIONAL: 4
-EMOTIONAL_REASON: Frustration and annoyance feel authentic to the character.
-"""
-    
     return prompt
 
 
@@ -228,60 +208,7 @@ RANKING: [List response numbers from best to worst, e.g., "3,1,5,2,4"]
 RANKING_REASON: [2-3 sentences explaining the ranking]
 """
     
-    if include_examples:
-        prompt += """
-
-Example output:
-RESPONSE_1_SCORES:
-SPEAKING_STYLE: 4
-SPEAKING_REASON: Uses mystical language consistently throughout.
-PERSONALITY: 5
-PERSONALITY_REASON: Grumpiness comes through clearly in every sentence.
-KNOWLEDGE: 3
-KNOWLEDGE_REASON: Shows some magical knowledge but could be more specific.
-BEHAVIORAL: 4
-BEHAVIORAL_REASON: Acts consistently grumpy but missed some opportunities.
-EMOTIONAL: 4
-EMOTIONAL_REASON: Frustration feels authentic to the character.
-
-RESPONSE_2_SCORES:
-[Similar format...]
-
-RANKING: 2,1,3,4,5
-RANKING_REASON: Response 2 had the best balance of personality and speaking style. Response 1 was strong but less consistent. The others lacked character depth.
-"""
-    
     return prompt
-
-
-def create_comparison_prompt(
-    persona: str,
-    question: str,
-    response_a: str,
-    response_b: str
-) -> str:
-    """Create a prompt for comparing two responses."""
-    
-    return f"""Compare which response better matches the given persona.
-
-PERSONA: {persona}
-QUESTION: {question}
-
-RESPONSE A: {response_a}
-
-RESPONSE B: {response_b}
-
-EVALUATION RUBRIC:
-{format_rubric_text()}
-
-First evaluate each response on all dimensions, then determine which is better overall.
-
-Format your response as:
-RESPONSE_A_SCORES: [List the 5 dimension scores]
-RESPONSE_B_SCORES: [List the 5 dimension scores]
-BETTER_RESPONSE: [A or B]
-REASON: [2-3 sentences explaining why the chosen response is better]
-"""
 
 
 def parse_evaluation_response(llm_response: str) -> PersonaScore:
@@ -353,76 +280,6 @@ def parse_evaluation_response(llm_response: str) -> PersonaScore:
             score_data[key] = ""
     
     return PersonaScore(**score_data)
-
-
-def parse_comparison_response(llm_response: str) -> Tuple[PersonaScore, PersonaScore, str, str]:
-    """
-    Parse LLM comparison response.
-    
-    Returns:
-        Tuple of (response_a_score, response_b_score, winner, reason)
-    """
-    lines = llm_response.strip().split('\n')
-    
-    response_a_scores = [3, 3, 3, 3, 3]  # Defaults
-    response_b_scores = [3, 3, 3, 3, 3]
-    winner = "A"
-    reason = ""
-    
-    for line in lines:
-        line = line.strip()
-        if not line:
-            continue
-            
-        if line.startswith('RESPONSE_A_SCORES:'):
-            try:
-                scores_text = line.split(':')[1].strip()
-                # Extract numbers from various formats
-                import re
-                numbers = re.findall(r'\d+', scores_text)
-                if len(numbers) >= 5:
-                    response_a_scores = [int(n) for n in numbers[:5]]
-            except:
-                pass
-                
-        elif line.startswith('RESPONSE_B_SCORES:'):
-            try:
-                scores_text = line.split(':')[1].strip()
-                import re
-                numbers = re.findall(r'\d+', scores_text)
-                if len(numbers) >= 5:
-                    response_b_scores = [int(n) for n in numbers[:5]]
-            except:
-                pass
-                
-        elif line.startswith('BETTER_RESPONSE:'):
-            winner_text = line.split(':')[1].strip().upper()
-            if 'B' in winner_text:
-                winner = "B"
-            else:
-                winner = "A"
-                
-        elif line.startswith('REASON:'):
-            reason = ':'.join(line.split(':')[1:]).strip()
-    
-    # Create PersonaScore objects
-    score_a = PersonaScore(
-        speaking_style=response_a_scores[0],
-        personality=response_a_scores[1],
-        knowledge=response_a_scores[2],
-        behavioral=response_a_scores[3],
-        emotional=response_a_scores[4]
-    )
-    
-    score_b = PersonaScore(
-        speaking_style=response_b_scores[0],
-        personality=response_b_scores[1],
-        knowledge=response_b_scores[2],
-        behavioral=response_b_scores[3],
-        emotional=response_b_scores[4]
-    )
-    
-    return score_a, score_b, winner, reason
 
 
 def parse_multi_comparison_response(llm_response: str, method_names: List[str]) -> Tuple[List[PersonaScore], List[int], str]:
