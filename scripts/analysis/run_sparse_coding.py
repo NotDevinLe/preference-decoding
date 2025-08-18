@@ -7,7 +7,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Dict, List
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,11 +16,9 @@ from tqdm import tqdm
 # Add project root to path
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
-from vllm import LLM
-from transformers import AutoTokenizer
 from src.core.sparse_coding import SparseCoding
-from src.core.reward_matrix import RewardMatrixBuilder
-from attributes.personas import persona_prompts
+sys.path.append(str(Path(__file__).parent.parent / "precompute"))
+from compute_reward_matrix import load_reward_matrix
 
 
 def run_experiment(
@@ -80,25 +78,34 @@ def parameter_sweep(
         print(f"\nRunning experiment with params: {params}")
         
         # Run experiment
-        results = run_experiment(
-            Y,
-            k=params["k"],
-            lambda1=params["lambda1"],
-            lambda21=params["lambda21"],
-            beta=params.get("beta", 0.01),
-            epsilon=params.get("epsilon", 1e-4),
-            device=device
-        )
+        try:
+            results = run_experiment(
+                Y,
+                k=params["k"],
+                lmbda=params["lmbda"],
+                beta=params.get("beta", 0.01),
+                epsilon=params.get("epsilon", 1e-3),
+                init_method=params.get("init_method", "svd"),
+                normalize_rows=params.get("normalize_rows", True),
+                device=device
+            )
+        except Exception as e:
+            print(f"Experiment failed: {e}")
+            continue
         
         # Add parameters to results
         results["parameters"] = params
         experiments.append(results)
         
         # Save intermediate results
-        exp_name = f"k{params['k']}_l1{params['lambda1']}_l21{params['lambda21']}"
+        exp_name = f"k{params['k']}_lmbda{params['lmbda']}_beta{params.get('beta', 0.01)}"
         save_path = output_dir / f"{exp_name}.pt"
         torch.save(results, save_path)
         print(f"Saved to {save_path}")
+        
+        # Save progress
+        with open(output_dir / "experiments_progress.json", "w") as f:
+            json.dump(experiments, f, indent=2, default=str)
     
     return experiments
 
@@ -141,7 +148,7 @@ def visualize_results(experiments: List[Dict], output_dir: Path):
     for i, exp in enumerate(experiments[:5]):  # Show first 5
         history = exp["history"]
         params = exp["parameters"]
-        label = f"k={params['k']}, λ₁={params['lambda1']:.3f}"
+        label = f"k={params['k']}, λ={params['lmbda']:.3f}"
         ax.plot(history["reconstruction_error"], label=label, alpha=0.7)
     
     ax.set_xlabel("Iteration")
@@ -154,12 +161,12 @@ def visualize_results(experiments: List[Dict], output_dir: Path):
     for i, exp in enumerate(experiments[:5]):  # Show first 5
         history = exp["history"]
         params = exp["parameters"]
-        label = f"k={params['k']}, λ₂₁={params['lambda21']:.3f}"
-        ax.plot(history["num_active_atoms"], label=label, alpha=0.7)
+        label = f"k={params['k']}, λ={params['lmbda']:.3f}"
+        ax.plot(history["num_active_attributes"], label=label, alpha=0.7)
     
     ax.set_xlabel("Iteration")
-    ax.set_ylabel("Number of Active Atoms")
-    ax.set_title("Active Atoms During Training")
+    ax.set_ylabel("Number of Active Attributes")
+    ax.set_title("Active Attributes During Training")
     ax.legend(fontsize=8)
     
     plt.tight_layout()
@@ -255,35 +262,18 @@ def analyze_selected_personas(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run sparse coding experiments")
+    parser = argparse.ArgumentParser(description="Run sparse coding experiments on precomputed reward matrix")
     parser.add_argument(
         "--reward-matrix",
         type=str,
-        help="Path to saved reward matrix (if already computed)"
-    )
-    parser.add_argument(
-        "--persona-file",
-        type=str,
-        default="data/persona_responses.json",
-        help="JSON file with all persona responses"
+        required=True,
+        help="Path to precomputed reward matrix (.npz file)"
     )
     parser.add_argument(
         "--output-dir",
         type=str,
         default="results/sparse_coding",
         help="Output directory for results"
-    )
-    parser.add_argument(
-        "--model-name",
-        type=str,
-        default="meta-llama/Llama-3.1-8B-Instruct",
-        help="Model for reward computation"
-    )
-    parser.add_argument(
-        "--base-prompt",
-        type=str,
-        default="You are a helpful assistant.",
-        help="Base prompt for drift computation"
     )
     parser.add_argument(
         "--device",
@@ -296,59 +286,47 @@ def main():
         action="store_true",
         help="Run parameter sweep"
     )
+    parser.add_argument(
+        "--single-k",
+        type=int,
+        default=20,
+        help="Number of attributes for single experiment"
+    )
+    parser.add_argument(
+        "--single-lambda",
+        type=float,
+        default=0.1,
+        help="Lambda (group sparsity) for single experiment"
+    )
     
     args = parser.parse_args()
     
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    # Load or compute reward matrix
-    if args.reward_matrix:
-        print(f"Loading reward matrix from {args.reward_matrix}")
-        Y, metadata = RewardMatrixBuilder.load_reward_matrix(args.reward_matrix)
-        Y = Y.to(args.device)
-    else:
-        print("Computing reward matrix from persona responses...")
-        
-        # Initialize model and tokenizer
-        model = LLM(
-            model=args.model_name,
-            tensor_parallel_size=1,
-            dtype="bfloat16" if args.device == "cuda" else "float32"
-        )
-        tokenizer = AutoTokenizer.from_pretrained(args.model_name)
-        
-        # Build reward matrix
-        builder = RewardMatrixBuilder(
-            model=model,
-            tokenizer=tokenizer,
-            base_prompt=args.base_prompt,
-            attribute_prompts=persona_prompts,
-            device=args.device
-        )
-        
-        Y, metadata = builder.compute_reward_matrix(
-            args.persona_file,
-            num_personas=100,
-            num_questions=100
-        )
-        
-        # Save for reuse
-        save_path = output_dir / "reward_matrix.pt"
-        builder.save_reward_matrix(Y, metadata, str(save_path))
+    # Load precomputed reward matrix
+    print(f"Loading precomputed reward matrix from {args.reward_matrix}")
+    Y, questions, persona_prompts, metadata = load_reward_matrix(args.reward_matrix)
+    Y = torch.tensor(Y, dtype=torch.float32, device=args.device)
     
-    print(f"Reward matrix shape: {Y.shape}")
+    print(f"Loaded reward matrix:")
+    print(f"  Shape: {Y.shape} (questions × personas)")
+    print(f"  Questions: {len(questions)}")
+    print(f"  Personas: {len(persona_prompts)}")
+    print(f"  Mean reward: {torch.mean(Y):.4f}")
+    print(f"  Std reward: {torch.std(Y):.4f}")
     
     if args.sweep:
         # Parameter sweep
         param_grid = {
-            "k": [10, 20, 30, 50],
-            "lambda1": [0.01, 0.1, 0.5, 1.0],
-            "lambda21": [0.01, 0.1, 0.5],
-            "beta": [0.01],
-            "epsilon": [1e-4]
+            "k": [16, 24, 32, 48],
+            "lmbda": [0.05, 0.1, 0.2, 0.5],
+            "beta": [1e-4, 1e-3, 1e-2],
+            "init_method": ["svd"],
+            "normalize_rows": [True]
         }
         
+        print(f"\nRunning parameter sweep...")
         experiments = parameter_sweep(Y, param_grid, output_dir, args.device)
         
         # Save all experiments
@@ -359,38 +337,83 @@ def main():
                 json_exp = {
                     "parameters": exp["parameters"],
                     "final_error": exp["final_error"],
-                    "final_sparsity": exp["final_sparsity"],
+                    "final_relative_error": exp["final_relative_error"],
+                    "final_group_sparsity": exp["final_group_sparsity"],
+                    "final_k": exp["final_k"],
                     "num_selected": exp["num_selected"],
-                    "selected_personas": exp["selected_personas"]
+                    "selected_personas": exp["selected_personas"],
+                    "converged": exp["converged"]
                 }
                 json_experiments.append(json_exp)
             json.dump(json_experiments, f, indent=2)
         
         # Visualize results
+        print("\nCreating visualizations...")
         visualize_results(experiments, output_dir)
         
         # Analyze selected personas
+        print("\nAnalyzing persona selection...")
         analyze_selected_personas(experiments, persona_prompts, output_dir)
         
+        # Find best experiment
+        if experiments:
+            best_exp = min(experiments, key=lambda x: x["final_relative_error"])
+            print(f"\nBest experiment:")
+            print(f"  Parameters: {best_exp['parameters']}")
+            print(f"  Relative error: {best_exp['final_relative_error']:.4f}")
+            print(f"  Final k: {best_exp['final_k']}")
+            print(f"  Group sparsity: {best_exp['final_group_sparsity']:.3f}")
+            print(f"  Selected personas: {best_exp['num_selected']}")
+        
     else:
-        # Single experiment with default parameters
+        # Single experiment with specified parameters
+        print(f"\nRunning single experiment with k={args.single_k}, λ={args.single_lambda}")
         results = run_experiment(
             Y,
-            k=30,
-            lambda1=0.1,
-            lambda21=0.1,
-            beta=0.01,
-            epsilon=1e-4,
+            k=args.single_k,
+            lmbda=args.single_lambda,
+            beta=1e-3,
+            epsilon=1e-3,
+            init_method="svd",
+            normalize_rows=True,
             device=args.device
         )
         
         print(f"\nResults:")
-        print(f"  Final error: {results['final_error']:.4f}")
-        print(f"  Final sparsity: {results['final_sparsity']:.3f}")
+        print(f"  Final relative error: {results['final_relative_error']:.4f}")
+        print(f"  Final k: {results['final_k']}")
+        print(f"  Group sparsity: {results['final_group_sparsity']:.3f}")
         print(f"  Selected personas: {results['num_selected']}/{Y.shape[1]}")
+        print(f"  Converged: {results['converged']}")
         
         # Save results
         torch.save(results, output_dir / "single_experiment.pt")
+        
+        # Save interpretability analysis
+        model = SparseCoding(
+            k=args.single_k,
+            lmbda=args.single_lambda,
+            beta=1e-3,
+            device=args.device
+        )
+        model.B = results["B"].to(args.device)
+        model.W = results["W"].to(args.device)
+        model.k = results["final_k"]
+        
+        # Interpret attributes
+        interpretations = model.interpret_attributes(top_questions=5, question_names=questions)
+        with open(output_dir / "attribute_interpretations.json", "w") as f:
+            json.dump(interpretations, f, indent=2)
+        
+        print(f"\nTop 3 attributes:")
+        attr_importance = model.get_attribute_importance()
+        top_attrs = torch.topk(attr_importance, min(3, len(attr_importance)))[1]
+        for i, attr_idx in enumerate(top_attrs):
+            attr_key = f"attribute_{attr_idx}"
+            if attr_key in interpretations:
+                print(f"  {i+1}. Attribute {attr_idx} (importance: {attr_importance[attr_idx]:.3f})")
+                for j, q_idx in enumerate(interpretations[attr_key]["top_question_indices"][:2]):
+                    print(f"     - Q{q_idx}: {questions[q_idx][:80]}...")
     
     print(f"\n✓ Analysis complete! Results saved to {output_dir}")
 
