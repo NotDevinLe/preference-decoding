@@ -46,7 +46,6 @@ def generate_persona_responses(
     tokenizer: AutoTokenizer,
     persona_prompt: str,
     questions: List[str],
-    batch_size: int = 8,
     temperature: float = 0.7,
     max_tokens: int = 1024
 ) -> List[Dict[str, Any]]:
@@ -61,26 +60,22 @@ def generate_persona_responses(
         ], tokenize=False, add_generation_prompt=True)
         formatted_prompts.append(formatted)
     
-    # Generate responses in batches
+    # Generate all responses at once (vLLM handles batching internally)
     sampling_params = SamplingParams(
         temperature=temperature,
         max_tokens=max_tokens,
         top_p=0.95
     )
     
+    outputs = model.generate(formatted_prompts, sampling_params)
+    
     all_responses = []
-    for i in range(0, len(formatted_prompts), batch_size):
-        batch = formatted_prompts[i:i+batch_size]
-        batch_questions = questions[i:i+batch_size]
-        
-        outputs = model.generate(batch, sampling_params)
-        
-        for question, output in zip(batch_questions, outputs):
-            response_text = output.outputs[0].text
-            all_responses.append({
-                "question": question,
-                "response": response_text
-            })
+    for question, output in zip(questions, outputs):
+        response_text = output.outputs[0].text
+        all_responses.append({
+            "question": question,
+            "response": response_text
+        })
     
     return all_responses
 
@@ -233,7 +228,6 @@ def main():
             tokenizer=tokenizer,
             persona_prompt=persona_prompt,
             questions=questions,
-            batch_size=args.batch_size,
             temperature=args.temperature,
             max_tokens=args.max_tokens
         )
