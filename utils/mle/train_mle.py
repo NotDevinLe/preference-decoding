@@ -34,11 +34,33 @@ def main():
     parser.add_argument("--eval_interval", type=int, default=50, help="Evaluate validation every N epochs")
     parser.add_argument("--max_val_pairs", type=int, default=200, help="Maximum validation pairs to evaluate")
     parser.add_argument("--val_sample_size", type=int, default=None, help="Limit validation data size")
+    # Attribute prompt customization
+    parser.add_argument("--attribute_indices", type=str, default=None, 
+                       help="Comma-separated indices of attributes to use (e.g., '0,1,2,31,33')")
+    parser.add_argument("--custom_base_prompt", type=str, default=None,
+                       help="Custom base prompt to use instead of default")
+    parser.add_argument("--global_lambda", type=float, default=0.0, help="Global lambda for L1 regularization")
     args = parser.parse_args()
     
     # Device setup
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"Using device: {device}")
+    
+    # Handle custom attribute prompts
+    selected_attributes = attribute_prompts  # Default to all attributes
+    selected_base_prompt = base_prompt  # Default base prompt
+    
+    if args.attribute_indices:
+        # Parse indices and select specific attributes
+        indices = [int(idx.strip()) for idx in args.attribute_indices.split(',')]
+        selected_attributes = [attribute_prompts[i] for i in indices]
+        print(f"Using {len(selected_attributes)} selected attributes (indices: {indices})")
+    else:
+        print(f"Using all {len(selected_attributes)} default attributes")
+    
+    if args.custom_base_prompt:
+        selected_base_prompt = args.custom_base_prompt
+        print(f"Using custom base prompt: {selected_base_prompt[:100]}...")
     
     # Model setup
     model_id = "meta-llama/Llama-3.2-1B-Instruct"
@@ -102,7 +124,7 @@ def main():
             validation_data = None
     
     # Always load the n=200 size=200 expectation matrix and slice as needed
-    expectation_matrix_path = f"../../data/expectation_matrices/{args.name}_expectation_n200_size200.pt"
+    expectation_matrix_path = f"../../data/expectation_matrices/{args.name}.pt"
     
     if not os.path.exists(expectation_matrix_path):
         print(f"Error: Expectation matrix not found at {expectation_matrix_path}")
@@ -137,7 +159,15 @@ def main():
     checkpoint['expectation_matrix'] = matrix_to_use
     
     # Verify compatibility after potential slicing
-    expected_shape = (len(train_data), args.num_expectation_samples, len(attribute_prompts))
+    # Note: When using custom attributes, the last dimension might not match
+    if args.attribute_indices:
+        # Slice the expectation matrix to match selected attributes
+        indices = [int(idx.strip()) for idx in args.attribute_indices.split(',')]
+        matrix_to_use = matrix_to_use[:, :, indices]
+        checkpoint['expectation_matrix'] = matrix_to_use  # Update checkpoint with sliced matrix
+        print(f"Sliced expectation matrix attributes to indices: {indices}")
+    
+    expected_shape = (len(train_data), args.num_expectation_samples, len(selected_attributes))
     if checkpoint['expectation_matrix'].shape != expected_shape:
         print(f"Error: Expectation matrix shape {checkpoint['expectation_matrix'].shape} doesn't match expected {expected_shape}")
         return
@@ -158,12 +188,18 @@ def main():
                 chosen_rewards = loaded_rewards[:args.sample_size]
             else:
                 chosen_rewards = loaded_rewards
+            
+            # Slice chosen rewards to match selected attributes if using custom attributes
+            if args.attribute_indices:
+                indices = [int(idx.strip()) for idx in args.attribute_indices.split(',')]
+                chosen_rewards = chosen_rewards[:, indices]
+                print(f"Sliced chosen rewards attributes to indices: {indices}")
         else:
             print(f"Chosen rewards file not found at {chosen_rewards_path}, will compute from scratch")
     
     # Initialize MLE
     print("\nInitializing MLE model...")
-    print(f"Number of attributes: {len(attribute_prompts)}")
+    print(f"Number of attributes: {len(selected_attributes)}")
     print(f"Number of expectation samples per prompt: {args.num_expectation_samples}")
     print(f"Expectation matrix loaded successfully and is compatible")
     print(f"  Expectation matrix: {checkpoint['expectation_matrix'].shape}")
@@ -179,7 +215,9 @@ def main():
         chosen_rewards=chosen_rewards,
         use_wandb=args.use_wandb,
         wandb_project=args.wandb_project,
-        validation_data=validation_data  # Pass validation data
+        validation_data=validation_data,  # Pass validation data
+        attribute_prompts=selected_attributes,  # Pass custom attributes
+        base_prompt_override=selected_base_prompt  # Pass custom base prompt
     )
     
     # Train MLE
@@ -214,23 +252,23 @@ def main():
     results_dir = "../../results/mle"
     os.makedirs(results_dir, exist_ok=True)
     
-    save_path = f"{results_dir}/{args.name}_lambda.jsonl"
+    save_path = f"{results_dir}/{args.name}.jsonl"
     print(f"\nSaving results to: {save_path}")
-    mle_model.save_results(save_path, args.num_mc_samples, args.l1_lambda)
+    mle_model.save_results(save_path, args.num_mc_samples, args.l1_lambda, args.global_lambda)
     
     # Print final p vector
     final_p = mle_model.p.cpu().numpy()
     print("\nFinal p vector:")
-    for i, (attr, p_val) in enumerate(zip(attribute_prompts, final_p)):
+    for i, (attr, p_val) in enumerate(zip(selected_attributes, final_p)):
         print(f"  Attribute {i}: {p_val:.4f}")
         print(f"    Prompt: {attr[:50]}...")
     
     # Print top attributes by weight
     print("\nTop 5 attributes by absolute weight:")
-    top_indices = np.argsort(np.abs(final_p))[::-1][:5]
+    top_indices = np.argsort(np.abs(final_p))[::-1][:min(5, len(final_p))]
     for idx in top_indices:
         print(f"  Attribute {idx}: {final_p[idx]:.4f}")
-        print(f"    Prompt: {attribute_prompts[idx][:100]}...")
+        print(f"    Prompt: {selected_attributes[idx][:100]}...")
     
     print("\nMLE evaluation complete!")
 

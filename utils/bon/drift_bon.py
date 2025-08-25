@@ -39,7 +39,7 @@ if __name__ == "__main__":
     with open(data_path, "r") as f:
         bon_data = json.load(f)
     
-    p_path = f"../../results/{args.name}_p.jsonl"
+    p_path = f"../../results/mle/{args.name}.jsonl"
 
     print(f"Loaded {len(bon_data)} prompts from {data_path}")
     print(f"Each prompt has {len(bon_data[0]['outputs'])} outputs")
@@ -66,10 +66,10 @@ if __name__ == "__main__":
         for line in f:
             p_entry = json.loads(line.strip())
 
-            if p_entry["lambda0"] != args.lambda_val:
+            if p_entry["global_lambda"] != args.lambda_val:
                 continue
             
-            p = torch.tensor(p_entry["p"], device=device, dtype=torch.float32)
+            p = torch.tensor(p_entry["p_vector"], device=device, dtype=torch.float32)
             
             # Sparsify p using torch operations
             abs_p = torch.abs(p)
@@ -118,7 +118,7 @@ if __name__ == "__main__":
                     "user": args.name,
                     "n": n,
                     "training_size": args.training_size,
-                    "lambda": args.lambda_val,
+                    "lambda": p_entry["global_lambda"],
                     "selected_indices": selected_indices,
                     "num_prompts": len(selected_indices)
                 }

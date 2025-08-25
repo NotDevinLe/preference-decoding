@@ -6,7 +6,7 @@ import json
 from drift import get_log_probs, get_scores
 from vllm import LLM, SamplingParams
 from transformers import AutoTokenizer
-from attribute_prompts import attribute_prompts, base_prompt
+from attribute_prompts import attribute_prompts as default_attribute_prompts, base_prompt
 from drift import get_scores
 import wandb
 from tqdm import tqdm
@@ -14,12 +14,17 @@ from tqdm import tqdm
 class MLE:
     def __init__(self, model, tokenizer, data, device, expectation_matrix=None, chosen_rewards=None, 
                  num_expectation_samples=100, use_wandb=True, wandb_project="mle-training", 
-                 validation_data=None):
+                 validation_data=None, attribute_prompts=None, base_prompt_override=None):
         self.model = model
         self.tokenizer = tokenizer
         self.data = data
         self.device = device
-        self.p = torch.randn(len(attribute_prompts), device=device)
+        
+        # Use custom attribute prompts if provided, otherwise use default
+        self.attribute_prompts = attribute_prompts if attribute_prompts is not None else default_attribute_prompts
+        self.base_prompt = base_prompt_override if base_prompt_override is not None else base_prompt
+        
+        self.p = torch.randn(len(self.attribute_prompts), device=device)
         self.num_expectation_samples = num_expectation_samples
         
         # Initialize expectation matrix state
@@ -74,7 +79,7 @@ class MLE:
         all_inputs = []
         for prompt in prompts:
             formatted_input = self.tokenizer.apply_chat_template([
-                {"role": "system", "content": base_prompt},
+                {"role": "system", "content": self.base_prompt},
                 {"role": "user", "content": prompt}
             ], tokenize=False, add_generation_prompt=True)
             all_inputs.append(formatted_input)
@@ -105,7 +110,7 @@ class MLE:
         all_rewards = self.get_reward(all_reward_data)
         
         # Create expectation matrix
-        self.expectation = torch.zeros((len(prompts), self.num_expectation_samples, len(attribute_prompts)), device=self.device)
+        self.expectation = torch.zeros((len(prompts), self.num_expectation_samples, len(self.attribute_prompts)), device=self.device)
         
         # Map rewards back to expectation matrix
         for idx, (prompt_idx, sample_idx) in enumerate(output_mapping):
@@ -155,7 +160,7 @@ class MLE:
                 "num_expectation_samples": self.num_expectation_samples,
                 "num_mc_samples": num_mc_samples,
                 "num_data_points": len(self.data),
-                "num_attributes": len(attribute_prompts),
+                "num_attributes": len(self.attribute_prompts),
                 "initial_p_norm": torch.norm(self.p).item(),
                 "beta": beta,
                 "learning_rate": learning_rate,
@@ -397,8 +402,8 @@ class MLE:
             batch_data, 
             self.model, 
             self.p.cpu().numpy(),  # Convert p to numpy for get_scores
-            base_prompt, 
-            attribute_prompts, 
+            self.base_prompt, 
+            self.attribute_prompts, 
             self.device, 
             self.tokenizer
         )
@@ -444,17 +449,17 @@ class MLE:
         # Get base log probabilities for all flattened items
         print("Computing base log probabilities...")
         base_probs, base_counts = get_log_probs(
-            self.model, self.tokenizer, [base_prompt] * m, 
+            self.model, self.tokenizer, [self.base_prompt] * m, 
             flat_questions, flat_outputs, self.device
         )
         base_tensor = torch.tensor(base_probs, device=self.device) / torch.tensor(base_counts, device=self.device)
         
         # Initialize drift scores for all items
-        drift_scores = torch.zeros((m, len(attribute_prompts)), device=self.device)
+        drift_scores = torch.zeros((m, len(self.attribute_prompts)), device=self.device)
         
         # Process each attribute prompt individually with progress bar
-        print(f"Computing attribute log probabilities for {len(attribute_prompts)} attributes...")
-        for i, attribute_prompt in enumerate(tqdm(attribute_prompts, desc="Processing attributes")):
+        print(f"Computing attribute log probabilities for {len(self.attribute_prompts)} attributes...")
+        for i, attribute_prompt in enumerate(tqdm(self.attribute_prompts, desc="Processing attributes")):
             # Get log probabilities for this attribute prompt
             attr_probs, attr_counts = get_log_probs(
                 self.model, self.tokenizer, [attribute_prompt] * m, 
@@ -472,13 +477,14 @@ class MLE:
         
         return drift_scores
     
-    def save_results(self, save_path, num_mc_samples=None, l1_lambda=None):
+    def save_results(self, save_path, num_mc_samples=None, l1_lambda=None, global_lambda=None):
         """Save the learned p vector and training results."""
         results = {
             "p_vector": self.p.cpu().numpy().tolist(),
             "p_norm": torch.norm(self.p).item(),
             "num_attributes": len(attribute_prompts),
             "num_data_points": len(self.data),
+            "global_lambda": global_lambda
         }
         
         # Add optional parameters if provided
@@ -507,7 +513,7 @@ class MLE:
         torch.save({
             'expectation_matrix': self.expectation.cpu(),
             'num_expectation_samples': self.num_expectation_samples,
-            'num_attributes': len(attribute_prompts)
+            'num_attributes': len(self.attribute_prompts)
         }, save_path)
         print(f"Expectation matrix saved successfully")
     
@@ -517,7 +523,7 @@ class MLE:
         torch.save({
             'chosen_rewards': self.chosen_rewards.cpu(),
             'num_data_points': len(self.data),
-            'num_attributes': len(attribute_prompts)
+            'num_attributes': len(self.attribute_prompts)
         }, save_path)
         print(f"Chosen rewards saved successfully")
     

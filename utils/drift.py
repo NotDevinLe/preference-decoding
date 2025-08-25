@@ -62,9 +62,8 @@ def approximate(data, pi, tokenizer, s0: str, s_list: list[str], l1_lambda, l2_l
     # Option A (your original): mean over samples
     d = X.mean(dim=0).detach().cpu().numpy()
 
-    # Optional: standardize columns before mean to avoid variance dominance
-    # col_std = X.std(dim=0).clamp_min(1e-8)
-    # d = (X / col_std).mean(dim=0).detach().cpu().numpy()
+    col_std = X.std(dim=0).clamp_min(1e-8)
+    d = (X - X.mean() / col_std).mean(dim=0).detach().cpu().numpy()
 
     return l1_solve(d, l1_lambda)
 
