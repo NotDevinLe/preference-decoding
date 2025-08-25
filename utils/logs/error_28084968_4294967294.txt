@@ -35,3 +35,4 @@
 INFO:     Started server process [65723]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
+[2025-08-11T02:55:20.576] error: *** JOB 28084968 ON g3080 CANCELLED AT 2025-08-11T02:55:20 DUE to SIGNAL Terminated ***

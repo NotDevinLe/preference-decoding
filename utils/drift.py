@@ -11,44 +11,61 @@ import gc
 import cvxpy as cp
 
 def l1_solve(d_mean, l1_lambda):
-    """Solve elastic net optimization problem"""
-    p_var = cp.Variable(len(d_mean))
-    constraints = [cp.norm2(p_var) <= 1]
-    
-    objective = cp.Maximize(d_mean @ p_var - l1_lambda * cp.norm1(p_var))
-    problem = cp.Problem(objective, constraints)
-    
-    problem.solve()
-    
-    if p_var.value is None:
-        print(f"Optimization failed for L1={l1_lambda}, using normalization fallback")
-        # Use simple normalization as fallback
-        current_norm = np.linalg.norm(d_mean, ord=1)
-        if current_norm > 1:
-            p = d_mean * (1 / current_norm)
-        else:
-            p = d_mean.copy()
-        return p
-    else:
-        return p_var.value
+    """
+    Closed-form solution to: maximize d^T p - lambda * ||p||_1  s.t. ||p||_2 <= 1
+    """
+    d = np.asarray(d_mean, dtype=float)
+    # soft-threshold
+    z = np.sign(d) * np.maximum(np.abs(d) - l1_lambda, 0.0)
+    norm = np.linalg.norm(z, ord=2)
+    if norm == 0.0:
+        return np.zeros_like(d)
+    return z / norm
 
 def approximate(data, pi, tokenizer, s0: str, s_list: list[str], l1_lambda, l2_lambda=1, device=None):
+    # data: list of (question, y_w, y_l)
     m, k = len(data), len(s_list)
-    W = torch.zeros(m, k, device=device)
-    L = torch.zeros(m, k, device=device)
-
     questions, yw_list, yl_list = zip(*data)
 
-    for i, system in enumerate(s_list):
-        pi_yw_attr, pi_yw_attr_counts = get_log_probs(pi, tokenizer, [system]*m, questions, yw_list, device=device)
-        pi_yl_attr, pi_yl_attr_counts = get_log_probs(pi, tokenizer, [system]*m, questions, yl_list, device=device)
-        pi_yw_base, pi_yw_base_counts = get_log_probs(pi, tokenizer, [s0]*m, questions, yw_list, device=device)
-        pi_yl_base, pi_yl_base_counts = get_log_probs(pi, tokenizer, [s0]*m, questions, yl_list, device=device)
+    # Compute base once
+    pi_yw_base, cnt_yw_base = get_log_probs(pi, tokenizer, [s0]*m, questions, yw_list, device=device)
+    pi_yl_base, cnt_yl_base = get_log_probs(pi, tokenizer, [s0]*m, questions, yl_list, device=device)
 
-        W[:, i] = torch.tensor(pi_yw_attr, device=device) / torch.tensor(pi_yw_attr_counts, device=device) - torch.tensor(pi_yw_base, device=device) / torch.tensor(pi_yw_base_counts, device=device)
-        L[:, i] = torch.tensor(pi_yl_attr, device=device) / torch.tensor(pi_yl_attr_counts, device=device) - torch.tensor(pi_yl_base, device=device) / torch.tensor(pi_yl_base_counts, device=device)
+    pi_yw_base = torch.tensor(pi_yw_base, device=device, dtype=torch.float32)
+    cnt_yw_base = torch.tensor(cnt_yw_base, device=device, dtype=torch.float32)
+    pi_yl_base = torch.tensor(pi_yl_base, device=device, dtype=torch.float32)
+    cnt_yl_base = torch.tensor(cnt_yl_base, device=device, dtype=torch.float32)
 
-    d = torch.mean(W - L, dim=0).cpu().numpy()
+    # safe average log-probs
+    eps = 1e-12
+    yw_base_avg = pi_yw_base / torch.clamp(cnt_yw_base, min=eps)
+    yl_base_avg = pi_yl_base / torch.clamp(cnt_yl_base, min=eps)
+
+    # Build X = (W - L) with columns per attribute
+    X = torch.zeros((m, k), device=device, dtype=torch.float32)
+
+    for j, system in enumerate(s_list):
+        pi_yw_attr, cnt_yw_attr = get_log_probs(pi, tokenizer, [system]*m, questions, yw_list, device=device)
+        pi_yl_attr, cnt_yl_attr = get_log_probs(pi, tokenizer, [system]*m, questions, yl_list, device=device)
+
+        pi_yw_attr = torch.tensor(pi_yw_attr, device=device, dtype=torch.float32)
+        cnt_yw_attr = torch.tensor(cnt_yw_attr, device=device, dtype=torch.float32)
+        pi_yl_attr = torch.tensor(pi_yl_attr, device=device, dtype=torch.float32)
+        cnt_yl_attr = torch.tensor(cnt_yl_attr, device=device, dtype=torch.float32)
+
+        yw_attr_avg = pi_yw_attr / torch.clamp(cnt_yw_attr, min=eps)
+        yl_attr_avg = pi_yl_attr / torch.clamp(cnt_yl_attr, min=eps)
+
+        # column j: (yw_attr - yw_base) - (yl_attr - yl_base)
+        X[:, j] = (yw_attr_avg - yw_base_avg) - (yl_attr_avg - yl_base_avg)
+
+    # Option A (your original): mean over samples
+    d = X.mean(dim=0).detach().cpu().numpy()
+
+    # Optional: standardize columns before mean to avoid variance dominance
+    # col_std = X.std(dim=0).clamp_min(1e-8)
+    # d = (X / col_std).mean(dim=0).detach().cpu().numpy()
+
     return l1_solve(d, l1_lambda)
 
 def get_training_matrix(data, pi, tokenizer, s0: str, s_list: list[str], device=None):

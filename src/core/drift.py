@@ -40,6 +40,7 @@ def approximate(data, pi, tokenizer, s0: str, s_list: list[str], l1_lambda, l2_l
     questions, yw_list, yl_list = zip(*data)
 
     for i, system in enumerate(s_list):
+        print(i)
         pi_yw_attr, pi_yw_attr_counts = get_log_probs(pi, tokenizer, [system]*m, questions, yw_list, device=device)
         pi_yl_attr, pi_yl_attr_counts = get_log_probs(pi, tokenizer, [system]*m, questions, yl_list, device=device)
         pi_yw_base, pi_yw_base_counts = get_log_probs(pi, tokenizer, [s0]*m, questions, yw_list, device=device)
@@ -98,23 +99,15 @@ def get_approximation_accuracy(data, model_ds, p, base_prompt, attribute_prompts
     questions, yw_list, yl_list = zip(*data)
     n = len(data)
 
-    # Get base log probabilities
-    print("Computing base log probabilities...")
     yw_base_probs, yw_base_counts = get_log_probs(model_ds, tokenizer, [base_prompt] * n, questions, yw_list, device)
     yl_base_probs, yl_base_counts = get_log_probs(model_ds, tokenizer, [base_prompt] * n, questions, yl_list, device)
 
-    # Initialize drift scores for each example
     drift_scores = torch.zeros(n, device=device)
 
-    # Process each attribute prompt individually
     for i, attribute_prompt in enumerate(attribute_prompts):
         if p[i] == 0:
-            print(f"Skipping attribute {i} (p={p[i]})")
             continue
             
-        print(f"Processing attribute {i+1}/{len(attribute_prompts)}: p={p[i]:.4f}")
-        
-        # Get log probabilities for this attribute prompt
         yw_attr_probs, yw_attr_counts = get_log_probs(model_ds, tokenizer, [attribute_prompt] * n, questions, yw_list, device)
         yl_attr_probs, yl_attr_counts = get_log_probs(model_ds, tokenizer, [attribute_prompt] * n, questions, yl_list, device)
         
@@ -168,43 +161,30 @@ def get_scores(data, model, p, base_prompt, attribute_prompts, device, tokenizer
             flat_outputs.append(output)
     
     total_items = len(flat_outputs)  # m * n
-    print(f"Processing {m} prompts with {n} outputs each ({total_items} total items)")
-    
-    # Get base log probabilities for all flattened items
-    print("Computing base log probabilities...")
+
     base_probs, base_counts = get_log_probs(
         model, tokenizer, [base_prompt] * total_items, 
         flat_questions, flat_outputs, device
     )
     base_tensor = torch.tensor(base_probs, device=device) / torch.tensor(base_counts, device=device)
     
-    # Initialize drift scores for all items
     drift_scores = torch.zeros(total_items, device=device)
     
-    # Process each attribute prompt individually
     for i, attribute_prompt in enumerate(attribute_prompts):
         if p[i] == 0:
-            print(f"Skipping attribute {i} (p={p[i]})")
             continue
             
-        print(f"Processing attribute {i+1}/{len(attribute_prompts)}: p={p[i]:.4f}")
-        
-        # Get log probabilities for this attribute prompt
         attr_probs, attr_counts = get_log_probs(
             model, tokenizer, [attribute_prompt] * total_items, 
             flat_questions, flat_outputs, device
         )
         
-        # Convert to tensors
         attr_tensor = torch.tensor(attr_probs, device=device) / torch.tensor(attr_counts, device=device)
         
-        # Compute drift contribution for this attribute
         attribute_drift = p[i] * (attr_tensor - base_tensor)
         
-        # Add to total drift scores
         drift_scores += attribute_drift
     
-    # Reshape back to m x n matrix
     score_matrix = drift_scores.view(m, n)
     
     return score_matrix
@@ -227,7 +207,7 @@ def get_log_probs(model, tokenizer, system_prompts, user_prompts, completion_tex
         input_ids.append(input_ids_i)
         completion_ids.append(completion_ids_i)
     sampling_params = SamplingParams(
-        prompt_logprobs=0,
+        prompt_logprobs=1,
         max_tokens=1,
         temperature=temperature,
     )

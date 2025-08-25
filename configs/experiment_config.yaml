@@ -18,8 +18,8 @@ data:
 generation:
   # Shared BON parameters
   bon_outputs_per_prompt: 16
-  bon_temperature: 1.0
-  bon_top_p: 0.9
+  bon_temperature: 1.2
+  bon_top_p: 0.95
   bon_max_tokens: 512
   
   # QAlign parameters

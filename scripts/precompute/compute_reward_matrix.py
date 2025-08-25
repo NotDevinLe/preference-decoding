@@ -35,7 +35,7 @@ sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from vllm import LLM
 from transformers import AutoTokenizer
-from drift import get_scores
+from src.core.drift import get_log_probs
 from attributes.attribute import attribute_prompts
 
 
@@ -92,7 +92,7 @@ def load_persona_data(persona_file: str, max_personas: int = None, max_questions
     return questions, responses_matrix, persona_prompts, metadata
 
 
-def compute_persona_attribute_rewards(
+def compute_individual_attribute_scores(
     model: LLM,
     tokenizer: AutoTokenizer,
     questions: List[str],
@@ -101,7 +101,10 @@ def compute_persona_attribute_rewards(
     device: str = "cuda"
 ) -> np.ndarray:
     """
-    Compute reward scores for a single persona using all attributes from attribute.py.
+    Compute individual attribute scores (not summed) for a single persona.
+    
+    This is a modified version of get_scores that returns individual attribute scores
+    instead of the combined drift score.
     
     Args:
         model: vLLM model for scoring
@@ -117,31 +120,50 @@ def compute_persona_attribute_rewards(
     n = len(questions)
     assert len(responses) == n, "Questions and responses must have same length"
     
-    # Prepare data in format expected by get_scores
-    # Each question gets paired with its single response
-    data = [(question, [response]) for question, response in zip(questions, responses)]
-    
-    # Use all attributes with equal weight
     num_attributes = len(attribute_prompts)
-    p = torch.ones(num_attributes, device=device)
+    print(f"Computing individual scores for {num_attributes} attributes...")
     
-    print(f"Computing scores for {num_attributes} attributes...")
+    # Flatten questions and responses for batch processing
+    flat_questions = []
+    flat_responses = []
     
-    # Compute drift scores using existing get_scores function
-    score_matrix = get_scores(
-        data=data,
-        model=model, 
-        p=p,
-        base_prompt=reference_prompt,
-        attribute_prompts=attribute_prompts,
-        device=device,
-        tokenizer=tokenizer
+    for question, response in zip(questions, responses):
+        flat_questions.append(question)
+        flat_responses.append(response)
+    
+    total_items = len(flat_responses)
+    
+    # Get base log probabilities for all items
+    print("Computing base log probabilities...")
+    base_probs, base_counts = get_log_probs(
+        model, tokenizer, [reference_prompt] * total_items, 
+        flat_questions, flat_responses, device
     )
+    base_tensor = torch.tensor(base_probs, device=device) / torch.tensor(base_counts, device=device)
     
-    # score_matrix is (n_questions, num_attributes)
-    rewards = score_matrix.cpu().numpy()
+    # Initialize scores matrix: (num_questions, num_attributes)
+    scores = torch.zeros((n, num_attributes), device=device)
     
-    return rewards
+    # Process each attribute individually to get separate scores
+    for attr_idx, attribute_prompt in enumerate(tqdm(attribute_prompts, desc="Processing attributes")):
+        print(f"Processing attribute {attr_idx+1}/{num_attributes}")
+        
+        # Get log probabilities for this attribute prompt
+        attr_probs, attr_counts = get_log_probs(
+            model, tokenizer, [attribute_prompt] * total_items, 
+            flat_questions, flat_responses, device
+        )
+        
+        # Convert to tensors
+        attr_tensor = torch.tensor(attr_probs, device=device) / torch.tensor(attr_counts, device=device)
+        
+        # Compute drift for this attribute: attr - base
+        attribute_scores = attr_tensor - base_tensor
+        
+        # Store in scores matrix
+        scores[:, attr_idx] = attribute_scores
+    
+    return scores.cpu().numpy()
 
 
 def compute_full_reward_matrix(
@@ -185,7 +207,8 @@ def compute_full_reward_matrix(
     model = LLM(
         model=scoring_model_name,
         tensor_parallel_size=1,
-        dtype="bfloat16" if device == "cuda" else "float32"
+        dtype="bfloat16" if device == "cuda" else "float32",
+        gpu_memory_utilization=0.5
     )
     tokenizer = AutoTokenizer.from_pretrained(scoring_model_name)
     
@@ -202,8 +225,8 @@ def compute_full_reward_matrix(
     for persona_idx in tqdm(range(num_personas), desc="Processing personas"):
         persona_responses = responses_matrix[persona_idx]
         
-        # Compute attribute-based rewards for this persona's responses
-        rewards = compute_persona_attribute_rewards(
+        # Compute individual attribute scores for this persona's responses
+        rewards = compute_individual_attribute_scores(
             model, tokenizer,
             questions,
             persona_responses,

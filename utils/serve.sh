@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=serve
 #SBATCH --account=cse
-#SBATCH --partition=gpu-a100
-#SBATCH --gpus=2
+#SBATCH --partition=gpu-l40s
+#SBATCH --gpus=4
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
@@ -18,4 +18,4 @@ export PATH=/gscratch/ark/devinl6/envs/align/bin:$PATH
 export HF_HOME=/mmfs1/gscratch/ark/devinl6/hf_cache
 
 # Run Python script with unbuffered output
-python -m vllm.entrypoints.openai.api_server --model meta-llama/Llama-3.3-70B-Instruct --host 0.0.0.0 --port 8000 --tensor-parallel-size 2 --max-model-len 16384 --gpu-memory-utilization 0.95 --max-num-seqs 16
+python -m vllm.entrypoints.openai.api_server --model meta-llama/Llama-3.3-70B-Instruct --host 0.0.0.0 --port 8000 --tensor-parallel-size 4 --max-model-len 16384 --gpu-memory-utilization 0.95 --max-num-seqs 16

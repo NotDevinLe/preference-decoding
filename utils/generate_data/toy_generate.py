@@ -6,17 +6,17 @@ from transformers import AutoTokenizer
 import json
 import random
 from datasets import load_dataset
-from attribute_prompts import user_prompts, base_prompt
+from attribute_prompts import persona_prompts, base_prompt
 
 # Args
 parser = argparse.ArgumentParser()
-parser.add_argument("--name", type=str, required=True)
+parser.add_argument("--name_idx", type=int, required=True)
 parser.add_argument("--sample_size", type=int, required=True)
 parser.add_argument("--split", type=str, default="train", choices=["train", "test", "val"], help="Generate train or test split")
 parser.add_argument("--save_path", type=str, default="../../data/preference", help="Path to save preference data")
 args = parser.parse_args()
 
-
+name_idx = args.name_idx
 
 sample_size = args.sample_size
 
@@ -70,7 +70,7 @@ base_prompt_outputs = [output.outputs[0].text.strip() for output in base_prompt_
 attr1_prompt_inputs = []
 attr1_prompt_outputs = []
 
-attr1_prompt = user_prompts[0]
+attr1_prompt = persona_prompts[name_idx]
 for instruction in instructions:
     attr1_prompt_input = tokenizer.apply_chat_template([
         {"role": "system", "content": attr1_prompt},
@@ -91,5 +91,5 @@ for i in range(len(instructions)):
     })
 
 random.shuffle(all_data)
-with open(f"{args.save_path}/{args.name}_{args.split}.json", "w") as f:
+with open(f"{args.save_path}/user{name_idx}_{args.split}.json", "w") as f:
     json.dump(all_data, f, indent=2)

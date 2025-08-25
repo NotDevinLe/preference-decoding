@@ -25,7 +25,7 @@ def main():
     parser.add_argument("--sample_size", type=int, default=None, help="Limit training data size (for testing)")
     parser.add_argument("--load_chosen_rewards", action="store_true", help="Load pre-computed chosen rewards if available")
     # Convergence criteria
-    parser.add_argument("--max_epochs", type=int, default=10000, help="Maximum number of epochs")
+    parser.add_argument("--max_epochs", type=int, default=30000, help="Maximum number of epochs")
     parser.add_argument("--gradient_tolerance", type=float, default=1e-6, help="Stop when gradient norm is below this threshold")
     parser.add_argument("--loss_tolerance", type=float, default=1e-6, help="Stop when loss change is below this threshold")
     parser.add_argument("--patience", type=int, default=100, help="Stop if no improvement for this many epochs")

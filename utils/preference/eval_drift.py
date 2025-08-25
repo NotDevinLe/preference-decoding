@@ -58,12 +58,29 @@ def sparsify_p(p_list, k=14):
 
 eval_data = eval_data[:args.sample_size]
 
-p_path = f"../../results/mle/{args.name}_lambda.jsonl"
+p_path = f"../../data/preference/user1_p_1500.jsonl"
+
+selected_attr_idx = [
+    1,
+    2,
+    3,
+    6,
+    9,
+    10,
+    20,
+    30,
+    31,
+    32,
+    36,
+    37,
+    57
+  ]
+attribute_prompts = [attribute_prompts[i] for i in selected_attr_idx]
 
 with open(p_path, "r") as f:
     for line in f:
         entry = json.loads(line)
-        p = entry["p_vector"]
+        p = entry["p"]
         p = np.array(p)
         p = p / np.linalg.norm(p)
         p = p.tolist()
@@ -71,12 +88,11 @@ with open(p_path, "r") as f:
         accuracy = get_approximation_accuracy(
             eval_data,
             engine,
-            sparsify_p(p, args.k),
+            p,
             base_prompt,
             attribute_prompts,
             device,
-            tokenizer,
-            batch_size=8
+            tokenizer
         )
 
         print(f"Accuracy: {accuracy:.4f} ({int(accuracy * len(eval_data))}/{len(eval_data)})")
@@ -85,9 +101,8 @@ with open(p_path, "r") as f:
         with open(args.save_path, "a") as f:
             f.write(json.dumps({
                 "user": args.name,
-                "n": entry["num_data_points"],
+                "n": args.sample_size,
                 "acc": accuracy,
                 "k": args.k,
-                "num_mc_samples": entry["num_mc_samples"],
             }) + "\n")
         print(f"Results saved to {args.save_path}")

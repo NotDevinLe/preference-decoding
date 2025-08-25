@@ -5,7 +5,7 @@ import os
 os.environ["HF_HOME"] = "/gscratch/ark/devinl6/hf_cache"
 from drift import approximate
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from attribute_prompts import attribute_prompts, persona_prompts, user1_reg_prompts, user2_reg_prompts, user4_reg_prompts, base_prompt
+from attribute_prompts import attribute_prompts, base_prompt, persona_prompts, persona_prompts_2
 from dotenv import load_dotenv
 from huggingface_hub import login
 import random
@@ -20,7 +20,7 @@ login(hf_token)
 parser = argparse.ArgumentParser()
 parser.add_argument('--name', type=str, required=True, help='User name (e.g., user1)')
 parser.add_argument('--samples', type=int, default=200, help='Maximum number of samples to use')
-parser.add_argument('--save_path', type=str, default="../results/user_p.jsonl", help='Path to save results')
+parser.add_argument('--lambda0', type=float, default=0.01, help='Lambda0 for L1 regularization')
 args = parser.parse_args()
 
 # Load user data from JSON format
@@ -46,6 +46,11 @@ model = vllm.LLM(model=small_model_id, tensor_parallel_size=1, gpu_memory_utiliz
 tokenizer = AutoTokenizer.from_pretrained(small_model_id)
 tokenizer.pad_token = tokenizer.eos_token
 
+# selected_attr_idx = [0, 1, 2, 31, 33, 37, 43]
+# attribute_prompts = [attribute_prompts[i] for i in selected_attr_idx]
+
+print(persona_prompts_2)
+
 data = []
 for j in range(args.samples):
     question = preference_data[j]['prompt']
@@ -58,14 +63,15 @@ print(f"Converted {len(data)} samples to drift format")
 ns = [args.samples]
 for n in ns:
     current_data = data[:n]
-    p = approximate(current_data, model, tokenizer, base_prompt, attribute_prompts, device, batch_size=8)
+    p = approximate(current_data, model, tokenizer, base_prompt, persona_prompts_2[:10],l1_lambda=0.01, device=device)
 
     # Save p to jsonl
     result_entry = {
         "user": args.name,
         "n": n,
         "p": p.tolist(),
+        "lambda0": args.lambda0
     }
 
-    with open(args.save_path, "a") as f:
+    with open(f'../results/{args.name}_p.jsonl', "a") as f:
         f.write(json.dumps(result_entry) + "\n")

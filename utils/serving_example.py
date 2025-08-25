@@ -4,7 +4,7 @@ import sys
 import json
 import requests
 
-BASE_URL = os.getenv("VLLM_BASE_URL", "http://localhost:8000/v1")
+BASE_URL = os.getenv("VLLM_BASE_URL", "http://g3101:8000/v1")
 MODEL = os.getenv("VLLM_MODEL", "meta-llama/Llama-3.3-70B-Instruct")
 
 def call_model(messages, temperature=0.7, max_tokens=1024):

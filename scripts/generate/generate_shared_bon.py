@@ -240,21 +240,21 @@ def main():
     parser.add_argument(
         "--config",
         type=str,
-        default="../../configs/experiment_config.yaml",
+        default="configs/experiment_config.yaml",
         help="Path to experiment configuration"
     )
     
     parser.add_argument(
         "--prompts",
         type=str,
-        default="../../data/processed/evaluation_prompts.json",
+        default="data/processed/evaluation_prompts.json",
         help="Path to evaluation prompts"
     )
     
     parser.add_argument(
         "--output_dir",
         type=str,
-        default="../../results/bon_outputs",
+        default="results/bon_outputs",
         help="Directory to save BON outputs"
     )
     
