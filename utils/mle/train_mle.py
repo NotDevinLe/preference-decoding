@@ -30,6 +30,11 @@ def main():
     parser.add_argument("--loss_tolerance", type=float, default=1e-6, help="Stop when loss change is below this threshold")
     parser.add_argument("--patience", type=int, default=100, help="Stop if no improvement for this many epochs")
     parser.add_argument("--l1_lambda", type=float, default=0.0, help="L1 regularization coefficient (0.0 = no regularization)")
+    # Validation evaluation arguments
+    parser.add_argument("--eval_validation", action="store_true", help="Evaluate on validation set during training")
+    parser.add_argument("--eval_interval", type=int, default=50, help="Evaluate validation every N epochs")
+    parser.add_argument("--max_val_pairs", type=int, default=200, help="Maximum validation pairs to evaluate")
+    parser.add_argument("--val_sample_size", type=int, default=None, help="Limit validation data size")
     args = parser.parse_args()
     
     # Device setup
@@ -73,6 +78,29 @@ def main():
     else:
         train_data = full_train_data
         print(f"Using all {len(train_data)} training samples")
+    
+    # Load validation data if requested
+    validation_data = None
+    if args.eval_validation:
+        val_data_path = f"../../data/preference/{args.name}_val.json"
+        print(f"\nLoading validation data from: {val_data_path}")
+        
+        try:
+            with open(val_data_path, "r") as f:
+                full_val_data = json.load(f)
+            
+            # Optionally limit validation data size
+            if args.val_sample_size:
+                validation_data = full_val_data[:args.val_sample_size]
+                print(f"Using {args.val_sample_size} validation samples (out of {len(full_val_data)} total)")
+            else:
+                validation_data = full_val_data
+                print(f"Using all {len(validation_data)} validation samples")
+                
+        except FileNotFoundError:
+            print(f"Warning: Could not find validation data at {val_data_path}")
+            print("Validation evaluation will be disabled.")
+            validation_data = None
     
     # Always load the n=200 size=200 expectation matrix and slice as needed
     expectation_matrix_path = f"../../data/expectation_matrices/{args.name}_expectation_n200_size200.pt"
@@ -140,6 +168,8 @@ def main():
     print(f"Number of expectation samples per prompt: {args.num_expectation_samples}")
     print(f"Expectation matrix loaded successfully and is compatible")
     print(f"  Expectation matrix: {checkpoint['expectation_matrix'].shape}")
+    if validation_data:
+        print(f"Validation data loaded: {len(validation_data)} pairs")
     
     mle_model = MLE(
         model=model,
@@ -149,7 +179,8 @@ def main():
         expectation_matrix=checkpoint['expectation_matrix'],
         chosen_rewards=chosen_rewards,
         use_wandb=args.use_wandb,
-        wandb_project=args.wandb_project
+        wandb_project=args.wandb_project,
+        validation_data=validation_data  # Pass validation data
     )
     
     # Train MLE
@@ -162,6 +193,9 @@ def main():
     print(f"Loss tolerance: {args.loss_tolerance}")
     print(f"Patience: {args.patience}")
     print(f"L1 regularization: {args.l1_lambda}")
+    if args.eval_validation and validation_data:
+        print(f"Validation evaluation: Every {args.eval_interval} epochs")
+        print(f"Max validation pairs: {args.max_val_pairs}")
     
     mle_model.train(
         max_epochs=args.max_epochs,
@@ -171,7 +205,10 @@ def main():
         gradient_tolerance=args.gradient_tolerance,
         loss_tolerance=args.loss_tolerance,
         patience=args.patience,
-        l1_lambda=args.l1_lambda
+        l1_lambda=args.l1_lambda,
+        eval_validation=args.eval_validation and validation_data is not None,
+        eval_interval=args.eval_interval,
+        max_val_pairs=args.max_val_pairs
     )
     
     # Save results

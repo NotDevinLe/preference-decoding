@@ -12,7 +12,9 @@ import wandb
 from tqdm import tqdm
 
 class MLE:
-    def __init__(self, model, tokenizer, data, device, expectation_matrix=None, chosen_rewards=None, num_expectation_samples=100, use_wandb=True, wandb_project="mle-training"):
+    def __init__(self, model, tokenizer, data, device, expectation_matrix=None, chosen_rewards=None, 
+                 num_expectation_samples=100, use_wandb=True, wandb_project="mle-training", 
+                 validation_data=None):
         self.model = model
         self.tokenizer = tokenizer
         self.data = data
@@ -24,6 +26,10 @@ class MLE:
         self.expectation = None
         self.chosen_rewards = None
         self._expectation_generated = False
+        
+        # Validation data for preference pair accuracy
+        self.validation_data = validation_data
+        self.validation_rewards_cache = {}
         
         if expectation_matrix is not None:
             # Load pre-computed expectation matrix
@@ -114,7 +120,8 @@ class MLE:
         # Don't initialize wandb here - wait until training starts
     
     def train(self, max_epochs=10000, learning_rate=0.01, beta=1.0, num_mc_samples=10, 
-              gradient_tolerance=1e-6, loss_tolerance=1e-6, patience=100, l1_lambda=0.0, run_name=None):
+              gradient_tolerance=1e-6, loss_tolerance=1e-6, patience=100, l1_lambda=0.0, 
+              run_name=None, eval_validation=True, eval_interval=50, max_val_pairs=200):
         """
         Train the MLE model using gradient descent with convergence criteria and L1 regularization.
         
@@ -130,6 +137,9 @@ class MLE:
             patience: Stop if no improvement for this many epochs
             l1_lambda: L1 regularization coefficient (0.0 = no regularization)
             run_name: Custom name for wandb run
+            eval_validation: Whether to evaluate on validation set
+            eval_interval: Evaluate validation every N epochs
+            max_val_pairs: Maximum validation pairs to evaluate
         """
         
         # Check if expectation matrix has been generated
@@ -153,7 +163,12 @@ class MLE:
                 "gradient_tolerance": gradient_tolerance,
                 "loss_tolerance": loss_tolerance,
                 "patience": patience,
-                "l1_lambda": l1_lambda
+                "l1_lambda": l1_lambda,
+                "eval_validation": eval_validation,
+                "eval_interval": eval_interval,
+                "max_val_pairs": max_val_pairs,
+                "has_validation": self.validation_data is not None,
+                "num_validation": len(self.validation_data) if self.validation_data else 0
             }
             
             # Create descriptive run name
@@ -259,6 +274,16 @@ class MLE:
                     "epochs_without_improvement": epochs_without_improvement
                 })
             
+            # Validation evaluation
+            val_accuracy = None
+            if eval_validation and self.validation_data is not None and epoch % eval_interval == 0:
+                val_accuracy = self.evaluate_validation(max_pairs=max_val_pairs)
+                if self.use_wandb:
+                    wandb.log({
+                        "validation_accuracy": val_accuracy,
+                        "epoch": epoch
+                    })
+            
             # Console logging
             if epoch % 100 == 0:
                 print(f"Epoch {epoch}")
@@ -274,6 +299,8 @@ class MLE:
                     print(f"  Epochs without improvement: {epochs_without_improvement}")
                 else:
                     print(f"  Epochs without improvement: {epochs_without_improvement} (patience disabled with L1)")
+                if val_accuracy is not None:
+                    print(f"  Validation Accuracy: {val_accuracy:.4f}")
                 print(f"  Current p: {self.p.cpu().numpy()}")
             
             # # Check convergence criteria
@@ -336,6 +363,60 @@ class MLE:
         self.chosen_rewards = self.get_reward(chosen_data)  # (num_data, num_attributes)
         
         print(f"Pre-computed rewards for {len(self.data)} chosen responses")
+    
+    def evaluate_validation(self, max_pairs=200):
+        """
+        Evaluate preference pair accuracy on validation set using drift scores.
+        
+        For each preference pair, we compute drift scores for chosen and rejected.
+        The prediction is correct if score(chosen) > score(rejected).
+        
+        Args:
+            max_pairs: Maximum number of validation pairs to evaluate
+            
+        Returns:
+            accuracy: Preference accuracy on validation set
+        """
+        if self.validation_data is None:
+            return None
+        
+        # Limit validation pairs if needed
+        val_data = self.validation_data[:max_pairs] if len(self.validation_data) > max_pairs else self.validation_data
+        
+        # Prepare batch data for efficient scoring
+        batch_data = []
+        for item in val_data:
+            # Each prompt gets [chosen, rejected] as outputs
+            batch_data.append((item['prompt'], [item['chosen'], item['rejected']]))
+        
+        # Compute drift scores using get_scores from drift.py
+        # This returns a tensor of shape (num_prompts, 2) where [:, 0] is chosen and [:, 1] is rejected
+        from drift import get_scores
+        
+        scores_tensor = get_scores(
+            batch_data, 
+            self.model, 
+            self.p.cpu().numpy(),  # Convert p to numpy for get_scores
+            base_prompt, 
+            attribute_prompts, 
+            self.device, 
+            self.tokenizer
+        )
+        
+        # Compute accuracy
+        correct = 0
+        total = len(val_data)
+        
+        for i in range(total):
+            chosen_score = scores_tensor[i, 0]
+            rejected_score = scores_tensor[i, 1]
+            
+            # Prediction is correct if chosen has higher drift score than rejected
+            if chosen_score > rejected_score:
+                correct += 1
+        
+        accuracy = correct / total if total > 0 else 0.0
+        return accuracy
 
 
     def get_reward(self, data):
