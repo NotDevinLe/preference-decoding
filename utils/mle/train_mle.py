@@ -16,7 +16,6 @@ def main():
     parser = argparse.ArgumentParser(description="Evaluate MLE for preference learning")
     parser.add_argument("--name", type=str, default="user1", help="User name for data files")
     parser.add_argument("--num_expectation_samples", type=int, default=50, help="Number of expectation samples per prompt")
-    parser.add_argument("--num_epochs", type=int, default=1000, help="Number of training epochs")
     parser.add_argument("--learning_rate", type=float, default=0.01, help="Learning rate")
     parser.add_argument("--beta", type=float, default=1.0, help="Temperature parameter")
     parser.add_argument("--num_mc_samples", type=int, default=10, help="Number of MC samples for expectation")
@@ -24,8 +23,8 @@ def main():
     parser.add_argument("--wandb_project", type=str, default="mle-preference", help="Wandb project name")
     parser.add_argument("--sample_size", type=int, default=None, help="Limit training data size (for testing)")
     parser.add_argument("--load_chosen_rewards", action="store_true", help="Load pre-computed chosen rewards if available")
-    # Convergence criteria
-    parser.add_argument("--max_epochs", type=int, default=30000, help="Maximum number of epochs")
+    # Training parameters
+    parser.add_argument("--max_epochs", type=int, default=30000, help="Maximum number of training epochs")
     parser.add_argument("--gradient_tolerance", type=float, default=1e-6, help="Stop when gradient norm is below this threshold")
     parser.add_argument("--loss_tolerance", type=float, default=1e-6, help="Stop when loss change is below this threshold")
     parser.add_argument("--patience", type=int, default=100, help="Stop if no improvement for this many epochs")

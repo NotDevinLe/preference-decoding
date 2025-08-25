@@ -70,6 +70,17 @@ def main():
     os.makedirs(os.path.dirname(args.output_path), exist_ok=True)
     mle_model.save_expectation_matrix(args.output_path)
     
+    # Also save chosen rewards if requested
+    if hasattr(mle_model, 'chosen_rewards') and mle_model.chosen_rewards is not None:
+        # Create path for chosen rewards (same directory, different filename)
+        rewards_path = args.output_path.replace('expectation', 'chosen_rewards')
+        if rewards_path == args.output_path:  # If 'expectation' not in filename
+            rewards_path = args.output_path.replace('.pt', '_chosen_rewards.pt')
+        
+        mle_model.save_chosen_rewards(rewards_path)
+        print(f"Chosen rewards saved to: {rewards_path}")
+        print(f"Chosen rewards shape: {mle_model.chosen_rewards.shape}")
+    
     print(f"\nExpectation matrix generation complete!")
     print(f"Saved to: {args.output_path}")
     print(f"Shape: {mle_model.expectation.shape}")
