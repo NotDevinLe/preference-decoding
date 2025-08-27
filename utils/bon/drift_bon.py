@@ -127,6 +127,7 @@ if __name__ == "__main__":
                 # Save to JSONL file
                 with open(args.output_path, "a") as f:
                     f.write(json.dumps(result) + "\n")
+                break
 
     print(f"\n✅ Results saved to {args.output_path}")
 

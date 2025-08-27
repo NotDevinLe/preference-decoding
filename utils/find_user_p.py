@@ -46,10 +46,8 @@ model = vllm.LLM(model=small_model_id, tensor_parallel_size=1, gpu_memory_utiliz
 tokenizer = AutoTokenizer.from_pretrained(small_model_id)
 tokenizer.pad_token = tokenizer.eos_token
 
-# selected_attr_idx = [0, 1, 2, 31, 33, 37, 43]
-# attribute_prompts = [attribute_prompts[i] for i in selected_attr_idx]
-
-print(persona_prompts_2)
+selected_attr_idx = [0, 1, 2, 31, 33, 37, 43]
+attribute_prompts = [attribute_prompts[i] for i in selected_attr_idx]
 
 data = []
 for j in range(args.samples):
@@ -63,7 +61,7 @@ print(f"Converted {len(data)} samples to drift format")
 ns = [args.samples]
 for n in ns:
     current_data = data[:n]
-    p = approximate(current_data, model, tokenizer, base_prompt, persona_prompts_2[:10],l1_lambda=0.01, device=device)
+    p = approximate(current_data, model, tokenizer, base_prompt, attribute_prompts,l1_lambda=0.01, device=device)
 
     # Save p to jsonl
     result_entry = {

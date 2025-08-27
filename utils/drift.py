@@ -10,7 +10,7 @@ from vllm import LLM, SamplingParams
 import gc
 import cvxpy as cp
 
-def l1_solve(d_mean, l1_lambda):
+def l1_solve(d_mean, l1_lambda, std=None):
     """
     Closed-form solution to: maximize d^T p - lambda * ||p||_1  s.t. ||p||_2 <= 1
     """
@@ -20,7 +20,10 @@ def l1_solve(d_mean, l1_lambda):
     norm = np.linalg.norm(z, ord=2)
     if norm == 0.0:
         return np.zeros_like(d)
-    return z / norm
+    if std is None:
+        return z / norm
+    else:
+        return z / (norm * std)
 
 def approximate(data, pi, tokenizer, s0: str, s_list: list[str], l1_lambda, l2_lambda=1, device=None):
     # data: list of (question, y_w, y_l)
@@ -59,13 +62,11 @@ def approximate(data, pi, tokenizer, s0: str, s_list: list[str], l1_lambda, l2_l
         # column j: (yw_attr - yw_base) - (yl_attr - yl_base)
         X[:, j] = (yw_attr_avg - yw_base_avg) - (yl_attr_avg - yl_base_avg)
 
-    # Option A (your original): mean over samples
-    d = X.mean(dim=0).detach().cpu().numpy()
 
     col_std = X.std(dim=0).clamp_min(1e-8)
-    d = (X - X.mean() / col_std).mean(dim=0).detach().cpu().numpy()
+    d = (X / col_std).mean(dim=0).detach().cpu().numpy()
 
-    return l1_solve(d, l1_lambda)
+    return l1_solve(d, l1_lambda, std=col_std.detach().cpu().numpy())
 
 def get_training_matrix(data, pi, tokenizer, s0: str, s_list: list[str], device=None):
     m, k = len(data), len(s_list)
@@ -219,10 +220,10 @@ def get_scores(data, model, p, base_prompt, attribute_prompts, device, tokenizer
         
         # Add to total drift scores
         drift_scores += attribute_drift
-    
+
     # Reshape back to m x n matrix
     score_matrix = drift_scores.view(m, n)
-    
+
     return score_matrix
 
 def get_log_probs(model, tokenizer, system_prompts, user_prompts, completion_texts, device, temperature=0.0):

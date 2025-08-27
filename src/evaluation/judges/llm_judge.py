@@ -160,14 +160,6 @@ Respond to the following input using this persona: {persona}
         tasks = [compare_one(comp) for comp in comparisons]
         return await asyncio.gather(*tasks)
 
-
-# Sync wrapper for backwards compatibility
-def compare_responses_sync(persona: str, question: str, response_a: str, response_b: str) -> Optional[str]:
-    """Synchronous wrapper around async compare_responses."""
-    judge = PersonaJudge()
-    return asyncio.run(judge.compare_responses(persona, question, response_a, response_b))
-
-
 if __name__ == "__main__":
     # Test
     judge = PersonaJudge()
