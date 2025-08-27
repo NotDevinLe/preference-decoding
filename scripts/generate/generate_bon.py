@@ -107,7 +107,7 @@ persona_prompts = [
 def load_prompts(input_path: str) -> List[Dict]:
     """Load prompts from file."""
     with open(input_path, 'r') as f:
-        data = json.load(f)
+        data = json.load(f)['questions']
     
     # Handle different formats
     if isinstance(data, list):

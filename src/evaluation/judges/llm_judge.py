@@ -134,7 +134,7 @@ Better response (just write A or B):"""
 
 if __name__ == "__main__":
     # Simple test
-    judge = PersonaJudge()
+    judge = PersonaJudge(base_url="https://api.openai.com/v1", model="gpt-4o")
     
     async def test():
         persona = "You are a grumpy old wizard who speaks in riddles"

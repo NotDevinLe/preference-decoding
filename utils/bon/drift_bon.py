@@ -35,11 +35,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Load bon outputs
-    data_path = "../../data/bon_all.json"
+    data_path = "../../data/bon_attributes.json"
     with open(data_path, "r") as f:
         bon_data = json.load(f)
     
-    p_path = f"../../results/mle/{args.name}.jsonl"
+    p_path = f"../../results/user1_p.jsonl"
 
     print(f"Loaded {len(bon_data)} prompts from {data_path}")
     print(f"Each prompt has {len(bon_data[0]['outputs'])} outputs")
@@ -57,8 +57,8 @@ if __name__ == "__main__":
     tokenizer = AutoTokenizer.from_pretrained(small_model_id)
     tokenizer.pad_token = tokenizer.eos_token
 
-    selected_indices = [0, 1, 2, 31, 33, 37, 43]
-    attribute_prompts = [attribute_prompts[i] for i in selected_indices]
+    # selected_indices = [0, 1, 2, 31, 33, 37, 43]
+    # attribute_prompts = [attribute_prompts[i] for i in selected_indices]
 
     # Load p vector for reward model from JSONL file
     p_sparse = None
@@ -66,10 +66,10 @@ if __name__ == "__main__":
         for line in f:
             p_entry = json.loads(line.strip())
 
-            if p_entry["global_lambda"] != args.lambda_val:
+            if p_entry["lambda0"] != args.lambda_val:
                 continue
             
-            p = torch.tensor(p_entry["p_vector"], device=device, dtype=torch.float32)
+            p = torch.tensor(p_entry["p"], device=device, dtype=torch.float32)
             
             # Sparsify p using torch operations
             abs_p = torch.abs(p)
@@ -118,7 +118,7 @@ if __name__ == "__main__":
                     "user": args.name,
                     "n": n,
                     "training_size": args.training_size,
-                    "lambda": p_entry["global_lambda"],
+                    "lambda": p_entry["lambda0"],
                     "selected_indices": selected_indices,
                     "num_prompts": len(selected_indices)
                 }
@@ -127,7 +127,7 @@ if __name__ == "__main__":
                 # Save to JSONL file
                 with open(args.output_path, "a") as f:
                     f.write(json.dumps(result) + "\n")
-                break
+            break
 
     print(f"\n✅ Results saved to {args.output_path}")
 
