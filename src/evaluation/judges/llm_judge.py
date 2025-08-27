@@ -9,6 +9,10 @@ import asyncio
 import aiohttp
 from pathlib import Path
 from typing import Optional, List, Dict
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 
 class PersonaJudge:
@@ -38,8 +42,19 @@ class PersonaJudge:
             "max_tokens": 10,
         }
         
+        # Set up headers - support both VLLM and OpenAI
+        headers = {"Content-Type": "application/json"}
+        
+        # Check if we're using OpenAI API
+        openai_key = os.getenv("OPENAI_API_KEY")
+        if openai_key and ("openai.com" in self.base_url or not self.base_url.startswith("http://localhost")):
+            headers["Authorization"] = f"Bearer {openai_key}"
+        else:
+            # Default for VLLM (dummy auth)
+            headers["Authorization"] = "Bearer dummy"
+        
         try:
-            async with session.post(url, json=payload, timeout=30) as response:
+            async with session.post(url, json=payload, headers=headers, timeout=30) as response:
                 response.raise_for_status()
                 result = await response.json()
                 return result["choices"][0]["message"]["content"]
