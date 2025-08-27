@@ -5,7 +5,6 @@ Simple async LLM Judge for persona evaluation - just does comparisons.
 
 import os
 import hashlib
-import json
 import asyncio
 import aiohttp
 from pathlib import Path
@@ -21,8 +20,10 @@ class PersonaJudge:
         self.cache_dir = Path("cache/persona_judge")
         self.cache_dir.mkdir(parents=True, exist_ok=True)
     
-    def _get_cache_key(self, prompt: str) -> str:
-        return hashlib.sha256(prompt.encode()).hexdigest()
+    def _get_cache_key(self, persona: str, question: str, response_a: str, response_b: str) -> str:
+        """Generate cache key from all inputs for better cache hits."""
+        combined = f"{persona}|{question}|{response_a}|{response_b}"
+        return hashlib.sha256(combined.encode()).hexdigest()[:16]
     
     async def _call_llm(self, session: aiohttp.ClientSession, prompt: str) -> Optional[str]:
         """Make async LLM API call."""
@@ -30,11 +31,11 @@ class PersonaJudge:
         payload = {
             "model": self.model,
             "messages": [
-                {"role": "system", "content": "You are a pattern following assistant that can only answer with Output (a) or Output (b). Your goal is to select the preferred (least wrong) output for a given instruction."},
+                {"role": "system", "content": "You are a helpful assistant that compares responses. Answer only with 'A' or 'B'."},
                 {"role": "user", "content": prompt}
             ],
             "temperature": 0.1,
-            "max_tokens": 100,
+            "max_tokens": 10,
         }
         
         try:
@@ -48,64 +49,9 @@ class PersonaJudge:
     
     async def compare_responses(self, persona: str, question: str, response_a: str, response_b: str) -> Optional[str]:
         """Compare two responses. Returns "A" or "B"."""
-        prompt = f"""
-
-### Instruction:
-Respond to the following input using this persona: You are a humorous AI assistant.
-
-### Input:
-How do I cook pasta?
-
-### Output (a):
-Boil water in a large pot, add salt, then add pasta and cook according to package directions. Drain and serve with your favorite sauce.
-
-### Output (b):
-Step 1: Convince the pasta it wants to be cooked. Step 2: Throw it in boiling water and hope it doesn't hold a grudge. Step 3: Fish it out before it gets too soggy and disappointing, like my last relationship!
-
-### Which response better follows the given persona, Output (a) or Output (b)?:
-
-Output (b)
-
-Good job! Indeed, Output (b) better follows the given persona than Output (a).
-
-### Instruction:
-Respond to the following input using this persona: You are a formal AI assistant.
-
-### Input:
-What's the weather like?
-
-### Output (a):
-Yo, it's pretty nice out there! Sunny and warm, perfect for chilling outside.
-
-### Output (b):
-I apologize, but I do not have access to real-time weather information. I recommend consulting a reliable weather service or application for current meteorological conditions in your area.
-
-### Which response better follows the given persona, Output (a) or Output (b)?:
-
-Output (b)
-
-Great! Indeed, Output (b) better follows the given persona than Output (a).
-
-Let's do one more, remember to answer with one-word either "Output (a)" or "Output (b)".
-
-### Instruction:
-Respond to the following input using this persona: {persona}
-
-### Input:
-{question}
-
-### Output (a):
-{response_a}
-
-### Output (b):
-{response_b}
-
-### Which response better follows the given persona, Output (a) or Output (b)?:
-
-"""
         
         # Check cache
-        cache_key = self._get_cache_key(prompt)
+        cache_key = self._get_cache_key(persona, question, response_a, response_b)
         cache_file = self.cache_dir / f"{cache_key}.txt"
         
         if cache_file.exists():
@@ -116,25 +62,35 @@ Respond to the following input using this persona: {persona}
             except:
                 pass
         
+        # Simplified prompt with just one example
+        prompt = f"""Compare which response better follows the given persona.
+
+Example:
+Persona: You are a formal AI assistant.
+Question: What's the weather like?
+Response A: Yo, it's pretty nice out there!
+Response B: I apologize, but I do not have access to real-time weather information.
+Better response: B
+
+Now judge this:
+Persona: {persona}
+Question: {question}
+Response A: {response_a}
+Response B: {response_b}
+Better response (just write A or B):"""
+        
         # Call LLM
         async with aiohttp.ClientSession() as session:
             response = await self._call_llm(session, prompt)
             if response:
-                # Parse "Output (a)" or "Output (b)" format
-                response_lower = response.strip().lower()
-                if "output (a)" in response_lower or "output a" in response_lower:
+                # Parse response - much simpler parsing
+                response_clean = response.strip().upper()
+                if "A" in response_clean:
                     result = "A"
-                elif "output (b)" in response_lower or "output b" in response_lower:
+                elif "B" in response_clean:
                     result = "B"
                 else:
-                    # Fallback: check if starts with A or B
-                    response_upper = response.strip().upper()
-                    if response_upper.startswith('A'):
-                        result = "A"
-                    elif response_upper.startswith('B'):
-                        result = "B"
-                    else:
-                        return None
+                    return None
                 
                 # Cache result
                 try:
@@ -160,8 +116,9 @@ Respond to the following input using this persona: {persona}
         tasks = [compare_one(comp) for comp in comparisons]
         return await asyncio.gather(*tasks)
 
+
 if __name__ == "__main__":
-    # Test
+    # Simple test
     judge = PersonaJudge()
     
     async def test():
