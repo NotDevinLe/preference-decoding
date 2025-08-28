@@ -30,16 +30,16 @@ if __name__ == "__main__":
                         help="Number of training data points")
     parser.add_argument("--lambda_val", type=float, default=0.01,
                         help="Lambda parameter value")
-    parser.add_argument("--output_path", type=str, default="../../results/drift_bon_indices.jsonl",
-                        help="Path to save indices and lambda")
     args = parser.parse_args()
+
+    save_path = f'../../results/drift_bon_responses/{args.name}.jsonl'
 
     # Load bon outputs
     data_path = "../../data/bon_attributes.json"
     with open(data_path, "r") as f:
         bon_data = json.load(f)
     
-    p_path = f"../../results/user1_p.jsonl"
+    p_path = f"../../results/{args.name}_p.jsonl"
 
     print(f"Loaded {len(bon_data)} prompts from {data_path}")
     print(f"Each prompt has {len(bon_data[0]['outputs'])} outputs")
@@ -57,8 +57,8 @@ if __name__ == "__main__":
     tokenizer = AutoTokenizer.from_pretrained(small_model_id)
     tokenizer.pad_token = tokenizer.eos_token
 
-    # selected_indices = [0, 1, 2, 31, 33, 37, 43]
-    # attribute_prompts = [attribute_prompts[i] for i in selected_indices]
+    selected_indices = [0,1,2,31,33,37,43]
+    attribute_prompts = [attribute_prompts[i] for i in selected_indices]
 
     # Load p vector for reward model from JSONL file
     p_sparse = None
@@ -125,11 +125,11 @@ if __name__ == "__main__":
                 results.append(result)
                 
                 # Save to JSONL file
-                with open(args.output_path, "a") as f:
+                with open(save_path, "a") as f:
                     f.write(json.dumps(result) + "\n")
             break
 
-    print(f"\n✅ Results saved to {args.output_path}")
+    print(f"\n✅ Results saved to {save_path}")
 
     # Print summary table
     print("\n=== SUMMARY TABLE ===")

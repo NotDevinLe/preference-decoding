@@ -13,12 +13,15 @@ from typing import List, Dict, Any
 from tqdm import tqdm
 import torch
 
-# Add project root to path
-sys.path.append(str(Path(__file__).parent.parent.parent))
+# Add project root and utils to path
+project_root = Path(__file__).parent.parent.parent
+sys.path.append(str(project_root))
+sys.path.append(str(project_root / "utils"))
 
 from vllm import LLM, SamplingParams
 from transformers import AutoTokenizer
-from attributes.personas import persona_prompts
+# Import persona_prompts directly to avoid circular imports
+from attribute_prompts import persona_prompts
 
 
 def load_questions(data_file: str, num_questions: int = 100) -> List[str]:
@@ -119,7 +122,7 @@ def main():
     parser.add_argument(
         "--model-name",
         type=str,
-        default="meta-llama/Llama-3.1-8B-Instruct",
+        default="meta-llama/Meta-Llama-3.1-8B-Instruct",
         help="Model to use for generation"
     )
     parser.add_argument(
@@ -133,6 +136,12 @@ def main():
         type=int,
         default=None,
         help="Number of personas to process (default: all)"
+    )
+    parser.add_argument(
+        "--persona-index",
+        type=int,
+        default=None,
+        help="Specific persona index to process (0-based)"
     )
     parser.add_argument(
         "--batch-size",
@@ -183,12 +192,21 @@ def main():
     completed_personas = set(all_data.get("completed_indices", []))
     
     # Determine personas to process
-    num_personas = args.num_personas or len(persona_prompts)
-    num_personas = min(num_personas, len(persona_prompts))
+    if args.persona_index is not None:
+        if args.persona_index < 0 or args.persona_index >= len(persona_prompts):
+            print(f"Error: persona-index {args.persona_index} is out of range (0-{len(persona_prompts)-1})")
+            return
+        persona_indices = [args.persona_index]
+        print(f"\nGenerating responses for persona {args.persona_index}")
+        print(f"Persona: {persona_prompts[args.persona_index][:100]}...")
+    else:
+        num_personas = args.num_personas or len(persona_prompts)
+        num_personas = min(num_personas, len(persona_prompts))
+        persona_indices = list(range(num_personas))
+        print(f"\nGenerating responses for {num_personas} personas")
     
-    print(f"\nGenerating responses for {num_personas} personas")
     print(f"Using {len(questions)} questions")
-    print(f"Total generations: {num_personas * len(questions)}")
+    print(f"Total generations: {len(persona_indices) * len(questions)}")
     
     if completed_personas:
         print(f"Resuming from checkpoint - {len(completed_personas)} personas already completed")
@@ -204,17 +222,18 @@ def main():
     
     # Update metadata
     all_data["metadata"] = {
-        "num_personas": num_personas,
+        "num_personas": len(persona_indices),
         "num_questions": len(questions),
-        "total_responses": num_personas * len(questions),
+        "total_responses": len(persona_indices) * len(questions),
         "model": args.model_name,
         "temperature": args.temperature,
         "max_tokens": args.max_tokens,
-        "questions": questions
+        "questions": questions,
+        "persona_indices": persona_indices
     }
     
     # Generate responses for each persona
-    for persona_idx in tqdm(range(num_personas), desc="Processing personas"):
+    for persona_idx in tqdm(persona_indices, desc="Processing personas"):
         if persona_idx in completed_personas:
             print(f"Skipping persona {persona_idx} (already completed)")
             continue
@@ -263,9 +282,9 @@ def main():
     save_all_data(output_file, all_data)
     
     print(f"\n✓ Generation complete! Saved to {output_file}")
-    print(f"  - {num_personas} personas")
+    print(f"  - {len(persona_indices)} personas")
     print(f"  - {len(questions)} questions each")
-    print(f"  - {num_personas * len(questions)} total responses")
+    print(f"  - {len(persona_indices) * len(questions)} total responses")
     
     # Print file size
     file_size_mb = output_file.stat().st_size / (1024 * 1024)

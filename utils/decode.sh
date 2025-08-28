@@ -19,4 +19,4 @@ export PATH=/gscratch/ark/devinl6/envs/align/bin:$PATH
 export HF_HOME=/mmfs1/gscratch/ark/devinl6/hf_cache
 
 # Run Python script with unbuffered output
-python generate_expectation_matrix.py --name user1 --num_expectation_samples=16 --sample_size=200
+python decoding/drift_decoding.py --name user8

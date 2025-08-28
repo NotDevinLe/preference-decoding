@@ -1,3 +1,10 @@
+import sys
+from pathlib import Path
+
+# Add parent directory to path to import drift module
+utils_dir = Path(__file__).parent.parent
+sys.path.append(str(utils_dir))
+
 from drift import DriftLogitsProcessor
 import torch
 import torch.nn.functional as F
@@ -9,16 +16,12 @@ from attribute_prompts import attribute_prompts, base_prompt
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--batch_size', type=int, default=4)  # Add batch size parameter
+parser.add_argument('--batch_size', type=int, default=1)  # Add batch size parameter
 parser.add_argument('--sample_size', type=int, default=200)
 parser.add_argument('--name', type=str, default='user1')
 args = parser.parse_args()
 
-# Load data
-with open(f'../results/preference/{args.name}_p.json', 'r') as f: 
-    p_list = json.load(f)
-
-with open('../data/bon.json', 'r') as f:
+with open('../data/bon_attributes.json', 'r') as f:
     data = json.load(f)
 
 prompts = [entry['prompt'] for entry in data]
@@ -52,13 +55,37 @@ small_model.eval()
 
 # Find p vector
 p = None
-for entry in p_list:
-    if entry['lambda'] == 0.01 and entry['sample_size'] == args.sample_size:
-        p = entry['p']
-        break
+with open(f'../results/{args.name}_p.jsonl', 'r') as f:
+    p_list = [json.loads(line) for line in f]
+    for entry in p_list:
+        if entry['lambda0'] == 0:
+            p = entry['p']
+            break
 
 if p is None:
-    raise ValueError(f"Could not find p vector with lambda=0.01 and sample_size={args.sample_size}")
+    raise ValueError(f"Could not find p vector with lambda0=0")
+
+# Normalize p vector
+p_array = np.array(p)
+p_array = p_array / np.linalg.norm(p_array)
+print(f"Normalized p vector (L2 norm)")
+
+# Sparsify p - keep only top k elements
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+abs_p = np.abs(p_array)
+topk_idx = np.argsort(abs_p)[-7:]  # Get indices of top 7 elements
+
+# Create sparse p
+p_sparse = np.zeros_like(p_array)
+p_sparse[topk_idx] = p_array[topk_idx]
+
+print(f"Sparsified to top 7 elements:")
+print(f"  Non-zero: {np.sum(p_sparse != 0)}")
+print(f"  Active indices: {topk_idx.tolist()}")
+print(f"  Values: {p_sparse[topk_idx]}")
+
+# Convert to list for DriftLogitsProcessor
+p = p_sparse.tolist()
 
 print(f"Using p vector: {p[:5]}...")  # Print first 5 elements
 

@@ -1,0 +1,926 @@
+{
+  "info": {
+    "user": "user8",
+    "n": 16,
+    "training_size": 200,
+    "lambda": 0.005,
+    "selected_indices": [
+      5,
+      5,
+      2,
+      5,
+      5,
+      5,
+      5,
+      5,
+      7,
+      5,
+      5,
+      5,
+      5,
+      14,
+      8,
+      5,
+      5,
+      15,
+      7,
+      5,
+      5,
+      5,
+      7,
+      5,
+      0,
+      0,
+      5,
+      2,
+      10,
+      5,
+      5,
+      10,
+      10,
+      5,
+      5,
+      15,
+      5,
+      5,
+      7,
+      5,
+      5,
+      5,
+      5,
+      5,
+      3,
+      5,
+      5,
+      5,
+      13,
+      5,
+      5,
+      5,
+      2,
+      8,
+      5,
+      5,
+      7,
+      5,
+      7,
+      5,
+      7,
+      10,
+      3,
+      10,
+      5,
+      4,
+      5,
+      5,
+      5,
+      5,
+      9,
+      5,
+      13,
+      2,
+      5,
+      15,
+      7,
+      5,
+      5,
+      5,
+      2,
+      5,
+      5,
+      5,
+      7,
+      5,
+      5,
+      10,
+      7,
+      13,
+      13,
+      5,
+      7,
+      5,
+      7,
+      10,
+      5,
+      7,
+      13,
+      5
+    ],
+    "num_prompts": 100
+  },
+  "statistics": {
+    "mean_win_rate": 76.3016983016983,
+    "std_win_rate": 22.921771821962512,
+    "median_win_rate": 80.0,
+    "min_win_rate": 0.0,
+    "max_win_rate": 100.0,
+    "num_prompts": 100,
+    "prompts_above_50": 87,
+    "prompts_above_60": 85,
+    "prompts_above_70": 76
+  },
+  "per_prompt_win_percentages": [
+    86.66666666666667,
+    73.33333333333333,
+    86.66666666666667,
+    92.85714285714286,
+    93.33333333333333,
+    80.0,
+    80.0,
+    64.28571428571429,
+    86.66666666666667,
+    80.0,
+    54.54545454545454,
+    80.0,
+    73.33333333333333,
+    0.0,
+    23.076923076923077,
+    73.33333333333333,
+    53.333333333333336,
+    71.42857142857143,
+    100.0,
+    85.71428571428571,
+    80.0,
+    66.66666666666666,
+    100.0,
+    80.0,
+    100.0,
+    84.61538461538461,
+    80.0,
+    93.33333333333333,
+    90.0,
+    75.0,
+    93.33333333333333,
+    93.33333333333333,
+    80.0,
+    93.33333333333333,
+    100.0,
+    76.92307692307693,
+    100.0,
+    73.33333333333333,
+    100.0,
+    80.0,
+    83.33333333333334,
+    71.42857142857143,
+    62.5,
+    80.0,
+    88.88888888888889,
+    90.9090909090909,
+    100.0,
+    85.71428571428571,
+    63.63636363636363,
+    86.66666666666667,
+    70.0,
+    85.71428571428571,
+    92.85714285714286,
+    50.0,
+    61.53846153846154,
+    86.66666666666667,
+    50.0,
+    85.71428571428571,
+    85.71428571428571,
+    86.66666666666667,
+    78.57142857142857,
+    86.66666666666667,
+    93.33333333333333,
+    100.0,
+    76.92307692307693,
+    50.0,
+    85.71428571428571,
+    0.0,
+    0,
+    86.66666666666667,
+    37.5,
+    100.0,
+    20.0,
+    92.85714285714286,
+    83.33333333333334,
+    11.11111111111111,
+    86.66666666666667,
+    80.0,
+    75.0,
+    81.81818181818183,
+    80.0,
+    66.66666666666666,
+    66.66666666666666,
+    40.0,
+    93.33333333333333,
+    100.0,
+    42.857142857142854,
+    92.3076923076923,
+    100.0,
+    73.33333333333333,
+    90.0,
+    80.0,
+    100.0,
+    25.0,
+    100.0,
+    90.9090909090909,
+    61.53846153846154,
+    100.0,
+    75.0,
+    80.0
+  ],
+  "detailed_results": {
+    "0": {
+      "wins": 13,
+      "losses": 2,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "1": {
+      "wins": 11,
+      "losses": 4,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "2": {
+      "wins": 13,
+      "losses": 2,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 2
+    },
+    "3": {
+      "wins": 13,
+      "losses": 1,
+      "ties": 1,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "4": {
+      "wins": 14,
+      "losses": 1,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "5": {
+      "wins": 12,
+      "losses": 3,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "6": {
+      "wins": 12,
+      "losses": 3,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "7": {
+      "wins": 9,
+      "losses": 5,
+      "ties": 1,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "8": {
+      "wins": 13,
+      "losses": 2,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 7
+    },
+    "9": {
+      "wins": 12,
+      "losses": 3,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "10": {
+      "wins": 6,
+      "losses": 5,
+      "ties": 4,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "11": {
+      "wins": 12,
+      "losses": 3,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "12": {
+      "wins": 11,
+      "losses": 4,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "13": {
+      "wins": 0,
+      "losses": 5,
+      "ties": 10,
+      "errors": 0,
+      "selected_idx": 14
+    },
+    "14": {
+      "wins": 3,
+      "losses": 10,
+      "ties": 2,
+      "errors": 0,
+      "selected_idx": 8
+    },
+    "15": {
+      "wins": 11,
+      "losses": 4,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "16": {
+      "wins": 8,
+      "losses": 7,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "17": {
+      "wins": 5,
+      "losses": 2,
+      "ties": 8,
+      "errors": 0,
+      "selected_idx": 15
+    },
+    "18": {
+      "wins": 15,
+      "losses": 0,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 7
+    },
+    "19": {
+      "wins": 6,
+      "losses": 1,
+      "ties": 8,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "20": {
+      "wins": 12,
+      "losses": 3,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "21": {
+      "wins": 6,
+      "losses": 3,
+      "ties": 6,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "22": {
+      "wins": 15,
+      "losses": 0,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 7
+    },
+    "23": {
+      "wins": 12,
+      "losses": 3,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "24": {
+      "wins": 15,
+      "losses": 0,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 0
+    },
+    "25": {
+      "wins": 11,
+      "losses": 2,
+      "ties": 2,
+      "errors": 0,
+      "selected_idx": 0
+    },
+    "26": {
+      "wins": 12,
+      "losses": 3,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "27": {
+      "wins": 14,
+      "losses": 1,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 2
+    },
+    "28": {
+      "wins": 9,
+      "losses": 1,
+      "ties": 5,
+      "errors": 0,
+      "selected_idx": 10
+    },
+    "29": {
+      "wins": 9,
+      "losses": 3,
+      "ties": 3,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "30": {
+      "wins": 14,
+      "losses": 1,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "31": {
+      "wins": 14,
+      "losses": 1,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 10
+    },
+    "32": {
+      "wins": 12,
+      "losses": 3,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 10
+    },
+    "33": {
+      "wins": 14,
+      "losses": 1,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "34": {
+      "wins": 14,
+      "losses": 0,
+      "ties": 1,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "35": {
+      "wins": 10,
+      "losses": 3,
+      "ties": 2,
+      "errors": 0,
+      "selected_idx": 15
+    },
+    "36": {
+      "wins": 15,
+      "losses": 0,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "37": {
+      "wins": 11,
+      "losses": 4,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "38": {
+      "wins": 15,
+      "losses": 0,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 7
+    },
+    "39": {
+      "wins": 12,
+      "losses": 3,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "40": {
+      "wins": 5,
+      "losses": 1,
+      "ties": 9,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "41": {
+      "wins": 5,
+      "losses": 2,
+      "ties": 8,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "42": {
+      "wins": 5,
+      "losses": 3,
+      "ties": 7,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "43": {
+      "wins": 12,
+      "losses": 3,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "44": {
+      "wins": 8,
+      "losses": 1,
+      "ties": 6,
+      "errors": 0,
+      "selected_idx": 3
+    },
+    "45": {
+      "wins": 10,
+      "losses": 1,
+      "ties": 4,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "46": {
+      "wins": 4,
+      "losses": 0,
+      "ties": 11,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "47": {
+      "wins": 12,
+      "losses": 2,
+      "ties": 1,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "48": {
+      "wins": 7,
+      "losses": 4,
+      "ties": 4,
+      "errors": 0,
+      "selected_idx": 13
+    },
+    "49": {
+      "wins": 13,
+      "losses": 2,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "50": {
+      "wins": 7,
+      "losses": 3,
+      "ties": 5,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "51": {
+      "wins": 6,
+      "losses": 1,
+      "ties": 8,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "52": {
+      "wins": 13,
+      "losses": 1,
+      "ties": 1,
+      "errors": 0,
+      "selected_idx": 2
+    },
+    "53": {
+      "wins": 1,
+      "losses": 1,
+      "ties": 13,
+      "errors": 0,
+      "selected_idx": 8
+    },
+    "54": {
+      "wins": 8,
+      "losses": 5,
+      "ties": 2,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "55": {
+      "wins": 13,
+      "losses": 2,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "56": {
+      "wins": 3,
+      "losses": 3,
+      "ties": 9,
+      "errors": 0,
+      "selected_idx": 7
+    },
+    "57": {
+      "wins": 12,
+      "losses": 2,
+      "ties": 1,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "58": {
+      "wins": 12,
+      "losses": 2,
+      "ties": 1,
+      "errors": 0,
+      "selected_idx": 7
+    },
+    "59": {
+      "wins": 13,
+      "losses": 2,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "60": {
+      "wins": 11,
+      "losses": 3,
+      "ties": 1,
+      "errors": 0,
+      "selected_idx": 7
+    },
+    "61": {
+      "wins": 13,
+      "losses": 2,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 10
+    },
+    "62": {
+      "wins": 14,
+      "losses": 1,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 3
+    },
+    "63": {
+      "wins": 14,
+      "losses": 0,
+      "ties": 1,
+      "errors": 0,
+      "selected_idx": 10
+    },
+    "64": {
+      "wins": 10,
+      "losses": 3,
+      "ties": 2,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "65": {
+      "wins": 1,
+      "losses": 1,
+      "ties": 13,
+      "errors": 0,
+      "selected_idx": 4
+    },
+    "66": {
+      "wins": 12,
+      "losses": 2,
+      "ties": 1,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "67": {
+      "wins": 0,
+      "losses": 7,
+      "ties": 8,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "68": {
+      "wins": 0,
+      "losses": 0,
+      "ties": 15,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "69": {
+      "wins": 13,
+      "losses": 2,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "70": {
+      "wins": 3,
+      "losses": 5,
+      "ties": 7,
+      "errors": 0,
+      "selected_idx": 9
+    },
+    "71": {
+      "wins": 7,
+      "losses": 0,
+      "ties": 8,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "72": {
+      "wins": 1,
+      "losses": 4,
+      "ties": 10,
+      "errors": 0,
+      "selected_idx": 13
+    },
+    "73": {
+      "wins": 13,
+      "losses": 1,
+      "ties": 1,
+      "errors": 0,
+      "selected_idx": 2
+    },
+    "74": {
+      "wins": 5,
+      "losses": 1,
+      "ties": 9,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "75": {
+      "wins": 1,
+      "losses": 8,
+      "ties": 6,
+      "errors": 0,
+      "selected_idx": 15
+    },
+    "76": {
+      "wins": 13,
+      "losses": 2,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 7
+    },
+    "77": {
+      "wins": 12,
+      "losses": 3,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "78": {
+      "wins": 9,
+      "losses": 3,
+      "ties": 3,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "79": {
+      "wins": 9,
+      "losses": 2,
+      "ties": 4,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "80": {
+      "wins": 12,
+      "losses": 3,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 2
+    },
+    "81": {
+      "wins": 2,
+      "losses": 1,
+      "ties": 12,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "82": {
+      "wins": 8,
+      "losses": 4,
+      "ties": 3,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "83": {
+      "wins": 2,
+      "losses": 3,
+      "ties": 10,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "84": {
+      "wins": 14,
+      "losses": 1,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 7
+    },
+    "85": {
+      "wins": 5,
+      "losses": 0,
+      "ties": 10,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "86": {
+      "wins": 6,
+      "losses": 8,
+      "ties": 1,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "87": {
+      "wins": 12,
+      "losses": 1,
+      "ties": 2,
+      "errors": 0,
+      "selected_idx": 10
+    },
+    "88": {
+      "wins": 15,
+      "losses": 0,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 7
+    },
+    "89": {
+      "wins": 11,
+      "losses": 4,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 13
+    },
+    "90": {
+      "wins": 9,
+      "losses": 1,
+      "ties": 5,
+      "errors": 0,
+      "selected_idx": 13
+    },
+    "91": {
+      "wins": 8,
+      "losses": 2,
+      "ties": 5,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "92": {
+      "wins": 15,
+      "losses": 0,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 7
+    },
+    "93": {
+      "wins": 3,
+      "losses": 9,
+      "ties": 3,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "94": {
+      "wins": 7,
+      "losses": 0,
+      "ties": 8,
+      "errors": 0,
+      "selected_idx": 7
+    },
+    "95": {
+      "wins": 10,
+      "losses": 1,
+      "ties": 4,
+      "errors": 0,
+      "selected_idx": 10
+    },
+    "96": {
+      "wins": 8,
+      "losses": 5,
+      "ties": 2,
+      "errors": 0,
+      "selected_idx": 5
+    },
+    "97": {
+      "wins": 13,
+      "losses": 0,
+      "ties": 2,
+      "errors": 0,
+      "selected_idx": 7
+    },
+    "98": {
+      "wins": 9,
+      "losses": 3,
+      "ties": 3,
+      "errors": 0,
+      "selected_idx": 13
+    },
+    "99": {
+      "wins": 12,
+      "losses": 3,
+      "ties": 0,
+      "errors": 0,
+      "selected_idx": 5
+    }
+  }
+}

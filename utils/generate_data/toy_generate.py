@@ -6,6 +6,13 @@ from transformers import AutoTokenizer
 import json
 import random
 from datasets import load_dataset
+import sys
+from pathlib import Path
+
+# Add utils directory to path
+utils_dir = Path(__file__).parent.parent
+sys.path.append(str(utils_dir))
+
 from attribute_prompts import persona_prompts, base_prompt
 
 # Args
@@ -13,7 +20,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--name_idx", type=int, required=True)
 parser.add_argument("--sample_size", type=int, required=True)
 parser.add_argument("--split", type=str, default="train", choices=["train", "test", "val"], help="Generate train or test split")
-parser.add_argument("--save_path", type=str, default="../../data/preference", help="Path to save preference data")
+parser.add_argument("--save_path", type=str, default="../data/preference", help="Path to save preference data")
 args = parser.parse_args()
 
 name_idx = args.name_idx

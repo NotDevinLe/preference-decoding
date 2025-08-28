@@ -41,13 +41,11 @@ print(f"Using device: {device}")
 print("Loading model...")
 model = vllm.LLM(model=small_model_id, tensor_parallel_size=1, gpu_memory_utilization=0.7, max_model_len=4096)
 
-# model = AutoModelForCausalLM.from_pretrained(small_model_id, device_map="auto", torch_dtype=torch.bfloat16)
-
 tokenizer = AutoTokenizer.from_pretrained(small_model_id)
 tokenizer.pad_token = tokenizer.eos_token
 
-# selected_attr_idx = [0, 1, 2, 31, 33, 37, 43]
-# attribute_prompts = [attribute_prompts[i] for i in selected_attr_idx]
+selected_attr_idx = [0,1,2,31,33,37,43]
+attribute_prompts = [attribute_prompts[i] for i in selected_attr_idx]
 
 data = []
 for j in range(args.samples):
