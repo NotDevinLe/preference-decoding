@@ -24,7 +24,7 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--name", type=str, required=True)
-    parser.add_argument("--n_values", type=str, default="5,10,15,20,50,100,150,200",
+    parser.add_argument("--n_values", type=str, default="16",
                         help="Comma-separated list of n values for best-of-n sampling")
     parser.add_argument("--training_size", type=int, default=200,
                         help="Number of training data points")
@@ -57,8 +57,8 @@ if __name__ == "__main__":
     tokenizer = AutoTokenizer.from_pretrained(small_model_id)
     tokenizer.pad_token = tokenizer.eos_token
 
-    selected_indices = [0,1,2,31,33,37,43]
-    attribute_prompts = [attribute_prompts[i] for i in selected_indices]
+    # selected_indices = [0,1,2,31,33,37,43]
+    # attribute_prompts = [attribute_prompts[i] for i in selected_indices]
 
     # Load p vector for reward model from JSONL file
     p_sparse = None

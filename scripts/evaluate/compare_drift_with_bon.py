@@ -69,11 +69,18 @@ async def run_batch_with_retry(judge, batch: List[Dict], max_retries: int = 3):
 
 def main():
     # Load BON data
+
+    name = "user1"
+
     data_path = project_root / "data" / "bon_attributes.json"
     with open(data_path, "r") as f:
         data = json.load(f)
+
+    drift_path = project_root / "results" / "drift_decoding_responses" / f"{name}.json"
+    with open(drift_path, "r") as f:
+        drift_info = json.load(f)
     
-    info = {"user": "user8", "n": 16, "training_size": 200, "lambda": 0.01, "selected_indices": [5, 5, 2, 5, 5, 5, 5, 5, 7, 13, 5, 5, 5, 7, 0, 5, 5, 5, 7, 5, 5, 5, 5, 5, 9, 13, 5, 2, 5, 5, 5, 10, 12, 5, 5, 7, 5, 5, 7, 5, 5, 5, 5, 5, 3, 5, 7, 5, 13, 5, 5, 5, 2, 13, 5, 3, 7, 5, 7, 5, 7, 13, 5, 10, 5, 4, 5, 5, 5, 5, 9, 5, 5, 3, 4, 5, 7, 5, 5, 5, 5, 5, 5, 5, 7, 5, 5, 5, 7, 13, 13, 5, 10, 5, 7, 13, 5, 7, 13, 5], "num_prompts": 100}
+    info = {"user": "user1", "n": 16, "training_size": 200, "lambda": 0.001, "selected_indices": [5, 1, 12, 5, 5, 5, 5, 7, 5, 10, 9, 8, 5, 12, 4, 12, 9, 15, 7, 5, 5, 12, 13, 4, 10, 0, 9, 12, 12, 5, 15, 10, 9, 5, 5, 15, 13, 5, 12, 5, 8, 12, 5, 5, 15, 5, 1, 10, 13, 15, 4, 13, 9, 4, 15, 9, 9, 12, 9, 9, 1, 9, 15, 9, 12, 12, 5, 5, 6, 5, 12, 6, 4, 15, 4, 15, 7, 12, 5, 8, 1, 12, 9, 5, 8, 5, 8, 10, 10, 12, 13, 9, 6, 4, 4, 9, 15, 9, 8, 9], "num_prompts": 100}
 
     print(f"Comparing BON selections vs random for {info['user']}")
     print(f"N={info['n']}, Lambda={info['lambda']}")
@@ -84,7 +91,7 @@ def main():
     
     # Track wins
     bon_wins = 0
-    random_wins = 0
+    drift_wins = 0
     ties = 0
     errors = 0
     
@@ -92,7 +99,7 @@ def main():
     random.seed(42)
     
     async def compare_all():
-        nonlocal bon_wins, random_wins, ties, errors
+        nonlocal bon_wins, drift_wins, ties, errors
         
         comparisons = []
         
@@ -102,25 +109,9 @@ def main():
                 print(f"Warning: Skipping index {i}, not enough data")
                 continue
             
-            # Get random index (make sure it's valid and different from BON selection)
-            max_outputs = len(data[i]['outputs'])
-            random_index = random.randint(0, max_outputs - 1)
-            
-            # Retry if same as BON selection (up to 5 times)
-            retries = 0
-            while random_index == selected_index and retries < 5:
-                random_index = random.randint(0, max_outputs - 1)
-                retries += 1
-            
-            # Skip if they're still the same after retries
-            if random_index == selected_index:
-                print(f"Prompt {i}: Could not find different random index, skipping")
-                ties += 1
-                continue
-            
             # Get outputs
             try:
-                random_output = data[i]['outputs'][random_index]
+                drift_output = drift_info[i]['response']
                 bon_output = data[i]['outputs'][selected_index]
             except IndexError as e:
                 print(f"Prompt {i}: Index error - {e}, skipping")
@@ -135,10 +126,10 @@ def main():
                 'persona': persona,
                 'question': prompt,
                 'response_a': bon_output,  # BON selected
-                'response_b': random_output,  # Random
+                'response_b': drift_output,  # Random
                 'prompt_idx': i,
                 'bon_idx': selected_index,
-                'random_idx': random_index
+                'drift_idx': 0
             })
         
         print(f"Running {len(comparisons)} comparisons...")
@@ -160,8 +151,8 @@ def main():
                 bon_wins += 1
                 winner = "BON"
             elif result == "B":
-                random_wins += 1
-                winner = "Random"
+                drift_wins += 1
+                winner = "Drift"
             elif result == "Error":
                 errors += 1
                 winner = "Error"
@@ -169,7 +160,7 @@ def main():
                 ties += 1
                 winner = "Tie"
             
-            print(f"Prompt {i}: BON[{comp['bon_idx']}] vs Random[{comp['random_idx']}] -> {winner}")
+            print(f"Prompt {i}: BON[{comp['bon_idx']}] vs Drift[{comp['drift_idx']}] -> {winner}")
     
     # Run async comparison
     try:
@@ -182,26 +173,26 @@ def main():
         return
     
     # Print results
-    total_comparisons = bon_wins + random_wins + ties + errors
-    valid_comparisons = bon_wins + random_wins + ties
+    total_comparisons = bon_wins + drift_wins + ties + errors
+    valid_comparisons = bon_wins + drift_wins + ties
     
     print(f"\n{'='*50}")
     print("RESULTS:")
     print(f"{'='*50}")
     print(f"BON wins: {bon_wins} ({bon_wins/valid_comparisons*100:.1f}% of valid)")
-    print(f"Random wins: {random_wins} ({random_wins/valid_comparisons*100:.1f}% of valid)")
+    print(f"Drift wins: {drift_wins} ({drift_wins/valid_comparisons*100:.1f}% of valid)")
     print(f"Ties: {ties} ({ties/valid_comparisons*100:.1f}% of valid)")
     print(f"Errors: {errors}")
     print(f"Total attempted: {total_comparisons}")
     print(f"Valid comparisons: {valid_comparisons}")
     
     if valid_comparisons > 0:
-        if bon_wins > random_wins:
-            print(f"\n🎉 BON selection outperforms random by {bon_wins - random_wins} wins!")
-        elif random_wins > bon_wins:
-            print(f"\n⚠️  Random selection outperforms BON by {random_wins - bon_wins} wins")
+        if bon_wins > drift_wins:
+            print(f"\n🎉 BON selection outperforms random by {bon_wins - drift_wins} wins!")
+        elif drift_wins > bon_wins:
+            print(f"\n⚠️  Drift selection outperforms BON by {drift_wins - bon_wins} wins")
         else:
-            print(f"\n🤷 BON and random perform equally")
+            print(f"\n🤷 BON and drift perform equally")
     else:
         print(f"\n❌ No valid comparisons completed")
     
@@ -214,7 +205,7 @@ def main():
             "info": info,
             "results": {
                 "bon_wins": bon_wins,
-                "random_wins": random_wins,
+                "drift_wins": drift_wins,
                 "ties": ties,
                 "errors": errors,
                 "total_attempted": total_comparisons,

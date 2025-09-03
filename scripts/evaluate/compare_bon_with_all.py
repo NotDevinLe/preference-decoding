@@ -19,6 +19,8 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 from src.evaluation.judges.llm_judge import PersonaJudge
+from src.core.attribute_prompts import persona_prompts
+import argparse
 
 async def run_comparisons_with_rate_limit(judge, comparisons: List[Dict], 
                                         max_concurrent: int = 10, 
@@ -75,7 +77,7 @@ def main():
         data = json.load(f)
     
     # Example info - update with your actual drift_bon results
-    info = {"user": "user8", "n": 16, "training_size": 200, "lambda": 0.005, "selected_indices": [5, 5, 2, 5, 5, 5, 5, 5, 7, 5, 5, 5, 5, 14, 8, 5, 5, 15, 7, 5, 5, 5, 7, 5, 0, 0, 5, 2, 10, 5, 5, 10, 10, 5, 5, 15, 5, 5, 7, 5, 5, 5, 5, 5, 3, 5, 5, 5, 13, 5, 5, 5, 2, 8, 5, 5, 7, 5, 7, 5, 7, 10, 3, 10, 5, 4, 5, 5, 5, 5, 9, 5, 13, 2, 5, 15, 7, 5, 5, 5, 2, 5, 5, 5, 7, 5, 5, 10, 7, 13, 13, 5, 7, 5, 7, 10, 5, 7, 13, 5], "num_prompts": 100}
+    info = {"user": "user1", "n": 16, "training_size": 200, "lambda": 0.0, "selected_indices": [5, 5, 1, 13, 5, 13, 5, 7, 7, 12, 9, 12, 5, 12, 4, 13, 14, 15, 10, 5, 10, 13, 13, 4, 10, 0, 12, 13, 12, 5, 5, 10, 9, 5, 9, 15, 13, 13, 12, 5, 12, 4, 13, 5, 15, 13, 13, 10, 13, 15, 4, 13, 5, 13, 15, 3, 9, 5, 13, 5, 1, 3, 6, 13, 7, 12, 2, 2, 6, 5, 12, 7, 13, 15, 4, 15, 7, 12, 13, 8, 13, 15, 12, 3, 7, 13, 8, 10, 10, 4, 13, 13, 3, 4, 13, 13, 8, 9, 13, 13], "num_prompts": 100}
 
     print(f"Comparing BON selections vs ALL other outputs for {info['user']}")
     print(f"N={info['n']}, Lambda={info['lambda']}")
@@ -83,9 +85,13 @@ def main():
     
     # Initialize judge
     judge = PersonaJudge(base_url="https://api.openai.com/v1", model="gpt-4o")
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--name_idx", type=int, default=0)
+    args = parser.parse_args()
     
     # Use the same persona as in compare_bon_with_random.py
-    persona = "You are an AI assistant who speaks like a seasoned comic. You are playful, often irreverent. You tend to respond with clever jokes, sarcasm, and punchy comebacks. You value humor, levity, and not taking things too seriously."
+    persona = persona_prompts[args.name_idx]
     
     async def compare_all():
         prompt_win_percentages = []
