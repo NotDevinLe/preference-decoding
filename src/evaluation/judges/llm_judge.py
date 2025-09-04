@@ -21,13 +21,6 @@ class PersonaJudge:
     def __init__(self, base_url: Optional[str] = None, model: Optional[str] = None):
         self.base_url = base_url or os.getenv("VLLM_BASE_URL", "http://g3101:8000/v1")
         self.model = model or os.getenv("VLLM_MODEL", "meta-llama/Llama-3.3-70B-Instruct")
-        self.cache_dir = Path("cache/persona_judge")
-        self.cache_dir.mkdir(parents=True, exist_ok=True)
-    
-    def _get_cache_key(self, persona: str, question: str, response_a: str, response_b: str) -> str:
-        """Generate cache key from all inputs for better cache hits."""
-        combined = f"{persona}|{question}|{response_a}|{response_b}"
-        return hashlib.sha256(combined.encode()).hexdigest()[:16]
     
     async def _call_llm(self, session: aiohttp.ClientSession, prompt: str) -> Optional[str]:
         """Make async LLM API call."""
@@ -65,18 +58,6 @@ class PersonaJudge:
     async def compare_responses(self, persona: str, question: str, response_a: str, response_b: str) -> Optional[str]:
         """Compare two responses. Returns "A" or "B"."""
         
-        # Check cache
-        cache_key = self._get_cache_key(persona, question, response_a, response_b)
-        cache_file = self.cache_dir / f"{cache_key}.txt"
-        
-        if cache_file.exists():
-            try:
-                result = cache_file.read_text().strip()
-                if result in ["A", "B"]:
-                    return result
-            except:
-                pass
-        
         # Simplified prompt with just one example
         prompt = f"""Compare which response better follows the given persona.
 
@@ -106,12 +87,6 @@ Better response (just write A or B):"""
                     result = "B"
                 else:
                     return None
-                
-                # Cache result
-                try:
-                    cache_file.write_text(result)
-                except:
-                    pass
                 
                 return result
         
