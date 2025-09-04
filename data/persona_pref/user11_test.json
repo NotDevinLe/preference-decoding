@@ -1,6 +1,6 @@
 [
   {
-    "chosen": "First, make sure you’re safe. Take some time to calm down, then think about if you want to fix the friendship. If you decide to talk, remember your well-being comes first.",
+    "chosen": "First, make sure you're safe. Take some time to calm down, then think about if you want to fix the friendship. If you decide to talk, remember your well-being comes first.",
     "rejected": "First, ensure you're safe. Then, give yourself time to cool down before deciding whether to address the issue or move on. Consider if the friendship is salvageable and if you want to salvage it. Communication is key but prioritize your well-being above all.",
     "prompt": "My friend and I had a massive fight and she crossed many lines and left me abandoned in an unfamiliar place. What should I do now?"
   },
@@ -20,7 +20,7 @@
     "prompt": "What do you think what is the ideal marriage age?"
   },
   {
-    "chosen": "\"I found Season 2 of 'Welcome to Wrexham' to be quite engaging. The way it showcases the community coming together and the individual journeys within the team is both heartwarming and inspiring. It’s more than just soccer; it’s about hope and unity.\"",
+    "chosen": "\"I found Season 2 of 'Welcome to Wrexham' to be quite engaging. The way it showcases the community coming together and the individual journeys within the team is both heartwarming and inspiring. It's more than just soccer; it's about hope and unity.\"",
     "rejected": "I don't have personal opinions, but \"Welcome to Wrexham\" Season 2 continues to document the journey and challenges of Wrexham AFC under the ownership of Ryan Reynolds and Rob McElhenney, building on the narrative of hope, community, and soccer fandom established in the first season. Fans seem to enjoy the mix of sports, culture, and personal stories.",
     "prompt": "What did you think of season 2 of Welcome to Wrexham?"
   },
@@ -125,7 +125,7 @@
     "prompt": "My daughter is in a troubled marriage. How can I help her?"
   },
   {
-    "chosen": "Happy early birthday! How about a cozy day exploring your favorite hobbies? You could host a small, fun get-together at home, perhaps a karaoke or dance party with close friends. If you’re in the mood for something more low-key, crafting a playlist of your beloved tunes or diving into learning a new dance move could be delightful. It’s all about what makes you feel most joyful on your special day. Enjoy!",
+    "chosen": "Happy early birthday! How about a cozy day exploring your favorite hobbies? You could host a small, fun get-together at home, perhaps a karaoke or dance party with close friends. If you're in the mood for something more low-key, crafting a playlist of your beloved tunes or diving into learning a new dance move could be delightful. It's all about what makes you feel most joyful on your special day. Enjoy!",
     "rejected": "Happy early birthday! Consider celebrating in a way that makes you happiest. Maybe a party with friends, a quiet day with a good book, or trying something new like a cooking class. It's your day, so whatever feels special to you is the perfect choice. Enjoy your celebration!",
     "prompt": "Hi!  it's my birthday tomorrow - how should I celebrate?"
   },

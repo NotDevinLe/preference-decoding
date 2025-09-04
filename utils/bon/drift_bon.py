@@ -10,11 +10,11 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 try:
     from utils.drift import get_scores
-    from utils.attribute_prompts import attribute_prompts, base_prompt
+    from utils.attribute_prompts import attribute_prompts, base_prompt, persona_prompts_3, persona_selected, attribute_selected
 except ImportError:
     sys.path.append('..')
     from drift import get_scores
-    from attribute_prompts import attribute_prompts, base_prompt
+    from attribute_prompts import attribute_prompts, base_prompt, persona_prompts_3, persona_selected, attribute_selected
 from vllm import LLM
 
 if __name__ == "__main__":
@@ -26,10 +26,11 @@ if __name__ == "__main__":
     parser.add_argument("--name", type=str, required=True)
     parser.add_argument("--n_values", type=str, default="16",
                         help="Comma-separated list of n values for best-of-n sampling")
-    parser.add_argument("--training_size", type=int, default=200,
+    parser.add_argument("--training_size", type=int, default=150,
                         help="Number of training data points")
     parser.add_argument("--lambda_val", type=float, default=0.01,
                         help="Lambda parameter value")
+    parser.add_argument('--system_prompt_list', type=str, choices=['personas', 'attributes'])
     args = parser.parse_args()
 
     save_path = f'../../results/drift_bon_responses/{args.name}.jsonl'
@@ -55,10 +56,12 @@ if __name__ == "__main__":
     model = LLM(model=small_model_id, tensor_parallel_size=1, gpu_memory_utilization=0.5, max_model_len=8192)
 
     tokenizer = AutoTokenizer.from_pretrained(small_model_id)
-    tokenizer.pad_token = tokenizer.eos_token
+    tokenizer.pad_token = tokenizer.eos_token   
 
-    # selected_indices = [0,1,2,31,33,37,43]
-    # attribute_prompts = [attribute_prompts[i] for i in selected_indices]
+    system_prompts = persona_prompts_3 if args.system_prompt_list == 'personas' else attribute_prompts
+    selected_idx = persona_selected if args.system_prompt_list == 'personas' else attribute_selected
+    selected_attr_idx = selected_idx[args.lambda_val]
+    system_prompts = [system_prompts[i] for i in selected_attr_idx]
 
     # Load p vector for reward model from JSONL file
     p_sparse = None
@@ -66,7 +69,7 @@ if __name__ == "__main__":
         for line in f:
             p_entry = json.loads(line.strip())
 
-            if p_entry["lambda0"] != args.lambda_val:
+            if p_entry["lambda0"] != args.lambda_val or p_entry["system_prompt_list"] != args.system_prompt_list:
                 continue
             
             p = torch.tensor(p_entry["p"], device=device, dtype=torch.float32)
@@ -99,7 +102,7 @@ if __name__ == "__main__":
                 # Score all outputs with reward model
                 all_scores = get_scores(
                     [(item["prompt"], item["outputs"]) for item in bon_data_subset],
-                    model, p_sparse.cpu().numpy(), base_prompt, attribute_prompts, device, tokenizer
+                    model, p_sparse.cpu().numpy(), base_prompt, system_prompts, device, tokenizer
                 )
                 
                 # For each prompt, get the index of the output with the highest reward model score
@@ -120,7 +123,8 @@ if __name__ == "__main__":
                     "training_size": args.training_size,
                     "lambda": p_entry["lambda0"],
                     "selected_indices": selected_indices,
-                    "num_prompts": len(selected_indices)
+                    "num_prompts": len(selected_indices),
+                    "system_prompt_list": args.system_prompt_list
                 }
                 results.append(result)
                 
@@ -133,7 +137,7 @@ if __name__ == "__main__":
 
     # Print summary table
     print("\n=== SUMMARY TABLE ===")
-    print(f"{'n':<10} {'Num Prompts':<15} {'Lambda':<10}")
+    print(f"{'n':<10} {'Num Prompts':<15} {'Lambda':<10} {'System Prompt List':<15}")
     print("-" * 35)
     for r in results:
-        print(f"{r['n']:<10} {r['num_prompts']:<15} {r['lambda']:<10}")
+        print(f"{r['n']:<10} {r['num_prompts']:<15} {r['lambda']:<10} {r['system_prompt_list']:<15}")

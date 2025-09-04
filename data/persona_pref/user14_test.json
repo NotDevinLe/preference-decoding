@@ -10,7 +10,7 @@
     "prompt": "I do not see my family often enough because they live far from me but in the same country.  How can I improve the situation?"
   },
   {
-    "chosen": "To reduce cholesterol, focus on a heart-healthy diet, increase physical activity, and consider medication with a doctor’s advice if necessary.",
+    "chosen": "To reduce cholesterol, focus on a heart-healthy diet, increase physical activity, and consider medication with a doctor's advice if necessary.",
     "rejected": "The best way to reduce cholesterol levels includes adopting a heart-healthy diet rich in fruits, vegetables, whole grains, and lean proteins, increasing physical activity, quitting smoking, limiting alcohol intake, and maintaining a healthy weight. For some, medication may also be necessary under a doctor's guidance.",
     "prompt": "What is the best way to reduce cholestorol levels?"
   },

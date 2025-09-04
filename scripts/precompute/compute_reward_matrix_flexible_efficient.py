@@ -1,28 +1,3 @@
-#!/usr/bin/env python3
-"""
-Efficient computation of reward matrix from persona preference data.
-
-This script loads user preference data and computes log probabilities under all sampled personas:
-- Processes ALL samples from ALL users together for better GPU utilization
-- Each row represents a single sample (user's question-response pair)
-- Each column represents a persona (used as an attribute)
-- Does NOT assume all users have the same questions
-- Processes all *_train.json files in data/persona_pref/
-
-Key efficiency improvements:
-1. Collects all samples from all users first
-2. Computes baseline once for all samples
-3. Processes each persona against all samples in one batch
-4. Much better GPU utilization than processing per-user
-
-Usage:
-    python scripts/precompute/compute_reward_matrix_flexible_efficient.py \
-        --data-dir data/persona_pref \
-        --personas-file utils/sampled_personas.json \
-        --output-file data/reward_matrix_efficient.npz \
-        --scoring-model meta-llama/Llama-3.1-8B-Instruct
-"""
-
 import argparse
 import json
 import sys
@@ -326,24 +301,6 @@ def save_flexible_reward_matrix(Y_chosen: np.ndarray, Y_rejected: Optional[np.nd
     
     # Save as compressed numpy archive
     np.savez_compressed(output_file, **save_dict)
-    
-    print(f"\nSaved reward matrix to {output_file}")
-    print(f"  Chosen shape: {Y_chosen.shape}")
-    if Y_rejected is not None:
-        print(f"  Rejected shape: {Y_rejected.shape}")
-    print(f"  Size: {Path(output_file).stat().st_size / 1e6:.2f} MB")
-    print(f"\nChosen statistics:")
-    print(f"  Mean: {np.mean(Y_chosen):.4f}")
-    print(f"  Std:  {np.std(Y_chosen):.4f}")
-    print(f"  Min:  {np.min(Y_chosen):.4f}")
-    print(f"  Max:  {np.max(Y_chosen):.4f}")
-    
-    if Y_rejected is not None:
-        print(f"\nRejected statistics:")
-        print(f"  Mean: {np.mean(Y_rejected):.4f}")
-        print(f"  Std:  {np.std(Y_rejected):.4f}")
-        print(f"  Min:  {np.min(Y_rejected):.4f}")
-        print(f"  Max:  {np.max(Y_rejected):.4f}")
 
 
 def load_flexible_reward_matrix(file_path: str) -> Tuple[np.ndarray, Optional[np.ndarray], Dict]:
@@ -362,70 +319,6 @@ def load_flexible_reward_matrix(file_path: str) -> Tuple[np.ndarray, Optional[np
     return Y_chosen, Y_rejected, metadata
 
 
-def analyze_flexible_reward_matrix(Y_chosen: np.ndarray, Y_rejected: Optional[np.ndarray], metadata: Dict):
-    """Print analysis of the flexible reward matrix."""
-    
-    print("\n" + "="*60)
-    print("EFFICIENT FLEXIBLE REWARD MATRIX ANALYSIS")
-    print("="*60)
-    
-    total_entries, num_attributes = Y_chosen.shape
-    
-    print(f"\nData shape:")
-    print(f"  Total samples: {total_entries}")
-    print(f"  Personas (as attributes): {num_attributes}")
-    print(f"  Users: {metadata['num_users']}")
-    print(f"  Memory usage: {Y_chosen.nbytes / 1e6:.2f} MB")
-    
-    # Entries per user
-    user_counts = {}
-    for user_id in metadata["user_ids"]:
-        user_counts[user_id] = user_counts.get(user_id, 0) + 1
-    
-    print(f"\nSamples per user:")
-    for user_id, count in sorted(user_counts.items()):
-        print(f"  {user_id}: {count} samples")
-    
-    print(f"\nChosen response statistics:")
-    print(f"  Mean: {np.mean(Y_chosen):.4f}")
-    print(f"  Std:  {np.std(Y_chosen):.4f}")
-    print(f"  Min:  {np.min(Y_chosen):.4f}")
-    print(f"  Max:  {np.max(Y_chosen):.4f}")
-    
-    if Y_rejected is not None:
-        print(f"\nRejected response statistics:")
-        print(f"  Mean: {np.mean(Y_rejected):.4f}")
-        print(f"  Std:  {np.std(Y_rejected):.4f}")
-        print(f"  Min:  {np.min(Y_rejected):.4f}")
-        print(f"  Max:  {np.max(Y_rejected):.4f}")
-        
-        # Preference margin statistics
-        margin = Y_chosen - Y_rejected
-        print(f"\nPreference margin (chosen - rejected):")
-        print(f"  Mean: {np.mean(margin):.4f}")
-        print(f"  Std:  {np.std(margin):.4f}")
-        print(f"  Min:  {np.min(margin):.4f}")
-        print(f"  Max:  {np.max(margin):.4f}")
-    
-    # Per-persona statistics
-    persona_means_chosen = np.mean(Y_chosen, axis=0)
-    persona_stds_chosen = np.std(Y_chosen, axis=0)
-    
-    print(f"\nPer-persona statistics (chosen):")
-    print(f"  Mean range: [{np.min(persona_means_chosen):.4f}, {np.max(persona_means_chosen):.4f}]")
-    print(f"  Std range:  [{np.min(persona_stds_chosen):.4f}, {np.max(persona_stds_chosen):.4f}]")
-    
-    # Top personas
-    top_idx = np.argmax(persona_means_chosen)
-    bottom_idx = np.argmin(persona_means_chosen)
-    
-    print(f"\nHighest scoring persona (idx {top_idx}, mean={persona_means_chosen[top_idx]:.4f}):")
-    print(f"  {metadata['attribute_prompts'][top_idx][:80]}...")
-    
-    print(f"\nLowest scoring persona (idx {bottom_idx}, mean={persona_means_chosen[bottom_idx]:.4f}):")
-    print(f"  {metadata['attribute_prompts'][bottom_idx][:80]}...")
-
-
 def main():
     parser = argparse.ArgumentParser(description="Efficiently compute reward matrix from user preference data")
     parser.add_argument(
@@ -437,7 +330,7 @@ def main():
     parser.add_argument(
         "--personas-file",
         type=str,
-        default="utils/sampled_personas.json",
+        default="src/core/sampled_personas.json",
         help="Path to sampled_personas.json file"
     )
     parser.add_argument(
@@ -449,7 +342,7 @@ def main():
     parser.add_argument(
         "--scoring-model",
         type=str,
-        default="meta-llama/Llama-3.1-8B-Instruct",
+        default="meta-llama/Llama-3.2-1B-Instruct",
         help="Model name for computing log probabilities"
     )
     parser.add_argument(
@@ -518,10 +411,7 @@ def main():
     # Save results
     save_flexible_reward_matrix(Y_chosen, Y_rejected, metadata, args.output_file)
     
-    # Show analysis
-    analyze_flexible_reward_matrix(Y_chosen, Y_rejected, metadata)
-    
-    print(f"\n✅ Efficient reward matrix computation complete!")
+    print(f"\nEfficient reward matrix computation complete!")
     print(f"Load with: Y_chosen, Y_rejected, metadata = load_flexible_reward_matrix('{args.output_file}')")
 
 

@@ -87,6 +87,15 @@ def main():
     random_wins = 0
     ties = 0
     errors = 0
+
+    persona = None
+    with open('data/persona_pref/user_metadata.json', 'r') as f:
+        user_metadata = json.load(f)
+    
+    for user in user_metadata['users']:
+        if user['user_id'] == info['user']:
+            persona = user['persona_text']
+            break
     
     # Set random seed for reproducibility
     random.seed(42)
@@ -129,7 +138,6 @@ def main():
             
             # Get prompt and persona
             prompt = data[i]['prompt']
-            persona = "You are an AI assistant who speaks like a seasoned comic. You are playful, often irreverent. You tend to respond with clever jokes, sarcasm, and punchy comebacks. You value humor, levity, and not taking things too seriously."
             
             comparisons.append({
                 'persona': persona,

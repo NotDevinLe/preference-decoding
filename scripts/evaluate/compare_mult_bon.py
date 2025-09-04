@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-"""
-Compare BON-selected outputs with randomly selected outputs using LLM judge.
-Fixed version with proper rate limiting and error handling.
-"""
-
 import json
 import random
 import asyncio
@@ -69,18 +63,12 @@ async def run_batch_with_retry(judge, batch: List[Dict], max_retries: int = 3):
 
 def main():
     # Load BON data
-
-    name = "user1"
-
     data_path = project_root / "data" / "bon_attributes.json"
     with open(data_path, "r") as f:
         data = json.load(f)
-
-    drift_path = project_root / "results" / "drift_decoding_responses" / f"{name}.json"
-    with open(drift_path, "r") as f:
-        drift_info = json.load(f)
     
-    info = {"user": "user1", "n": 16, "training_size": 200, "lambda": 0.001, "selected_indices": [5, 1, 12, 5, 5, 5, 5, 7, 5, 10, 9, 8, 5, 12, 4, 12, 9, 15, 7, 5, 5, 12, 13, 4, 10, 0, 9, 12, 12, 5, 15, 10, 9, 5, 5, 15, 13, 5, 12, 5, 8, 12, 5, 5, 15, 5, 1, 10, 13, 15, 4, 13, 9, 4, 15, 9, 9, 12, 9, 9, 1, 9, 15, 9, 12, 12, 5, 5, 6, 5, 12, 6, 4, 15, 4, 15, 7, 12, 5, 8, 1, 12, 9, 5, 8, 5, 8, 10, 10, 12, 13, 9, 6, 4, 4, 9, 15, 9, 8, 9], "num_prompts": 100}
+    info1 = None
+    info2 = None
 
     print(f"Comparing BON selections vs random for {info['user']}")
     print(f"N={info['n']}, Lambda={info['lambda']}")
@@ -90,17 +78,18 @@ def main():
     judge = PersonaJudge(base_url="https://api.openai.com/v1", model="gpt-4o")
     
     # Track wins
-    bon_wins = 0
-    drift_wins = 0
+    method1 = 0
+    method2 = 0
     ties = 0
     errors = 0
 
     persona = None
+
     with open('data/persona_pref/user_metadata.json', 'r') as f:
         user_metadata = json.load(f)
     
     for user in user_metadata['users']:
-        if user['user_id'] == info['user']:
+        if user['user_id'] == info1['user']:
             persona = user['persona_text']
             break
     
@@ -108,7 +97,7 @@ def main():
     random.seed(42)
     
     async def compare_all():
-        nonlocal bon_wins, drift_wins, ties, errors
+        nonlocal method1, method2, ties, errors
         
         comparisons = []
         
@@ -118,10 +107,14 @@ def main():
                 print(f"Warning: Skipping index {i}, not enough data")
                 continue
             
+            # Get random index (make sure it's valid and different from BON selection)
+            max_outputs = len(data[i]['outputs'])
+            
+            
             # Get outputs
             try:
-                drift_output = drift_info[i]['response']
-                bon_output = data[i]['outputs'][selected_index]
+                method1_output = data[i]['outputs'][info1['selected_indices'][i]]
+                method2_output = data[i]['outputs'][info2['selected_indices'][i]]
             except IndexError as e:
                 print(f"Prompt {i}: Index error - {e}, skipping")
                 errors += 1
@@ -133,11 +126,11 @@ def main():
             comparisons.append({
                 'persona': persona,
                 'question': prompt,
-                'response_a': bon_output,  # BON selected
-                'response_b': drift_output,  # Random
+                'response_a': method1_output,  # BON selected
+                'response_b': method2_output,  # Random
                 'prompt_idx': i,
-                'bon_idx': selected_index,
-                'drift_idx': 0
+                'method1_idx': selected_index,
+                'method2_idx': random_index
             })
         
         print(f"Running {len(comparisons)} comparisons...")
@@ -156,11 +149,11 @@ def main():
             i = comp['prompt_idx']
             
             if result == "A":
-                bon_wins += 1
+                method1_wins += 1
                 winner = "BON"
             elif result == "B":
-                drift_wins += 1
-                winner = "Drift"
+                method2_wins += 1
+                winner = "Random"
             elif result == "Error":
                 errors += 1
                 winner = "Error"
@@ -168,7 +161,7 @@ def main():
                 ties += 1
                 winner = "Tie"
             
-            print(f"Prompt {i}: BON[{comp['bon_idx']}] vs Drift[{comp['drift_idx']}] -> {winner}")
+            print(f"Prompt {i}: [{comp['method1_idx']}] vs [{comp['method2_idx']}] -> {winner}")
     
     # Run async comparison
     try:
@@ -181,26 +174,26 @@ def main():
         return
     
     # Print results
-    total_comparisons = bon_wins + drift_wins + ties + errors
-    valid_comparisons = bon_wins + drift_wins + ties
+    total_comparisons = method1_wins + method2_wins + ties + errors
+    valid_comparisons = method1_wins + method2_wins + ties
     
     print(f"\n{'='*50}")
     print("RESULTS:")
     print(f"{'='*50}")
-    print(f"BON wins: {bon_wins} ({bon_wins/valid_comparisons*100:.1f}% of valid)")
-    print(f"Drift wins: {drift_wins} ({drift_wins/valid_comparisons*100:.1f}% of valid)")
+    print(f"BON wins: {method1_wins} ({method1_wins/valid_comparisons*100:.1f}% of valid)")
+    print(f"Random wins: {method2_wins} ({method2_wins/valid_comparisons*100:.1f}% of valid)")
     print(f"Ties: {ties} ({ties/valid_comparisons*100:.1f}% of valid)")
     print(f"Errors: {errors}")
     print(f"Total attempted: {total_comparisons}")
     print(f"Valid comparisons: {valid_comparisons}")
     
     if valid_comparisons > 0:
-        if bon_wins > drift_wins:
-            print(f"\n🎉 BON selection outperforms random by {bon_wins - drift_wins} wins!")
-        elif drift_wins > bon_wins:
-            print(f"\n⚠️  Drift selection outperforms BON by {drift_wins - bon_wins} wins")
+        if method1_wins > method2_wins:
+            print(f"\n🎉 BON selection outperforms random by {method1_wins - method2_wins} wins!")
+        elif method2_wins > method1_wins:
+            print(f"\n⚠️  Random selection outperforms BON by {method2_wins - method1_wins} wins")
         else:
-            print(f"\n🤷 BON and drift perform equally")
+            print(f"\n🤷 BON and random perform equally")
     else:
         print(f"\n❌ No valid comparisons completed")
     
@@ -212,8 +205,8 @@ def main():
         json.dump({
             "info": info,
             "results": {
-                "bon_wins": bon_wins,
-                "drift_wins": drift_wins,
+                "bon_wins": method1_wins,
+                "random_wins": method2_wins,
                 "ties": ties,
                 "errors": errors,
                 "total_attempted": total_comparisons,

@@ -5,7 +5,7 @@
     "prompt": "What do you think of Brexit?"
   },
   {
-    "chosen": "\"Backing the 30 mph limit makes sense for safety. It’s practical for urban areas.\"",
+    "chosen": "\"Backing the 30 mph limit makes sense for safety. It's practical for urban areas.\"",
     "rejected": "I don't have personal opinions, but the 30 mph speed restriction is aimed at improving road safety, reducing accidents, and enhancing pedestrian safety in populated areas. It reflects a broader approach to urban traffic management that balances safety with the flow of traffic.",
     "prompt": "What do you think about the 30 mile per hour speed restrictions that have been put in place in areas of wales that could potentially end up all over the UK?"
   },
@@ -140,7 +140,7 @@
     "prompt": "In the next few months I will take the plane to go on a holiday. What places in the airplane have the highest chance of survival in case of a plane crash ?"
   },
   {
-    "chosen": "For an effective immigration policy in Australia, it’s crucial to strike a balance between bolstering the economy and maintaining social cohesion. This involves a keen eye on infrastructure capabilities and the nation's security, ensuring policies are flexible to adapt to new challenges. Public input and expert insights are key to shaping an approach that respects both humanitarian obligations and societal needs.",
+    "chosen": "For an effective immigration policy in Australia, it's crucial to strike a balance between bolstering the economy and maintaining social cohesion. This involves a keen eye on infrastructure capabilities and the nation's security, ensuring policies are flexible to adapt to new challenges. Public input and expert insights are key to shaping an approach that respects both humanitarian obligations and societal needs.",
     "rejected": "It's important for policy decisions on immigration to consider economic needs, humanitarian responsibilities, societal impact, and infrastructure capacity. The right approach balances growth and cohesion, adapting to changing circumstances. Public opinion and expert analysis both play vital roles in shaping these policies.",
     "prompt": "Do you think we should allow more or less immigrants into Australia?"
   },
@@ -180,7 +180,7 @@
     "prompt": "How can we hold politicians accountable for failing to keep promises?"
   },
   {
-    "chosen": "To communicate with a toddler, kneel to their height, maintain eye contact, simplify your words, and listen well. Stay calm, offer limited choices, and encourage but don’t overcomplicate. Acknowledge their feelings briefly.",
+    "chosen": "To communicate with a toddler, kneel to their height, maintain eye contact, simplify your words, and listen well. Stay calm, offer limited choices, and encourage but don't overcomplicate. Acknowledge their feelings briefly.",
     "rejected": "To talk to a toddler, get down to their level, make eye contact, use simple language, and listen actively. Be patient, offer choices instead of commands, and use a calm, positive tone. Encourage them to express their thoughts and feelings, and validate their emotions.",
     "prompt": "How do I talk to a toddler?"
   },

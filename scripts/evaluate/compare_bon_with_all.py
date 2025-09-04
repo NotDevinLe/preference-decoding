@@ -77,7 +77,7 @@ def main():
         data = json.load(f)
     
     # Example info - update with your actual drift_bon results
-    info = {"user": "user1", "n": 16, "training_size": 200, "lambda": 0.0, "selected_indices": [5, 5, 1, 13, 5, 13, 5, 7, 7, 12, 9, 12, 5, 12, 4, 13, 14, 15, 10, 5, 10, 13, 13, 4, 10, 0, 12, 13, 12, 5, 5, 10, 9, 5, 9, 15, 13, 13, 12, 5, 12, 4, 13, 5, 15, 13, 13, 10, 13, 15, 4, 13, 5, 13, 15, 3, 9, 5, 13, 5, 1, 3, 6, 13, 7, 12, 2, 2, 6, 5, 12, 7, 13, 15, 4, 15, 7, 12, 13, 8, 13, 15, 12, 3, 7, 13, 8, 10, 10, 4, 13, 13, 3, 4, 13, 13, 8, 9, 13, 13], "num_prompts": 100}
+    info = {"user": "user11", "n": 16, "training_size": 150, "lambda": 4e-05, "selected_indices": [5, 5, 0, 5, 5, 5, 13, 5, 7, 10, 5, 5, 5, 14, 7, 5, 7, 3, 10, 10, 10, 5, 13, 5, 10, 2, 5, 5, 5, 5, 5, 10, 10, 5, 5, 3, 5, 13, 7, 5, 5, 10, 13, 5, 10, 7, 10, 10, 10, 10, 10, 13, 2, 13, 3, 3, 9, 5, 10, 10, 13, 10, 10, 13, 5, 10, 5, 2, 7, 13, 2, 5, 13, 10, 13, 5, 7, 13, 5, 13, 7, 15, 5, 5, 7, 15, 13, 10, 7, 10, 13, 10, 11, 10, 10, 10, 12, 13, 5, 13], "num_prompts": 100, "system_prompt_list": "personas"}
 
     print(f"Comparing BON selections vs ALL other outputs for {info['user']}")
     print(f"N={info['n']}, Lambda={info['lambda']}")
@@ -85,13 +85,18 @@ def main():
     
     # Initialize judge
     judge = PersonaJudge(base_url="https://api.openai.com/v1", model="gpt-4o")
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--name_idx", type=int, default=0)
-    args = parser.parse_args()
     
     # Use the same persona as in compare_bon_with_random.py
-    persona = persona_prompts[args.name_idx]
+    persona = None
+    with open('data/persona_pref/user_metadata.json', 'r') as f:
+        user_metadata = json.load(f)
+    
+    for user in user_metadata['users']:
+        if user['user_id'] == info['user']:
+            persona = user['persona_text']
+            break
+    
+    print(f"Using persona: {persona}")
     
     async def compare_all():
         prompt_win_percentages = []
