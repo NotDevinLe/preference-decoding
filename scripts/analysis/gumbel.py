@@ -237,13 +237,20 @@ class TemperatureScheduler(pl.Callback):
 
 if __name__ == '__main__':
     # Initialize wandb
+
+
+    from argparse import ArgumentParser
+    parser = ArgumentParser()
+    parser.add_argument("--sparsity_weight", type=float, default=0.0)
+    args = parser.parse_args()
+    sparsity_weight = args.sparsity_weight
     wandb.init(
         project="sparse-pca-analysis",
         name="gumbel-sparse-pca",
         config={
             "model": "SparsePCALightning",
             "n_components": 10,
-            "sparsity_weight": 0.00002,
+            "sparsity_weight": sparsity_weight,
             "initial_temperature": 1.0,
             "final_temperature": 0.1,
             "anneal_rate": 0.99,
@@ -271,7 +278,7 @@ if __name__ == '__main__':
     model = SparsePCALightning(
         input_dim=X.shape[1],  # Number of actions/features
         n_components=10,
-        sparsity_weight=0.00006,
+        sparsity_weight=sparsity_weight,
         temperature=1.0,
         hard_gumbel=True
     )

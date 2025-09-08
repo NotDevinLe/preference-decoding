@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=train_reward_model
 #SBATCH --account=cse
-#SBATCH --partition=gpu-a100
+#SBATCH --partition=gpu-l40s
 #SBATCH --gpus=1
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -10,7 +10,7 @@
 #SBATCH --time=10:00:00
 #SBATCH --output=logs/output_%A_%a.txt
 #SBATCH --error=logs/error_%A_%a.txt
-#SBATCH --array=1
+#SBATCH --array=11-20
 
 # Load conda and activate env
 source /gscratch/ark/devinl6/miniconda3/etc/profile.d/conda.sh

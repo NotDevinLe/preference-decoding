@@ -11,7 +11,7 @@ model = LLM(
     model=small_model_id,
     tensor_parallel_size=1,
     gpu_memory_utilization=0.7,
-    max_model_len=4096,
+    max_model_len=8192,
 )
 
 tokenizer = AutoTokenizer.from_pretrained(small_model_id)
@@ -20,12 +20,12 @@ tokenizer.pad_token = tokenizer.eos_token
 # ---- Load data
 with open("../data/persona_pref/user11_train.json", "r") as f:
     train_data = json.load(f)
-with open("../data/bon_50.json", "r") as f:
+with open("../data/bon_attributes.json", "r") as f:
     bon_data = json.load(f)
 
 # ---- Few-shot selection
 random.seed(0)
-k = 4
+k = 16
 selected_idx_sets = [random.sample(range(len(train_data)), k) for _ in range(8)]
 fewshot_sets = [[train_data[i] for i in idxs] for idxs in selected_idx_sets]
 
@@ -67,7 +67,7 @@ for fewshots in fewshot_sets:
 sampling_params = SamplingParams(
     temperature=0.2,      # low temp to reduce rambling
     top_p=0.9,
-    max_tokens=384,
+    max_tokens=512,
     stop=["</answer>", "\n#", "##", "Explanation:", "Reason:"]
 )
 

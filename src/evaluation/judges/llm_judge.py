@@ -106,7 +106,7 @@ Better response (just write A or B):"""
         tasks = [compare_one(comp) for comp in comparisons]
         return await asyncio.gather(*tasks)
 
-
+    
 if __name__ == "__main__":
     # Simple test
     judge = PersonaJudge(base_url="https://api.openai.com/v1", model="gpt-4o")

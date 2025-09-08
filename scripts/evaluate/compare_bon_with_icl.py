@@ -67,10 +67,13 @@ def main():
     with open(data_path, "r") as f:
         data = json.load(f)
     
-    info = {"user": "user11", "n": 16, "training_size": 150, "lambda": 6e-05, "selected_indices": [5, 5, 0, 5, 5, 5, 13, 5, 7, 10, 5, 5, 5, 14, 5, 5, 7, 3, 10, 10, 10, 5, 13, 5, 10, 2, 5, 5, 5, 5, 5, 10, 10, 5, 5, 10, 5, 13, 7, 5, 5, 10, 13, 5, 10, 7, 10, 10, 10, 10, 10, 13, 5, 13, 3, 3, 9, 5, 10, 10, 13, 10, 10, 13, 5, 10, 5, 2, 7, 13, 2, 5, 13, 10, 13, 5, 7, 13, 5, 13, 7, 15, 5, 5, 7, 15, 13, 10, 7, 10, 5, 10, 11, 10, 10, 10, 12, 13, 5, 5], "num_prompts": 100, "system_prompt_list": "personas"}
+    info = {"user": "user11", "n": 16, "training_size": 150, "lambda": 0.0001, "selected_indices": [5, 5, 0, 5, 6, 13, 13, 10, 7, 10, 5, 5, 13, 14, 13, 5, 7, 9, 10, 10, 10, 3, 13, 3, 10, 2, 5, 10, 3, 10, 5, 10, 10, 2, 5, 10, 5, 13, 7, 2, 13, 7, 13, 5, 10, 7, 10, 10, 10, 10, 10, 13, 5, 13, 14, 3, 9, 5, 10, 10, 13, 10, 13, 13, 0, 10, 5, 2, 7, 13, 2, 5, 13, 10, 13, 5, 7, 13, 2, 13, 2, 15, 10, 10, 7, 15, 13, 10, 7, 13, 2, 10, 11, 10, 13, 10, 14, 13, 5, 13], "num_prompts": 100, "system_prompt_list": "personas"}
 
     print(f"Comparing BON selections vs ICL for {info['user']}")
     print(f"Number of prompts: {info['num_prompts']}")
+
+    with open('results/bon_pairwise_winners_linear.json', 'r') as f:
+        bon_pairwise_winners = json.load(f)
     
     # Initialize judge once
     judge = PersonaJudge(base_url="https://api.openai.com/v1", model="gpt-4o")
@@ -115,7 +118,7 @@ def main():
             # Get outputs
             try:
                 bon_output = data[i]['outputs'][info['selected_indices'][i]]
-                icl_output = icl_data[i]['output']
+                icl_output = bon_pairwise_winners[i]['winner_text']
             except IndexError as e:
                 print(f"Prompt {i}: Index error - {e}, skipping")
                 errors += 1
