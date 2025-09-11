@@ -432,8 +432,8 @@ class ServerCoordinator:
                         'samples_per_user': self.samples_per_user,
                         'replay_buffer_size': self.replay_buffer.maxlen,
                         'replay_ratio': self.replay_ratio,
-                        'collector_args': self.collector_args,
-                        'learner_args': self.learner_args
+                        'collector_url': self.collector_url,
+                        'learner_url': self.learner_url
                     }
                 )
                 logging.info("Wandb monitoring initialized")
