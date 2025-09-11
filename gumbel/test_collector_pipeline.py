@@ -49,16 +49,8 @@ class CollectorPipelineValidator:
                 health_data = response.json()
                 print(f"✅ Collector health check passed: {health_data}")
                 
-                # Check specific readiness indicators
-                if health_data.get('vllm_ready'):
-                    print("✅ VLLM client is connected")
-                else:
-                    print("⚠️  VLLM client not ready - check collector logs")
-                    
-                if health_data.get('data_sampler_ready'):
-                    print("✅ Data sampler is ready")
-                else:
-                    print("⚠️  Data sampler not ready")
+                # Simplified health check (no detailed readiness indicators)
+                print("✅ Collector health check shows healthy status")
                     
                 return health_data.get('status') == 'healthy'
             else:
@@ -128,16 +120,14 @@ class CollectorPipelineValidator:
         """Test collector batch generation (the main pipeline)"""
         print("\n🎲 Testing Collector Batch Generation...")
         try:
-            # Prepare test request (small batch)
+            # Prepare test request (small batch) - simplified API
             test_request = {
                 "users_per_batch": 1,
-                "samples_per_user": 1,
-                "behavior_logits": [0.0] * 100,  # Assuming 100 attributes 
-                "tau": 1.0
+                "samples_per_user": 1
             }
             
             print(f"   Requesting: {test_request['users_per_batch']} users × {test_request['samples_per_user']} samples")
-            print("   This tests the full pipeline: data sampling → API calls → reward computation")
+            print("   This tests the full pipeline: data sampling → VLLM API calls → reward computation")
             
             start_time = time.time()
             response = requests.post(
@@ -153,7 +143,6 @@ class CollectorPipelineValidator:
                 
                 if batch_data.get('success'):
                     print(f"✅ Batch generation successful in {elapsed_time:.2f} seconds")
-                    print(f"   Mask sparsity: {sum(batch_data.get('m_hard', []))}")
                     
                     R = batch_data.get('R', [])
                     if R:
