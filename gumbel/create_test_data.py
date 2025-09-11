@@ -10,18 +10,20 @@ from pathlib import Path
 def create_test_dataset():
     """Create interpretable test dataset with clear persona matches"""
     test_data = {
-        'user1': {
-            'prompts': [
-                "Tell me about treasure hunting",
-                "Tell me about treasure hunting", 
-                "Tell me about treasure hunting"
-            ],
-            'outputs': [
-                "Arrr, matey! Treasure hunting be the finest adventure on the seven seas! Ye'll need a trusty map, a sharp cutlass, and nerves of steel to find buried gold!",
-                "Treasure hunting is an archaeological practice involving the systematic search for valuable historical artifacts using proper documentation and preservation methods.",
-                "OMG treasure hunting is sooo cool! Like, you get to dig around and find shiny things! It's like the ultimate shopping spree but underground! 💎✨"
-            ]
-        }
+        'user1': [
+            {
+                'prompt': "Tell me about treasure hunting",
+                'output': "Arrr, matey! Treasure hunting be the finest adventure on the seven seas! Ye'll need a trusty map, a sharp cutlass, and nerves of steel to find buried gold!"
+            },
+            {
+                'prompt': "Tell me about treasure hunting",
+                'output': "Treasure hunting is an archaeological practice involving the systematic search for valuable historical artifacts using proper documentation and preservation methods."
+            },
+            {
+                'prompt': "Tell me about treasure hunting", 
+                'output': "OMG treasure hunting is sooo cool! Like, you get to dig around and find shiny things! It's like the ultimate shopping spree but underground! 💎✨"
+            }
+        ]
     }
     
     with open('test_data.pkl', 'wb') as f:
