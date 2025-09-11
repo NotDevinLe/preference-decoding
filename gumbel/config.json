@@ -1,7 +1,7 @@
 {
   "model": {
-    "d": 1000,
-    "k": 100,
+    "d": "auto",
+    "k": 10,
     "lr": 1e-3,
     "sparsity_weight": 0.1,
     "tau_init": 1.0

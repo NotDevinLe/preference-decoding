@@ -7,14 +7,59 @@ import argparse
 from pathlib import Path
 from typing import Dict, Any, Optional
 
+def auto_detect_num_attributes(attribute_prompts_path: str) -> int:
+    """Automatically detect number of attributes from prompts file"""
+    try:
+        prompts_file = Path(attribute_prompts_path)
+        if not prompts_file.exists():
+            print(f"Warning: Attribute prompts file not found: {attribute_prompts_path}")
+            print("Using default d=100. Create the prompts file or set d manually in config.")
+            return 100
+            
+        with open(prompts_file, 'r') as f:
+            data = json.load(f)
+        
+        # Handle different JSON formats
+        if isinstance(data, list):
+            num_attributes = len(data)
+        elif isinstance(data, dict) and 'prompts' in data:
+            num_attributes = len(data['prompts'])
+        elif isinstance(data, dict):
+            # Assume each key is an attribute
+            num_attributes = len(data)
+        else:
+            raise ValueError(f"Unsupported attribute prompts format in {attribute_prompts_path}")
+        
+        print(f"Auto-detected {num_attributes} attributes from {attribute_prompts_path}")
+        return num_attributes
+        
+    except Exception as e:
+        print(f"Error auto-detecting attributes: {e}")
+        print("Using default d=100")
+        return 100
+
+def resolve_auto_values(config: Dict[str, Any]) -> Dict[str, Any]:
+    """Resolve 'auto' values in config"""
+    config = config.copy()  # Don't modify original
+    
+    # Auto-detect number of attributes if set to "auto"
+    if config['model'].get('d') == 'auto':
+        attribute_prompts_path = config['data']['attribute_prompts_path']
+        config['model']['d'] = auto_detect_num_attributes(attribute_prompts_path)
+    
+    return config
+
 def load_config(config_path: str = "config.json") -> Dict[str, Any]:
-    """Load configuration from JSON file"""
+    """Load configuration from JSON file and resolve auto values"""
     config_file = Path(config_path)
     if not config_file.exists():
         raise FileNotFoundError(f"Config file not found: {config_path}")
     
     with open(config_file, 'r') as f:
         config = json.load(f)
+    
+    # Resolve any "auto" values
+    config = resolve_auto_values(config)
     
     return config
 

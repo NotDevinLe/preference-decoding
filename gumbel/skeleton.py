@@ -8,12 +8,19 @@ from dataclasses import dataclass
 from typing import Dict, Any, Optional
 
 class SparseMaskModel(nn.Module):
-    def __init__(self, d, k, sparsity_weight=1e-4):
+    def __init__(self, d, k, sparsity_weight=0.1):
         super().__init__()
+        self.d = d
+        self.k = k  
+        self.sparsity_weight = sparsity_weight
+        
+        # Simple linear encoder/decoder (exactly like original gumbel.py)
         self.encoder = nn.Linear(d, k, bias=False)
         self.decoder = nn.Linear(k, d, bias=False)
+        
+        # Learnable mask parameters - logits for Gumbel-Softmax
+        # Shape: [d] for shared feature masks across all components
         self.mask_logits = nn.Parameter(torch.zeros(d))
-        self.sparsity_weight = sparsity_weight
 
     def forward_decode_hard_soft(self, X, ell, tau, gated_st=True):
         # sample soft/hard with current logits ell
@@ -22,7 +29,7 @@ class SparseMaskModel(nn.Module):
         # HARD path (efficient): column slice by active attrs
         idx_on = torch.nonzero(m_hard, as_tuple=False).squeeze(1)
         if idx_on.numel() == 0:
-            z_hard = torch.zeros(X.size(0), self.decoder.in_features, device=X.device)
+            z_hard = torch.zeros(X.size(0), self.k, device=X.device)
         else:
             X_sel = X.index_select(1, idx_on)              # [N, s]
             W = self.encoder.weight                        # [k, d]
