@@ -12,8 +12,9 @@ def auto_detect_num_attributes(attribute_prompts_path: str) -> int:
     try:
         prompts_file = Path(attribute_prompts_path)
         if not prompts_file.exists():
-            print(f"Warning: Attribute prompts file not found: {attribute_prompts_path}")
-            print("Using default d=100. Create the prompts file or set d manually in config.")
+            import sys
+            print(f"Warning: Attribute prompts file not found: {attribute_prompts_path}", file=sys.stderr)
+            print("Using default d=100. Create the prompts file or set d manually in config.", file=sys.stderr)
             return 100
             
         with open(prompts_file, 'r') as f:
@@ -30,12 +31,15 @@ def auto_detect_num_attributes(attribute_prompts_path: str) -> int:
         else:
             raise ValueError(f"Unsupported attribute prompts format in {attribute_prompts_path}")
         
-        print(f"Auto-detected {num_attributes} attributes from {attribute_prompts_path}")
+        # Redirect to stderr to avoid shell eval issues
+        import sys
+        print(f"Auto-detected {num_attributes} attributes from {attribute_prompts_path}", file=sys.stderr)
         return num_attributes
         
     except Exception as e:
-        print(f"Error auto-detecting attributes: {e}")
-        print("Using default d=100")
+        import sys
+        print(f"Error auto-detecting attributes: {e}", file=sys.stderr)
+        print("Using default d=100", file=sys.stderr)
         return 100
 
 def resolve_auto_values(config: Dict[str, Any]) -> Dict[str, Any]:
@@ -93,7 +97,7 @@ def get_learner_args(config: Dict[str, Any], overrides: Optional[Dict[str, Any]]
         'host': config['servers']['learner']['host'],
         'port': config['servers']['learner']['port'],
         'device': config['servers']['learner']['device'],
-        'checkpoint_dir': config['servers']['learner']['checkpoint_dir'],
+        'checkpoint_dir_arg': config['servers']['learner']['checkpoint_dir'],
         'use_wandb': config['servers']['learner']['use_wandb'],
         'log_level': config['monitoring']['log_level']
     }

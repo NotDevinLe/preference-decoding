@@ -56,7 +56,7 @@ CMD=(python -u learner_server.py
     --host "$HOST"
     --port "$PORT"
     --device "$DEVICE"
-    --checkpoint-dir "$CHECKPOINT_DIR"
+    --checkpoint-dir "$CHECKPOINT_DIR_ARG"
     --log-level "$LOG_LEVEL"
 )
 
@@ -117,7 +117,7 @@ echo "Command: ${CMD[*]}"
 echo ""
 
 # Create checkpoint directory
-mkdir -p "$CHECKPOINT_DIR"
+mkdir -p "$CHECKPOINT_DIR_ARG"
 
 # Execute
 exec "${CMD[@]}"
