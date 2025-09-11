@@ -27,14 +27,4 @@ nvidia-smi || true
 
 # === Run directly (no nested sbatch) ===
 # You can use srun for cleaner Slurm I/O:
-srun --unbuffered ./start_learner.sh \
-  --d 400 \
-  --k 50 \
-  --lr 1e-3 \
-  --sparsity-weight 1e-4 \
-  --tau-init 1.0 \
-  --host 0.0.0.0 \
-  --port 8002 \
-  --device cuda:0 \
-  --checkpoint-dir ./checkpoints \
-  --log-level INFO
+srun --unbuffered ./start_learner_config.sh

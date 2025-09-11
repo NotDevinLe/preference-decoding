@@ -22,13 +22,4 @@ echo "SLURM_JOB_ID: $SLURM_JOB_ID"
 echo "Date: $(date)"
 
 # --- run your server ---
-python -u collector_server.py \
-  --d 1000 \
-  --dataset-path data/persona_train_dataset.pkl \
-  --attribute-prompts-path attribute_prompts.json \
-  --vllm-model meta-llama/Llama-3.2-1B-Instruct \
-  --gpu-memory-util 0.6 \
-  --host 0.0.0.0 \
-  --port 8001 \
-  --device cuda:0 \
-  --log-level INFO
+./start_collector_config.sh

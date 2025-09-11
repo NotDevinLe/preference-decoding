@@ -65,24 +65,33 @@ device = None
 current_step = 0
 tau = 1.0
 wandb_run = None
+checkpoint_dir = "./checkpoints"  # Will be set during initialization
 
 def initialize_learner(d: int, k: int, lr: float, sparsity_weight: float,
                       tau_init: float, device_str: str, 
-                      checkpoint_dir: str, use_wandb: bool):
+                      checkpoint_dir_arg: str, use_wandb: bool):
     """Initialize learner components"""
-    global model, optimizer, device, tau, wandb_run
+    global model, optimizer, device, tau, wandb_run, checkpoint_dir
     
     device = torch.device(device_str)
     tau = tau_init
+    checkpoint_dir = checkpoint_dir_arg
     
     logging.info(f"Initializing learner on {device}")
+    logging.info(f"Checkpoint directory: {checkpoint_dir}")
+    
+    # Create checkpoint directory
+    Path(checkpoint_dir).mkdir(parents=True, exist_ok=True)
     
     # Initialize model
     model = SparseMaskModel(d, k, sparsity_weight=sparsity_weight).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
     
-    # Create checkpoint directory
-    Path(checkpoint_dir).mkdir(parents=True, exist_ok=True)
+    # Try to load latest checkpoint
+    if load_latest_checkpoint():
+        logging.info(f"Resumed training from checkpoint at step {current_step}")
+    else:
+        logging.info("Starting training from scratch")
     
     # Initialize wandb
     if use_wandb and WANDB_AVAILABLE:
@@ -216,24 +225,71 @@ async def train_step(m_hard: torch.Tensor, R: torch.Tensor, step: int) -> Dict[s
         'active_attributes': float(masks.sum().detach().cpu()),  # Use model's masks
     }
 
-async def save_checkpoint(step: int, final: bool = False):
+def save_checkpoint(step: int, final: bool = False):
     """Save model checkpoint"""
+    global current_step, tau, model, optimizer, checkpoint_dir
+    
     try:
         checkpoint = {
-            'model_state': model.state_dict(),
-            'optimizer_state': optimizer.state_dict(),
+            'model_state_dict': model.state_dict(),
+            'optimizer_state_dict': optimizer.state_dict(),
             'step': step,
             'tau': tau,
+            'model_config': {
+                'd': model.d,
+                'k': model.k,
+                'sparsity_weight': model.sparsity_weight
+            }
         }
         
-        filename = "final_checkpoint.pt" if final else f"checkpoint_step_{step}.pt"
-        path = Path("./checkpoints") / filename
+        if final:
+            # Save final checkpoint for deployment/inference
+            filename = "final_checkpoint.pt"
+            path = Path(checkpoint_dir) / filename
+            torch.save(checkpoint, path)
+            logging.info(f"Saved final checkpoint: {path}")
+        else:
+            # Only save as latest.pt for resuming
+            path = Path(checkpoint_dir) / "latest.pt"
+            torch.save(checkpoint, path)
+            logging.info(f"Saved checkpoint: {path} (step {step})")
         
-        torch.save(checkpoint, path)
-        logging.info(f"Saved checkpoint: {path}")
+        return str(path)
         
     except Exception as e:
         logging.error(f"Failed to save checkpoint: {e}")
+        return None
+
+def load_checkpoint(checkpoint_path: str) -> bool:
+    """Load model checkpoint"""
+    global current_step, tau, model, optimizer
+    
+    try:
+        if not Path(checkpoint_path).exists():
+            logging.info(f"Checkpoint not found: {checkpoint_path}")
+            return False
+            
+        checkpoint = torch.load(checkpoint_path, map_location=device)
+        
+        # Load model and optimizer states
+        model.load_state_dict(checkpoint['model_state_dict'])
+        optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        
+        # Load training state
+        current_step = checkpoint.get('step', 0)
+        tau = checkpoint.get('tau', 1.0)
+        
+        logging.info(f"Loaded checkpoint from {checkpoint_path}: step={current_step}, tau={tau:.4f}")
+        return True
+        
+    except Exception as e:
+        logging.error(f"Failed to load checkpoint {checkpoint_path}: {e}")
+        return False
+
+def load_latest_checkpoint() -> bool:
+    """Load the latest checkpoint if it exists"""
+    latest_path = Path(checkpoint_dir) / "latest.pt"
+    return load_checkpoint(str(latest_path))
 
 @app.get("/parameters", response_model=ParametersResponse)
 async def get_parameters():
