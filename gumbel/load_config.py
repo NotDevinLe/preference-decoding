@@ -73,7 +73,8 @@ def get_coordinator_args(config: Dict[str, Any], overrides: Optional[Dict[str, A
         'enable_wandb': config['monitoring']['enable_wandb'],
         'plot_update_interval': config['monitoring']['plot_update_interval'],
         'collector_url': f"http://{config['servers']['collector']['host']}:{config['servers']['collector']['port']}",
-        'learner_url': f"http://{config['servers']['learner']['host']}:{config['servers']['learner']['port']}"
+        'learner_url': f"http://{config['servers']['learner']['host']}:{config['servers']['learner']['port']}",
+        'timeouts': config['timeouts']
     }
     
     if overrides:

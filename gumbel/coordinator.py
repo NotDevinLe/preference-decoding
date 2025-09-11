@@ -42,11 +42,23 @@ class ServerCoordinator:
                  replay_ratio: float = 0.3,
                  enable_monitoring: bool = True,
                  enable_wandb: bool = False,
-                 plot_update_interval: float = 10.0):
+                 plot_update_interval: float = 10.0,
+                 timeouts: Dict[str, float] = None):
         
         # Server URLs - connecting to existing servers
         self.collector_url = collector_url.rstrip('/')
         self.learner_url = learner_url.rstrip('/')
+        
+        # Timeout configuration
+        self.timeouts = timeouts or {
+            'server_health_check': 120.0,
+            'server_startup_wait': 300.0,
+            'get_params': 120.0,
+            'generate_batch': 180.0,
+            'train_step': 120.0,
+            'server_status': 120.0,
+            'system_check': 150.0
+        }
         
         # No longer managing server processes
         # self.collector_process = None
@@ -100,14 +112,17 @@ class ServerCoordinator:
     # def start_collector_server(self): ...
     # def start_learner_server(self): ...
     
-    async def wait_for_server(self, url: str, name: str, max_wait: float = 30.0) -> bool:
+    async def wait_for_server(self, url: str, name: str, max_wait: float = None) -> bool:
         """Wait for server to be ready"""
-        logging.info(f"Waiting for {name} server at {url}...")
+        if max_wait is None:
+            max_wait = self.timeouts['server_startup_wait']
+            
+        logging.info(f"Waiting for {name} server at {url} (timeout: {max_wait}s)...")
         
         start_time = time.time()
         while time.time() - start_time < max_wait:
             try:
-                response = requests.get(f"{url}/health", timeout=2.0)
+                response = requests.get(f"{url}/health", timeout=self.timeouts['server_health_check'])
                 if response.status_code == 200:
                     health_data = response.json()
                     logging.info(f"{name} server ready: {health_data}")
@@ -127,12 +142,12 @@ class ServerCoordinator:
         
         # Wait for collector to be ready
         logging.info(f"Connecting to collector at {self.collector_url}...")
-        if not await self.wait_for_server(self.collector_url, "Collector", max_wait=30.0):
+        if not await self.wait_for_server(self.collector_url, "Collector"):
             raise RuntimeError(f"Collector server not available at {self.collector_url}")
         
         # Wait for learner to be ready
         logging.info(f"Connecting to learner at {self.learner_url}...")
-        if not await self.wait_for_server(self.learner_url, "Learner", max_wait=30.0):
+        if not await self.wait_for_server(self.learner_url, "Learner"):
             raise RuntimeError(f"Learner server not available at {self.learner_url}")
         
         logging.info("=== Connected to both servers ===")
@@ -236,7 +251,7 @@ class ServerCoordinator:
     async def get_learner_params(self) -> Dict[str, Any]:
         """Get current model parameters from learner"""
         try:
-            response = requests.get(f"{self.learner_url}/get_params", timeout=10.0)
+            response = requests.get(f"{self.learner_url}/get_params", timeout=self.timeouts['get_params'])
             if response.status_code == 200:
                 return response.json()
             else:
@@ -259,7 +274,7 @@ class ServerCoordinator:
             response = requests.post(
                 f"{self.collector_url}/generate_batch",
                 json=request_data,
-                timeout=30.0
+                timeout=self.timeouts['generate_batch']
             )
             
             if response.status_code == 200:
@@ -277,7 +292,7 @@ class ServerCoordinator:
             response = requests.post(
                 f"{self.learner_url}/train_step",
                 json=batch_data,
-                timeout=30.0
+                timeout=self.timeouts['train_step']
             )
             
             if response.status_code == 200:
@@ -583,7 +598,7 @@ class ServerCoordinator:
                 
                 # Get status from learner to check progress
                 try:
-                    response = requests.get(f"{self.learner_url}/status", timeout=5.0)
+                    response = requests.get(f"{self.learner_url}/status", timeout=self.timeouts['server_status'])
                     if response.status_code == 200:
                         status = response.json()
                         current_step = status.get("current_step", step)
@@ -593,7 +608,7 @@ class ServerCoordinator:
                             
                             # Get additional metrics for monitoring
                             try:
-                                params_response = requests.get(f"{self.learner_url}/get_params", timeout=5.0)
+                                params_response = requests.get(f"{self.learner_url}/get_params", timeout=self.timeouts['get_params'])
                                 if params_response.status_code == 200:
                                     params = params_response.json()
                                     temperature = params.get('tau', 1.0) if params.get('success') else 1.0
@@ -652,14 +667,14 @@ class ServerCoordinator:
         status = {"collector": {}, "learner": {}}
         
         try:
-            resp = requests.get(f"{self.collector_url}/status", timeout=5.0)
+            resp = requests.get(f"{self.collector_url}/status", timeout=self.timeouts['server_status'])
             if resp.status_code == 200:
                 status["collector"] = resp.json()
         except Exception as e:
             status["collector"] = {"error": str(e)}
         
         try:
-            resp = requests.get(f"{self.learner_url}/status", timeout=5.0)
+            resp = requests.get(f"{self.learner_url}/status", timeout=self.timeouts['server_status'])
             if resp.status_code == 200:
                 status["learner"] = resp.json()
         except Exception as e:
@@ -770,7 +785,8 @@ def main():
         replay_ratio=coordinator_config['replay_ratio'],
         enable_monitoring=coordinator_config['enable_monitoring'],
         enable_wandb=coordinator_config['enable_wandb'],
-        plot_update_interval=coordinator_config['plot_update_interval']
+        plot_update_interval=coordinator_config['plot_update_interval'],
+        timeouts=coordinator_config['timeouts']
     )
     
     logging.info("=== Distributed Sparse Attribute Learning ===")

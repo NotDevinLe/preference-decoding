@@ -11,16 +11,24 @@ from typing import Dict, Any, Optional, Tuple
 from load_config import load_config, get_coordinator_args, print_config_summary
 
 class SystemChecker:
-    def __init__(self, collector_url: str, learner_url: str, timeout: float = 10.0):
+    def __init__(self, collector_url: str, learner_url: str, timeouts: Dict[str, float] = None):
         self.collector_url = collector_url.rstrip('/')
         self.learner_url = learner_url.rstrip('/')
-        self.timeout = timeout
+        self.timeouts = timeouts or {
+            'server_health_check': 120.0,
+            'server_startup_wait': 300.0,
+            'get_params': 120.0,
+            'generate_batch': 180.0,
+            'train_step': 120.0,
+            'server_status': 120.0,
+            'system_check': 150.0
+        }
         
     def check_server_health(self, url: str, name: str) -> Tuple[bool, Dict[str, Any]]:
         """Check if server is healthy and responsive"""
         try:
             print(f"🔍 Checking {name} at {url}/health...")
-            response = requests.get(f"{url}/health", timeout=self.timeout)
+            response = requests.get(f"{url}/health", timeout=self.timeouts['server_health_check'])
             
             if response.status_code == 200:
                 health_data = response.json()
@@ -47,7 +55,7 @@ class SystemChecker:
         """Get detailed server status"""
         try:
             print(f"📊 Getting {name} status...")
-            response = requests.get(f"{url}/status", timeout=self.timeout)
+            response = requests.get(f"{url}/status", timeout=self.timeouts['server_status'])
             
             if response.status_code == 200:
                 status_data = response.json()
@@ -67,7 +75,7 @@ class SystemChecker:
         """Check if learner can provide parameters"""
         try:
             print(f"🧠 Getting learner parameters...")
-            response = requests.get(f"{self.learner_url}/get_params", timeout=self.timeout)
+            response = requests.get(f"{self.learner_url}/get_params", timeout=self.timeouts['get_params'])
             
             if response.status_code == 200:
                 params_data = response.json()
@@ -114,7 +122,7 @@ class SystemChecker:
             response = requests.post(
                 f"{self.collector_url}/generate_batch",
                 json=test_request,
-                timeout=max(30.0, self.timeout)  # VLLM can be slow
+                timeout=self.timeouts['generate_batch']
             )
             
             if response.status_code == 200:
@@ -158,7 +166,7 @@ class SystemChecker:
             response = requests.post(
                 f"{self.learner_url}/train_step",
                 json=train_request,
-                timeout=self.timeout
+                timeout=self.timeouts['train_step']
             )
             
             if response.status_code == 200:
@@ -248,7 +256,7 @@ def main():
     parser.add_argument("--collector-url", type=str, help="Collector URL override")
     parser.add_argument("--learner-url", type=str, help="Learner URL override")
     parser.add_argument("--node", type=str, help="Node name (for both servers)")
-    parser.add_argument("--timeout", type=float, default=30.0, help="Request timeout")
+    parser.add_argument("--timeout", type=float, help="Override all timeouts (for backwards compatibility)")
     parser.add_argument("--quick", action="store_true", help="Quick health check only")
     
     args = parser.parse_args()
@@ -282,11 +290,20 @@ def main():
     print(f"Checking system with:")
     print(f"  Collector: {collector_url}")
     print(f"  Learner: {learner_url}")
-    print(f"  Timeout: {args.timeout}s")
+    if hasattr(args, 'timeout') and args.timeout:
+        print(f"  Timeout override: {args.timeout}s")
+    else:
+        print(f"  Using config timeouts")
     print()
     
-    # Create checker and run tests
-    checker = SystemChecker(collector_url, learner_url, args.timeout)
+    # Create checker and run tests  
+    if hasattr(args, 'timeout') and args.timeout:
+        # Override all timeouts with single value (backwards compatibility)
+        custom_timeouts = {key: args.timeout for key in coordinator_config.get('timeouts', {}).keys()}
+        checker = SystemChecker(collector_url, learner_url, custom_timeouts)
+    else:
+        # Use config timeouts
+        checker = SystemChecker(collector_url, learner_url, coordinator_config.get('timeouts'))
     
     if args.quick:
         # Quick health check only

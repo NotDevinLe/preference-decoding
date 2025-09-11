@@ -3,13 +3,13 @@ import requests
 import argparse
 import json
 
-def check_server(url, name="Server"):
+def check_server(url, name="Server", timeout=120.0):
     """Check health and status of a server"""
-    print(f"🔍 Checking {name} at {url}")
+    print(f"🔍 Checking {name} at {url} (timeout: {timeout}s)")
     
     # Health check
     try:
-        health_resp = requests.get(f"{url}/health", timeout=10)
+        health_resp = requests.get(f"{url}/health", timeout=timeout)
         print(f"  Health: {health_resp.status_code}")
         if health_resp.status_code == 200:
             health_data = health_resp.json()
@@ -22,7 +22,7 @@ def check_server(url, name="Server"):
     
     # Status check
     try:
-        status_resp = requests.get(f"{url}/status", timeout=10)
+        status_resp = requests.get(f"{url}/status", timeout=timeout)
         print(f"  Status: {status_resp.status_code}")
         if status_resp.status_code == 200:
             status_data = status_resp.json()
@@ -42,23 +42,24 @@ def main():
     parser.add_argument("--server", type=str, choices=['collector', 'learner', 'both'], 
                        default='both', help="Which server to check")
     parser.add_argument("--url", type=str, help="Direct URL to check (overrides node/port)")
+    parser.add_argument("--timeout", type=float, default=120.0, help="Request timeout in seconds")
     
     args = parser.parse_args()
     
     if args.url:
-        check_server(args.url, "Custom Server")
+        check_server(args.url, "Custom Server", args.timeout)
     else:
         if args.server in ['collector', 'both']:
             collector_url = f"http://{args.node}:{args.collector_port}"
             print("=" * 50)
-            if not check_server(collector_url, "Collector"):
+            if not check_server(collector_url, "Collector", args.timeout):
                 print("❌ Collector check failed")
             print()
         
         if args.server in ['learner', 'both']:
             learner_url = f"http://{args.node}:{args.learner_port}"
             print("=" * 50)
-            if not check_server(learner_url, "Learner"):
+            if not check_server(learner_url, "Learner", args.timeout):
                 print("❌ Learner check failed")
             print()
     

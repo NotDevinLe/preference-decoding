@@ -43,5 +43,14 @@
     "enable_wandb": false,
     "plot_update_interval": 10.0,
     "log_level": "INFO"
+  },
+  "timeouts": {
+    "server_health_check": 120.0,
+    "server_startup_wait": 300.0,
+    "get_params": 120.0,
+    "generate_batch": 180.0,
+    "train_step": 120.0,
+    "server_status": 120.0,
+    "system_check": 150.0
   }
 }
