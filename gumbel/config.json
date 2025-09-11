@@ -12,16 +12,17 @@
   },
   "vllm": {
     "model_name": "meta-llama/Llama-3.2-1B-Instruct",
+    "server_url": "http://g3124:8000/v1",
     "gpu_memory_util": 0.6
   },
   "servers": {
     "collector": {
-      "host": "g3097",
+      "host": "0.0.0.0",
       "port": 8001,
       "device": "cuda:0"
     },
     "learner": {
-      "host": "g3097", 
+      "host": "0.0.0.0", 
       "port": 8002,
       "device": "cuda:0",
       "checkpoint_dir": "./checkpoints",

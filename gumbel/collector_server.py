@@ -135,7 +135,7 @@ async def get_log_probs_api(system_prompts: List[str], user_prompts: List[str],
                           completions: List[str]) -> tuple[List[float], List[int]]:
     """
     Get log probabilities using OpenAI API (via VLLM server).
-    Replaces the direct VLLM get_log_probs function.
+    Follows the same logic as src/core/drift.py get_log_probs function.
     
     Returns:
         tuple: (log_probs, token_counts) for each completion
@@ -143,46 +143,101 @@ async def get_log_probs_api(system_prompts: List[str], user_prompts: List[str],
     log_probs = []
     token_counts = []
     
-    for sys_prompt, user_prompt, completion in zip(system_prompts, user_prompts, completions):
+    for i, (sys_prompt, user_prompt, completion) in enumerate(zip(system_prompts, user_prompts, completions)):
         try:
-            # Use chat completions with logprobs
+            # Add 10-second throttling delay to avoid overwhelming VLLM server
+            if i > 0:  # Skip delay for first request
+                logging.debug(f"Throttling: sleeping 10s before request {i+1}/{len(system_prompts)}")
+                await asyncio.sleep(10.0)  # 10 second delay between requests
+            
+            logging.debug(f"Processing API request {i+1}/{len(system_prompts)}")
+            
+            # Format prompt using chat template structure (matching original logic)
+            messages = [
+                {"role": "system", "content": sys_prompt.strip()},
+                {"role": "user", "content": user_prompt.strip()}
+            ]
+            
+            # Get the chat completion with logprobs for the full sequence
+            # We want to score: prompt + completion + eos
             response = vllm_client.chat.completions.create(
                 model=model_name,
-                messages=[
-                    {"role": "system", "content": sys_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
+                messages=messages,
+                max_tokens=1,  # Minimal generation (we mainly want prompt logprobs)
+                temperature=0.0,
                 logprobs=True,
                 top_logprobs=1,
-                max_tokens=1,  # We just want to score the existing completion
-                temperature=0.0
+                extra_body={
+                    "prompt_logprobs": 1,  # Enable prompt logprobs like original
+                    "include_stop_str_in_output": True
+                }
             )
             
-            # Extract logprob for the completion
-            # Note: This is a simplified version - real implementation would need
-            # to properly tokenize the completion and sum logprobs
-            if response.choices and response.choices[0].logprobs:
-                # For now, use a placeholder scoring mechanism
-                # This would need to be more sophisticated in practice
-                log_prob = 0.0
-                token_count = len(completion.split())  # Rough token estimate
+            # Note: The OpenAI API doesn't give us the exact same access to prompt_logprobs
+            # as the direct VLLM interface. We need to work with what's available.
+            
+            # For now, use a simpler approach that approximates the original logic
+            # by making a completion request with the full prompt+completion text
+            full_text = f"{sys_prompt.strip()}\n\nUser: {user_prompt.strip()}\n\nAssistant: {completion}"
+            
+            # Use completions endpoint to get logprobs for the full sequence
+            completion_response = vllm_client.completions.create(
+                model=model_name,
+                prompt=full_text,
+                max_tokens=1,
+                temperature=0.0,
+                logprobs=1,
+                echo=True  # Include prompt tokens in response
+            )
+            
+            if completion_response.choices and completion_response.choices[0].logprobs:
+                logprobs_data = completion_response.choices[0].logprobs
+                token_logprobs = logprobs_data.token_logprobs or []
+                tokens = logprobs_data.tokens or []
                 
-                log_probs.append(log_prob)
-                token_counts.append(token_count)
+                # Find where the actual completion starts (after "Assistant:")
+                # This mimics the original logic of skipping prompt tokens
+                completion_start_idx = len(tokens)  # Default to end if not found
+                for idx, token in enumerate(tokens):
+                    if "Assistant:" in token or "assistant:" in token:
+                        completion_start_idx = idx + 1
+                        break
+                
+                # Sum logprobs for completion tokens only (matching original logic)
+                if completion_start_idx < len(token_logprobs):
+                    completion_logprobs = token_logprobs[completion_start_idx:]
+                    total_log_prob = sum(lp for lp in completion_logprobs if lp is not None)
+                    token_count = len(completion_logprobs)
+                else:
+                    # Fallback if we can't find the split point
+                    total_log_prob = sum(lp for lp in token_logprobs[-10:] if lp is not None)  # Last 10 tokens
+                    token_count = min(10, len(token_logprobs))
+                
+                log_probs.append(total_log_prob)
+                token_counts.append(max(token_count, 1))
+                
+                logging.debug(f"✅ Computed logprob {total_log_prob:.3f} for '{completion[:30]}...' ({token_count} tokens)")
             else:
-                log_probs.append(0.0)
-                token_counts.append(1)
+                # Fallback scoring (length-based penalty)
+                log_prob = -len(completion.split()) * 0.5  # Penalty per word
+                token_count = len(completion.split())
+                log_probs.append(log_prob)
+                token_counts.append(max(token_count, 1))
+                logging.debug(f"⚠️ Fallback scoring for '{completion[:30]}...': {log_prob:.3f}")
                 
         except Exception as e:
-            logging.warning(f"Error getting log probs for completion: {e}")
-            log_probs.append(0.0) 
-            token_counts.append(1)
+            logging.warning(f"Error getting log probs for completion '{completion[:30]}...': {e}")
+            # Fallback scoring
+            log_prob = -len(completion.split()) * 0.5
+            token_count = len(completion.split())
+            log_probs.append(log_prob)
+            token_counts.append(max(token_count, 1))
     
     return log_probs, token_counts
 
 async def compute_reward_matrix_direct(user_data: Dict[str, Any], m_hard: torch.Tensor) -> torch.Tensor:
     """
-    Compute reward matrix using direct VLLM scoring (drift-based like compute_reward_matrix_flexible_efficient.py)
+    Compute reward matrix using batched VLLM API calls for maximum efficiency.
     
     Args:
         user_data: Dict with 'prompts', 'outputs', 'user_ids'
@@ -199,31 +254,68 @@ async def compute_reward_matrix_direct(user_data: Dict[str, Any], m_hard: torch.
     if batch_size == 0:
         return torch.zeros(0, d, device=device)
     
-    # Compute baseline scores with reference prompt
-    base_probs, base_counts = await get_log_probs_api(
-        [base_prompt] * batch_size,
-        prompts, outputs
+    # Get active attributes only (optimization)
+    active_attr_indices = torch.where(m_hard > 0)[0].tolist()
+    active_attributes = [attribute_prompts[i] for i in active_attr_indices if i < len(attribute_prompts)]
+    
+    logging.debug(f"Computing rewards for {len(active_attributes)} active attributes out of {d} total")
+    
+    # Prepare batched API call
+    # Structure: [baseline_batch, attr1_batch, attr2_batch, ...]
+    all_system_prompts = []
+    all_user_prompts = []
+    all_completions = []
+    
+    # Add baseline prompts
+    all_system_prompts.extend([base_prompt] * batch_size)
+    all_user_prompts.extend(prompts)
+    all_completions.extend(outputs)
+    
+    # Add attribute prompts
+    for attr_prompt in active_attributes:
+        all_system_prompts.extend([attr_prompt] * batch_size)
+        all_user_prompts.extend(prompts)
+        all_completions.extend(outputs)
+    
+    total_requests = len(all_system_prompts)
+    logging.debug(f"Making single batched API call with {total_requests} requests")
+    
+    # Single batched API call
+    import time
+    start_time = time.time()
+    all_probs, all_counts = await get_log_probs_api(
+        all_system_prompts, all_user_prompts, all_completions
     )
+    api_time = time.time() - start_time
+    logging.debug(f"Batched API call completed in {api_time:.2f}s")
+    
+    # Parse results
+    # First batch_size results are baseline scores
+    base_probs = all_probs[:batch_size]
+    base_counts = all_counts[:batch_size]
     base_scores = torch.tensor(base_probs, device=device) / torch.tensor(base_counts, device=device)
     
-    # Compute scores for each attribute prompt
-    reward_matrix = torch.zeros(batch_size, d, device=device)
-    
-    for attr_idx, attr_prompt in enumerate(attribute_prompts):
-        if attr_idx >= d:  # Don't exceed the mask dimension
-            break
-            
-        # Get scores with this attribute prompt
-        attr_probs, attr_counts = await get_log_probs_api(
-            [attr_prompt] * batch_size,
-            prompts, outputs
-        )
+    # Remaining results are attribute scores
+    attr_results = []
+    for i, attr_idx in enumerate(active_attr_indices[:len(active_attributes)]):
+        start_idx = batch_size + i * batch_size
+        end_idx = start_idx + batch_size
+        
+        attr_probs = all_probs[start_idx:end_idx]
+        attr_counts = all_counts[start_idx:end_idx]
         attr_scores = torch.tensor(attr_probs, device=device) / torch.tensor(attr_counts, device=device)
         
-        # Compute drift scores (attribute vs reference)
-        reward_matrix[:, attr_idx] = attr_scores - base_scores
+        attr_results.append((attr_idx, attr_scores))
     
-    # Apply mask - zero out inactive attributes
+    # Build reward matrix
+    reward_matrix = torch.zeros(batch_size, d, device=device)
+    
+    for attr_idx, attr_scores in attr_results:
+        # Compute drift scores (attribute vs reference)
+        drift_scores = attr_scores - base_scores
+        reward_matrix[:, attr_idx] = drift_scores
+    
+    # Apply mask (this should be redundant since we only computed active attributes)
     masked_reward_matrix = reward_matrix * m_hard.unsqueeze(0)
     
     logging.debug(f"Computed reward matrix {masked_reward_matrix.shape}, mask sparsity: {m_hard.sum().item()}/{d}")

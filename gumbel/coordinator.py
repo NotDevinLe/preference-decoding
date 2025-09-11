@@ -10,7 +10,7 @@ import argparse
 import time
 # Removed subprocess and sys imports - no longer starting servers
 # import subprocess
-# import sys
+import sys
 import requests
 from pathlib import Path
 from typing import Dict, Any, Optional, Tuple
@@ -327,6 +327,19 @@ class ServerCoordinator:
                     logging.warning("Failed to generate batch, retrying...")
                     await asyncio.sleep(1.0)
                     continue
+                
+                # Log successful batch generation
+                batch_size = len(fresh_batch_data.get('R', []))
+                mask_sparsity = sum(fresh_batch_data.get('m_hard', []))
+                reward_matrix = fresh_batch_data.get('R', [])
+                if reward_matrix and len(reward_matrix) > 0:
+                    reward_range = [
+                        min(min(row) for row in reward_matrix),
+                        max(max(row) for row in reward_matrix)
+                    ]
+                    logging.info(f"🎉 BATCH GENERATED: {batch_size} samples, {int(mask_sparsity)} active attributes, reward range [{reward_range[0]:.3f}, {reward_range[1]:.3f}]")
+                else:
+                    logging.info(f"🎉 BATCH GENERATED: {batch_size} samples, {int(mask_sparsity)} active attributes")
                 
                 # Add fresh data to replay buffer for future use
                 self.add_to_replay_buffer(
