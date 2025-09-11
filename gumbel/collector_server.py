@@ -67,7 +67,8 @@ collections_count = 0
 device = None
 
 async def initialize_collector(d: int, dataset_path: str, device_str: str, 
-                             vllm_model_name: str, gpu_memory_util: float):
+                             vllm_model_name: str, gpu_memory_util: float,
+                             attribute_prompts_path: str = None):
     """Initialize collector components"""
     global data_sampler, vllm_model, vllm_tokenizer, attribute_prompts, device
     
@@ -98,8 +99,38 @@ async def initialize_collector(d: int, dataset_path: str, device_str: str,
     data_sampler = DataSampler(dataset_path=dataset_path)
     
     # Initialize attribute prompts for scoring
-    attribute_prompts = [f"You are evaluating responses based on attribute {i}." for i in range(min(d, 10))]
-    logging.info(f"Using {len(attribute_prompts)} attribute prompts for scoring")
+    if not attribute_prompts_path:
+        logging.error("No attribute prompts file provided")
+        raise ValueError("--attribute-prompts-path is required")
+        
+    if not Path(attribute_prompts_path).exists():
+        logging.error(f"Attribute prompts file not found: {attribute_prompts_path}")
+        raise FileNotFoundError(f"Attribute prompts file not found: {attribute_prompts_path}")
+    
+    logging.info(f"Loading attribute prompts from {attribute_prompts_path}")
+    try:
+        import json
+        with open(attribute_prompts_path, 'r') as f:
+            loaded_prompts = json.load(f)
+        
+        # Handle different file formats
+        if isinstance(loaded_prompts, list):
+            attribute_prompts = loaded_prompts[:d]  # Take first d prompts
+        elif isinstance(loaded_prompts, dict) and 'prompts' in loaded_prompts:
+            attribute_prompts = loaded_prompts['prompts'][:d]
+        else:
+            logging.error("Invalid attribute prompts file format - expected list or {'prompts': [...]}")
+            raise ValueError("Invalid attribute prompts file format")
+            
+        if len(attribute_prompts) < d:
+            logging.error(f"Not enough attribute prompts: file has {len(attribute_prompts)}, but d={d}")
+            raise ValueError(f"Need at least {d} attribute prompts, but file only has {len(attribute_prompts)}")
+            
+        logging.info(f"Successfully loaded {len(attribute_prompts)} attribute prompts")
+        
+    except Exception as e:
+        logging.error(f"Failed to load attribute prompts: {e}")
+        raise
     
     stats = data_sampler.get_stats()
     logging.info(f"Collector initialized: {stats['num_users']} users, {stats['total_samples']} samples")
@@ -237,6 +268,9 @@ def main():
     parser.add_argument("--vllm-model", type=str, default="microsoft/DialoGPT-medium", help="VLLM model")
     parser.add_argument("--gpu-memory-util", type=float, default=0.8, help="GPU memory utilization")
     
+    # Attribute prompts
+    parser.add_argument("--attribute-prompts-path", type=str, required=True, help="Path to attribute prompts JSON file")
+    
     # Server parameters
     parser.add_argument("--host", type=str, default="0.0.0.0", help="Host to bind to")
     parser.add_argument("--port", type=int, default=8001, help="Port to bind to")
@@ -257,8 +291,9 @@ def main():
             d=args.d,
             dataset_path=args.dataset_path,
             device_str=args.device,
-            vllm_model=args.vllm_model,
-            gpu_memory_util=args.gpu_memory_util
+            vllm_model_name=args.vllm_model,
+            gpu_memory_util=args.gpu_memory_util,
+            attribute_prompts_path=args.attribute_prompts_path
         )
     
     # Add startup event

@@ -52,15 +52,15 @@ class CollectorTester:
             logging.error(f"❌ Status check error: {e}")
             return False
     
-    def test_generate_batch(self, d: int = 10):
-        """Test batch generation endpoint"""
-        logging.info("Testing batch generation...")
+    def test_generate_batch(self, d: int = 3):
+        """Test batch generation endpoint with focus on reward logic"""
+        logging.info("Testing batch generation and reward logic...")
         try:
-            # Create test request
+            # Create test request - use small numbers for focused testing
             request_data = {
-                "users_per_batch": 2,
-                "samples_per_user": 3,
-                "behavior_logits": [0.5] * d,  # Neutral logits
+                "users_per_batch": 1,  # Just 1 user
+                "samples_per_user": 3,  # 3 samples (all from our test data)
+                "behavior_logits": [0.8, 0.2, 0.6],  # Non-uniform logits for d=3
                 "tau": 1.0
             }
             
@@ -69,7 +69,7 @@ class CollectorTester:
             response = requests.post(
                 f"{self.collector_url}/generate_batch",
                 json=request_data,
-                timeout=60.0  # VLLM can be slow
+                timeout=180.0  # VLLM scoring can be very slow, especially first time
             )
             
             if response.status_code == 200:
@@ -109,14 +109,32 @@ class CollectorTester:
                     else:
                         logging.warning(f"⚠️ Reward matrix dimension mismatch: expected {d}, got {len(R[0]) if R else 0}")
                     
+                    # Detailed reward analysis for testing
+                    logging.info("=== REWARD ANALYSIS ===")
+                    logging.info(f"Hard mask: {m_hard}")
+                    logging.info(f"Active attributes: {sum(m_hard)}")
+                    
+                    if R:
+                        import numpy as np
+                        R_array = np.array(R)
+                        logging.info(f"Reward matrix shape: {R_array.shape}")
+                        logging.info(f"Reward range: [{R_array.min():.4f}, {R_array.max():.4f}]")
+                        logging.info(f"Mean reward per attribute: {R_array.mean(axis=0)}")
+                        
+                        # Show rewards for each sample
+                        for i, row in enumerate(R):
+                            logging.info(f"  Sample {i}: {[f'{r:.4f}' for r in row]}")
+                    
                     # Show sample data
-                    logging.info("Sample data:")
+                    logging.info("=== SAMPLE DATA ===")
                     if user_data.get('prompts'):
-                        logging.info(f"  Sample prompt: {user_data['prompts'][0][:100]}...")
+                        for i, prompt in enumerate(user_data['prompts']):
+                            logging.info(f"  Prompt {i}: {prompt}")
                     if user_data.get('outputs'):
-                        logging.info(f"  Sample output: {user_data['outputs'][0][:100]}...")
+                        for i, output in enumerate(user_data['outputs']):
+                            logging.info(f"  Output {i}: {output}")
                     if user_data.get('user_ids'):
-                        logging.info(f"  Sample user_id: {user_data['user_ids'][0]}")
+                        logging.info(f"  User IDs: {user_data['user_ids']}")
                     
                     return True
                 else:
@@ -131,7 +149,7 @@ class CollectorTester:
             logging.error(f"❌ Batch generation error: {e}")
             return False
     
-    def run_all_tests(self, d: int = 10):
+    def run_all_tests(self, d: int = 3):
         """Run all tests"""
         logging.info("=== Starting Collector Tests ===")
         
@@ -163,12 +181,13 @@ class CollectorTester:
         logging.info(f"\nOverall: {passed}/{len(results)} tests passed")
         return passed == len(results)
 
-def start_collector_server(dataset_path: str, d: int = 10, port: int = 8001):
+def start_collector_server(dataset_path: str, attribute_prompts_path: str, d: int = 3, port: int = 8001):
     """Start collector server for testing"""
     cmd = [
         sys.executable, "collector_server.py",
         "--d", str(d),
         "--dataset-path", dataset_path,
+        "--attribute-prompts-path", attribute_prompts_path,
         "--vllm-model", "microsoft/DialoGPT-medium",  # Small model for testing
         "--gpu-memory-util", "0.3",  # Low memory usage
         "--host", "localhost",
@@ -183,8 +202,9 @@ def start_collector_server(dataset_path: str, d: int = 10, port: int = 8001):
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="Test Collector Server")
-    parser.add_argument("--dataset-path", type=str, required=True, help="Dataset path")
-    parser.add_argument("--d", type=int, default=10, help="Number of attributes")
+    parser.add_argument("--dataset-path", type=str, default="test_data.pkl", help="Dataset path")
+    parser.add_argument("--attribute-prompts-path", type=str, default="test_attribute_prompts.json", help="Path to attribute prompts JSON file")
+    parser.add_argument("--d", type=int, default=3, help="Number of attributes")
     parser.add_argument("--port", type=int, default=8001, help="Collector port")
     parser.add_argument("--start-server", action="store_true", help="Start collector server automatically")
     parser.add_argument("--wait-time", type=int, default=30, help="Time to wait for server startup")
@@ -196,13 +216,38 @@ def main():
     try:
         if args.start_server:
             logging.info("Starting collector server...")
-            collector_process = start_collector_server(args.dataset_path, args.d, args.port)
+            collector_process = start_collector_server(args.dataset_path, args.attribute_prompts_path, args.d, args.port)
             
-            logging.info(f"Waiting {args.wait_time} seconds for server to start...")
-            time.sleep(args.wait_time)
-        
-        # Run tests
-        tester = CollectorTester(f"http://localhost:{args.port}")
+            # Wait for server to be ready with health checks
+            logging.info(f"Waiting up to {args.wait_time} seconds for server to be ready...")
+            tester = CollectorTester(f"http://localhost:{args.port}")
+            
+            ready = False
+            for attempt in range(0, args.wait_time, 5):  # Check every 5 seconds
+                time.sleep(5)
+                # Suppress health check error messages during startup
+                original_level = logging.getLogger().level
+                logging.getLogger().setLevel(logging.CRITICAL)
+                
+                try:
+                    health_ok = tester.test_health()
+                finally:
+                    logging.getLogger().setLevel(original_level)
+                
+                if health_ok:
+                    logging.info(f"✅ Server ready after ~{attempt + 5} seconds!")
+                    ready = True
+                    break
+                elif attempt % 30 == 0:  # Log progress every 30 seconds
+                    logging.info(f"Still waiting for server... ({attempt + 5}/{args.wait_time}s)")
+            
+            if not ready:
+                logging.error(f"❌ Server failed to start within {args.wait_time} seconds")
+                return 1
+
+        # Run tests (reuse tester if we created one above)
+        if not args.start_server:
+            tester = CollectorTester(f"http://localhost:{args.port}")
         success = tester.run_all_tests(args.d)
         
         if success:
@@ -223,10 +268,18 @@ def main():
             logging.info("Stopping collector server...")
             collector_process.terminate()
             try:
-                collector_process.wait(timeout=10.0)
+                collector_process.wait(timeout=5.0)
+                logging.info("Collector server stopped gracefully")
             except subprocess.TimeoutExpired:
                 logging.warning("Force killing collector server")
                 collector_process.kill()
+                try:
+                    collector_process.wait(timeout=3.0)
+                    logging.info("Collector server force killed")
+                except subprocess.TimeoutExpired:
+                    logging.error("Failed to kill collector server!")
+            except Exception as e:
+                logging.error(f"Error stopping collector server: {e}")
 
 if __name__ == "__main__":
     sys.exit(main())

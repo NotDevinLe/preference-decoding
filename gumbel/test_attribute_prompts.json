@@ -1,0 +1,9 @@
+{
+  "prompts": [
+    "You are a helpful assistant focused on accuracy",
+    "You are a creative assistant focused on interesting responses",
+    "You are a concise assistant focused on brevity"
+  ],
+  "count": 3,
+  "source": "test"
+}
