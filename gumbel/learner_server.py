@@ -176,25 +176,28 @@ async def train_step_endpoint(request: TrainStepRequest):
         )
 
 async def train_step(m_hard: torch.Tensor, R: torch.Tensor, step: int) -> Dict[str, float]:
-    """Single training step with reward matrix"""
+    """Single training step with reward matrix using full model (like working test)"""
     optimizer.zero_grad()
     
-    # R is now [batch_size, d] reward matrix
+    # R is now [batch_size, d] reward matrix - treat as input data
+    x = R  # Use rewards as input data
     batch_size, d = R.shape
-    assert len(m_hard) == d, f"Mask dimension mismatch: {len(m_hard)} vs {d}"
     
-    # Compute reward-based loss directly from the reward matrix
-    # We want to maximize rewards for active attributes (those selected by m_hard)
-    active_rewards = R * m_hard.unsqueeze(0)  # Zero out inactive attributes
-    reward_signal = active_rewards.sum(dim=1).mean()  # Average reward across batch
+    # Normalize input like original gumbel.py
+    x = torch.nn.functional.normalize(x, p=2, dim=1)  # L2 normalize each sample
     
-    # Sparsity loss (encourage sparse selection)
-    mask_probs = torch.sigmoid(model.mask_logits)  # Convert logits to probabilities
-    sparsity_loss = mask_probs.mean()  # Encourage sparsity
+    # Forward pass - use the model's built-in forward method (with gradient flow)
+    z, x_hat, masks = model.forward(x)
     
-    # Total loss: maximize reward while encouraging sparsity
-    # Negative reward signal because we want to maximize (so minimize negative)
-    loss = -reward_signal + model.sparsity_weight * sparsity_loss
+    # Reconstruction loss (exactly like original gumbel.py)
+    recon_loss = torch.nn.functional.mse_loss(x_hat, x)
+    
+    # Sparsity loss - encourage masks to be sparse (exactly like original)
+    mask_probs = torch.sigmoid(model.mask_logits)
+    sparsity_loss = mask_probs.mean()  # Penalize high probabilities
+    
+    # Total loss (exactly like original gumbel.py)
+    loss = recon_loss + model.sparsity_weight * sparsity_loss
     
     # Backward pass
     loss.backward()
@@ -203,10 +206,10 @@ async def train_step(m_hard: torch.Tensor, R: torch.Tensor, step: int) -> Dict[s
     
     return {
         'loss': float(loss.detach().cpu()),
-        'reward_signal': float(reward_signal.detach().cpu()),
+        'reward_signal': float(recon_loss.detach().cpu()),  # Use recon_loss as reward signal
         'sparsity_loss': float(sparsity_loss.detach().cpu()),
         'avg_reward': float(R.mean().detach().cpu()) if R.numel() > 0 else 0.0,
-        'active_attributes': float(m_hard.sum().detach().cpu()),
+        'active_attributes': float(masks.sum().detach().cpu()),  # Use model's masks
     }
 
 async def save_checkpoint(step: int, final: bool = False):

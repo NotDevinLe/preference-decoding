@@ -18,6 +18,17 @@ import threading
 import random
 import torch
 from collections import deque
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from datetime import datetime
+import json
+
+# Optional wandb import
+try:
+    import wandb
+    WANDB_AVAILABLE = True
+except ImportError:
+    WANDB_AVAILABLE = False
 
 class ServerCoordinator:
     """Coordinates collector and learner servers"""
@@ -28,7 +39,10 @@ class ServerCoordinator:
                  queue_size: int = 100,
                  replay_buffer_size: int = 10000,
                  replay_ratio: float = 0.3,
-                 startup_wait: float = 10.0):
+                 startup_wait: float = 10.0,
+                 enable_monitoring: bool = True,
+                 enable_wandb: bool = False,
+                 plot_update_interval: float = 10.0):
         
         self.collector_args = collector_args
         self.learner_args = learner_args
@@ -50,6 +64,30 @@ class ServerCoordinator:
         # Replay buffer for improved sample efficiency
         self.replay_buffer = deque(maxlen=replay_buffer_size)
         self.replay_ratio = replay_ratio
+        
+        # Monitoring configuration
+        self.enable_monitoring = enable_monitoring
+        self.enable_wandb = enable_wandb and WANDB_AVAILABLE
+        self.plot_update_interval = plot_update_interval
+        self.start_time = None
+        
+        # Metrics tracking
+        self.metrics = {
+            'timestamps': [],
+            'steps': [],
+            'losses': [],
+            'reward_signals': [],
+            'active_attributes': [],
+            'temperatures': [],
+            'queue_sizes': [],
+            'replay_buffer_sizes': []
+        }
+        
+        # Plotting
+        self.fig = None
+        self.axes = None
+        self.monitoring_thread = None
+        self.wandb_run = None
         
         # Training configuration
         self.users_per_batch = 4
@@ -74,6 +112,10 @@ class ServerCoordinator:
             "--device", self.collector_args['device'],
             "--log-level", self.collector_args['log_level']
         ]
+        
+        # Add attribute prompts path if provided
+        if self.collector_args.get('attribute_prompts_path'):
+            cmd.extend(["--attribute-prompts-path", self.collector_args['attribute_prompts_path']])
         
         logging.info(f"Starting collector server: {' '.join(cmd)}")
         self.collector_process = subprocess.Popen(cmd)
@@ -374,11 +416,204 @@ class ServerCoordinator:
         
         logging.info(f"Consumer loop stopped after {step} steps")
     
+    async def update_metrics(self, step: int, loss: float = None, reward_signal: float = None, 
+                           active_attributes: float = None, temperature: float = None):
+        """Update metrics tracking"""
+        if not self.enable_monitoring:
+            return
+            
+        current_time = time.time()
+        if self.start_time is None:
+            self.start_time = current_time
+        
+        timestamp = current_time - self.start_time
+        
+        self.metrics['timestamps'].append(timestamp)
+        self.metrics['steps'].append(step)
+        self.metrics['losses'].append(loss or 0.0)
+        self.metrics['reward_signals'].append(reward_signal or 0.0)
+        self.metrics['active_attributes'].append(active_attributes or 0.0)
+        self.metrics['temperatures'].append(temperature or 1.0)
+        self.metrics['queue_sizes'].append(self.batch_queue.qsize())
+        self.metrics['replay_buffer_sizes'].append(len(self.replay_buffer))
+        
+        # Log to wandb if enabled
+        if self.enable_wandb and self.wandb_run:
+            self.wandb_run.log({
+                'step': step,
+                'loss': loss or 0.0,
+                'reward_signal': reward_signal or 0.0,
+                'active_attributes': active_attributes or 0.0,
+                'temperature': temperature or 1.0,
+                'queue_size': self.batch_queue.qsize(),
+                'replay_buffer_size': len(self.replay_buffer),
+                'timestamp': timestamp
+            }, step=step)
+    
+    def setup_monitoring(self):
+        """Setup monitoring components"""
+        if not self.enable_monitoring:
+            return
+            
+        # Initialize wandb if enabled
+        if self.enable_wandb:
+            try:
+                self.wandb_run = wandb.init(
+                    project="distributed-sparse-attributes",
+                    name=f"coordinator-{datetime.now().strftime('%Y%m%d-%H%M%S')}",
+                    config={
+                        'users_per_batch': self.users_per_batch,
+                        'samples_per_user': self.samples_per_user,
+                        'replay_buffer_size': self.replay_buffer.maxlen,
+                        'replay_ratio': self.replay_ratio,
+                        'collector_args': self.collector_args,
+                        'learner_args': self.learner_args
+                    }
+                )
+                logging.info("Wandb monitoring initialized")
+            except Exception as e:
+                logging.error(f"Failed to initialize wandb: {e}")
+                self.enable_wandb = False
+        
+        # Setup matplotlib for live plotting
+        if self.enable_monitoring:
+            try:
+                plt.ion()  # Interactive mode
+                self.fig, self.axes = plt.subplots(2, 2, figsize=(12, 8))
+                self.fig.suptitle('Real-time Training Monitoring', fontsize=14)
+                
+                # Configure subplots
+                self.axes[0, 0].set_title('Training Loss')
+                self.axes[0, 0].set_xlabel('Time (s)')
+                self.axes[0, 0].set_ylabel('Loss')
+                self.axes[0, 0].grid(True)
+                
+                self.axes[0, 1].set_title('Active Attributes')
+                self.axes[0, 1].set_xlabel('Time (s)')
+                self.axes[0, 1].set_ylabel('Count')
+                self.axes[0, 1].grid(True)
+                
+                self.axes[1, 0].set_title('Queue & Buffer Status')
+                self.axes[1, 0].set_xlabel('Time (s)')
+                self.axes[1, 0].set_ylabel('Size')
+                self.axes[1, 0].grid(True)
+                
+                self.axes[1, 1].set_title('Temperature')
+                self.axes[1, 1].set_xlabel('Time (s)')
+                self.axes[1, 1].set_ylabel('Temperature')
+                self.axes[1, 1].grid(True)
+                
+                plt.tight_layout()
+                logging.info("Live plotting initialized")
+            except Exception as e:
+                logging.error(f"Failed to setup live plotting: {e}")
+    
+    def update_plots(self):
+        """Update live plots"""
+        if not self.enable_monitoring or self.fig is None or not self.metrics['timestamps']:
+            return
+        
+        try:
+            timestamps = self.metrics['timestamps']
+            
+            # Clear and update each subplot
+            self.axes[0, 0].clear()
+            self.axes[0, 0].plot(timestamps, self.metrics['losses'], 'b-', alpha=0.7)
+            self.axes[0, 0].set_title('Training Loss')
+            self.axes[0, 0].set_xlabel('Time (s)')
+            self.axes[0, 0].set_ylabel('Loss')
+            self.axes[0, 0].grid(True)
+            
+            self.axes[0, 1].clear()
+            self.axes[0, 1].plot(timestamps, self.metrics['active_attributes'], 'g-', alpha=0.7)
+            self.axes[0, 1].set_title('Active Attributes')
+            self.axes[0, 1].set_xlabel('Time (s)')
+            self.axes[0, 1].set_ylabel('Count')
+            self.axes[0, 1].grid(True)
+            
+            self.axes[1, 0].clear()
+            self.axes[1, 0].plot(timestamps, self.metrics['queue_sizes'], 'r-', alpha=0.7, label='Queue')
+            self.axes[1, 0].plot(timestamps, self.metrics['replay_buffer_sizes'], 'orange', alpha=0.7, label='Replay Buffer')
+            self.axes[1, 0].set_title('Queue & Buffer Status')
+            self.axes[1, 0].set_xlabel('Time (s)')
+            self.axes[1, 0].set_ylabel('Size')
+            self.axes[1, 0].legend()
+            self.axes[1, 0].grid(True)
+            
+            self.axes[1, 1].clear()
+            self.axes[1, 1].plot(timestamps, self.metrics['temperatures'], 'purple', alpha=0.7)
+            self.axes[1, 1].set_title('Temperature')
+            self.axes[1, 1].set_xlabel('Time (s)')
+            self.axes[1, 1].set_ylabel('Temperature')
+            self.axes[1, 1].grid(True)
+            
+            plt.tight_layout()
+            plt.draw()
+            plt.pause(0.01)  # Small pause to update display
+            
+        except Exception as e:
+            logging.debug(f"Failed to update plots: {e}")
+    
+    def start_monitoring_thread(self):
+        """Start background monitoring thread"""
+        if not self.enable_monitoring:
+            return
+            
+        def monitoring_loop():
+            last_plot_update = time.time()
+            
+            while self.training_active:
+                try:
+                    current_time = time.time()
+                    
+                    # Update plots at specified interval
+                    if current_time - last_plot_update >= self.plot_update_interval:
+                        self.update_plots()
+                        last_plot_update = current_time
+                    
+                    time.sleep(1.0)  # Check every second
+                    
+                except Exception as e:
+                    logging.debug(f"Error in monitoring thread: {e}")
+                    time.sleep(5.0)
+        
+        self.monitoring_thread = threading.Thread(target=monitoring_loop, daemon=True)
+        self.monitoring_thread.start()
+        logging.info("Monitoring thread started")
+    
+    def save_monitoring_results(self):
+        """Save final monitoring results"""
+        if not self.enable_monitoring or not self.metrics['timestamps']:
+            return
+            
+        try:
+            # Save metrics to JSON
+            metrics_file = f"training_metrics_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+            with open(metrics_file, 'w') as f:
+                json.dump(self.metrics, f, indent=2)
+            logging.info(f"Saved training metrics to {metrics_file}")
+            
+            # Save final plot
+            if self.fig is not None:
+                plot_file = f"training_progress_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
+                self.fig.savefig(plot_file, dpi=150, bbox_inches='tight')
+                logging.info(f"Saved training plot to {plot_file}")
+                
+                if self.enable_wandb and self.wandb_run:
+                    self.wandb_run.log({"final_training_plot": wandb.Image(plot_file)})
+            
+        except Exception as e:
+            logging.error(f"Failed to save monitoring results: {e}")
+    
     async def start_async_training(self, max_steps: int = 1000, log_freq: int = 20, checkpoint_freq: int = 100):
         """Start async distributed training with producer-consumer pattern"""
         logging.info(f"Starting async distributed training for {max_steps} steps")
         
         try:
+            # Setup monitoring
+            self.setup_monitoring()
+            self.start_monitoring_thread()
+            
             # Start training mode
             self.training_active = True
             
@@ -390,6 +625,8 @@ class ServerCoordinator:
             
             # Monitor progress and stop after max_steps
             step = 0
+            last_metrics_update = 0
+            
             while step < max_steps and self.training_active:
                 await asyncio.sleep(5.0)  # Check every 5 seconds
                 
@@ -399,12 +636,36 @@ class ServerCoordinator:
                     if response.status_code == 200:
                         status = response.json()
                         current_step = status.get("current_step", step)
+                        
                         if current_step > step:
                             step = current_step
+                            
+                            # Get additional metrics for monitoring
+                            try:
+                                params_response = requests.get(f"{self.learner_url}/get_params", timeout=5.0)
+                                if params_response.status_code == 200:
+                                    params = params_response.json()
+                                    temperature = params.get('tau', 1.0) if params.get('success') else 1.0
+                                else:
+                                    temperature = 1.0
+                            except:
+                                temperature = 1.0
+                            
+                            active_features = status.get("active_features", 0)
+                            
+                            # Update metrics (we don't have loss from status, so use placeholder)
+                            await self.update_metrics(
+                                step=step,
+                                loss=None,  # Will be set to 0.0 in update_metrics
+                                reward_signal=None,
+                                active_attributes=active_features,
+                                temperature=temperature
+                            )
+                            
                             if step % log_freq == 0:
-                                active_features = status.get("active_features", 0)
                                 replay_stats = self.get_replay_stats()
                                 logging.info(f"Step {step}: active_features={active_features:.1f}, "
+                                           f"temp={temperature:.3f}, "
                                            f"queue_size={self.batch_queue.qsize()}, "
                                            f"replay_buffer={replay_stats['size']}/{replay_stats['max_size']} "
                                            f"({100*replay_stats['utilization']:.1f}% full)")
@@ -419,6 +680,13 @@ class ServerCoordinator:
                 await self.producer_task
             if self.consumer_task:
                 await self.consumer_task
+            
+            # Save monitoring results
+            self.save_monitoring_results()
+            
+            # Clean up wandb
+            if self.enable_wandb and self.wandb_run:
+                self.wandb_run.finish()
             
             logging.info(f"Training completed after {step} steps")
             return True
@@ -539,6 +807,12 @@ def main():
     parser.add_argument("--use-wandb", action="store_true", help="Use wandb logging")
     parser.add_argument("--log-level", type=str, default="INFO", help="Log level")
     
+    # Monitoring parameters
+    parser.add_argument("--enable-monitoring", action="store_true", default=True, help="Enable real-time monitoring")
+    parser.add_argument("--enable-wandb-coordinator", action="store_true", help="Enable wandb for coordinator")
+    parser.add_argument("--plot-update-interval", type=float, default=10.0, help="Plot update interval in seconds")
+    parser.add_argument("--disable-monitoring", action="store_true", help="Disable monitoring completely")
+    
     args = parser.parse_args()
     
     # Setup logging
@@ -578,7 +852,10 @@ def main():
         collector_args, learner_args, 
         queue_size=args.queue_size,
         replay_buffer_size=args.replay_buffer_size,
-        replay_ratio=args.replay_ratio
+        replay_ratio=args.replay_ratio,
+        enable_monitoring=not args.disable_monitoring,
+        enable_wandb=args.enable_wandb_coordinator,
+        plot_update_interval=args.plot_update_interval
     )
     
     logging.info("=== Distributed Sparse Attribute Learning ===")
