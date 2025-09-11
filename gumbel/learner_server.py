@@ -149,6 +149,10 @@ async def train_step_endpoint(request: TrainStepRequest):
         if current_step % 100 == 0 and current_step > 0:
             tau = max(0.1, tau * 0.995)
         
+        # Periodic checkpointing (every 100 steps by default)
+        if current_step % 100 == 0:
+            save_checkpoint(current_step)
+        
         # Wandb logging
         if wandb_run:
             active_features = torch.sigmoid(model.mask_logits).sum().item()
@@ -276,7 +280,40 @@ async def health_check():
         "model_ready": model is not None
     }
 
-# stop_training endpoint removed - coordinator handles orchestration
+# Checkpointing endpoints
+@app.post("/save_checkpoint")
+async def save_checkpoint_endpoint():
+    """Save current model checkpoint"""
+    try:
+        path = save_checkpoint(current_step, final=False)
+        if path:
+            return {"success": True, "checkpoint_path": path, "step": current_step}
+        else:
+            return {"success": False, "error": "Failed to save checkpoint"}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+@app.post("/save_final_checkpoint")
+async def save_final_checkpoint_endpoint():
+    """Save final model checkpoint"""
+    try:
+        path = save_checkpoint(current_step, final=True)
+        if path:
+            return {"success": True, "checkpoint_path": path, "step": current_step}
+        else:
+            return {"success": False, "error": "Failed to save final checkpoint"}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Save final checkpoint on shutdown"""
+    logging.info("Shutting down learner server, saving final checkpoint...")
+    save_checkpoint(current_step, final=True)
+    
+    if wandb_run:
+        wandb_run.finish()
+        logging.info("Finished wandb run")
 
 def main():
     parser = argparse.ArgumentParser(description="Learner Server")
