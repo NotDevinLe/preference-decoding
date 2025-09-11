@@ -141,10 +141,12 @@ class SystemChecker:
                 else:
                     error = batch_data.get("error", "Unknown error")
                     print(f"❌ Collector batch generation failed: {error}")
+                    print(f"   Full response: {batch_data}")
                     return False, batch_data
             else:
                 print(f"❌ Collector batch generation HTTP {response.status_code}")
-                return False, {"error": f"HTTP {response.status_code}"}
+                print(f"   Response text: {response.text}")
+                return False, {"error": f"HTTP {response.status_code}", "response": response.text}
                 
         except Exception as e:
             print(f"❌ Collector batch generation error: {e}")

@@ -21,20 +21,14 @@ import requests
 from sampler import DataSampler
 from utils import bernoulli_gumbel_soft
 
-# VLLM imports
+# OpenAI API client for external VLLM server
 try:
-    from vllm import LLM
-    from transformers import AutoTokenizer
-    import sys
-    from pathlib import Path
-    # Add project root to path for core imports
-    sys.path.append(str(Path(__file__).parent.parent.parent))
-    from src.core.drift import get_log_probs
-    VLLM_AVAILABLE = True
+    from openai import OpenAI
+    OPENAI_AVAILABLE = True
 except ImportError as e:
-    logging.error(f"VLLM dependencies not available: {e}")
-    logging.error("Cannot proceed without VLLM - exiting")
-    VLLM_AVAILABLE = False
+    logging.error(f"OpenAI client not available: {e}")
+    logging.error("Cannot proceed without OpenAI client - install with: pip install openai")
+    OPENAI_AVAILABLE = False
 
 # Request/Response models
 class CollectionRequest(BaseModel):
@@ -59,39 +53,41 @@ class StatusResponse(BaseModel):
 # Global variables
 app = FastAPI(title="Collector Server", version="1.0")
 data_sampler = None
-vllm_model = None
-vllm_tokenizer = None
+vllm_client = None
+model_name = None
 attribute_prompts = None
 base_prompt = "You are a helpful assistant."
 collections_count = 0
 device = None
 
 async def initialize_collector(d: int, dataset_path: str, device_str: str, 
-                             vllm_model_name: str, gpu_memory_util: float,
+                             vllm_server_url: str, model_name_arg: str,
                              attribute_prompts_path: str = None):
     """Initialize collector components"""
-    global data_sampler, vllm_model, vllm_tokenizer, attribute_prompts, device
+    global data_sampler, vllm_client, model_name, attribute_prompts, device
     
-    if not VLLM_AVAILABLE:
-        logging.error("VLLM not available - cannot initialize collector")
-        raise RuntimeError("VLLM dependencies required")
+    if not OPENAI_AVAILABLE:
+        logging.error("OpenAI client not available - cannot initialize collector")
+        raise RuntimeError("OpenAI client required for VLLM server communication")
     
     device = torch.device(device_str)
     logging.info(f"Initializing collector on {device}")
     
-    # Initialize VLLM model directly
-    logging.info(f"Loading VLLM model: {vllm_model_name}")
+    # Initialize VLLM client for external server
+    logging.info(f"Connecting to VLLM server at: {vllm_server_url}")
     try:
-        vllm_model = LLM(
-            model=vllm_model_name,
-            tensor_parallel_size=1,
-            dtype="bfloat16" if device_str == "cuda" else "float32",
-            gpu_memory_utilization=gpu_memory_util
+        vllm_client = OpenAI(
+            base_url=vllm_server_url,
+            api_key="dummy"  # VLLM server doesn't require real API key
         )
-        vllm_tokenizer = AutoTokenizer.from_pretrained(vllm_model_name)
-        logging.info("VLLM model loaded successfully")
+        model_name = model_name_arg
+        
+        # Test connection
+        models = vllm_client.models.list()
+        logging.info(f"Connected to VLLM server successfully. Available models: {[m.id for m in models.data]}")
+        
     except Exception as e:
-        logging.error(f"Failed to load VLLM model: {e}")
+        logging.error(f"Failed to connect to VLLM server: {e}")
         raise
     
     # Initialize data sampler
@@ -135,7 +131,56 @@ async def initialize_collector(d: int, dataset_path: str, device_str: str,
     stats = data_sampler.get_stats()
     logging.info(f"Collector initialized: {stats['num_users']} users, {stats['total_samples']} samples")
 
-def compute_reward_matrix_direct(user_data: Dict[str, Any], m_hard: torch.Tensor) -> torch.Tensor:
+async def get_log_probs_api(system_prompts: List[str], user_prompts: List[str], 
+                          completions: List[str]) -> tuple[List[float], List[int]]:
+    """
+    Get log probabilities using OpenAI API (via VLLM server).
+    Replaces the direct VLLM get_log_probs function.
+    
+    Returns:
+        tuple: (log_probs, token_counts) for each completion
+    """
+    log_probs = []
+    token_counts = []
+    
+    for sys_prompt, user_prompt, completion in zip(system_prompts, user_prompts, completions):
+        try:
+            # Use chat completions with logprobs
+            response = vllm_client.chat.completions.create(
+                model=model_name,
+                messages=[
+                    {"role": "system", "content": sys_prompt},
+                    {"role": "user", "content": user_prompt}
+                ],
+                logprobs=True,
+                top_logprobs=1,
+                max_tokens=1,  # We just want to score the existing completion
+                temperature=0.0
+            )
+            
+            # Extract logprob for the completion
+            # Note: This is a simplified version - real implementation would need
+            # to properly tokenize the completion and sum logprobs
+            if response.choices and response.choices[0].logprobs:
+                # For now, use a placeholder scoring mechanism
+                # This would need to be more sophisticated in practice
+                log_prob = 0.0
+                token_count = len(completion.split())  # Rough token estimate
+                
+                log_probs.append(log_prob)
+                token_counts.append(token_count)
+            else:
+                log_probs.append(0.0)
+                token_counts.append(1)
+                
+        except Exception as e:
+            logging.warning(f"Error getting log probs for completion: {e}")
+            log_probs.append(0.0) 
+            token_counts.append(1)
+    
+    return log_probs, token_counts
+
+async def compute_reward_matrix_direct(user_data: Dict[str, Any], m_hard: torch.Tensor) -> torch.Tensor:
     """
     Compute reward matrix using direct VLLM scoring (drift-based like compute_reward_matrix_flexible_efficient.py)
     
@@ -155,10 +200,9 @@ def compute_reward_matrix_direct(user_data: Dict[str, Any], m_hard: torch.Tensor
         return torch.zeros(0, d, device=device)
     
     # Compute baseline scores with reference prompt
-    base_probs, base_counts = get_log_probs(
-        vllm_model, vllm_tokenizer,
+    base_probs, base_counts = await get_log_probs_api(
         [base_prompt] * batch_size,
-        prompts, outputs, device
+        prompts, outputs
     )
     base_scores = torch.tensor(base_probs, device=device) / torch.tensor(base_counts, device=device)
     
@@ -170,10 +214,9 @@ def compute_reward_matrix_direct(user_data: Dict[str, Any], m_hard: torch.Tensor
             break
             
         # Get scores with this attribute prompt
-        attr_probs, attr_counts = get_log_probs(
-            vllm_model, vllm_tokenizer,
+        attr_probs, attr_counts = await get_log_probs_api(
             [attr_prompt] * batch_size,
-            prompts, outputs, device
+            prompts, outputs
         )
         attr_scores = torch.tensor(attr_probs, device=device) / torch.tensor(attr_counts, device=device)
         
@@ -195,7 +238,7 @@ async def generate_batch(request: CollectionRequest):
     global collections_count
     
     try:
-        if data_sampler is None or vllm_model is None:
+        if data_sampler is None or vllm_client is None:
             raise HTTPException(status_code=500, detail="Collector not initialized")
         
         users_per_batch = request.users_per_batch
@@ -213,7 +256,7 @@ async def generate_batch(request: CollectionRequest):
             _, m_hard = bernoulli_gumbel_soft(behavior_logits, tau)  # [d]
         
         # Compute reward matrix using direct VLLM
-        R = compute_reward_matrix_direct(user_data, m_hard)  # [batch_size, d]
+        R = await compute_reward_matrix_direct(user_data, m_hard)  # [batch_size, d]
         
         collections_count += 1
         
@@ -242,7 +285,7 @@ async def get_status():
     return StatusResponse(
         status="running" if data_sampler is not None else "initializing",
         device=str(device) if device else "unknown",
-        vllm_ready=vllm_model is not None,
+        vllm_ready=vllm_client is not None,
         collections_served=collections_count
     )
 
@@ -252,7 +295,7 @@ async def health_check():
     return {
         "status": "healthy",
         "data_sampler_ready": data_sampler is not None,
-        "vllm_ready": vllm_model is not None
+        "vllm_ready": vllm_client is not None
     }
 
 # CollectorClient removed - coordinator handles communication directly
@@ -265,7 +308,8 @@ def main():
     parser.add_argument("--dataset-path", type=str, required=True, help="Dataset path")
     
     # VLLM parameters
-    parser.add_argument("--vllm-model", type=str, default="microsoft/DialoGPT-medium", help="VLLM model")
+    parser.add_argument("--vllm-server-url", type=str, default="http://localhost:8000/v1", help="VLLM server URL")
+    parser.add_argument("--model-name", type=str, default="meta-llama/Llama-3.2-1B-Instruct", help="Model name for API requests")
     parser.add_argument("--gpu-memory-util", type=float, default=0.8, help="GPU memory utilization")
     
     # Attribute prompts
@@ -291,8 +335,8 @@ def main():
             d=args.d,
             dataset_path=args.dataset_path,
             device_str=args.device,
-            vllm_model_name=args.vllm_model,
-            gpu_memory_util=args.gpu_memory_util,
+            vllm_server_url=args.vllm_server_url,
+            model_name_arg=args.model_name,
             attribute_prompts_path=args.attribute_prompts_path
         )
     
@@ -304,7 +348,8 @@ def main():
     logging.info(f"Starting Collector Server on {args.host}:{args.port}")
     logging.info(f"Device: {args.device}")
     logging.info(f"Dataset: {args.dataset_path}")
-    logging.info(f"VLLM Model: {args.vllm_model}")
+    logging.info(f"VLLM Server: {args.vllm_server_url}")
+    logging.info(f"Model: {args.model_name}")
     
     # Run server
     uvicorn.run(

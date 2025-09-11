@@ -49,8 +49,8 @@ CMD=(python -u collector_server.py
     --d "$D"
     --dataset-path "$DATASET_PATH"
     --attribute-prompts-path "$ATTRIBUTE_PROMPTS_PATH"
-    --vllm-model "$VLLM_MODEL"
-    --gpu-memory-util "$GPU_MEMORY_UTIL"
+    --vllm-server-url "$VLLM_SERVER_URL"
+    --model-name "$MODEL_NAME"
     --host "$HOST"
     --port "$PORT"
     --device "$DEVICE"
@@ -63,8 +63,8 @@ while [[ $# -gt 0 ]]; do
         --d) CMD[2]="$2"; shift 2 ;;
         --dataset-path) CMD[4]="$2"; shift 2 ;;
         --attribute-prompts-path) CMD[6]="$2"; shift 2 ;;
-        --vllm-model) CMD[8]="$2"; shift 2 ;;
-        --gpu-memory-util) CMD[10]="$2"; shift 2 ;;
+        --vllm-server-url) CMD[8]="$2"; shift 2 ;;
+        --model-name) CMD[10]="$2"; shift 2 ;;
         --host) CMD[12]="$2"; shift 2 ;;
         --port) CMD[14]="$2"; shift 2 ;;
         --device) CMD[16]="$2"; shift 2 ;;
@@ -77,8 +77,8 @@ while [[ $# -gt 0 ]]; do
             echo "  --d NUM                      Number of attributes"
             echo "  --dataset-path PATH          Dataset path"
             echo "  --attribute-prompts-path PATH Attribute prompts file"
-            echo "  --vllm-model MODEL           VLLM model name"
-            echo "  --gpu-memory-util FLOAT      GPU memory utilization"
+            echo "  --vllm-server-url URL        VLLM server URL"
+            echo "  --model-name MODEL           Model name for API requests"
             echo "  --host HOST                  Server host"
             echo "  --port NUM                   Server port"
             echo "  --device DEVICE              CUDA device"
