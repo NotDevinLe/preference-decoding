@@ -209,7 +209,7 @@ def start_collector_server(dataset_path: str, attribute_prompts_path: str, d: in
         "--d", str(d),
         "--dataset-path", dataset_path,
         "--attribute-prompts-path", attribute_prompts_path,
-        "--vllm-model", "microsoft/DialoGPT-medium",  # Small model for testing
+        "--vllm-model", "meta-llama/Llama-3.2-1B-Instruct",  # Small model for testing
         "--gpu-memory-util", "0.3",  # Low memory usage
         "--host", "localhost",
         "--port", str(port),

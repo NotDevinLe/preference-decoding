@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from typing import Dict, Any, Optional
 
 class SparseMaskModel(nn.Module):
-    def __init__(self, d, k, sparsity_weight=0.1):
+    def __init__(self, d, k, sparsity_weight=1e-4):
         super().__init__()
         self.encoder = nn.Linear(d, k, bias=False)
         self.decoder = nn.Linear(k, d, bias=False)
@@ -41,3 +41,29 @@ class SparseMaskModel(nn.Module):
         # Optionally produce a *gated* proxy mask for logging or extra losses
         m = straight_through(m_soft, m_hard, gated=gated_st)
         return xhat, m, (m_soft, m_hard)
+    
+    def get_masks(self, training=True):
+        """Get binary mask for input dimensions (like original gumbel.py)"""
+        if training:
+            # During training, sample from Gumbel-Softmax
+            _, m_hard = bernoulli_gumbel_soft(self.mask_logits, tau=1.0)
+            return m_hard
+        else:
+            # During inference, use hard thresholding
+            return (torch.sigmoid(self.mask_logits) > 0.5).float()
+    
+    def forward(self, x):
+        """Forward pass with masked input features (like original gumbel.py)"""
+        # Get masks
+        masks = self.get_masks(training=self.training)  # [d]
+        
+        # Apply mask to input features
+        x_masked = x * masks  # Broadcasting: [batch_size, d] * [d]
+        
+        # Encode masked input
+        z = self.encoder(x_masked)
+        
+        # Decode back to full input space
+        x_hat = self.decoder(z)
+        
+        return z, x_hat, masks
