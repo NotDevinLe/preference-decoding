@@ -1,122 +1,88 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Start Learner Server (FastAPI/uvicorn)
 
-# Start Learner Server
-# Usage: ./start_learner.sh [options]
+# Safety: avoid -u because some conda hooks choke on nounset
+set -eo pipefail
 
-# Default parameters
-D=400
-K=50
-LR=0.001
-SPARSITY_WEIGHT=0.0
+# ===== Defaults (override with flags) =====
+D=100
+K=10
+LR=1e-3
+SPARSITY_WEIGHT=0.1
 TAU_INIT=1.0
-HOST="localhost"
+HOST="0.0.0.0"         # important for cross-node access / tunnels
 PORT=8002
-DEVICE="cuda:1"
+DEVICE="cuda:0"
 CHECKPOINT_DIR="./checkpoints"
 LOG_LEVEL="INFO"
 USE_WANDB=false
 
-# Parse command line arguments
+# ===== Parse flags =====
 while [[ $# -gt 0 ]]; do
-    case $1 in
-        --d)
-            D="$2"
-            shift 2
-            ;;
-        --k)
-            K="$2"
-            shift 2
-            ;;
-        --lr)
-            LR="$2"
-            shift 2
-            ;;
-        --sparsity-weight)
-            SPARSITY_WEIGHT="$2"
-            shift 2
-            ;;
-        --tau-init)
-            TAU_INIT="$2"
-            shift 2
-            ;;
-        --port)
-            PORT="$2"
-            shift 2
-            ;;
-        --device)
-            DEVICE="$2"
-            shift 2
-            ;;
-        --checkpoint-dir)
-            CHECKPOINT_DIR="$2"
-            shift 2
-            ;;
-        --log-level)
-            LOG_LEVEL="$2"
-            shift 2
-            ;;
-        --use-wandb)
-            USE_WANDB=true
-            shift
-            ;;
-        --help|-h)
-            echo "Usage: $0 [options]"
-            echo "Options:"
-            echo "  --d NUM                      Number of attributes (default: $D)"
-            echo "  --k NUM                      Number of components (default: $K)"
-            echo "  --lr FLOAT                   Learning rate (default: $LR)"
-            echo "  --sparsity-weight FLOAT      Sparsity weight (default: $SPARSITY_WEIGHT)"
-            echo "  --tau-init FLOAT             Initial temperature (default: $TAU_INIT)"
-            echo "  --port NUM                   Server port (default: $PORT)"
-            echo "  --device DEVICE              CUDA device (default: $DEVICE)"
-            echo "  --checkpoint-dir PATH        Checkpoint directory (default: $CHECKPOINT_DIR)"
-            echo "  --log-level LEVEL            Log level (default: $LOG_LEVEL)"
-            echo "  --use-wandb                  Enable wandb logging"
-            echo "  --help, -h                   Show this help message"
-            exit 0
-            ;;
-        *)
-            echo "Unknown option: $1"
-            echo "Use --help for usage information"
-            exit 1
-            ;;
-    esac
+  case "$1" in
+    --d) D="$2"; shift 2 ;;
+    --k) K="$2"; shift 2 ;;
+    --lr) LR="$2"; shift 2 ;;
+    --sparsity-weight) SPARSITY_WEIGHT="$2"; shift 2 ;;
+    --tau-init) TAU_INIT="$2"; shift 2 ;;
+    --host) HOST="$2"; shift 2 ;;
+    --port) PORT="$2"; shift 2 ;;
+    --device) DEVICE="$2"; shift 2 ;;
+    --checkpoint-dir) CHECKPOINT_DIR="$2"; shift 2 ;;
+    --log-level) LOG_LEVEL="$2"; shift 2 ;;
+    --use-wandb) USE_WANDB=true; shift ;;
+    -h|--help)
+      cat <<EOF
+Usage: $0 [options]
+  --d N                  (default: $D)
+  --k N                  (default: $K)
+  --lr F                 (default: $LR)
+  --sparsity-weight F    (default: $SPARSITY_WEIGHT)
+  --tau-init F           (default: $TAU_INIT)
+  --host HOST            (default: $HOST)
+  --port PORT            (default: $PORT)
+  --device DEV           (default: $DEVICE)
+  --checkpoint-dir PATH  (default: $CHECKPOINT_DIR)
+  --log-level LEVEL      (default: $LOG_LEVEL)
+  --use-wandb            Enable wandb logging
+EOF
+      exit 0
+      ;;
+    *) echo "Unknown option: $1" >&2; exit 1 ;;
+  esac
 done
 
-echo "Starting Learner Server..."
-echo "Parameters:"
-echo "  Attributes (d): $D"
-echo "  Components (k): $K"
-echo "  Learning Rate: $LR"
-echo "  Sparsity Weight: $SPARSITY_WEIGHT"
-echo "  Initial Temperature: $TAU_INIT"
-echo "  Port: $PORT"
-echo "  Device: $DEVICE"
-echo "  Checkpoint Dir: $CHECKPOINT_DIR"
-echo "  Log Level: $LOG_LEVEL"
-echo "  Use Wandb: $USE_WANDB"
-echo ""
+echo "== $(date) =="
+echo "Host: $(hostname)  SLURM_JOB_ID: ${SLURM_JOB_ID:-none}"
+echo "Python: $(command -v python)  ($(python -V 2>&1))"
+nvidia-smi || true
+echo "Params -> d=$D, k=$K, lr=$LR, sparsity=$SPARSITY_WEIGHT, tau=$TAU_INIT"
+echo "Bind   -> $HOST:$PORT  device=$DEVICE  log=$LOG_LEVEL  ckpt=$CHECKPOINT_DIR  wandb=$USE_WANDB"
+echo
 
-# Create checkpoint directory if it doesn't exist
 mkdir -p "$CHECKPOINT_DIR"
 
-# Build command
-CMD="python learner_server.py \
-    --d $D \
-    --k $K \
-    --lr $LR \
-    --sparsity-weight $SPARSITY_WEIGHT \
-    --tau-init $TAU_INIT \
-    --host $HOST \
-    --port $PORT \
-    --device $DEVICE \
-    --checkpoint-dir $CHECKPOINT_DIR \
-    --log-level $LOG_LEVEL"
-
-# Add wandb flag if enabled
-if [[ "$USE_WANDB" == "true" ]]; then
-    CMD="$CMD --use-wandb"
+# Ensure port is free
+if command -v lsof >/dev/null 2>&1; then
+  if lsof -i:"$PORT" >/dev/null 2>&1; then
+    echo "Error: Port $PORT is already in use on $(hostname)." >&2
+    exit 1
+  fi
 fi
 
-# Start the learner server
-exec $CMD
+# Build command (unbuffered -u so logs stream)
+CMD=( python -u learner_server.py
+  --d "$D"
+  --k "$K"
+  --lr "$LR"
+  --sparsity-weight "$SPARSITY_WEIGHT"
+  --tau-init "$TAU_INIT"
+  --host "$HOST"
+  --port "$PORT"
+  --device "$DEVICE"
+  --checkpoint-dir "$CHECKPOINT_DIR"
+  --log-level "$LOG_LEVEL"
+)
+[[ "$USE_WANDB" == "true" ]] && CMD+=( --use-wandb )
+
+exec "${CMD[@]}"

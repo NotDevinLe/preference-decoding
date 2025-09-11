@@ -1,108 +1,34 @@
 #!/bin/bash
+#SBATCH --job-name=collector
+#SBATCH --account=ark
+#SBATCH --partition=gpu-l40
+#SBATCH --gpus=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=32G
+#SBATCH --time=24:00:00
+#SBATCH --output=logs/%x-%j.out
+#SBATCH --error=logs/%x-%j.err
 
-# Start Collector Server
-# Usage: ./start_collector.sh [options]
+# --- setup ---
+set -eo pipefail
+mkdir -p logs
 
-# Default parameters
-D=400
-DATASET_PATH="../data/reward_matrix_flexible.npz"
-ATTRIBUTE_PROMPTS_PATH="test_attribute_prompts.json"
-VLLM_MODEL="meta-llama/Llama-3.2-1B-Instruct"
-GPU_MEMORY_UTIL=0.4
-HOST="localhost"
-PORT=8001
-DEVICE="cuda:0"
-LOG_LEVEL="INFO"
+source /gscratch/ark/devinl6/miniconda3/etc/profile.d/conda.sh
+conda activate align
+export HF_HOME=/mmfs1/gscratch/ark/devinl6/hf_cache
 
-# Parse command line arguments
-while [[ $# -gt 0 ]]; do
-    case $1 in
-        --d)
-            D="$2"
-            shift 2
-            ;;
-        --dataset-path)
-            DATASET_PATH="$2"
-            shift 2
-            ;;
-        --attribute-prompts-path)
-            ATTRIBUTE_PROMPTS_PATH="$2"
-            shift 2
-            ;;
-        --vllm-model)
-            VLLM_MODEL="$2"
-            shift 2
-            ;;
-        --gpu-memory-util)
-            GPU_MEMORY_UTIL="$2"
-            shift 2
-            ;;
-        --port)
-            PORT="$2"
-            shift 2
-            ;;
-        --device)
-            DEVICE="$2"
-            shift 2
-            ;;
-        --log-level)
-            LOG_LEVEL="$2"
-            shift 2
-            ;;
-        --help|-h)
-            echo "Usage: $0 [options]"
-            echo "Options:"
-            echo "  --d NUM                      Number of attributes (default: $D)"
-            echo "  --dataset-path PATH          Dataset path (default: $DATASET_PATH)"
-            echo "  --attribute-prompts-path PATH Attribute prompts file (default: $ATTRIBUTE_PROMPTS_PATH)"
-            echo "  --vllm-model MODEL           VLLM model name (default: $VLLM_MODEL)"
-            echo "  --gpu-memory-util FLOAT      GPU memory utilization (default: $GPU_MEMORY_UTIL)"
-            echo "  --port NUM                   Server port (default: $PORT)"
-            echo "  --device DEVICE              CUDA device (default: $DEVICE)"
-            echo "  --log-level LEVEL            Log level (default: $LOG_LEVEL)"
-            echo "  --help, -h                   Show this help message"
-            exit 0
-            ;;
-        *)
-            echo "Unknown option: $1"
-            echo "Use --help for usage information"
-            exit 1
-            ;;
-    esac
-done
+echo "Running on node: $(hostname)"
+echo "SLURM_JOB_ID: $SLURM_JOB_ID"
+echo "Date: $(date)"
 
-echo "Starting Collector Server..."
-echo "Parameters:"
-echo "  Attributes (d): $D"
-echo "  Dataset: $DATASET_PATH"
-echo "  Attribute Prompts: $ATTRIBUTE_PROMPTS_PATH"
-echo "  VLLM Model: $VLLM_MODEL"
-echo "  GPU Memory Util: $GPU_MEMORY_UTIL"
-echo "  Port: $PORT"
-echo "  Device: $DEVICE"
-echo "  Log Level: $LOG_LEVEL"
-echo ""
-
-# Check if dataset exists
-if [[ ! -f "$DATASET_PATH" ]]; then
-    echo "Error: Dataset file not found: $DATASET_PATH"
-    exit 1
-fi
-
-# Check if attribute prompts exist
-if [[ ! -f "$ATTRIBUTE_PROMPTS_PATH" ]]; then
-    echo "Error: Attribute prompts file not found: $ATTRIBUTE_PROMPTS_PATH"
-    exit 1
-fi
-
-# Start the collector server
-exec python collector_server.py \
-    --d "$D" \
-    --dataset-path "$DATASET_PATH" \
-    --attribute-prompts-path "$ATTRIBUTE_PROMPTS_PATH" \
-    --vllm-model "$VLLM_MODEL" \
-    --gpu-memory-util "$GPU_MEMORY_UTIL" \
-    --host "$HOST" \
-    --port "$PORT" \
-    --device "$DEVICE" \
-    --log-level "$LOG_LEVEL"
+# --- run your server ---
+python -u collector_server.py \
+  --d 1000 \
+  --dataset-path data/persona_train_dataset.pkl \
+  --attribute-prompts-path attribute_prompts.json \
+  --vllm-model meta-llama/Llama-3.2-1B-Instruct \
+  --gpu-memory-util 0.6 \
+  --host 0.0.0.0 \
+  --port 8001 \
+  --device cuda:0 \
+  --log-level INFO
