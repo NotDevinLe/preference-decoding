@@ -24,19 +24,4 @@ def straight_through(m_soft, m_hard, gated=False):
     else:
         return (m_hard - m_soft).detach() + m_soft
 
-# ---- reward scorer stub (replaced - see reward_scorer.py) ----
-def score_rewards(X, m_hard, scorer=None, user_data=None):
-    """
-    Stub function - actual implementation is in reward_scorer.py
-    This function should not be called without proper scorer and user_data.
-    """
-    if scorer is None or user_data is None:
-        raise AssertionError(
-            "score_rewards called without proper scorer and user_data. "
-            "Make sure to pass VLLMRewardScorer instance and user_data dict. "
-            "See reward_scorer.py for proper usage."
-        )
-    
-    # Import here to avoid circular dependencies
-    from reward_scorer import score_rewards as real_score_rewards
-    return real_score_rewards(X, m_hard, scorer, user_data)
+# reward scoring now handled directly in collector_server.py

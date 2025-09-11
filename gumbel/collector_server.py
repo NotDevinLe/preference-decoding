@@ -18,21 +18,34 @@ import uvicorn
 import requests
 
 # Local imports
-from data_sampler import create_data_sampler
-from reward_scorer import VLLMRewardScorer
+from sampler import DataSampler
 from utils import bernoulli_gumbel_soft
-from vllm_server_standalone import startup_vllm_engine
+
+# VLLM imports
+try:
+    from vllm import LLM
+    from transformers import AutoTokenizer
+    import sys
+    from pathlib import Path
+    # Add project root to path for core imports
+    sys.path.append(str(Path(__file__).parent.parent.parent))
+    from src.core.drift import get_log_probs
+    VLLM_AVAILABLE = True
+except ImportError as e:
+    logging.error(f"VLLM dependencies not available: {e}")
+    logging.error("Cannot proceed without VLLM - exiting")
+    VLLM_AVAILABLE = False
 
 # Request/Response models
 class CollectionRequest(BaseModel):
-    batch_size: int
+    users_per_batch: int
+    samples_per_user: int
     behavior_logits: List[float]
     tau: float
 
 class CollectionResponse(BaseModel):
-    X: List[List[float]]  # [batch_size, d]
     m_hard: List[float]   # [d]
-    R: List[float]        # [batch_size]
+    R: List[List[float]]  # [batch_size, d] - reward matrix
     user_data: Dict[str, Any]
     success: bool
     error: str = None
@@ -46,87 +59,135 @@ class StatusResponse(BaseModel):
 # Global variables
 app = FastAPI(title="Collector Server", version="1.0")
 data_sampler = None
-reward_scorer = None
-vllm_engine = None
+vllm_model = None
+vllm_tokenizer = None
+attribute_prompts = None
+base_prompt = "You are a helpful assistant."
 collections_count = 0
 device = None
 
 async def initialize_collector(d: int, dataset_path: str, device_str: str, 
-                             vllm_model: str, gpu_memory_util: float):
+                             vllm_model_name: str, gpu_memory_util: float):
     """Initialize collector components"""
-    global data_sampler, reward_scorer, vllm_engine, device
+    global data_sampler, vllm_model, vllm_tokenizer, attribute_prompts, device
+    
+    if not VLLM_AVAILABLE:
+        logging.error("VLLM not available - cannot initialize collector")
+        raise RuntimeError("VLLM dependencies required")
     
     device = torch.device(device_str)
     logging.info(f"Initializing collector on {device}")
     
-    # Initialize VLLM engine for reward scoring
-    logging.info("Starting VLLM engine for reward scoring...")
+    # Initialize VLLM model directly
+    logging.info(f"Loading VLLM model: {vllm_model_name}")
     try:
-        await startup_vllm_engine(vllm_model, gpu_memory_util)
-        from vllm_server_standalone import engine, sampling_params
-        vllm_engine = engine
-        logging.info("VLLM engine initialized successfully")
+        vllm_model = LLM(
+            model=vllm_model_name,
+            tensor_parallel_size=1,
+            dtype="bfloat16" if device_str == "cuda" else "float32",
+            gpu_memory_utilization=gpu_memory_util
+        )
+        vllm_tokenizer = AutoTokenizer.from_pretrained(vllm_model_name)
+        logging.info("VLLM model loaded successfully")
     except Exception as e:
-        logging.error(f"Failed to initialize VLLM engine: {e}")
-        vllm_engine = None
+        logging.error(f"Failed to load VLLM model: {e}")
+        raise
     
     # Initialize data sampler
     logging.info("Initializing data sampler...")
-    data_sampler = create_data_sampler({
-        'dataset_path': dataset_path,
-        'num_attributes': d,
-        'feature_dim': d
-    })
+    data_sampler = DataSampler(dataset_path=dataset_path)
     
-    # Initialize reward scorer
-    logging.info("Initializing reward scorer...")
+    # Initialize attribute prompts for scoring
     attribute_prompts = [f"You are evaluating responses based on attribute {i}." for i in range(min(d, 10))]
-    reward_scorer = VLLMRewardScorer(
-        server_url="http://localhost:8000",  # Use local VLLM engine
-        base_prompt="You are a helpful assistant.",
-        attribute_prompts=attribute_prompts
-    )
+    logging.info(f"Using {len(attribute_prompts)} attribute prompts for scoring")
     
     stats = data_sampler.get_stats()
     logging.info(f"Collector initialized: {stats['num_users']} users, {stats['total_samples']} samples")
 
-@app.post("/collect_batch", response_model=CollectionResponse)
-async def collect_batch(request: CollectionRequest):
+def compute_reward_matrix_direct(user_data: Dict[str, Any], m_hard: torch.Tensor) -> torch.Tensor:
     """
-    Main collection endpoint: sample data and compute rewards
+    Compute reward matrix using direct VLLM scoring (drift-based like compute_reward_matrix_flexible_efficient.py)
+    
+    Args:
+        user_data: Dict with 'prompts', 'outputs', 'user_ids'
+        m_hard: [d] binary mask for active attributes
+        
+    Returns:
+        torch.Tensor: [batch_size, d] reward matrix
+    """
+    prompts = user_data['prompts']
+    outputs = user_data['outputs']
+    batch_size = len(prompts)
+    d = len(m_hard)
+    
+    if batch_size == 0:
+        return torch.zeros(0, d, device=device)
+    
+    # Compute baseline scores with reference prompt
+    base_probs, base_counts = get_log_probs(
+        vllm_model, vllm_tokenizer,
+        [base_prompt] * batch_size,
+        prompts, outputs, device
+    )
+    base_scores = torch.tensor(base_probs, device=device) / torch.tensor(base_counts, device=device)
+    
+    # Compute scores for each attribute prompt
+    reward_matrix = torch.zeros(batch_size, d, device=device)
+    
+    for attr_idx, attr_prompt in enumerate(attribute_prompts):
+        if attr_idx >= d:  # Don't exceed the mask dimension
+            break
+            
+        # Get scores with this attribute prompt
+        attr_probs, attr_counts = get_log_probs(
+            vllm_model, vllm_tokenizer,
+            [attr_prompt] * batch_size,
+            prompts, outputs, device
+        )
+        attr_scores = torch.tensor(attr_probs, device=device) / torch.tensor(attr_counts, device=device)
+        
+        # Compute drift scores (attribute vs reference)
+        reward_matrix[:, attr_idx] = attr_scores - base_scores
+    
+    # Apply mask - zero out inactive attributes
+    masked_reward_matrix = reward_matrix * m_hard.unsqueeze(0)
+    
+    logging.debug(f"Computed reward matrix {masked_reward_matrix.shape}, mask sparsity: {m_hard.sum().item()}/{d}")
+    
+    return masked_reward_matrix
+
+@app.post("/generate_batch", response_model=CollectionResponse)
+async def generate_batch(request: CollectionRequest):
+    """
+    Generate batch endpoint: sample data and compute rewards
     """
     global collections_count
     
     try:
-        if data_sampler is None or reward_scorer is None:
+        if data_sampler is None or vllm_model is None:
             raise HTTPException(status_code=500, detail="Collector not initialized")
         
-        batch_size = request.batch_size
+        users_per_batch = request.users_per_batch
+        samples_per_user = request.samples_per_user
         behavior_logits = torch.tensor(request.behavior_logits, device=device)
         tau = request.tau
         
-        logging.debug(f"Collecting batch: size={batch_size}, tau={tau:.3f}")
+        logging.debug(f"Collecting batch: users={users_per_batch}, samples_per_user={samples_per_user}, tau={tau:.3f}")
         
         # Sample user data
-        batch_sample = data_sampler.sample_batch(batch_size, device=device)
-        X = batch_sample.X  # [batch_size, d]
-        user_data = batch_sample.user_data
+        user_data = data_sampler(users_per_batch=users_per_batch, samples_per_user=samples_per_user, device=device)
         
         # Sample hard mask using behavior policy
         with torch.no_grad():
             _, m_hard = bernoulli_gumbel_soft(behavior_logits, tau)  # [d]
         
-        # Compute rewards using VLLM
-        # Note: This uses the reward_scorer which will make HTTP requests
-        # In a real setup, you'd use the local VLLM engine directly
-        from reward_scorer import score_rewards
-        R = score_rewards(X, m_hard, reward_scorer, user_data)  # [batch_size]
+        # Compute reward matrix using direct VLLM
+        R = compute_reward_matrix_direct(user_data, m_hard)  # [batch_size, d]
         
         collections_count += 1
         
         # Convert tensors to lists for JSON serialization
         response = CollectionResponse(
-            X=X.detach().cpu().tolist(),
             m_hard=m_hard.detach().cpu().tolist(), 
             R=R.detach().cpu().tolist(),
             user_data=user_data,
@@ -140,7 +201,7 @@ async def collect_batch(request: CollectionRequest):
     except Exception as e:
         logging.error(f"Error in collect_batch: {e}")
         return CollectionResponse(
-            X=[], m_hard=[], R=[], user_data={},
+            m_hard=[], R=[], user_data={},
             success=False, error=str(e)
         )
 
@@ -150,7 +211,7 @@ async def get_status():
     return StatusResponse(
         status="running" if data_sampler is not None else "initializing",
         device=str(device) if device else "unknown",
-        vllm_ready=vllm_engine is not None,
+        vllm_ready=vllm_model is not None,
         collections_served=collections_count
     )
 
@@ -160,66 +221,10 @@ async def health_check():
     return {
         "status": "healthy",
         "data_sampler_ready": data_sampler is not None,
-        "reward_scorer_ready": reward_scorer is not None,
-        "vllm_ready": vllm_engine is not None
+        "vllm_ready": vllm_model is not None
     }
 
-class CollectorClient:
-    """
-    Client for communicating with collector server.
-    Used by learner to request data collection.
-    """
-    
-    def __init__(self, collector_url: str = "http://localhost:8001"):
-        self.collector_url = collector_url.rstrip('/')
-        self.session = requests.Session()
-        
-    def collect_batch(self, batch_size: int, behavior_logits: torch.Tensor, tau: float) -> Dict[str, Any]:
-        """Request batch collection from collector server"""
-        try:
-            request_data = {
-                "batch_size": batch_size,
-                "behavior_logits": behavior_logits.tolist(),
-                "tau": tau
-            }
-            
-            response = self.session.post(
-                f"{self.collector_url}/collect_batch",
-                json=request_data,
-                timeout=30.0
-            )
-            
-            if response.status_code != 200:
-                logging.error(f"Collector request failed: {response.status_code}")
-                return None
-            
-            result = response.json()
-            
-            if not result["success"]:
-                logging.error(f"Collector error: {result.get('error', 'Unknown error')}")
-                return None
-            
-            # Convert back to tensors
-            return {
-                'X': torch.tensor(result['X'], dtype=torch.float32),
-                'm_hard': torch.tensor(result['m_hard'], dtype=torch.float32),
-                'R': torch.tensor(result['R'], dtype=torch.float32),
-                'user_data': result['user_data']
-            }
-            
-        except Exception as e:
-            logging.error(f"Error communicating with collector: {e}")
-            return None
-    
-    def get_status(self) -> Dict[str, Any]:
-        """Get collector status"""
-        try:
-            response = self.session.get(f"{self.collector_url}/status", timeout=5.0)
-            if response.status_code == 200:
-                return response.json()
-        except Exception as e:
-            logging.error(f"Error getting collector status: {e}")
-        return {"status": "unknown"}
+# CollectorClient removed - coordinator handles communication directly
 
 def main():
     parser = argparse.ArgumentParser(description="Collector Server")

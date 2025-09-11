@@ -17,11 +17,9 @@ import torch.nn.functional as F
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import uvicorn
-import requests
 
 # Local imports
 from skeleton import SparseMaskModel
-from collector_server import CollectorClient
 
 # Wandb logging
 try:
@@ -30,22 +28,7 @@ try:
 except ImportError:
     WANDB_AVAILABLE = False
 
-# Request/Response models
-class TrainingRequest(BaseModel):
-    max_steps: int = 1000
-    log_freq: int = 20
-    checkpoint_freq: int = 100
-
-class TrainingResponse(BaseModel):
-    success: bool
-    final_step: int
-    final_active_features: float
-    final_sparsity_ratio: float
-    error: str = None
-
-class ParametersRequest(BaseModel):
-    pass
-
+# Request/Response models for new distributed architecture
 class ParametersResponse(BaseModel):
     mask_logits: List[float]
     step: int
@@ -53,29 +36,41 @@ class ParametersResponse(BaseModel):
     success: bool
     error: str = None
 
+class TrainStepRequest(BaseModel):
+    m_hard: List[float]
+    R: List[List[float]]  # [batch_size, d] reward matrix
+    user_data: Dict[str, Any]
+    success: bool
+    error: str = None
+
+class TrainStepResponse(BaseModel):
+    success: bool
+    step: int
+    loss: float
+    reward_signal: float
+    active_attributes: float
+    error: str = None
+
 class StatusResponse(BaseModel):
     status: str
     device: str
     current_step: int
     active_features: float
-    training_active: bool
 
 # Global variables
 app = FastAPI(title="Learner Server", version="1.0")
 model = None
 optimizer = None
-collector_client = None
 device = None
 current_step = 0
 tau = 1.0
-training_active = False
 wandb_run = None
 
 def initialize_learner(d: int, k: int, lr: float, sparsity_weight: float,
-                      tau_init: float, device_str: str, collector_url: str,
+                      tau_init: float, device_str: str, 
                       checkpoint_dir: str, use_wandb: bool):
     """Initialize learner components"""
-    global model, optimizer, collector_client, device, tau, wandb_run
+    global model, optimizer, device, tau, wandb_run
     
     device = torch.device(device_str)
     tau = tau_init
@@ -85,13 +80,6 @@ def initialize_learner(d: int, k: int, lr: float, sparsity_weight: float,
     # Initialize model
     model = SparseMaskModel(d, k, sparsity_weight=sparsity_weight).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    
-    # Initialize collector client
-    collector_client = CollectorClient(collector_url)
-    
-    # Test collector connection
-    status = collector_client.get_status()
-    logging.info(f"Collector status: {status}")
     
     # Create checkpoint directory
     Path(checkpoint_dir).mkdir(parents=True, exist_ok=True)
@@ -112,137 +100,101 @@ def initialize_learner(d: int, k: int, lr: float, sparsity_weight: float,
     
     logging.info(f"Learner initialized: {d} attributes -> {k} components")
 
-@app.post("/start_training", response_model=TrainingResponse)
-async def start_training(request: TrainingRequest):
-    """Start the training loop"""
-    global training_active, current_step, tau
-    
-    if training_active:
-        return TrainingResponse(
-            success=False, 
-            final_step=current_step,
-            final_active_features=0.0,
-            final_sparsity_ratio=0.0,
-            error="Training already active"
-        )
-    
-    if model is None or collector_client is None:
-        return TrainingResponse(
-            success=False,
-            final_step=0,
-            final_active_features=0.0, 
-            final_sparsity_ratio=0.0,
-            error="Learner not initialized"
-        )
-    
-    training_active = True
-    
+@app.get("/get_params", response_model=ParametersResponse)
+async def get_params():
+    """Get current model parameters for behavior policy"""
     try:
-        logging.info(f"Starting training for {request.max_steps} steps")
-        
-        for step in range(request.max_steps):
-            current_step = step
-            
-            # Request batch from collector
-            batch_data = collector_client.collect_batch(
-                batch_size=32,  # Default batch size
-                behavior_logits=model.mask_logits.detach().cpu(),
-                tau=tau
+        if model is None:
+            return ParametersResponse(
+                mask_logits=[], step=0, tau=0.0, 
+                success=False, error="Model not initialized"
             )
-            
-            if batch_data is None:
-                logging.error(f"Failed to get batch from collector at step {step}")
-                continue
-            
-            # Move data to device
-            X = batch_data['X'].to(device)
-            m_hard = batch_data['m_hard'].to(device) 
-            R = batch_data['R'].to(device)
-            
-            # Training step
-            metrics = await train_step(X, m_hard, R, step)
-            
-            # Logging
-            if step % request.log_freq == 0:
-                active_features = torch.sigmoid(model.mask_logits).sum().item()
-                
-                logging.info(
-                    f"Step {step}: loss={metrics['loss']:.4f} "
-                    f"recon={metrics['reconstruction_loss']:.4f} "
-                    f"sparsity={metrics['sparsity_loss']:.4f} "
-                    f"reward={metrics['avg_reward']:.4f} "
-                    f"active={active_features:.1f} "
-                    f"tau={tau:.3f}"
-                )
-                
-                # Wandb logging
-                if wandb_run:
-                    wandb_run.log({
-                        **metrics,
-                        'step': step,
-                        'active_features': active_features,
-                        'temperature': tau,
-                    }, step=step)
-            
-            # Temperature annealing
-            if step % 100 == 0 and step > 0:
-                tau = max(0.1, tau * 0.995)
-            
-            # Checkpointing
-            if step % request.checkpoint_freq == 0 and step > 0:
-                await save_checkpoint(step)
         
-        # Final results
-        final_active = torch.sigmoid(model.mask_logits).sum().item()
-        final_sparsity = final_active / model.mask_logits.shape[0]
-        
-        await save_checkpoint(current_step, final=True)
-        
-        logging.info(f"Training completed after {current_step + 1} steps")
-        logging.info(f"Final sparse mask: {final_active:.1f} active ({100*final_sparsity:.1f}%)")
-        
-        training_active = False
-        
-        return TrainingResponse(
-            success=True,
-            final_step=current_step,
-            final_active_features=final_active,
-            final_sparsity_ratio=final_sparsity
+        return ParametersResponse(
+            mask_logits=model.mask_logits.detach().cpu().tolist(),
+            step=current_step,
+            tau=tau,
+            success=True
         )
         
     except Exception as e:
-        training_active = False
-        logging.error(f"Training failed: {e}")
-        return TrainingResponse(
-            success=False,
-            final_step=current_step,
-            final_active_features=0.0,
-            final_sparsity_ratio=0.0,
+        return ParametersResponse(
+            mask_logits=[], step=0, tau=0.0,
+            success=False, error=str(e)
+        )
+
+@app.post("/train_step", response_model=TrainStepResponse)
+async def train_step_endpoint(request: TrainStepRequest):
+    """Perform a single training step with provided batch data"""
+    global current_step, tau
+    
+    try:
+        if model is None or optimizer is None:
+            return TrainStepResponse(
+                success=False, step=current_step, loss=0.0, 
+                reward_signal=0.0, active_attributes=0.0,
+                error="Model not initialized"
+            )
+        
+        # Convert data to tensors
+        m_hard = torch.tensor(request.m_hard, device=device)
+        R = torch.tensor(request.R, device=device)
+        
+        # Perform training step
+        metrics = await train_step(m_hard, R, current_step)
+        
+        current_step += 1
+        
+        # Temperature annealing
+        if current_step % 100 == 0 and current_step > 0:
+            tau = max(0.1, tau * 0.995)
+        
+        # Wandb logging
+        if wandb_run:
+            active_features = torch.sigmoid(model.mask_logits).sum().item()
+            wandb_run.log({
+                **metrics,
+                'step': current_step,
+                'active_features': active_features,
+                'temperature': tau,
+            }, step=current_step)
+        
+        return TrainStepResponse(
+            success=True,
+            step=current_step,
+            loss=metrics['loss'],
+            reward_signal=metrics['reward_signal'],
+            active_attributes=metrics['active_attributes']
+        )
+        
+    except Exception as e:
+        logging.error(f"Training step failed: {e}")
+        return TrainStepResponse(
+            success=False, step=current_step, loss=0.0,
+            reward_signal=0.0, active_attributes=0.0,
             error=str(e)
         )
 
-async def train_step(X: torch.Tensor, m_hard: torch.Tensor, R: torch.Tensor, step: int) -> Dict[str, float]:
-    """Single training step"""
+async def train_step(m_hard: torch.Tensor, R: torch.Tensor, step: int) -> Dict[str, float]:
+    """Single training step with reward matrix"""
     optimizer.zero_grad()
     
-    # Forward pass
-    mask_logits = model.mask_logits
-    xhat, _, _ = model.forward_decode_hard_soft(X, mask_logits, tau, gated_st=True)
+    # R is now [batch_size, d] reward matrix
+    batch_size, d = R.shape
+    assert len(m_hard) == d, f"Mask dimension mismatch: {len(m_hard)} vs {d}"
     
-    # Reconstruction loss
-    recon_loss = F.mse_loss(xhat, X, reduction="mean")
+    # Compute reward-based loss directly from the reward matrix
+    # We want to maximize rewards for active attributes (those selected by m_hard)
+    active_rewards = R * m_hard.unsqueeze(0)  # Zero out inactive attributes
+    reward_signal = active_rewards.sum(dim=1).mean()  # Average reward across batch
     
-    # Sparsity loss (on active attributes from behavior policy)
-    idx_on = torch.nonzero(m_hard, as_tuple=False).squeeze(1)
-    if idx_on.numel() > 0:
-        sparsity_loss = torch.sigmoid(mask_logits.index_select(0, idx_on)).mean()
-    else:
-        sparsity_loss = torch.tensor(0.0, device=device)
+    # Sparsity loss (encourage sparse selection)
+    mask_probs = torch.sigmoid(model.mask_logits)  # Convert logits to probabilities
+    sparsity_loss = mask_probs.mean()  # Encourage sparsity
     
-    # Total loss (reward-weighted)
-    task_loss = recon_loss + model.sparsity_weight * sparsity_loss
-    reward_weight = R.abs().mean() if R.numel() > 0 else torch.tensor(1.0, device=device)
-    loss = reward_weight * task_loss
+    # Total loss: maximize reward while encouraging sparsity
+    # Negative reward signal because we want to maximize (so minimize negative)
+    loss = -reward_signal + model.sparsity_weight * sparsity_loss
     
     # Backward pass
     loss.backward()
@@ -251,10 +203,10 @@ async def train_step(X: torch.Tensor, m_hard: torch.Tensor, R: torch.Tensor, ste
     
     return {
         'loss': float(loss.detach().cpu()),
-        'reconstruction_loss': float(recon_loss.detach().cpu()),
+        'reward_signal': float(reward_signal.detach().cpu()),
         'sparsity_loss': float(sparsity_loss.detach().cpu()),
-        'reward_weight': float(reward_weight.detach().cpu()),
         'avg_reward': float(R.mean().detach().cpu()) if R.numel() > 0 else 0.0,
+        'active_attributes': float(m_hard.sum().detach().cpu()),
     }
 
 async def save_checkpoint(step: int, final: bool = False):
@@ -310,8 +262,7 @@ async def get_status():
         status="running" if model is not None else "initializing",
         device=str(device) if device else "unknown",
         current_step=current_step,
-        active_features=active_features,
-        training_active=training_active
+        active_features=active_features
     )
 
 @app.get("/health")
@@ -319,17 +270,10 @@ async def health_check():
     """Health check endpoint"""
     return {
         "status": "healthy",
-        "model_ready": model is not None,
-        "collector_connected": collector_client is not None,
-        "training_active": training_active
+        "model_ready": model is not None
     }
 
-@app.post("/stop_training")
-async def stop_training():
-    """Stop training (emergency stop)"""
-    global training_active
-    training_active = False
-    return {"success": True, "message": "Training stopped"}
+# stop_training endpoint removed - coordinator handles orchestration
 
 def main():
     parser = argparse.ArgumentParser(description="Learner Server")
@@ -341,9 +285,7 @@ def main():
     parser.add_argument("--sparsity-weight", type=float, default=0.1, help="Sparsity weight")
     parser.add_argument("--tau-init", type=float, default=1.0, help="Initial temperature")
     
-    # Communication
-    parser.add_argument("--collector-url", type=str, default="http://localhost:8001", 
-                       help="Collector server URL")
+    # Communication no longer needed - coordinator handles orchestration
     
     # Server parameters
     parser.add_argument("--host", type=str, default="0.0.0.0", help="Host to bind to")
@@ -373,14 +315,12 @@ def main():
             sparsity_weight=args.sparsity_weight,
             tau_init=args.tau_init,
             device_str=args.device,
-            collector_url=args.collector_url,
             checkpoint_dir=args.checkpoint_dir,
             use_wandb=args.use_wandb
         )
     
     logging.info(f"Starting Learner Server on {args.host}:{args.port}")
     logging.info(f"Device: {args.device}")
-    logging.info(f"Collector URL: {args.collector_url}")
     logging.info(f"Model: {args.d} attributes -> {args.k} components")
     
     # Run server
