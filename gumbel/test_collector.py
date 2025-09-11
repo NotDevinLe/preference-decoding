@@ -109,8 +109,15 @@ class CollectorTester:
                     else:
                         logging.warning(f"⚠️ Reward matrix dimension mismatch: expected {d}, got {len(R[0]) if R else 0}")
                     
+                    # Expected behavior explanation
+                    logging.info("=== EXPECTED BEHAVIOR ===")
+                    logging.info("Attribute 0: Pirate persona - should give highest reward to response 0 (pirate talk)")
+                    logging.info("Attribute 1: Academic persona - should give highest reward to response 1 (formal language)")  
+                    logging.info("Attribute 2: Teen persona - should give highest reward to response 2 (slang/emojis)")
+                    logging.info("All responses are about the same topic, so differences should be due to style/persona matching")
+                    
                     # Detailed reward analysis for testing
-                    logging.info("=== REWARD ANALYSIS ===")
+                    logging.info("\n=== REWARD ANALYSIS ===")
                     logging.info(f"Hard mask: {m_hard}")
                     logging.info(f"Active attributes: {sum(m_hard)}")
                     
@@ -121,18 +128,32 @@ class CollectorTester:
                         logging.info(f"Reward range: [{R_array.min():.4f}, {R_array.max():.4f}]")
                         logging.info(f"Mean reward per attribute: {R_array.mean(axis=0)}")
                         
-                        # Show rewards for each sample
+                        # Show rewards for each sample with interpretation
+                        personas = ["Pirate", "Academic", "Teen"]
+                        response_styles = ["Pirate style", "Academic style", "Teen style"]
+                        
                         for i, row in enumerate(R):
-                            logging.info(f"  Sample {i}: {[f'{r:.4f}' for r in row]}")
+                            logging.info(f"  Response {i} ({response_styles[i]}): {[f'{r:.4f}' for r in row]}")
+                            
+                        # Highlight expected patterns
+                        logging.info("\n=== REWARD INTERPRETATION ===")
+                        for attr_idx, persona in enumerate(personas):
+                            attr_rewards = [R[i][attr_idx] for i in range(len(R))]
+                            best_response = attr_rewards.index(max(attr_rewards))
+                            logging.info(f"{persona} attribute (col {attr_idx}): highest reward for response {best_response} ({response_styles[best_response]})")
+                            if best_response == attr_idx:
+                                logging.info("  ✅ CORRECT: Attribute gave highest reward to matching response style!")
+                            else:
+                                logging.info("  ❌ UNEXPECTED: Attribute gave highest reward to non-matching style")
                     
                     # Show sample data
-                    logging.info("=== SAMPLE DATA ===")
+                    logging.info("\n=== SAMPLE DATA ===")
                     if user_data.get('prompts'):
                         for i, prompt in enumerate(user_data['prompts']):
                             logging.info(f"  Prompt {i}: {prompt}")
                     if user_data.get('outputs'):
                         for i, output in enumerate(user_data['outputs']):
-                            logging.info(f"  Output {i}: {output}")
+                            logging.info(f"  Response {i}: {output[:100]}...")
                     if user_data.get('user_ids'):
                         logging.info(f"  User IDs: {user_data['user_ids']}")
                     
