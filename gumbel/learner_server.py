@@ -411,7 +411,7 @@ def main():
             sparsity_weight=args.sparsity_weight,
             tau_init=args.tau_init,
             device_str=args.device,
-            checkpoint_dir=args.checkpoint_dir,
+            checkpoint_dir_arg=args.checkpoint_dir,
             use_wandb=args.use_wandb
         )
     
