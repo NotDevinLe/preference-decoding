@@ -8,8 +8,9 @@ import asyncio
 import logging
 import argparse
 import time
-import subprocess
-import sys
+# Removed subprocess and sys imports - no longer starting servers
+# import subprocess
+# import sys
 import requests
 from pathlib import Path
 from typing import Dict, Any, Optional, Tuple
@@ -34,26 +35,22 @@ class ServerCoordinator:
     """Coordinates collector and learner servers"""
     
     def __init__(self, 
-                 collector_args: Dict[str, Any],
-                 learner_args: Dict[str, Any],
+                 collector_url: str,
+                 learner_url: str,
                  queue_size: int = 100,
                  replay_buffer_size: int = 10000,
                  replay_ratio: float = 0.3,
-                 startup_wait: float = 10.0,
                  enable_monitoring: bool = True,
                  enable_wandb: bool = False,
                  plot_update_interval: float = 10.0):
         
-        self.collector_args = collector_args
-        self.learner_args = learner_args
-        self.startup_wait = startup_wait
+        # Server URLs - connecting to existing servers
+        self.collector_url = collector_url.rstrip('/')
+        self.learner_url = learner_url.rstrip('/')
         
-        self.collector_process = None
-        self.learner_process = None
-        
-        # Server URLs
-        self.collector_url = f"http://{collector_args['host']}:{collector_args['port']}"
-        self.learner_url = f"http://{learner_args['host']}:{learner_args['port']}"
+        # No longer managing server processes
+        # self.collector_process = None
+        # self.learner_process = None
         
         # Batch queue for producer-consumer pattern
         self.batch_queue = asyncio.Queue(maxsize=queue_size)
@@ -94,56 +91,14 @@ class ServerCoordinator:
         self.samples_per_user = 8
         
         logging.info("ServerCoordinator initialized with queue-based architecture and replay buffer")
-        logging.info(f"Collector: {self.collector_url}")
-        logging.info(f"Learner: {self.learner_url}")
+        logging.info(f"Will connect to collector at: {self.collector_url}")
+        logging.info(f"Will connect to learner at: {self.learner_url}")
         logging.info(f"Queue size: {queue_size}")
         logging.info(f"Replay buffer size: {replay_buffer_size}, replay ratio: {replay_ratio}")
     
-    def start_collector_server(self):
-        """Start collector server subprocess"""
-        cmd = [
-            sys.executable, "collector_server.py",
-            "--d", str(self.collector_args['d']),
-            "--dataset-path", self.collector_args['dataset_path'],
-            "--vllm-model", self.collector_args['vllm_model'],
-            "--gpu-memory-util", str(self.collector_args['gpu_memory_util']),
-            "--host", self.collector_args['host'],
-            "--port", str(self.collector_args['port']),
-            "--device", self.collector_args['device'],
-            "--log-level", self.collector_args['log_level']
-        ]
-        
-        # Add attribute prompts path if provided
-        if self.collector_args.get('attribute_prompts_path'):
-            cmd.extend(["--attribute-prompts-path", self.collector_args['attribute_prompts_path']])
-        
-        logging.info(f"Starting collector server: {' '.join(cmd)}")
-        self.collector_process = subprocess.Popen(cmd)
-        return self.collector_process
-    
-    def start_learner_server(self):
-        """Start learner server subprocess"""
-        cmd = [
-            sys.executable, "learner_server.py",
-            "--d", str(self.learner_args['d']),
-            "--k", str(self.learner_args['k']),
-            "--lr", str(self.learner_args['lr']),
-            "--sparsity-weight", str(self.learner_args['sparsity_weight']),
-            "--tau-init", str(self.learner_args['tau_init']),
-            "--collector-url", self.collector_url,
-            "--host", self.learner_args['host'],
-            "--port", str(self.learner_args['port']),
-            "--device", self.learner_args['device'],
-            "--checkpoint-dir", self.learner_args['checkpoint_dir'],
-            "--log-level", self.learner_args['log_level']
-        ]
-        
-        if self.learner_args.get('use_wandb', False):
-            cmd.append("--use-wandb")
-        
-        logging.info(f"Starting learner server: {' '.join(cmd)}")
-        self.learner_process = subprocess.Popen(cmd)
-        return self.learner_process
+    # Removed server startup methods - servers are managed externally
+    # def start_collector_server(self): ...
+    # def start_learner_server(self): ...
     
     async def wait_for_server(self, url: str, name: str, max_wait: float = 30.0) -> bool:
         """Wait for server to be ready"""
@@ -165,26 +120,22 @@ class ServerCoordinator:
         logging.error(f"{name} server failed to start within {max_wait}s")
         return False
     
-    async def start_servers(self):
-        """Start both servers and wait for them to be ready"""
+    async def connect_to_servers(self):
+        """Connect to existing servers and verify they are ready"""
         
-        # Start collector first (has VLLM initialization)
-        logging.info("=== Starting Collector Server ===")
-        self.start_collector_server()
+        logging.info("=== Connecting to Existing Servers ===")
         
         # Wait for collector to be ready
-        if not await self.wait_for_server(self.collector_url, "Collector", max_wait=60.0):
-            raise RuntimeError("Collector server failed to start")
-        
-        # Start learner
-        logging.info("=== Starting Learner Server ===") 
-        self.start_learner_server()
+        logging.info(f"Connecting to collector at {self.collector_url}...")
+        if not await self.wait_for_server(self.collector_url, "Collector", max_wait=30.0):
+            raise RuntimeError(f"Collector server not available at {self.collector_url}")
         
         # Wait for learner to be ready
+        logging.info(f"Connecting to learner at {self.learner_url}...")
         if not await self.wait_for_server(self.learner_url, "Learner", max_wait=30.0):
-            raise RuntimeError("Learner server failed to start")
+            raise RuntimeError(f"Learner server not available at {self.learner_url}")
         
-        logging.info("=== Both servers ready ===")
+        logging.info("=== Connected to both servers ===")
     
     def add_to_replay_buffer(self, m_hard: list, R: list, user_data: Dict[str, Any]):
         """Add batch data to replay buffer"""
@@ -716,35 +667,14 @@ class ServerCoordinator:
         
         return status
     
-    def stop_servers(self):
-        """Stop both server processes"""
-        logging.info("Stopping servers...")
-        
-        if self.learner_process:
-            logging.info("Stopping learner server...")
-            self.learner_process.terminate()
-            try:
-                self.learner_process.wait(timeout=10.0)
-            except subprocess.TimeoutExpired:
-                logging.warning("Force killing learner server")
-                self.learner_process.kill()
-        
-        if self.collector_process:
-            logging.info("Stopping collector server...")
-            self.collector_process.terminate()
-            try:
-                self.collector_process.wait(timeout=10.0)
-            except subprocess.TimeoutExpired:
-                logging.warning("Force killing collector server")
-                self.collector_process.kill()
-        
-        logging.info("Servers stopped")
+    # Removed server stopping method - servers are managed externally
+    # def stop_servers(self): ...
     
     async def run_training(self, max_steps: int = 1000, log_freq: int = 20, checkpoint_freq: int = 100):
-        """Complete training workflow: start servers, run async training, cleanup"""
+        """Complete training workflow: connect to existing servers, run async training"""
         try:
-            # Start servers
-            await self.start_servers()
+            # Connect to existing servers
+            await self.connect_to_servers()
             
             # Start async training with producer-consumer pattern
             success = await self.start_async_training(max_steps, log_freq, checkpoint_freq)
@@ -767,109 +697,96 @@ class ServerCoordinator:
         finally:
             # Ensure training is stopped
             self.training_active = False
-            self.stop_servers()
+            # Note: servers are managed externally, no cleanup needed
 
 def main():
     parser = argparse.ArgumentParser(description="Distributed Sparse Attribute Learning Coordinator")
     
-    # Model parameters
-    parser.add_argument("--d", type=int, default=100, help="Number of attributes")
-    parser.add_argument("--k", type=int, default=10, help="Number of components")
-    parser.add_argument("--lr", type=float, default=1e-3, help="Learning rate")
-    parser.add_argument("--sparsity-weight", type=float, default=0.1, help="Sparsity weight")
-    parser.add_argument("--tau-init", type=float, default=1.0, help="Initial temperature")
+    # Configuration file
+    parser.add_argument("--config", type=str, default="config.json", help="Configuration file path")
     
-    # Training parameters
-    parser.add_argument("--max-steps", type=int, default=1000, help="Maximum training steps")
-    parser.add_argument("--log-freq", type=int, default=20, help="Logging frequency")
-    parser.add_argument("--checkpoint-freq", type=int, default=100, help="Checkpoint frequency")
+    # Server connection overrides
+    parser.add_argument("--collector-url", type=str, help="Collector server URL (overrides config)")
+    parser.add_argument("--learner-url", type=str, help="Learner server URL (overrides config)")
     
-    # Data parameters
-    parser.add_argument("--dataset-path", type=str, required=True, help="Dataset path")
+    # Training parameter overrides
+    parser.add_argument("--max-steps", type=int, help="Maximum training steps (overrides config)")
+    parser.add_argument("--log-freq", type=int, help="Logging frequency (overrides config)")
+    parser.add_argument("--checkpoint-freq", type=int, help="Checkpoint frequency (overrides config)")
     
-    # VLLM parameters
-    parser.add_argument("--vllm-model", type=str, default="microsoft/DialoGPT-medium", help="VLLM model")
-    parser.add_argument("--gpu-memory-util", type=float, default=0.8, help="GPU memory utilization")
-    
-    # System parameters
-    parser.add_argument("--collector-device", type=str, default="cuda:0", help="Collector device")
-    parser.add_argument("--learner-device", type=str, default="cuda:1", help="Learner device")
-    parser.add_argument("--collector-port", type=int, default=8001, help="Collector port")
-    parser.add_argument("--learner-port", type=int, default=8002, help="Learner port")
-    parser.add_argument("--queue-size", type=int, default=100, help="Batch queue size")
-    
-    # Replay buffer parameters
-    parser.add_argument("--replay-buffer-size", type=int, default=10000, help="Replay buffer size")
-    parser.add_argument("--replay-ratio", type=float, default=0.3, help="Fraction of batch from replay buffer")
-    
-    # Logging and checkpointing
-    parser.add_argument("--checkpoint-dir", type=str, default="./checkpoints", help="Checkpoint directory")
-    parser.add_argument("--use-wandb", action="store_true", help="Use wandb logging")
-    parser.add_argument("--log-level", type=str, default="INFO", help="Log level")
-    
-    # Monitoring parameters
-    parser.add_argument("--enable-monitoring", action="store_true", default=True, help="Enable real-time monitoring")
+    # Monitoring parameter overrides
     parser.add_argument("--enable-wandb-coordinator", action="store_true", help="Enable wandb for coordinator")
-    parser.add_argument("--plot-update-interval", type=float, default=10.0, help="Plot update interval in seconds")
     parser.add_argument("--disable-monitoring", action="store_true", help="Disable monitoring completely")
+    parser.add_argument("--plot-update-interval", type=float, help="Plot update interval in seconds (overrides config)")
+    parser.add_argument("--log-level", type=str, help="Log level (overrides config)")
     
     args = parser.parse_args()
     
-    # Setup logging
+    # Load configuration from file
+    try:
+        from load_config import load_config, get_coordinator_args, print_config_summary
+        config = load_config(args.config)
+        print_config_summary(config)
+        print()
+    except Exception as e:
+        print(f"Error loading config file '{args.config}': {e}")
+        print("Please ensure the config file exists and is valid JSON.")
+        exit(1)
+    
+    # Setup logging with config or override
+    log_level = args.log_level or config['monitoring']['log_level']
     logging.basicConfig(
-        level=getattr(logging, args.log_level.upper()),
+        level=getattr(logging, log_level.upper()),
         format='%(asctime)s - %(levelname)s - %(message)s'
     )
     
-    # Prepare server configurations
-    collector_args = {
-        'd': args.d,
-        'dataset_path': args.dataset_path,
-        'vllm_model': args.vllm_model,
-        'gpu_memory_util': args.gpu_memory_util,
-        'host': '0.0.0.0',
-        'port': args.collector_port,
-        'device': args.collector_device,
-        'log_level': args.log_level
-    }
+    # Get coordinator arguments from config with overrides
+    coordinator_config = get_coordinator_args(config)
     
-    learner_args = {
-        'd': args.d,
-        'k': args.k,
-        'lr': args.lr,
-        'sparsity_weight': args.sparsity_weight,
-        'tau_init': args.tau_init,
-        'host': '0.0.0.0',
-        'port': args.learner_port,
-        'device': args.learner_device,
-        'checkpoint_dir': args.checkpoint_dir,
-        'use_wandb': args.use_wandb,
-        'log_level': args.log_level
-    }
+    # Apply command line overrides
+    if args.collector_url:
+        coordinator_config['collector_url'] = args.collector_url
+    if args.learner_url:
+        coordinator_config['learner_url'] = args.learner_url
+    if args.max_steps is not None:
+        coordinator_config['max_steps'] = args.max_steps
+    if args.log_freq is not None:
+        coordinator_config['log_freq'] = args.log_freq
+    if args.checkpoint_freq is not None:
+        coordinator_config['checkpoint_freq'] = args.checkpoint_freq
+    if args.plot_update_interval is not None:
+        coordinator_config['plot_update_interval'] = args.plot_update_interval
+    if args.enable_wandb_coordinator:
+        coordinator_config['enable_wandb'] = True
+    if args.disable_monitoring:
+        coordinator_config['enable_monitoring'] = False
     
     # Create coordinator
     coordinator = ServerCoordinator(
-        collector_args, learner_args, 
-        queue_size=args.queue_size,
-        replay_buffer_size=args.replay_buffer_size,
-        replay_ratio=args.replay_ratio,
-        enable_monitoring=not args.disable_monitoring,
-        enable_wandb=args.enable_wandb_coordinator,
-        plot_update_interval=args.plot_update_interval
+        collector_url=coordinator_config['collector_url'],
+        learner_url=coordinator_config['learner_url'],
+        queue_size=coordinator_config['queue_size'],
+        replay_buffer_size=coordinator_config['replay_buffer_size'],
+        replay_ratio=coordinator_config['replay_ratio'],
+        enable_monitoring=coordinator_config['enable_monitoring'],
+        enable_wandb=coordinator_config['enable_wandb'],
+        plot_update_interval=coordinator_config['plot_update_interval']
     )
     
     logging.info("=== Distributed Sparse Attribute Learning ===")
-    logging.info(f"Dataset: {args.dataset_path}")
-    logging.info(f"Model: {args.d} attributes -> {args.k} components")
-    logging.info(f"Devices: Collector={args.collector_device}, Learner={args.learner_device}")
-    logging.info(f"Training: {args.max_steps} steps")
+    logging.info(f"Config: {args.config}")
+    logging.info(f"Dataset: {config['data']['dataset_path']}")
+    logging.info(f"Model: {config['model']['d']} attributes -> {config['model']['k']} components")
+    logging.info(f"Collector: {coordinator_config['collector_url']}")
+    logging.info(f"Learner: {coordinator_config['learner_url']}")
+    logging.info(f"Training: {coordinator_config['max_steps']} steps")
     
     # Run training
     async def run():
         success = await coordinator.run_training(
-            max_steps=args.max_steps,
-            log_freq=args.log_freq,
-            checkpoint_freq=args.checkpoint_freq
+            max_steps=coordinator_config['max_steps'],
+            log_freq=coordinator_config['log_freq'],
+            checkpoint_freq=coordinator_config['checkpoint_freq']
         )
         return success
     
