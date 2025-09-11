@@ -43,11 +43,12 @@ class SparseMaskModel(nn.Module):
         return xhat, m, (m_soft, m_hard)
     
     def get_masks(self, training=True):
-        """Get binary mask for input dimensions (like original gumbel.py)"""
+        """Get mask for input dimensions (soft during training for gradients)"""
         if training:
-            # During training, sample from Gumbel-Softmax
-            _, m_hard = bernoulli_gumbel_soft(self.mask_logits, tau=1.0)
-            return m_hard
+            # During training, use SOFT mask for gradients
+            m_soft, m_hard = bernoulli_gumbel_soft(self.mask_logits, tau=1.0)
+            # Use straight-through estimator: hard forward, soft backward
+            return straight_through(m_soft, m_hard, gated=False)
         else:
             # During inference, use hard thresholding
             return (torch.sigmoid(self.mask_logits) > 0.5).float()
