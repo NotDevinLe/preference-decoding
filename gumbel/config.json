@@ -16,12 +16,12 @@
   },
   "servers": {
     "collector": {
-      "host": "0.0.0.0",
+      "host": "g3097",
       "port": 8001,
       "device": "cuda:0"
     },
     "learner": {
-      "host": "0.0.0.0", 
+      "host": "g3097", 
       "port": 8002,
       "device": "cuda:0",
       "checkpoint_dir": "./checkpoints",
