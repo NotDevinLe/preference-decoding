@@ -1,5 +1,6 @@
 import asyncio
 import aiohttp
+import os
 import time
 from typing import Tuple, List, Dict
 import torch
@@ -94,16 +95,35 @@ async def compute_drift_rewards(session: aiohttp.ClientSession, tokenizer, promp
             all_completion_texts.append(outputs[i])
             request_map.append(("attr", attr_idx, i))
     
-    # Fire ALL requests concurrently in one batch
-    print(f"Firing {len(all_system_prompts)} concurrent requests ({B} samples × {d+1} prompts)...")
+    # Process requests in manageable batches to avoid overwhelming the system
+    total_requests = len(all_system_prompts)
+    # Use configurable batch size from environment or default to 512
+    default_batch_size = int(os.getenv("REQUEST_BATCH_SIZE", "512"))
+    batch_size = min(default_batch_size, total_requests)  # Process in manageable chunks
+    
+    print(f"Processing {total_requests} requests in batches of {batch_size} ({B} samples × {d+1} prompts)...")
     start_time = time.time()
     
-    all_probs, all_counts = await get_log_probs_async(
-        session, tokenizer, all_system_prompts, all_user_prompts, all_completion_texts, vllm_url, model_id
-    )
+    all_probs = []
+    all_counts = []
+    
+    for i in range(0, total_requests, batch_size):
+        end_i = min(i + batch_size, total_requests)
+        batch_system = all_system_prompts[i:end_i]
+        batch_user = all_user_prompts[i:end_i]
+        batch_completion = all_completion_texts[i:end_i]
+        
+        print(f"  Processing batch {i//batch_size + 1}/{(total_requests + batch_size - 1)//batch_size} ({end_i - i} requests)...")
+        
+        batch_probs, batch_counts = await get_log_probs_async(
+            session, tokenizer, batch_system, batch_user, batch_completion, vllm_url, model_id
+        )
+        
+        all_probs.extend(batch_probs)
+        all_counts.extend(batch_counts)
     
     elapsed = time.time() - start_time
-    print(f"Completed {len(all_system_prompts)} requests in {elapsed:.2f}s ({len(all_system_prompts)/elapsed:.1f} req/sec)")
+    print(f"Completed {total_requests} requests in {elapsed:.2f}s ({total_requests/elapsed:.1f} req/sec)")
     
     # Reconstruct base scores and attribute scores
     base_scores = torch.zeros(B, device=device)

@@ -61,6 +61,7 @@ tokenizer: AutoTokenizer | None = None
 http_session: aiohttp.ClientSession | None = None
 sem: asyncio.Semaphore | None = None
 CONCURRENCY = int(os.getenv("COLLECTOR_CONCURRENCY", "256"))  # tune to GPU/server (128–512 common)
+REQUEST_BATCH_SIZE = int(os.getenv("REQUEST_BATCH_SIZE", "512"))  # Process requests in batches of this size
 
 async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
     """
