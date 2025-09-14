@@ -22,10 +22,8 @@ import uvicorn
 from transformers import AutoTokenizer
 
 # ---- Local imports ----
-from sampler import DataSampler
-import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'utils'))
-import async_utils
+from .sampler import DataSampler
+from ..utils import async_utils
 
 # =========================
 # Request/Response models

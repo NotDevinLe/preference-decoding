@@ -19,7 +19,7 @@ from pydantic import BaseModel
 import uvicorn
 
 # Local imports
-from skeleton import SparseMaskModel
+from ..scripts.skeleton import SparseMaskModel
 
 # Wandb logging
 try:
