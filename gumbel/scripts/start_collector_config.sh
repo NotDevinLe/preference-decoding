@@ -3,7 +3,7 @@
 # Start Collector Server using config.json
 # Usage: ./start_collector_config.sh [--config CONFIG_FILE] [overrides...]
 
-CONFIG_FILE="config.json"
+CONFIG_FILE="gumbel/configs/config.json"
 
 # Parse config file argument first
 if [[ "$1" == "--config" ]]; then
@@ -19,7 +19,7 @@ fi
 
 # Load configuration using Python helper
 echo "Loading configuration from: $CONFIG_FILE"
-if ! python load_config.py --config "$CONFIG_FILE" --component collector >/dev/null 2>&1; then
+if ! python -m gumbel.utils.load_config --config "$CONFIG_FILE" --component collector >/dev/null 2>&1; then
     echo "Error: Failed to load config file. Please check the format."
     exit 1
 fi
@@ -27,8 +27,11 @@ fi
 # Extract values from config using Python
 eval "$(python -c "
 import sys
-sys.path.append('.')
-from load_config import load_config, get_collector_args
+import os
+# Add the project root to Python path
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath('$0'))))
+sys.path.insert(0, project_root)
+from gumbel.utils.load_config import load_config, get_collector_args
 
 try:
     config = load_config('$CONFIG_FILE')
@@ -45,7 +48,7 @@ except Exception as e:
 ")"
 
 # Build command with config values
-CMD=(python -u collector_server.py
+CMD=(python -u -m gumbel.core.collector_server
     --d "$D"
     --dataset-path "$DATASET_PATH"
     --attribute-prompts-path "$ATTRIBUTE_PROMPTS_PATH"
