@@ -1,45 +1,47 @@
 #!/usr/bin/env python3
-"""
-Test Approximation Script
-Uses async utils to compute log probs, finds p vector using drift approximation logic,
-then evaluates preference pair accuracy on test data.
-"""
-
 import asyncio
-import json
+import aiohttp
+from typing import Tuple, List, Dict
 import torch
 import numpy as np
-from typing import List, Tuple, Dict, Any
-import argparse
 from transformers import AutoTokenizer
 
-# Import async utils for log prob computation
-from async_utils import fetch_sum_lp, build_full_prompt, VLLM_URL, MODEL_ID, CONCURRENCY
-import aiohttp
+VLLM_URL = "http://localhost:8000/v1/completions"
+MODEL_ID  = "meta-llama/Llama-3.2-1B-Instruct"
+CONCURRENCY = 128   # tune as needed
 
-# Import drift approximation logic
-import sys
-import os
-sys.path.append('../utils')
-from attribute_prompts import attribute_prompts, base_prompt
+# ---------- helpers ----------
+def build_full_prompt(tokenizer, sys_prompt: str, user_prompt: str, completion: str) -> Tuple[str, int, int]:
+    """Return: full_text (prompt+completion), n_prefix_tokens, completion_len_tokens"""
+    prompt_text = tokenizer.apply_chat_template(
+        [{"role": "system", "content": sys_prompt.strip()},
+         {"role": "user",   "content": user_prompt.strip()}],
+        tokenize=False,
+        add_generation_prompt=True,
+    )
+    prompt_ids = tokenizer([prompt_text], return_tensors=None, add_special_tokens=False)["input_ids"][0]
+    comp_ids   = tokenizer([completion], return_tensors=None, add_special_tokens=False)["input_ids"][0]
+    return prompt_text + completion, len(prompt_ids), len(comp_ids)
 
+def sum_completion_logprobs(resp_json, n_prefix: int, comp_len: int) -> float:
+    lp = resp_json["choices"][0]["logprobs"]["token_logprobs"]
+    end = min(len(lp), n_prefix + comp_len)  # guard if server adds a token somehow
+    seg = [x for x in lp[n_prefix:end] if x is not None]
+    return float(sum(seg))
 
-def l1_solve(d_mean, l1_lambda, std=None):
-    """
-    Closed-form solution to: maximize d^T p - lambda * ||p||_1  s.t. ||p||_2 <= 1
-    Copied from drift.py
-    """
-    d = np.asarray(d_mean, dtype=float)
-    # soft-threshold
-    z = np.sign(d) * np.maximum(np.abs(d) - l1_lambda, 0.0)
-    norm = np.linalg.norm(z, ord=2)
-    if norm == 0.0:
-        return np.zeros_like(d)
-    if std is None:
-        return z / norm
-    else:
-        return z / (norm * std)
-
+async def fetch_sum_lp(session: aiohttp.ClientSession, prompt: str, n_prefix: int, comp_len: int) -> float:
+    payload = {
+        "model": MODEL_ID,
+        "prompt": prompt,
+        "echo": True,
+        "logprobs": 1,
+        "max_tokens": 0,      # no generation; just score provided text
+        "temperature": 0.0,
+    }
+    async with session.post(VLLM_URL, json=payload) as r:
+        r.raise_for_status()
+        data = await r.json()
+        return sum_completion_logprobs(data, n_prefix, comp_len)
 
 async def get_log_probs_async(session: aiohttp.ClientSession, tokenizer, system_prompts: List[str], user_prompts: List[str], completion_texts: List[str]) -> Tuple[List[float], List[int]]:
     """
@@ -58,6 +60,20 @@ async def get_log_probs_async(session: aiohttp.ClientSession, tokenizer, system_
     
     return log_probs, token_counts
 
+def l1_solve(d_mean, l1_lambda, std=None):
+    """
+    Closed-form solution to: maximize d^T p - lambda * ||p||_1  s.t. ||p||_2 <= 1
+    """
+    d = np.asarray(d_mean, dtype=float)
+    # soft-threshold
+    z = np.sign(d) * np.maximum(np.abs(d) - l1_lambda, 0.0)
+    norm = np.linalg.norm(z, ord=2)
+    if norm == 0.0:
+        return np.zeros_like(d)
+    if std is None:
+        return z / norm
+    else:
+        return z / (norm * std)
 
 async def approximate_async(data: List[Tuple[str, str, str]], tokenizer, s0: str, s_list: List[str], l1_lambda: float = 0.01) -> np.ndarray:
     """
@@ -77,7 +93,6 @@ async def approximate_async(data: List[Tuple[str, str, str]], tokenizer, s0: str
     questions, yw_list, yl_list = zip(*data)
     
     # Set up async session
-    sem = asyncio.Semaphore(CONCURRENCY)
     timeout = aiohttp.ClientTimeout(total=300)
     connector = aiohttp.TCPConnector(limit=0)
     
@@ -126,7 +141,6 @@ async def approximate_async(data: List[Tuple[str, str, str]], tokenizer, s0: str
     p = l1_solve(d, l1_lambda, std=col_std.detach().cpu().numpy())
     
     return p
-
 
 async def evaluate_accuracy_async(test_data: List[Dict[str, str]], p: np.ndarray, tokenizer, base_prompt: str, attribute_prompts: List[str]) -> float:
     """
@@ -186,67 +200,81 @@ async def evaluate_accuracy_async(test_data: List[Dict[str, str]], p: np.ndarray
     
     return accuracy
 
-
+# ---------- example main ----------
 async def main():
-    parser = argparse.ArgumentParser(description="Test preference approximation using async VLLM")
-    parser.add_argument("--train-data", type=str, default="data/persona_pref/user11_train.json", help="Training data path")
-    parser.add_argument("--test-data", type=str, default="data/persona_pref/user11_test.json", help="Test data path")
-    parser.add_argument("--max-train-samples", type=int, default=150, help="Max training samples")
-    parser.add_argument("--max-attributes", type=int, default=50, help="Max attribute prompts to use")
-    parser.add_argument("--l1-lambda", type=float, default=0.01, help="L1 regularization parameter")
-    
-    args = parser.parse_args()
-    
-    # Initialize tokenizer
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
     tokenizer.pad_token = tokenizer.eos_token
-    
-    # Load training data
-    print(f"Loading training data from {args.train_data}")
-    with open(args.train_data, 'r') as f:
-        train_data_raw = json.load(f)
-    
-    # Convert to drift format: (question, chosen, rejected)
-    train_data = []
-    for i, item in enumerate(train_data_raw[:args.max_train_samples]):
-        train_data.append((item['prompt'], item['chosen'], item['rejected']))
-    
-    print(f"Loaded {len(train_data)} training samples")
-    
-    # Use subset of attribute prompts
-    selected_attributes = attribute_prompts[:args.max_attributes]
-    print(f"Using {len(selected_attributes)} attribute prompts")
-    
-    # Find p vector
-    print("Finding p vector...")
-    p = await approximate_async(train_data, tokenizer, base_prompt, selected_attributes, args.l1_lambda)
-    
-    print(f"Found p vector with {np.count_nonzero(p)} non-zero components")
-    print(f"P vector norm: {np.linalg.norm(p):.4f}")
-    print(f"Top 5 attributes by weight:")
-    top_indices = np.argsort(np.abs(p))[-5:][::-1]
-    for i in top_indices:
-        print(f"  {i}: {p[i]:.4f} - {selected_attributes[i][:80]}...")
-    
-    # Load test data
-    print(f"\nLoading test data from {args.test_data}")
-    with open(args.test_data, 'r') as f:
-        test_data = json.load(f)
-    
-    print(f"Loaded {len(test_data)} test samples")
-    
-    # Evaluate accuracy
-    print("\nEvaluating accuracy on test data...")
-    accuracy = await evaluate_accuracy_async(test_data, p, tokenizer, base_prompt, selected_attributes)
-    
-    print(f"\nResults:")
-    print(f"Training samples: {len(train_data)}")
-    print(f"Test samples: {len(test_data)}")
-    print(f"Attribute prompts: {len(selected_attributes)}")
-    print(f"Non-zero p components: {np.count_nonzero(p)}")
-    print(f"L1 lambda: {args.l1_lambda}")
-    print(f"Test accuracy: {accuracy:.4f} ({accuracy*100:.2f}%)")
 
+    # Three “styles”
+    system_prompts = [
+        "You are a grumpy pirate who always talks about treasure.",
+        "You are an angsty teenager who complains about homework.",
+        "You are a wise old wizard who speaks in riddles.",
+    ]
+    user_prompts = [
+        "Introduce yourself.",
+        "Tell me about your day.",
+        "What is your secret of power?",
+    ]
+    completions = [
+        "Arrr, I be Blackbeard, scourge of the seas!",
+        "Ugh, school is so boring, nobody understands me.",
+        "The secret lies in patience, young apprentice.",
+    ]
+
+    S = len(system_prompts)
+    C = len(completions)
+
+    # Build all S x C requests: score completion i under (system j, user j)
+    jobs = []  # (j, i, prompt, n_prefix, comp_len)
+    for j in range(S):
+        for i in range(C):
+            full, n_pref, clen = build_full_prompt(
+                tokenizer, system_prompts[j], user_prompts[j], completions[i]
+            )
+            jobs.append((j, i, full, n_pref, clen))
+
+    # Fire off requests with concurrency cap
+    sem = asyncio.Semaphore(CONCURRENCY)
+    timeout = aiohttp.ClientTimeout(total=300)
+    connector = aiohttp.TCPConnector(limit=0)
+
+    async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
+        async def go(job):
+            j, i, full, n_pref, clen = job
+            async with sem:
+                val = await fetch_sum_lp(session, full, n_pref, clen)
+            return j, i, val
+
+        results = await asyncio.gather(*[go(job) for job in jobs])
+
+    # Assemble matrix scores[j][i]
+    scores = [[0.0 for _ in range(C)] for _ in range(S)]
+    for j, i, val in results:
+        scores[j][i] = val
+
+    # Pretty print matrix with headers
+    col_headers = [f"comp{i}: {name.split()[0]}" for i, name in enumerate(["pirate", "teenager", "wizard"])]
+    row_headers = [f"sys{j}: {name.split()[0]}"  for j, name in enumerate(["pirate", "teenager", "wizard"])]
+
+    # header row
+    print("\nLogprob sum matrix  (rows = system+user style, cols = completion style)\n")
+    print("{:16s}".format(""), end="")
+    for h in col_headers:
+        print(f"{h:>20s}", end="")
+    print()
+    # rows
+    for j in range(S):
+        print(f"{row_headers[j]:16s}", end="")
+        for i in range(C):
+            print(f"{scores[j][i]:20.3f}", end="")
+        print()
+
+    # Optional: show argmax per row (which completion best fits each system style)
+    print("\nBest completion per system row:")
+    for j in range(S):
+        best_i = max(range(C), key=lambda i: scores[j][i])
+        print(f"  {row_headers[j]} -> {col_headers[best_i]} (score={scores[j][best_i]:.3f})")
 
 if __name__ == "__main__":
     asyncio.run(main())
