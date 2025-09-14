@@ -14,7 +14,29 @@ setup(
         "wandb",
         "tqdm",
         "datasets",
+        "fastapi",
+        "uvicorn",
+        "pydantic",
+        "aiohttp",
+        "scipy",
+        "matplotlib",
     ],
+    extras_require={
+        "dev": [
+            "pytest",
+            "black",
+            "flake8",
+            "mypy",
+        ],
+    },
+    entry_points={
+        "console_scripts": [
+            "gumbel-collector=gumbel.core.collector_server:main",
+            "gumbel-learner=gumbel.core.learner_server:main",
+            "gumbel-coordinator=gumbel.core.coordinator:main",
+            "gumbel-test-collector=gumbel.tests.test_collector:main",
+        ],
+    },
     author="Devin",
     author_email="devin.t.le@outlook.com",
 )
