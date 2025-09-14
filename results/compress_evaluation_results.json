@@ -1,0 +1,18 @@
+{
+  "info": {
+    "user_id": "user20",
+    "persona_text": "age: 69\nsex: Male\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: Regular high school diploma\nemployment status: Not in labor force\nclass of worker: Self-employed in own incorporated business, professional practice or farm\nindustry category: TRN-Truck Transportation\noccupation category: RPR-Bus And Truck Mechanics And Diesel Engine Specialists\ndetailed job description: Maintains and repairs trucks and diesel engines\nincome: 69700.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Michigan/MI\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: With a disability\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Extremely High, Extraversion: Average, Agreeableness: Low, Neuroticism: Average\ndefining quirks: Prefers face-to-face communication\nmannerisms: Direct and straightforward\npersonal time: Spends free time in quiet reflection or prayer\nlifestyle: Simple and peaceful\nideology: Conservative\npolitical views: Republican\nreligion: Catholic\n",
+    "total_available_rows": 200,
+    "training_rows": 150,
+    "test_rows": 50,
+    "persona_preview": "age: 69\nsex: Male\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: Regular high school diploma\nemployment status: Not in labor force\nclass of worker: Self-employed in o..."
+  },
+  "results": {
+    "compress_wins": 45,
+    "icl_wins": 55,
+    "ties": 0,
+    "errors": 0,
+    "total_attempted": 100,
+    "valid_comparisons": 100
+  }
+}
