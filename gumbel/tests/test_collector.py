@@ -16,7 +16,7 @@ import sys
 
 
 class CollectorTester:
-    def __init__(self, collector_url: str = "http://localhost:8000"):
+    def __init__(self, collector_url: str = "http://localhost:8001"):
         self.collector_url = collector_url
         self.session = None
         self.running = True
@@ -232,7 +232,7 @@ class CollectorTester:
 
 async def main():
     parser = argparse.ArgumentParser(description="Test collector server performance")
-    parser.add_argument("--collector-url", type=str, default="http://localhost:8000",
+    parser.add_argument("--collector-url", type=str, default="http://localhost:8001",
                        help="Collector server URL")
     parser.add_argument("--users-per-batch", type=int, default=8,
                        help="Number of users per batch")

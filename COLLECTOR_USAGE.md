@@ -124,18 +124,20 @@ curl http://localhost:8001/status
 
 ### Performance Testing
 ```bash
-# Method 1: Using console script
-gumbel-test-collector --collector-url http://localhost:8001
+# Method 1: Using console script (uses correct default port 8001)
+gumbel-test-collector
 
-# Method 2: Using Python module
-python -m gumbel.tests.test_collector --collector-url http://localhost:8001
+# Method 2: Using Python module (uses correct default port 8001)
+python -m gumbel.tests.test_collector
 
 # Method 3: Custom parameters
 python -m gumbel.tests.test_collector \
-  --collector-url http://localhost:8001 \
   --users-per-batch 16 \
   --samples-per-user 8 \
   --max-batches 50
+
+# Method 4: Specify collector URL explicitly (if using different port)
+python -m gumbel.tests.test_collector --collector-url http://localhost:8002
 ```
 
 ### Manual Test Request
@@ -151,8 +153,21 @@ curl -X POST http://localhost:8001/generate_batch \
 - ✅ **Fixed FastAPI deprecation warning**: Updated from `@app.on_event("shutdown")` to lifespan handlers
 - ✅ **Fixed async event loop error**: Moved aiohttp session creation to lifespan startup
 - ✅ **Updated package imports**: All imports now use proper package structure
+- ✅ **Fixed test collector default port**: Now correctly defaults to port 8001 (collector) instead of 8000 (VLLM)
 
 ## Troubleshooting
+
+### Port Confusion (Important!)
+
+**VLLM Server**: Port 8000 (default)
+- Serves the language model
+- Endpoint: `/v1/completions`
+
+**Collector Server**: Port 8001 (default)  
+- Handles data sampling and reward computation
+- Endpoints: `/generate_batch`, `/health`, `/status`
+
+**Common Error**: Getting 404 on `/generate_batch` usually means you're hitting port 8000 (VLLM) instead of port 8001 (Collector)
 
 ### Common Issues
 
