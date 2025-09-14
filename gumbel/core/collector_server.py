@@ -32,6 +32,8 @@ from ..utils import async_utils
 class CollectionRequest(BaseModel):
     users_per_batch: int
     samples_per_user: int
+    behavior_logits: List[float] = []  # Behavioral policy logits (optional)
+    tau: float = 1.0  # Temperature for sampling (optional)
 
 class CollectionResponse(BaseModel):
     R: List[List[float]]              # [batch_size, d]
@@ -181,14 +183,21 @@ def main():
             if data_sampler is None:
                 raise HTTPException(status_code=500, detail="Collector not initialized")
 
+            # Sample user data (currently ignores behavior_logits and tau)
+            # Future: could use behavior_logits to bias user/prompt selection
             user_data = data_sampler(
                 users_per_batch=request.users_per_batch,
                 samples_per_user=request.samples_per_user,
                 device=device
             )
 
+            # Compute drift rewards using current behavioral policy parameters
             R = await compute_rewards(user_data, len(attribute_prompts))
             collections_count += 1
+
+            # Log behavioral policy info if provided
+            if request.behavior_logits:
+                logging.debug(f"Received behavioral policy: {len(request.behavior_logits)} logits, tau={request.tau:.3f}")
 
             return CollectionResponse(
                 R=R.detach().cpu().tolist(),
