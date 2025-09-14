@@ -13,6 +13,7 @@ import torch
 import asyncio
 import logging
 import argparse
+from contextlib import asynccontextmanager
 from typing import List, Dict, Any, Tuple
 
 import aiohttp
@@ -45,7 +46,7 @@ class StatusResponse(BaseModel):
 # =========================
 # Globals
 # =========================
-app = FastAPI()
+# app will be defined later with lifespan
 
 data_sampler: DataSampler | None = None
 attribute_prompts: List[str] | None = None
@@ -80,54 +81,26 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
         device=device
     )
 
-# =========================
-# FastAPI endpoints
-# =========================
-@app.post("/generate_batch", response_model=CollectionResponse)
-async def generate_batch(request: CollectionRequest):
-    global collections_count
-    try:
-        if data_sampler is None:
-            raise HTTPException(status_code=500, detail="Collector not initialized")
+# FastAPI endpoints will be defined in main() after app is created
 
-        # Sample user data
-        user_data = data_sampler(
-            users_per_batch=request.users_per_batch,
-            samples_per_user=request.samples_per_user,
-            device=device
-        )
-
-        # Compute reward matrix for all attributes (single big wave)
-        R = await compute_rewards(user_data, len(attribute_prompts))  # [B, d]
-        collections_count += 1
-
-        # Return tensors as lists (JSON-serializable)
-        return CollectionResponse(
-            R=R.detach().cpu().tolist(),
-            user_data=user_data,  # assumed JSON-serializable by your sampler
-            success=True
-        )
-    except Exception as e:
-        logging.exception("Error in /generate_batch")
-        return CollectionResponse(R=[], user_data={}, success=False, error=str(e))
-
-@app.get("/status", response_model=StatusResponse)
-async def get_status():
-    return StatusResponse(
-        status="running" if data_sampler else "initializing",
-        collections_served=collections_count
-    )
-
-@app.get("/health")
-async def health_check():
-    return {"status": "healthy"}
-
-@app.on_event("shutdown")
-async def _shutdown():
-    global http_session
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    global http_session, sem
+    timeout = aiohttp.ClientTimeout(total=600)
+    connector = aiohttp.TCPConnector(limit=0)
+    http_session = aiohttp.ClientSession(timeout=timeout, connector=connector)
+    sem = asyncio.Semaphore(CONCURRENCY)
+    
+    yield
+    
+    # Shutdown
     if http_session is not None:
         await http_session.close()
         http_session = None
+
+# Update app initialization
+app = FastAPI(lifespan=lifespan)
 
 # =========================
 # Initialization & main
@@ -166,13 +139,9 @@ def initialize_collector(
         raise ValueError(f"Need at least {d} attribute prompts")
     attribute_prompts = attribute_prompts_local
 
-    # Create a single shared session + semaphore
-    timeout = aiohttp.ClientTimeout(total=600)
-    connector = aiohttp.TCPConnector(limit=0)  # no per-host cap; sem gates concurrency
-    http_session = aiohttp.ClientSession(timeout=timeout, connector=connector)
-    sem = asyncio.Semaphore(CONCURRENCY)
-
 def main():
+    global app
+    
     parser = argparse.ArgumentParser(description="Collector Server (optimized)")
     parser.add_argument("--d", type=int, default=100, help="Number of attributes")
     parser.add_argument("--dataset-path", type=str, required=True, help="Dataset path")
@@ -190,6 +159,7 @@ def main():
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     )
 
+    # Initialize collector (everything except aiohttp session)
     initialize_collector(
         d=args.d,
         dataset_path=args.dataset_path,
@@ -198,6 +168,46 @@ def main():
         vllm_server_url_arg=args.vllm_server_url,
         model_name_arg=args.model_name,
     )
+
+    # Create app with lifespan
+    app = FastAPI(lifespan=lifespan)
+    
+    # Re-register routes (since app was recreated)
+    @app.post("/generate_batch", response_model=CollectionResponse)
+    async def generate_batch(request: CollectionRequest):
+        global collections_count
+        try:
+            if data_sampler is None:
+                raise HTTPException(status_code=500, detail="Collector not initialized")
+
+            user_data = data_sampler(
+                users_per_batch=request.users_per_batch,
+                samples_per_user=request.samples_per_user,
+                device=device
+            )
+
+            R = await compute_rewards(user_data, len(attribute_prompts))
+            collections_count += 1
+
+            return CollectionResponse(
+                R=R.detach().cpu().tolist(),
+                user_data=user_data,
+                success=True
+            )
+        except Exception as e:
+            logging.exception("Error in /generate_batch")
+            return CollectionResponse(R=[], user_data={}, success=False, error=str(e))
+
+    @app.get("/status", response_model=StatusResponse)
+    async def get_status():
+        return StatusResponse(
+            status="running" if data_sampler else "initializing",
+            collections_served=collections_count
+        )
+
+    @app.get("/health")
+    async def health_check():
+        return {"status": "healthy"}
 
     logging.info(f"Starting Collector Server on {args.host}:{args.port} | CONCURRENCY={CONCURRENCY}")
     uvicorn.run(app, host=args.host, port=args.port, log_level=args.log_level.lower())

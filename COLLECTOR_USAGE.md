@@ -145,6 +145,13 @@ curl -X POST http://localhost:8001/generate_batch \
   -d '{"users_per_batch": 4, "samples_per_user": 2}'
 ```
 
+## Recent Fixes
+
+### v2 Updates (2025-09-14)
+- ✅ **Fixed FastAPI deprecation warning**: Updated from `@app.on_event("shutdown")` to lifespan handlers
+- ✅ **Fixed async event loop error**: Moved aiohttp session creation to lifespan startup
+- ✅ **Updated package imports**: All imports now use proper package structure
+
 ## Troubleshooting
 
 ### Common Issues
