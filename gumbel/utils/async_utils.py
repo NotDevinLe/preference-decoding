@@ -29,21 +29,22 @@ def sum_completion_logprobs(resp_json, n_prefix: int, comp_len: int) -> float:
     seg = [x for x in lp[n_prefix:end] if x is not None]
     return float(sum(seg))
 
-async def fetch_sum_lp(session: aiohttp.ClientSession, prompt: str, n_prefix: int, comp_len: int) -> float:
+async def fetch_sum_lp(session: aiohttp.ClientSession, prompt: str, n_prefix: int, comp_len: int, vllm_url: str = None, model_id: str = None) -> float:
     payload = {
-        "model": MODEL_ID,
+        "model": model_id or MODEL_ID,
         "prompt": prompt,
         "echo": True,
         "logprobs": 1,
         "max_tokens": 0,      # no generation; just score provided text
         "temperature": 0.0,
     }
-    async with session.post(VLLM_URL, json=payload) as r:
+    url = vllm_url or VLLM_URL
+    async with session.post(url, json=payload) as r:
         r.raise_for_status()
         data = await r.json()
         return sum_completion_logprobs(data, n_prefix, comp_len)
 
-async def get_log_probs_async(session: aiohttp.ClientSession, tokenizer, system_prompts: List[str], user_prompts: List[str], completion_texts: List[str]) -> Tuple[List[float], List[int]]:
+async def get_log_probs_async(session: aiohttp.ClientSession, tokenizer, system_prompts: List[str], user_prompts: List[str], completion_texts: List[str], vllm_url: str = None, model_id: str = None) -> Tuple[List[float], List[int]]:
     """
     Async version of get_log_probs using aiohttp
     """
@@ -53,12 +54,40 @@ async def get_log_probs_async(session: aiohttp.ClientSession, tokenizer, system_
     for sys_prompt, user_prompt, completion in zip(system_prompts, user_prompts, completion_texts):
         full_prompt, n_prefix, comp_len = build_full_prompt(tokenizer, sys_prompt, user_prompt, completion)
         prompts_data.append((n_prefix, comp_len))
-        tasks.append(fetch_sum_lp(session, full_prompt, n_prefix, comp_len))
+        tasks.append(fetch_sum_lp(session, full_prompt, n_prefix, comp_len, vllm_url, model_id))
     
     log_probs = await asyncio.gather(*tasks)
     token_counts = [comp_len for _, comp_len in prompts_data]
     
     return log_probs, token_counts
+
+async def compute_drift_rewards(session: aiohttp.ClientSession, tokenizer, prompts: List[str], outputs: List[str], 
+                               base_prompt: str, attribute_prompts: List[str], vllm_url: str = None, model_id: str = None, device = None) -> torch.Tensor:
+    """
+    Compute drift rewards: attr_avg_logprob - base_avg_logprob (shape [B, d])
+    """
+    import torch
+    
+    B = len(outputs)
+    d = len(attribute_prompts)
+    if B == 0:
+        return torch.zeros(0, d, device=device)
+
+    # Get base log probabilities
+    base_probs, base_counts = await get_log_probs_async(session, tokenizer, [base_prompt] * B, prompts, outputs, vllm_url, model_id)
+    base_scores = torch.tensor(base_probs, device=device) / torch.tensor(base_counts, device=device)
+    
+    # Build reward matrix
+    reward_matrix = torch.zeros(B, d, device=device)
+    
+    # Compute drift scores for each attribute
+    for attr_idx in range(d):
+        attr_prompt = attribute_prompts[attr_idx]
+        attr_probs, attr_counts = await get_log_probs_async(session, tokenizer, [attr_prompt] * B, prompts, outputs, vllm_url, model_id)
+        attr_scores = torch.tensor(attr_probs, device=device) / torch.tensor(attr_counts, device=device)
+        reward_matrix[:, attr_idx] = attr_scores - base_scores
+    
+    return reward_matrix
 
 def l1_solve(d_mean, l1_lambda, std=None):
     """

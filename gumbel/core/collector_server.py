@@ -63,46 +63,24 @@ http_session: aiohttp.ClientSession | None = None
 sem: asyncio.Semaphore | None = None
 CONCURRENCY = int(os.getenv("COLLECTOR_CONCURRENCY", "256"))  # tune to GPU/server (128–512 common)
 
-async def get_log_probs_batch(system_prompts: List[str], user_prompts: List[str], completion_texts: List[str]) -> Tuple[List[float], List[int]]:
-    """Get log probabilities using async_utils with collector's VLLM server"""
-    # Temporarily override async_utils globals
-    original_vllm_url = async_utils.VLLM_URL
-    original_model_id = async_utils.MODEL_ID
-    
-    try:
-        async_utils.VLLM_URL = f"{vllm_server_url}/v1/completions"
-        async_utils.MODEL_ID = model_name
-        
-        return await async_utils.get_log_probs_async(http_session, tokenizer, system_prompts, user_prompts, completion_texts)
-    finally:
-        async_utils.VLLM_URL = original_vllm_url
-        async_utils.MODEL_ID = original_model_id
-
 async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
     """
     Drift reward = attr_avg_logprob - base_avg_logprob  (shape [B, d])
     """
     prompts: List[str] = user_data["prompts"]
     outputs: List[str] = user_data["outputs"]
-    B = len(outputs)
-    if B == 0:
-        return torch.zeros(0, d, device=device)
-
-    # Get base log probabilities
-    base_probs, base_counts = await get_log_probs_batch([base_prompt] * B, prompts, outputs)
-    base_scores = torch.tensor(base_probs, device=device) / torch.tensor(base_counts, device=device)
     
-    # Build reward matrix
-    reward_matrix = torch.zeros(B, d, device=device)
-    
-    # Compute drift scores for each attribute
-    for attr_idx in range(d):
-        attr_prompt = attribute_prompts[attr_idx]
-        attr_probs, attr_counts = await get_log_probs_batch([attr_prompt] * B, prompts, outputs)
-        attr_scores = torch.tensor(attr_probs, device=device) / torch.tensor(attr_counts, device=device)
-        reward_matrix[:, attr_idx] = attr_scores - base_scores
-    
-    return reward_matrix
+    return await async_utils.compute_drift_rewards(
+        session=http_session,
+        tokenizer=tokenizer,
+        prompts=prompts,
+        outputs=outputs,
+        base_prompt=base_prompt,
+        attribute_prompts=attribute_prompts,
+        vllm_url=f"{vllm_server_url}/v1/completions",
+        model_id=model_name,
+        device=device
+    )
 
 # =========================
 # FastAPI endpoints
