@@ -19,4 +19,4 @@ export PATH=/gscratch/ark/devinl6/envs/align/bin:$PATH
 export HF_HOME=/mmfs1/gscratch/ark/devinl6/hf_cache
 
 # Run Python script with unbuffered output
-python -m vllm.entrypoints.openai.api_server --model meta-llama/Llama-3.2-1B-Instruct --host 0.0.0.0 --port 8000
+vllm serve meta-llama/Llama-3.2-1B-Instruct --host 0.0.0.0 --port 8000

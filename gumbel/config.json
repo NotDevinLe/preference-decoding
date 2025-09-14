@@ -12,7 +12,7 @@
   },
   "vllm": {
     "model_name": "meta-llama/Llama-3.2-1B-Instruct",
-    "server_url": "http://g3124:8000/v1",
+    "server_url": "http://g3112:8000/v1",
     "gpu_memory_util": 0.6
   },
   "servers": {

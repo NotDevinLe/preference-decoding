@@ -16,7 +16,7 @@ import uvicorn
 
 # Local imports
 from sampler import DataSampler
-from openai import OpenAI
+import aiohttp
 
 
 # Request/Response models
@@ -41,18 +41,18 @@ attribute_prompts = None
 base_prompt = "You are a helpful assistant."
 collections_count = 0
 device = None
-vllm_client = None
+vllm_server_url = None
 model_name = None
 
-def initialize_collector(d: int, dataset_path: str, device_str: str, attribute_prompts_path: str, vllm_server_url: str, model_name_arg: str):
+def initialize_collector(d: int, dataset_path: str, device_str: str, attribute_prompts_path: str, vllm_server_url_arg: str, model_name_arg: str):
     """Initialize collector components"""
-    global data_sampler, attribute_prompts, device, vllm_client, model_name
+    global data_sampler, attribute_prompts, device, vllm_server_url, model_name
     
     device = torch.device(device_str)
     data_sampler = DataSampler(dataset_path=dataset_path)
     
-    # Connect to external VLLM server
-    vllm_client = OpenAI(base_url=vllm_server_url, api_key="dummy")
+    # Store VLLM server URL for aiohttp requests
+    vllm_server_url = vllm_server_url_arg
     model_name = model_name_arg
     
     with open(attribute_prompts_path, 'r') as f:
@@ -70,49 +70,60 @@ def initialize_collector(d: int, dataset_path: str, device_str: str, attribute_p
 
 
 async def get_log_probs_from_server(system_prompts: List[str], user_prompts: List[str], completion_texts: List[str], temperature: float = 0.0) -> tuple[List[float], List[int]]:
-    """Async version of get_log_probs using external VLLM server API"""
-    log_probs = []
-    token_counts = []
+    """Batch version using concurrent aiohttp calls to VLLM server"""
     
-    for sys_prompt, user_prompt, completion in zip(system_prompts, user_prompts, completion_texts):
+    async def single_request(session, sys_prompt, user_prompt, completion):
         try:
-            # Use chat completions API to get logprobs
             messages = [
                 {"role": "system", "content": sys_prompt.strip()},
                 {"role": "user", "content": user_prompt.strip()}
             ]
             
-            response = vllm_client.chat.completions.create(
-                model=model_name,
-                messages=messages,
-                max_tokens=len(completion.split()) + 10,
-                temperature=temperature,
-                logprobs=True
-            )
+            payload = {
+                "model": model_name,
+                "messages": messages,
+                "max_tokens": len(completion.split()) + 10,
+                "temperature": temperature,
+                "logprobs": True
+            }
             
-            if response.choices and response.choices[0].logprobs:
-                choice = response.choices[0]
-                if choice.logprobs and choice.logprobs.content:
-                    # Sum logprobs from completion tokens
-                    completion_logprob = sum(
-                        token_logprob.logprob 
-                        for token_logprob in choice.logprobs.content
-                        if token_logprob.logprob is not None
-                    )
-                    log_probs.append(completion_logprob)
-                    token_counts.append(len(choice.logprobs.content))
-                else:
-                    log_probs.append(-1.0)
-                    token_counts.append(len(completion.split()))
-            else:
-                log_probs.append(-1.0)
-                token_counts.append(len(completion.split()))
+            async with session.post(f"{vllm_server_url}/v1/chat/completions", json=payload) as response:
+                if response.status != 200:
+                    return -1.0, len(completion.split())
                 
-            await asyncio.sleep(0.01)
+                result = await response.json()
+                
+                if result.get("choices") and result["choices"][0].get("logprobs"):
+                    choice = result["choices"][0]
+                    if choice["logprobs"] and choice["logprobs"].get("content"):
+                        # Sum logprobs from completion tokens
+                        completion_logprob = sum(
+                            token_logprob["logprob"] 
+                            for token_logprob in choice["logprobs"]["content"]
+                            if token_logprob.get("logprob") is not None
+                        )
+                        return completion_logprob, len(choice["logprobs"]["content"])
+                    else:
+                        return -1.0, len(completion.split())
+                else:
+                    return -1.0, len(completion.split())
                 
         except Exception:
-            log_probs.append(-1.0)
-            token_counts.append(len(completion.split()))
+            return -1.0, len(completion.split())
+    
+    # Create aiohttp session and run all requests concurrently
+    async with aiohttp.ClientSession() as session:
+        tasks = [
+            single_request(session, sys_prompt, user_prompt, completion)
+            for sys_prompt, user_prompt, completion in zip(system_prompts, user_prompts, completion_texts)
+        ]
+        
+        # Execute all requests in parallel
+        results = await asyncio.gather(*tasks)
+    
+    # Separate log_probs and token_counts
+    log_probs = [result[0] for result in results]
+    token_counts = [result[1] for result in results]
     
     return log_probs, token_counts
 
