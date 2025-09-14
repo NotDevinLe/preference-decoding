@@ -1,5 +1,6 @@
 import asyncio
 import aiohttp
+import time
 from typing import Tuple, List, Dict
 import torch
 import numpy as np
@@ -63,6 +64,68 @@ async def compute_drift_rewards(session: aiohttp.ClientSession, tokenizer, promp
                                base_prompt: str, attribute_prompts: List[str], vllm_url: str = None, model_id: str = None, device = None) -> torch.Tensor:
     """
     Compute drift rewards: attr_avg_logprob - base_avg_logprob (shape [B, d])
+    OPTIMIZED VERSION: Fires all (d+1)*B requests concurrently in one wave
+    """
+    import torch
+    
+    B = len(outputs)
+    d = len(attribute_prompts)
+    if B == 0:
+        return torch.zeros(0, d, device=device)
+
+    # Build ALL requests at once: base + all attributes
+    all_system_prompts = []
+    all_user_prompts = []
+    all_completion_texts = []
+    request_map = []  # Track which request corresponds to which (type, attr_idx, sample_idx)
+    
+    # Base prompts for all samples
+    for i in range(B):
+        all_system_prompts.append(base_prompt)
+        all_user_prompts.append(prompts[i])
+        all_completion_texts.append(outputs[i])
+        request_map.append(("base", 0, i))
+    
+    # Attribute prompts for all samples
+    for attr_idx in range(d):
+        for i in range(B):
+            all_system_prompts.append(attribute_prompts[attr_idx])
+            all_user_prompts.append(prompts[i])
+            all_completion_texts.append(outputs[i])
+            request_map.append(("attr", attr_idx, i))
+    
+    # Fire ALL requests concurrently in one batch
+    print(f"Firing {len(all_system_prompts)} concurrent requests ({B} samples × {d+1} prompts)...")
+    start_time = time.time()
+    
+    all_probs, all_counts = await get_log_probs_async(
+        session, tokenizer, all_system_prompts, all_user_prompts, all_completion_texts, vllm_url, model_id
+    )
+    
+    elapsed = time.time() - start_time
+    print(f"Completed {len(all_system_prompts)} requests in {elapsed:.2f}s ({len(all_system_prompts)/elapsed:.1f} req/sec)")
+    
+    # Reconstruct base scores and attribute scores
+    base_scores = torch.zeros(B, device=device)
+    attr_scores = torch.zeros(B, d, device=device)
+    
+    for i, (request_type, attr_idx, sample_idx) in enumerate(request_map):
+        score = all_probs[i] / max(all_counts[i], 1)  # Avoid division by zero
+        
+        if request_type == "base":
+            base_scores[sample_idx] = score
+        else:  # attr
+            attr_scores[sample_idx, attr_idx] = score
+    
+    # Compute drift: attr_score - base_score for each attribute
+    reward_matrix = attr_scores - base_scores.unsqueeze(1)  # Broadcast base_scores across attributes
+    
+    return reward_matrix
+
+async def compute_drift_rewards_old(session: aiohttp.ClientSession, tokenizer, prompts: List[str], outputs: List[str], 
+                               base_prompt: str, attribute_prompts: List[str], vllm_url: str = None, model_id: str = None, device = None) -> torch.Tensor:
+    """
+    OLD SEQUENTIAL VERSION: Compute drift rewards sequentially (kept for reference)
     """
     import torch
     
