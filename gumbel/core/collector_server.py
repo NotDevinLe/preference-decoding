@@ -4,7 +4,6 @@ Collector Server: Handles data sampling and reward scoring using VLLM.
 Runs on GPU 0, communicates with learner server via HTTP.
 """
 
-import asyncio
 import json
 import logging
 import argparse
@@ -13,10 +12,15 @@ import torch
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import uvicorn
+import aiohttp
 
 # Local imports
 from sampler import DataSampler
-import aiohttp
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'utils'))
+from async_utils import get_log_probs_async
+from transformers import AutoTokenizer
 
 
 # Request/Response models
@@ -43,10 +47,11 @@ collections_count = 0
 device = None
 vllm_server_url = None
 model_name = None
+tokenizer = None
 
 def initialize_collector(d: int, dataset_path: str, device_str: str, attribute_prompts_path: str, vllm_server_url_arg: str, model_name_arg: str):
     """Initialize collector components"""
-    global data_sampler, attribute_prompts, device, vllm_server_url, model_name
+    global data_sampler, attribute_prompts, device, vllm_server_url, model_name, tokenizer
     
     device = torch.device(device_str)
     data_sampler = DataSampler(dataset_path=dataset_path)
@@ -54,6 +59,10 @@ def initialize_collector(d: int, dataset_path: str, device_str: str, attribute_p
     # Store VLLM server URL for aiohttp requests
     vllm_server_url = vllm_server_url_arg
     model_name = model_name_arg
+    
+    # Initialize tokenizer for async_utils functions
+    tokenizer = AutoTokenizer.from_pretrained(model_name_arg)
+    tokenizer.pad_token = tokenizer.eos_token
     
     with open(attribute_prompts_path, 'r') as f:
         loaded_prompts = json.load(f)
@@ -70,62 +79,28 @@ def initialize_collector(d: int, dataset_path: str, device_str: str, attribute_p
 
 
 async def get_log_probs_from_server(system_prompts: List[str], user_prompts: List[str], completion_texts: List[str], temperature: float = 0.0) -> tuple[List[float], List[int]]:
-    """Batch version using concurrent aiohttp calls to VLLM server"""
+    """Wrapper function that uses async_utils for log probability computation"""
+    # Set up session with collector server's VLLM URL and model
+    timeout = aiohttp.ClientTimeout(total=300)
+    connector = aiohttp.TCPConnector(limit=0)
     
-    async def single_request(session, sys_prompt, user_prompt, completion):
-        try:
-            messages = [
-                {"role": "system", "content": sys_prompt.strip()},
-                {"role": "user", "content": user_prompt.strip()}
-            ]
-            
-            payload = {
-                "model": model_name,
-                "messages": messages,
-                "max_tokens": len(completion.split()) + 10,
-                "temperature": temperature,
-                "logprobs": True
-            }
-            
-            async with session.post(f"{vllm_server_url}/v1/chat/completions", json=payload) as response:
-                if response.status != 200:
-                    return -1.0, len(completion.split())
-                
-                result = await response.json()
-                
-                if result.get("choices") and result["choices"][0].get("logprobs"):
-                    choice = result["choices"][0]
-                    if choice["logprobs"] and choice["logprobs"].get("content"):
-                        # Sum logprobs from completion tokens
-                        completion_logprob = sum(
-                            token_logprob["logprob"] 
-                            for token_logprob in choice["logprobs"]["content"]
-                            if token_logprob.get("logprob") is not None
-                        )
-                        return completion_logprob, len(choice["logprobs"]["content"])
-                    else:
-                        return -1.0, len(completion.split())
-                else:
-                    return -1.0, len(completion.split())
-                
-        except Exception:
-            return -1.0, len(completion.split())
-    
-    # Create aiohttp session and run all requests concurrently
-    async with aiohttp.ClientSession() as session:
-        tasks = [
-            single_request(session, sys_prompt, user_prompt, completion)
-            for sys_prompt, user_prompt, completion in zip(system_prompts, user_prompts, completion_texts)
-        ]
+    async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
+        # Temporarily override async_utils globals for this collector's config
+        import async_utils
+        original_vllm_url = async_utils.VLLM_URL
+        original_model_id = async_utils.MODEL_ID
         
-        # Execute all requests in parallel
-        results = await asyncio.gather(*tasks)
-    
-    # Separate log_probs and token_counts
-    log_probs = [result[0] for result in results]
-    token_counts = [result[1] for result in results]
-    
-    return log_probs, token_counts
+        try:
+            # Monkey patch the globals in async_utils for this request
+            async_utils.VLLM_URL = f"{vllm_server_url}/v1/completions"
+            async_utils.MODEL_ID = model_name
+            
+            # Use the async_utils function
+            return await get_log_probs_async(session, tokenizer, system_prompts, user_prompts, completion_texts)
+        finally:
+            # Restore original values
+            async_utils.VLLM_URL = original_vllm_url
+            async_utils.MODEL_ID = original_model_id
 
 
 async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
@@ -137,7 +112,7 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
     if batch_size == 0:
         return torch.zeros(0, d, device=device)
     
-    # Compute base log probabilities using VLLM server
+    # Compute base log probabilities using async_utils
     base_probs, base_counts = await get_log_probs_from_server(
         [base_prompt] * batch_size, prompts, outputs
     )
@@ -150,7 +125,7 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
     for attr_idx in range(d):
         attr_prompt = attribute_prompts[attr_idx]
         
-        # Get log probabilities for this attribute using VLLM server
+        # Get log probabilities for this attribute using async_utils
         attr_probs, attr_counts = await get_log_probs_from_server(
             [attr_prompt] * batch_size, prompts, outputs
         )
