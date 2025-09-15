@@ -41,7 +41,7 @@ except Exception:
 import anyio
 
 # ---- Local imports (adjust to your repo layout) ----
-from ..scripts.skeleton import SparseMaskModel  # ensure this exposes forward() returning (z, x_hat, masks)
+from ..models.sparse_mask import SparseMaskModel  # ensure this exposes forward() returning (z, x_hat, masks)
 
 # =========================
 # Request/Response models
@@ -461,26 +461,74 @@ async def shutdown_event():
 # =========================
 def main():
     parser = argparse.ArgumentParser(description="Learner Server")
-
-    # Model parameters
-    parser.add_argument("--d", type=int, default=100, help="Number of attributes")
-    parser.add_argument("--k", type=int, default=10, help="Number of components")
-    parser.add_argument("--lr", type=float, default=1e-3, help="Learning rate")
-    parser.add_argument("--sparsity-weight", type=float, default=0.1, help="Sparsity weight")
-    parser.add_argument("--tau-init", type=float, default=1.0, help="Initial temperature")
-
-    # Server parameters
-    parser.add_argument("--host", type=str, default="0.0.0.0", help="Host to bind to")
-    parser.add_argument("--port", type=int, default=8002, help="Port to bind to")
-    parser.add_argument("--device", type=str, default="cuda:1", help="Device for learner")
-
-    # Logging and checkpointing
-    parser.add_argument("--checkpoint-dir", type=str, default="./checkpoints", help="Checkpoint directory")
-    parser.add_argument("--checkpoint-every", type=int, default=500, help="Checkpoint every N steps (0 disables)")
+    
+    # Config file option
+    parser.add_argument("--config", type=str, help="Path to YAML/JSON config file")
+    
+    # Individual parameter overrides (for backward compatibility)
+    parser.add_argument("--d", type=int, help="Number of attributes")
+    parser.add_argument("--k", type=int, help="Number of components")
+    parser.add_argument("--lr", type=float, help="Learning rate")
+    parser.add_argument("--sparsity-weight", type=float, help="Sparsity weight")
+    parser.add_argument("--tau-init", type=float, help="Initial temperature")
+    parser.add_argument("--host", type=str, help="Host to bind to")
+    parser.add_argument("--port", type=int, help="Port to bind to")
+    parser.add_argument("--device", type=str, help="Device for learner")
+    parser.add_argument("--checkpoint-dir", type=str, help="Checkpoint directory")
+    parser.add_argument("--checkpoint-every", type=int, help="Checkpoint every N steps")
     parser.add_argument("--use-wandb", action="store_true", help="Use wandb logging")
-    parser.add_argument("--log-level", type=str, default="INFO", help="Log level")
-
+    parser.add_argument("--log-level", type=str, help="Log level")
+    
     args = parser.parse_args()
+    
+    # Load config if provided
+    if args.config:
+        try:
+            from ..utils.config_loader import load_config, ConfigLoader
+            config = load_config(args.config)
+            learner_config = ConfigLoader.get_learner_config(config)
+            
+            # Apply config values as defaults, allow CLI overrides
+            d = args.d or learner_config["d"]
+            k = args.k or learner_config["k"]
+            lr = args.lr or learner_config["lr"]
+            sparsity_weight = args.sparsity_weight or learner_config["sparsity_weight"]
+            tau_init = args.tau_init or learner_config["tau_init"]
+            host = args.host or learner_config["host"]
+            port = args.port or learner_config["port"]
+            device_str = args.device or learner_config["device"]
+            checkpoint_dir_arg = args.checkpoint_dir or learner_config["checkpoint_dir"]
+            checkpoint_every = args.checkpoint_every or learner_config["checkpoint_every"]
+            use_wandb = args.use_wandb or learner_config["use_wandb"]
+            log_level = args.log_level or learner_config["log_level"]
+            
+            logging.basicConfig(
+                level=getattr(logging, log_level.upper()),
+                format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+            )
+            logging.info(f"Loaded learner config from {args.config}")
+        except Exception as e:
+            logging.error(f"Failed to load config from {args.config}: {e}")
+            return
+    else:
+        # Use command line arguments with defaults
+        d = args.d or 100
+        k = args.k or 10
+        lr = args.lr or 1e-3
+        sparsity_weight = args.sparsity_weight or 0.1
+        tau_init = args.tau_init or 1.0
+        host = args.host or "0.0.0.0"
+        port = args.port or 8002
+        device_str = args.device or "cuda:1"
+        checkpoint_dir_arg = args.checkpoint_dir or "./checkpoints"
+        checkpoint_every = args.checkpoint_every or 500
+        use_wandb = args.use_wandb
+        log_level = args.log_level or "INFO"
+        
+        logging.basicConfig(
+            level=getattr(logging, log_level.upper()),
+            format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        )
 
     # Install uvloop if available
     if UVLOOP_AVAILABLE:
@@ -489,36 +537,31 @@ def main():
         except Exception:
             pass
 
-    logging.basicConfig(
-        level=getattr(logging, args.log_level.upper()),
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    )
-
     # Initialize learner synchronously on startup
     @app.on_event("startup")
     async def startup_event():
         initialize_learner(
-            d=args.d,
-            k=args.k,
-            lr=args.lr,
-            sparsity_weight=args.sparsity_weight,
-            tau_init=args.tau_init,
-            device_str=args.device,
-            checkpoint_dir_arg=args.checkpoint_dir,
-            use_wandb=args.use_wandb,
-            ckpt_every=args.checkpoint_every,
+            d=d,
+            k=k,
+            lr=lr,
+            sparsity_weight=sparsity_weight,
+            tau_init=tau_init,
+            device_str=device_str,
+            checkpoint_dir_arg=checkpoint_dir_arg,
+            use_wandb=use_wandb,
+            ckpt_every=checkpoint_every,
         )
 
-    logging.info("Starting Learner Server on %s:%d", args.host, args.port)
-    logging.info("Device: %s", args.device)
-    logging.info("Model: d=%d -> k=%d", args.d, args.k)
+    logging.info("Starting Learner Server on %s:%d", host, port)
+    logging.info("Device: %s", device_str)
+    logging.info("Model: d=%d -> k=%d", d, k)
 
     # Important: use a single process/worker (GPU state is not multiprocess-safe)
     uvicorn.run(
         app,
-        host=args.host,
-        port=args.port,
-        log_level=args.log_level.lower(),
+        host=host,
+        port=port,
+        log_level=log_level.lower(),
         workers=1
     )
 

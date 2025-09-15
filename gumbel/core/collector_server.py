@@ -146,30 +146,71 @@ def main():
     global app
     
     parser = argparse.ArgumentParser(description="Collector Server (optimized)")
-    parser.add_argument("--d", type=int, default=100, help="Number of attributes")
-    parser.add_argument("--dataset-path", type=str, required=True, help="Dataset path")
-    parser.add_argument("--model-name", type=str, required=True, help="HF model id (for tokenizer)")
-    parser.add_argument("--vllm-server-url", type=str, required=True, help="Base URL of vLLM server (e.g. http://localhost:8000)")
-    parser.add_argument("--attribute-prompts-path", type=str, required=True, help="Path to attribute prompts JSON")
-    parser.add_argument("--host", type=str, default="0.0.0.0", help="Bind host")
-    parser.add_argument("--port", type=int, default=8001, help="Bind port")
-    parser.add_argument("--device", type=str, default="cuda:0", help="Device for torch tensors")
-    parser.add_argument("--log-level", type=str, default="INFO", help="Logging level")
+    # Config file option
+    parser.add_argument("--config", type=str, help="Path to YAML/JSON config file")
+    
+    # Individual parameter overrides (for backward compatibility)
+    parser.add_argument("--d", type=int, help="Number of attributes")
+    parser.add_argument("--dataset-path", type=str, help="Dataset path")
+    parser.add_argument("--model-name", type=str, help="HF model id (for tokenizer)")
+    parser.add_argument("--vllm-server-url", type=str, help="Base URL of vLLM server")
+    parser.add_argument("--attribute-prompts-path", type=str, help="Path to attribute prompts JSON")
+    parser.add_argument("--host", type=str, help="Bind host")
+    parser.add_argument("--port", type=int, help="Bind port")
+    parser.add_argument("--device", type=str, help="Device for torch tensors")
+    parser.add_argument("--log-level", type=str, help="Logging level")
     args = parser.parse_args()
+    
+    # Load config if provided
+    if args.config:
+        try:
+            from ..utils.config_loader import load_config, ConfigLoader
+            config = load_config(args.config)
+            collector_config = ConfigLoader.get_collector_config(config)
+            
+            # Apply config values as defaults
+            d = args.d or collector_config["d"]
+            dataset_path = args.dataset_path or collector_config["dataset_path"]
+            model_name = args.model_name or collector_config["model_name"]
+            vllm_server_url = args.vllm_server_url or collector_config["vllm_server_url"]
+            attribute_prompts_path = args.attribute_prompts_path or collector_config["attribute_prompts_path"]
+            host = args.host or collector_config["host"]
+            port = args.port or collector_config["port"]
+            device_str = args.device or collector_config["device"]
+            log_level = args.log_level or collector_config["log_level"]
+            
+            logging.info(f"Loaded collector config from {args.config}")
+        except Exception as e:
+            logging.error(f"Failed to load config from {args.config}: {e}")
+            return
+    else:
+        # Use command line arguments (require them if no config)
+        if not all([args.dataset_path, args.model_name, args.vllm_server_url, args.attribute_prompts_path]):
+            parser.error("Either --config or all required arguments must be provided")
+        
+        d = args.d or 100
+        dataset_path = args.dataset_path
+        model_name = args.model_name
+        vllm_server_url = args.vllm_server_url
+        attribute_prompts_path = args.attribute_prompts_path
+        host = args.host or "0.0.0.0"
+        port = args.port or 8001
+        device_str = args.device or "cuda:0"
+        log_level = args.log_level or "INFO"
 
     logging.basicConfig(
-        level=getattr(logging, args.log_level.upper()),
+        level=getattr(logging, log_level.upper()),
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     )
 
     # Initialize collector (everything except aiohttp session)
     initialize_collector(
-        d=args.d,
-        dataset_path=args.dataset_path,
-        device_str=args.device,
-        attribute_prompts_path=args.attribute_prompts_path,
-        vllm_server_url_arg=args.vllm_server_url,
-        model_name_arg=args.model_name,
+        d=d,
+        dataset_path=dataset_path,
+        device_str=device_str,
+        attribute_prompts_path=attribute_prompts_path,
+        vllm_server_url_arg=vllm_server_url,
+        model_name_arg=model_name,
     )
 
     # Create app with lifespan
@@ -219,8 +260,8 @@ def main():
     async def health_check():
         return {"status": "healthy"}
 
-    logging.info(f"Starting Collector Server on {args.host}:{args.port} | CONCURRENCY={CONCURRENCY}")
-    uvicorn.run(app, host=args.host, port=args.port, log_level=args.log_level.lower())
+    logging.info(f"Starting Collector Server on {host}:{port} | CONCURRENCY={CONCURRENCY}")
+    uvicorn.run(app, host=host, port=port, log_level=log_level.lower())
 
 if __name__ == "__main__":
     main()
