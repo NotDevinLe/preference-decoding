@@ -310,7 +310,10 @@ class ServerCoordinator:
         )
         if status == 200:
             return data
-        logging.error(f"collector.generate_batch failed: HTTP {status}")
+        if status == 0:
+            logging.error(f"🔥 COLLECTOR CONNECTION FAILED: HTTP {status} - collector server may be down or unreachable")
+        else:
+            logging.error(f"🔥 COLLECTOR ERROR: HTTP {status} - {data}")
         return None
 
     async def call_learner_train_step(self, batch_data: Dict[str, Any]) -> Dict[str, Any] | None:

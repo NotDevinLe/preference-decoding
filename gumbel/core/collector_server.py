@@ -11,6 +11,7 @@ Optimized for throughput & stability:
 import os
 import json
 import math
+import time
 import asyncio
 import logging
 import argparse
@@ -106,20 +107,34 @@ async def post_json_with_retry(
     """
     POST JSON with small retry/backoff on stale keep-alive sockets and transient server disconnects.
     """
+    last_exception = None
+    
     for attempt in range(retries):
         try:
             async with session.post(url, json=payload) as r:
+                if r.status == 0:
+                    raise aiohttp.ClientOSError(f"HTTP status 0 - connection failed")
                 r.raise_for_status()
                 return await r.json()
         except (aiohttp.ClientConnectionResetError,
                 aiohttp.ServerDisconnectedError,
-                aiohttp.ClientOSError) as e:
+                aiohttp.ClientOSError,
+                aiohttp.ClientConnectorError,
+                aiohttp.ClientTimeout,
+                asyncio.TimeoutError) as e:
+            last_exception = e
             if attempt == retries - 1:
+                logging.error(f"⛔ HTTP REQUEST FAILED after {retries} attempts: {type(e).__name__}: {e}")
                 raise
-            await asyncio.sleep(base_delay * (2 ** attempt))
-        except Exception:
-            # Do not infinitely retry on other exceptions
+            retry_delay = base_delay * (2 ** attempt)
+            logging.warning(f"⚠️  HTTP ERROR (attempt {attempt + 1}/{retries}): {type(e).__name__}: {e} - retrying in {retry_delay:.1f}s")
+            await asyncio.sleep(retry_delay)
+        except Exception as e:
+            logging.error(f"⛔ NON-RETRYABLE HTTP ERROR: {type(e).__name__}: {e}")
             raise
+    
+    # Should never reach here, but just in case
+    raise last_exception or Exception("Unknown HTTP failure")
 
 async def score_many(
     session: ClientSession,
@@ -154,7 +169,24 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
     Drift reward = attr_avg_logprob - base_avg_logprob  (shape [B, d])
     Builds ALL (d+1)*B requests and dispatches them with bounded concurrency + retries.
     """
-    assert tokenizer is not None and vllm_server_url is not None and model_name is not None and http_session is not None
+    global http_session
+    
+    # Validate components
+    if tokenizer is None or vllm_server_url is None or model_name is None:
+        raise RuntimeError("Collector not properly initialized")
+    
+    # Check/recreate session if needed
+    if http_session is None or http_session.closed:
+        logging.warning("🔄 HTTP SESSION: Recreating closed session...")
+        connector = aiohttp.TCPConnector(
+            limit=TOTAL_CONN_LIMIT,
+            limit_per_host=PER_HOST_LIMIT,
+            enable_cleanup_closed=True,
+            ttl_dns_cache=300,
+        )
+        timeout = ClientTimeout(total=REQUEST_TIMEOUT)
+        http_session = aiohttp.ClientSession(timeout=timeout, connector=connector)
+        logging.info("✅ HTTP SESSION: Recreated")
 
     prompts: List[str] = user_data["prompts"]
     outputs: List[str] = user_data["outputs"]
@@ -198,15 +230,33 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
             metas.append((i, a_idx, comp_len))
             prefix_and_len.append((n_prefix, comp_len))
 
-    # Fire requests
+    # Fire requests with timeout protection
     url = f"{vllm_server_url}/v1/completions"
-    raw_results = await score_many(
-        session=http_session,
-        url=url,
-        payloads=payloads,
-        concurrency=CONCURRENCY,
-        batch_size=REQUEST_BATCH_SIZE,
-    )
+    total_requests = len(payloads)
+    logging.info(f"🚀 VLLM REQUESTS: Starting {total_requests} requests to {url}")
+    
+    start_time = time.time()
+    try:
+        raw_results = await asyncio.wait_for(
+            score_many(
+                session=http_session,
+                url=url,
+                payloads=payloads,
+                concurrency=CONCURRENCY,
+                batch_size=REQUEST_BATCH_SIZE,
+            ),
+            timeout=REQUEST_TIMEOUT * 2  # Give extra time for large batches
+        )
+        elapsed = time.time() - start_time
+        logging.info(f"✅ VLLM REQUESTS: Completed {total_requests} requests in {elapsed:.1f}s")
+    except asyncio.TimeoutError:
+        elapsed = time.time() - start_time
+        logging.error(f"⏰ VLLM REQUESTS: Timed out after {elapsed:.1f}s")
+        raise
+    except Exception as e:
+        elapsed = time.time() - start_time
+        logging.error(f"⛔ VLLM REQUESTS: Failed after {elapsed:.1f}s: {type(e).__name__}: {e}")
+        raise
 
     # Prepare tensors
     base_scores = torch.zeros(B, dtype=torch.float32, device=device)
