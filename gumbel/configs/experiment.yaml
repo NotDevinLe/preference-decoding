@@ -1,14 +1,14 @@
 # Gumbel Distributed Training Experiment Configuration
-experiment_name: "baseline_100_attrs"
+experiment_name: "baseline_1000_attrs"
 description: "Baseline experiment with 100 attributes"
 
 # Model configuration
 model:
-  d: 100                    # Number of attributes ("auto" to detect from prompts file)
-  k: 10                     # Number of components
-  lr: 1e-3                  # Learning rate
-  sparsity_weight: 1e-4     # Sparsity regularization weight
-  tau_init: 1.0             # Initial temperature
+  d: 1000
+  k: 10
+  lr: 1e-3
+  sparsity_weight: 1e-4
+  tau_init: 1.0
 
 # Data configuration
 data:

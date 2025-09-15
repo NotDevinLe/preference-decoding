@@ -635,9 +635,9 @@ def main():
 
     # Load external config (same interface you used)
     try:
-        from load_config import load_config, get_coordinator_args, print_config_summary  # type: ignore
+        from ..utils.config_loader import load_config, ConfigLoader
         config = load_config(args.config)
-        print_config_summary(config)
+        ConfigLoader.print_config_summary(config)
         print()
     except Exception as e:
         print(f"Error loading config '{args.config}': {e}")
@@ -652,7 +652,7 @@ def main():
     )
 
     # Apply coordinator config + overrides
-    coord_cfg = get_coordinator_args(config)
+    coord_cfg = ConfigLoader.get_coordinator_config(config)
     if args.collector_url:
         coord_cfg["collector_url"] = args.collector_url
     if args.learner_url:
