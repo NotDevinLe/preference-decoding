@@ -117,7 +117,8 @@ class ServerCoordinator:
         logging.info("ServerCoordinator initialized")
         logging.info(f"Collector: {self.collector_url}")
         logging.info(f"Learner:   {self.learner_url}")
-        logging.info(f"Queue size: {queue_size} | Replay buffer: {replay_buffer_size} (ratio={replay_ratio})")
+        logging.info(f"Queue size: {queue_size}")
+        logging.info(f"🔄 REPLAY BUFFER: Enabled with {replay_buffer_size} max samples (mixing ratio: {replay_ratio:.1%})")
 
     # ---------- HTTP helpers ----------
 
@@ -237,11 +238,14 @@ class ServerCoordinator:
 
     def sample_replay_data(self, target_batch_size: int) -> Optional[Dict[str, Any]]:
         if not self.replay_buffer:
+            logging.debug("🚫 REPLAY BUFFER: Empty, no replay data available")
             return None
         replay_size = min(int(target_batch_size * self.replay_ratio), len(self.replay_buffer))
         if replay_size <= 0:
+            logging.debug(f"🚫 REPLAY BUFFER: Calculated replay size {replay_size} <= 0, skipping replay")
             return None
 
+        logging.debug(f"🎲 REPLAY BUFFER: Sampling {replay_size} from {len(self.replay_buffer)} available samples")
         replay_samples = random.sample(list(self.replay_buffer), replay_size)
         
         R = [s["reward_vector"] for s in replay_samples]
@@ -373,18 +377,27 @@ class ServerCoordinator:
 
                 # Add to replay buffer
                 self.add_to_replay_buffer(R, fresh.get("user_data", {}))
+                logging.info(f"📦 REPLAY BUFFER: Added {batch_size} samples (buffer size: {len(self.replay_buffer)}/{self.replay_buffer.maxlen})")
 
                 # Mix with replay
                 replay = self.sample_replay_data(len(R))
-                mixed = self.mix_fresh_and_replay(fresh, replay)
+                if replay:
+                    replay_size = len(replay["R"])
+                    logging.info(f"🔄 REPLAY BUFFER: Sampling {replay_size} replay samples for mixing (ratio: {self.replay_ratio})")
+                    mixed = self.mix_fresh_and_replay(fresh, replay)
+                    logging.info(f"🎯 MIXED BATCH: {len(fresh['R'])} fresh + {replay_size} replay = {len(mixed['R'])} total samples")
+                else:
+                    logging.info(f"⚡ FRESH ONLY: No replay data available, using {batch_size} fresh samples only")
+                    mixed = fresh
 
                 # Enqueue (blocks if queue full)
                 await self.batch_queue.put(mixed)
 
                 # Debug queue/replay utilization
                 stats = self.get_replay_stats()
+                utilization_pct = 100 * stats['utilization']
                 logging.debug(
-                    f"Queued mixed batch | queue={self.batch_queue.qsize()} | replay={stats['size']}/{stats['max_size']}"
+                    f"Queued mixed batch | queue={self.batch_queue.qsize()} | replay buffer: {stats['size']}/{stats['max_size']} ({utilization_pct:.1f}% full)"
                 )
 
             except Exception as e:
@@ -558,10 +571,10 @@ class ServerCoordinator:
 
                     if step_seen % log_freq == 0:
                         rep = self.get_replay_stats()
+                        replay_status = f"📊 REPLAY BUFFER: {rep['size']}/{rep['max_size']} ({100*rep['utilization']:.1f}% full, {rep['unique_users']} unique users)"
                         logging.info(
                             f"Step {step_seen} | active={active_features:.1f} | tau={tau:.3f} | "
-                            f"queue={self.batch_queue.qsize()} | replay={rep['size']}/{rep['max_size']} "
-                            f"({100*rep['utilization']:.1f}% full)"
+                            f"queue={self.batch_queue.qsize()} | {replay_status}"
                         )
 
             # Stop loops

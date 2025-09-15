@@ -7,9 +7,10 @@ import torch
 import numpy as np
 from transformers import AutoTokenizer
 
-VLLM_URL = "http://localhost:8000/v1/completions"
-MODEL_ID  = "meta-llama/Llama-3.2-1B-Instruct"
-CONCURRENCY = 256
+VLLM_URL = os.getenv("VLLM_URL", "http://localhost:8000/v1/completions")
+MODEL_ID  = os.getenv("MODEL_ID", "meta-llama/Llama-3.2-1B-Instruct")
+CONCURRENCY = int(os.getenv("VLLM_CONCURRENCY", "256"))
+MAX_RETRIES = int(os.getenv("VLLM_MAX_RETRIES", "3"))
 
 def build_full_prompt(tokenizer, sys_prompt: str, user_prompt: str, completion: str) -> Tuple[str, int, int]:
     """Return: full_text (prompt+completion), n_prefix_tokens, completion_len_tokens"""
@@ -29,7 +30,7 @@ def sum_completion_logprobs(resp_json, n_prefix: int, comp_len: int) -> float:
     seg = [x for x in lp[n_prefix:end] if x is not None]
     return float(sum(seg))
 
-async def fetch_sum_lp(session: aiohttp.ClientSession, prompt: str, n_prefix: int, comp_len: int, vllm_url: str = None, model_id: str = None) -> float:
+async def fetch_sum_lp(session: aiohttp.ClientSession, prompt: str, n_prefix: int, comp_len: int, vllm_url: str = None, model_id: str = None, max_retries: int = None) -> float:
     payload = {
         "model": model_id or MODEL_ID,
         "prompt": prompt,
@@ -39,10 +40,23 @@ async def fetch_sum_lp(session: aiohttp.ClientSession, prompt: str, n_prefix: in
         "temperature": 0.0,
     }
     url = vllm_url or VLLM_URL
-    async with session.post(url, json=payload) as r:
-        r.raise_for_status()
-        data = await r.json()
-        return sum_completion_logprobs(data, n_prefix, comp_len)
+    max_retries = max_retries or MAX_RETRIES
+    
+    for attempt in range(max_retries):
+        try:
+            async with session.post(url, json=payload) as r:
+                r.raise_for_status()
+                data = await r.json()
+                return sum_completion_logprobs(data, n_prefix, comp_len)
+        except (aiohttp.ClientConnectionResetError, aiohttp.ClientOSError, aiohttp.ClientConnectorError) as e:
+            if attempt == max_retries - 1:
+                print(f"❌ VLLM REQUEST FAILED after {max_retries} attempts: {e}")
+                raise
+            print(f"⚠️  VLLM CONNECTION ERROR (attempt {attempt + 1}/{max_retries}): {e} - retrying...")
+            await asyncio.sleep(0.5 * (2 ** attempt))  # exponential backoff
+        except Exception as e:
+            print(f"❌ VLLM REQUEST ERROR: {e}")
+            raise
 
 async def get_log_probs_async(session: aiohttp.ClientSession, tokenizer, system_prompts: List[str], user_prompts: List[str], completion_texts: List[str], vllm_url: str = None, model_id: str = None) -> Tuple[List[float], List[int]]:
     """
@@ -56,7 +70,18 @@ async def get_log_probs_async(session: aiohttp.ClientSession, tokenizer, system_
         prompts_data.append((n_prefix, comp_len))
         tasks.append(fetch_sum_lp(session, full_prompt, n_prefix, comp_len, vllm_url, model_id))
     
-    log_probs = await asyncio.gather(*tasks)
+    try:
+        log_probs = await asyncio.gather(*tasks, return_exceptions=True)
+    except Exception as e:
+        print(f"❌ GATHER ERROR: {e}")
+        raise
+    
+    # Check for exceptions in results
+    for i, result in enumerate(log_probs):
+        if isinstance(result, Exception):
+            print(f"❌ TASK {i} FAILED: {result}")
+            raise result
+    
     token_counts = [comp_len for _, comp_len in prompts_data]
     
     return log_probs, token_counts
@@ -115,9 +140,14 @@ async def compute_drift_rewards(session: aiohttp.ClientSession, tokenizer, promp
         
         print(f"  Processing batch {i//batch_size + 1}/{(total_requests + batch_size - 1)//batch_size} ({end_i - i} requests)...")
         
-        batch_probs, batch_counts = await get_log_probs_async(
-            session, tokenizer, batch_system, batch_user, batch_completion, vllm_url, model_id
-        )
+        try:
+            batch_probs, batch_counts = await get_log_probs_async(
+                session, tokenizer, batch_system, batch_user, batch_completion, vllm_url, model_id
+            )
+        except Exception as e:
+            print(f"❌ BATCH PROCESSING ERROR (batch {i//batch_size + 1}): {e}")
+            # For partial failure, we could implement fallback logic here
+            raise
         
         all_probs.extend(batch_probs)
         all_counts.extend(batch_counts)
