@@ -13,7 +13,7 @@ import argparse
 import asyncio
 import json
 import logging
-from contextlib import asynccontextmanager
+import warnings
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 
@@ -78,8 +78,8 @@ class StatusResponse(BaseModel):
 # =========================
 # Globals
 # =========================
-# app will be defined later with lifespan
-app = None
+app = FastAPI(title="Learner Server", version="1.1")
+app.add_middleware(GZipMiddleware, minimum_size=1024)
 
 model: Optional[SparseMaskModel] = None
 optimizer: Optional[torch.optim.Optimizer] = None
@@ -524,10 +524,12 @@ def main():
         except Exception:
             pass
 
-    # Create lifespan handler for modern FastAPI
-    @asynccontextmanager
-    async def lifespan(app: FastAPI):
-        # Startup
+    # Suppress FastAPI deprecation warnings for now (we'll fix this later)
+    warnings.filterwarnings("ignore", message=".*on_event is deprecated.*")
+    
+    # Initialize learner on startup (using legacy but working approach)
+    @app.on_event("startup")
+    async def startup_event():
         initialize_learner(
             d=d,
             k=k,
@@ -539,10 +541,10 @@ def main():
             use_wandb=use_wandb,
             ckpt_every=checkpoint_every,
         )
-        
-        yield
-        
-        # Shutdown
+    
+    @app.on_event("shutdown")
+    async def shutdown_event():
+        """Save final checkpoint and close wandb on shutdown."""
         logging.info("Shutting down learner server, saving final checkpoint...")
         try:
             await anyio.to_thread.run_sync(save_checkpoint, current_step, True)
@@ -554,11 +556,6 @@ def main():
                 logging.info("Finished wandb run")
             except Exception as e:
                 logging.warning("Failed to finish wandb run: %s", e)
-    
-    # Create app with lifespan
-    global app
-    app = FastAPI(title="Learner Server", version="1.1", lifespan=lifespan)
-    app.add_middleware(GZipMiddleware, minimum_size=1024)
 
     logging.info("Starting Learner Server on %s:%d", host, port)
     logging.info("Device: %s", device_str)
