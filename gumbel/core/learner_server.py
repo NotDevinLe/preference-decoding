@@ -13,6 +13,7 @@ import argparse
 import asyncio
 import json
 import logging
+from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 
@@ -77,8 +78,8 @@ class StatusResponse(BaseModel):
 # =========================
 # Globals
 # =========================
-app = FastAPI(title="Learner Server", version="1.1")
-app.add_middleware(GZipMiddleware, minimum_size=1024)
+# app will be defined later with lifespan
+app = None
 
 model: Optional[SparseMaskModel] = None
 optimizer: Optional[torch.optim.Optimizer] = None
@@ -441,20 +442,6 @@ async def train_step_endpoint(request: TrainStepRequest):
             error=str(e)
         )
 
-@app.on_event("shutdown")
-async def shutdown_event():
-    """Save final checkpoint and close wandb on shutdown."""
-    logging.info("Shutting down learner server, saving final checkpoint...")
-    try:
-        await anyio.to_thread.run_sync(save_checkpoint, current_step, True)
-    except Exception as e:
-        logging.error("Final checkpoint save failed: %s", e)
-    if WANDB_AVAILABLE and wandb_run:
-        try:
-            wandb_run.finish()
-            logging.info("Finished wandb run")
-        except Exception as e:
-            logging.warning("Failed to finish wandb run: %s", e)
 
 # =========================
 # Main
@@ -488,19 +475,19 @@ def main():
             config = load_config(args.config)
             learner_config = ConfigLoader.get_learner_config(config)
             
-            # Apply config values as defaults, allow CLI overrides
-            d = args.d or learner_config["d"]
-            k = args.k or learner_config["k"]
-            lr = args.lr or learner_config["lr"]
-            sparsity_weight = args.sparsity_weight or learner_config["sparsity_weight"]
-            tau_init = args.tau_init or learner_config["tau_init"]
-            host = args.host or learner_config["host"]
-            port = args.port or learner_config["port"]
-            device_str = args.device or learner_config["device"]
-            checkpoint_dir_arg = args.checkpoint_dir or learner_config["checkpoint_dir"]
-            checkpoint_every = args.checkpoint_every or learner_config["checkpoint_every"]
-            use_wandb = args.use_wandb or learner_config["use_wandb"]
-            log_level = args.log_level or learner_config["log_level"]
+            # Apply config values as defaults, allow CLI overrides with proper type conversion
+            d = int(args.d or learner_config["d"])
+            k = int(args.k or learner_config["k"])
+            lr = float(args.lr or learner_config["lr"])
+            sparsity_weight = float(args.sparsity_weight or learner_config["sparsity_weight"])
+            tau_init = float(args.tau_init or learner_config["tau_init"])
+            host = str(args.host or learner_config["host"])
+            port = int(args.port or learner_config["port"])
+            device_str = str(args.device or learner_config["device"])
+            checkpoint_dir_arg = str(args.checkpoint_dir or learner_config["checkpoint_dir"])
+            checkpoint_every = int(args.checkpoint_every or learner_config["checkpoint_every"])
+            use_wandb = bool(args.use_wandb or learner_config["use_wandb"])
+            log_level = str(args.log_level or learner_config["log_level"])
             
             logging.basicConfig(
                 level=getattr(logging, log_level.upper()),
@@ -511,19 +498,19 @@ def main():
             logging.error(f"Failed to load config from {args.config}: {e}")
             return
     else:
-        # Use command line arguments with defaults
-        d = args.d or 100
-        k = args.k or 10
-        lr = args.lr or 1e-3
-        sparsity_weight = args.sparsity_weight or 0.1
-        tau_init = args.tau_init or 1.0
-        host = args.host or "0.0.0.0"
-        port = args.port or 8002
-        device_str = args.device or "cuda:1"
-        checkpoint_dir_arg = args.checkpoint_dir or "./checkpoints"
-        checkpoint_every = args.checkpoint_every or 500
-        use_wandb = args.use_wandb
-        log_level = args.log_level or "INFO"
+        # Use command line arguments with defaults and proper types
+        d = int(args.d or 100)
+        k = int(args.k or 10)
+        lr = float(args.lr or 1e-3)
+        sparsity_weight = float(args.sparsity_weight or 0.1)
+        tau_init = float(args.tau_init or 1.0)
+        host = str(args.host or "0.0.0.0")
+        port = int(args.port or 8002)
+        device_str = str(args.device or "cuda:1")
+        checkpoint_dir_arg = str(args.checkpoint_dir or "./checkpoints")
+        checkpoint_every = int(args.checkpoint_every or 500)
+        use_wandb = bool(args.use_wandb or False)
+        log_level = str(args.log_level or "INFO")
         
         logging.basicConfig(
             level=getattr(logging, log_level.upper()),
@@ -537,9 +524,10 @@ def main():
         except Exception:
             pass
 
-    # Initialize learner synchronously on startup
-    @app.on_event("startup")
-    async def startup_event():
+    # Create lifespan handler for modern FastAPI
+    @asynccontextmanager
+    async def lifespan(app: FastAPI):
+        # Startup
         initialize_learner(
             d=d,
             k=k,
@@ -551,6 +539,26 @@ def main():
             use_wandb=use_wandb,
             ckpt_every=checkpoint_every,
         )
+        
+        yield
+        
+        # Shutdown
+        logging.info("Shutting down learner server, saving final checkpoint...")
+        try:
+            await anyio.to_thread.run_sync(save_checkpoint, current_step, True)
+        except Exception as e:
+            logging.error("Final checkpoint save failed: %s", e)
+        if WANDB_AVAILABLE and wandb_run:
+            try:
+                wandb_run.finish()
+                logging.info("Finished wandb run")
+            except Exception as e:
+                logging.warning("Failed to finish wandb run: %s", e)
+    
+    # Create app with lifespan
+    global app
+    app = FastAPI(title="Learner Server", version="1.1", lifespan=lifespan)
+    app.add_middleware(GZipMiddleware, minimum_size=1024)
 
     logging.info("Starting Learner Server on %s:%d", host, port)
     logging.info("Device: %s", device_str)

@@ -168,16 +168,16 @@ def main():
             config = load_config(args.config)
             collector_config = ConfigLoader.get_collector_config(config)
             
-            # Apply config values as defaults
-            d = args.d or collector_config["d"]
-            dataset_path = args.dataset_path or collector_config["dataset_path"]
-            model_name = args.model_name or collector_config["model_name"]
-            vllm_server_url = args.vllm_server_url or collector_config["vllm_server_url"]
-            attribute_prompts_path = args.attribute_prompts_path or collector_config["attribute_prompts_path"]
-            host = args.host or collector_config["host"]
-            port = args.port or collector_config["port"]
-            device_str = args.device or collector_config["device"]
-            log_level = args.log_level or collector_config["log_level"]
+            # Apply config values as defaults with proper type conversion
+            d = int(args.d or collector_config["d"])
+            dataset_path = str(args.dataset_path or collector_config["dataset_path"])
+            model_name = str(args.model_name or collector_config["model_name"])
+            vllm_server_url = str(args.vllm_server_url or collector_config["vllm_server_url"])
+            attribute_prompts_path = str(args.attribute_prompts_path or collector_config["attribute_prompts_path"])
+            host = str(args.host or collector_config["host"])
+            port = int(args.port or collector_config["port"])
+            device_str = str(args.device or collector_config["device"])
+            log_level = str(args.log_level or collector_config["log_level"])
             
             logging.info(f"Loaded collector config from {args.config}")
         except Exception as e:
@@ -188,15 +188,15 @@ def main():
         if not all([args.dataset_path, args.model_name, args.vllm_server_url, args.attribute_prompts_path]):
             parser.error("Either --config or all required arguments must be provided")
         
-        d = args.d or 100
-        dataset_path = args.dataset_path
-        model_name = args.model_name
-        vllm_server_url = args.vllm_server_url
-        attribute_prompts_path = args.attribute_prompts_path
-        host = args.host or "0.0.0.0"
-        port = args.port or 8001
-        device_str = args.device or "cuda:0"
-        log_level = args.log_level or "INFO"
+        d = int(args.d or 100)
+        dataset_path = str(args.dataset_path)
+        model_name = str(args.model_name)
+        vllm_server_url = str(args.vllm_server_url)
+        attribute_prompts_path = str(args.attribute_prompts_path)
+        host = str(args.host or "0.0.0.0")
+        port = int(args.port or 8001)
+        device_str = str(args.device or "cuda:0")
+        log_level = str(args.log_level or "INFO")
 
     logging.basicConfig(
         level=getattr(logging, log_level.upper()),
