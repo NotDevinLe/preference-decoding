@@ -260,7 +260,7 @@ if __name__ == '__main__':
     )
     
     # Load reward matrix
-    reward_data = np.load('data/reward_matrix_flexible.npz')
+    reward_data = np.load('reward_matrix_flexible.npz')
 
     # Reshape to (P*Q, A) - each row is one preference pair, columns are actions
     X = reward_data['Y_chosen']

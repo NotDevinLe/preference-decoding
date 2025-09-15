@@ -120,7 +120,6 @@ async def post_json_with_retry(
                 aiohttp.ServerDisconnectedError,
                 aiohttp.ClientOSError,
                 aiohttp.ClientConnectorError,
-                aiohttp.ClientTimeout,
                 asyncio.TimeoutError) as e:
             last_exception = e
             if attempt == retries - 1:
@@ -134,7 +133,10 @@ async def post_json_with_retry(
             raise
     
     # Should never reach here, but just in case
-    raise last_exception or Exception("Unknown HTTP failure")
+    if last_exception is not None:
+        raise last_exception
+    else:
+        raise Exception("Unknown HTTP failure")
 
 async def score_many(
     session: ClientSession,
@@ -155,12 +157,15 @@ async def score_many(
             return await post_json_with_retry(session, url, body)
 
     # chunking the task creation mitigates large coroutine fan-out
-    for start in range(0, len(payloads), batch_size):
+    total_batches = math.ceil(len(payloads) / batch_size)
+    for batch_idx, start in enumerate(range(0, len(payloads), batch_size), 1):
         end = min(len(payloads), start + batch_size)
         chunk = payloads[start:end]
+        logging.info(f"📦 PROCESSING BATCH {batch_idx}/{total_batches}: requests {start+1}-{end} ({len(chunk)} requests)")
         tasks = [asyncio.create_task(one(start + j, body)) for j, body in enumerate(chunk)]
         chunk_results = await asyncio.gather(*tasks, return_exceptions=True)
         results[start:end] = chunk_results
+        logging.info(f"✅ COMPLETED BATCH {batch_idx}/{total_batches}")
 
     return results
 

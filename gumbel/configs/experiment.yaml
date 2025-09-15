@@ -7,7 +7,7 @@ model:
   d: 1000
   k: 10
   lr: 1e-3
-  sparsity_weight: 1e-4
+  sparsity_weight: 1e-3
   tau_init: 1.0
 
 # Data configuration
@@ -36,7 +36,7 @@ servers:
     device: "cuda:0"       # GPU for learner (can be same as collector)
     checkpoint_dir: "./checkpoints"
     checkpoint_every: 500  # Save checkpoint every N steps (0 disables)
-    use_wandb: false
+    use_wandb: true
 
 # Training configuration
 training:
@@ -55,7 +55,7 @@ training:
 # Monitoring configuration
 monitoring:
   enable_monitoring: true
-  enable_wandb: false
+  enable_wandb: true
   plot_update_interval: 10.0
   log_level: "INFO"
 

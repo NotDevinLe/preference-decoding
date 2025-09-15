@@ -349,6 +349,26 @@ class ServerCoordinator:
             "unique_users": unique_users,
         }
 
+    def force_offline_mode(self) -> bool:
+        """
+        Force the coordinator to switch to offline mode and start training with current buffer,
+        even if buffer size is below the normal threshold.
+        Returns True if offline mode was enabled, False if already enabled.
+        """
+        if self.offline_mode:
+            logging.info("📋 FORCE OFFLINE: Already in offline mode")
+            return False
+            
+        buffer_size = len(self.replay_buffer)
+        if buffer_size == 0:
+            logging.warning("⚠️  FORCE OFFLINE: Cannot enable offline mode - buffer is empty!")
+            return False
+            
+        logging.info(f"🚀 FORCE OFFLINE: Enabling offline mode with {buffer_size} samples (threshold: {self.offline_threshold})")
+        self.offline_mode = True
+        self.save_replay_buffer()  # Save immediately when forcing offline
+        return True
+
     # ---------- Server RPCs ----------
 
     async def get_learner_params(self) -> Dict[str, Any] | None:
@@ -747,6 +767,7 @@ def main():
     parser.add_argument("--max-steps", type=int, help="Max training steps (override)")
     parser.add_argument("--log-freq", type=int, help="Logging frequency (override)")
     parser.add_argument("--checkpoint-freq", type=int, help="Checkpoint frequency (override)")
+    parser.add_argument("--force-offline", action="store_true", help="Force offline mode even with partial buffer")
 
     # Monitoring overrides
     parser.add_argument("--enable-wandb-coordinator", action="store_true", help="Enable W&B on coordinator")
@@ -827,6 +848,11 @@ def main():
     logging.info(f"Training steps: {coord_cfg['max_steps']}")
 
     async def _run():
+        # Force offline mode if requested
+        if args.force_offline:
+            logging.info("🚀 CLI FLAG: Forcing offline mode...")
+            coordinator.force_offline_mode()
+            
         return await coordinator.run_training(
             max_steps=coord_cfg["max_steps"],
             log_freq=coord_cfg["log_freq"],
