@@ -1,12 +1,4 @@
 #!/usr/bin/env python3
-"""
-Collector Server: samples data and computes drift rewards using a remote vLLM server.
-Optimized for throughput & stability:
-  - Reuses one aiohttp.ClientSession (keep-alive)
-  - Bounded connector (no FD explosions) + retries on stale sockets
-  - Sends (d+1)*B requests in one large concurrent wave (chunked)
-  - Uses /v1/completions with echo=True, max_tokens=0, logprobs=1 (no generation)
-"""
 
 import os
 import json
@@ -26,20 +18,14 @@ import uvicorn
 import torch
 from transformers import AutoTokenizer
 
-# ---- Local imports ----
 from .sampler import DataSampler
 
-# =========================
-# Request/Response models
-# =========================
 class CollectionRequest(BaseModel):
     users_per_batch: int
     samples_per_user: int
-    behavior_logits: List[float] = []  # (optional)
-    tau: float = 1.0                   # (optional)
 
 class CollectionResponse(BaseModel):
-    R: List[List[float]]              # [batch_size, d]
+    R: List[List[float]]
     user_data: Dict[str, Any]
     success: bool
     error: Optional[str] = None
@@ -48,9 +34,6 @@ class StatusResponse(BaseModel):
     status: str
     collections_served: int
 
-# =========================
-# Globals
-# =========================
 data_sampler: Optional[DataSampler] = None
 attribute_prompts: Optional[List[str]] = None
 base_prompt: str = "You are a helpful assistant."
@@ -64,7 +47,6 @@ tokenizer: Optional[AutoTokenizer] = None
 http_session: Optional[ClientSession] = None
 sem: Optional[asyncio.Semaphore] = None
 
-# Tune these via env
 CONCURRENCY = int(os.getenv("COLLECTOR_CONCURRENCY", "256"))         # max in-flight POSTs
 REQUEST_BATCH_SIZE = int(os.getenv("REQUEST_BATCH_SIZE", "512"))      # size of coroutines launched at once
 REQUEST_RETRIES = int(os.getenv("REQUEST_RETRIES", "3"))              # retry count for resets/disconnects
@@ -72,9 +54,6 @@ REQUEST_TIMEOUT = float(os.getenv("REQUEST_TIMEOUT", "180"))          # seconds
 PER_HOST_LIMIT = int(os.getenv("PER_HOST_LIMIT", str(CONCURRENCY)))   # per-host socket cap
 TOTAL_CONN_LIMIT = int(os.getenv("TOTAL_CONN_LIMIT", str(CONCURRENCY * 2)))
 
-# =========================
-# vLLM scoring helpers
-# =========================
 def build_full_prompt_and_ids(tokenizer, sys_prompt: str, user_prompt: str, completion: str):
     """
     Returns:
@@ -91,7 +70,6 @@ def build_full_prompt_and_ids(tokenizer, sys_prompt: str, user_prompt: str, comp
     return prompt_text + completion, len(prompt_ids), len(comp_ids), prompt_ids, comp_ids
 
 def sum_completion_logprobs(resp_json: Dict[str, Any], n_prefix: int, comp_len: int) -> float:
-    # vLLM OpenAI /v1/completions with echo=True returns token_logprobs across the prompt tokens
     lp = resp_json["choices"][0]["logprobs"]["token_logprobs"]
     end = min(len(lp), n_prefix + comp_len)   # guard if server ever adds a token
     seg = [x for x in lp[n_prefix:end] if x is not None]
@@ -105,7 +83,7 @@ async def post_json_with_retry(
     base_delay: float = 0.2,
 ) -> Dict[str, Any]:
     """
-    POST JSON with small retry/backoff on stale keep-alive sockets and transient server disconnects.
+    Keep spamming Posts for some time until it succeeds or runs out of tries
     """
     last_exception = None
     
@@ -123,13 +101,13 @@ async def post_json_with_retry(
                 asyncio.TimeoutError) as e:
             last_exception = e
             if attempt == retries - 1:
-                logging.error(f"⛔ HTTP REQUEST FAILED after {retries} attempts: {type(e).__name__}: {e}")
+                logging.error(f"HTTP REQUEST FAILED after {retries} attempts: {type(e).__name__}: {e}")
                 raise
             retry_delay = base_delay * (2 ** attempt)
-            logging.warning(f"⚠️  HTTP ERROR (attempt {attempt + 1}/{retries}): {type(e).__name__}: {e} - retrying in {retry_delay:.1f}s")
+            logging.warning(f"HTTP ERROR (attempt {attempt + 1}/{retries}): {type(e).__name__}: {e} - retrying in {retry_delay:.1f}s")
             await asyncio.sleep(retry_delay)
         except Exception as e:
-            logging.error(f"⛔ NON-RETRYABLE HTTP ERROR: {type(e).__name__}: {e}")
+            logging.error(f"NON-RETRYABLE HTTP ERROR: {type(e).__name__}: {e}")
             raise
     
     # Should never reach here, but just in case
@@ -142,7 +120,6 @@ async def score_many(
     session: ClientSession,
     url: str,
     payloads: List[Dict[str, Any]],
-    concurrency: int,
     batch_size: int,
 ) -> List[Any]:
     """
@@ -150,10 +127,10 @@ async def score_many(
     Returns a list of responses (or exceptions) matching payload order.
     """
     results: List[Any] = [None] * len(payloads)
-    sem_local = asyncio.Semaphore(concurrency)
+    global sem
 
     async def one(i: int, body: Dict[str, Any]):
-        async with sem_local:
+        async with sem:
             return await post_json_with_retry(session, url, body)
 
     # chunking the task creation mitigates large coroutine fan-out
@@ -161,11 +138,11 @@ async def score_many(
     for batch_idx, start in enumerate(range(0, len(payloads), batch_size), 1):
         end = min(len(payloads), start + batch_size)
         chunk = payloads[start:end]
-        logging.info(f"📦 PROCESSING BATCH {batch_idx}/{total_batches}: requests {start+1}-{end} ({len(chunk)} requests)")
+        logging.info(f"PROCESSING BATCH {batch_idx}/{total_batches}: requests {start+1}-{end} ({len(chunk)} requests)")
         tasks = [asyncio.create_task(one(start + j, body)) for j, body in enumerate(chunk)]
         chunk_results = await asyncio.gather(*tasks, return_exceptions=True)
         results[start:end] = chunk_results
-        logging.info(f"✅ COMPLETED BATCH {batch_idx}/{total_batches}")
+        logging.info(f"COMPLETED BATCH {batch_idx}/{total_batches}")
 
     return results
 
@@ -182,7 +159,7 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
     
     # Check/recreate session if needed
     if http_session is None or http_session.closed:
-        logging.warning("🔄 HTTP SESSION: Recreating closed session...")
+        logging.warning("HTTP SESSION: Recreating closed session...")
         connector = aiohttp.TCPConnector(
             limit=TOTAL_CONN_LIMIT,
             limit_per_host=PER_HOST_LIMIT,
@@ -191,7 +168,7 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
         )
         timeout = ClientTimeout(total=REQUEST_TIMEOUT)
         http_session = aiohttp.ClientSession(timeout=timeout, connector=connector)
-        logging.info("✅ HTTP SESSION: Recreated")
+        logging.info("HTTP SESSION: Recreated")
 
     prompts: List[str] = user_data["prompts"]
     outputs: List[str] = user_data["outputs"]
@@ -238,7 +215,7 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
     # Fire requests with timeout protection
     url = f"{vllm_server_url}/v1/completions"
     total_requests = len(payloads)
-    logging.info(f"🚀 VLLM REQUESTS: Starting {total_requests} requests to {url}")
+    logging.info(f"VLLM REQUESTS: Starting {total_requests} requests to {url}")
     
     start_time = time.time()
     try:
@@ -247,20 +224,19 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
                 session=http_session,
                 url=url,
                 payloads=payloads,
-                concurrency=CONCURRENCY,
                 batch_size=REQUEST_BATCH_SIZE,
             ),
             timeout=REQUEST_TIMEOUT * 2  # Give extra time for large batches
         )
         elapsed = time.time() - start_time
-        logging.info(f"✅ VLLM REQUESTS: Completed {total_requests} requests in {elapsed:.1f}s")
+        logging.info(f"VLLM REQUESTS: Completed {total_requests} requests in {elapsed:.1f}s")
     except asyncio.TimeoutError:
         elapsed = time.time() - start_time
-        logging.error(f"⏰ VLLM REQUESTS: Timed out after {elapsed:.1f}s")
+        logging.error(f"VLLM REQUESTS: Timed out after {elapsed:.1f}s")
         raise
     except Exception as e:
         elapsed = time.time() - start_time
-        logging.error(f"⛔ VLLM REQUESTS: Failed after {elapsed:.1f}s: {type(e).__name__}: {e}")
+        logging.error(f"VLLM REQUESTS: Failed after {elapsed:.1f}s: {type(e).__name__}: {e}")
         raise
 
     # Prepare tensors
@@ -299,9 +275,6 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
     reward_matrix = attr_avg - base_avg[:, None]
     return reward_matrix
 
-# =========================
-# FastAPI lifespan (session setup/teardown)
-# =========================
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global http_session, sem
@@ -323,9 +296,6 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-# =========================
-# Initialization & main
-# =========================
 def initialize_collector(
     d: int,
     dataset_path: str,
@@ -343,7 +313,7 @@ def initialize_collector(
     model_name = model_name_arg
 
     tokenizer = AutoTokenizer.from_pretrained(model_name_arg)
-    # ensure pad token exists for some tokenizers
+    # Ensure pad token exists for some tokenizers
     if tokenizer.pad_token is None and tokenizer.eos_token is not None:
         tokenizer.pad_token = tokenizer.eos_token
 
@@ -360,7 +330,7 @@ def initialize_collector(
     if len(attribute_prompts_local) < d:
         raise ValueError(f"Need at least {d} attribute prompts")
 
-    # store
+    # Store
     attribute_prompts = attribute_prompts_local
 
 def main():
@@ -379,7 +349,7 @@ def main():
     parser.add_argument("--log-level", type=str, help="Logging level")
     args = parser.parse_args()
     
-    # Load config if provided
+    # Load config
     if args.config:
         try:
             from ..utils.config_loader import load_config, ConfigLoader
@@ -405,7 +375,7 @@ def main():
             logging.error(f"Failed to load config from {args.config}: {e}")
             return
     else:
-        # Require individual args when no config is given
+        # Require individual args when no config
         if not all([args.dataset_path, args.model_name, args.vllm_server_url, args.attribute_prompts_path]):
             parser.error("Either --config or all of --dataset-path, --model-name, --vllm-server-url, --attribute-prompts-path must be provided")
         
@@ -424,7 +394,7 @@ def main():
             format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         )
 
-    # Initialize collector (tokenizer, prompts, sampler)
+    # Initialize collector
     initialize_collector(
         d=d,
         dataset_path=dataset_path,
@@ -434,7 +404,7 @@ def main():
         model_name_arg=model_name,
     )
 
-    # Recreate app with lifespan so FastAPI wires startup/shutdown
+    # Recreate app with lifespan
     app = FastAPI(lifespan=lifespan)
     
     @app.post("/generate_batch", response_model=CollectionResponse)
@@ -444,19 +414,16 @@ def main():
             if data_sampler is None:
                 raise HTTPException(status_code=500, detail="Collector not initialized")
 
-            # Sample user data
+            # Sample
             user_data = data_sampler(
                 users_per_batch=request.users_per_batch,
                 samples_per_user=request.samples_per_user,
                 device=device
             )
 
-            # Compute drift rewards
+            # Compute
             R = await compute_rewards(user_data, len(attribute_prompts))
             collections_count += 1
-
-            if request.behavior_logits:
-                logging.debug(f"Behavioral policy provided: {len(request.behavior_logits)} logits, tau={request.tau:.3f}")
 
             return CollectionResponse(
                 R=R.detach().cpu().tolist(),
@@ -484,7 +451,7 @@ def main():
         f"PER_HOST_LIMIT={PER_HOST_LIMIT} | TOTAL_CONN_LIMIT={TOTAL_CONN_LIMIT}"
     )
 
-    # Single worker: we keep one process to avoid multi-proc socket storms
+    # Single worker
     uvicorn.run(app, host=host, port=port, log_level=log_level.lower(), workers=1)
 
 if __name__ == "__main__":

@@ -1,0 +1,160 @@
+Analysis Results - Generated on 2025-09-15 17:11:01.361406
+Sparse CSV: multi_user_results.csv
+Random CSV: random_selection_results.csv
+================================================================================
+🚀 ANALYZING APPROXIMATION RESULTS
+Sparse selection file: multi_user_results.csv
+📊 Loaded 150 results from multi_user_results.csv
+📈 Sparse best results: 50 user/lambda combinations
+
+============================================================
+SPARSE SELECTION WINRATE TABLE
+============================================================
+Accuracy (%) by Lambda (rows) vs Users (columns)
+============================================================
+user       user11  user12  user13  user14  user15  user16  user17  user18  user19  user20
+l1_lambda                                                                                
+0.001      80.000  82.000  74.000  70.000  74.000  88.000  94.000  82.000  82.000  86.000
+0.005      82.000  82.000  72.000  70.000  74.000  88.000  94.000  82.000  82.000  86.000
+0.010      80.000  84.000  74.000  68.000  74.000  88.000  94.000  80.000  80.000  86.000
+0.050      82.000  84.000  72.000  72.000  74.000  88.000  94.000  82.000  82.000  84.000
+0.100      80.000  84.000  72.000  72.000  74.000  88.000  94.000  82.000  84.000  86.000
+
+📊 Summary Statistics:
+Average accuracy: 81.240%
+Best accuracy: 94.000%
+Worst accuracy: 68.000%
+Standard deviation: 0.816%
+
+============================================================
+ANALYSIS BY LAMBDA VALUE
+============================================================
+
+📈 Sparse Selection Performance by Lambda:
+            mean      std   min   max
+l1_lambda                            
+0.001      0.812  0.07193  0.70  0.94
+0.005      0.812  0.07436  0.70  0.94
+0.010      0.808  0.07613  0.68  0.94
+0.050      0.814  0.07058  0.72  0.94
+0.100      0.816  0.07230  0.72  0.94
+
+============================================================
+ANALYSIS BY USER
+============================================================
+
+📈 Sparse Selection Performance by User:
+         mean      std   min   max
+user                              
+user11  0.808  0.01095  0.80  0.82
+user12  0.832  0.01095  0.82  0.84
+user13  0.728  0.01095  0.72  0.74
+user14  0.704  0.01673  0.68  0.72
+user15  0.740  0.00000  0.74  0.74
+user16  0.880  0.00000  0.88  0.88
+user17  0.940  0.00000  0.94  0.94
+user18  0.816  0.00894  0.80  0.82
+user19  0.820  0.01414  0.80  0.84
+user20  0.856  0.00894  0.84  0.86
+
+Random selection file: random_selection_results.csv
+📊 Loaded 30 results from random_selection_results.csv
+📈 Random best results: 10 user/lambda combinations
+
+============================================================
+RANDOM SELECTION WINRATE TABLE
+============================================================
+Accuracy (%) by Lambda (rows) vs Users (columns)
+============================================================
+user       user11  user12  user13  user14  user15  user16  user17  user18  user19  user20
+l1_lambda                                                                                
+0.01       70.000  78.000  74.000  70.000  76.000  90.000  86.000  80.000  84.000  86.000
+
+📊 Summary Statistics:
+Average accuracy: 79.400%
+Best accuracy: 90.000%
+Worst accuracy: 70.000%
+Standard deviation: nan%
+
+================================================================================
+SPARSE vs RANDOM COMPARISON
+================================================================================
+Showing accuracy differences (Sparse - Random) in percentage points
+Positive values = Sparse wins, Negative values = Random wins
+================================================================================
+user       user11  user12  user13  user14  user15  user16  user17  user18  user19  user20
+l1_lambda                                                                                
+0.01      +10.000  +6.000  +0.000  -2.000  -2.000  -2.000  +8.000  +0.000  -4.000  +0.000
+
+📊 Sparse Selection Wins (True/False):
+user       user11  user12  user13  user14  user15  user16  user17  user18  user19  user20
+l1_lambda                                                                                
+0.01         True    True   False   False   False   False    True   False   False   False
+
+🏆 Overall Performance:
+Total comparisons: 10
+Sparse wins: 3 (30.0%)
+Random wins: 7 (70.0%)
+Average accuracy difference: 1.400 percentage points
+Largest sparse advantage: +10.000 percentage points
+Largest random advantage: -4.000 percentage points
+
+============================================================
+ANALYSIS BY LAMBDA VALUE
+============================================================
+
+📈 Sparse Selection Performance by Lambda:
+            mean      std   min   max
+l1_lambda                            
+0.001      0.812  0.07193  0.70  0.94
+0.005      0.812  0.07436  0.70  0.94
+0.010      0.808  0.07613  0.68  0.94
+0.050      0.814  0.07058  0.72  0.94
+0.100      0.816  0.07230  0.72  0.94
+
+🎲 Random Selection Performance by Lambda:
+            mean      std  min  max
+l1_lambda                          
+0.01       0.794  0.06995  0.7  0.9
+
+🏆 Best Lambda Values:
+Sparse selection: λ = 0.1 (avg accuracy: 0.816)
+Random selection: λ = 0.01 (avg accuracy: 0.794)
+
+============================================================
+ANALYSIS BY USER
+============================================================
+
+📈 Sparse Selection Performance by User:
+         mean      std   min   max
+user                              
+user11  0.808  0.01095  0.80  0.82
+user12  0.832  0.01095  0.82  0.84
+user13  0.728  0.01095  0.72  0.74
+user14  0.704  0.01673  0.68  0.72
+user15  0.740  0.00000  0.74  0.74
+user16  0.880  0.00000  0.88  0.88
+user17  0.940  0.00000  0.94  0.94
+user18  0.816  0.00894  0.80  0.82
+user19  0.820  0.01414  0.80  0.84
+user20  0.856  0.00894  0.84  0.86
+
+🎲 Random Selection Performance by User:
+        mean  std   min   max
+user                         
+user11  0.70  NaN  0.70  0.70
+user12  0.78  NaN  0.78  0.78
+user13  0.74  NaN  0.74  0.74
+user14  0.70  NaN  0.70  0.70
+user15  0.76  NaN  0.76  0.76
+user16  0.90  NaN  0.90  0.90
+user17  0.86  NaN  0.86  0.86
+user18  0.80  NaN  0.80  0.80
+user19  0.84  NaN  0.84  0.84
+user20  0.86  NaN  0.86  0.86
+
+🏆 Best Performing Users:
+Sparse selection: user17 (avg accuracy: 0.940)
+Random selection: user16 (avg accuracy: 0.900)
+
+✅ ANALYSIS COMPLETE

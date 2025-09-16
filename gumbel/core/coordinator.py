@@ -1,11 +1,4 @@
 #!/usr/bin/env python3
-"""
-Coordinator: Start and manage both collector and learner servers.
-- Pure-async HTTP with aiohttp (keep-alive + connection pooling)
-- Backpressure via asyncio.Queue and a semaphore for HTTP concurrency
-- Replay buffer support with fresh+replay mixing
-- Optional live monitoring (matplotlib) and W&B logging
-"""
 
 from __future__ import annotations
 
@@ -130,8 +123,8 @@ class ServerCoordinator:
         logging.info(f"Collector: {self.collector_url}")
         logging.info(f"Learner:   {self.learner_url}")
         logging.info(f"Queue size: {queue_size}")
-        logging.info(f"🔄 REPLAY BUFFER: Enabled with {replay_buffer_size} max samples (mixing ratio: {replay_ratio:.1%})")
-        logging.info(f"💾 BUFFER PERSISTENCE: Save path='{buffer_save_path}', offline_mode={offline_mode}, threshold={offline_threshold}")
+        logging.info(f"REPLAY BUFFER: Enabled with {replay_buffer_size} max samples (mixing ratio: {replay_ratio:.1%})")
+        logging.info(f"BUFFER PERSISTENCE: Save path='{buffer_save_path}', offline_mode={offline_mode}, threshold={offline_threshold}")
         
         # Try to load existing buffer
         self.load_replay_buffer()
@@ -250,39 +243,39 @@ class ServerCoordinator:
             }
             with open(self.buffer_save_path, 'wb') as f:
                 pickle.dump(buffer_data, f)
-            logging.info(f"💾 BUFFER SAVED: {len(self.replay_buffer)} samples to '{self.buffer_save_path}'")
+            logging.info(f"BUFFER SAVED: {len(self.replay_buffer)} samples to '{self.buffer_save_path}'")
         except Exception as e:
-            logging.error(f"🚫 BUFFER SAVE FAILED: {e}")
+            logging.error(f"BUFFER SAVE FAILED: {e}")
     
     def load_replay_buffer(self) -> None:
         """Load replay buffer from disk if it exists"""
         if not os.path.exists(self.buffer_save_path):
-            logging.info(f"📄 BUFFER LOAD: No existing buffer file at '{self.buffer_save_path}'")
+            logging.info(f"BUFFER LOAD: No existing buffer file at '{self.buffer_save_path}'")
             return
         
         try:
             with open(self.buffer_save_path, 'rb') as f:
                 buffer_data = pickle.load(f)
             
-            # Restore buffer with same maxlen
+            # Restore buffer
             self.replay_buffer = deque(buffer_data["buffer"], maxlen=self.replay_buffer.maxlen)
             
-            # Estimate progress from loaded data
+            # Estimate progress
             if "total_samples" in buffer_data:
                 self.total_samples_collected = buffer_data["total_samples"]
             else:
-                self.total_samples_collected = len(self.replay_buffer)  # Fallback estimate
+                self.total_samples_collected = len(self.replay_buffer)  # Fallback
             
             saved_time = datetime.fromtimestamp(buffer_data["timestamp"])
-            logging.info(f"📄 BUFFER LOADED: {len(self.replay_buffer)} samples from '{self.buffer_save_path}' (saved: {saved_time})")
+            logging.info(f"BUFFER LOADED: {len(self.replay_buffer)} samples from '{self.buffer_save_path}' (saved: {saved_time})")
             logging.info(f"📈 PROGRESS RESTORED: ~{self.total_samples_collected} total samples collected")
             
             # Check if we have enough data for offline mode
             if len(self.replay_buffer) >= self.offline_threshold and not self.offline_mode:
-                logging.info(f"🎆 OFFLINE MODE: Buffer has {len(self.replay_buffer)} >= {self.offline_threshold} samples - consider enabling offline mode")
+                logging.info(f"OFFLINE MODE: Buffer has {len(self.replay_buffer)} >= {self.offline_threshold} samples - consider enabling offline mode")
                 
         except Exception as e:
-            logging.error(f"🚫 BUFFER LOAD FAILED: {e} - starting with empty buffer")
+            logging.error(f"BUFFER LOAD FAILED: {e} - starting with empty buffer")
 
     def add_to_replay_buffer(self, R: List[List[float]], user_data: Dict[str, Any]) -> None:
         batch_size = len(R)
@@ -301,14 +294,14 @@ class ServerCoordinator:
 
     def sample_replay_data(self, target_batch_size: int) -> Optional[Dict[str, Any]]:
         if not self.replay_buffer:
-            logging.debug("🚫 REPLAY BUFFER: Empty, no replay data available")
+            logging.debug("REPLAY BUFFER: Empty, no replay data available")
             return None
         replay_size = min(int(target_batch_size * self.replay_ratio), len(self.replay_buffer))
         if replay_size <= 0:
-            logging.debug(f"🚫 REPLAY BUFFER: Calculated replay size {replay_size} <= 0, skipping replay")
+            logging.debug(f"REPLAY BUFFER: Calculated replay size {replay_size} <= 0, skipping replay")
             return None
 
-        logging.debug(f"🎲 REPLAY BUFFER: Sampling {replay_size} from {len(self.replay_buffer)} available samples")
+        logging.debug(f"REPLAY BUFFER: Sampling {replay_size} from {len(self.replay_buffer)} available samples")
         replay_samples = random.sample(list(self.replay_buffer), replay_size)
         
         R = [s["reward_vector"] for s in replay_samples]
@@ -356,36 +349,25 @@ class ServerCoordinator:
         Returns True if offline mode was enabled, False if already enabled.
         """
         if self.offline_mode:
-            logging.info("📋 FORCE OFFLINE: Already in offline mode")
+            logging.info("FORCE OFFLINE: Already in offline mode")
             return False
             
         buffer_size = len(self.replay_buffer)
         if buffer_size == 0:
-            logging.warning("⚠️  FORCE OFFLINE: Cannot enable offline mode - buffer is empty!")
+            logging.warning("FORCE OFFLINE: Cannot enable offline mode - buffer is empty!")
             return False
             
-        logging.info(f"🚀 FORCE OFFLINE: Enabling offline mode with {buffer_size} samples (threshold: {self.offline_threshold})")
+        logging.info(f"FORCE OFFLINE: Enabling offline mode with {buffer_size} samples (threshold: {self.offline_threshold})")
         self.offline_mode = True
         self.save_replay_buffer()  # Save immediately when forcing offline
         return True
 
     # ---------- Server RPCs ----------
 
-    async def get_learner_params(self) -> Dict[str, Any] | None:
-        status, data = await self._request_json(
-            "GET", f"{self.learner_url}/get_params", timeout=self.timeouts["get_params"]
-        )
-        if status == 200:
-            return data
-        logging.error(f"get_learner_params failed: HTTP {status}")
-        return None
-
-    async def call_collector_generate_batch(self, behavior_logits: List[float], tau: float) -> Dict[str, Any] | None:
+    async def call_collector_generate_batch(self) -> Dict[str, Any] | None:
         payload = {
             "users_per_batch": self.users_per_batch,
             "samples_per_user": self.samples_per_user,
-            "behavior_logits": behavior_logits,  # keep if collector expects; otherwise remove
-            "tau": tau,
         }
         status, data = await self._request_json(
             "POST", f"{self.collector_url}/generate_batch",
@@ -394,15 +376,14 @@ class ServerCoordinator:
         if status == 200:
             return data
         if status == 0:
-            logging.error(f"🔥 COLLECTOR CONNECTION FAILED: HTTP {status} - collector server may be down or unreachable")
+            logging.error(f"COLLECTOR CONNECTION FAILED: HTTP {status} - collector server may be down or unreachable")
         else:
-            logging.error(f"🔥 COLLECTOR ERROR: HTTP {status} - {data}")
+            logging.error(f"COLLECTOR ERROR: HTTP {status} - {data}")
         return None
 
     async def call_learner_train_step(self, batch_data: Dict[str, Any]) -> Dict[str, Any] | None:
         # Format request for learner's expected structure
         learner_request = {
-            "m_hard": [],  # Empty since we're not using hard masks anymore
             "R": batch_data.get("R", []),
             "user_data": batch_data.get("user_data", {}),
             "success": batch_data.get("success", True),
@@ -431,35 +412,25 @@ class ServerCoordinator:
         logging.info("Producer loop started")
         while self.training_active:
             try:
-                # Pull behavior policy from learner
-                params = await self.get_learner_params()
-                if not params or not params.get("success"):
-                    logging.warning("get_learner_params() failed; retrying")
-                    await asyncio.sleep(1.0)
-                    continue
-
-                behavior_logits = params.get("mask_logits", [])
-                tau = params.get("tau", 1.0)
-
                 # In offline mode, skip collector and only use replay data
                 if self.offline_mode:
                     if len(self.replay_buffer) == 0:
-                        logging.warning("🚫 OFFLINE MODE: No replay data available, sleeping...")
+                        logging.warning("OFFLINE MODE: No replay data available, sleeping...")
                         await asyncio.sleep(5.0)
                         continue
                     
                     # Create a batch purely from replay data
                     replay = self.sample_replay_data(32)  # Use standard batch size
                     if not replay:
-                        logging.warning("🚫 OFFLINE MODE: Failed to sample replay data, sleeping...")
+                        logging.warning("OFFLINE MODE: Failed to sample replay data, sleeping...")
                         await asyncio.sleep(5.0)
                         continue
                     
-                    logging.info(f"🔄 OFFLINE BATCH #{self.batch_count}: Using {len(replay['R'])} replay samples only")
+                    logging.info(f"OFFLINE BATCH #{self.batch_count}: Using {len(replay['R'])} replay samples only")
                     mixed = replay
                 else:
                     # Normal mode: ask collector for a fresh batch
-                    fresh = await self.call_collector_generate_batch(behavior_logits, tau)
+                    fresh = await self.call_collector_generate_batch()
                     if not fresh or not fresh.get("success"):
                         logging.warning("collector.generate_batch failed; retrying")
                         await asyncio.sleep(1.0)
@@ -478,15 +449,15 @@ class ServerCoordinator:
                         try:
                             rmin = min(min(row) for row in R)
                             rmax = max(max(row) for row in R)
-                            logging.info(f"🎉 BATCH #{self.batch_count}: {batch_size} samples | reward∈[{rmin:.3f},{rmax:.3f}] | total: {self.total_samples_collected}")
+                            logging.info(f"BATCH #{self.batch_count}: {batch_size} samples | reward∈[{rmin:.3f},{rmax:.3f}] | total: {self.total_samples_collected}")
                         except Exception:
-                            logging.info(f"🎉 BATCH #{self.batch_count}: {batch_size} samples | total: {self.total_samples_collected}")
+                            logging.info(f"BATCH #{self.batch_count}: {batch_size} samples | total: {self.total_samples_collected}")
                     else:
-                        logging.info(f"🎉 BATCH #{self.batch_count}: {batch_size} samples | total: {self.total_samples_collected}")
+                        logging.info(f"BATCH #{self.batch_count}: {batch_size} samples | total: {self.total_samples_collected}")
 
                     # Add to replay buffer
                     self.add_to_replay_buffer(R, fresh.get("user_data", {}))
-                    logging.info(f"📦 REPLAY BUFFER: Added {batch_size} samples (buffer size: {len(self.replay_buffer)}/{self.replay_buffer.maxlen})")
+                    logging.info(f"REPLAY BUFFER: Added {batch_size} samples (buffer size: {len(self.replay_buffer)}/{self.replay_buffer.maxlen})")
                     
                     # Save buffer periodically
                     if len(self.replay_buffer) % self.buffer_save_frequency == 0:
@@ -494,7 +465,7 @@ class ServerCoordinator:
                     
                     # Check if we should switch to offline mode
                     if len(self.replay_buffer) >= self.offline_threshold and not self.offline_mode:
-                        logging.info(f"🎆 SWITCHING TO OFFLINE MODE: Buffer has {len(self.replay_buffer)} >= {self.offline_threshold} samples")
+                        logging.info(f"SWITCHING TO OFFLINE MODE: Buffer has {len(self.replay_buffer)} >= {self.offline_threshold} samples")
                         self.offline_mode = True
                         self.save_replay_buffer()  # Save immediately when switching
 
@@ -502,11 +473,11 @@ class ServerCoordinator:
                     replay = self.sample_replay_data(len(R))
                     if replay:
                         replay_size = len(replay["R"])
-                        logging.info(f"🔄 REPLAY BUFFER: Sampling {replay_size} replay samples for mixing (ratio: {self.replay_ratio})")
+                        logging.info(f"REPLAY BUFFER: Sampling {replay_size} replay samples for mixing (ratio: {self.replay_ratio})")
                         mixed = self.mix_fresh_and_replay(fresh, replay)
-                        logging.info(f"🎯 MIXED BATCH: {len(fresh['R'])} fresh + {replay_size} replay = {len(mixed['R'])} total samples")
+                        logging.info(f"MIXED BATCH: {len(fresh['R'])} fresh + {replay_size} replay = {len(mixed['R'])} total samples")
                     else:
-                        logging.info(f"⚡ FRESH ONLY: No replay data available, using {batch_size} fresh samples only")
+                        logging.info(f"FRESH ONLY: No replay data available, using {batch_size} fresh samples only")
                         mixed = fresh
 
                 # Enqueue (blocks if queue full)
@@ -542,11 +513,10 @@ class ServerCoordinator:
                         loss=result.get("loss"),
                         reward_signal=result.get("reward_signal"),
                         active_attributes=result.get("active_attributes"),
-                        temperature=None,  # polled periodically below
                     )
 
                     if local_step % 10 == 0:
-                        mode_indicator = "🔄 OFFLINE" if self.offline_mode else "🌐 ONLINE"
+                        mode_indicator = "OFFLINE" if self.offline_mode else "ONLINE"
                         logging.info(f"✅ {mode_indicator} TRAINED step {local_step} | queue={self.batch_queue.qsize()} | batches processed: {self.batch_count}")
                 else:
                     logging.warning(f"Training step {local_step} failed")
@@ -567,7 +537,6 @@ class ServerCoordinator:
         loss: float | None = None,
         reward_signal: float | None = None,
         active_attributes: float | None = None,
-        temperature: float | None = None,
     ) -> None:
         if not self.enable_monitoring:
             return
@@ -582,7 +551,6 @@ class ServerCoordinator:
         self.metrics["losses"].append(float(loss or 0.0))
         self.metrics["reward_signals"].append(float(reward_signal or 0.0))
         self.metrics["active_attributes"].append(float(active_attributes or 0.0))
-        self.metrics["temperatures"].append(float(temperature or 1.0))
         self.metrics["queue_sizes"].append(float(self.batch_queue.qsize()))
         self.metrics["replay_buffer_sizes"].append(float(len(self.replay_buffer)))
 
@@ -593,7 +561,6 @@ class ServerCoordinator:
                     "loss": loss or 0.0,
                     "reward_signal": reward_signal or 0.0,
                     "active_attributes": active_attributes or 0.0,
-                    "temperature": temperature or 1.0,
                     "queue_size": self.batch_queue.qsize(),
                     "replay_buffer_size": len(self.replay_buffer),
                     "timestamp": t,
@@ -686,16 +653,15 @@ class ServerCoordinator:
                         loss=None,
                         reward_signal=None,
                         active_attributes=active_features,
-                        temperature=tau,
                     )
 
                     if step_seen % log_freq == 0:
                         rep = self.get_replay_stats()
-                        replay_status = f"📊 REPLAY BUFFER: {rep['size']}/{rep['max_size']} ({100*rep['utilization']:.1f}% full, {rep['unique_users']} unique users)"
+                        replay_status = f"REPLAY BUFFER: {rep['size']}/{rep['max_size']} ({100*rep['utilization']:.1f}% full, {rep['unique_users']} unique users)"
                         
                         # Calculate progress
                         progress_pct = (step_seen / max_steps) * 100 if max_steps > 0 else 0
-                        mode_str = "🔄 OFFLINE" if self.offline_mode else "🌐 ONLINE"
+                        mode_str = "OFFLINE" if self.offline_mode else "ONLINE"
                         
                         logging.info(
                             f"{mode_str} | Step {step_seen}/{max_steps} ({progress_pct:.1f}%) | Batches: {self.batch_count} | "

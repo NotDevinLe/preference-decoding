@@ -1,37 +1,38 @@
 #!/usr/bin/env python3
 """
-Test Approximation Sweep Script
-Runs approximation tests across all sparsity keys from selected.py with varying L1 lambda values.
+Test Approximation Random Selection Script
+Runs approximation tests using random attribute selection with varying L1 lambda values.
 Uses the attribute_prompts.json config file for all tests.
 
-This script supports both single-user and multi-user modes.
+This script supports both single-user and multi-user modes, similar to test_approximation_sweep.py
+but uses random attribute selection instead of the learned sparse selection from selected.py.
 
 This script will test all combinations of:
-- Sparsity keys: ["2e-5", "3e-5", "4e-5"] (from selected.py)
+- Random attribute counts: [50, 100, 200] (or custom list)
 - L1 lambda values: [0.001, 0.01, 0.1, 1.0] (or custom range)
 
 Usage examples:
 
-    # Single user mode: Run sweep with default lambda values
-    python test_approximation_sweep.py --train-data data/user1_train.json --test-data data/user1_test.json
+    # Single user mode: Run with default attribute counts and lambda values
+    python test_approximation_random.py --train-data data/user1_train.json --test-data data/user1_test.json
+
+    # Single user mode: Custom attribute counts
+    python test_approximation_random.py --train-data data/user1_train.json --test-data data/user1_test.json --attribute-counts 25 50 100
 
     # Single user mode: Custom lambda range
-    python test_approximation_sweep.py --train-data data/user1_train.json --test-data data/user1_test.json --lambda-values 0.001 0.01 0.05 0.1
-
-    # Single user mode: Single lambda value across all sparsity levels
-    python test_approximation_sweep.py --train-data data/user1_train.json --test-data data/user1_test.json --lambda-values 0.01
+    python test_approximation_random.py --train-data data/user1_train.json --test-data data/user1_test.json --lambda-values 0.001 0.01 0.05 0.1
 
     # Multi-user mode: Process user range 
-    python test_approximation_sweep.py --users user1-5 --data-dir data/persona_pref/
+    python test_approximation_random.py --users user1-5 --data-dir data/persona_pref/
 
-    # Multi-user mode: Process specific users
-    python test_approximation_sweep.py --users user1,user3,user5 --data-dir data/persona_pref/
-
-    # Multi-user mode: Custom parameters
-    python test_approximation_sweep.py --users user1-3 --data-dir data/persona_pref/ --lambda-values 0.01 0.1 --sparsity-keys 3e-5 4e-5
+    # Multi-user mode: Process specific users with custom parameters
+    python test_approximation_random.py --users user1,user3,user5 --data-dir data/persona_pref/ --attribute-counts 20 50 100 --lambda-values 0.01 0.1
 
     # Save results to CSV (works for both modes)
-    python test_approximation_sweep.py --users user1-5 --output multi_user_results.csv
+    python test_approximation_random.py --users user1-5 --output random_selection_results.csv
+
+    # Use a fixed random seed for reproducibility
+    python test_approximation_random.py --users user1-3 --random-seed 42
 """
 
 import asyncio
@@ -41,6 +42,7 @@ import argparse
 import csv
 import os
 import sys
+import random
 from transformers import AutoTokenizer
 from datetime import datetime
 
@@ -56,20 +58,23 @@ def load_attribute_prompts_from_config(config_path):
         config_data = json.load(f)
     return config_data["prompts"]
 
-def load_selected_indices(selected_path, sparsity_key):
-    """Load selected indices from selected.py"""
-    sys.path.insert(0, os.path.dirname(selected_path))
-    import selected
+def select_random_attributes(available_prompts, num_attributes, seed=None):
+    """Randomly select a subset of attributes"""
+    if seed is not None:
+        random.seed(seed)
+        np.random.seed(seed)
     
-    if sparsity_key in selected.selected_ind:
-        return selected.selected_ind[sparsity_key]
-    else:
-        available_keys = list(selected.selected_ind.keys())
-        raise ValueError(f"Sparsity key '{sparsity_key}' not found. Available keys: {available_keys}")
+    if num_attributes >= len(available_prompts):
+        return available_prompts.copy()
+    
+    # Use random.sample for reproducible random selection
+    indices = random.sample(range(len(available_prompts)), num_attributes)
+    selected_attributes = [available_prompts[i] for i in sorted(indices)]
+    return selected_attributes
 
-async def run_single_test(train_data, test_data, tokenizer, base_prompt, selected_attributes, l1_lambda, sparsity_key):
+async def run_single_test(train_data, test_data, tokenizer, base_prompt, selected_attributes, l1_lambda, num_attributes, test_id):
     """Run a single approximation test and return results"""
-    print(f"\n🔧 TESTING: Sparsity={sparsity_key}, L1={l1_lambda}, Attributes={len(selected_attributes)}")
+    print(f"\n🔧 TESTING: Random={num_attributes} attrs, L1={l1_lambda}, Test ID={test_id}")
     
     # Find p vector
     try:
@@ -89,9 +94,11 @@ async def run_single_test(train_data, test_data, tokenizer, base_prompt, selecte
         top_attributes = [selected_attributes[i][:50] + "..." for i in top_indices]
         
         result = {
-            'sparsity_key': sparsity_key,
+            'selection_type': 'random',
+            'num_attributes': num_attributes,
+            'test_id': test_id,
             'l1_lambda': l1_lambda,
-            'num_attributes': len(selected_attributes),
+            'actual_attributes': len(selected_attributes),
             'accuracy': accuracy,
             'non_zero_components': non_zero_components,
             'sparsity_ratio': sparsity_ratio,
@@ -108,9 +115,11 @@ async def run_single_test(train_data, test_data, tokenizer, base_prompt, selecte
     except Exception as e:
         print(f"❌ FAILED: {e}")
         return {
-            'sparsity_key': sparsity_key,
+            'selection_type': 'random',
+            'num_attributes': num_attributes,
+            'test_id': test_id,
             'l1_lambda': l1_lambda,
-            'num_attributes': len(selected_attributes),
+            'actual_attributes': len(selected_attributes),
             'accuracy': 0.0,
             'non_zero_components': 0,
             'sparsity_ratio': 0.0,
@@ -131,7 +140,7 @@ def save_results_to_csv(results, output_path):
     has_user_info = any('user' in result for result in results)
     
     fieldnames = [
-        'sparsity_key', 'l1_lambda', 'num_attributes', 'accuracy', 
+        'selection_type', 'num_attributes', 'test_id', 'l1_lambda', 'actual_attributes', 'accuracy', 
         'non_zero_components', 'sparsity_ratio', 'p_norm', 'success', 'error',
         'top_weight_1', 'top_weight_2', 'top_weight_3', 'top_weight_4', 'top_weight_5',
         'top_attr_1', 'top_attr_2', 'top_attr_3', 'top_attr_4', 'top_attr_5'
@@ -172,32 +181,32 @@ def print_summary_table(results):
     # Check if we have user information (multi-user mode)
     has_user_info = any('user' in result for result in results)
     
-    print("\n" + "="*90)
-    print("SUMMARY RESULTS")
-    print("="*90)
+    print("\n" + "="*100)
+    print("SUMMARY RESULTS - RANDOM ATTRIBUTE SELECTION")
+    print("="*100)
     
     if has_user_info:
-        print(f"{'User':<8} {'Sparsity':<10} {'L1 Lambda':<10} {'Attributes':<12} {'Accuracy':<10} {'Non-Zero':<10} {'P Norm':<10}")
-        print("-" * 90)
+        print(f"{'User':<8} {'Attributes':<12} {'Test ID':<8} {'L1 Lambda':<10} {'Accuracy':<10} {'Non-Zero':<10} {'P Norm':<10}")
+        print("-" * 100)
         
         for result in results:
             user_name = result.get('user', 'N/A')
             if result['success']:
-                print(f"{user_name:<8} {result['sparsity_key']:<10} {result['l1_lambda']:<10.3f} {result['num_attributes']:<12} "
+                print(f"{user_name:<8} {result['num_attributes']:<12} {result['test_id']:<8} {result['l1_lambda']:<10.3f} "
                       f"{result['accuracy']:<10.4f} {result['non_zero_components']:<10} {result['p_norm']:<10.4f}")
             else:
-                print(f"{user_name:<8} {result['sparsity_key']:<10} {result['l1_lambda']:<10.3f} {result['num_attributes']:<12} "
+                print(f"{user_name:<8} {result['num_attributes']:<12} {result['test_id']:<8} {result['l1_lambda']:<10.3f} "
                       f"{'FAILED':<10} {'N/A':<10} {'N/A':<10}")
     else:
-        print(f"{'Sparsity':<10} {'L1 Lambda':<10} {'Attributes':<12} {'Accuracy':<10} {'Non-Zero':<10} {'P Norm':<10}")
-        print("-" * 80)
+        print(f"{'Attributes':<12} {'Test ID':<8} {'L1 Lambda':<10} {'Accuracy':<10} {'Non-Zero':<10} {'P Norm':<10}")
+        print("-" * 90)
         
         for result in results:
             if result['success']:
-                print(f"{result['sparsity_key']:<10} {result['l1_lambda']:<10.3f} {result['num_attributes']:<12} "
+                print(f"{result['num_attributes']:<12} {result['test_id']:<8} {result['l1_lambda']:<10.3f} "
                       f"{result['accuracy']:<10.4f} {result['non_zero_components']:<10} {result['p_norm']:<10.4f}")
             else:
-                print(f"{result['sparsity_key']:<10} {result['l1_lambda']:<10.3f} {result['num_attributes']:<12} "
+                print(f"{result['num_attributes']:<12} {result['test_id']:<8} {result['l1_lambda']:<10.3f} "
                       f"{'FAILED':<10} {'N/A':<10} {'N/A':<10}")
     
     # Find best results
@@ -206,10 +215,12 @@ def print_summary_table(results):
         best_accuracy = max(successful_results, key=lambda x: x['accuracy'])
         if has_user_info:
             print(f"\n🏆 BEST ACCURACY: {best_accuracy['accuracy']:.4f} "
-                  f"(User: {best_accuracy.get('user', 'N/A')}, Sparsity: {best_accuracy['sparsity_key']}, L1: {best_accuracy['l1_lambda']})")
+                  f"(User: {best_accuracy.get('user', 'N/A')}, Attributes: {best_accuracy['num_attributes']}, "
+                  f"L1: {best_accuracy['l1_lambda']}, Test: {best_accuracy['test_id']})")
         else:
             print(f"\n🏆 BEST ACCURACY: {best_accuracy['accuracy']:.4f} "
-                  f"(Sparsity: {best_accuracy['sparsity_key']}, L1: {best_accuracy['l1_lambda']})")
+                  f"(Attributes: {best_accuracy['num_attributes']}, L1: {best_accuracy['l1_lambda']}, "
+                  f"Test: {best_accuracy['test_id']})")
         
         # If multi-user mode, also show per-user best results
         if has_user_info:
@@ -220,7 +231,8 @@ def print_summary_table(results):
                 if user_results:
                     best_user = max(user_results, key=lambda x: x['accuracy'])
                     print(f"  {user}: {best_user['accuracy']:.4f} "
-                          f"(Sparsity: {best_user['sparsity_key']}, L1: {best_user['l1_lambda']})")
+                          f"(Attrs: {best_user['num_attributes']}, L1: {best_user['l1_lambda']}, "
+                          f"Test: {best_user['test_id']})")
 
 def parse_user_range(user_range_str):
     """Parse user range string like 'user1-5' or 'user1,user3,user5' into list of user names"""
@@ -292,72 +304,83 @@ async def run_user_sweep(user_name, data_dir, tokenizer, base_prompt, available_
     
     # Run tests for all combinations
     user_results = []
-    total_tests = len(args.sparsity_keys) * len(args.lambda_values)
+    total_tests = len(args.attribute_counts) * len(args.lambda_values) * args.random_runs
     current_test = 0
     
-    for sparsity_key in args.sparsity_keys:
-        print(f"\n  📊 SPARSITY LEVEL: {sparsity_key}")
+    for num_attributes in args.attribute_counts:
+        print(f"\n  📊 ATTRIBUTE COUNT: {num_attributes}")
         
-        # Load selected indices for this sparsity level
-        try:
-            selected_indices = load_selected_indices(args.selected_config, sparsity_key)
-            selected_attributes = [available_prompts[i] for i in selected_indices if i < len(available_prompts)]
+        for run_id in range(args.random_runs):
+            print(f"\n    🎲 RANDOM RUN: {run_id + 1}/{args.random_runs}")
             
-            invalid_indices = [i for i in selected_indices if i >= len(available_prompts)]
-            if invalid_indices:
-                print(f"  ⚠️  Warning: {len(invalid_indices)} indices out of range")
+            # Select random attributes for this run
+            try:
+                # Use a deterministic seed based on user, num_attributes, and run_id if seed is provided
+                run_seed = None
+                if args.random_seed is not None:
+                    run_seed = args.random_seed + hash(f"{user_name}_{num_attributes}_{run_id}") % 10000
+                
+                selected_attributes = select_random_attributes(available_prompts, num_attributes, run_seed)
+                print(f"    Selected {len(selected_attributes)} random attributes")
+                
+            except Exception as e:
+                print(f"    ❌ Failed to select random attributes: {e}")
+                continue
             
-            print(f"  Selected {len(selected_attributes)} attributes using {sparsity_key} indices")
-            
-        except Exception as e:
-            print(f"  ❌ Failed to load selected indices for {sparsity_key}: {e}")
-            continue
-        
-        # Test each lambda value
-        for l1_lambda in args.lambda_values:
-            current_test += 1
-            print(f"\n  [{current_test}/{total_tests}] {user_name}", end=" ")
-            
-            result = await run_single_test(
-                train_data, test_data, tokenizer, base_prompt, 
-                selected_attributes, l1_lambda, sparsity_key
-            )
-            # Add user information to result
-            result['user'] = user_name
-            user_results.append(result)
+            # Test each lambda value
+            for l1_lambda in args.lambda_values:
+                current_test += 1
+                test_id = f"{run_id + 1}"
+                print(f"\n    [{current_test}/{total_tests}] {user_name} run {test_id}", end=" ")
+                
+                result = await run_single_test(
+                    train_data, test_data, tokenizer, base_prompt, 
+                    selected_attributes, l1_lambda, num_attributes, test_id
+                )
+                # Add user information to result
+                result['user'] = user_name
+                user_results.append(result)
     
     return user_results
 
 async def main():
-    parser = argparse.ArgumentParser(description="Test preference approximation across all sparsity levels and L1 values")
+    parser = argparse.ArgumentParser(description="Test preference approximation using random attribute selection")
     
     # Single user mode (original behavior)
     parser.add_argument("--train-data", type=str, help="Training data path (single user mode)")
     parser.add_argument("--test-data", type=str, help="Test data path (single user mode)")
     
     # Multi-user mode
-    parser.add_argument("--data-dir", type=str, default="data/persona_pref/", help="Directory containing user data files")
+    parser.add_argument("--data-dir", type=str, default="../../data/persona_pref/", help="Directory containing user data files")
     parser.add_argument("--users", type=str, help="User range (e.g., 'user1-5' or 'user1,user3,user5')")
     
     # Common parameters
     parser.add_argument("--max-train-samples", type=int, default=150, help="Max training samples")
     parser.add_argument("--lambda-values", type=float, nargs='+', default=[0.001, 0.01, 0.1, 1.0], help="L1 lambda values to test")
-    parser.add_argument("--sparsity-keys", type=str, nargs='+', choices=["2e-5", "3e-5", "4e-5"], default=["2e-5", "3e-5", "4e-5"], help="Sparsity keys to test")
+    parser.add_argument("--attribute-counts", type=int, nargs='+', default=[25, 50, 100], help="Numbers of random attributes to test")
+    parser.add_argument("--random-runs", type=int, default=3, help="Number of random runs per attribute count")
+    parser.add_argument("--random-seed", type=int, help="Random seed for reproducible results")
     parser.add_argument("--output", type=str, help="Output CSV file path (optional)")
     parser.add_argument("--attribute-config", type=str, default="../configs/attribute_prompts.json", help="Path to attribute prompts JSON")
-    parser.add_argument("--selected-config", type=str, default="../configs/selected.py", help="Path to selected.py file")
     
     args = parser.parse_args()
+    
+    # Set random seed if provided
+    if args.random_seed is not None:
+        random.seed(args.random_seed)
+        np.random.seed(args.random_seed)
+        print(f"🎲 Using random seed: {args.random_seed}")
     
     # Determine mode: single user or multi-user
     if args.users:
         # Multi-user mode
         user_list = parse_user_range(args.users)
-        print(f"🚀 MULTI-USER APPROXIMATION SWEEP")
+        print(f"🚀 MULTI-USER RANDOM SELECTION SWEEP")
         print(f"Data directory: {args.data_dir}")
         print(f"Users: {user_list}")
-        print(f"Sparsity keys: {args.sparsity_keys}")
+        print(f"Attribute counts: {args.attribute_counts}")
         print(f"L1 lambda values: {args.lambda_values}")
+        print(f"Random runs per count: {args.random_runs}")
         print(f"Max training samples per user: {args.max_train_samples}")
         
         # Initialize tokenizer
@@ -384,11 +407,12 @@ async def main():
             print("❌ Error: For single user mode, both --train-data and --test-data are required")
             return
         
-        print(f"🚀 SINGLE-USER APPROXIMATION SWEEP")
+        print(f"🚀 SINGLE-USER RANDOM SELECTION SWEEP")
         print(f"Training data: {args.train_data}")
         print(f"Test data: {args.test_data}")
-        print(f"Sparsity keys: {args.sparsity_keys}")
+        print(f"Attribute counts: {args.attribute_counts}")
         print(f"L1 lambda values: {args.lambda_values}")
+        print(f"Random runs per count: {args.random_runs}")
         print(f"Max training samples: {args.max_train_samples}")
         
         # Initialize tokenizer
@@ -422,39 +446,42 @@ async def main():
         
         # Run tests for all combinations
         results = []
-        total_tests = len(args.sparsity_keys) * len(args.lambda_values)
+        total_tests = len(args.attribute_counts) * len(args.lambda_values) * args.random_runs
         current_test = 0
         
         print(f"\n🧪 Running {total_tests} total tests...")
         
-        for sparsity_key in args.sparsity_keys:
-            print(f"\n📊 SPARSITY LEVEL: {sparsity_key}")
+        for num_attributes in args.attribute_counts:
+            print(f"\n📊 ATTRIBUTE COUNT: {num_attributes}")
             
-            # Load selected indices for this sparsity level
-            try:
-                selected_indices = load_selected_indices(args.selected_config, sparsity_key)
-                selected_attributes = [available_prompts[i] for i in selected_indices if i < len(available_prompts)]
+            for run_id in range(args.random_runs):
+                print(f"\n🎲 RANDOM RUN: {run_id + 1}/{args.random_runs}")
                 
-                invalid_indices = [i for i in selected_indices if i >= len(available_prompts)]
-                if invalid_indices:
-                    print(f"⚠️  Warning: {len(invalid_indices)} indices out of range")
+                # Select random attributes for this run
+                try:
+                    # Use a deterministic seed based on num_attributes and run_id if seed is provided
+                    run_seed = None
+                    if args.random_seed is not None:
+                        run_seed = args.random_seed + hash(f"{num_attributes}_{run_id}") % 10000
+                    
+                    selected_attributes = select_random_attributes(available_prompts, num_attributes, run_seed)
+                    print(f"Selected {len(selected_attributes)} random attributes")
+                    
+                except Exception as e:
+                    print(f"❌ Failed to select random attributes: {e}")
+                    continue
                 
-                print(f"Selected {len(selected_attributes)} attributes using {sparsity_key} indices")
-                
-            except Exception as e:
-                print(f"❌ Failed to load selected indices for {sparsity_key}: {e}")
-                continue
-            
-            # Test each lambda value
-            for l1_lambda in args.lambda_values:
-                current_test += 1
-                print(f"\n[{current_test}/{total_tests}]", end=" ")
-                
-                result = await run_single_test(
-                    train_data, test_data, tokenizer, base_prompt, 
-                    selected_attributes, l1_lambda, sparsity_key
-                )
-                results.append(result)
+                # Test each lambda value
+                for l1_lambda in args.lambda_values:
+                    current_test += 1
+                    test_id = f"{run_id + 1}"
+                    print(f"\n[{current_test}/{total_tests}] Run {test_id}", end=" ")
+                    
+                    result = await run_single_test(
+                        train_data, test_data, tokenizer, base_prompt, 
+                        selected_attributes, l1_lambda, num_attributes, test_id
+                    )
+                    results.append(result)
     
     # Print summary
     print_summary_table(results)
@@ -467,12 +494,12 @@ async def main():
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         if args.users:
             user_suffix = args.users.replace(",", "_").replace("-", "_")
-            auto_output = f"approximation_sweep_multi_{user_suffix}_{timestamp}.csv"
+            auto_output = f"approximation_random_multi_{user_suffix}_{timestamp}.csv"
         else:
-            auto_output = f"approximation_sweep_single_{timestamp}.csv"
+            auto_output = f"approximation_random_single_{timestamp}.csv"
         save_results_to_csv(results, auto_output)
     
-    print(f"\n✅ SWEEP COMPLETE: {len([r for r in results if r['success']])}/{len(results)} tests successful")
+    print(f"\n✅ RANDOM SELECTION SWEEP COMPLETE: {len([r for r in results if r['success']])}/{len(results)} tests successful")
 
 if __name__ == "__main__":
     asyncio.run(main())

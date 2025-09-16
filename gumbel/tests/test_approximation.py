@@ -16,8 +16,8 @@ Usage examples:
 
     # Full example with all options
     python test_approximation.py \
-        --train-data data/user1_train.json \
-        --test-data data/user1_test.json \
+        --train-data data/persona_pref/user11_train.json \
+        --test-data data/persona_pref/user11_test.json \
         --attribute-config ../configs/attribute_prompts.json \
         --selected-config ../configs/selected.py \
         --sparsity-key 3e-5 \
@@ -32,7 +32,7 @@ import argparse
 from transformers import AutoTokenizer
 
 # Import async utils for log prob computation and drift approximation
-from async_utils import approximate_async, evaluate_accuracy_async, MODEL_ID
+from gumbel.utils.async_utils import approximate_async, evaluate_accuracy_async, MODEL_ID
 
 # Import attribute prompts - support both local import and config file
 import sys

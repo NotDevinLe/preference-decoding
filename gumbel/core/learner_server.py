@@ -1,13 +1,4 @@
 #!/usr/bin/env python3
-"""
-Learner Server: Handles model training and parameter updates.
-- Runs on a specified GPU (default cuda:1)
-- Receives batches (reward matrices) via HTTP and updates model
-- Optimized to keep FastAPI event loop responsive:
-    * Heavy Torch ops run in a worker thread (anyio.to_thread)
-    * TF32/AMP enabled for speed on modern GPUs
-    * Checkpoint I/O offloaded to thread as well
-"""
 
 import argparse
 import asyncio
@@ -41,23 +32,17 @@ except Exception:
 
 import anyio
 
-# ---- Local imports (adjust to your repo layout) ----
 from ..models.sparse_mask import SparseMaskModel  # ensure this exposes forward() returning (z, x_hat, masks)
 
-# =========================
-# Request/Response models
-# =========================
 class ParametersResponse(BaseModel):
-    mask_logits: List[float]
     step: int
     tau: float
     success: bool
     error: Optional[str] = None
 
 class TrainStepRequest(BaseModel):
-    m_hard: List[float]                 # if unused for loss, consider removing to save bandwidth
-    R: List[List[float]]               # [batch_size, d] reward matrix
-    user_data: Dict[str, Any]          # passthrough (for logging/analysis)
+    R: List[List[float]]
+    user_data: Dict[str, Any]
     success: bool
     error: Optional[str] = None
 
@@ -75,9 +60,6 @@ class StatusResponse(BaseModel):
     current_step: int
     active_features: float
 
-# =========================
-# Globals
-# =========================
 app = FastAPI(title="Learner Server", version="1.1")
 app.add_middleware(GZipMiddleware, minimum_size=1024)
 
@@ -91,18 +73,11 @@ checkpoint_dir: str = "./checkpoints"
 checkpoint_every: int = 500  # steps between checkpoints (configurable)
 training_lock = asyncio.Lock()  # ensure only one train step mutates model at a time
 
-# Scalars for saving config (avoid relying on model.d/model.k existence)
+# Scalars for saving config
 D_SIZE: int = 0
 K_SIZE: int = 0
 SPARSITY_WEIGHT: float = 0.1
 
-# AMP/TF32 helpers
-USE_AMP: bool = False
-grad_scaler: Optional[torch.cuda.amp.GradScaler] = None
-
-# =========================
-# Initialization
-# =========================
 def initialize_learner(
     d: int,
     k: int,
@@ -116,23 +91,12 @@ def initialize_learner(
 ):
     """Initialize learner components (sync)."""
     global model, optimizer, device, tau, wandb_run, checkpoint_dir
-    global D_SIZE, K_SIZE, SPARSITY_WEIGHT, USE_AMP, grad_scaler, checkpoint_every
+    global D_SIZE, K_SIZE, SPARSITY_WEIGHT, checkpoint_every
 
     device = torch.device(device_str)
     tau = tau_init
     checkpoint_dir = checkpoint_dir_arg
     checkpoint_every = ckpt_every
-
-    # Enable TF32/AMP where available
-    try:
-        torch.backends.cuda.matmul.allow_tf32 = True
-        torch.backends.cudnn.allow_tf32 = True
-        torch.set_float32_matmul_precision("high")
-    except Exception:
-        pass
-
-    USE_AMP = device.type == "cuda"
-    grad_scaler = torch.cuda.amp.GradScaler(enabled=USE_AMP)
 
     logging.info("Initializing learner")
     logging.info("Device: %s", device)
@@ -141,6 +105,7 @@ def initialize_learner(
     Path(checkpoint_dir).mkdir(parents=True, exist_ok=True)
 
     # Initialize model/optimizer
+    # Assumes constructor signature
     model = SparseMaskModel(d, k, sparsity_weight=sparsity_weight).to(device)  # assumes constructor signature
     # Persist size params in case model doesn't expose attributes
     D_SIZE = d
@@ -149,7 +114,7 @@ def initialize_learner(
 
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
-    # Resume if possible
+    # Resume
     if load_latest_checkpoint():
         logging.info("Resumed training from checkpoint at step %d", current_step)
     else:
@@ -171,13 +136,10 @@ def initialize_learner(
 
     logging.info("Learner ready: d=%d -> k=%d", d, k)
 
-# =========================
-# Core training (sync)
-# =========================
+
 def train_step_impl(m_hard: torch.Tensor, R: torch.Tensor, step: int) -> Dict[str, float]:
     """Single training step using reward matrix as input. Runs under a lock in a worker thread."""
     assert model is not None and optimizer is not None and device is not None
-    assert grad_scaler is not None
 
     model.train()
     optimizer.zero_grad(set_to_none=True)
@@ -185,28 +147,15 @@ def train_step_impl(m_hard: torch.Tensor, R: torch.Tensor, step: int) -> Dict[st
     # Normalize input per-sample like original
     x = F.normalize(R, p=2, dim=1)
 
-    # Forward + loss
-    if USE_AMP:
-        with torch.cuda.amp.autocast():
-            z, x_hat, masks = model.forward(x)  # assumes returns (z, x_hat, masks)
-            recon_loss = F.mse_loss(x_hat, x)
-            mask_probs = torch.sigmoid(model.mask_logits)
-            sparsity_loss = mask_probs.mean()
-            loss = recon_loss + model.sparsity_weight * sparsity_loss
-        grad_scaler.scale(loss).backward()
-        torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-        grad_scaler.step(optimizer)
-        grad_scaler.update()
-    else:
-        z, x_hat, masks = model.forward(x)
-        recon_loss = F.mse_loss(x_hat, x)
-        mask_probs = torch.sigmoid(model.mask_logits)
-        sparsity_loss = mask_probs.mean()
-        loss = recon_loss + model.sparsity_weight * sparsity_loss
+    z, x_hat, masks = model.forward(x)
+    recon_loss = F.mse_loss(x_hat, x)
+    mask_probs = torch.sigmoid(model.mask_logits)
+    sparsity_loss = mask_probs.mean()
+    loss = recon_loss + model.sparsity_weight * sparsity_loss
 
-        loss.backward()
-        torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-        optimizer.step()
+    loss.backward()
+    torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+    optimizer.step()
 
     metrics = {
         "loss": float(loss.detach().cpu()),
@@ -217,14 +166,12 @@ def train_step_impl(m_hard: torch.Tensor, R: torch.Tensor, step: int) -> Dict[st
     }
     return metrics
 
-# =========================
-# Checkpointing (sync)
-# =========================
+# Checkpointing
 def save_checkpoint(step: int, final: bool = False) -> Optional[str]:
     """Save model checkpoint (sync)."""
     try:
         assert model is not None and optimizer is not None
-        # move weights to CPU for lighter write and to avoid GPU stalls
+        # Move weights to CPU for lighter write and to avoid GPU stalls
         cpu_state = {k: v.detach().cpu() for k, v in model.state_dict().items()}
 
         checkpoint = {
@@ -271,7 +218,7 @@ def load_checkpoint(checkpoint_path: str) -> bool:
 
         cfg = checkpoint.get("model_config", {})
         if isinstance(cfg, dict):
-            # Not strictly necessary; kept for logging sanity
+            # Not strictly necessary; kept for logging
             logging.info(
                 "Loaded checkpoint cfg: d=%s k=%s sparsity_weight=%s",
                 cfg.get("d", "?"), cfg.get("k", "?"), cfg.get("sparsity_weight", "?")
@@ -287,9 +234,7 @@ def load_latest_checkpoint() -> bool:
     latest_path = Path(checkpoint_dir) / "latest.pt"
     return load_checkpoint(str(latest_path))
 
-# =========================
 # Endpoints
-# =========================
 @app.get("/get_params", response_model=ParametersResponse)
 async def get_params():
     """Alias: returns current mask logits, step, and tau."""
@@ -387,9 +332,9 @@ async def train_step_endpoint(request: TrainStepRequest):
 
         m_hard_tensor = torch.tensor(request.m_hard, dtype=torch.float32) if request.m_hard else torch.zeros(d)
 
-        # Move to device inside worker to avoid blocking loop
+        # Move to device inside worker
         async with training_lock:
-            # Offload training to worker thread
+            # Offload training
             def _train():
                 m = m_hard_tensor.to(device, non_blocking=True)
                 Rt = R_tensor.to(device, non_blocking=True)
@@ -404,15 +349,15 @@ async def train_step_endpoint(request: TrainStepRequest):
             if current_step % 100 == 0 and current_step > 0:
                 tau_new = tau * 0.995
                 tau_value = 0.1 if tau_new < 0.1 else tau_new
-                # assign outside of any potential autocast context
+                # Assign outside of any potential autocast context
                 tau = float(tau_value)
 
             # Periodic checkpointing
             if checkpoint_every > 0 and current_step % checkpoint_every == 0:
-                # fire-and-forget checkpoint write (but await here to keep it simple & safe)
+                # Fire-and-forget checkpoint write (but await here to keep it simple & safe)
                 await anyio.to_thread.run_sync(save_checkpoint, current_step, False)
 
-        # Wandb logging (lightweight)
+        # Wandb logging
         if WANDB_AVAILABLE and wandb_run:
             try:
                 active_features = float(torch.sigmoid(model.mask_logits).sum().item()) if model is not None else 0.0
@@ -443,16 +388,14 @@ async def train_step_endpoint(request: TrainStepRequest):
         )
 
 
-# =========================
 # Main
-# =========================
 def main():
     parser = argparse.ArgumentParser(description="Learner Server")
     
-    # Config file option
+    # Config
     parser.add_argument("--config", type=str, help="Path to YAML/JSON config file")
     
-    # Individual parameter overrides (for backward compatibility)
+    # Individual parameter overrides
     parser.add_argument("--d", type=int, help="Number of attributes")
     parser.add_argument("--k", type=int, help="Number of components")
     parser.add_argument("--lr", type=float, help="Learning rate")
@@ -468,14 +411,14 @@ def main():
     
     args = parser.parse_args()
     
-    # Load config if provided
+    # Load config
     if args.config:
         try:
             from ..utils.config_loader import load_config, ConfigLoader
             config = load_config(args.config)
             learner_config = ConfigLoader.get_learner_config(config)
             
-            # Apply config values as defaults, allow CLI overrides with proper type conversion
+            # Apply config values as defaults, allow CLI overrides
             d = int(args.d or learner_config["d"])
             k = int(args.k or learner_config["k"])
             lr = float(args.lr or learner_config["lr"])
@@ -498,7 +441,7 @@ def main():
             logging.error(f"Failed to load config from {args.config}: {e}")
             return
     else:
-        # Use command line arguments with defaults and proper types
+        # Use command line arguments with defaults
         d = int(args.d or 100)
         k = int(args.k or 10)
         lr = float(args.lr or 1e-3)
@@ -517,17 +460,17 @@ def main():
             format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         )
 
-    # Install uvloop if available
+    # Install uvloop
     if UVLOOP_AVAILABLE:
         try:
             uvloop.install()
         except Exception:
             pass
 
-    # Suppress FastAPI deprecation warnings for now (we'll fix this later)
+    # Suppress FastAPI deprecation warnings
     warnings.filterwarnings("ignore", message=".*on_event is deprecated.*")
     
-    # Initialize learner on startup (using legacy but working approach)
+    # Initialize learner on startup
     @app.on_event("startup")
     async def startup_event():
         initialize_learner(
@@ -561,7 +504,7 @@ def main():
     logging.info("Device: %s", device_str)
     logging.info("Model: d=%d -> k=%d", d, k)
 
-    # Important: use a single process/worker (GPU state is not multiprocess-safe)
+    # Important: use a single process/worker
     uvicorn.run(
         app,
         host=host,
