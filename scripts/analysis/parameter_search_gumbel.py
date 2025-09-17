@@ -13,13 +13,18 @@ components = [5, 10, 20, 50, 100]
 
 results = []
 
-for lr in lrs:
-    for sparsity_weight in sparsity_weights:
-        for n_components in components:
+for lr_val in lrs:
+    for sparsity_weight_val in sparsity_weights:
+        for n_components_val in components:
+            
+            # Ensure parameters are proper scalar types
+            lr = float(lr_val)
+            sparsity_weight = float(sparsity_weight_val)
+            n_components = int(n_components_val)
 
             wandb.init(
                 project="gumbel",
-                name=f"lr_{lr}_sparsity_weight_{sparsity_weight}_n_components_{n_components}",
+                name=f"lr_{lr:.2e}_sparsity_weight_{sparsity_weight:.2e}_n_components_{n_components}",
                 config={
                     "model": "SparsePCALightning",
                     "n_components": n_components,
@@ -38,6 +43,7 @@ for lr in lrs:
             model = SparsePCALightning(
                 input_dim=reward_matrix.shape[1],
                 n_components=n_components,
+                lr=lr,
                 sparsity_weight=sparsity_weight,
                 temperature=1.0,
                 hard_gumbel=True
@@ -58,17 +64,26 @@ for lr in lrs:
 
             wandb.finish()
 
+            model.eval()
+
+            reconstruction_error = F.mse_loss(model.forward(torch.from_numpy(reward_matrix))[1], torch.from_numpy(reward_matrix)).item()
+    
             results.append({
-                "lr": lr,
-                "sparsity_weight": sparsity_weight,
-                "n_selected": masks.sum(),
+                "lr": float(lr),
+                "sparsity_weight": float(sparsity_weight),
+                "n_selected": int(masks.sum()),
                 "sparsity_ratio": float(masks.sum() / len(masks)),
-                "reconstruction_error": float(F.mse_loss(model.forward(torch.from_numpy(reward_matrix))[1], torch.from_numpy(reward_matrix)).item()),
+                "reconstruction_error": float(reconstruction_error),
                 "components": components.tolist(),
                 "masks": masks.tolist(),
-                "mask_probs": mask_probs,
-                "n_components": n_components
+                "mask_probs": mask_probs.tolist(),
+                "n_components": int(n_components)
             })
+            
+            print(f"Completed: lr={lr:.2e}, sparsity_weight={sparsity_weight:.2e}, n_components={n_components}")
+            print(f"  Selected features: {int(masks.sum())}/{len(masks)} ({100*masks.sum()/len(masks):.1f}%)")
+            print(f"  Reconstruction error: {reconstruction_error:.4f}")
+            print()
 
 with open('data/parameter_search_gumbel.json', 'w') as f:
     json.dump(results, f)

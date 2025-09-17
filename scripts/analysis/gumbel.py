@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 class SparsePCALightning(pl.LightningModule):
-    def __init__(self, input_dim, n_components, sparsity_weight=0.1,
+    def __init__(self, input_dim, n_components, lr = 1e-3, sparsity_weight=0.1,
                  temperature=1.0, hard_gumbel=True):
         super().__init__()
         self.save_hyperparameters()
@@ -19,6 +19,7 @@ class SparsePCALightning(pl.LightningModule):
         self.mask_logits = torch.nn.Parameter(
             torch.zeros(input_dim)
         )
+        self.lr = lr
         self.sparsity_weight = sparsity_weight
         self.temperature = temperature
         self.hard_gumbel = hard_gumbel
@@ -189,7 +190,7 @@ class SparsePCALightning(pl.LightningModule):
             })
         
     def configure_optimizers(self):
-        optimizer = torch.optim.Adam(self.parameters(), lr=1e-3)
+        optimizer = torch.optim.Adam(self.parameters(), lr=self.lr)
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
             optimizer, mode='min', factor=0.5, patience=10
         )
@@ -250,6 +251,7 @@ if __name__ == '__main__':
         config={
             "model": "SparsePCALightning",
             "n_components": 10,
+            "lr": 1e-3,
             "sparsity_weight": sparsity_weight,
             "initial_temperature": 1.0,
             "final_temperature": 0.1,
@@ -278,6 +280,7 @@ if __name__ == '__main__':
     model = SparsePCALightning(
         input_dim=X.shape[1],  # Number of actions/features
         n_components=10,
+        lr=1e-3,
         sparsity_weight=sparsity_weight,
         temperature=1.0,
         hard_gumbel=True
