@@ -11,7 +11,7 @@ for example in ds["train"]:
 
 random.seed(0)
 
-chosen_personas = random.sample(list(distinct_personas), 90)
+chosen_personas = random.sample(list(distinct_personas), 100)
 
 data = {}
 
@@ -33,7 +33,7 @@ if os.path.exists(metadata_path):
         last_user_num = max([int(uid.replace("user", "")) for uid in existing_users])
         curr = last_user_num + 1
     else:
-        curr = 21
+        curr = 111
 
 # Process each persona and create user files + metadata
 users_added = 0

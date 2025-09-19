@@ -134,10 +134,8 @@ class VLLMServerManager:
         if self.quantization:
             cmd.extend(["--quantization", self.quantization])
 
-        print(f"vllm_server_{self.registry.server_id}.log")
-        log_file = open(f"vllm_server_{self.registry.server_id}.log", "w")
         self.process = subprocess.Popen(
-            cmd, stdout=log_file, stderr=subprocess.STDOUT, universal_newlines=True
+            cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
         )
         print(f"Started vLLM server with PID {self.process.pid}")
 

@@ -24,9 +24,9 @@ httpClient: Optional[RegistryHTTPClient] = None
 fileSystemKVStore: Optional[FileSystemKVStore] = None
 registryClient: Optional[RegistryClient] = None
 
-REQUEST_BATCH_SIZE = int(os.getenv("REQUEST_BATCH_SIZE", "512"))      # size of coroutines launched at once
-REQUEST_RETRIES = int(os.getenv("REQUEST_RETRIES", "3"))              # retry count for resets/disconnects
-REQUEST_TIMEOUT = float(os.getenv("REQUEST_TIMEOUT", "180"))          # seconds
+REQUEST_BATCH_SIZE = int(os.getenv("REQUEST_BATCH_SIZE", "512"))
+REQUEST_RETRIES = int(os.getenv("REQUEST_RETRIES", "3")) 
+REQUEST_TIMEOUT = float(os.getenv("REQUEST_TIMEOUT", "180")) 
 
 def build_full_prompt_and_ids(tokenizer, sys_prompt: str, user_prompt: str, completion: str):
     """
@@ -45,11 +45,10 @@ def build_full_prompt_and_ids(tokenizer, sys_prompt: str, user_prompt: str, comp
 
 def sum_completion_logprobs(resp_json: Dict[str, Any], n_prefix: int, comp_len: int) -> float:
     lp = resp_json["choices"][0]["logprobs"]["token_logprobs"]
-    end = min(len(lp), n_prefix + comp_len)   # guard if server ever adds a token
+    end = min(len(lp), n_prefix + comp_len)
     seg = [x for x in lp[n_prefix:end] if x is not None]
     return float(sum(seg))
 
-# Removed post_json_with_retry and score_many functions - using LiteRegistry instead
 
 async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
     """
@@ -65,11 +64,9 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
     B = len(outputs)
     d_attrs = d
 
-    # Pre-build payloads and per-request metadata for reconstruction
     payloads: List[Dict[str, Any]] = []
-    metas: List[Tuple[int, int, int]] = []  # (sample_idx, attr_idx(-1 for base), comp_len_subset)
+    metas: List[Tuple[int, int, int]] = []
 
-    # Helper to build an echo-scoring payload
     def mk_payload(full_prompt: str) -> Dict[str, Any]:
         return {
             "model": model_name,
@@ -77,15 +74,12 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
             "max_tokens": 0,
             "temperature": 0.0,
             "echo": True,
-            "logprobs": 1,  # keep 1; if your vLLM build supports chosen-logprob without top-k, you can set 0
+            "logprobs": 1,
         }
 
-    # We also keep n_prefix/comp_len for slicing logprobs; recompute cheaply after
     prefix_and_len: List[Tuple[int, int]] = []
 
-    # Base first, then all attributes per sample
     for i in range(B):
-        # Base
         full_prompt, n_prefix, comp_len, prompt_ids, comp_ids = build_full_prompt_and_ids(
             tokenizer, base_prompt, prompts[i], outputs[i]
         )
@@ -93,7 +87,6 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
         metas.append((i, -1, comp_len))
         prefix_and_len.append((n_prefix, comp_len))
 
-        # Attributes
         for a_idx, a_sys in enumerate(attribute_prompts):
             full_prompt, n_prefix, comp_len, prompt_ids, comp_ids = build_full_prompt_and_ids(
                 tokenizer, a_sys, prompts[i], outputs[i]
@@ -106,52 +99,61 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
     logging.info(f"VLLM REQUESTS: Starting {total_requests} requests via LiteRegistry")
     
     start_time = time.time()
-    try:
-        # Check if any servers are available first
-        available_servers = await registryClient.get_all(model_name)
-        if not available_servers:
-            raise RuntimeError(f"No servers available for model {model_name}. Please start some vLLM servers first.")
-        
-        logging.info(f"Found {len(available_servers)} servers for model {model_name}: {available_servers}")
-        
-        # Create registry client for the model
-        async with RegistryHTTPClient(
-            registry=registryClient,
-            value=model_name,
-            max_parallel_requests=REQUEST_BATCH_SIZE,
-            timeout=REQUEST_TIMEOUT,
-            max_retries=REQUEST_RETRIES
-        ) as httpClient:
-            # Dispatch all requests in batches with proper server rotation
-            raw_results: List[Any] = []
-            for i in range(0, len(payloads), REQUEST_BATCH_SIZE):
-                batch_payloads = payloads[i:i + REQUEST_BATCH_SIZE]
-                
-                # Use different starting server indices for each request in the batch
-                batch_results = await asyncio.gather(*[
-                    httpClient.request_with_rotation("v1/completions", payload, initial_server_idx=j % len(available_servers))
-                    for j, payload in enumerate(batch_payloads)
-                ])
-                raw_results.extend([result for result, _ in batch_results])
-        
-        elapsed = time.time() - start_time
-        logging.info(f"VLLM REQUESTS: Completed {total_requests} requests in {elapsed:.1f}s")
-    except Exception as e:
-        elapsed = time.time() - start_time
-        logging.error(f"VLLM REQUESTS: Failed after {elapsed:.1f}s: {type(e).__name__}: {e}")
-        raise
+    
+    available_servers = await registryClient.get_all(model_name)
 
-    # Prepare tensors
-    base_scores = torch.zeros(B, dtype=torch.float32, device=device)
-    base_counts = torch.zeros(B, dtype=torch.float32, device=device)
-    attr_scores = torch.zeros(B, d_attrs, dtype=torch.float32, device=device)
-    attr_counts = torch.zeros(B, d_attrs, dtype=torch.float32, device=device)
+    if not available_servers:
+        raise RuntimeError(f"No servers available for model {model_name}")
+    
+    async with RegistryHTTPClient(
+        registry=registryClient,
+        value=model_name,
+        max_parallel_requests=1024,
+        timeout=REQUEST_TIMEOUT,
+        max_retries=REQUEST_RETRIES
+    ) as httpClient:
+        logging.info(f"Sending {len(payloads)} requests in batches of {REQUEST_BATCH_SIZE}...")
+        
+        raw_results_with_servers = []
+        
+        tasks = [httpClient.request_with_rotation("v1/completions", payload, available_servers=len(available_servers)) for payload in payloads]
+        raw_results_with_servers = await asyncio.gather(*tasks, return_exceptions=True)
+        
+        server_usage = []
+        raw_results = []
 
-    # Parse results; on failures, leave zeros (or you can raise)
+        for result in raw_results_with_servers:
+            if isinstance(result, Exception):
+                raw_results.append(result)
+                server_usage.append("ERROR")
+            else:
+                result_data, server_used = result
+                raw_results.append(result_data)
+                server_usage.append(server_used)
+        
+        from collections import Counter
+        server_counts = Counter(server_usage)
+        logging.info(f"Server usage statistics:")
+        for server, count in server_counts.items():
+            percentage = (count / len(server_usage)) * 100
+            logging.info(f"  {server}: {count} requests ({percentage:.1f}%)")
+        
+        if len(server_counts) > 1:
+            logging.info("✅ Requests were distributed across multiple servers")
+        else:
+            logging.warning("⚠️  All requests used the same server - rotation may not be working")
+    
+    elapsed = time.time() - start_time
+    logging.info(f"VLLM REQUESTS: Completed {total_requests} requests in {elapsed:.1f}s")
+
+    base_scores = torch.zeros(B, dtype=torch.float32, device="cpu")
+    base_counts = torch.zeros(B, dtype=torch.float32, device="cpu")
+    attr_scores = torch.zeros(B, d_attrs, dtype=torch.float32, device="cpu")
+    attr_counts = torch.zeros(B, d_attrs, dtype=torch.float32, device="cpu")
+
     for idx, res in enumerate(raw_results):
         i, a_idx, comp_len = metas[idx]
         n_prefix, comp_len_chk = prefix_and_len[idx]
-        # guard mismatches
         comp_len_eff = min(comp_len, comp_len_chk)
 
         if isinstance(res, Exception):
@@ -169,16 +171,12 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
         except Exception as e:
             logging.warning(f"Parse failed for sample={i}, attr={a_idx}: {e}")
 
-    # Average and compute drift reward
-    # Avoid div-by-zero; if a row failed entirely, it stays 0
     base_avg = torch.where(base_counts > 0, base_scores / base_counts, torch.zeros_like(base_scores))
     attr_avg = torch.where(attr_counts > 0, attr_scores / torch.clamp_min(attr_counts, 1.0), torch.zeros_like(attr_scores))
 
     reward_matrix = attr_avg - base_avg[:, None]
+    
     return reward_matrix
-
-def save_rewards(rewards: torch.Tensor, path: str):
-    torch.save(rewards, path)
 
 def initialize_collector(
     d: int,
@@ -195,7 +193,6 @@ def initialize_collector(
     model_name = model_name_arg
 
     tokenizer = AutoTokenizer.from_pretrained(model_name_arg)
-    # Ensure pad token exists for some tokenizers
     if tokenizer.pad_token is None and tokenizer.eos_token is not None:
         tokenizer.pad_token = tokenizer.eos_token
 
@@ -212,10 +209,8 @@ def initialize_collector(
     if len(attribute_prompts_local) < d:
         raise ValueError(f"Need at least {d} attribute prompts")
 
-    # Store
     attribute_prompts = attribute_prompts_local
 
-    # Initialize registry components
     global fileSystemKVStore, registryClient
     fileSystemKVStore = FileSystemKVStore("/gscratch/ark/devinl6/registry")
     registryClient = RegistryClient(fileSystemKVStore, service_type="model_path")
@@ -247,7 +242,6 @@ async def main():
         logging.error(f"Failed to load config from {args.config}: {e}")
         return
 
-    # Initialize collector
     initialize_collector(
         d=d,
         device_str=device_str,
@@ -256,7 +250,6 @@ async def main():
         model_name_arg=model_name,
     )
 
-# Test connectivity to each server
     available_servers = await registryClient.get_all(model_name)
     for i, server in enumerate(available_servers):
         try:
@@ -270,25 +263,26 @@ async def main():
         except Exception as e:
             logging.warning(f"Server {i+1}: {server} - UNREACHABLE ({type(e).__name__}: {e})")
 
+
+    total_rewards = []
     try:
-        for i in range(11, 13):
+        for i in range(151, 171):
             dataset_path = f'data/persona_pref/user{i}_train.json'
             logging.info(f"Processing user {i} from {dataset_path}")
             
             with open(dataset_path, 'r') as f:
                 user_data = json.load(f)
             
-            # Compute rewards for this user
             R_batch = await compute_rewards(user_data, len(attribute_prompts))
-            
-            # Save results for this user
-            user_output_path = f"rewards_user{i}.pt"
-            save_rewards(R_batch, user_output_path)
-            logging.info(f"Saved reward matrix for user {i} with shape {R_batch.shape} to {user_output_path}")
+            total_rewards.append(R_batch)
             
     except Exception as e:
         logging.exception("Error in reward computation")
         raise
+
+    total_rewards = torch.cat(total_rewards, dim=0)
+    torch.save(total_rewards, "rewards_all.pt")
+    logging.info(f"Saved total reward matrix with shape {total_rewards.shape} to rewards_all.pt")
 
 if __name__ == "__main__":
     asyncio.run(main())

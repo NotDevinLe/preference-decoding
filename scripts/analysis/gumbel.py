@@ -217,10 +217,10 @@ class SparsePCALightning(pl.LightningModule):
         return components.detach().cpu().numpy(), masks.detach().cpu().numpy(), mask_probs.detach().cpu().numpy()
 
 # Example usage and training setup
-def create_dataloader(X, batch_size=32, shuffle=True):
+def create_dataloader(X, batch_size=32, num_workers=0, shuffle=True):
     """Create a simple DataLoader for training"""
     dataset = torch.utils.data.TensorDataset(torch.FloatTensor(X))
-    return torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
+    return torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)
 
 # Temperature scheduling callback
 class TemperatureScheduler(pl.Callback):
@@ -251,7 +251,7 @@ if __name__ == '__main__':
         name="gumbel-sparse-pca",
         config={
             "model": "SparsePCALightning",
-            "n_components": 10,
+            "n_components": 50,
             "lr": 1e-3,
             "sparsity_weight": sparsity_weight,
             "initial_temperature": 1.0,
@@ -263,10 +263,11 @@ if __name__ == '__main__':
     )
     
     # Load reward matrix
-    reward_data = np.load('async_rewards.npz')
+    reward_data = torch.load('rewards/rewards.pt').numpy()
+    print(reward_data.shape)
 
     # Reshape to (P*Q, A) - each row is one preference pair, columns are actions
-    X = reward_data['Y_chosen'][:,:20]
+    X = reward_data
     
     # Log data statistics
     wandb.log({
@@ -280,7 +281,7 @@ if __name__ == '__main__':
     # Create model
     model = SparsePCALightning(
         input_dim=X.shape[1],  # Number of actions/features
-        n_components=200,
+        n_components=50,
         lr=1e-3,
         sparsity_weight=sparsity_weight,
         temperature=1.0,
