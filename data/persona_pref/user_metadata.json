@@ -1,9 +1,9 @@
 {
   "dataset_info": {
     "source": "SynthLabsAI/PERSONA",
-    "total_users": 10,
-    "total_training_rows": 1500,
-    "total_test_rows": 500,
+    "total_users": 100,
+    "total_training_rows": 15000,
+    "total_test_rows": 5000,
     "rows_per_user": {
       "training": 150,
       "test": 50
@@ -89,6 +89,726 @@
       "training_rows": 150,
       "test_rows": 50,
       "persona_preview": "age: 69\nsex: Male\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: Regular high school diploma\nemployment status: Not in labor force\nclass of worker: Self-employed in o..."
+    },
+    {
+      "user_id": "user21",
+      "persona_text": "age: 18\nsex: Male\nrace: White\nancestry: Swiss\nhousehold language: English\neducation: High School Diploma\nemployment status: Not in labor force\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Currently not working, possibly a student or taking a gap year\nincome: 20700\nmarital status: Single\nhousehold type: Living with relatives, no children\nfamily presence and age: No related children\nplace of birth: North Carolina, USA\ncitizenship: US Citizen\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Low, Conscientiousness: Average, Extraversion: Extremely High, Agreeableness: High, Neuroticism: Average\ndefining quirks: Enjoys collecting various items as a hobby\nmannerisms: Often engages others in conversation and maintains eye contact\npersonal time: Spends free time with friends or on his collection\nlifestyle: Active and social\nideology: Liberal\npolitical views: Democrat\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 18\nsex: Male\nrace: White\nancestry: Swiss\nhousehold language: English\neducation: High School Dip..."
+    },
+    {
+      "user_id": "user22",
+      "persona_text": "age: 40\nsex: Female\nrace: Two or More Races\nancestry: Colombian and Other\nhousehold language: Spanish\neducation: 1 or more years of college credit, no degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: TRN-Couriers And Messengers\noccupation category: TRN-Laborers And Freight, Stock, And Material Movers, Hand\ndetailed job description: Handles and moves goods in a courier company\nincome: 167200.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Colombia\ncitizenship: U.S. citizen by naturalization\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: No health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Extremely Low, Extraversion: Extremely High, Agreeableness: Average, Neuroticism: Extremely High\ndefining quirks: Yoga enthusiast\nmannerisms: Always wears sunglasses\npersonal time: Practicing yoga or salsa dancing\nlifestyle: Active and health-conscious\nideology: Liberal\npolitical views: Democrat\nreligion: Indigenous Beliefs\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 40\nsex: Female\nrace: Two or More Races\nancestry: Colombian and Other\nhousehold language: Spanis..."
+    },
+    {
+      "user_id": "user23",
+      "persona_text": "age: 37\nsex: Female\nrace: White alone\nancestry: American\nhousehold language: English only\neducation: Master's degree\nemployment status: Civilian employed, at work\nclass of worker: Local government employee (city, county, etc.)\nindustry category: EDU-Elementary And Secondary Schools\noccupation category: EDU-Elementary And Middle School Teachers\ndetailed job description: Teaches elementary and middle school students\nincome: 140000.0\nmarital status: Married\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children under 5 years only\nplace of birth: Georgia/GA\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: High, Conscientiousness: Low, Extraversion: Extremely Low, Agreeableness: Average, Neuroticism: High\ndefining quirks: Always carries a book of poetry\nmannerisms: Often uses hand gestures while speaking\npersonal time: Spends free time with her children or gardening\nlifestyle: Healthy and active lifestyle\nideology: Progressive\npolitical views: Democrat\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 37\nsex: Female\nrace: White alone\nancestry: American\nhousehold language: English only\neducation:..."
+    },
+    {
+      "user_id": "user24",
+      "persona_text": "age: 37\nsex: Female\nrace: White\nancestry: American\nhousehold language: English\neducation: Regular high school diploma\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: TRN-Truck Transportation\noccupation category: OFF-Secretaries And Administrative Assistants, Except Legal, Medical, And Executive\ndetailed job description: Handles administrative tasks, schedules appointments, and supports other staff\nincome: 120000.0\nmarital status: Married\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: Alabama/AL\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: High, Agreeableness: High, Neuroticism: Average\ndefining quirks: Enjoys experimenting with southern cuisine\nmannerisms: Often uses southern colloquialisms\npersonal time: Spends free time with family or at the gym\nlifestyle: Active and family-oriented\nideology: Conservative\npolitical views: Republican\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 37\nsex: Female\nrace: White\nancestry: American\nhousehold language: English\neducation: Regular hi..."
+    },
+    {
+      "user_id": "user25",
+      "persona_text": "age: 50\nsex: Female\nrace: Two or More Races\nancestry: Irish\nhousehold language: English\neducation: Associate's Degree\nemployment status: Not in labor force\nclass of worker: Private\nindustry category: Education\noccupation category: Teacher\ndetailed job description: Former elementary school teacher\nincome: 26500\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: Illinois/IL\ncitizenship: US Citizen\nveteran status: Non-Veteran\ndisability: With a disability\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: High, Extraversion: Average, Agreeableness: Low, Neuroticism: Low\ndefining quirks: Enjoys bird-watching\nmannerisms: Expressive and emotional\npersonal time: Spends free time with family or engaging in hobbies\nlifestyle: Active and family-oriented\nideology: Liberal\npolitical views: Democrat\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 50\nsex: Female\nrace: Two or More Races\nancestry: Irish\nhousehold language: English\neducation: A..."
+    },
+    {
+      "user_id": "user26",
+      "persona_text": "age: 87\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English\neducation: Regular high school diploma\nemployment status: Not in labor force\nclass of worker: Retired\ndetailed job description: Retired, previously worked in construction\nincome: 0-20000\nmarital status: Widowed\nhousehold type: One-person household\nfamily presence and age: No family\nplace of birth: Georgia/GA\ncitizenship: Born in the United States\nveteran status: Veteran\ndisability: With a disability\nhealth insurance: With health insurance coverage\ncognitive difficulty: Yes\nbig five scores: Openness: Average, Conscientiousness: Extremely High, Extraversion: Low, Agreeableness: Extremely Low, Neuroticism: High\ndefining quirks: Collects vintage coins\nmannerisms: Often taps his foot when thinking\npersonal time: Spends free time reading or watching TV\nlifestyle: Quiet and solitary\nideology: Conservative\npolitical views: Republican\nreligion: Other Non-Christian Religion\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 87\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English\neducation: Regular h..."
+    },
+    {
+      "user_id": "user27",
+      "persona_text": "age: 65\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: Regular high school diploma\nemployment status: Not in labor force\nclass of worker: Retired\ndetailed job description: Retired, previously worked in education\nincome: 571270.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Colorado/CO\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Extremely Low, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Collects vintage jewelry\nmannerisms: Hums old songs under her breath\npersonal time: Spends free time gardening, reading, and volunteering\nlifestyle: Quiet and community-oriented\nideology: Liberal\npolitical views: Democrat\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 65\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation:..."
+    },
+    {
+      "user_id": "user28",
+      "persona_text": "age: 4\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Pre-school\nemployment status: Unemployed\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Not applicable\nincome: Not applicable\nmarital status: Under 15 years old\nhousehold type: Male householder, no spouse/partner present, with children of the householder less than 18\nfamily presence and age: With related children under 5 years and 5 to 17 years\nplace of birth: Tennessee/TN\ncitizenship: Born in the United States\nveteran status: Not applicable\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Low, Agreeableness: Average, Neuroticism: Extremely Low\ndefining quirks: Loves to draw and color\nmannerisms: Often hums while playing\npersonal time: Spends free time playing with toys or drawing\nlifestyle: Active and playful\nideology: Not applicable\npolitical views: Not applicable\nreligion: Other Non-Christian Religion\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 4\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Pre..."
+    },
+    {
+      "user_id": "user29",
+      "persona_text": "age: 40\nsex: Male\nrace: Some Other Race alone\nancestry: Hispanic\nhousehold language: Spanish\neducation: Bachelor's degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private not-for-profit, tax-exempt, or charitable organization\nindustry category: MED-Other Health Care Services\noccupation category: MED-Paramedics\ndetailed job description: Provides emergency medical care and transportation for critical and emergent patients\nincome: 147250.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: New York/NY\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Extremely High, Extraversion: Extremely Low, Agreeableness: Extremely Low, Neuroticism: Extremely High\ndefining quirks: Always carries the latest medical gadget\nmannerisms: Always checking his smartwatch for health stats\npersonal time: Volunteering at local community centers, Learning about new medical technologies\nlifestyle: Active and health-conscious\nideology: Humanism\npolitical views: Democrat\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 40\nsex: Male\nrace: Some Other Race alone\nancestry: Hispanic\nhousehold language: Spanish\neducati..."
+    },
+    {
+      "user_id": "user30",
+      "persona_text": "age: 23\nsex: Male\nrace: Some Other Race alone\nancestry: Hispanic\nhousehold language: Spanish\neducation: Regular high school diploma\nemployment status: Not in labor force\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: RET-Automobile Dealers\noccupation category: TRN-Stockers And Order Fillers\ndetailed job description: Responsible for receiving, storing, and distributing material, tools, equipment, and products within establishments\nincome: 112600.0\nmarital status: Never married or under 15 years old\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Texas/TX\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Low, Conscientiousness: Extremely Low, Extraversion: High, Agreeableness: Average, Neuroticism: Low\ndefining quirks: Enjoys tinkering with technology and gadgets\nmannerisms: Speaks quickly and with enthusiasm\npersonal time: Spends free time volunteering at the local church and working on cars\nlifestyle: Relaxed and community-oriented\nideology: Conservative\npolitical views: Republican\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 23\nsex: Male\nrace: Some Other Race alone\nancestry: Hispanic\nhousehold language: Spanish\neducati..."
+    },
+    {
+      "user_id": "user31",
+      "persona_text": "age: 66\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Master's degree\nemployment status: Not in labor force\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: RET-Gasoline Stations\noccupation category: TRN-Transportation Service Attendants\ndetailed job description: Managed fueling services and customer interactions at a gasoline station\nincome: 109600.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: New Jersey/NJ\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely Low, Conscientiousness: Average, Extraversion: Extremely High, Agreeableness: Extremely High, Neuroticism: Average\ndefining quirks: Enjoys tinkering with technology and gadgets\nmannerisms: Tends to engage others in conversation enthusiastically\npersonal time: Spends free time in his garden or working on DIY projects\nlifestyle: Active and engaged, enjoys outdoor activities and DIY projects\nideology: Moderate\npolitical views: Independent\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 66\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Mast..."
+    },
+    {
+      "user_id": "user32",
+      "persona_text": "age: 21\nsex: Female\nrace: Chinese\nancestry: Chinese\nhousehold language: Asian and Pacific Island languages\neducation: 1 or more years of college credit, no degree\nemployment status: Unemployed\nclass of worker: Private\nindustry category: Advertising, Public Relations, And Related Services\noccupation category: Office Clerks, General\ndetailed job description: General office clerk in an advertising agency\nincome: 19800\nmarital status: Never married\nhousehold type: Female householder, no spouse/partner present, with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: China\ncitizenship: U.S. citizen by naturalization\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Extremely High, Extraversion: Low, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Enjoys experimenting with traditional Chinese recipes\nmannerisms: Often uses Chinese idioms in conversation\npersonal time: Spends free time cooking or reading\nlifestyle: Busy and family-oriented\nideology: Liberal\npolitical views: Democrat\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 21\nsex: Female\nrace: Chinese\nancestry: Chinese\nhousehold language: Asian and Pacific Island lan..."
+    },
+    {
+      "user_id": "user33",
+      "persona_text": "age: 43\nsex: Male\nrace: White alone\nancestry: American\nhousehold language: English only\neducation: Regular high school diploma\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: SRV-Automotive Repair And Maintenance\noccupation category: RPR-Automotive Service Technicians And Mechanics\ndetailed job description: Performs maintenance and repair on customer vehicles, specializing in engine and transmission work\nincome: 105000.0\nmarital status: Never married or under 15 years old\nhousehold type: Cohabiting couple household with children of the householder less than 18\nfamily presence and age: With related children under 5 years and 5 to 17 years\nplace of birth: Florida/FL\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: High, Conscientiousness: Low, Extraversion: Average, Agreeableness: Low, Neuroticism: Low\ndefining quirks: Prefers to spend his weekends camping and hiking\nmannerisms: Often uses his hands when explaining something\npersonal time: Working on his own car or exploring new hiking trails\nlifestyle: Active and outdoorsy\nideology: Conservative\npolitical views: Republican\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 43\nsex: Male\nrace: White alone\nancestry: American\nhousehold language: English only\neducation: R..."
+    },
+    {
+      "user_id": "user34",
+      "persona_text": "age: 86\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Regular high school diploma\nemployment status: Not in labor force\nclass of worker: Retired\ndetailed job description: Retired, previously worked as a school teacher\nincome: 49100.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Maryland/MD\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Low, Agreeableness: Extremely High, Neuroticism: Extremely High\ndefining quirks: Enjoys experimenting with new recipes\nmannerisms: Often uses expressive hand gestures when speaking\npersonal time: Spends free time cooking, reading or gardening\nlifestyle: Quiet and home-centered\nideology: Conservative\npolitical views: Republican\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 86\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Re..."
+    },
+    {
+      "user_id": "user35",
+      "persona_text": "age: 26\nsex: Male\nrace: White\nancestry: Irish\nhousehold language: English\neducation: Bachelor's Degree\nemployment status: Employed\nclass of worker: Private\nindustry category: Accounting\noccupation category: Accountant\ndetailed job description: Prepares and examines financial records\nincome: 80000\nmarital status: Married\nhousehold type: Married couple household, no children\nfamily presence and age: No related children\nplace of birth: Iowa\ncitizenship: US Citizen\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: Private\nbig five scores: Openness: Average, Conscientiousness: Extremely Low, Extraversion: High, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Enjoys reading classic literature\nmannerisms: Tends to use local idioms and expressions\npersonal time: Spends free time reading or watching sports\nlifestyle: Active and outdoorsy\nideology: Conservative\npolitical views: Republican\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 26\nsex: Male\nrace: White\nancestry: Irish\nhousehold language: English\neducation: Bachelor's Degr..."
+    },
+    {
+      "user_id": "user36",
+      "persona_text": "age: 13\nsex: Female\nrace: Other specified American Indian tribes alone\nancestry: Hispanic\nhousehold language: Spanish\neducation: Grade 7\nemployment status: Student\nclass of worker: Not Applicable\nindustry category: Not Applicable\noccupation category: Not Applicable\ndetailed job description: Full-time student, occasionally helps with family chores\nincome: Not Applicable\nmarital status: Never married or under 15 years old\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: Florida/FL\ncitizenship: Born in the United States\nveteran status: Not Applicable\ndisability: None\nhealth insurance: With health insurance coverage\nfertility: Not Applicable\nhearing difficulty: None\nvision difficulty: None\ncognitive difficulty: None\nability to speak english: Fluent\nbig five scores: Openness: Extremely Low, Conscientiousness: High, Extraversion: Extremely Low, Agreeableness: Average, Neuroticism: Extremely Low\ndefining quirks: Has a fascination with technology and gadgets, often tinkering with devices around the house\nmannerisms: Often seen with a book or a gadget in hand, has a habit of pushing up her glasses\npersonal time: Spends most of her free time reading, gaming, or helping around the house\nlifestyle: Introverted and studious, values family time and privacy\nideology: Believes in the importance of environmental protection and privacy rights\npolitical views: Too young to vote, but shows interest in environmental policies\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 13\nsex: Female\nrace: Other specified American Indian tribes alone\nancestry: Hispanic\nhousehold ..."
+    },
+    {
+      "user_id": "user37",
+      "persona_text": "age: 47\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Regular high school diploma\nemployment status: Not in labor force\nclass of worker: Not working\ndetailed job description: Not currently employed\nincome: 133000.0\nmarital status: Married\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: New York/NY\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Low, Extraversion: Average, Agreeableness: Extremely High, Neuroticism: Extremely High\ndefining quirks: Has an extensive collection of classic literature\nmannerisms: Constantly adjusts her glasses\npersonal time: Spends free time with family or reading\nlifestyle: Family-oriented and intellectually curious\nideology: Liberal\npolitical views: Democrat\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 47\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Re..."
+    },
+    {
+      "user_id": "user38",
+      "persona_text": "age: 12\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Grade 6\nemployment status: Unemployed\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Student\ndetailed job description: Attends school and completes homework\nincome: 0\nmarital status: Never married or under 15 years old\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: Indiana/IN\ncitizenship: Born in the United States\nveteran status: Not applicable\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: High, Extraversion: Extremely High, Agreeableness: Extremely High, Neuroticism: Extremely High\ndefining quirks: Always has a new idea for a school project\nmannerisms: Talks quickly and with enthusiasm\npersonal time: Spends free time reading or playing soccer\nlifestyle: Active and curious\nideology: Believes in fairness and creativity\npolitical views: Too young to vote, but interested in environmental issues\nreligion: Jewish\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 12\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Gr..."
+    },
+    {
+      "user_id": "user39",
+      "persona_text": "age: 5\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Pre-school\nemployment status: Unemployed\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Not applicable\nincome: Not applicable\nmarital status: Not applicable\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children under 5 years and 5 to 17 years\nplace of birth: Missouri/MO\ncitizenship: Born in the United States\nveteran status: Not applicable\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Extremely High, Extraversion: Average, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Loves to play with toy cars\nmannerisms: Often squints when focusing on something\npersonal time: Spends free time playing with toys or drawing\nlifestyle: Active and playful\nideology: Not applicable\npolitical views: Not applicable\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 5\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Pre-s..."
+    },
+    {
+      "user_id": "user40",
+      "persona_text": "age: 27\nsex: Female\nrace: American Indian and Alaska Native, not specified\nancestry: Mexican\nhousehold language: Spanish\neducation: 12th grade - no diploma\nemployment status: Not in labor force\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: SRV-Beauty Salons\noccupation category: PRS-Hairdressers, Hairstylists, And Cosmetologists\ndetailed job description: Provides hair care services to clients, including cutting, styling, and coloring hair\nincome: 20000-30000\nmarital status: Widowed\nhousehold type: Female householder, no spouse/partner present, with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: Mexico\ncitizenship: Not a U.S. citizen\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: No health insurance coverage\nbig five scores: Openness: High, Conscientiousness: High, Extraversion: High, Agreeableness: Low, Neuroticism: High\ndefining quirks: Has a habit of humming traditional Mexican songs while working\nmannerisms: Often uses hand gestures when speaking\npersonal time: Spends time with her children and cook traditional Mexican meals\nlifestyle: Busy and family-oriented\nideology: Traditional\npolitical views: Non-partisan\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 27\nsex: Female\nrace: American Indian and Alaska Native, not specified\nancestry: Mexican\nhouseho..."
+    },
+    {
+      "user_id": "user41",
+      "persona_text": "age: 60\nsex: Male\nrace: Two or More Races\nancestry: Mixed\nhousehold language: English\neducation: Bachelor's Degree\nemployment status: Employed\nclass of worker: Private\nindustry category: ENT-Performing Arts Companies\noccupation category: ENT-Musicians and Singers\ndetailed job description: Performs at various events and records music\nincome: 48000\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Oklahoma/OK\ncitizenship: US Citizen\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Extremely Low, Extraversion: Low, Agreeableness: Extremely High, Neuroticism: High\ndefining quirks: Always seen with the latest music equipment\nmannerisms: Often uses his hands to explain things, as if conducting music\npersonal time: Practicing music or exploring new gadgets\nlifestyle: Busy but fulfilling, constantly learning and creating\nideology: Liberal\npolitical views: Democrat\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 60\nsex: Male\nrace: Two or More Races\nancestry: Mixed\nhousehold language: English\neducation: Bac..."
+    },
+    {
+      "user_id": "user42",
+      "persona_text": "age: 43\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Regular high school diploma\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: EXT-Nonmetallic Mineral Mining And Quarrying\noccupation category: EXT-Surface Mining Machine Operators And Earth Drillers\ndetailed job description: Operates machinery to extract minerals and other non-metallic materials\nincome: 173200.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: Ohio/OH\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: High, Extraversion: Extremely Low, Agreeableness: Low, Neuroticism: Average\ndefining quirks: Collects rare minerals\nmannerisms: Tends to hum when concentrating\npersonal time: Spends free time with family or outdoors\nlifestyle: Practical and outdoorsy\nideology: Conservative\npolitical views: Republican\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 43\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Regu..."
+    },
+    {
+      "user_id": "user43",
+      "persona_text": "age: 37\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Regular high school diploma\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: RET-Gasoline Stations\noccupation category: SAL-Cashiers\ndetailed job description: Handles customer transactions at a gas station\nincome: 166600.0\nmarital status: Divorced\nhousehold type: Cohabiting couple household with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: Oregon/OR\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Average, Agreeableness: High, Neuroticism: Extremely Low\ndefining quirks: Enjoys outdoor activities and fitness\nmannerisms: Often hums or whistles\npersonal time: Spends free time with kids or working on home improvement projects\nlifestyle: Practical and family-oriented\nideology: Moderate\npolitical views: Independent\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 37\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Regu..."
+    },
+    {
+      "user_id": "user44",
+      "persona_text": "age: 70\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: 1 or more years of college credit, no degree\nemployment status: Civilian employed, at work\nclass of worker: State government employee\nindustry category: SCA-Individual And Family Services\noccupation category: HLS-Personal Care Aides\ndetailed job description: Provides assistance to individuals with disabilities, elderly individuals, or others who require care in their homes\nincome: 31810.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Georgia/GA\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Average, Extraversion: Average, Agreeableness: High, Neuroticism: Low\ndefining quirks: Enjoys bird watching\nmannerisms: Tends to use local colloquialisms\npersonal time: Spends free time exploring nature, reading, or volunteering in her community\nlifestyle: Active and engaged\nideology: Liberal\npolitical views: Democrat\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 70\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation:..."
+    },
+    {
+      "user_id": "user45",
+      "persona_text": "age: 33\nsex: Female\nrace: White alone\nancestry: English\nhousehold language: English only\neducation: Professional degree beyond a bachelor's degree\nemployment status: Not in labor force\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: MED-Offices Of Physicians\noccupation category: HLS-Medical Assistants\ndetailed job description: Assists physicians in medical procedures and patient care\nincome: 31000.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Massachusetts/MA\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: With a disability\nhealth insurance: No health insurance coverage\nbig five scores: Openness: Low, Conscientiousness: Average, Extraversion: Average, Agreeableness: Average, Neuroticism: Extremely Low\ndefining quirks: Takes work very seriously and is always punctual\nmannerisms: Often uses hand gestures when speaking\npersonal time: Spends free time with family or at church\nlifestyle: Simple and family-oriented\nideology: Conservative\npolitical views: Republican\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 33\nsex: Female\nrace: White alone\nancestry: English\nhousehold language: English only\neducation: ..."
+    },
+    {
+      "user_id": "user46",
+      "persona_text": "age: 31\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Master's Degree\nemployment status: Not in labor force\nclass of worker: Unemployed\nindustry category: Non-profit\noccupation category: Social Worker\ndetailed job description: Works with disadvantaged communities to improve their living conditions\nincome: 50000\nmarital status: Married\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children under 5 years and 5 to 17 years\nplace of birth: Indiana/IN\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Average, Agreeableness: Low, Neuroticism: Average\ndefining quirks: Enjoys tinkering with gadgets and creating DIY tech projects\nmannerisms: Often speaks in a direct, straightforward manner\npersonal time: Spends free time on DIY tech projects or with family\nlifestyle: Busy, family-oriented, and creative\nideology: Believes in social equality and environmental sustainability\npolitical views: Liberal\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 31\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Ma..."
+    },
+    {
+      "user_id": "user47",
+      "persona_text": "age: 63\nsex: Female\nrace: White alone\nancestry: English\nhousehold language: English only\neducation: Some college, but less than 1 year\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: ENT-Traveler Accommodation\noccupation category: CLN-Maids And Housekeeping Cleaners\ndetailed job description: Responsible for cleaning and maintaining the appearance of hotel rooms and common areas\nincome: 26800.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Utah/UT\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: No health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Low, Agreeableness: Extremely High, Neuroticism: High\ndefining quirks: Enjoys gardening and cooking\nmannerisms: Expressive and warm towards others\npersonal time: Spends free time gardening or cooking\nlifestyle: Simple and focused on work and family\nideology: Conservative\npolitical views: Republican\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 63\nsex: Female\nrace: White alone\nancestry: English\nhousehold language: English only\neducation: ..."
+    },
+    {
+      "user_id": "user48",
+      "persona_text": "age: 52\nsex: Female\nrace: Pakistani alone\nancestry: Pakistani\nhousehold language: Other Indo-European languages\neducation: Master's degree\nemployment status: Not in labor force\nclass of worker: Not Applicable\nindustry category: Not Applicable\noccupation category: Not Applicable\ndetailed job description: Not Applicable\nincome: 50000.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Pakistan\ncitizenship: Not a U.S. citizen\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: No health insurance coverage\nbig five scores: Openness: Low, Conscientiousness: High, Extraversion: Extremely High, Agreeableness: Average, Neuroticism: Low\ndefining quirks: Interested in fashion and personal style\nmannerisms: Unique vocal and speech pattern\npersonal time: Spends time in peaceful environments\nlifestyle: Balanced\nideology: Believes in equality\npolitical views: Liberal\nreligion: Muslim\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 52\nsex: Female\nrace: Pakistani alone\nancestry: Pakistani\nhousehold language: Other Indo-Europea..."
+    },
+    {
+      "user_id": "user49",
+      "persona_text": "age: 16\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Grade 9\nemployment status: Not in labor force\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Student\ndetailed job description: High school student\nincome: 135500.0\nmarital status: Never married\nhousehold type: Cohabiting couple household with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: New York/NY\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: High, Conscientiousness: Extremely Low, Extraversion: Extremely High, Agreeableness: Extremely Low, Neuroticism: High\ndefining quirks: Has a unique fashion sense and often wears vintage clothing\nmannerisms: Often taps his foot when he's thinking\npersonal time: Spends free time skateboarding or playing video games\nlifestyle: Active and social\nideology: Liberal\npolitical views: Democrat\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 16\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Grad..."
+    },
+    {
+      "user_id": "user50",
+      "persona_text": "age: 40\nsex: Male\nrace: White alone\nancestry: Swedish\nhousehold language: English only\neducation: Doctorate degree\nemployment status: Unemployed\nclass of worker: Employee of a private not-for-profit, tax-exempt, or charitable organization\nindustry category: MED-General Medical And Surgical Hospitals, And Specialty (Except Psychiatric And Substance Abuse) Hospitals\noccupation category: CMM-Other Mathematical Science Occupations\ndetailed job description: Conducts research and analysis in the field of mathematical sciences\nincome: 35400.0\nmarital status: Never married\nhousehold type: Male householder, no spouse/partner present, living alone\nfamily presence and age: No family\nplace of birth: New York/NY\ncitizenship: US Citizen\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Average, Agreeableness: Average, Neuroticism: Extremely Low\ndefining quirks: Has a habit of solving complex mathematical problems for fun\nmannerisms: Often uses mathematical jargon in casual conversations\npersonal time: Spends free time reading scientific journals or hiking\nlifestyle: Active and health-conscious\nideology: Liberal\npolitical views: Democrat\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 40\nsex: Male\nrace: White alone\nancestry: Swedish\nhousehold language: English only\neducation: Do..."
+    },
+    {
+      "user_id": "user51",
+      "persona_text": "age: 41\nsex: Male\nrace: Black or African American alone\nancestry: African American\nhousehold language: English\neducation: Regular high school diploma\nemployment status: Not in labor force\nclass of worker: Not Applicable\nindustry category: Not Applicable\noccupation category: Not Applicable\ndetailed job description: Not Applicable\nincome: -60000.0\nmarital status: Divorced\nhousehold type: One-person household\nfamily presence and age: No family\nplace of birth: Arkansas/AR\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: No health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Low, Extraversion: Extremely High, Agreeableness: Low, Neuroticism: Extremely High\ndefining quirks: Passionate about literature and reading\nmannerisms: Often hums to himself\npersonal time: Spends free time reading or attending social events\nlifestyle: Social and active\nideology: Liberal\npolitical views: Democrat\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 41\nsex: Male\nrace: Black or African American alone\nancestry: African American\nhousehold languag..."
+    },
+    {
+      "user_id": "user52",
+      "persona_text": "age: 41\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: Bachelor's degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: FIN-Banking And Related Activities\noccupation category: CMM-Computer Systems Analysts\ndetailed job description: Analyzes and improves computer systems for banking activities\nincome: 99000.0\nmarital status: Married\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children under 5 years only\nplace of birth: Virginia/VA\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Low, Conscientiousness: Extremely Low, Extraversion: High, Agreeableness: High, Neuroticism: Extremely High\ndefining quirks: Enjoys experimenting with different cuisines\nmannerisms: Frequently checks her phone or other digital devices\npersonal time: Spends free time with family or pursuing hobbies\nlifestyle: Busy and fast-paced\nideology: Conservative\npolitical views: Republican\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 41\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation:..."
+    },
+    {
+      "user_id": "user53",
+      "persona_text": "age: 10\nsex: Female\nrace: Two or More Races\nancestry: Mixed\nhousehold language: Spanish\neducation: Grade 3\nemployment status: Unemployed\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Student\ndetailed job description: Student\nincome: 0\nmarital status: Never married or under 15 years old\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children under 5 years and 5 to 17 years\nplace of birth: California/CA\ncitizenship: Born in the United States\nveteran status: Not applicable\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Average, Extraversion: Extremely Low, Agreeableness: Extremely High, Neuroticism: Average\ndefining quirks: Prefers to express herself through drawing\nmannerisms: Often hums while concentrating\npersonal time: Spends free time drawing or reading\nlifestyle: Active and curious\nideology: Believes in fairness and kindness\npolitical views: Too young to have political views\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 10\nsex: Female\nrace: Two or More Races\nancestry: Mixed\nhousehold language: Spanish\neducation: G..."
+    },
+    {
+      "user_id": "user54",
+      "persona_text": "age: 67\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Regular high school diploma\nemployment status: Not in labor force\nclass of worker: Private\nindustry category: Retail\noccupation category: Sales and related occupations\ndetailed job description: Worked in a department store as a sales associate\nincome: 24500.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Oklahoma/OK\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely Low, Conscientiousness: Average, Extraversion: Extremely High, Agreeableness: Average, Neuroticism: Low\ndefining quirks: Enjoys gardening and has a knack for growing roses\nmannerisms: Often uses expressive hand gestures when talking\npersonal time: Spends free time in her garden or planning her next travel adventure\nlifestyle: Active and social, enjoys spending time outdoors\nideology: Conservative\npolitical views: Republican\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 67\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Re..."
+    },
+    {
+      "user_id": "user55",
+      "persona_text": "age: 59\nsex: Male\nrace: White alone\nancestry: Swedish\nhousehold language: English only\neducation: 1 or more years of college credit, no degree\nemployment status: Not in labor force\nclass of worker: Self-employed in own incorporated business, professional practice or farm\nindustry category: PRF-Computer Systems Design And Related Services\noccupation category: CMM-Information Security Analysts\ndetailed job description: Responsible for protecting information systems by ensuring they can't be accessed or altered\nincome: 155050.0\nmarital status: Divorced\nhousehold type: Cohabiting couple household, no children of the householder less than 18\nfamily presence and age: No family\nplace of birth: Minnesota/MN\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: With a disability\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely Low, Conscientiousness: Extremely High, Extraversion: Extremely High, Agreeableness: Extremely High, Neuroticism: Low\ndefining quirks: Has a vast collection of vintage tech gadgets\nmannerisms: Often expresses emotions through animated facial expressions\npersonal time: Spends free time restoring old tech gadgets or reading about new ones\nlifestyle: Active and adventurous, with a love for technology\nideology: Liberal\npolitical views: Democrat\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 59\nsex: Male\nrace: White alone\nancestry: Swedish\nhousehold language: English only\neducation: 1 ..."
+    },
+    {
+      "user_id": "user56",
+      "persona_text": "age: 21\nsex: Female\nrace: Black or African American alone\nancestry: African\nhousehold language: English only\neducation: 1 or more years of college credit, no degree\nemployment status: Not in labor force\nclass of worker: Unemployed\nindustry category: Arts\noccupation category: Artist\ndetailed job description: Freelance artist specializing in contemporary art\nincome: 70000.0\nmarital status: Never married\nhousehold type: Female householder, no spouse/partner present, with relatives, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Florida/FL\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely Low, Conscientiousness: Average, Extraversion: Low, Agreeableness: High, Neuroticism: Average\ndefining quirks: Has a unique perspective on art and creativity\nmannerisms: Often lost in thought, tends to speak in metaphors\npersonal time: Spends free time creating art or reading\nlifestyle: Creative and independent\nideology: Liberal\npolitical views: Democrat\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 21\nsex: Female\nrace: Black or African American alone\nancestry: African\nhousehold language: Engl..."
+    },
+    {
+      "user_id": "user57",
+      "persona_text": "age: 12\nsex: Female\nrace: White alone\nancestry: Scandinavian\nhousehold language: English only\neducation: Grade 7\nemployment status: Student\nclass of worker: Not Applicable\nindustry category: Not Applicable\noccupation category: Not Applicable\ndetailed job description: Not Applicable\nincome: Not Applicable\nmarital status: Never married or under 15 years old\nhousehold type: Female householder, no spouse/partner present, with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: California/CA\ncitizenship: Born in the United States\nveteran status: Not Applicable\ndisability: None\nhealth insurance: With health insurance coverage\nfertility: Not Applicable\nhearing difficulty: None\nvision difficulty: None\ncognitive difficulty: None\nability to speak english: Very well\nbig five scores: Openness: Extremely Low, Conscientiousness: Average, Extraversion: Average, Agreeableness: Average, Neuroticism: Extremely Low\ndefining quirks: Has an uncanny ability to remember and quote lines from her favorite books\nmannerisms: Often seen with a book in hand, even while walking\npersonal time: Spends most of her free time reading or writing\nlifestyle: Introverted, prefers quiet spaces and solitude for reading and writing\nideology: Believes in the power of education and knowledge\npolitical views: Too young to form political views\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 12\nsex: Female\nrace: White alone\nancestry: Scandinavian\nhousehold language: English only\neducat..."
+    },
+    {
+      "user_id": "user58",
+      "persona_text": "age: 71\nsex: Female\nrace: White alone\nancestry: Canadian\nhousehold language: Other Indo-European languages\neducation: Bachelor's degree\nemployment status: Not in labor force\nclass of worker: Private\nindustry category: Education\noccupation category: Teacher\ndetailed job description: Former school teacher, now retired\nincome: 492600.0\nmarital status: Widowed\nhousehold type: Female householder, no spouse/partner present, with relatives, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Canada\ncitizenship: Not a U.S. citizen\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely Low, Conscientiousness: Average, Extraversion: Average, Agreeableness: High, Neuroticism: Extremely High\ndefining quirks: Enjoys painting and sketching\nmannerisms: Often engages in deep, meaningful conversations\npersonal time: Spends free time in quiet reflection or engaging with her community\nlifestyle: Simple and community-oriented\nideology: Believes in social justice and equality\npolitical views: Liberal\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 71\nsex: Female\nrace: White alone\nancestry: Canadian\nhousehold language: Other Indo-European lan..."
+    },
+    {
+      "user_id": "user59",
+      "persona_text": "age: 88\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Regular high school diploma\nemployment status: Not in labor force\nclass of worker: Private\nindustry category: Environmental Conservation\noccupation category: Conservationist\ndetailed job description: Worked in environmental conservation, focusing on local wildlife\nincome: 25900.0\nmarital status: Widowed\nhousehold type: Female householder, no spouse/partner present, with relatives, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: West Virginia/WV\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: With a disability\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Low, Extraversion: Average, Agreeableness: Average, Neuroticism: Extremely High\ndefining quirks: Enjoys creating birdhouses and other items that benefit local wildlife\nmannerisms: Frequently uses binoculars or other visual aids\npersonal time: Spends free time bird watching, gardening, and reading about environmental conservation\nlifestyle: Active and engaged with the outdoors, despite age and disability\nideology: Environmental conservation\npolitical views: Green Party\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 88\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Re..."
+    },
+    {
+      "user_id": "user60",
+      "persona_text": "age: 15\nsex: Female\nrace: White alone\nancestry: Czech\nhousehold language: English only\neducation: Grade 9\nemployment status: Unemployed\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Student\nincome: No income\nmarital status: Never married\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: Wisconsin/WI\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Extremely Low, Agreeableness: Low, Neuroticism: Average\ndefining quirks: Enjoys tinkering with gadgets and creating digital art\nmannerisms: Tends to use local slang and expressions\npersonal time: Spends free time drawing or playing video games\nlifestyle: Active and creative\nideology: Liberal\npolitical views: Too young to vote, but interested in social issues\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 15\nsex: Female\nrace: White alone\nancestry: Czech\nhousehold language: English only\neducation: Gr..."
+    },
+    {
+      "user_id": "user61",
+      "persona_text": "age: 47\nsex: Female\nrace: White alone\nancestry: German\nhousehold language: English only\neducation: Master's degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: PRF-Scientific Research And Development Services\noccupation category: MGR-Marketing Managers\ndetailed job description: Oversees marketing strategies and efforts to promote products and services\nincome: 335000.0\nmarital status: Married\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: Missouri/MO\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Low, Extraversion: Extremely Low, Agreeableness: Low, Neuroticism: Average\ndefining quirks: Keen interest in fashion and personal style\nmannerisms: Often listens to podcasts or audiobooks\npersonal time: Spends free time with family or pursuing a hobby\nlifestyle: Busy and structured, balancing work, family, and personal interests\nideology: Liberal\npolitical views: Democrat\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 47\nsex: Female\nrace: White alone\nancestry: German\nhousehold language: English only\neducation: M..."
+    },
+    {
+      "user_id": "user62",
+      "persona_text": "age: 68\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: 1 or more years of college credit, no degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: RET-General Merchandise Stores, Including Warehouse Clubs and Supercenters\noccupation category: SAL-Cashiers\ndetailed job description: Handles customer transactions and provides customer service\nincome: 33200.0\nmarital status: Never married or under 15 years old\nhousehold type: Female householder, no spouse/partner present, living alone\nfamily presence and age: No family\nplace of birth: Ohio/OH\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: High, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Meticulous attention to detail\nmannerisms: Constantly checks and organizes her surroundings\npersonal time: Reading, Gardening\nlifestyle: Simple and content\nideology: Liberal\npolitical views: Democrat\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 68\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation:..."
+    },
+    {
+      "user_id": "user63",
+      "persona_text": "age: 63\nsex: Male\nrace: Two or More Races\nancestry: Japanese\nhousehold language: Asian and Pacific Island languages\neducation: 1 or more years of college credit, no degree\nemployment status: Civilian employed, at work\nclass of worker: Local government employee (city, county, etc.)\nindustry category: ADM-Executive Offices And Legislative Bodies\noccupation category: CMM-Operations Research Analysts\ndetailed job description: Analyzes and interprets data to help local government make strategic decisions\nincome: 159000.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Missouri/MO\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Average, Agreeableness: Average, Neuroticism: Extremely Low\ndefining quirks: Enjoys playing traditional Japanese instruments\nmannerisms: Often uses hand gestures when speaking\npersonal time: Spends free time in his home garden or playing traditional Japanese instruments\nlifestyle: Balanced between work and personal life, enjoys quiet hobbies\nideology: Believes in the importance of community and public service\npolitical views: Moderate\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 63\nsex: Male\nrace: Two or More Races\nancestry: Japanese\nhousehold language: Asian and Pacific I..."
+    },
+    {
+      "user_id": "user64",
+      "persona_text": "age: 29\nsex: Male\nrace: White alone\nancestry: Hungarian\nhousehold language: English only\neducation: Bachelor's degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: MFG-Aircraft And Parts\noccupation category: ENG-Other Drafters\ndetailed job description: Designs and drafts components for aircraft manufacturing\nincome: 75000\nmarital status: Married\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children under 5 years only\nplace of birth: California/CA\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Extremely High, Extraversion: High, Agreeableness: High, Neuroticism: Average\ndefining quirks: Enjoys outdoor activities, particularly hiking and camping\nmannerisms: Speaks with a clear, confident voice\npersonal time: Spends free time with family or exploring nature\nlifestyle: Active and outdoorsy, with a focus on family\nideology: Believes in personal freedom and justice\npolitical views: Independent\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 29\nsex: Male\nrace: White alone\nancestry: Hungarian\nhousehold language: English only\neducation: ..."
+    },
+    {
+      "user_id": "user65",
+      "persona_text": "age: 65\nsex: Female\nrace: Two or More Races\nancestry: Mexican and Spanish\nhousehold language: Spanish\neducation: Bachelor's degree\nemployment status: Civilian employed, at work\nclass of worker: Self-employed in own incorporated business, professional practice or farm\nindustry category: WHL-Grocery And Related Product Merchant Wholesalers\noccupation category: FFF-Graders And Sorters, Agricultural Products\ndetailed job description: Grades and sorts agricultural products based on size, weight, color, and condition\nincome: 126000.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Mexico\ncitizenship: Not a U.S. citizen\nveteran status: Non-Veteran\ndisability: With a disability\nhealth insurance: With health insurance coverage\nvision difficulty: Yes\nability to speak english: Not well\nbig five scores: Openness: Low, Conscientiousness: Low, Extraversion: Extremely High, Agreeableness: Extremely High, Neuroticism: Average\ndefining quirks: Has a unique sense of fashion, often incorporating traditional Mexican elements\nmannerisms: Speaks with a strong Spanish accent and often uses Spanish idioms\npersonal time: Spends free time tending to her garden or cooking traditional Mexican dishes\nlifestyle: Active and community-oriented\nideology: Progressive\npolitical views: Liberal\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 65\nsex: Female\nrace: Two or More Races\nancestry: Mexican and Spanish\nhousehold language: Spanis..."
+    },
+    {
+      "user_id": "user66",
+      "persona_text": "age: 10\nsex: Female\nrace: Vietnamese alone\nancestry: Vietnamese\nhousehold language: Asian and Pacific Island languages\neducation: Grade 4\nemployment status: Unemployed\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Student\nincome: No income\nmarital status: Never married or under 15 years old\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children under 5 years and 5 to 17 years\nplace of birth: Arizona/AZ\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Low, Extraversion: Average, Agreeableness: Low, Neuroticism: Extremely High\ndefining quirks: Loves to doodle in notebooks\nmannerisms: Often uses Vietnamese phrases when speaking\npersonal time: Spends free time drawing or playing with friends\nlifestyle: Active and playful\nideology: Too young to form an ideology\npolitical views: Too young to have political views\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 10\nsex: Female\nrace: Vietnamese alone\nancestry: Vietnamese\nhousehold language: Asian and Pacifi..."
+    },
+    {
+      "user_id": "user67",
+      "persona_text": "age: 83\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: GED or alternative credential\nemployment status: Not in labor force\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: RET-Supermarkets And Other Grocery (Except Convenience) Stores\noccupation category: SAL-Cashiers\ndetailed job description: Handled customer transactions and ensured customer satisfaction in a supermarket setting\nincome: 84500.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: West Virginia/WV\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Average, Extraversion: High, Agreeableness: Extremely Low, Neuroticism: Average\ndefining quirks: Takes pride in her work and always strives for efficiency\nmannerisms: Often uses hand gestures while speaking\npersonal time: Spends her free time in her garden or reading a book\nlifestyle: Quiet and peaceful, enjoys simple pleasures\nideology: Conservative\npolitical views: Republican\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 83\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation:..."
+    },
+    {
+      "user_id": "user68",
+      "persona_text": "age: 44\nsex: Female\nrace: Black or African American alone\nancestry: Trinidadian\nhousehold language: English only\neducation: Bachelor's degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: MED-Offices Of Optometrists\noccupation category: MGR-Human Resources Managers\ndetailed job description: Oversees the human resources department in an optometrist's office\nincome: 294000.0\nmarital status: Divorced\nhousehold type: Female householder, no spouse/partner present, with relatives, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Trinidad and Tobago\ncitizenship: U.S. citizen by naturalization\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: High, Conscientiousness: Low, Extraversion: Low, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Enjoys painting in her free time\nmannerisms: Often wears colorful scarves\npersonal time: Spends free time painting or attending local events\nlifestyle: Active and community-oriented\nideology: Liberal\npolitical views: Democrat\nreligion: Jewish\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 44\nsex: Female\nrace: Black or African American alone\nancestry: Trinidadian\nhousehold language: ..."
+    },
+    {
+      "user_id": "user69",
+      "persona_text": "age: 77\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: Some college, but less than 1 year\nemployment status: Not in labor force\nclass of worker: Private\nindustry category: Community Service\noccupation category: Volunteer\ndetailed job description: Volunteers at a local community center\nincome: 28610.0\nmarital status: Divorced\nhousehold type: Female householder, no spouse/partner present, living alone\nfamily presence and age: No family\nplace of birth: California/CA\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: With a disability\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Average, Extraversion: Average, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Enjoys experimenting with new recipes\nmannerisms: Tends to use local slang\npersonal time: Spends free time painting or volunteering at a local community center\nlifestyle: Active and community-oriented\nideology: Liberal\npolitical views: Democrat\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 77\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation:..."
+    },
+    {
+      "user_id": "user70",
+      "persona_text": "age: 28\nsex: Male\nrace: Two or More Races\nancestry: Puerto Rican and Other\nhousehold language: English\neducation: Grade 11\nemployment status: Not in labor force\nclass of worker: Not Applicable\nindustry category: Not Applicable\noccupation category: Not Applicable\ndetailed job description: Not Applicable\nincome: 0-10000\nmarital status: Never married\nhousehold type: Nonfamily household\nfamily presence and age: No family\nplace of birth: Puerto Rico\ncitizenship: US Citizen\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: High, Conscientiousness: High, Extraversion: Average, Agreeableness: Extremely High, Neuroticism: Average\ndefining quirks: Passionate about music and entertainment\nmannerisms: Engages easily with others\npersonal time: Spends free time exploring new places and experiences\nlifestyle: Adventurous and empathetic\nideology: Liberal\npolitical views: Democrat\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 28\nsex: Male\nrace: Two or More Races\nancestry: Puerto Rican and Other\nhousehold language: Engli..."
+    },
+    {
+      "user_id": "user71",
+      "persona_text": "age: 52\nsex: Female\nrace: Korean alone\nancestry: Korean\nhousehold language: Asian and Pacific Island languages\neducation: Regular high school diploma\nemployment status: Civilian employed, at work\nclass of worker: State government employee\nindustry category: ENT-Restaurants And Other Food Services\noccupation category: EAT-First-Line Supervisors Of Food Preparation And Serving Workers\ndetailed job description: Supervises food preparation and serving workers in a state government facility\nincome: 133900.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Korea\ncitizenship: U.S. citizen by naturalization\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Extremely High, Extraversion: Extremely Low, Agreeableness: Extremely Low, Neuroticism: Average\ndefining quirks: Deep love for literature and reading\nmannerisms: Constantly adjusts her glasses\npersonal time: Spends free time reading or engaging in community activism\nlifestyle: Quiet and community-oriented\nideology: Liberal\npolitical views: Democratic\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 52\nsex: Female\nrace: Korean alone\nancestry: Korean\nhousehold language: Asian and Pacific Island..."
+    },
+    {
+      "user_id": "user72",
+      "persona_text": "age: 46\nsex: Male\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: GED or alternative credential\nemployment status: Civilian employed, at work\nclass of worker: Self-employed in own not incorporated business, professional practice, or farm\nindustry category: TRN-Truck Transportation\noccupation category: MGR-Other Managers\ndetailed job description: Manages his own truck transportation business\nincome: 150000.0\nmarital status: Divorced\nhousehold type: Male householder, no spouse/partner present, living alone\nfamily presence and age: No family\nplace of birth: Nebraska/NE\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Low, Extraversion: Average, Agreeableness: Average, Neuroticism: Low\ndefining quirks: Enjoys long drives in the countryside\nmannerisms: Has a deep, slow voice\npersonal time: Maintains his trucks or goes for long drives\nlifestyle: Independent and hardworking\nideology: Conservative\npolitical views: Republican\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 46\nsex: Male\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: G..."
+    },
+    {
+      "user_id": "user73",
+      "persona_text": "age: 22\nsex: Female\nrace: White alone\nancestry: American\nhousehold language: English only\neducation: 1 or more years of college credit, no degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: PRF-Travel Arrangements And Reservation Services\noccupation category: EAT-Waiters And Waitresses\ndetailed job description: Serving customers, taking orders, ensuring customer satisfaction\nincome: 29000.0\nmarital status: Never married or under 15 years old\nhousehold type: Cohabiting couple household, no children of the householder less than 18\nfamily presence and age: No family\nplace of birth: Virginia/VA\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Average, Extraversion: High, Agreeableness: Extremely High, Neuroticism: Extremely Low\ndefining quirks: Loves to try out new recipes\nmannerisms: Often hums to herself\npersonal time: Exploring new places, trying out new recipes, reading books\nlifestyle: Adventurous and independent\nideology: Individualism\npolitical views: Moderate\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 22\nsex: Female\nrace: White alone\nancestry: American\nhousehold language: English only\neducation:..."
+    },
+    {
+      "user_id": "user74",
+      "persona_text": "age: 72\nsex: Female\nrace: White alone\nancestry: Austrian\nhousehold language: Other Indo-European languages\neducation: 1 or more years of college credit, no degree\nemployment status: Not in labor force\nclass of worker: Retired\ndetailed job description: Retired, previously worked in education\nincome: 1279000.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Austria\ncitizenship: U.S. citizen by naturalization\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Low, Conscientiousness: Average, Extraversion: High, Agreeableness: Low, Neuroticism: Average\ndefining quirks: Enjoys engaging in lively debates\nmannerisms: Often taps her fingers when thinking\npersonal time: Spends free time traveling or tending to her garden\nlifestyle: Active and adventurous\nideology: Liberal\npolitical views: Democrat\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 72\nsex: Female\nrace: White alone\nancestry: Austrian\nhousehold language: Other Indo-European lan..."
+    },
+    {
+      "user_id": "user75",
+      "persona_text": "age: 54\nsex: Male\nrace: Asian Indian alone\nancestry: Indian\nhousehold language: Other Indo-European languages\neducation: Bachelor's degree\nemployment status: Civilian employed, at work\nclass of worker: State government employee\nindustry category: PRF-Computer Systems Design And Related Services\noccupation category: CMM-Computer Occupations, All Other\ndetailed job description: Manages and oversees IT projects\nincome: 251050.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: India\ncitizenship: U.S. citizen by naturalization\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Extremely Low, Extraversion: Average, Agreeableness: Average, Neuroticism: High\ndefining quirks: Fascinated with the latest technology and gadgets\nmannerisms: Frequently checks his phone or other devices\npersonal time: Spends free time exercising and exploring new technology\nlifestyle: Active and tech-oriented\nideology: Progressive\npolitical views: Liberal\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 54\nsex: Male\nrace: Asian Indian alone\nancestry: Indian\nhousehold language: Other Indo-European ..."
+    },
+    {
+      "user_id": "user76",
+      "persona_text": "age: 64\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: Some college, but less than 1 year\nemployment status: Not in labor force\nclass of worker: Private\nindustry category: Education\noccupation category: Teacher\ndetailed job description: Retired teacher\nincome: 14400.0\nmarital status: Divorced\nhousehold type: Female householder, no spouse/partner present, living alone\nfamily presence and age: Adult children not living at home\nplace of birth: Michigan/MI\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: With a disability\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely Low, Conscientiousness: Low, Extraversion: High, Agreeableness: Average, Neuroticism: Extremely High\ndefining quirks: Loves painting\nmannerisms: Speaks with a strong Midwestern accent\npersonal time: Painting or volunteering at a local community center\nlifestyle: Quiet and community-oriented\nideology: Liberal\npolitical views: Democratic\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 64\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation:..."
+    },
+    {
+      "user_id": "user77",
+      "persona_text": "age: 21\nsex: Male\nrace: Black or African American alone\nancestry: Congolese\nhousehold language: Other language\neducation: Regular high school diploma\nemployment status: Not in labor force\nclass of worker: Unpaid family workers\nindustry category: Education and Health Services\noccupation category: Natural Resources, Construction, and Maintenance\ndetailed job description: Student\nincome: 149500.0\nmarital status: Never married or under 15 years old\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children under 5 years and 5 to 17 years\nplace of birth: Democratic Republic of Congo (Zaire)\ncitizenship: Born abroad of U.S. citizen parent or parents\nveteran status: Nonveteran\ndisability: No disability\nhealth insurance: No health insurance coverage\nability to speak english: Well\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Extremely Low, Agreeableness: Low, Neuroticism: High\ndefining quirks: Loves outdoor activities such as hiking and camping\nmannerisms: Frequently uses visual aids when explaining things\npersonal time: Exercising or meditating\nlifestyle: Disciplined and focused\nideology: Personal growth and self-improvement\npolitical views: Social liberalism\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 21\nsex: Male\nrace: Black or African American alone\nancestry: Congolese\nhousehold language: Othe..."
+    },
+    {
+      "user_id": "user78",
+      "persona_text": "age: 19\nsex: Male\nrace: Asian Indian alone\nancestry: Indian\nhousehold language: Hindi\neducation: 1 or more years of college credit, no degree\nemployment status: Not in labor force\nclass of worker: Not Applicable\nindustry category: Not Applicable\noccupation category: Not Applicable\ndetailed job description: Not Applicable\nincome: -60000.0\nmarital status: Never married or under 15 years old\nhousehold type: Living with parents\nfamily presence and age: Living with two parents\nplace of birth: India\ncitizenship: Not a U.S. citizen\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: High, Extraversion: Extremely Low, Agreeableness: Extremely High, Neuroticism: Extremely Low\ndefining quirks: Passionate about music\nmannerisms: Expressive hand gestures when speaking\npersonal time: Practicing music or studying\nlifestyle: Student and Music Enthusiast\nideology: Liberal\npolitical views: Liberal\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 19\nsex: Male\nrace: Asian Indian alone\nancestry: Indian\nhousehold language: Hindi\neducation: 1 o..."
+    },
+    {
+      "user_id": "user79",
+      "persona_text": "age: 3\nsex: Male\nrace: White\nancestry: German\nhousehold language: English\neducation: No schooling completed\nemployment status: Unemployed\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Not applicable\nincome: No income\nmarital status: Under 15 years old\nhousehold type: Married couple household with children\nfamily presence and age: With related children under 5 years and 5 to 17 years\nplace of birth: Missouri/MO\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: High, Conscientiousness: Average, Extraversion: Average, Agreeableness: Extremely High, Neuroticism: Average\ndefining quirks: Loves to draw and color\nmannerisms: Often hums while playing\npersonal time: Spends free time playing with toys or drawing\nlifestyle: Active and playful\nideology: Not applicable\npolitical views: Not applicable\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 3\nsex: Male\nrace: White\nancestry: German\nhousehold language: English\neducation: No schooling co..."
+    },
+    {
+      "user_id": "user80",
+      "persona_text": "age: 35\nsex: Male\nrace: Two or More Races\nancestry: Irish and Native American\nhousehold language: English\neducation: 1 or more years of college credit, no degree\nemployment status: Employed\nclass of worker: Private\nindustry category: ENT-Drinking Places, Alcoholic Beverages\noccupation category: EAT-Bartenders\ndetailed job description: Serves alcoholic beverages and interacts with customers\nincome: 100000.0\nmarital status: Single\nhousehold type: Male householder, no spouse/partner present, with relatives, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Nevada/NV\ncitizenship: US Citizen\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: Private\nbig five scores: Openness: High, Conscientiousness: High, Extraversion: Average, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Enjoys reading classic literature\nmannerisms: Often seen with a book or a cocktail shaker\npersonal time: Spends free time reading or hiking\nlifestyle: Active and social\nideology: Liberal\npolitical views: Democrat\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 35\nsex: Male\nrace: Two or More Races\nancestry: Irish and Native American\nhousehold language: En..."
+    },
+    {
+      "user_id": "user81",
+      "persona_text": "age: 87\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Master's degree\nemployment status: Not in labor force\nclass of worker: Private\nindustry category: Environmental Science\noccupation category: Environmental Scientist\ndetailed job description: Worked on projects to protect the environment and promote peace\nincome: 324600.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Mississippi/MS\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: High, Conscientiousness: Average, Extraversion: Low, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Passionate about music, particularly folk and blues\nmannerisms: Speaks with a soft, slow Southern drawl\npersonal time: Spends free time in nature or volunteering for environmental causes\nlifestyle: Active and environmentally conscious\nideology: Liberal\npolitical views: Democrat\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 87\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Mast..."
+    },
+    {
+      "user_id": "user82",
+      "persona_text": "age: 2\nsex: Male\nrace: Two or More Races\nancestry: Mixed\nhousehold language: English\neducation: Pre-school\nemployment status: Unemployed\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Not applicable\nincome: 0\nmarital status: Never married\nhousehold type: Female householder, no spouse/partner present, with relatives\nfamily presence and age: With related children under 5 years only\nplace of birth: Texas/TX\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Extremely High, Agreeableness: Average, Neuroticism: High\ndefining quirks: Loves to collect toys\nmannerisms: Often mimics adults\npersonal time: Spends most of the time playing or sleeping\nlifestyle: Active and playful\nideology: Too young to have a defined ideology\npolitical views: Too young to have political views\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 2\nsex: Male\nrace: Two or More Races\nancestry: Mixed\nhousehold language: English\neducation: Pre-..."
+    },
+    {
+      "user_id": "user83",
+      "persona_text": "age: 28\nsex: Female\nrace: White alone\nancestry: German\nhousehold language: English only\neducation: Bachelor's degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: INF-Sound Recording Industries\noccupation category: MGR-Industrial Production Managers\ndetailed job description: Oversees the production process in a recording studio\nincome: 78520.0\nmarital status: Never married\nhousehold type: Female householder, no spouse/partner present, living alone\nfamily presence and age: No family\nplace of birth: Massachusetts/MA\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Low, Extraversion: Extremely Low, Agreeableness: Extremely High, Neuroticism: High\ndefining quirks: Practices yoga daily\nmannerisms: Often taps her fingers when thinking\npersonal time: Spends free time practicing yoga or attending music events\nlifestyle: Active and spiritual\nideology: Liberal\npolitical views: Democrat\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 28\nsex: Female\nrace: White alone\nancestry: German\nhousehold language: English only\neducation: B..."
+    },
+    {
+      "user_id": "user84",
+      "persona_text": "age: 20\nsex: Male\nrace: Two or More Races\nancestry: Mixed European and Native American\nhousehold language: English\neducation: Regular high school diploma\nemployment status: Civilian employed, at work\nclass of worker: Self-employed in own not incorporated business, professional practice, or farm\nindustry category: SRV-Car Washes\noccupation category: TRN-Cleaners Of Vehicles And Equipment\ndetailed job description: Operates a car wash business, providing cleaning services for vehicles\nincome: 31140.0\nmarital status: Never married\nhousehold type: Male householder, no spouse/partner present, only nonrelatives present\nfamily presence and age: No family\nplace of birth: Kansas/KS\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Average, Agreeableness: Extremely High, Neuroticism: Extremely Low\ndefining quirks: Passionate about environmental conservation\nmannerisms: Tends to speak quickly and with enthusiasm\npersonal time: Spends free time in nature or working on cars\nlifestyle: Active and environmentally conscious\nideology: Liberal\npolitical views: Democrat\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 20\nsex: Male\nrace: Two or More Races\nancestry: Mixed European and Native American\nhousehold lan..."
+    },
+    {
+      "user_id": "user85",
+      "persona_text": "age: 33\nsex: Male\nrace: Two or More Races\nancestry: Mixed\nhousehold language: English\neducation: Some college, but less than 1 year\nemployment status: Not in labor force\nclass of worker: Not working\nindustry category: Unemployed\noccupation category: Unemployed\ndetailed job description: Not currently employed\nincome: No income\nmarital status: Married\nhousehold type: Married without children\nfamily presence and age: No family\nplace of birth: Texas/TX\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: With a disability\nhealth insurance: No health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Average, Agreeableness: Low, Neuroticism: Average\ndefining quirks: Passionate about health and wellness\nmannerisms: Often seen wearing glasses and reading\npersonal time: Spends free time volunteering or meditating\nlifestyle: Simple and mindful\nideology: Social justice oriented\npolitical views: Liberal\nreligion: Jewish\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 33\nsex: Male\nrace: Two or More Races\nancestry: Mixed\nhousehold language: English\neducation: Som..."
+    },
+    {
+      "user_id": "user86",
+      "persona_text": "age: 20\nsex: Male\nrace: White alone\nancestry: American\nhousehold language: English\neducation: 1 or more years of college credit, no degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: EDU-Colleges, Universities, And Professional Schools, Including Junior Colleges\noccupation category: PRS-Tour And Travel Guides\ndetailed job description: Organizes and leads group tours for educational institutions\nincome: 0-60000\nmarital status: Never married\nhousehold type: Non-family household\nfamily presence and age: No family\nplace of birth: Colorado/CO\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Average, Extraversion: Average, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Loves sharing interesting facts about the places he visits\nmannerisms: Uses local slang or phrases from the places he tours\npersonal time: Planning trips, Researching new destinations, Relaxing with friends\nlifestyle: Active and social\nideology: Liberal\npolitical views: Democrat\nreligion: Other Non-Christian Religion\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 20\nsex: Male\nrace: White alone\nancestry: American\nhousehold language: English\neducation: 1 or m..."
+    },
+    {
+      "user_id": "user87",
+      "persona_text": "age: 45\nsex: Female\nrace: Black or African American alone\nancestry: African\nhousehold language: English only\neducation: Some college, but less than 1 year\nemployment status: Civilian employed, at work\nclass of worker: Local government employee (city, county, etc.)\nindustry category: EDU-Elementary And Secondary Schools\noccupation category: CLN-Janitors And Building Cleaners\ndetailed job description: Maintains cleanliness and hygiene in school premises\nincome: 67000.0\nmarital status: Separated\nhousehold type: Female householder, no spouse/partner present, with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: New York/NY\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: With a disability\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Extremely Low, Extraversion: Extremely High, Agreeableness: Average, Neuroticism: Extremely Low\ndefining quirks: Keen interest in fashion and personal style\nmannerisms: Constantly adjusting her clothing or accessories\npersonal time: Taking care of her children, indulging in hobbies\nlifestyle: Busy and challenging\nideology: Liberal\npolitical views: Democrat\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 45\nsex: Female\nrace: Black or African American alone\nancestry: African\nhousehold language: Engl..."
+    },
+    {
+      "user_id": "user88",
+      "persona_text": "age: 39\nsex: Female\nrace: White alone\nancestry: German\nhousehold language: English only\neducation: Regular high school diploma\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private not-for-profit, tax-exempt, or charitable organization\nindustry category: MED-General Medical And Surgical Hospitals, And Specialty (Except Psychiatric And Substance Abuse) Hospitals\noccupation category: OFF-Insurance Claims And Policy Processing Clerks\ndetailed job description: Processes insurance claims and policies for a medical hospital\nincome: 73500.0\nmarital status: Divorced\nhousehold type: Cohabiting couple household with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: Iowa/IA\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: With a disability\nhealth insurance: With health insurance coverage\ncognitive difficulty: Yes\nbig five scores: Openness: Low, Conscientiousness: High, Extraversion: Average, Agreeableness: Extremely Low, Neuroticism: Extremely Low\ndefining quirks: Enjoys experimenting with different cuisines\nmannerisms: Often hums to herself\npersonal time: Spends free time taking care of her children and gardening\nlifestyle: Practical and independent\nideology: Liberal\npolitical views: Democrat\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 39\nsex: Female\nrace: White alone\nancestry: German\nhousehold language: English only\neducation: R..."
+    },
+    {
+      "user_id": "user89",
+      "persona_text": "age: 48\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: Master's degree\nemployment status: Civilian employed, at work\nclass of worker: Local government employee (city, county, etc.)\nindustry category: EDU-Elementary And Secondary Schools\noccupation category: EDU-Elementary And Middle School Teachers\ndetailed job description: Teaching various subjects to students and developing lesson plans\nincome: 269400.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: California/CA\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Low, Extraversion: Extremely Low, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Often brings work home\nmannerisms: Constantly adjusts her glasses\npersonal time: Spends most of her free time at home\nlifestyle: Quiet and home-centered\nideology: Liberal\npolitical views: Democrat\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 48\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation:..."
+    },
+    {
+      "user_id": "user90",
+      "persona_text": "age: 49\nsex: Female\nrace: Korean alone\nancestry: Korean\nhousehold language: Asian and Pacific Island languages\neducation: Master's degree\nemployment status: Not in labor force\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: TRN-Couriers And Messengers\noccupation category: OFF-Couriers And Messengers\ndetailed job description: Delivers packages and documents between businesses and households\nincome: 134900.0\nmarital status: Married\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: North Carolina/NC\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: High, Conscientiousness: Extremely High, Extraversion: Low, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Has a habit of humming while working\nmannerisms: Often uses hand gestures while speaking\npersonal time: Spends free time with family or gardening\nlifestyle: Busy and family-oriented\nideology: Conservative\npolitical views: Republican\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 49\nsex: Female\nrace: Korean alone\nancestry: Korean\nhousehold language: Asian and Pacific Island..."
+    },
+    {
+      "user_id": "user91",
+      "persona_text": "age: 24\nsex: Female\nrace: White\nancestry: German\nhousehold language: English\neducation: Bachelor's Degree\nemployment status: Employed\nclass of worker: Private\nindustry category: Entertainment\noccupation category: Entertainment Coordinator\ndetailed job description: Coordinates and manages recreational activities and events\nincome: 566900\nmarital status: Single\nhousehold type: Cohabiting couple household, no children\nfamily presence and age: No related children\nplace of birth: Montana, USA\ncitizenship: US Citizen\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: Private\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Low, Agreeableness: High, Neuroticism: Average\ndefining quirks: Has a knack for creating unique art installations\nmannerisms: Often uses expressive hand gestures when talking\npersonal time: Spends free time creating art or exploring nature\nlifestyle: Active and creative, often involved in community art projects\nideology: Liberal, believes in freedom of expression and environmental sustainability\npolitical views: Democrat, supports policies on environmental protection and arts funding\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 24\nsex: Female\nrace: White\nancestry: German\nhousehold language: English\neducation: Bachelor's D..."
+    },
+    {
+      "user_id": "user92",
+      "persona_text": "age: 10\nsex: Male\nrace: Two or More Races\nancestry: Cuban and other\nhousehold language: Spanish\neducation: Grade 5\nemployment status: Student\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Student\nincome: No income\nmarital status: Never married or under 15 years old\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children under 5 years and 5 to 17 years\nplace of birth: Cuba\ncitizenship: Not a U.S. citizen\nveteran status: Not applicable\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Low, Extraversion: Low, Agreeableness: Extremely Low, Neuroticism: Average\ndefining quirks: Always carries a water bottle for hydration\nmannerisms: Often seen with a backpack full of books and sports equipment\npersonal time: Spends free time playing soccer, reading, or playing video games\nlifestyle: Active and studious\nideology: Family-oriented values\npolitical views: Undecided\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 10\nsex: Male\nrace: Two or More Races\nancestry: Cuban and other\nhousehold language: Spanish\neduc..."
+    },
+    {
+      "user_id": "user93",
+      "persona_text": "age: 86\nsex: Female\nrace: White alone\nancestry: British\nhousehold language: English only\neducation: GED or alternative credential\nemployment status: Not in labor force\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: MED-Home Health Care Services\noccupation category: HLS-Personal Care Aides\ndetailed job description: Providing personal care to elderly or disabled individuals, including assistance with daily activities and basic health-related services\nincome: 30660.0\nmarital status: Divorced\nhousehold type: Female householder, no spouse/partner present, with relatives, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Texas/TX\ncitizenship: Born in the United States\nveteran status: Non-veteran\ndisability: With a disability\nhealth insurance: With health insurance coverage\nhearing difficulty: Yes\nvision difficulty: Yes\nability to speak english: Very well\nbig five scores: Openness: Extremely Low, Conscientiousness: Average, Extraversion: Extremely Low, Agreeableness: Low, Neuroticism: Average\ndefining quirks: Strong sense of independence and resilience, often tells stories about her past\nmannerisms: Speaks softly, often pauses to reflect before speaking\npersonal time: Spends most of her time at home, with occasional visits to family or friends\nlifestyle: Quiet and simple, with a focus on maintaining health and well-being\nideology: Conservative, traditional values and beliefs\npolitical views: Conservative\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 86\nsex: Female\nrace: White alone\nancestry: British\nhousehold language: English only\neducation: ..."
+    },
+    {
+      "user_id": "user94",
+      "persona_text": "age: 16\nsex: Male\nrace: White alone\nancestry: American\nhousehold language: English only\neducation: Grade 10\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: CON-Construction (The Cleaning Of Buildings And Dwellings Is Incidental During Construction And Immediately After Construction)\noccupation category: CON-Construction Laborers\ndetailed job description: Performs various physical tasks on construction sites\nincome: 375000.0\nmarital status: Never married or under 15 years old\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: Florida/FL\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely Low, Conscientiousness: Average, Extraversion: Average, Agreeableness: Low, Neuroticism: Average\ndefining quirks: Enjoys skateboarding and video games\nmannerisms: Often wears a baseball cap\npersonal time: Hanging out with friends, Playing video games, Practicing skateboarding\nlifestyle: Active and social\nideology: Progressive\npolitical views: Liberal\nreligion: Other Non-Christian Religion\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 16\nsex: Male\nrace: White alone\nancestry: American\nhousehold language: English only\neducation: G..."
+    },
+    {
+      "user_id": "user95",
+      "persona_text": "age: 3\nsex: Male\nrace: Black or African American\nancestry: African American\nhousehold language: English\neducation: No schooling completed\nemployment status: Unemployed\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Too young to work\nincome: 0\nmarital status: Never married\nhousehold type: Female householder, no spouse/partner present, with children of the householder less than 18\nfamily presence and age: With related children under 5 years\nplace of birth: Georgia/GA\ncitizenship: Born in the United States\nveteran status: Not applicable\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: High, Extraversion: Extremely High, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Loves to play with toy cars\nmannerisms: Often repeats words he hears\npersonal time: Spends most of his time playing\nlifestyle: Active and playful\nideology: Too young to have an ideology\npolitical views: Too young to have political views\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 3\nsex: Male\nrace: Black or African American\nancestry: African American\nhousehold language: Engl..."
+    },
+    {
+      "user_id": "user96",
+      "persona_text": "age: 2\nsex: Male\nrace: Two or More Races\nancestry: Mexican and White\nhousehold language: Spanish\neducation: Pre-school\nemployment status: Unemployed\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Learns and plays at home\nincome: 16380.0\nmarital status: Never married or under 15 years old\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children under 5 years and 5 to 17 years\nplace of birth: Texas/TX\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: High, Extraversion: Extremely High, Agreeableness: Extremely High, Neuroticism: High\ndefining quirks: Loves to draw and color\nmannerisms: Often hums or sings to himself\npersonal time: Spends free time playing or drawing\nlifestyle: Active and playful\nideology: Not applicable\npolitical views: Not applicable\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 2\nsex: Male\nrace: Two or More Races\nancestry: Mexican and White\nhousehold language: Spanish\nedu..."
+    },
+    {
+      "user_id": "user97",
+      "persona_text": "age: 65\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: Some college, but less than 1 year\nemployment status: Not in labor force\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: RET-Automotive Parts, Accessories, And Tire Stores\noccupation category: SAL-Parts Salespersons\ndetailed job description: Selling automotive parts and accessories\nincome: 20400.0\nmarital status: Widowed\nhousehold type: Female householder, no spouse/partner present, living alone\nfamily presence and age: No family\nplace of birth: California/CA\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Low, Conscientiousness: Extremely Low, Extraversion: Extremely High, Agreeableness: High, Neuroticism: High\ndefining quirks: Enjoys collecting antiques and memorabilia\nmannerisms: Warm and welcoming demeanor\npersonal time: Volunteering in the community, Spending time with family\nlifestyle: Active and community-oriented\nideology: Conservative\npolitical views: Republican\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 65\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation:..."
+    },
+    {
+      "user_id": "user98",
+      "persona_text": "age: 44\nsex: Female\nrace: Some Other Race alone\nancestry: Mexican\nhousehold language: Spanish\neducation: No schooling completed\nemployment status: Not in labor force\nclass of worker: Unpaid family workers\nindustry category: Private households\noccupation category: Homemakers and household members\ndetailed job description: Homemaker, taking care of household chores and family\nincome: 64600.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Mexico\ncitizenship: Not a U.S. citizen\nveteran status: Not a veteran\ndisability: None\nhealth insurance: No health insurance coverage\nability to speak english: Not well\nbig five scores: Openness: High, Conscientiousness: Extremely High, Extraversion: Extremely Low, Agreeableness: Average, Neuroticism: High\ndefining quirks: Expresses herself creatively through art\nmannerisms: Speaks softly and slowly\npersonal time: Engages in spiritual practices like meditation\nlifestyle: Simple and eco-friendly\nideology: Believes in the importance of family, spirituality, and environmental conservation\npolitical views: Leans towards policies that support immigrants and environmental protection\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 44\nsex: Female\nrace: Some Other Race alone\nancestry: Mexican\nhousehold language: Spanish\neducat..."
+    },
+    {
+      "user_id": "user99",
+      "persona_text": "age: 71\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Some college, but less than 1 year\nemployment status: Not in labor force\nclass of worker: Employee of a private not-for-profit, tax-exempt, or charitable organization\nindustry category: SRV-Religious Organizations\noccupation category: OFF-Mail Clerks And Mail Machine Operators, Except Postal Service\ndetailed job description: Handles and sorts mail for the organization\nincome: 66500.0\nmarital status: Married\nhousehold type: Married couple household, no children of the householder less than 18\nfamily presence and age: With related children under 5 years and 5 to 17 years\nplace of birth: Illinois/IL\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely Low, Conscientiousness: Extremely Low, Extraversion: Average, Agreeableness: Average, Neuroticism: Extremely Low\ndefining quirks: Enjoys singing hymns\nmannerisms: Often hums to herself\npersonal time: Spends free time in the garden or at church\nlifestyle: Quiet, community-oriented\nideology: Conservative\npolitical views: Republican\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 71\nsex: Female\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: So..."
+    },
+    {
+      "user_id": "user100",
+      "persona_text": "age: 50\nsex: Female\nrace: White alone\nancestry: Irish Scotch\nhousehold language: English only\neducation: Bachelor's degree\nemployment status: Not in labor force\nclass of worker: Employee of a private not-for-profit, tax-exempt, or charitable organization\nindustry category: FIN-Lessors Of Real Estate, And Offices Of Real Estate Agents And Brokers\noccupation category: MGR-Property, Real Estate, And Community Association Managers\ndetailed job description: Manages properties, deals with tenants, oversees maintenance and repairs\nincome: 89000.0\nmarital status: Never married or under 15 years old\nhousehold type: Female householder, no spouse/partner present, living alone\nfamily presence and age: No family present\nplace of birth: Pennsylvania/PA\ncitizenship: Born in the United States\nveteran status: On active duty in the past, but not now\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Average, Extraversion: Average, Agreeableness: Extremely Low, Neuroticism: Average\ndefining quirks: Meticulous attention to detail in work\nmannerisms: Constantly checks and rechecks work\npersonal time: Spends time in quiet reflection or prayer\nlifestyle: Quiet and introspective\nideology: Conservative\npolitical views: Republican\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 50\nsex: Female\nrace: White alone\nancestry: Irish Scotch\nhousehold language: English only\neducat..."
+    },
+    {
+      "user_id": "user101",
+      "persona_text": "age: 8\nsex: Male\nrace: Some Other Race alone\nancestry: Mixed\nhousehold language: English\neducation: Grade 3\nemployment status: Unemployed\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Student\nincome: Not applicable\nmarital status: Never married or under 15 years old\nhousehold type: Male householder, no spouse/partner present, with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: Connecticut/CT\ncitizenship: Born in the United States\nveteran status: Not applicable\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Low, Conscientiousness: Low, Extraversion: High, Agreeableness: Low, Neuroticism: Average\ndefining quirks: Loves to explore nature and outdoor activities\nmannerisms: Expresses emotions openly\npersonal time: Spends free time playing with friends or drawing\nlifestyle: Active and playful\nideology: Not applicable\npolitical views: Not applicable\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 8\nsex: Male\nrace: Some Other Race alone\nancestry: Mixed\nhousehold language: English\neducation: ..."
+    },
+    {
+      "user_id": "user102",
+      "persona_text": "age: 46\nsex: Female\nrace: White alone\nancestry: Hispanic\nhousehold language: Spanish\neducation: 1 or more years of college credit, no degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: PRF-Travel Arrangements And Reservation Services\noccupation category: OFF-Receptionists And Information Clerks\ndetailed job description: Handles customer inquiries and bookings for travel arrangements and reservation services\nincome: 58000.0\nmarital status: Never married or under 15 years old\nhousehold type: Female householder, no spouse/partner present, with relatives, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: New Jersey/NJ\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Low, Conscientiousness: Average, Extraversion: Average, Agreeableness: Low, Neuroticism: Average\ndefining quirks: Has a habit of planning and organizing everything in advance\nmannerisms: Speaks with a warm and friendly tone\npersonal time: Planning future travels or cooking for family and friends\nlifestyle: Busy and organized, with a strong focus on family\nideology: Traditional\npolitical views: Democrat\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 46\nsex: Female\nrace: White alone\nancestry: Hispanic\nhousehold language: Spanish\neducation: 1 or..."
+    },
+    {
+      "user_id": "user103",
+      "persona_text": "age: 11\nsex: Female\nrace: Black or African American alone\nancestry: African American\nhousehold language: Spanish\neducation: Grade 5\nemployment status: Unemployed\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Student\nincome: No income\nmarital status: Never married or under 15 years old\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children under 5 years and 5 to 17 years\nplace of birth: Texas/TX\ncitizenship: Born in the United States\nveteran status: Not applicable\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Low, Conscientiousness: Average, Extraversion: Extremely Low, Agreeableness: Average, Neuroticism: Average\ndefining quirks: Loves to cook and experiment with food\nmannerisms: Tends to be shy and reserved in social situations\npersonal time: Spends free time cooking, reading, or playing outside\nlifestyle: Active and outdoorsy\nideology: Environmentalism\npolitical views: Too young to vote\nreligion: Muslim\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 11\nsex: Female\nrace: Black or African American alone\nancestry: African American\nhousehold langu..."
+    },
+    {
+      "user_id": "user104",
+      "persona_text": "age: 31\nsex: Female\nrace: All combinations of Asian races only\nancestry: Vietnamese\nhousehold language: Asian and Pacific Island languages\neducation: Bachelor's degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: MFG-Miscellaneous Manufacturing, N.E.C.\noccupation category: OFF-Production, Planning, And Expediting Clerks\ndetailed job description: Coordinates and expedites the flow of work and materials within or between departments of an establishment according to production schedule.\nincome: 57400.0\nmarital status: Never married or under 15 years old\nhousehold type: Female householder, no spouse/partner present, with relatives, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: Vietnam\ncitizenship: U.S. citizen by naturalization\nveteran status: Nonveteran\ndisability: No disability\nhealth insurance: With health insurance coverage\nfertility: Not applicable\nhearing difficulty: No hearing difficulty\nvision difficulty: No vision difficulty\ncognitive difficulty: No cognitive difficulty\nability to speak english: Very well\nbig five scores: Openness: Extremely High, Conscientiousness: Extremely Low, Extraversion: Low, Agreeableness: Average, Neuroticism: Extremely High\ndefining quirks: Meticulous attention to detail, ability to stay calm under pressure\nmannerisms: Speaks softly, uses a lot of hand gestures when explaining something\npersonal time: Cooking traditional Vietnamese dishes, spending time in nature\nlifestyle: Balanced and health-conscious, with a focus on maintaining physical fitness and mental well-being\nideology: Personal growth and continuous learning\npolitical views: Liberal, advocating for social equality and environmental sustainability\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 31\nsex: Female\nrace: All combinations of Asian races only\nancestry: Vietnamese\nhousehold langua..."
+    },
+    {
+      "user_id": "user105",
+      "persona_text": "age: 1\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Not applicable\nemployment status: Not applicable\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Not applicable\nincome: Not applicable\nmarital status: Too young to be married\nhousehold type: Cohabiting couple household with children of the householder less than 18\nfamily presence and age: With related children under 5 years only\nplace of birth: Missouri/MO\ncitizenship: Born in the United States\nveteran status: Not applicable\ndisability: None\nhealth insurance: With health insurance coverage\nfertility: Not applicable\nhearing difficulty: None\nvision difficulty: None\ncognitive difficulty: None\nability to speak english: Not applicable\nbig five scores: Openness: High, Conscientiousness: High, Extraversion: Low, Agreeableness: Extremely High, Neuroticism: Extremely Low\ndefining quirks: Loves to play with his food\nmannerisms: Waves hands when excited\npersonal time: Spends most of his time playing, sleeping, and learning to walk\nlifestyle: Lives a carefree and playful lifestyle\nideology: Not applicable\npolitical views: Not applicable\nreligion: Other Christian\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 1\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: Not a..."
+    },
+    {
+      "user_id": "user106",
+      "persona_text": "age: 57\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation: Bachelor's degree\nemployment status: Civilian employed, at work\nclass of worker: Local government employee (city, county, etc.)\nindustry category: EDU-Elementary And Secondary Schools\noccupation category: EDU-Secondary School Teachers\ndetailed job description: Teaches English to secondary school students and prepares them for college\nincome: 82320.0\nmarital status: Widowed\nhousehold type: Female householder, no spouse/partner present, with relatives, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: North Carolina/NC\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely High, Conscientiousness: Average, Extraversion: Low, Agreeableness: Extremely High, Neuroticism: Low\ndefining quirks: Enjoys painting in her free time\nmannerisms: Speaks in a soft, soothing voice\npersonal time: Spends free time reading, gardening, or painting\nlifestyle: Stable and routine-oriented\nideology: Liberal\npolitical views: Democrat\nreligion: Protestant\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 57\nsex: Female\nrace: White alone\nancestry: European\nhousehold language: English only\neducation:..."
+    },
+    {
+      "user_id": "user107",
+      "persona_text": "age: 14\nsex: Male\nrace: White alone\nancestry: American\nhousehold language: Spanish\neducation: Grade 7\nemployment status: Unemployed\nclass of worker: Not applicable\nindustry category: Not applicable\noccupation category: Not applicable\ndetailed job description: Student\nincome: 0\nmarital status: Never married or under 15 years old\nhousehold type: Married couple household with children of the householder less than 18\nfamily presence and age: With related children 5 to 17 years only\nplace of birth: Wisconsin/WI\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: High, Conscientiousness: Extremely High, Extraversion: Average, Agreeableness: Average, Neuroticism: Low\ndefining quirks: Enjoys playing the guitar\nmannerisms: Tends to tap his foot when nervous\npersonal time: Spends free time playing guitar or video games\nlifestyle: Active and outdoorsy\nideology: Too young to define\npolitical views: Too young to define\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 14\nsex: Male\nrace: White alone\nancestry: American\nhousehold language: Spanish\neducation: Grade ..."
+    },
+    {
+      "user_id": "user108",
+      "persona_text": "age: 25\nsex: Female\nrace: White alone\nancestry: Norwegian\nhousehold language: English only\neducation: 1 or more years of college credit, no degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: INF-Motion Pictures And Video Industries\noccupation category: CMS-Other Community and Social Service Specialists\ndetailed job description: Works in community outreach programs within the film industry\nincome: 75400.0\nmarital status: Never married or under 15 years old\nhousehold type: Female householder, no spouse/partner present, only nonrelatives present\nfamily presence and age: No family\nplace of birth: California/CA\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Extremely Low, Conscientiousness: Extremely High, Extraversion: Low, Agreeableness: Extremely High, Neuroticism: High\ndefining quirks: Has a passion for cooking and trying new recipes\nmannerisms: Often uses hand gestures while speaking\npersonal time: Spends free time cooking or volunteering at local community centers\nlifestyle: Active and community-oriented\nideology: Liberal\npolitical views: Democrat\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 25\nsex: Female\nrace: White alone\nancestry: Norwegian\nhousehold language: English only\neducation..."
+    },
+    {
+      "user_id": "user109",
+      "persona_text": "age: 49\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: 1 or more years of college credit, no degree\nemployment status: Civilian employed, at work\nclass of worker: State government employee\nindustry category: ADM-Justice, Public Order, And Safety Activities\noccupation category: PRT-Correctional Officers and Jailers\ndetailed job description: Oversees the custody, safety, security, and supervision of inmates in a correctional facility\nincome: 148470.0\nmarital status: Divorced\nhousehold type: Male householder, no spouse/partner present, with relatives, no children of the householder less than 18\nfamily presence and age: No related children\nplace of birth: New Jersey/NJ\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Extremely Low, Extraversion: High, Agreeableness: High, Neuroticism: Average\ndefining quirks: Collects historical memorabilia\nmannerisms: Has a strong regional accent\npersonal time: Spends free time working out, reading, or exploring\nlifestyle: Disciplined and active\nideology: Conservative\npolitical views: Republican\nreligion: Religiously Unaffiliated\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 49\nsex: Male\nrace: White alone\nancestry: Irish\nhousehold language: English only\neducation: 1 or..."
+    },
+    {
+      "user_id": "user110",
+      "persona_text": "age: 42\nsex: Male\nrace: Filipino alone\nancestry: Filipino\nhousehold language: English only\neducation: 1 or more years of college credit, no degree\nemployment status: Civilian employed, at work\nclass of worker: Employee of a private for-profit company or business, or of an individual, for wages, salary, or commissions\nindustry category: INF-Wired Telecommunications Carriers\noccupation category: RPR-Radio And Telecommunications Equipment Installers And Repairers\ndetailed job description: Installs and repairs telecommunications equipment\nincome: 239000.0\nmarital status: Never married or under 15 years old\nhousehold type: Cohabiting couple household, no children of the householder less than 18\nfamily presence and age: No family\nplace of birth: California/CA\ncitizenship: Born in the United States\nveteran status: Non-Veteran\ndisability: None\nhealth insurance: With health insurance coverage\nbig five scores: Openness: Average, Conscientiousness: Average, Extraversion: Extremely Low, Agreeableness: Average, Neuroticism: Low\ndefining quirks: Prefers to communicate through written messages rather than verbal communication\nmannerisms: Speaks in a monotone voice\npersonal time: Reading about new technologies or volunteering in the local community\nlifestyle: Active and community-oriented\nideology: Progressive\npolitical views: Democrat\nreligion: Catholic\n",
+      "total_available_rows": 200,
+      "training_rows": 150,
+      "test_rows": 50,
+      "persona_preview": "age: 42\nsex: Male\nrace: Filipino alone\nancestry: Filipino\nhousehold language: English only\neducation..."
     }
   ]
 }

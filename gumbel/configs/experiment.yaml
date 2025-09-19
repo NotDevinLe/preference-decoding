@@ -1,10 +1,10 @@
 # Gumbel Distributed Training Experiment Configuration
-experiment_name: "baseline_1000_attrs"
+experiment_name: "baseline_400_attrs"
 description: "Baseline experiment with 100 attributes"
 
 # Model configuration
 model:
-  d: 1000
+  d: 400
   k: 10
   lr: 1e-3
   sparsity_weight: 1e-3
@@ -13,12 +13,12 @@ model:
 # Data configuration
 data:
   dataset_path: "gumbel/data/persona_train_dataset.pkl"
-  attribute_prompts_path: "gumbel/configs/attribute_prompts.json"
+  attribute_prompts_path: "gumbel/configs/attribute_prompts_400.json"
 
 # VLLM server configuration
 vllm:
   model_name: "meta-llama/Llama-3.2-1B-Instruct"
-  server_url: "http://localhost:8000"
+  server_url: "http://localhost:8080"
   gpu_memory_util: 0.6
   start_server: true       # Whether to auto-start VLLM server
 

@@ -7,38 +7,27 @@ import json
 import torch
 import torch.nn.functional as F
 
-lrs = 10 ** np.linspace(-6, -3, 10)
-sparsity_weights = 10 ** np.linspace(-6, -2, 10)
-components = [5, 10, 20, 50, 100]
+lrs = 10 ** np.linspace(-6, -2, 5)
+sparsity_weights = [1e-5]
+component_sizes = [5, 10, 20, 50, 100]
+print(f"Component sizes list: {component_sizes}")
+print(f"Component sizes types: {[type(c) for c in component_sizes]}")
 
-results = []
+best = {}
 
-for lr_val in lrs:
-    for sparsity_weight_val in sparsity_weights:
-        for n_components_val in components:
+for sparsity_weight_val in sparsity_weights:
+    best_loss = float('inf')
+    best_model = None
+    for lr_val in lrs:
+        for n_components_val in component_sizes:
+            print(f"Training with sparsity weight {sparsity_weight_val}, lr {lr_val}, and n_components {n_components_val}")
             
             # Ensure parameters are proper scalar types
             lr = float(lr_val)
             sparsity_weight = float(sparsity_weight_val)
             n_components = int(n_components_val)
 
-            wandb.init(
-                project="gumbel",
-                name=f"lr_{lr:.2e}_sparsity_weight_{sparsity_weight:.2e}_n_components_{n_components}",
-                config={
-                    "model": "SparsePCALightning",
-                    "n_components": n_components,
-                    "sparsity_weight": sparsity_weight,
-                    "lr": lr,
-                    "initial_temperature": 1.0,
-                    "final_temperature": 0.1,
-                    "anneal_rate": 0.99,
-                    "batch_size": 32,
-                    "max_epochs": 100
-                }
-            )
-
-            reward_matrix = np.load('data/reward_matrix_flexible.npz')['Y_chosen']
+            reward_matrix = np.load('reward_matrix_flexible.npz')['Y_chosen']
 
             model = SparsePCALightning(
                 input_dim=reward_matrix.shape[1],
@@ -53,37 +42,39 @@ for lr_val in lrs:
             val_loader = create_dataloader(reward_matrix[int(0.8 * reward_matrix.shape[0]):], batch_size=32)
 
             trainer = pl.Trainer(
-                max_epochs=100,
+                max_epochs=500,
                 accelerator='auto',
-                logger=pl.loggers.WandbLogger(project="gumbel"),
+                logger=pl.loggers.WandbLogger(project="gumbel",
+                    name=f"lr_{lr:.2e}_sparsity_weight_{sparsity_weight:.2e}_n_components_{n_components}",
+                    config={
+                        "model": "SparsePCALightning",
+                        "n_components": n_components,
+                        "sparsity_weight": sparsity_weight,
+                        "lr": lr,
+                    }),
                 callbacks=[TemperatureScheduler(initial_temp=1.0, final_temp=0.1)]
             )
 
             trainer.fit(model, train_loader, val_loader)
-            components, masks, mask_probs = model.get_sparse_components()
-
-            wandb.finish()
 
             model.eval()
 
-            reconstruction_error = F.mse_loss(model.forward(torch.from_numpy(reward_matrix))[1], torch.from_numpy(reward_matrix)).item()
-    
-            results.append({
-                "lr": float(lr),
-                "sparsity_weight": float(sparsity_weight),
-                "n_selected": int(masks.sum()),
-                "sparsity_ratio": float(masks.sum() / len(masks)),
-                "reconstruction_error": float(reconstruction_error),
-                "components": components.tolist(),
-                "masks": masks.tolist(),
-                "mask_probs": mask_probs.tolist(),
-                "n_components": int(n_components)
-            })
-            
-            print(f"Completed: lr={lr:.2e}, sparsity_weight={sparsity_weight:.2e}, n_components={n_components}")
-            print(f"  Selected features: {int(masks.sum())}/{len(masks)} ({100*masks.sum()/len(masks):.1f}%)")
-            print(f"  Reconstruction error: {reconstruction_error:.4f}")
-            print()
+            validation_matrix = torch.from_numpy(reward_matrix[int(0.8) * reward_matrix.shape[0]:])
+            validation_loss = model.validation_step(validation_matrix, 0, log=False).item()
+
+            if validation_loss < best_loss:
+                best_loss = validation_loss
+                best_model = model
+
+            wandb.finish()
+    best[sparsity_weight_val] = best_model
+
+component_results = {}
+
+for sparsity_weight_val in sparsity_weights:
+    components, _, _ = best[sparsity_weight_val].get_sparse_components()
+    component_results[sparsity_weight_val] = components
 
 with open('data/parameter_search_gumbel.json', 'w') as f:
-    json.dump(results, f)
+    json.dump(component_results, f)
+

@@ -157,13 +157,14 @@ class SparsePCALightning(pl.LightningModule):
         
         return loss
         
-    def validation_step(self, batch, batch_idx):
+    def validation_step(self, batch, batch_idx, log=True):
         # Unpack batch (TensorDataset returns a tuple)
         x = batch[0] if isinstance(batch, (list, tuple)) else batch
         x = F.normalize(x, p=2, dim=1)
         z, x_hat, masks = self.forward(x)
         val_loss = F.mse_loss(x_hat, x)
-        self.log('val_loss', val_loss, prog_bar=True)
+        if log:
+            self.log('val_loss', val_loss, prog_bar=True)
         return val_loss
         
     def on_train_end(self):
@@ -262,10 +263,10 @@ if __name__ == '__main__':
     )
     
     # Load reward matrix
-    reward_data = np.load('reward_matrix_flexible.npz')
+    reward_data = np.load('async_rewards.npz')
 
     # Reshape to (P*Q, A) - each row is one preference pair, columns are actions
-    X = reward_data['Y_chosen']
+    X = reward_data['Y_chosen'][:,:20]
     
     # Log data statistics
     wandb.log({
@@ -279,7 +280,7 @@ if __name__ == '__main__':
     # Create model
     model = SparsePCALightning(
         input_dim=X.shape[1],  # Number of actions/features
-        n_components=10,
+        n_components=200,
         lr=1e-3,
         sparsity_weight=sparsity_weight,
         temperature=1.0,
@@ -300,7 +301,7 @@ if __name__ == '__main__':
         accelerator='auto',
         logger=pl.loggers.WandbLogger(project="sparse-pca-analysis")
     )
-    
+
     # Train
     trainer.fit(model, train_loader, val_loader)
     
