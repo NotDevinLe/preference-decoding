@@ -11,6 +11,7 @@ from typing import List, Dict, Any, Tuple, Optional
 from literegistry import RegistryHTTPClient, FileSystemKVStore, RegistryClient
 import torch
 from transformers import AutoTokenizer
+from src.core.drift import compute_rewards
 
 attribute_prompts: Optional[List[str]] = None
 base_prompt: str = "You are a helpful assistant."
@@ -28,32 +29,10 @@ REQUEST_BATCH_SIZE = int(os.getenv("REQUEST_BATCH_SIZE", "512"))
 REQUEST_RETRIES = int(os.getenv("REQUEST_RETRIES", "3")) 
 REQUEST_TIMEOUT = float(os.getenv("REQUEST_TIMEOUT", "180")) 
 
-def build_full_prompt_and_ids(tokenizer, sys_prompt: str, user_prompt: str, completion: str):
-    """
-    Returns:
-      full_text, n_prefix_tokens, completion_len_tokens, prompt_ids, comp_ids
-    """
-    prompt_text = tokenizer.apply_chat_template(
-        [{"role": "system", "content": sys_prompt.strip()},
-         {"role": "user",   "content": user_prompt.strip()}],
-        tokenize=False,
-        add_generation_prompt=True,
-    )
-    prompt_ids = tokenizer([prompt_text], return_tensors=None, add_special_tokens=False)["input_ids"][0]
-    comp_ids   = tokenizer([completion], return_tensors=None, add_special_tokens=False)["input_ids"][0]
-    return prompt_text + completion, len(prompt_ids), len(comp_ids), prompt_ids, comp_ids
-
-def sum_completion_logprobs(resp_json: Dict[str, Any], n_prefix: int, comp_len: int) -> float:
-    lp = resp_json["choices"][0]["logprobs"]["token_logprobs"]
-    end = min(len(lp), n_prefix + comp_len)
-    seg = [x for x in lp[n_prefix:end] if x is not None]
-    return float(sum(seg))
-
-
 async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
     """
     Drift reward = attr_avg_logprob - base_avg_logprob  (shape [B, d])
-    Builds ALL (d+1)*B requests and dispatches them with bounded concurrency + retries.
+    Uses LiteRegistry for efficient server management and load balancing
     """
     # Validate components
     if tokenizer is None or vllm_server_url is None or model_name is None:
@@ -66,42 +45,44 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
 
     payloads: List[Dict[str, Any]] = []
     metas: List[Tuple[int, int, int]] = []
+    prefix_and_len: List[Tuple[int, int]] = []
 
-    def mk_payload(full_prompt: str) -> Dict[str, Any]:
-        return {
+    for i in range(B):
+        # Base prompt
+        full_prompt, prefix_len, comp_len = build_full_prompt(
+            tokenizer, base_prompt, prompts[i], outputs[i]
+        )
+        payloads.append({
             "model": model_name,
             "prompt": full_prompt,
             "max_tokens": 0,
             "temperature": 0.0,
             "echo": True,
             "logprobs": 1,
-        }
-
-    prefix_and_len: List[Tuple[int, int]] = []
-
-    for i in range(B):
-        full_prompt, n_prefix, comp_len, prompt_ids, comp_ids = build_full_prompt_and_ids(
-            tokenizer, base_prompt, prompts[i], outputs[i]
-        )
-        payloads.append(mk_payload(full_prompt))
+        })
         metas.append((i, -1, comp_len))
-        prefix_and_len.append((n_prefix, comp_len))
+        prefix_and_len.append((prefix_len, comp_len))
 
         for a_idx, a_sys in enumerate(attribute_prompts):
-            full_prompt, n_prefix, comp_len, prompt_ids, comp_ids = build_full_prompt_and_ids(
+            full_prompt, prefix_len, comp_len = build_full_prompt(
                 tokenizer, a_sys, prompts[i], outputs[i]
             )
-            payloads.append(mk_payload(full_prompt))
+            payloads.append({
+                "model": model_name,
+                "prompt": full_prompt,
+                "max_tokens": 0,
+                "temperature": 0.0,
+                "echo": True,
+                "logprobs": 1,
+            })
             metas.append((i, a_idx, comp_len))
-            prefix_and_len.append((n_prefix, comp_len))
+            prefix_and_len.append((prefix_len, comp_len))
     
     total_requests = len(payloads)
     logging.info(f"VLLM REQUESTS: Starting {total_requests} requests via LiteRegistry")
-    
     start_time = time.time()
     
     available_servers = await registryClient.get_all(model_name)
-
     if not available_servers:
         raise RuntimeError(f"No servers available for model {model_name}")
     
@@ -112,36 +93,9 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
         timeout=REQUEST_TIMEOUT,
         max_retries=REQUEST_RETRIES
     ) as httpClient:
-        logging.info(f"Sending {len(payloads)} requests in batches of {REQUEST_BATCH_SIZE}...")
-        
-        raw_results_with_servers = []
-        
-        tasks = [httpClient.request_with_rotation("v1/completions", payload, available_servers=len(available_servers)) for payload in payloads]
-        raw_results_with_servers = await asyncio.gather(*tasks, return_exceptions=True)
-        
-        server_usage = []
-        raw_results = []
-
-        for result in raw_results_with_servers:
-            if isinstance(result, Exception):
-                raw_results.append(result)
-                server_usage.append("ERROR")
-            else:
-                result_data, server_used = result
-                raw_results.append(result_data)
-                server_usage.append(server_used)
-        
-        from collections import Counter
-        server_counts = Counter(server_usage)
-        logging.info(f"Server usage statistics:")
-        for server, count in server_counts.items():
-            percentage = (count / len(server_usage)) * 100
-            logging.info(f"  {server}: {count} requests ({percentage:.1f}%)")
-        
-        if len(server_counts) > 1:
-            logging.info("✅ Requests were distributed across multiple servers")
-        else:
-            logging.warning("⚠️  All requests used the same server - rotation may not be working")
+        logging.info(f"Sending {len(payloads)} requests via LiteRegistry...")
+        raw_results = await httpClient.post("v1/completions", payloads, track=True)
+        logging.info("LiteRegistry batch processing completed")
     
     elapsed = time.time() - start_time
     logging.info(f"VLLM REQUESTS: Completed {total_requests} requests in {elapsed:.1f}s")
@@ -153,7 +107,7 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
 
     for idx, res in enumerate(raw_results):
         i, a_idx, comp_len = metas[idx]
-        n_prefix, comp_len_chk = prefix_and_len[idx]
+        prefix_len, comp_len_chk = prefix_and_len[idx]
         comp_len_eff = min(comp_len, comp_len_chk)
 
         if isinstance(res, Exception):
@@ -161,7 +115,7 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
             continue
 
         try:
-            s = sum_completion_logprobs(res, n_prefix, comp_len_eff)
+            s = sum_completion_logprobs(res, prefix_len, comp_len_eff)
             if a_idx == -1:
                 base_scores[i] += s
                 base_counts[i] += max(1, comp_len_eff)
@@ -173,7 +127,6 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
 
     base_avg = torch.where(base_counts > 0, base_scores / base_counts, torch.zeros_like(base_scores))
     attr_avg = torch.where(attr_counts > 0, attr_scores / torch.clamp_min(attr_counts, 1.0), torch.zeros_like(attr_scores))
-
     reward_matrix = attr_avg - base_avg[:, None]
     
     return reward_matrix

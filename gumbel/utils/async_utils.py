@@ -36,7 +36,7 @@ async def fetch_sum_lp(session: aiohttp.ClientSession, prompt: str, n_prefix: in
         "prompt": prompt,
         "echo": True,
         "logprobs": 1,
-        "max_tokens": 0,      # no generation; just score provided text
+        "max_tokens": 0,
         "temperature": 0.0,
     }
     url = vllm_url or VLLM_URL
@@ -50,12 +50,12 @@ async def fetch_sum_lp(session: aiohttp.ClientSession, prompt: str, n_prefix: in
                 return sum_completion_logprobs(data, n_prefix, comp_len)
         except (aiohttp.ClientConnectionResetError, aiohttp.ClientOSError, aiohttp.ClientConnectorError) as e:
             if attempt == max_retries - 1:
-                print(f"❌ VLLM REQUEST FAILED after {max_retries} attempts: {e}")
+                print(f"VLLM REQUEST FAILED after {max_retries} attempts: {e}")
                 raise
-            print(f"⚠️  VLLM CONNECTION ERROR (attempt {attempt + 1}/{max_retries}): {e} - retrying...")
+            print(f"VLLM CONNECTION ERROR (attempt {attempt + 1}/{max_retries}): {e} - retrying...")
             await asyncio.sleep(0.5 * (2 ** attempt))  # exponential backoff
         except Exception as e:
-            print(f"❌ VLLM REQUEST ERROR: {e}")
+            print(f"VLLM REQUEST ERROR: {e}")
             raise
 
 async def get_log_probs_async(session: aiohttp.ClientSession, tokenizer, system_prompts: List[str], user_prompts: List[str], completion_texts: List[str], vllm_url: str = None, model_id: str = None) -> Tuple[List[float], List[int]]:
@@ -73,13 +73,13 @@ async def get_log_probs_async(session: aiohttp.ClientSession, tokenizer, system_
     try:
         log_probs = await asyncio.gather(*tasks, return_exceptions=True)
     except Exception as e:
-        print(f"❌ GATHER ERROR: {e}")
+        print(f"GATHER ERROR: {e}")
         raise
     
     # Check for exceptions in results
     for i, result in enumerate(log_probs):
         if isinstance(result, Exception):
-            print(f"❌ TASK {i} FAILED: {result}")
+            print(f"TASK {i} FAILED: {result}")
             raise result
     
     token_counts = [comp_len for _, comp_len in prompts_data]
@@ -145,7 +145,7 @@ async def compute_drift_rewards(session: aiohttp.ClientSession, tokenizer, promp
                 session, tokenizer, batch_system, batch_user, batch_completion, vllm_url, model_id
             )
         except Exception as e:
-            print(f"❌ BATCH PROCESSING ERROR (batch {i//batch_size + 1}): {e}")
+            print(f"BATCH PROCESSING ERROR (batch {i//batch_size + 1}): {e}")
             # For partial failure, we could implement fallback logic here
             raise
         
