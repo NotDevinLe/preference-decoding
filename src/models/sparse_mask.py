@@ -1,4 +1,4 @@
-from ..utils.utils import bernoulli_gumbel_soft, straight_through
+from utils.gumbel_utils import bernoulli_gumbel_soft, straight_through
 import os, math, time
 import torch
 import torch.nn as nn

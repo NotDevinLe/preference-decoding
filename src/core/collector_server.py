@@ -18,7 +18,7 @@ import uvicorn
 import torch
 from transformers import AutoTokenizer
 
-from .sampler import DataSampler
+from src.core.sampler import DataSampler
 
 class CollectionRequest(BaseModel):
     users_per_batch: int

@@ -1,5 +1,0 @@
-input_dim: 5800
-n_components: 10
-sparsity_weight: 0.01
-temperature: 1.0
-hard_gumbel: true

@@ -1,5 +1,4 @@
 import asyncio
-import aiohttp
 import os
 import time
 from typing import Tuple, List, Dict
@@ -7,11 +6,8 @@ import torch
 import numpy as np
 from transformers import AutoTokenizer
 from transformers import LogitsProcessor
+from literegistry.literegistry.http import RegistryHTTPClient
 
-VLLM_URL = os.getenv("VLLM_URL", "http://localhost:8080/v1/completions")
-MODEL_ID  = os.getenv("MODEL_ID", "meta-llama/Llama-3.2-1B-Instruct")
-CONCURRENCY = int(os.getenv("VLLM_CONCURRENCY", "256"))
-MAX_RETRIES = int(os.getenv("VLLM_MAX_RETRIES", "3"))
 
 def build_full_prompt(tokenizer, sys_prompt: str, user_prompt: str, completion: str) -> Tuple[str, int, int]:
     """Return: full_text (prompt+completion), prefix_tokens, completion_tokens"""
@@ -31,35 +27,8 @@ def sum_completion_logprobs(resp_json, prefix_len: int, comp_len: int) -> float:
     seg = [x for x in lp[prefix_len:end] if x is not None]
     return float(sum(seg))
 
-async def fetch_sum_lp(session: aiohttp.ClientSession, prompt: str, prefix_len: int, comp_len: int, vllm_url: str = None, model_id: str = None, max_retries: int = None) -> float:
-    payload = {
-        "model": model_id or MODEL_ID,
-        "prompt": prompt,
-        "echo": True,
-        "logprobs": 1,
-        "max_tokens": 0,
-        "temperature": 0.0,
-    }
-    url = vllm_url or VLLM_URL
-    max_retries = max_retries or MAX_RETRIES
-    
-    for attempt in range(max_retries):
-        try:
-            async with session.post(url, json=payload) as r:
-                r.raise_for_status()
-                data = await r.json()
-                return sum_completion_logprobs(data, prefix_len, comp_len)
-        except (aiohttp.ClientConnectionResetError, aiohttp.ClientOSError, aiohttp.ClientConnectorError) as e:
-            if attempt == max_retries - 1:
-                print(f"VLLM REQUEST FAILED after {max_retries} attempts: {e}")
-                raise
-            print(f"VLLM CONNECTION ERROR (attempt {attempt + 1}/{max_retries}): {e} - retrying...")
-            await asyncio.sleep(0.5 * (2 ** attempt))  # exponential backoff
-        except Exception as e:
-            print(f"VLLM REQUEST ERROR: {e}")
-            raise
 
-async def get_log_probs_async_registry(http_client, tokenizer, system_prompts: List[str], user_prompts: List[str], completion_texts: List[str], model_name: str) -> Tuple[List[float], List[int]]:
+async def get_log_probs(http_client, tokenizer, system_prompts: List[str], user_prompts: List[str], completion_texts: List[str], model_name: str) -> Tuple[List[float], List[int]]:
     """
     Registry-based async version of get_log_probs using RegistryHTTPClient
     """
@@ -110,53 +79,23 @@ async def get_log_probs_async_registry(http_client, tokenizer, system_prompts: L
     
     return log_probs, token_counts
 
-async def get_log_probs_async(session: aiohttp.ClientSession, tokenizer, system_prompts: List[str], user_prompts: List[str], completion_texts: List[str], vllm_url: str = None, model_id: str = None) -> Tuple[List[float], List[int]]:
-    """
-    Async version of get_log_probs using aiohttp
-    """
-    tasks = []
-    prompts_data = []
-    
-    for sys_prompt, user_prompt, completion in zip(system_prompts, user_prompts, completion_texts):
-        full_prompt, prefix_len, comp_len = build_full_prompt(tokenizer, sys_prompt, user_prompt, completion)
-        prompts_data.append((prefix_len, comp_len))
-        tasks.append(fetch_sum_lp(session, full_prompt, prefix_len, comp_len, vllm_url, model_id))
-    
-    try:
-        log_probs = await asyncio.gather(*tasks, return_exceptions=True)
-    except Exception as e:
-        print(f"GATHER ERROR: {e}")
-        raise
-    
-    # Check for exceptions in results
-    for i, result in enumerate(log_probs):
-        if isinstance(result, Exception):
-            print(f"TASK {i} FAILED: {result}")
-            raise result
-    
-    token_counts = [comp_len for _, comp_len in prompts_data]
-    
-    return log_probs, token_counts
-
-
 
 async def compute_drift_rewards(registry_client, tokenizer, prompts: List[str], outputs: List[str], 
                                base_prompt: str, attribute_prompts: List[str], model_name: str = None, device = None) -> torch.Tensor:
     """
-    Compute drift rewards using LiteRegistry: attr_avg_logprob - base_avg_logprob (shape [B, d])
-    OPTIMIZED VERSION: Uses registry for efficient server management and load balancing
+    Efficient batch computation of drift rewards: attr_avg_logprob - base_avg_logprob (shape [B, d])
+    Uses single batch request instead of multiple separate calls for better efficiency.
     """
     import torch
-    from literegistry.literegistry.http import RegistryHTTPClient
     
     B = len(outputs)
     d = len(attribute_prompts)
     if B == 0:
         return torch.zeros(0, d, device=device)
 
-    # Build ALL requests at once: base + all attributes
+    # Build ALL payloads at once: base + all attributes
     payloads = []
-    request_map = []  # Track which request corresponds to which (type, attr_idx, sample_idx)
+    metas = []  # Track which request corresponds to which (sample_idx, attr_idx, comp_len)
     
     # Base prompts for all samples
     for i in range(B):
@@ -169,7 +108,7 @@ async def compute_drift_rewards(registry_client, tokenizer, prompts: List[str], 
             "echo": True,
             "logprobs": 1,
         })
-        request_map.append(("base", 0, i, prefix_len, comp_len))
+        metas.append((i, -1, prefix_len, comp_len))  # -1 indicates base prompt
     
     # Attribute prompts for all samples
     for attr_idx in range(d):
@@ -183,21 +122,12 @@ async def compute_drift_rewards(registry_client, tokenizer, prompts: List[str], 
                 "echo": True,
                 "logprobs": 1,
             })
-            request_map.append(("attr", attr_idx, i, prefix_len, comp_len))
+            metas.append((i, attr_idx, prefix_len, comp_len))
     
-    total_requests = len(payloads)
-    print(f"Processing {total_requests} requests via LiteRegistry ({B} samples × {d+1} prompts)...")
-    start_time = time.time()
-    
-    # Check server availability
-    available_servers = await registry_client.get_all(model_name)
-    if not available_servers:
-        raise RuntimeError(f"No servers available for model {model_name}")
-    
-    # Use RegistryHTTPClient for efficient batch processing
     REQUEST_TIMEOUT = float(os.getenv("REQUEST_TIMEOUT", "180"))
     REQUEST_RETRIES = int(os.getenv("REQUEST_RETRIES", "3"))
     
+    # Make single batch request
     async with RegistryHTTPClient(
         registry=registry_client,
         value=model_name,
@@ -205,36 +135,37 @@ async def compute_drift_rewards(registry_client, tokenizer, prompts: List[str], 
         timeout=REQUEST_TIMEOUT,
         max_retries=REQUEST_RETRIES
     ) as httpClient:
-        print(f"Sending {len(payloads)} requests via LiteRegistry...")
         raw_results = await httpClient.post("v1/completions", payloads, track=True)
-        print("LiteRegistry batch processing completed")
-    
-    elapsed = time.time() - start_time
-    print(f"Completed {total_requests} requests in {elapsed:.2f}s ({total_requests/elapsed:.1f} req/sec)")
     
     # Process results and build reward matrix
-    base_scores = torch.zeros(B, device=device)
-    attr_scores = torch.zeros(B, d, device=device)
+    base_scores = torch.zeros(B, dtype=torch.float32, device=device)
+    base_counts = torch.zeros(B, dtype=torch.float32, device=device)
+    attr_scores = torch.zeros(B, d, dtype=torch.float32, device=device)
+    attr_counts = torch.zeros(B, d, dtype=torch.float32, device=device)
     
-    for i, (request_type, attr_idx, sample_idx, prefix_len, comp_len) in enumerate(request_map):
-        result = raw_results[i]
+    for idx, result in enumerate(raw_results):
+        sample_idx, attr_idx, prefix_len, comp_len = metas[idx]
         
         if isinstance(result, Exception):
-            print(f"Request {i} failed: {result}")
+            print(f"Request failed for sample={sample_idx}, attr={attr_idx}: {result}")
             continue
             
         try:
             score = sum_completion_logprobs(result, prefix_len, comp_len)
             
-            if request_type == "base":
-                base_scores[sample_idx] = score
-            else:  # attr
-                attr_scores[sample_idx, attr_idx] = score
+            if attr_idx == -1:  # Base prompt
+                base_scores[sample_idx] += score
+                base_counts[sample_idx] += max(1, comp_len)
+            else:  # Attribute prompt
+                attr_scores[sample_idx, attr_idx] += score
+                attr_counts[sample_idx, attr_idx] += max(1, comp_len)
         except Exception as e:
-            print(f"Parse failed for request {i}: {e}")
+            print(f"Parse failed for sample={sample_idx}, attr={attr_idx}: {e}")
     
-    # Compute drift: attr_score - base_score for each attribute
-    reward_matrix = attr_scores - base_scores.unsqueeze(1)
+    # Compute averages and drift
+    base_avg = torch.where(base_counts > 0, base_scores / base_counts, torch.zeros_like(base_scores))
+    attr_avg = torch.where(attr_counts > 0, attr_scores / torch.clamp_min(attr_counts, 1.0), torch.zeros_like(attr_scores))
+    reward_matrix = attr_avg - base_avg[:, None]
     
     return reward_matrix
 
@@ -270,7 +201,6 @@ async def approximate_async_registry(registry_client, data: List[Tuple[str, str,
     Returns:
         p vector (numpy array)
     """
-    from literegistry.literegistry.http import RegistryHTTPClient
     
     m, k = len(data), len(s_list)
     questions, yw_list, yl_list = zip(*data)
@@ -292,8 +222,8 @@ async def approximate_async_registry(registry_client, data: List[Tuple[str, str,
     ) as httpClient:
         # Compute base probabilities
         print("Computing base probabilities...")
-        pi_yw_base, cnt_yw_base = await get_log_probs_async_registry(httpClient, tokenizer, [s0]*m, questions, yw_list, model_name)
-        pi_yl_base, cnt_yl_base = await get_log_probs_async_registry(httpClient, tokenizer, [s0]*m, questions, yl_list, model_name)
+        pi_yw_base, cnt_yw_base = await get_log_probs(httpClient, tokenizer, [s0]*m, questions, yw_list, model_name)
+        pi_yl_base, cnt_yl_base = await get_log_probs(httpClient, tokenizer, [s0]*m, questions, yl_list, model_name)
         
         # Convert to tensors
         pi_yw_base = torch.tensor(pi_yw_base, dtype=torch.float32)
@@ -312,8 +242,8 @@ async def approximate_async_registry(registry_client, data: List[Tuple[str, str,
         for j, system in enumerate(s_list):
             print(f"Processing attribute {j+1}/{k}: {system[:50]}...")
             
-            pi_yw_attr, cnt_yw_attr = await get_log_probs_async_registry(httpClient, tokenizer, [system]*m, questions, yw_list, model_name)
-            pi_yl_attr, cnt_yl_attr = await get_log_probs_async_registry(httpClient, tokenizer, [system]*m, questions, yl_list, model_name)
+            pi_yw_attr, cnt_yw_attr = await get_log_probs(httpClient, tokenizer, [system]*m, questions, yw_list, model_name)
+            pi_yl_attr, cnt_yl_attr = await get_log_probs(httpClient, tokenizer, [system]*m, questions, yl_list, model_name)
             
             pi_yw_attr = torch.tensor(pi_yw_attr, dtype=torch.float32)
             cnt_yw_attr = torch.tensor(cnt_yw_attr, dtype=torch.float32)
@@ -351,7 +281,6 @@ async def evaluate_accuracy_async_registry(registry_client, test_data: List[Dict
     Returns:
         accuracy (float)
     """
-    from literegistry.literegistry.http import RegistryHTTPClient
     
     n = len(test_data)
     prompts = [item['prompt'] for item in test_data]
@@ -375,8 +304,8 @@ async def evaluate_accuracy_async_registry(registry_client, test_data: List[Dict
     ) as httpClient:
         # Get base log probabilities
         print("Computing base log probabilities for test data...")
-        chosen_base_probs, chosen_base_counts = await get_log_probs_async_registry(httpClient, tokenizer, [base_prompt]*n, prompts, chosen, model_name)
-        rejected_base_probs, rejected_base_counts = await get_log_probs_async_registry(httpClient, tokenizer, [base_prompt]*n, prompts, rejected, model_name)
+        chosen_base_probs, chosen_base_counts = await get_log_probs(httpClient, tokenizer, [base_prompt]*n, prompts, chosen, model_name)
+        rejected_base_probs, rejected_base_counts = await get_log_probs(httpClient, tokenizer, [base_prompt]*n, prompts, rejected, model_name)
         
         # Initialize drift scores
         drift_scores = torch.zeros(n, dtype=torch.float32)
@@ -388,8 +317,8 @@ async def evaluate_accuracy_async_registry(registry_client, test_data: List[Dict
                 
             print(f"Processing test attribute {i+1}/{len(attribute_prompts)}: p={p[i]:.4f}")
             
-            chosen_attr_probs, chosen_attr_counts = await get_log_probs_async_registry(httpClient, tokenizer, [attr_prompt]*n, prompts, chosen, model_name)
-            rejected_attr_probs, rejected_attr_counts = await get_log_probs_async_registry(httpClient, tokenizer, [attr_prompt]*n, prompts, rejected, model_name)
+            chosen_attr_probs, chosen_attr_counts = await get_log_probs(httpClient, tokenizer, [attr_prompt]*n, prompts, chosen, model_name)
+            rejected_attr_probs, rejected_attr_counts = await get_log_probs(httpClient, tokenizer, [attr_prompt]*n, prompts, rejected, model_name)
             
             # Convert to tensors and compute averages
             chosen_attr_avg = torch.tensor(chosen_attr_probs, dtype=torch.float32) / torch.tensor(chosen_attr_counts, dtype=torch.float32)
