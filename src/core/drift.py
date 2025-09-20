@@ -64,9 +64,9 @@ async def get_log_probs(http_client, tokenizer, system_prompts: List[str], user_
     for i, result in enumerate(results):
         if isinstance(result, Exception):
             print(f"TASK {i} FAILED: {result}")
-            log_probs.append(0.0)  # Default value for failed requests
+            log_probs.append(0.0)
         else:
-            response, _ = result  # Unpack (response, server_idx)
+            response, _ = result
             prefix_len, comp_len = prompts_data[i]
             try:
                 log_prob = sum_completion_logprobs(response, prefix_len, comp_len)
