@@ -1,15 +1,32 @@
 from typing import List
-from src.core.drift import get_log_probs
+import torch
 
 class BaseVector:
-    def __init__(self, vector):
+    def __init__(self, vector=None):
         self.vector = vector
 
     def evaluate(self, text: str) -> float:
-        return await get_log_probs(self.vector, text)        
+        """
+        Evaluate text using the vector. 
+        Base implementation - should be overridden by subclasses.
+        """
+        raise NotImplementedError("Subclasses must implement evaluate method")
     
     def train(self, data: List[str]) -> None:
-        pass
+        """
+        Train the vector on data.
+        Base implementation - should be overridden by subclasses.
+        """
+        raise NotImplementedError("Subclasses must implement train method")
     
-    def get_vector(self) -> List[float]:
-        pass
+    def get_vector(self) -> torch.Tensor:
+        """
+        Get the current vector.
+        """
+        return self.vector
+    
+    def set_vector(self, vector: torch.Tensor) -> None:
+        """
+        Set the vector.
+        """
+        self.vector = vector
