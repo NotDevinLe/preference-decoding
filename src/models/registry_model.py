@@ -213,7 +213,7 @@ def create_qalign_with_gateway(gateway_url, tokenizer, model_name, bonvoyage_vec
     Returns:
         QAlign instance ready to use
     """
-    from src.models.qalign.qalign_generator import QAlign
+    from src.models.qalign.qalign import QAlign
     
     # Create wrappers
     model_wrapper = RegistryModelWrapper(gateway_url, tokenizer, model_name)
