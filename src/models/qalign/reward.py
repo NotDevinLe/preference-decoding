@@ -19,6 +19,8 @@ import torch
 from typing import Dict
 from torch import nn
 
+from src.core.drift import compute_drift_rewards
+
 
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 class Reward:
@@ -107,3 +109,35 @@ class ConstantReward(Reward):
 
     def set_context(self, *args, **kwargs):
         pass
+
+class VectorReward(Reward):
+    """
+    A class for a vector reward.
+    """
+    def __init__(self, vector: List[float]):
+        self.vector = vector
+        super().__init__(f"vector:{self.vector}")
+        
+    def evaluate(self, conversations: List[List[Dict[str, str]]],
+        gateway_url,
+        tokenizer,
+        base_prompt,
+        attribute_prompts,
+        model_name,
+        device,
+    ) -> List[float]:
+
+
+        prompts = [conversation[0]['content'] for conversation in conversations]
+        outputs = [conversation[1]['content'] for conversation in conversations]
+        
+        return await compute_drift_rewards(
+            gateway_url=gateway_url,
+            tokenizer=tokenizer,
+            prompts=prompts,
+            outputs=outputs,
+            base_prompt=base_prompt,
+            attribute_prompts=attribute_prompts,
+            model_name=model_name,
+            device=device,
+        )
