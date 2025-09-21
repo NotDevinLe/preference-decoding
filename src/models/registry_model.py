@@ -14,8 +14,8 @@ class RegistryModelWrapper:
     - tokenizer attribute with apply_chat_template method
     """
     
-    def __init__(self, registry_client, tokenizer, model_name):
-        self.registry_client = registry_client
+    def __init__(self, gateway_url, tokenizer, model_name):
+        self.gateway_url = gateway_url
         self.tokenizer = tokenizer
         self.model_name = model_name
     
@@ -117,9 +117,9 @@ class RegistryModelWrapper:
             tokenized.append(tokens)
         return tokenized
     
-    def _generate_with_registry(self, input_text: str) -> str:
+    def _generate_with_gateway(self, input_text: str) -> str:
         """
-        Generate text using your registry client.
+        Generate text using VLLM-compatible gateway.
         
         Args:
             input_text: Input prompt text
@@ -128,31 +128,26 @@ class RegistryModelWrapper:
             str: Generated completion text
         """
         import asyncio
-        from literegistry.http import RegistryHTTPClient
+        import aiohttp
         
         async def _async_generate():
-            async with RegistryHTTPClient(
-                registry=self.registry_client,
-                value=self.model_name,
-                timeout=120,  # 2 minute timeout for generation
-                max_retries=3
-            ) as client:
+            timeout = aiohttp.ClientTimeout(total=120)  # 2 minute timeout
+            async with aiohttp.ClientSession(timeout=timeout) as session:
                 # Prepare the generation payload
                 payload = {
+                    "model": self.model_name,
                     "prompt": input_text,
                     "max_tokens": 512,
                     "temperature": 1.0,
                     "stop": None  # Let the model decide when to stop
                 }
                 
-                # Make the request
-                result, _ = await client.request_with_rotation(
-                    endpoint="v1/completions",
-                    payload=payload
-                )
+                # Make the request to gateway
+                async with session.post(f"{self.gateway_url}/v1/completions", json=payload) as response:
+                    response.raise_for_status()
+                    result = await response.json()
                 
                 # Extract the generated text from the response
-                # Assuming the response format matches OpenAI-style completions
                 if "choices" in result and len(result["choices"]) > 0:
                     return result["choices"][0].get("text", "")
                 elif "text" in result:
@@ -182,10 +177,10 @@ class BonVoyageRewardWrapper:
     Simple wrapper to adapt BonVoyageVector for QAlign's reward interface.
     """
     
-    def __init__(self, bonvoyage_vector, tokenizer, registry_client):
+    def __init__(self, bonvoyage_vector, tokenizer, gateway_url):
         self.bonvoyage = bonvoyage_vector
         self.tokenizer = tokenizer
-        self.registry_client = registry_client
+        self.gateway_url = gateway_url
     
     def evaluate(self, conversations):
         """
@@ -200,18 +195,18 @@ class BonVoyageRewardWrapper:
         return self.bonvoyage.evaluate_for_qalign(
             conversations, 
             self.tokenizer, 
-            self.registry_client
+            self.gateway_url
         )
 
 
-def create_qalign_with_registry(registry_client, tokenizer, model_name, bonvoyage_vector, beta=0.1):
+def create_qalign_with_gateway(gateway_url, tokenizer, model_name, bonvoyage_vector, beta=0.1):
     """
-    Create a QAlign instance using your registry infrastructure.
+    Create a QAlign instance using your gateway infrastructure.
     
     Args:
-        registry_client: Your registry client for model calls
+        gateway_url: URL of the VLLM-compatible gateway
         tokenizer: HuggingFace tokenizer
-        model_name: Model name for registry
+        model_name: Model name for the gateway
         bonvoyage_vector: Your BonVoyageVector instance
         beta: Temperature parameter for QAlign
         
@@ -221,8 +216,8 @@ def create_qalign_with_registry(registry_client, tokenizer, model_name, bonvoyag
     from src.models.qalign.qalign_generator import QAlign
     
     # Create wrappers
-    model_wrapper = RegistryModelWrapper(registry_client, tokenizer, model_name)
-    reward_wrapper = BonVoyageRewardWrapper(bonvoyage_vector, tokenizer, registry_client)
+    model_wrapper = RegistryModelWrapper(gateway_url, tokenizer, model_name)
+    reward_wrapper = BonVoyageRewardWrapper(bonvoyage_vector, tokenizer, gateway_url)
     
     # Create QAlign instance
     qalign = QAlign(

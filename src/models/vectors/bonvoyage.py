@@ -13,11 +13,11 @@ class BonVoyageVector(BaseVector):
         self.mc_samples = mc_samples
         self.model_name = model_name
 
-    async def compute_chosen_rewards(self, data, tokenizer, registry_client):
+    async def compute_chosen_rewards(self, data, tokenizer, gateway_url):
         """Compute reward vectors for chosen responses in training data."""
         print("Computing chosen rewards...")
         chosen_data = [(item['prompt'], item['chosen']) for item in data]
-        chosen_rewards = await self.get_reward(chosen_data, tokenizer, registry_client)
+        chosen_rewards = await self.get_reward(chosen_data, tokenizer, gateway_url)
         print(f"Computed rewards for {len(data)} chosen responses")
         return chosen_rewards
     
@@ -59,7 +59,7 @@ class BonVoyageVector(BaseVector):
         print("Training completed!")
 
     
-    async def _estimate_expectation_with_qalign(self, data_item, steps, tokenizer, registry_client, beta):
+    async def _estimate_expectation_with_qalign(self, data_item, steps, tokenizer, gateway_url, beta):
         """Estimate expectation using QAlign generator."""
         if self.qalign_generator is None:
             return torch.zeros(self.p.shape[0], device=self.device)
@@ -92,20 +92,20 @@ class BonVoyageVector(BaseVector):
         reward_data = [(data_item['prompt'], text) for text in generated_texts[:self.mc_samples]]
         
         # Compute rewards for generated samples
-        sample_rewards = await self.get_reward(reward_data, tokenizer, registry_client)
+        sample_rewards = await self.get_reward(reward_data, tokenizer, gateway_url)
         
         # Compute expected reward (mean across samples)
         expected_reward = torch.mean(sample_rewards, dim=0)
         
         return expected_reward
 
-    async def get_reward(self, data, tokenizer, registry_client):
+    async def get_reward(self, data, tokenizer, gateway_url):
         """Compute reward for data using drift rewards."""
         flat_questions = [prompt for prompt, _ in data]
         flat_outputs = [output for _, output in data]
         
         reward_matrix = await compute_drift_rewards(
-            registry_client=registry_client,
+            gateway_url=gateway_url,
             tokenizer=tokenizer,
             prompts=flat_questions,
             outputs=flat_outputs,
@@ -147,14 +147,14 @@ class BonVoyageVector(BaseVector):
             steps=steps
         )
     
-    def evaluate_for_qalign(self, conversations, tokenizer, registry_client):
+    def evaluate_for_qalign(self, conversations, tokenizer, gateway_url):
         """
         QAlign-compatible reward evaluation method.
         
         Args:
             conversations: List of conversations with system/user/assistant messages
             tokenizer: Tokenizer for reward computation
-            registry_client: Registry client for reward computation
+            gateway_url: URL of the VLLM-compatible gateway
             
         Returns:
             List[float]: Scalar reward scores (one per conversation)
@@ -188,16 +188,16 @@ class BonVoyageVector(BaseVector):
                     # If we're in an async context, we need to use a different approach
                     import concurrent.futures
                     with concurrent.futures.ThreadPoolExecutor() as executor:
-                        future = executor.submit(asyncio.run, self.get_reward(reward_data, tokenizer, registry_client))
+                        future = executor.submit(asyncio.run, self.get_reward(reward_data, tokenizer, gateway_url))
                         reward_matrix = future.result()
                 else:
                     reward_matrix = loop.run_until_complete(
-                        self.get_reward(reward_data, tokenizer, registry_client)
+                        self.get_reward(reward_data, tokenizer, gateway_url)
                     )
             except RuntimeError:
                 # No event loop exists, create a new one
                 reward_matrix = asyncio.run(
-                    self.get_reward(reward_data, tokenizer, registry_client)
+                    self.get_reward(reward_data, tokenizer, gateway_url)
                 )
             
             # Convert to scalar rewards using learned preference vector

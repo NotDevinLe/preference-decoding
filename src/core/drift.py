@@ -6,7 +6,7 @@ import torch
 import numpy as np
 from transformers import AutoTokenizer
 from transformers import LogitsProcessor
-from literegistry.http import RegistryHTTPClient
+import aiohttp
 
 
 def build_full_prompt(tokenizer, sys_prompt: str, user_prompt: str, completion: str) -> Tuple[str, int, int]:
@@ -28,9 +28,15 @@ def sum_completion_logprobs(resp_json, prefix_len: int, comp_len: int) -> float:
     return float(sum(seg))
 
 
-async def get_log_probs(http_client, tokenizer, system_prompts: List[str], user_prompts: List[str], completion_texts: List[str], model_name: str) -> Tuple[List[float], List[int]]:
+async def make_vllm_request(session: aiohttp.ClientSession, gateway_url: str, payload: Dict) -> Dict:
+    """Make a single request to VLLM-compatible gateway"""
+    async with session.post(f"{gateway_url}/v1/completions", json=payload) as response:
+        response.raise_for_status()
+        return await response.json()
+
+async def get_log_probs(session: aiohttp.ClientSession, gateway_url: str, tokenizer, system_prompts: List[str], user_prompts: List[str], completion_texts: List[str], model_name: str) -> Tuple[List[float], List[int]]:
     """
-    Registry-based async version of get_log_probs using RegistryHTTPClient
+    Simple VLLM gateway version of get_log_probs
     """
     tasks = []
     prompts_data = []
@@ -39,7 +45,7 @@ async def get_log_probs(http_client, tokenizer, system_prompts: List[str], user_
         full_prompt, prefix_len, comp_len = build_full_prompt(tokenizer, sys_prompt, user_prompt, completion)
         prompts_data.append((prefix_len, comp_len))
         
-        # Create payload for registry client
+        # Create standard VLLM payload
         payload = {
             "model": model_name,
             "prompt": full_prompt,
@@ -49,8 +55,8 @@ async def get_log_probs(http_client, tokenizer, system_prompts: List[str], user_
             "logprobs": 1,
         }
         
-        # Use registry client to make request
-        task = http_client.request_with_rotation("v1/completions", payload)
+        # Make request to gateway
+        task = make_vllm_request(session, gateway_url, payload)
         tasks.append(task)
     
     try:
@@ -66,10 +72,9 @@ async def get_log_probs(http_client, tokenizer, system_prompts: List[str], user_
             print(f"TASK {i} FAILED: {result}")
             log_probs.append(0.0)
         else:
-            response, _ = result
             prefix_len, comp_len = prompts_data[i]
             try:
-                log_prob = sum_completion_logprobs(response, prefix_len, comp_len)
+                log_prob = sum_completion_logprobs(result, prefix_len, comp_len)
                 log_probs.append(log_prob)
             except Exception as e:
                 print(f"Parse error for task {i}: {e}")
@@ -80,11 +85,11 @@ async def get_log_probs(http_client, tokenizer, system_prompts: List[str], user_
     return log_probs, token_counts
 
 
-async def compute_drift_rewards(registry_client, tokenizer, prompts: List[str], outputs: List[str], 
+async def compute_drift_rewards(gateway_url: str, tokenizer, prompts: List[str], outputs: List[str], 
                                base_prompt: str, attribute_prompts: List[str], model_name: str = None, device = None) -> torch.Tensor:
     """
     Efficient batch computation of drift rewards: attr_avg_logprob - base_avg_logprob (shape [B, d])
-    Uses single batch request instead of multiple separate calls for better efficiency.
+    Uses direct HTTP requests to VLLM-compatible gateway.
     """
     import torch
     
@@ -93,49 +98,49 @@ async def compute_drift_rewards(registry_client, tokenizer, prompts: List[str], 
     if B == 0:
         return torch.zeros(0, d, device=device)
 
-    # Build ALL payloads at once: base + all attributes
-    payloads = []
+    # Build ALL requests at once: base + all attributes
+    tasks = []
     metas = []  # Track which request corresponds to which (sample_idx, attr_idx, comp_len)
     
-    # Base prompts for all samples
-    for i in range(B):
-        full_prompt, prefix_len, comp_len = build_full_prompt(tokenizer, base_prompt, prompts[i], outputs[i])
-        payloads.append({
-            "model": model_name,
-            "prompt": full_prompt,
-            "max_tokens": 0,
-            "temperature": 0.0,
-            "echo": True,
-            "logprobs": 1,
-        })
-        metas.append((i, -1, prefix_len, comp_len))  # -1 indicates base prompt
+    REQUEST_TIMEOUT = float(os.getenv("REQUEST_TIMEOUT", "180"))
     
-    # Attribute prompts for all samples
-    for attr_idx in range(d):
+    # Create HTTP session
+    timeout = aiohttp.ClientTimeout(total=REQUEST_TIMEOUT)
+    async with aiohttp.ClientSession(timeout=timeout) as session:
+        
+        # Base prompts for all samples
         for i in range(B):
-            full_prompt, prefix_len, comp_len = build_full_prompt(tokenizer, attribute_prompts[attr_idx], prompts[i], outputs[i])
-            payloads.append({
+            full_prompt, prefix_len, comp_len = build_full_prompt(tokenizer, base_prompt, prompts[i], outputs[i])
+            payload = {
                 "model": model_name,
                 "prompt": full_prompt,
                 "max_tokens": 0,
                 "temperature": 0.0,
                 "echo": True,
                 "logprobs": 1,
-            })
-            metas.append((i, attr_idx, prefix_len, comp_len))
-    
-    REQUEST_TIMEOUT = float(os.getenv("REQUEST_TIMEOUT", "180"))
-    REQUEST_RETRIES = int(os.getenv("REQUEST_RETRIES", "3"))
-    
-    # Make single batch request
-    async with RegistryHTTPClient(
-        registry=registry_client,
-        value=model_name,
-        max_parallel_requests=1024,
-        timeout=REQUEST_TIMEOUT,
-        max_retries=REQUEST_RETRIES
-    ) as httpClient:
-        raw_results = await httpClient.post("v1/completions", payloads, track=True)
+            }
+            task = make_vllm_request(session, gateway_url, payload)
+            tasks.append(task)
+            metas.append((i, -1, prefix_len, comp_len))  # -1 indicates base prompt
+        
+        # Attribute prompts for all samples
+        for attr_idx in range(d):
+            for i in range(B):
+                full_prompt, prefix_len, comp_len = build_full_prompt(tokenizer, attribute_prompts[attr_idx], prompts[i], outputs[i])
+                payload = {
+                    "model": model_name,
+                    "prompt": full_prompt,
+                    "max_tokens": 0,
+                    "temperature": 0.0,
+                    "echo": True,
+                    "logprobs": 1,
+                }
+                task = make_vllm_request(session, gateway_url, payload)
+                tasks.append(task)
+                metas.append((i, attr_idx, prefix_len, comp_len))
+        
+        # Execute all requests
+        raw_results = await asyncio.gather(*tasks, return_exceptions=True)
     
     # Process results and build reward matrix
     base_scores = torch.zeros(B, dtype=torch.float32, device=device)
@@ -185,15 +190,15 @@ def l1_solve(d_mean, l1_lambda, std=None):
     else:
         return z / (norm * std)
 
-async def approximate_async_registry(registry_client, data: List[Tuple[str, str, str]], tokenizer, model_name: str, s0: str, s_list: List[str], l1_lambda: float = 0.01) -> np.ndarray:
+async def approximate_async_gateway(gateway_url: str, data: List[Tuple[str, str, str]], tokenizer, model_name: str, s0: str, s_list: List[str], l1_lambda: float = 0.01) -> np.ndarray:
     """
-    Async version using LiteRegistry for the approximate function
+    Async version using VLLM gateway for the approximate function
     
     Args:
-        registry_client: LiteRegistry client for server management
+        gateway_url: URL of the VLLM-compatible gateway
         data: list of (question, y_w, y_l) tuples
         tokenizer: tokenizer
-        model_name: model identifier for registry
+        model_name: model identifier
         s0: base system prompt
         s_list: list of attribute system prompts
         l1_lambda: L1 regularization parameter
@@ -205,25 +210,14 @@ async def approximate_async_registry(registry_client, data: List[Tuple[str, str,
     m, k = len(data), len(s_list)
     questions, yw_list, yl_list = zip(*data)
     
-    # Check server availability
-    available_servers = await registry_client.get_all(model_name)
-    if not available_servers:
-        raise RuntimeError(f"No servers available for model {model_name}")
-    
     REQUEST_TIMEOUT = float(os.getenv("REQUEST_TIMEOUT", "180"))
-    REQUEST_RETRIES = int(os.getenv("REQUEST_RETRIES", "3"))
+    timeout = aiohttp.ClientTimeout(total=REQUEST_TIMEOUT)
     
-    async with RegistryHTTPClient(
-        registry=registry_client,
-        value=model_name,
-        max_parallel_requests=1024,
-        timeout=REQUEST_TIMEOUT,
-        max_retries=REQUEST_RETRIES
-    ) as httpClient:
+    async with aiohttp.ClientSession(timeout=timeout) as session:
         # Compute base probabilities
         print("Computing base probabilities...")
-        pi_yw_base, cnt_yw_base = await get_log_probs(httpClient, tokenizer, [s0]*m, questions, yw_list, model_name)
-        pi_yl_base, cnt_yl_base = await get_log_probs(httpClient, tokenizer, [s0]*m, questions, yl_list, model_name)
+        pi_yw_base, cnt_yw_base = await get_log_probs(session, gateway_url, tokenizer, [s0]*m, questions, yw_list, model_name)
+        pi_yl_base, cnt_yl_base = await get_log_probs(session, gateway_url, tokenizer, [s0]*m, questions, yl_list, model_name)
         
         # Convert to tensors
         pi_yw_base = torch.tensor(pi_yw_base, dtype=torch.float32)
@@ -242,8 +236,8 @@ async def approximate_async_registry(registry_client, data: List[Tuple[str, str,
         for j, system in enumerate(s_list):
             print(f"Processing attribute {j+1}/{k}: {system[:50]}...")
             
-            pi_yw_attr, cnt_yw_attr = await get_log_probs(httpClient, tokenizer, [system]*m, questions, yw_list, model_name)
-            pi_yl_attr, cnt_yl_attr = await get_log_probs(httpClient, tokenizer, [system]*m, questions, yl_list, model_name)
+            pi_yw_attr, cnt_yw_attr = await get_log_probs(session, gateway_url, tokenizer, [system]*m, questions, yw_list, model_name)
+            pi_yl_attr, cnt_yl_attr = await get_log_probs(session, gateway_url, tokenizer, [system]*m, questions, yl_list, model_name)
             
             pi_yw_attr = torch.tensor(pi_yw_attr, dtype=torch.float32)
             cnt_yw_attr = torch.tensor(cnt_yw_attr, dtype=torch.float32)
@@ -265,16 +259,16 @@ async def approximate_async_registry(registry_client, data: List[Tuple[str, str,
     
     return p
 
-async def evaluate_accuracy_async_registry(registry_client, test_data: List[Dict[str, str]], p: np.ndarray, tokenizer, model_name: str, base_prompt: str, attribute_prompts: List[str]) -> float:
+async def evaluate_accuracy_async_gateway(gateway_url: str, test_data: List[Dict[str, str]], p: np.ndarray, tokenizer, model_name: str, base_prompt: str, attribute_prompts: List[str]) -> float:
     """
-    Evaluate preference pair accuracy on test data using the learned p vector and LiteRegistry
+    Evaluate preference pair accuracy on test data using the learned p vector and VLLM gateway
     
     Args:
-        registry_client: LiteRegistry client for server management
+        gateway_url: URL of the VLLM-compatible gateway
         test_data: list of preference pairs with 'prompt', 'chosen', 'rejected'
         p: learned drift vector
         tokenizer: tokenizer
-        model_name: model identifier for registry
+        model_name: model identifier
         base_prompt: base system prompt
         attribute_prompts: list of attribute prompts
     
@@ -287,25 +281,14 @@ async def evaluate_accuracy_async_registry(registry_client, test_data: List[Dict
     chosen = [item['chosen'] for item in test_data]
     rejected = [item['rejected'] for item in test_data]
     
-    # Check server availability
-    available_servers = await registry_client.get_all(model_name)
-    if not available_servers:
-        raise RuntimeError(f"No servers available for model {model_name}")
-    
     REQUEST_TIMEOUT = float(os.getenv("REQUEST_TIMEOUT", "180"))
-    REQUEST_RETRIES = int(os.getenv("REQUEST_RETRIES", "3"))
+    timeout = aiohttp.ClientTimeout(total=REQUEST_TIMEOUT)
     
-    async with RegistryHTTPClient(
-        registry=registry_client,
-        value=model_name,
-        max_parallel_requests=1024,
-        timeout=REQUEST_TIMEOUT,
-        max_retries=REQUEST_RETRIES
-    ) as httpClient:
+    async with aiohttp.ClientSession(timeout=timeout) as session:
         # Get base log probabilities
         print("Computing base log probabilities for test data...")
-        chosen_base_probs, chosen_base_counts = await get_log_probs(httpClient, tokenizer, [base_prompt]*n, prompts, chosen, model_name)
-        rejected_base_probs, rejected_base_counts = await get_log_probs(httpClient, tokenizer, [base_prompt]*n, prompts, rejected, model_name)
+        chosen_base_probs, chosen_base_counts = await get_log_probs(session, gateway_url, tokenizer, [base_prompt]*n, prompts, chosen, model_name)
+        rejected_base_probs, rejected_base_counts = await get_log_probs(session, gateway_url, tokenizer, [base_prompt]*n, prompts, rejected, model_name)
         
         # Initialize drift scores
         drift_scores = torch.zeros(n, dtype=torch.float32)
@@ -317,8 +300,8 @@ async def evaluate_accuracy_async_registry(registry_client, test_data: List[Dict
                 
             print(f"Processing test attribute {i+1}/{len(attribute_prompts)}: p={p[i]:.4f}")
             
-            chosen_attr_probs, chosen_attr_counts = await get_log_probs(httpClient, tokenizer, [attr_prompt]*n, prompts, chosen, model_name)
-            rejected_attr_probs, rejected_attr_counts = await get_log_probs(httpClient, tokenizer, [attr_prompt]*n, prompts, rejected, model_name)
+            chosen_attr_probs, chosen_attr_counts = await get_log_probs(session, gateway_url, tokenizer, [attr_prompt]*n, prompts, chosen, model_name)
+            rejected_attr_probs, rejected_attr_counts = await get_log_probs(session, gateway_url, tokenizer, [attr_prompt]*n, prompts, rejected, model_name)
             
             # Convert to tensors and compute averages
             chosen_attr_avg = torch.tensor(chosen_attr_probs, dtype=torch.float32) / torch.tensor(chosen_attr_counts, dtype=torch.float32)
