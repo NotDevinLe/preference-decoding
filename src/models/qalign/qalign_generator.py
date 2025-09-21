@@ -15,9 +15,9 @@ import queue
 import threading
 from copy import deepcopy
 import os
-from src.evaluation.qalign.timing_utils import timing_decorator
-from src.evaluation.qalign.list_utils import join_accepted_values, process_batch_outputs, repeat_on_reject
-from src.evaluation.qalign.math_utils import sample_index, log_prob_index
+from src.models.qalign.timing_utils import timing_decorator
+from src.models.qalign.list_utils import join_accepted_values, process_batch_outputs, repeat_on_reject
+from src.models.qalign.math_utils import sample_index, log_prob_index
 
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
@@ -610,6 +610,7 @@ class QAlign:
         result_queue = queue.PriorityQueue() 
         
         # Dictionary to store results in order
+        from collections import OrderedDict
         results_dict = OrderedDict()
         
         # Event to signal threads to stop

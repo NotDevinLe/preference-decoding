@@ -6,7 +6,7 @@ import torch
 import numpy as np
 from transformers import AutoTokenizer
 from transformers import LogitsProcessor
-from literegistry.literegistry.http import RegistryHTTPClient
+from literegistry.http import RegistryHTTPClient
 
 
 def build_full_prompt(tokenizer, sys_prompt: str, user_prompt: str, completion: str) -> Tuple[str, int, int]:

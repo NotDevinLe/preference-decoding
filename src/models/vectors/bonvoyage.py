@@ -181,16 +181,24 @@ class BonVoyageVector(BaseVector):
             return []
         
         try:
-            loop = asyncio.get_event_loop()
-        except RuntimeError:
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-        
-        try:
-            # Get reward matrix
-            reward_matrix = loop.run_until_complete(
-                self.get_reward(reward_data, tokenizer, registry_client)
-            )
+            # Try to get the current event loop
+            try:
+                loop = asyncio.get_event_loop()
+                if loop.is_running():
+                    # If we're in an async context, we need to use a different approach
+                    import concurrent.futures
+                    with concurrent.futures.ThreadPoolExecutor() as executor:
+                        future = executor.submit(asyncio.run, self.get_reward(reward_data, tokenizer, registry_client))
+                        reward_matrix = future.result()
+                else:
+                    reward_matrix = loop.run_until_complete(
+                        self.get_reward(reward_data, tokenizer, registry_client)
+                    )
+            except RuntimeError:
+                # No event loop exists, create a new one
+                reward_matrix = asyncio.run(
+                    self.get_reward(reward_data, tokenizer, registry_client)
+                )
             
             # Convert to scalar rewards using learned preference vector
             scalar_rewards = torch.sum(reward_matrix * self.p, dim=1).tolist()
