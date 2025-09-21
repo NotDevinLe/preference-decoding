@@ -126,21 +126,55 @@ class RegistryModelWrapper:
             
         Returns:
             str: Generated completion text
-            
-        Note: You'll need to implement this based on your registry API
         """
-        # TODO: Replace this with your actual registry generation call
-        # Example:
-        # response = self.registry_client.generate(
-        #     model_name=self.model_name,
-        #     prompt=input_text,
-        #     max_tokens=512,
-        #     temperature=1.0
-        # )
-        # return response.text
+        import asyncio
+        from literegistry.http import RegistryHTTPClient
         
-        # Placeholder - replace with your registry call
-        return "Generated text placeholder"
+        async def _async_generate():
+            async with RegistryHTTPClient(
+                registry=self.registry_client,
+                value=self.model_name,
+                timeout=120,  # 2 minute timeout for generation
+                max_retries=3
+            ) as client:
+                # Prepare the generation payload
+                payload = {
+                    "prompt": input_text,
+                    "max_tokens": 512,
+                    "temperature": 1.0,
+                    "stop": None  # Let the model decide when to stop
+                }
+                
+                # Make the request
+                result, _ = await client.request_with_rotation(
+                    endpoint="v1/completions",
+                    payload=payload
+                )
+                
+                # Extract the generated text from the response
+                # Assuming the response format matches OpenAI-style completions
+                if "choices" in result and len(result["choices"]) > 0:
+                    return result["choices"][0].get("text", "")
+                elif "text" in result:
+                    return result["text"]
+                else:
+                    # Fallback: return the whole result as string if format is unexpected
+                    return str(result)
+        
+        # Run the async function and return the result
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                # If we're already in an async context, we need to use a different approach
+                import concurrent.futures
+                with concurrent.futures.ThreadPoolExecutor() as executor:
+                    future = executor.submit(asyncio.run, _async_generate())
+                    return future.result()
+            else:
+                return loop.run_until_complete(_async_generate())
+        except RuntimeError:
+            # If no event loop exists, create a new one
+            return asyncio.run(_async_generate())
 
 
 class BonVoyageRewardWrapper:
