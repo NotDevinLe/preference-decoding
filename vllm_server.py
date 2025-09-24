@@ -134,8 +134,10 @@ class VLLMServerManager:
         if self.quantization:
             cmd.extend(["--quantization", self.quantization])
 
+        print(f"vllm_server_{self.registry.server_id}.log")
+        log_file = open(f"vllm_server_{self.registry.server_id}.log", "w")
         self.process = subprocess.Popen(
-            cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            cmd, stdout=log_file, stderr=subprocess.STDOUT, universal_newlines=True
         )
         print(f"Started vLLM server with PID {self.process.pid}")
 
@@ -218,7 +220,7 @@ def main(
     host: str = "0.0.0.0",
     tensor_parallel_size: int = 1,
     gpu_memory_utilization: float = 0.95,
-    registry_dir: str = "/gscratch/ark/graf/registry",
+    registry_dir: str = "/gscratch/ark/devinl6/registry",
     quantization: str = None,
     max_new_tokens=800,
     max_prompt_length=1200,

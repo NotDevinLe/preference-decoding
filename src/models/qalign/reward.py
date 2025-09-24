@@ -114,18 +114,17 @@ class VectorReward(Reward):
     """
     A class for a vector reward.
     """
-    def __init__(self, vector: List[float], attribute_prompts: List[str]):
+    def __init__(self, vector: List[float], attribute_prompts: List[str], gateway_url=None, tokenizer=None, base_prompt=None, model_name=None, device=None):
         self.vector = vector
         self.attribute_prompts = attribute_prompts
+        self.gateway_url = gateway_url
+        self.tokenizer = tokenizer
+        self.base_prompt = base_prompt
+        self.model_name = model_name
+        self.device = device
         super().__init__(f"vector:{self.vector}")
         
-    def evaluate(self, conversations: List[List[Dict[str, str]]],
-        gateway_url,
-        tokenizer,
-        base_prompt,
-        model_name,
-        device,
-    ) -> List[float]:
+    def evaluate(self, conversations: List[List[Dict[str, str]]]) -> List[float]:
         """
         Evaluates drift rewards for conversations.
         
@@ -159,17 +158,17 @@ class VectorReward(Reward):
         async def _async_compute_rewards():
             # Call the async compute_drift_rewards function
             reward_matrix = await compute_drift_rewards(
-                gateway_url=gateway_url,
-                tokenizer=tokenizer,
+                gateway_url=self.gateway_url,
+                tokenizer=self.tokenizer,
                 prompts=prompts,
                 outputs=outputs,
-                base_prompt=base_prompt,
+                base_prompt=self.base_prompt,
                 attribute_prompts=self.attribute_prompts,
-                model_name=model_name,
-                device=device,
+                model_name=self.model_name,
+                device=self.device,
             )
             
-            vector_tensor = torch.tensor(self.vector, device=device, dtype=torch.float32)
+            vector_tensor = torch.tensor(self.vector, device=self.device, dtype=torch.float32)
             scalar_rewards = torch.sum(reward_matrix * vector_tensor, dim=1)
             
             return scalar_rewards.tolist()
