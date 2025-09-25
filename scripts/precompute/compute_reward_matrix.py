@@ -8,10 +8,10 @@ import asyncio
 import logging
 import argparse
 from typing import List, Dict, Any, Tuple, Optional
-from literegistry import RegistryHTTPClient, FileSystemKVStore, RegistryClient
+import aiohttp
 import torch
 from transformers import AutoTokenizer
-from src.core.drift import compute_rewards
+from src.core.drift import compute_rewards, build_full_prompt, sum_completion_logprobs
 
 attribute_prompts: Optional[List[str]] = None
 base_prompt: str = "You are a helpful assistant."
@@ -21,13 +21,24 @@ vllm_server_url: Optional[str] = None
 model_name: Optional[str] = None
 tokenizer: Optional[AutoTokenizer] = None
 
-httpClient: Optional[RegistryHTTPClient] = None
-fileSystemKVStore: Optional[FileSystemKVStore] = None
-registryClient: Optional[RegistryClient] = None
-
-REQUEST_BATCH_SIZE = int(os.getenv("REQUEST_BATCH_SIZE", "512"))
+REQUEST_BATCH_SIZE = int(os.getenv("REQUEST_BATCH_SIZE", "1024"))
 REQUEST_RETRIES = int(os.getenv("REQUEST_RETRIES", "3")) 
-REQUEST_TIMEOUT = float(os.getenv("REQUEST_TIMEOUT", "180")) 
+REQUEST_TIMEOUT = float(os.getenv("REQUEST_TIMEOUT", "180"))
+
+async def _send_request(session: aiohttp.ClientSession, server_url: str, payload: Dict[str, Any]) -> Dict[str, Any]:
+    """Send a single request to the server (VLLM or gateway)."""
+    url = f"{server_url}/v1/completions"
+    timeout = aiohttp.ClientTimeout(total=REQUEST_TIMEOUT)
+    
+    try:
+        async with session.post(url, json=payload, timeout=timeout) as response:
+            if response.status == 200:
+                return await response.json()
+            else:
+                error_text = await response.text()
+                raise aiohttp.ClientError(f"HTTP {response.status}: {error_text}")
+    except Exception as e:
+        return e 
 
 async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
     """
@@ -79,23 +90,30 @@ async def compute_rewards(user_data: Dict[str, Any], d: int) -> torch.Tensor:
             prefix_and_len.append((prefix_len, comp_len))
     
     total_requests = len(payloads)
-    logging.info(f"VLLM REQUESTS: Starting {total_requests} requests via LiteRegistry")
+    logging.info(f"VLLM REQUESTS: Starting {total_requests} requests via Gateway")
     start_time = time.time()
     
-    available_servers = await registryClient.get_all(model_name)
-    if not available_servers:
-        raise RuntimeError(f"No servers available for model {model_name}")
-    
-    async with RegistryHTTPClient(
-        registry=registryClient,
-        value=model_name,
-        max_parallel_requests=1024,
-        timeout=REQUEST_TIMEOUT,
-        max_retries=REQUEST_RETRIES
-    ) as httpClient:
-        logging.info(f"Sending {len(payloads)} requests via LiteRegistry...")
-        raw_results = await httpClient.post("v1/completions", payloads, track=True)
-        logging.info("LiteRegistry batch processing completed")
+    # Send requests directly to gateway
+    async with aiohttp.ClientSession() as session:
+        logging.info(f"Sending {len(payloads)} requests to gateway...")
+        
+        # Process requests in batches to avoid overwhelming the server
+        batch_size = REQUEST_BATCH_SIZE
+        raw_results = []
+        
+        for i in range(0, len(payloads), batch_size):
+            batch = payloads[i:i+batch_size]
+            batch_tasks = []
+            
+            for payload in batch:
+                batch_tasks.append(_send_request(session, vllm_server_url, payload))
+            
+            batch_results = await asyncio.gather(*batch_tasks, return_exceptions=True)
+            raw_results.extend(batch_results)
+            
+            logging.info(f"Completed batch {i//batch_size + 1}/{(len(payloads) + batch_size - 1)//batch_size}")
+        
+        logging.info("Gateway batch processing completed")
     
     elapsed = time.time() - start_time
     logging.info(f"VLLM REQUESTS: Completed {total_requests} requests in {elapsed:.1f}s")
@@ -164,10 +182,6 @@ def initialize_collector(
 
     attribute_prompts = attribute_prompts_local
 
-    global fileSystemKVStore, registryClient
-    fileSystemKVStore = FileSystemKVStore("/gscratch/ark/devinl6/registry")
-    registryClient = RegistryClient(fileSystemKVStore, service_type="model_path")
-
 async def main():
     parser = argparse.ArgumentParser(description="Reward Matrix Computation Script")
     parser.add_argument("--config", type=str, help="Path to YAML/JSON config file", default="gumbel/configs/experiment.yaml")
@@ -175,7 +189,7 @@ async def main():
     args = parser.parse_args()
     
     try:
-        from ..utils.config_loader import load_config, ConfigLoader
+        from utils.config_loader import load_config, ConfigLoader
         config = load_config(args.config)
         collector_config = ConfigLoader.get_collector_config(config)
         
@@ -203,23 +217,21 @@ async def main():
         model_name_arg=model_name,
     )
 
-    available_servers = await registryClient.get_all(model_name)
-    for i, server in enumerate(available_servers):
-        try:
-            import aiohttp
-            async with aiohttp.ClientSession() as test_session:
-                async with test_session.get(f"{server}/health", timeout=aiohttp.ClientTimeout(total=5)) as resp:
-                    if resp.status == 200:
-                        logging.info(f"Server {i+1}: {server} - HEALTHY")
-                    else:
-                        logging.warning(f"Server {i+1}: {server} - UNHEALTHY (status {resp.status})")
-        except Exception as e:
-            logging.warning(f"Server {i+1}: {server} - UNREACHABLE ({type(e).__name__}: {e})")
+    # Test server connection
+    try:
+        async with aiohttp.ClientSession() as test_session:
+            async with test_session.get(f"{vllm_url}/health", timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                if resp.status == 200:
+                    logging.info(f"Server: {vllm_url} - HEALTHY")
+                else:
+                    logging.warning(f"Server: {vllm_url} - UNHEALTHY (status {resp.status})")
+    except Exception as e:
+        logging.warning(f"Server: {vllm_url} - UNREACHABLE ({type(e).__name__}: {e})")
 
 
     total_rewards = []
     try:
-        for i in range(151, 171):
+        for i in range(11, 200):
             dataset_path = f'data/persona_pref/user{i}_train.json'
             logging.info(f"Processing user {i} from {dataset_path}")
             

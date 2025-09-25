@@ -85,7 +85,7 @@ async def get_log_probs(session: aiohttp.ClientSession, gateway_url: str, tokeni
     return log_probs, token_counts
 
 
-async def compute_drift_rewards(gateway_url: str, tokenizer, prompts: List[str], outputs: List[str], 
+async def compute_rewards(gateway_url: str, tokenizer, prompts: List[str], outputs: List[str], 
                                base_prompt: str, attribute_prompts: List[str], model_name: str = None, device = None) -> torch.Tensor:
     """
     Efficient batch computation of drift rewards: attr_avg_logprob - base_avg_logprob (shape [B, d])

@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=start_checkpoints
 #SBATCH --account=ark
-#SBATCH --partition=ckpt-g2
-#SBATCH --gpus-per-node=2
+#SBATCH --partition=ckpt-all
+#SBATCH --gpus-per-node=8
 #SBATCH --nodes=5
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=5
@@ -26,9 +26,9 @@ srun python /gscratch/ark/devinl6/preference/preference-decoding/vllm_server.py 
   --model meta-llama/Llama-3.2-1B-Instruct \
   --host 0.0.0.0 \
   --port $PORT \
-  --tensor-parallel-size 2 \
+  --tensor-parallel-size 8 \
   --gpu-memory-utilization 0.70 \
   --registry_dir "/gscratch/ark/devinl6/registry" \
   --max_new_tokens 2048 \
   --max_prompt_length 2048 \
-  --dtype bfloat16
+  --dtype float16

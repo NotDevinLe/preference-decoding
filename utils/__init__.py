@@ -3,21 +3,19 @@ Utilities for preference decoding and MLE training.
 """
 
 # Core classes and functions
-from .mle import MLE
-from .drift import get_log_probs, get_scores
-from .attribute_prompts import attribute_prompts, base_prompt
-from .qalign import qalign
+from src.core.drift import build_full_prompt, sum_completion_logprobs
+from src.core.attribute_prompts import attribute_prompts, base_prompt
+from src.models.qalign.qalign import QAlign
 
 # Make key modules easily importable
-from . import drift
-from . import attribute_prompts
+import src.core.drift as drift
+import src.core.attribute_prompts as attribute_prompts
 
 __all__ = [
-    'MLE',
-    'get_log_probs', 
-    'get_scores',
+    'build_full_prompt', 
+    'sum_completion_logprobs',
     'attribute_prompts',
     'base_prompt',
-    'qalign',
+    'QAlign',
     'drift',
 ]
