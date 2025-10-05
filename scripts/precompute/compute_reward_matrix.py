@@ -184,7 +184,7 @@ def initialize_collector(
 
 async def main():
     parser = argparse.ArgumentParser(description="Reward Matrix Computation Script")
-    parser.add_argument("--config", type=str, help="Path to YAML/JSON config file", default="gumbel/configs/experiment.yaml")
+    parser.add_argument("--config", type=str, help="Path to YAML/JSON config file", default="configs/experiment.yaml")
     parser.add_argument("--output-path", type=str, default="rewards.pt", help="Output path for reward matrix")
     args = parser.parse_args()
     
@@ -231,7 +231,7 @@ async def main():
 
     total_rewards = []
     try:
-        for i in range(11, 200):
+        for i in range(200, 300):
             dataset_path = f'data/persona_pref/user{i}_train.json'
             logging.info(f"Processing user {i} from {dataset_path}")
             

@@ -1,0 +1,54 @@
+# Sparse Autoencoder Configuration
+# This configuration file replaces the hardcoded Config class in train.py
+
+# Model architecture
+model:
+  n_dirs: 32768           # Number of dictionary directions/features
+  d_model: 768            # Input dimension (e.g., transformer hidden size)
+  k: 32                   # Number of active features (sparsity level)
+  auxk: 256               # Auxiliary features for auxiliary loss
+  dead_toks_threshold: 10000000  # Threshold for dead token detection
+
+# Training hyperparameters
+training:
+  batch_size: 131072      # Global batch size
+  learning_rate: 1e-4      # Learning rate
+  eps: 6.25e-10           # Adam epsilon
+  clip_grad: null         # Gradient clipping (null to disable)
+  auxk_coef: 0.03125     # Coefficient for auxiliary loss (1/32)
+  ema_multiplier: null    # EMA multiplier (null to disable)
+
+# Logging and monitoring
+logging:
+  wandb_project: null     # Weights & Biases project name (null to disable)
+  wandb_name: null        # Weights & Biases run name (null for auto-generated)
+  
+# Data settings
+data:
+  # Add your data configuration here
+  # Example:
+  # dataset_path: "/path/to/your/data"
+  # max_sequence_length: 2048
+  # tokenizer_name: "gpt2"
+
+# Device settings
+device:
+  use_cuda: true          # Use CUDA if available
+  device_id: 0            # CUDA device ID
+
+# Checkpointing
+checkpointing:
+  save_dir: "./checkpoints"  # Directory to save checkpoints
+  save_frequency: 1000    # Save every N steps
+  max_checkpoints: 5      # Maximum number of checkpoints to keep
+
+# Validation
+validation:
+  eval_frequency: 1000    # Evaluate every N steps
+  eval_steps: 100         # Number of steps for evaluation
+
+# Advanced settings
+advanced:
+  use_amp: false          # Use automatic mixed precision
+  compile_model: false    # Use torch.compile (PyTorch 2.0+)
+  profile: false          # Enable profiling

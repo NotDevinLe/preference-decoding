@@ -15,6 +15,7 @@ source /gscratch/ark/devinl6/miniconda3/etc/profile.d/conda.sh
 conda activate align
 export PATH=/gscratch/ark/devinl6/envs/align/bin:$PATH
 export HF_HOME=/mmfs1/gscratch/ark/devinl6/hf_cache
+export vllm_cache_dir=/gscratch/ark/devinl6/vllm_cache
 
 # Get the task ID for port assignment
 NODE_ID=${SLURM_PROCID}

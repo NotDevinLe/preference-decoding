@@ -8,7 +8,7 @@ import numpy as np
 
 class SparsePCALightning(pl.LightningModule):
     def __init__(self, input_dim, n_components, lr = 1e-3, sparsity_weight=0.1,
-                 temperature=1.0, hard_gumbel=True):
+                 temperature=1.0, weight_decay=0.0, hard_gumbel=True):
         super().__init__()
         self.save_hyperparameters()
         # Main networks
@@ -23,7 +23,7 @@ class SparsePCALightning(pl.LightningModule):
         self.sparsity_weight = sparsity_weight
         self.temperature = temperature
         self.hard_gumbel = hard_gumbel
-        
+        self.weight_decay = weight_decay
         # Initialize wandb logging
         self.log_components_plot = True
         self.log_mask_plot = True
@@ -120,14 +120,16 @@ class SparsePCALightning(pl.LightningModule):
         # Normalize data across dimensions (features)
         x = F.normalize(x, p=2, dim=1)  # L2 normalize each sample
         z, x_hat, masks = self.forward(x)
+
+        p = torch.sigmoid(self.mask_logits)                # [D]
+        gate_hard = (p > 0.5).float().unsqueeze(0)
         
-        # Reconstruction loss
-        recon_loss = F.mse_loss(x_hat, x)
-        
-        # Sparsity loss - encourage masks to be sparse
-        # Use the probability of being "on" (sigmoid of logits)
+        # x_hat = x_hat * gate_hard
+
+        recon_loss = F.mse_loss((x_hat - x),
+                            torch.zeros_like(x), reduction='mean')
         mask_probs = torch.sigmoid(self.mask_logits)
-        sparsity_loss = mask_probs.mean()  # Penalize high probabilities
+        sparsity_loss = mask_probs.mean()
         
         # Total loss
         loss = recon_loss + self.sparsity_weight * sparsity_loss
@@ -158,14 +160,20 @@ class SparsePCALightning(pl.LightningModule):
         return loss
         
     def validation_step(self, batch, batch_idx, log=True):
-        # Unpack batch (TensorDataset returns a tuple)
         x = batch[0] if isinstance(batch, (list, tuple)) else batch
         x = F.normalize(x, p=2, dim=1)
-        z, x_hat, masks = self.forward(x)
-        val_loss = F.mse_loss(x_hat, x)
+        _, x_hat, _ = self.forward(x)
+
+        p = torch.sigmoid(self.mask_logits)          # [D]
+        gate_hard = (p > 0.5).float().unsqueeze(0)   # [1, D]
+        # x_hat = x_hat * gate_hard
+
+        val_loss = F.mse_loss((x_hat - x),
+                            torch.zeros_like(x), reduction='mean')
         if log:
             self.log('val_loss', val_loss, prog_bar=True)
         return val_loss
+
         
     def on_train_end(self):
         """Log final results and create summary plots"""
@@ -187,19 +195,43 @@ class SparsePCALightning(pl.LightningModule):
                 "final_active_features": int(masks.sum()),
                 "final_total_features": len(masks),
                 "final_sparsity_ratio": float(masks.sum() / len(masks)),
-                "final_avg_mask_prob": float(mask_probs.mean())
+                "final_avg_mask_prob": float(mask_probs.mean()),
+                "final_std_mask_prob": float(mask_probs.std())
             })
         
     def configure_optimizers(self):
-        optimizer = torch.optim.Adam(self.parameters(), lr=self.lr)
+        decay, no_decay = [], []
+
+        for name, p in self.named_parameters():
+            if not p.requires_grad:
+                continue
+            if name == "mask_logits" or name.endswith("bias"):
+                no_decay.append(p)              # no weight decay on the selector (and biases)
+            else:
+                decay.append(p)
+
+        optimizer = torch.optim.AdamW(
+            [
+                {"params": decay,    "weight_decay": self.weight_decay},
+                {"params": no_decay, "weight_decay": 0.0},
+            ],
+            lr=self.lr,
+        )
+
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            optimizer, mode='min', factor=0.5, patience=10
+            optimizer, mode="min", factor=0.5, patience=10
         )
         return {
-            'optimizer': optimizer,
-            'lr_scheduler': scheduler,
-            'monitor': 'val_loss'
+            "optimizer": optimizer,
+            "lr_scheduler": {
+                "scheduler": scheduler,
+                "monitor": "val_loss",
+                "interval": "epoch",
+                "frequency": 1,
+            },
         }
+
+
         
     def get_sparse_components(self):
         """
@@ -239,102 +271,106 @@ class TemperatureScheduler(pl.Callback):
 
 if __name__ == '__main__':
     # Initialize wandb
-
-
-    from argparse import ArgumentParser
-    parser = ArgumentParser()
-    parser.add_argument("--sparsity_weight", type=float, default=0.0)
-    args = parser.parse_args()
-    sparsity_weight = args.sparsity_weight
-
-    wandb.init(
-        project="selection-validation",
-        name="gumbel-sparse-pca",
-        config={
-            "model": "SparsePCALightning",
-            "n_components": 50,
-            "lr": 1e-2,
-            "sparsity_weight": sparsity_weight,
-            "initial_temperature": 1.0,
-            "final_temperature": 0.1,
-            "anneal_rate": 0.99,
-            "batch_size": 32,
-            "max_epochs": 200
-        }
-    )
     
     # Load reward matrix
-    reward_data = np.load('async_rewards.npz')['Y_chosen']
+    reward_data = torch.load('data/rewards.pt')
 
     # Reshape to (P*Q, A) - each row is one preference pair, columns are actions
-    X = reward_data
+    X = reward_data.numpy()
+    X = (X - X.mean(axis=0)) / np.sqrt(X.var(axis=0) + 1e-6)
     mask = np.random.uniform(-1, 1, X.shape[1])
     
-    # Log data statistics
-    wandb.log({
-        "data_shape": X.shape,
-        "data_mean": float(X.mean()),
-        "data_std": float(X.std()),
-        "data_min": float(X.min()),
-        "data_max": float(X.max())
-    })
 
-    # Create model
-    model = SparsePCALightning(
-        input_dim=X.shape[1],  # Number of actions/features
-        n_components=50,
-        lr=1e-2,
-        sparsity_weight=sparsity_weight,
-        temperature=1.0,
-        hard_gumbel=True
-    )
-    
-    # Create data loaders (80/20 train/val split)
-    n_samples = X.shape[0]
-    n_train = int(0.8 * n_samples)
-    train_loader = create_dataloader(X[:n_train], batch_size=32)
-    val_loader = create_dataloader(X[n_train:], batch_size=32, shuffle=False)
-    
-    # Create trainer with temperature scheduling
-    temp_scheduler = TemperatureScheduler(initial_temp=1.0, final_temp=0.1)
-    trainer = pl.Trainer(
-        max_epochs=200,
-        callbacks=[temp_scheduler],
-        accelerator='auto',
-        logger=pl.loggers.WandbLogger(project="selection-validation")
-    )
+    weight_decays = [1e-4]
+    learning_rates = [1e-2]
+    sparsity_weights = [5e-4, 7e-4, 1e-3]
 
-    # Train
-    trainer.fit(model, train_loader, val_loader)
-    
-    # Get learned sparse components
-    components, masks, mask_probs = model.get_sparse_components()
-    
-    # Log final results
-    print(f"Selected features: {masks.sum()}/{len(masks)}")
-    print(f"Average mask probability: {mask_probs.mean():.3f}")
-    print(f"Active feature indices: {np.where(masks)[0]}")
-    
-    # Create and log final summary plots
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
-    
-    # Component heatmap
-    im1 = ax1.imshow(components, cmap='RdBu_r', aspect='auto')
-    ax1.set_xlabel('Features/Dimensions')
-    ax1.set_ylabel('Components')
-    ax1.set_title('Final Learned Components')
-    plt.colorbar(im1, ax=ax1)
-    
-    # Feature masks
-    ax2.bar(range(len(masks)), masks, alpha=0.7, color='green')
-    ax2.set_xlabel('Feature Index')
-    ax2.set_ylabel('Binary Mask (0/1)')
-    ax2.set_title(f'Final Feature Masks ({int(masks.sum())}/{len(masks)} active)')
-    ax2.set_ylim(-0.1, 1.1)
-    
-    plt.tight_layout()
-    wandb.log({"final_summary": wandb.Image(fig)})
-    plt.close(fig)
-    
-    # Finish wandb run
-    wandb.finish()
+    for weight_decay in weight_decays:
+        for learning_rate in learning_rates:
+            for sparsity_weight in sparsity_weights:
+                wandb.init(
+                    project="selection-validation",
+                    name="gumbel-sparse-pca",
+                    config={
+                        "model": "SparsePCALightning",
+                        "n_components": 50,
+                        "weight_decay": weight_decay,
+                        "learning_rate": learning_rate,
+                        "sparsity_weight": sparsity_weight,
+                        "initial_temperature": 1.0,
+                        "final_temperature": 0.1,
+                        "anneal_rate": 0.99,
+                        "batch_size": 2048,
+                        "max_epochs": 400
+                    }
+                )
+                # Log data statistics
+                wandb.log({
+                    "data_shape": X.shape,
+                    "data_mean": float(X.mean()),
+                    "data_std": float(X.std()),
+                    "data_min": float(X.min()),
+                    "data_max": float(X.max())
+                })
+
+                # Create model
+                model = SparsePCALightning(
+                    input_dim=X.shape[1],  # Number of actions/features
+                    n_components=50,
+                    lr=learning_rate,
+                    sparsity_weight=sparsity_weight,
+                    temperature=1.0,
+                    weight_decay=weight_decay,
+                    hard_gumbel=True
+                )
+                
+                # Create data loaders (80/20 train/val split)
+                n_samples = X.shape[0]
+                n_train = int(0.8 * n_samples)
+                train_loader = create_dataloader(X[:n_train], batch_size=2048)
+                val_loader = create_dataloader(X[n_train:], batch_size=2048, shuffle=False)
+                
+                # Create trainer with temperature and learning rate scheduling
+                temp_scheduler = TemperatureScheduler(initial_temp=1.0, final_temp=0.1)
+
+                trainer = pl.Trainer(
+                    max_epochs=400,
+                    callbacks=[temp_scheduler],
+                    accelerator='auto',
+                    logger=pl.loggers.WandbLogger(project="selection-validation")
+                )
+
+                # Train
+                trainer.fit(model, train_loader, val_loader)
+                
+                # Get learned sparse components
+                components, masks, mask_probs = model.get_sparse_components()
+                
+                # Log final results
+                print(f"Selected features: {masks.sum()}/{len(masks)}")
+                print(f"Average mask probability: {mask_probs.mean():.3f}")
+                print(f"Active feature indices: {np.where(masks)[0]}")
+                
+                # Create and log final summary plots
+                fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
+                
+                # Component heatmap
+                im1 = ax1.imshow(components, cmap='RdBu_r', aspect='auto')
+                ax1.set_xlabel('Features/Dimensions')
+                ax1.set_ylabel('Components')
+                ax1.set_title('Final Learned Components')
+                plt.colorbar(im1, ax=ax1)
+                
+                # Feature masks
+                ax2.bar(range(len(masks)), masks, alpha=0.7, color='green')
+                ax2.set_xlabel('Feature Index')
+                ax2.set_ylabel('Binary Mask (0/1)')
+                ax2.set_title(f'Final Feature Masks ({int(masks.sum())}/{len(masks)} active)')
+                ax2.set_ylim(-0.1, 1.1)
+                
+                plt.tight_layout()
+                wandb.log({"final_summary": wandb.Image(fig)})
+                plt.close(fig)
+                
+                # Finish wandb run
+                wandb.finish()
