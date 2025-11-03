@@ -49,63 +49,80 @@ TRANSFORMS_DICT = {
 }
 
 
+def load_custom_dataset(train_path, val_path, split="train"):
+    """
+    Load custom data from specified file paths.
+    The data should be in format nxd where n is training samples and d is attributes.
+    
+    Args:
+        train_path: Full path to training data file
+        val_path: Full path to validation data file
+        split: "train" or "valid"
+    """
+    import torch
+    from torch.utils.data import TensorDataset
+    
+    if split == "train":
+        file_path = train_path
+    elif split == "valid":
+        file_path = val_path
+    else:
+        raise ValueError(f"Invalid split: {split}. Only 'train' and 'valid' are supported.")
+        
+    # Check if file exists
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"Data file not found at {file_path}")
+        
+    # Load data based on file extension
+    if file_path.endswith('.pt'):
+        data = torch.load(file_path)
+    elif file_path.endswith('.npy'):
+        import numpy as np
+        data = torch.from_numpy(np.load(file_path)).float()
+    elif file_path.endswith('.csv'):
+        import pandas as pd
+        df = pd.read_csv(file_path, header=None)
+        data = torch.from_numpy(df.values).float()
+    else:
+        raise ValueError(f"Unsupported file format. Supported: .pt, .npy, .csv")
+        
+    print(f"Loaded {split} data from {os.path.basename(file_path)} with shape: {data.shape}")
+    
+    # Create dummy labels (since this is unsupervised learning)
+    n_samples, n_attributes = data.shape
+    dummy_labels = torch.zeros(n_samples, 1)  # Dummy labels for compatibility
+    
+    return TensorDataset(data, dummy_labels)
+
+
 def load_rewards_dataset(root, split="train"):
     """
     Load reward data from data/rewards.pt file.
     The data is in format nxd where n is training samples and d is attributes.
     matrix[i][j] is the reward signal for example i under attribute j.
     """
-    import torch
-    from torch.utils.data import TensorDataset
-    
-    # Load the reward data
     rewards_path = os.path.join(root, "rewards.pt")
-    if not os.path.exists(rewards_path):
-        # Try alternative naming
-        rewards_path = os.path.join(root, "rewards_11_200.pt")
-        if not os.path.exists(rewards_path):
-            raise FileNotFoundError(f"Reward data not found at {rewards_path}")
-    
-    rewards_data = torch.load(rewards_path)
-    print(f"Loaded rewards data with shape: {rewards_data.shape}")
-    
-    # Create dummy labels (since this is unsupervised learning)
-    # We'll use the reward data as both input and target for reconstruction
-    n_samples, n_attributes = rewards_data.shape
-    dummy_labels = torch.zeros(n_samples, 1)  # Dummy labels for compatibility
-    
-    # Create train/val/test splits
-    n_train = int(0.7 * n_samples)
-    n_val = int(0.15 * n_samples)
-    n_test = n_samples - n_train - n_val
-    
-    # Shuffle indices for random split
-    indices = torch.randperm(n_samples)
-    train_indices = indices[:n_train]
-    val_indices = indices[n_train:n_train + n_val]
-    test_indices = indices[n_train + n_val:]
-    
-    if split == "train":
-        return TensorDataset(rewards_data[train_indices], dummy_labels[train_indices])
-    elif split == "valid":
-        return TensorDataset(rewards_data[val_indices], dummy_labels[val_indices])
-    elif split == "test":
-        return TensorDataset(rewards_data[test_indices], dummy_labels[test_indices])
-    else:
-        raise ValueError(f"Invalid split: {split}")
+    return load_custom_dataset(rewards_path, split)
 
 
-def get_dataset(dataset_str, root, input_size=None):
+def get_dataset(dataset_str, root, input_size=None, train_path=None, val_path=None):
     transform_train = None
     transform_val = None
-    transform_test = None
     
     # Handle custom rewards dataset
     if dataset_str == "rewards":
         dataset_train = load_rewards_dataset(root, "train")
         dataset_val = load_rewards_dataset(root, "valid")
-        dataset_test = load_rewards_dataset(root, "test")
-        return (dataset_train, dataset_val, dataset_test)
+        return (dataset_train, dataset_val)
+    
+    # Handle custom dataset with separate train/val files
+    if dataset_str == "custom":
+        if train_path is None or val_path is None:
+            raise ValueError("Both train_path and val_path must be specified when using 'custom' dataset")
+        
+        dataset_train = load_custom_dataset(train_path, val_path, "train")
+        dataset_val = load_custom_dataset(train_path, val_path, "valid")
+        return (dataset_train, dataset_val)
     
     if dataset_str == "mnist" or dataset_str == "mnist_fashion":
         transform_train = TRANSFORMS_DICT[dataset_str]["train"](input_size)

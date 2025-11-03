@@ -220,8 +220,10 @@ class PL_ReconstructionWrapper(pl.LightningModule):
         )
 
     def test_dataloader(self):
+        # Use validation dataset for testing if no separate test set is provided
+        test_dataset = self.datasets[2] if len(self.datasets) > 2 else self.datasets[1]
         return DataLoader(
-            self.datasets[2],
+            test_dataset,
             batch_size=self.test_batch_size,
             num_workers=self.num_workers,
             pin_memory=self.pin_mem,

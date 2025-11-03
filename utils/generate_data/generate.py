@@ -1,276 +1,204 @@
 import os
-os.environ["HF_HOME"] = "/gscratch/ark/devinl6/hf_cache"
-# Disable TorchDynamo to avoid disk quota issues
-os.environ["TORCHDYNAMO_DISABLE"] = "1"
-# Additional environment variables to reduce disk usage
-os.environ["TORCH_COMPILE_DISABLE"] = "1"
-os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:128"
-import torch
-import pickle
 import argparse
-from datasets import load_dataset
-from vllm import LLM, SamplingParams
 from transformers import AutoTokenizer
-import random
-from personas import personas
 import json
-from openai import OpenAI
+import asyncio
+import aiohttp
 import time
-from dotenv import load_dotenv
 
-# Args
 parser = argparse.ArgumentParser()
-parser.add_argument("--name", type=str, required=True)
-parser.add_argument("--sample_size", type=int, required=True)
-parser.add_argument("--resume_from", type=int, default=0, help="Resume generation from this checkpoint (number of completed items)")
+parser.add_argument("--name_idx_range", type=str, required=True, help="Comma-separated list of user indices, e.g., '0,1,2' or '0-2'")
 parser.add_argument("--split", type=str, default="train", choices=["train", "test"], help="Generate train or test split")
 args = parser.parse_args()
 
-sample_size = args.sample_size
+# Parse name_idx_range
+if '-' in args.name_idx_range:
+    # Handle range format like "0-2"
+    start, end = map(int, args.name_idx_range.split('-'))
+    name_indices = list(range(start, end + 1))
+else:
+    # Handle comma-separated format like "0,1,2"
+    name_indices = [int(x.strip()) for x in args.name_idx_range.split(',')]
 
-# Load environment variables from .env file
-load_dotenv(dotenv_path="/mmfs1/gscratch/ark/devinl6/preference/preference-decoding/.env")
-
-# Set up OpenAI client
-api_key = os.getenv("OPENAI_API_KEY")
-if not api_key:
-    raise ValueError("OPENAI_API_KEY not found in .env file or environment variables")
-client = OpenAI(api_key=api_key)
-
-# Model setup
-model_id = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+model_id = "meta-llama/Llama-3.1-8B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 
-llm = LLM(
-    model=model_id,
-    dtype="float16",
-    tensor_parallel_size=1,
-    trust_remote_code=True
-)
+# vLLM server configuration
+VLLM_SERVER_URL = "http://localhost:8080/v1"
+VLLM_GENERATE_ENDPOINT = f"{VLLM_SERVER_URL}/completions"
 
-# Sampling configuration
-sampling_params = SamplingParams(
-    temperature=0.8,
-    top_p=0.9,
-    max_tokens=512,
-    stop=[]
-)
+# Generation parameters
+GENERATION_PARAMS = {
+    "temperature": 0,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "stop": []
+}
 
-def build_prompt(instruction, context):
-    if context.strip():
-        return f"{instruction}\n\n{context}"
-    else:
-        return instruction
+# Load configuration data
+with open("configs/persona_prompts.json", "r") as f:
+    persona_data = json.load(f)
 
-def create_judgment_prompt(instruction, response_1, response_2, system_prompt):
-    return f"""You are an expert evaluator. Given an instruction and two responses, determine which response better follows the given system prompt.
+with open("configs/high_variance_questions.json", "r") as f:
+    questions = json.load(f)
 
-System Prompt: {system_prompt}
+# Validate all name indices
+for name_idx in name_indices:
+    if name_idx >= len(persona_data["prompts"]):
+        raise ValueError(f"Persona prompt index {name_idx} is out of range. Available indices: 0-{len(persona_data['prompts'])-1}")
 
-Instruction: {instruction}
+base_prompt = "You are a helpful AI assistant."
+instructions = questions["questions"]
 
-Response A: {response_1}
-
-Response B: {response_2}
-
-Which response better follows the system prompt? Respond with only "A" or "B"."""
-
-def get_gpt4o_judgment(prompt, max_retries=3):
-    """Get judgment from GPT-4o with retry logic"""
+async def generate_text_async(session, prompt, max_retries=3):
+    """Generate text using vLLM server via async HTTP request"""
+    payload = {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "prompt": prompt,
+        **GENERATION_PARAMS
+    }
+    
     for attempt in range(max_retries):
         try:
-            response = client.chat.completions.create(
-                model="gpt-4o",
-                messages=[
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=0.1,
-                max_tokens=10
-            )
-            judgment = response.choices[0].message.content.strip().upper()
-            # Validate judgment
-            if judgment in ["A", "B"]:
-                return judgment
-            else:
-                print(f"Invalid judgment received: {judgment}, retrying...")
-                time.sleep(1)
-        except Exception as e:
-            print(f"Error calling GPT-4o (attempt {attempt + 1}): {e}")
+            async with session.post(VLLM_GENERATE_ENDPOINT, json=payload, timeout=30) as response:
+                if response.status == 200:
+                    result = await response.json()
+                    return result["choices"][0].get("text", "").strip()
+                else:
+                    print(f"HTTP error {response.status}: {await response.text()}")
+                    if attempt < max_retries - 1:
+                        await asyncio.sleep(1)
+                        continue
+        except asyncio.TimeoutError:
+            print(f"Timeout on attempt {attempt + 1}")
             if attempt < max_retries - 1:
-                time.sleep(2 ** attempt)  # Exponential backoff
-            else:
-                print("Max retries reached, defaulting to A")
-                return "A"
-        # Small delay to avoid rate limiting
-        time.sleep(0.1)
-    return "A"  # Default fallback
-
-def check_checkpoint_status(checkpoint_file):
-    """Check the status of the latest checkpoint"""
-    if os.path.exists(checkpoint_file):
-        with open(checkpoint_file, "r") as f:
-            checkpoint_data = json.load(f)
-            completed = checkpoint_data.get("completed_items", 0)
-            total = checkpoint_data.get("total_items", 0)
-            last_updated = checkpoint_data.get("last_updated", "Unknown")
-            print(f"Found checkpoint: {completed}/{total} items completed (last updated: {last_updated})")
-            return completed
-    return 0
-
-# Load Dolly dataset
-dolly_ds = load_dataset("databricks/databricks-dolly-15k", split="train")
-
-# Select persona prompt for the user
-persona_prompt = None
-with open("../../data/user_prompts.jsonl", "r") as f:
-    for line in f:
-        data = json.loads(line)
-        if data["user"] == args.name:
-            persona_prompt = data["prompt"]
-            break
-
-assert persona_prompt is not None, f"Persona prompt for {args.name} not found"
-
-# Use the persona prompt as the base prompt for generation
-base_prompt = "You are a helpful AI assistant."
-
-# Prepare prompts
-instructions = [build_prompt(row["instruction"], row["context"]) for row in dolly_ds.shuffle().select(range(sample_size))]
-
-# Checkpoint functionality
-checkpoint_dir = f"../../data/preference/checkpoints/{args.name}"
-os.makedirs(checkpoint_dir, exist_ok=True)
-checkpoint_file = f"{checkpoint_dir}/checkpoint_{args.split}.json"
-
-# Load existing data if resuming
-data = []
-if args.resume_from > 0:
-    completed_items = check_checkpoint_status(checkpoint_file)
-    if completed_items > 0:
-        with open(checkpoint_file, "r") as f:
-            checkpoint_data = json.load(f)
-            data = checkpoint_data.get("data", [])
-        args.resume_from = completed_items
-    else:
-        print(f"Warning: Resume requested but no checkpoint found. Starting from beginning.")
-        args.resume_from = 0
-else:
-    # Check if there's an existing checkpoint even if not explicitly resuming
-    completed_items = check_checkpoint_status(checkpoint_file)
-    if completed_items > 0:
-        print(f"Found existing checkpoint with {completed_items} items. Use --resume_from {completed_items} to resume.")
-        print("Starting fresh generation...")
-
-# Calculate starting point
-start_idx = args.resume_from
-print(f"Starting {args.split} split generation from item {start_idx} out of {sample_size}")
-
-# Batch generation
-batch_size = 256
-checkpoint_interval = 100  # Save checkpoint every 100 items
-
-for i in range(start_idx, len(instructions), batch_size):
-    items_remaining = len(instructions) - i
-    print(f"Processing batch starting at item {i} ({items_remaining} items remaining)")
-    batch = instructions[i:i + batch_size]
-
-    inputs = []
-
-    for instr in batch:
-        # Add two inputs per instruction - both using the same base prompt
-        # This will generate two different responses due to randomness in sampling
-        inputs.append(tokenizer.apply_chat_template([
-            {"role": "system", "content": base_prompt},
-            {"role": "user", "content": instr}
-        ], tokenize=False, add_generation_prompt=True))
-
-        inputs.append(tokenizer.apply_chat_template([
-            {"role": "system", "content": base_prompt},
-            {"role": "user", "content": instr}
-        ], tokenize=False, add_generation_prompt=True))
-
-    outputs = llm.generate(inputs, sampling_params)
-
-    # Process outputs and prepare for judgment
-    batch_data = []
+                await asyncio.sleep(1)
+                continue
+        except Exception as e:
+            print(f"Request failed on attempt {attempt + 1}: {e}")
+            if attempt < max_retries - 1:
+                await asyncio.sleep(1)
+                continue
     
-    for j in range(0, len(batch)):
-        output_1 = outputs[j * 2].outputs[0].text.strip()
-        output_2 = outputs[j * 2 + 1].outputs[0].text.strip()
+    print(f"Failed to generate text after {max_retries} attempts")
+    return ""
+
+async def generate_batch_async(instructions, base_prompt, persona_prompt):
+    """Generate responses for a batch of instructions"""
+    async with aiohttp.ClientSession() as session:
+        tasks = []
         
-        batch_data.append({
-            "prompt": batch[j], 
-            "answer_1": output_1, 
-            "answer_2": output_2,
-        })
-    
-    # Get judgments from GPT-4o
-    print(f"  Getting GPT-4o judgments for {len(batch_data)} items...")
-    judgments = []
-    for j in range(0, len(batch_data)):
-        prompt_for_judge = create_judgment_prompt(batch_data[j]["prompt"], batch_data[j]["answer_1"], batch_data[j]["answer_2"], persona_prompt)
-        judgment = get_gpt4o_judgment(prompt_for_judge)
-        judgments.append(judgment)
-        if j % 10 == 0:  # Print progress every 10 items
-            print(f"    Judged {j+1}/{len(batch_data)} items")
-    
-    print(f"  Completed judgments for batch {i//batch_size + 1}")
-    
-    # Add judgments and assign chosen/rejected based on preference
-    for j, judgment in enumerate(judgments):
+        for instr in instructions:
+            # Create prompts for both base and persona
+            base_input = tokenizer.apply_chat_template([
+                {"role": "system", "content": base_prompt},
+                {"role": "user", "content": instr}
+            ], tokenize=False, add_generation_prompt=True)
+            
+            persona_input = tokenizer.apply_chat_template([
+                {"role": "system", "content": persona_prompt},
+                {"role": "user", "content": instr}
+            ], tokenize=False, add_generation_prompt=True)
+            
+            # Create async tasks for both generations
+            tasks.append(generate_text_async(session, base_input))
+            tasks.append(generate_text_async(session, persona_input))
         
-        # Assign chosen and rejected based on judge's preference
-        if judgment == "A":
-            chosen = batch_data[j]["answer_1"]
-            rejected = batch_data[j]["answer_2"]
-        elif judgment == "B":
-            chosen = batch_data[j]["answer_2"]
-            rejected = batch_data[j]["answer_1"]
-        else:
-            # If judge gives unclear response, default to answer_1 as chosen
-            chosen = batch_data[j]["answer_1"]
-            rejected = batch_data[j]["answer_2"]
-            judgment = "A"  # Default judgment
+        # Wait for all generations to complete
+        results = await asyncio.gather(*tasks, return_exceptions=True)
         
-        # Create the final data point in the desired format
-        data.append({
-            "prompt": batch_data[j]["prompt"],
-            "chosen": chosen,
-            "rejected": rejected
-        })
+        # Process results
+        batch_data = []
+        for i in range(0, len(results), 2):
+            if i + 1 < len(results):
+                output_1 = results[i] if not isinstance(results[i], Exception) else ""
+                output_2 = results[i + 1] if not isinstance(results[i + 1], Exception) else ""
+                
+                batch_data.append({
+                    "prompt": instructions[i // 2],
+                    "chosen": output_2,
+                    "rejected": output_1
+                })
+        
+        return batch_data
+
+def apply_persona_template(persona_prompt):
+    template = f"""
     
-    # Save checkpoint every 100 items
-    if len(data) % checkpoint_interval == 0:
-        checkpoint_data = {
-            "data": data,
-            "completed_items": len(data),
-            "total_items": sample_size,
-            "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
-        }
-        with open(checkpoint_file, "w") as f:
-            json.dump(checkpoint_data, f, indent=2)
-        print(f"  Checkpoint saved: {len(data)} items completed")
+    You are roleplaying as a real person with the following characteristics and background:
 
-# Save final checkpoint and dataset
-checkpoint_data = {
-    "data": data,
-    "completed_items": len(data),
-    "total_items": sample_size,
-    "last_updated": time.strftime("%Y-%m-%d %H:%M:%S"),
-    "status": "completed"
-}
-with open(checkpoint_file, "w") as f:
-    json.dump(checkpoint_data, f, indent=2)
+    {persona_prompt}
 
-# Save final dataset
-os.makedirs("../../data/preference", exist_ok=True)
-output_file = f"../../data/preference/{args.name}_{args.split}.json"
-with open(output_file, "w") as f:
-    json.dump(data, f, indent=2)
+    CRITICAL INSTRUCTIONS:
+    - Respond naturally as this person would, drawing on their life experience, personality, and worldview
+    - Let your age, education, occupation, and personality traits authentically shape your perspectives and communication style
+    - Never explicitly mention your demographic details, scores, or background unless directly relevant to the conversation
+    - Don't say things like "as someone with high agreeableness" or "given my neuroticism score"
+    - Simply BE this person - your responses should reflect these traits implicitly through your opinions, word choices, knowledge depth, and reasoning
 
-print(f"\nGeneration complete!")
-print(f"Generated {len(data)} preference pairs for user: {args.name} ({args.split} split)")
-print(f"Dataset saved to: {output_file}")
-print(f"Final checkpoint saved to: {checkpoint_file}")
-print(f"Note: Used LLaMA for generation and GPT-4o for judging to optimize cost and quality")
+    Your responses should naturally reflect:
+    - How someone with your education and occupation would explain concepts
+    - How your personality traits influence your communication style and viewpoints
+    - What life experiences someone of your age and background would reference
+    - The perspective someone with your ideology and values would take
+    - The interests and knowledge areas relevant to your quirks and lifestyle
 
+    Respond authentically as this person would in everyday conversation.
+    """
+    return template.format(persona_prompt=persona_prompt)
+
+async def generate_for_user(name_idx, persona_prompt):
+    """Generate data for a single user"""
+    print(f"\n=== Processing user {name_idx} ===")
+    print(f"Using persona prompt {name_idx}: {persona_prompt[:100]}...")
+    
+    data = []
+    batch_size = 2048  # Smaller batch size for async requests
+    total_batches = (len(instructions) + batch_size - 1) // batch_size
+    
+    for i in range(0, len(instructions), batch_size):
+        items_remaining = len(instructions) - i
+        batch_num = i // batch_size + 1
+        print(f"User {name_idx}: Processing batch {batch_num}/{total_batches} starting at item {i} ({items_remaining} items remaining)")
+        
+        batch = instructions[i:i + batch_size]
+        
+        # Generate batch asynchronously
+        batch_data = await generate_batch_async(batch, base_prompt, persona_prompt)
+        data.extend(batch_data)
+        
+        print(f"User {name_idx}: Completed batch {batch_num}/{total_batches}")
+    
+    return data
+
+async def main():
+    """Generate data for all users in the range"""
+    all_results = {}
+    
+    for name_idx in name_indices:
+        persona_prompt = persona_data["prompts"][name_idx]
+        formatted_persona = apply_persona_template(persona_prompt)
+        data = await generate_for_user(name_idx, formatted_persona)
+        all_results[name_idx] = data
+    
+    return all_results
+
+# Run the async main function
+all_data = asyncio.run(main())
+
+# Save datasets for each user
+os.makedirs("data/PERSONA_testing", exist_ok=True)
+total_pairs = 0
+
+for name_idx, data in all_data.items():
+    output_file = f"data/PERSONA_testing/user{name_idx}_{args.split}.json"
+    with open(output_file, "w") as f:
+        json.dump(data, f, indent=2)
+    
+    print(f"User {name_idx}: Generated {len(data)} preference pairs")
+    print(f"User {name_idx}: Dataset saved to: {output_file}")
+    total_pairs += len(data)
+
+print(f"\n=== Generation complete! ===")
+print(f"Generated {total_pairs} total preference pairs across {len(name_indices)} users")
+print(f"Users processed: {name_indices}")

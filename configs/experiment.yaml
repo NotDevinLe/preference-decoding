@@ -1,11 +1,11 @@
 # Gumbel Distributed Training Experiment Configuration
-experiment_name: "baseline_400_attrs"
+experiment_name: "baseline_persona_attrs"
 description: "Baseline experiment with 100 attributes"
 
 # Model configuration
 model:
   d: 400
-  k: 10
+  k: 2
   lr: 1e-3
   sparsity_weight: 1e-3
   tau_init: 1.0
@@ -73,7 +73,7 @@ timeouts:
 environment:
   # Collector server settings
   COLLECTOR_CONCURRENCY: 256
-  REQUEST_BATCH_SIZE: 512
+  REQUEST_BATCH_SIZE: 2048
   REQUEST_RETRIES: 5
   REQUEST_TIMEOUT: 180
   PER_HOST_LIMIT: 128
@@ -81,7 +81,7 @@ environment:
   
   # VLLM connection settings
   VLLM_URL: "http://localhost:8080/v1/completions"
-  MODEL_ID: "meta-llama/Llama-3.2-1B-Instruct"
+  MODEL_ID: "meta-llama/Meta-Llama-3.1-8B-Instruct"
   VLLM_CONCURRENCY: 256
   VLLM_MAX_RETRIES: 7
   

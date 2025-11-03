@@ -17,7 +17,7 @@ from models.gumbel_distrib import (
 class ConcreteLinear(pl.LightningModule):
     def __init__(
         self,
-        input_dim=400,
+        input_dim=6,
         mask_ratio=None,
         k=None,
         dim_ip=0,

@@ -52,6 +52,7 @@ def main(args):
         run = wandb.init(
             project=args.wandb,
             entity=args.wandb_entity,
+            name=getattr(args, "run_name", None),
             config=vars(args),
             dir=args.output_dir,
             anonymous="allow",
@@ -105,7 +106,23 @@ def main(args):
 
     # TODO: add switch_st callback
 
-    datasets = utils.get_dataset(args.dataset, args.data_root_dir)
+    datasets = utils.get_dataset(
+        args.dataset, 
+        args.data_root_dir, 
+        train_path=getattr(args, 'train_path', None),
+        val_path=getattr(args, 'val_path', None)
+    )
+
+    # Infer input_dim from dataset if not explicitly provided
+    inferred_input_dim = getattr(args, "input_dim", None)
+    try:
+        if inferred_input_dim is None and len(datasets) > 0 and len(datasets[0]) > 0:
+            sample_x = datasets[0][0][0]
+            if isinstance(sample_x, torch.Tensor):
+                inferred_input_dim = int(np.prod(tuple(sample_x.shape)))
+    except Exception:
+        # Fallback to None and let model defaults handle if inference fails
+        inferred_input_dim = getattr(args, "input_dim", None)
 
     args.test_batch_size = args.batch_size
     if args.full_batch:
@@ -137,6 +154,7 @@ def main(args):
                 )
             ]
         model = MODEL_DICT["feature_learners"][args.model](
+            input_dim=inferred_input_dim,
             dim_ip=args.dim_ip,
             mask_ratio=args.mask_ratio,
             k=args.k,

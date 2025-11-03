@@ -1,13 +1,9 @@
-import json
-import numpy as np
+import torch
 
-with open('data/parameter_search_gumbel.json', 'r') as f:
-    data = json.load(f)
+total = torch.load('rewards/reward_matrices_0.pt')
 
-cleaned = [data[0], data[3], data[-1]]
+for i in range(1, 10):
+    total = torch.cat([total, torch.load(f'rewards/reward_matrices_{i}.pt')], dim=0)
 
-processed = []
-
-for row in cleaned:
-    features = np.where(np.array(row[3]) == 1.0)[0].tolist()
-    print(len(features))
+print(total.shape)
+torch.save(total, 'data/toy_rewards.pt')

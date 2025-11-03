@@ -1,0 +1,48 @@
+dataset: "custom"
+train_path: "/gscratch/ark/devinl6/preference/preference-decoding/rewards_high_var/rewards_persona_testing_train.pt"
+val_path: "/gscratch/ark/devinl6/preference/preference-decoding/rewards_high_var/rewards_persona_testing_val.pt"
+
+# Model configuration
+model: "ConcreteLinearRandom"
+input_dim: 400 # How many orignal features
+dim_ip: 2000  # How many dimensions for decoder
+k: 30  # Number of features to select
+
+# Training configuration
+batch_size: 256
+epochs: 1000
+lr: 0.001
+blr: 0.001  # base learning rate
+
+# Loss configuration
+loss_type: "mse"  # Mean squared error for reconstruction
+# Don't use jsd and eeg
+jsd_factor: 0  # Jensen-Shannon divergence factor
+eeg_factor: 0.0  # EEG factor (set to 0 if not using)
+
+# Temperature and threshold annealing
+anneal_temp: "exp"
+temp_base: 10.0
+temp_min: 0.01
+
+# Training settings
+straight_through: 1
+rao_samples: 1
+use_masked_loss: 0
+norm_pix_loss: 0
+
+# Output configuration
+output_dir: "./outs/rewards_experiment"
+log_dir: "./logs/rewards_experiment"
+save_top_k: 3
+save_last: 1
+every_n_epochs: 10
+
+# Logging
+wandb: "high_var_concrete"
+
+gumbel_learn_mode: "logits"
+
+# Other settings
+seed: 42
+scale_lr_by_batchsize: 0

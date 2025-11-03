@@ -1,11 +1,11 @@
 #!/bin/bash
 #SBATCH --job-name=start_vllm_server
-#SBATCH --account=ark
+#SBATCH --account=cse
 #SBATCH --partition=gpu-l40s
 #SBATCH --gpus-per-node=1
-#SBATCH --nodes=4
+#SBATCH --nodes=5
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=6
 #SBATCH --mem=32G
 #SBATCH --time=24:00:00
 #SBATCH --output=logs/output_%j_%t.txt
@@ -23,13 +23,7 @@ PORT=$((8000 + NODE_ID))
 
 echo "Starting vLLM server on task $NODE_ID, port $PORT"
 
-srun python /gscratch/ark/devinl6/preference/preference-decoding/vllm_server.py \
-  --model meta-llama/Llama-3.2-1B-Instruct \
-  --host 0.0.0.0 \
-  --port $PORT \
-  --tensor-parallel-size 1 \
-  --gpu-memory-utilization 0.70 \
-  --registry_dir "/gscratch/ark/devinl6/registry" \
-  --max_new_tokens 1024 \
-  --max_prompt_length 2048 \
-  --dtype bfloat16
+srun literegistry vllm \
+  --model "meta-llama/Llama-3.2-1B-Instruct" \
+  --registry redis://g3071.hyak.local:6379 \
+  --tensor-parallel-size 1

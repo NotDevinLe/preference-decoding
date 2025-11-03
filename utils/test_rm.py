@@ -45,14 +45,6 @@ if tokenizer.pad_token is None:
     # Method 1: Use EOS token as padding token
     tokenizer.pad_token = tokenizer.eos_token
     print(f"Set pad_token to eos_token: {tokenizer.pad_token}")
-    
-    # Method 2: If you want to use a specific token, you can also do:
-    # tokenizer.pad_token = "<pad>"
-    # tokenizer.add_special_tokens({"pad_token": "<pad>"})
-    
-    # Method 3: For some models, you might need to resize embeddings
-    # if hasattr(model, 'resize_token_embeddings'):
-    #     model.resize_token_embeddings(len(tokenizer))
 
 print("Loading reward model...")
 model = load_model(

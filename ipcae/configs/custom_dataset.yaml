@@ -1,0 +1,60 @@
+# Configuration for any custom n×k dataset
+# Just specify the full path to your data file
+
+# Dataset configuration
+dataset: "custom"  # Use the new custom dataset option
+
+# Required: Separate train/validation files
+train_path: "/path/to/your_train.pt"  # Full path to training data
+val_path: "/path/to/your_validation.pt"  # Full path to validation data
+
+# Examples:
+# train_path: "/home/user/train_data.pt"
+# val_path: "/home/user/val_data.pt"
+# train_path: "/data/experiments/train.npy" 
+# val_path: "/data/experiments/val.npy"
+
+# Model configuration
+model: "ConcreteLinear"  # or "ConcreteMLP" for more complex reconstruction
+input_dim: 1000  # Set this to your k (number of features)
+k: 50  # Number of features to select (adjust as needed)
+# mask_ratio: 0.95  # OR use mask_ratio instead of k
+
+# Training configuration
+batch_size: 256  # Adjust based on your data size
+epochs: 100
+lr: 0.001
+blr: 0.001
+
+# Loss configuration
+loss_type: "mse"  # Use "mse" for continuous data, "bce" for binary data
+jsd_factor: 0.1  # Jensen-Shannon divergence regularization
+eeg_factor: 0.0  # EEG regularization (set to 0 if not using)
+
+# Temperature annealing
+anneal_temp: "exp"  # or "linear", "exponential"
+temp_base: 5.0
+temp_min: 0.1
+
+# Training settings
+straight_through: 1
+rao_samples: 1
+use_masked_loss: 0
+norm_pix_loss: 0
+
+# Output configuration
+output_dir: "./outs/custom_dataset_experiment"
+log_dir: "./logs/custom_dataset_experiment"
+save_top_k: 3
+save_last: 1
+every_n_epochs: 10
+
+# Logging
+wandb: "custom-dataset-cae-experiment"
+
+# Gumbel distribution settings
+gumbel_learn_mode: "logits"
+
+# Other settings
+seed: 42
+scale_lr_by_batchsize: 0

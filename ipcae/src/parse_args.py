@@ -118,9 +118,21 @@ def get_args_parser(conf_parser):
     parser.add_argument(
         "--dataset",
         default=None,
-        choices=["mnist", "mnist_fashion", "isolet", "coil20", "activity", "mice"],
+        choices=["mnist", "mnist_fashion", "isolet", "coil20", "activity", "mice", "rewards", "custom"],
         type=str,
         help="String deciding which dataset to load/download",
+    )
+    parser.add_argument(
+        "--train_path",
+        default=None,
+        type=str,
+        help="Full path to training data file (required when using 'custom' dataset)",
+    )
+    parser.add_argument(
+        "--val_path",
+        default=None,
+        type=str,
+        help="Full path to validation data file (required when using 'custom' dataset)",
     )
     parser.add_argument(
         "--watch_grads",
