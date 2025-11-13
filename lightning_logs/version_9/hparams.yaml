@@ -1,4 +1,0 @@
-input_dim: 400
-lr: 0.01
-sparsity_weight: 1.0e-05
-alpha: 1.0e-06

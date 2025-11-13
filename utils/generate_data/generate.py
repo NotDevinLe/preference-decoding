@@ -48,7 +48,7 @@ for name_idx in name_indices:
         raise ValueError(f"Persona prompt index {name_idx} is out of range. Available indices: 0-{len(persona_data['prompts'])-1}")
 
 base_prompt = "You are a helpful AI assistant."
-instructions = questions["questions"]
+instructions = questions["test"]
 
 async def generate_text_async(session, prompt, max_retries=3):
     """Generate text using vLLM server via async HTTP request"""

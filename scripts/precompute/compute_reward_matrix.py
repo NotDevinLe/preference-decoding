@@ -11,8 +11,9 @@ from typing import List, Dict, Any, Tuple, Optional
 import aiohttp
 import torch
 from transformers import AutoTokenizer
-from src.core.drift import compute_rewards, build_full_prompt, sum_completion_logprobs
+from src.core.drift import RewardModel
 import random
+import numpy as np
 
 attribute_prompts: Optional[List[str]] = None
 base_prompt: str = "You are a helpful assistant."
@@ -86,27 +87,33 @@ async def main():
         model_name_arg=model_name,
     )
 
-    # Test server connection
-    try:
-        async with aiohttp.ClientSession() as test_session:
-            async with test_session.get(f"{vllm_url}/health", timeout=aiohttp.ClientTimeout(total=5)) as resp:
-                if resp.status == 200:
-                    logging.info(f"Server: {vllm_url} - HEALTHY")
-                else:
-                    logging.warning(f"Server: {vllm_url} - UNHEALTHY (status {resp.status})")
-    except Exception as e:
-        logging.warning(f"Server: {vllm_url} - UNREACHABLE ({type(e).__name__}: {e})")
+    reward_model = RewardModel(
+        model_name=model_name,
+        tokenizer=tokenizer,
+        base_prompt=base_prompt,
+        attribute_prompts=attribute_prompts,
+        vllm_server_url=vllm_url,
+        device=device_str,
+        max_concurrent_requests=50,
+        max_retries=10,
+        request_timeout=60,
+        request_batch_size=1,
+    )
 
     try:
-        for i in range(15, 50):
-            dataset_path = f'data/PERSONA_testing/user{i}_train.json'
+        for i in range(25):
+            dataset_path = f'data/processed_prism/user{i}.json'
+
+            if not os.path.exists(dataset_path):
+                logging.info(f"User {i} data not found, skipping")
+                continue
+
             logging.info(f"Processing user {i} from {dataset_path}")
             
             with open(dataset_path, 'r') as f:
                 user_data = json.load(f)
             
-            await compute_rewards(user_data, i, attribute_prompts, base_prompt, tokenizer, vllm_server_url, model_name)
-
+            await reward_model.compute_rewards(user_data, i, split="train", save_dir=f'eval_rewards/llama1b/prism', batch_size=1)
     except Exception as e:
         logging.exception("Error in reward computation")
         raise

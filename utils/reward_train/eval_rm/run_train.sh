@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=run_llamafactory_users
-#SBATCH --account=ark
-#SBATCH --partition=gpu-a40
+#SBATCH --account=cse
+#SBATCH --partition=gpu-l40s
 #SBATCH --gpus=1
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -10,7 +10,7 @@
 #SBATCH --time=24:00:00
 #SBATCH --output=logs/output_%A_%a.txt
 #SBATCH --error=logs/error_%A_%a.txt
-#SBATCH --array=8,9,10,11,12,13,14
+#SBATCH --array=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14
 
 # Properly load conda
 source /gscratch/ark/devinl6/miniconda3/etc/profile.d/conda.sh

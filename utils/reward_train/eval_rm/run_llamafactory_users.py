@@ -12,7 +12,7 @@ def build_command_for_user(user_id: int) -> List[str]:
     """
     dataset_name_train = f"user{user_id}_train"
     dataset_name_val = f"user{user_id}_val"
-    output_dir = f"saves/mod/user{user_id}_1b"
+    output_dir = f"saves/mod/user{user_id}_1b/full"
 
     # Construct the command as a list for subprocess
     cmd: List[str] = [
@@ -21,9 +21,7 @@ def build_command_for_user(user_id: int) -> List[str]:
         # method
         "--stage", "rm",
         "--do_train", "true",
-        "--finetuning_type", "lora",
-        "--lora_rank", "8",
-        "--lora_target", "all",
+        "--finetuning_type", "full",
         # model
         "--model_name_or_path", "meta-llama/Llama-3.2-1B-Instruct",
         "--trust_remote_code", "true",
@@ -36,6 +34,7 @@ def build_command_for_user(user_id: int) -> List[str]:
         "--overwrite_cache", "true",
         "--preprocessing_num_workers", "8",
         "--dataloader_num_workers", "4",
+        "--save_safetensors", "false",
         # output
         "--output_dir", output_dir,
         "--logging_steps", "10",
@@ -47,8 +46,8 @@ def build_command_for_user(user_id: int) -> List[str]:
         # train
         "--per_device_train_batch_size", "1",
         "--gradient_accumulation_steps", "1",
-        "--learning_rate", "1.0e-4",
-        "--num_train_epochs", "5.0",
+        "--learning_rate", "1.0e-5",
+        "--num_train_epochs", "3.0",
         "--lr_scheduler_type", "cosine",
         "--warmup_ratio", "0.1",
         "--bf16", "true",

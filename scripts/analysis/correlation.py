@@ -6,7 +6,7 @@ import seaborn as sns
 parts = []
 
 for i in range(10):
-    t = torch.load(f"rewards_persona_testing/user{i}.pt", map_location="cpu")
+    t = torch.load(f"eval_rewards/llama8b/original_prompts_high_entropy/train/user{i}.pt", map_location="cpu")
     chosen_score = t['attr_scores_chosen'] / t['attr_counts_chosen'].clamp(min=1e-9) - t['base_scores_chosen'].unsqueeze(1) / t['base_counts_chosen'].unsqueeze(1).clamp(min=1e-9)
     rejected_score = t['attr_scores_rejected'] / t['attr_counts_rejected'].clamp(min=1e-9) - t['base_scores_rejected'].unsqueeze(1) / t['base_counts_rejected'].unsqueeze(1).clamp(min=1e-9)
 

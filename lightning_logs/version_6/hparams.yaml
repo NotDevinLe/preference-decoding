@@ -1,5 +1,0 @@
-input_dim: 400
-lr: 0.01
-sparsity_weight: 0
-target_k: 10
-alpha: 1.0e-06

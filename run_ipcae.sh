@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=run_ipcae
-#SBATCH --account=ark
-#SBATCH --partition=gpu-titan
+#SBATCH --account=cse
+#SBATCH --partition=gpu-a100
 #SBATCH --gpus=1
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -10,7 +10,7 @@
 #SBATCH --time=10:00:00
 #SBATCH --output=logs/output_%A_%a.txt
 #SBATCH --error=logs/error_%A_%a.txt
-#SBATCH --array=180,240,300,360,400
+#SBATCH --array=40
 
 # Load conda and activate env
 source /gscratch/ark/devinl6/miniconda3/etc/profile.d/conda.sh
